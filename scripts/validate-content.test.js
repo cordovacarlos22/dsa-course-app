@@ -3,9 +3,11 @@ import { describe, it, expect } from 'vitest'
 import {
   checkPracticeInCourse,
   countMissingSpanish,
+  countSteps,
   findLessonsMissingEnglish,
   validateCourse,
   validateLesson,
+  validateLessonChecks,
   validatePractice,
 } from './validate-content.js'
 
@@ -398,5 +400,87 @@ describe('findLessonsMissingEnglish', () => {
         '03-c.en.md',
       ]),
     ).toEqual(['02-b.es.md'])
+  })
+})
+
+// A checks file with one choice and one code checkpoint that passes every rule.
+function makeValidChecks() {
+  return {
+    steps: [
+      {
+        type: 'choice',
+        question: text('Which is faster for big lists?'),
+        options: [text('O(n)'), text('O(1)')],
+        answer: 1,
+        hint: text('Count the steps.'),
+        explanation: text('O(1) does not grow.'),
+      },
+      {
+        type: 'code',
+        task: text('Return true when n is even.'),
+        hint: text('Use %.'),
+        starterCode: 'function isEven(n) {\n  // your code\n}',
+        solution: 'function isEven(n) {\n  return n % 2 === 0\n}',
+        kind: 'function',
+        functionName: 'isEven',
+        tests: [
+          { args: [2], expected: true },
+          { args: [3], expected: false },
+        ],
+      },
+    ],
+  }
+}
+
+describe('countSteps', () => {
+  it('counts the ## headings after the front matter', () => {
+    const lesson =
+      '---\ntitle: A\norder: 1\nminutes: 3\n---\nGoal\n## One\nx\n## Two\ny'
+    expect(countSteps(lesson)).toBe(2)
+  })
+})
+
+describe('validateLessonChecks', () => {
+  it('accepts valid checkpoints', () => {
+    expect(validateLessonChecks(makeValidChecks(), { en: 2, es: 2 })).toEqual(
+      [],
+    )
+  })
+
+  it('needs one checkpoint per step in every language', () => {
+    const errors = validateLessonChecks(makeValidChecks(), { en: 2, es: 3 })
+    expect(errors).toEqual([
+      'the es lesson has 3 steps but there are 2 checkpoints',
+    ])
+  })
+
+  it('rejects a choice answer that is not one of the options', () => {
+    const checks = makeValidChecks()
+    checks.steps[0].answer = 5
+    expect(validateLessonChecks(checks, { en: 2 }).join()).toMatch(/answer/)
+  })
+
+  it('fails when the solution does not pass its tests', () => {
+    const checks = makeValidChecks()
+    checks.steps[1].solution = 'function isEven(n) { return true }'
+    expect(validateLessonChecks(checks, { en: 2 }).join()).toMatch(
+      /checkpoint 2/,
+    )
+  })
+
+  it('fails when the starter code already passes', () => {
+    const checks = makeValidChecks()
+    checks.steps[1].starterCode = checks.steps[1].solution
+    expect(validateLessonChecks(checks, { en: 2 })).toEqual([
+      'checkpoint 2: the starter code already passes every test',
+    ])
+  })
+
+  it('fails when the starter code does not compile', () => {
+    const checks = makeValidChecks()
+    checks.steps[1].starterCode = 'function isEven(n) {'
+    expect(validateLessonChecks(checks, { en: 2 }).join()).toMatch(
+      /starter code does not compile/,
+    )
   })
 })

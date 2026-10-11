@@ -6,10 +6,12 @@ import { pathToFileURL } from 'node:url'
 import vm from 'node:vm'
 import {
   courseSchema,
+  lessonChecksSchema,
   lessonFrontMatterSchema,
   practiceSchema,
 } from './content-schema.js'
 import { parseFrontMatter } from '../src/lib/frontMatter.js'
+import { splitSteps } from '../src/lib/steps.js'
 import {
   extractFencedBlocks,
   RUNNABLE_LANGUAGE,
@@ -254,6 +256,52 @@ export function validateLesson({ moduleSlug, fileName, text }, course) {
   return errors
 }
 
+// How many steps a lesson file has (every "## " heading starts one).
+export function countSteps(lessonText) {
+  return splitSteps(parseFrontMatter(lessonText).body).length
+}
+
+// Checks a lesson's checkpoints file against its lesson files.
+// `stepCounts` is { en: 4, es: 4 }: the number of steps in each language.
+export function validateLessonChecks(data, stepCounts) {
+  const result = lessonChecksSchema.safeParse(data)
+  if (!result.success) return formatIssues(result.error)
+
+  const { steps } = result.data
+  const errors = []
+  for (const [language, count] of Object.entries(stepCounts)) {
+    if (count !== steps.length) {
+      errors.push(
+        `the ${language} lesson has ${count} steps but there are ${steps.length} checkpoints`,
+      )
+    }
+  }
+
+  steps.forEach((checkpoint, index) => {
+    if (checkpoint.type !== 'code') return
+    const label = `checkpoint ${index + 1}`
+    // Reuse the exercise checker: same test format, same sandbox.
+    const asExercise = (code) => ({
+      ...checkpoint,
+      slug: label,
+      solution: { javascript: code },
+    })
+    errors.push(...checkSolution(asExercise(checkpoint.solution)))
+
+    try {
+      new vm.Script(checkpoint.starterCode) // only checks the syntax
+    } catch (error) {
+      errors.push(`${label}: starter code does not compile (${error.message})`)
+      return
+    }
+    // A checkpoint the starter code already passes doesn't check anything.
+    if (checkSolution(asExercise(checkpoint.starterCode)).length === 0) {
+      errors.push(`${label}: the starter code already passes every test`)
+    }
+  })
+  return errors
+}
+
 // English is written first: every Spanish lesson needs its English original.
 export function findLessonsMissingEnglish(fileNames) {
   return fileNames
@@ -269,16 +317,17 @@ async function validateAllLessons(course) {
       .map((entry) => entry.name)
       .sort()
   } catch {
-    return { lessonCount: 0, hasErrors: false } // no lessons folder yet
+    return { lessonCount: 0, checkpointCount: 0, hasErrors: false } // no lessons folder yet
   }
 
   let lessonCount = 0
+  let checkpointCount = 0
   let hasErrors = false
   for (const moduleSlug of moduleFolders) {
     const folder = join(LESSONS_DIR, moduleSlug)
-    const fileNames = (await readdir(folder)).filter((name) =>
-      name.endsWith('.md'),
-    )
+    const allFiles = await readdir(folder)
+    const fileNames = allFiles.filter((name) => name.endsWith('.md'))
+    const checksFiles = allFiles.filter((name) => name.endsWith('.checks.json'))
 
     for (const fileName of fileNames.sort()) {
       const text = await readFile(join(folder, fileName), 'utf8')
@@ -290,13 +339,36 @@ async function validateAllLessons(course) {
         errors.forEach((error) => console.error(`    - ${error}`))
       }
     }
+    for (const checksName of checksFiles) {
+      const lessonBase = checksName.replace(/\.checks\.json$/, '')
+      const stepCounts = {}
+      for (const language of ['en', 'es']) {
+        const lessonFile = `${lessonBase}.${language}.md`
+        if (fileNames.includes(lessonFile)) {
+          stepCounts[language] = countSteps(
+            await readFile(join(folder, lessonFile), 'utf8'),
+          )
+        }
+      }
+      const data = JSON.parse(await readFile(join(folder, checksName), 'utf8'))
+      const errors =
+        Object.keys(stepCounts).length === 0
+          ? [`no lesson file "${lessonBase}.en.md" for these checkpoints`]
+          : validateLessonChecks(data, stepCounts)
+      checkpointCount += data.steps?.length ?? 0
+      if (errors.length > 0) {
+        hasErrors = true
+        console.error(`✗ lessons/${moduleSlug}/${checksName}`)
+        errors.forEach((error) => console.error(`    - ${error}`))
+      }
+    }
     for (const fileName of findLessonsMissingEnglish(fileNames)) {
       hasErrors = true
       console.error(`✗ lessons/${moduleSlug}/${fileName}`)
       console.error('    - has no English version (.en.md)')
     }
   }
-  return { lessonCount, hasErrors }
+  return { lessonCount, checkpointCount, hasErrors }
 }
 
 function plural(count, word) {
@@ -354,7 +426,11 @@ async function main() {
 
   const lessons = await validateAllLessons(course)
   if (lessons.hasErrors) hasErrors = true
-  else console.log(`✓ lessons (${plural(lessons.lessonCount, 'file')})`)
+  else {
+    console.log(
+      `✓ lessons (${plural(lessons.lessonCount, 'file')}, ${plural(lessons.checkpointCount, 'checkpoint')})`,
+    )
+  }
 
   if (missingSpanish > 0) {
     console.warn(`⚠ ${missingSpanish} texts still need a Spanish translation`)
