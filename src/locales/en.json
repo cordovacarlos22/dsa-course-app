@@ -166,21 +166,192 @@
     },
     "arrayReindex": {
       "title": "Array operations and re-indexing",
-      "start": "Every item in an array has an index, starting at 0.",
-      "push": "push(17) adds to the end. No other item moves: O(1).",
-      "pop": "pop() removes from the end. No other item moves: O(1).",
-      "shift": "shift() removes the first item, so every other item moves down one index: O(n).",
-      "unshift": "unshift(11) adds to the start, so every item moves up one index: O(n).",
+      "start": "Every guest in the array has an index, starting at 0.",
+      "push": "push('Eli') adds to the end. No other guest moves: O(1).",
+      "pop": "pop() removes from the end. No other guest moves: O(1).",
+      "shift": "shift() removes the first guest, so every other guest moves down one index: O(n).",
+      "unshift": "unshift('Ana') adds to the start, so every guest moves up one index: O(n).",
       "legendNew": "new",
       "legendMoved": "re-indexed",
       "index": "index {{index}}"
     },
     "binarySearch": {
-      "title": "Binary search: cut it in half",
-      "start": "Find {{target}} in a sorted array of {{count}} items.",
-      "goRight": "The middle is {{middle}}, smaller than {{target}}: throw away the left half.",
-      "goLeft": "The middle is {{middle}}, bigger than {{target}}: throw away the right half.",
-      "found": "Found {{target}} after {{checks}} checks. log₂(8) = 3: that's O(log n)."
+      "title": "Binary search: cut the list in half",
+      "start": "Find '{{target}}' in a guest list of {{count}} names sorted A to Z.",
+      "goRight": "The middle name is '{{middle}}', which comes before '{{target}}' in ABC order: throw away the left half.",
+      "goLeft": "The middle name is '{{middle}}', which comes after '{{target}}' in ABC order: throw away the right half.",
+      "found": "Found '{{target}}' after {{checks}} checks. log₂(8) = 3: that's O(log n)."
+    },
+    "stopwatchRace": {
+      "title": "Timing the same code on two computers",
+      "laptop": "Fast laptop",
+      "phone": "Old phone",
+      "steps_one": "{{count}} step",
+      "steps_other": "{{count}} steps",
+      "start": "The same code welcomes {{n}} guests. Let's time it on a fast laptop and an old phone.",
+      "firstRun": "The laptop is much faster… but both did exactly {{n}} steps.",
+      "secondRun": "Run it again: different times! Other apps and the browser change every run. The steps are still {{n}}.",
+      "moreGuests": "Now {{n}} guests. The times change again, but the steps simply doubled to {{n}}.",
+      "summary": "Seconds depend on the machine. Steps depend only on the code and n. Big O counts steps."
+    },
+    "searchCases": {
+      "title": "Best, average and worst case",
+      "looking": "Looking for",
+      "checks_one": "{{count}} check",
+      "checks_other": "{{count}} checks",
+      "start": "isInvited reads the list from the start. How much work it does depends on where the name is.",
+      "best": "'{{name}}' is first: found in {{checks}} check. The best case is called Ω (omega).",
+      "average": "'{{name}}' is in the middle: {{checks}} checks. The average case is called Θ (theta).",
+      "worst": "'{{name}}' isn't on the list: all {{checks}} names checked. The worst case is called O: big O.",
+      "summary": "Big O always means the worst case: the code will never be slower than this."
+    },
+    "linearBoxes": {
+      "title": "O(n): one step per guest",
+      "chartLabel": "Steps grow in a straight line with the number of guests",
+      "stepsAxis": "steps",
+      "count": "{{n}} guests → {{count}} steps",
+      "one": "Welcome {{guest}}: one step.",
+      "four": "4 guests, 4 steps.",
+      "eight": "Double the guests (8) and the work doubles too: 8 steps.",
+      "sixteen": "16 guests → 16 steps.",
+      "line": "The dots form a straight line. Work that grows like this is O(n), linear time."
+    },
+    "constantJump": {
+      "title": "O(1): jump straight to the box",
+      "steps_one": "{{count}} step",
+      "steps_other": "{{count}} steps",
+      "start": "The guest list. Each box has an index.",
+      "jump": "guests[3] jumps straight to box 3. No need to look at boxes 0, 1 and 2.",
+      "length": "guests.length is also just one step: the array already knows its size.",
+      "huge": "With a million guests, guests[500000] still jumps straight there: 1 step.",
+      "summary": "The work doesn't change with the size of the list. That's O(1), constant time: the best Big O."
+    },
+    "sameShape": {
+      "title": "Drop the constants: same shape",
+      "axisOps": "steps",
+      "n": "One loop over the guests: n steps. A straight line.",
+      "twoN": "Two loops in a row: 2n steps. Steeper, but still a straight line.",
+      "threeN": "3n: steeper again, and still a straight line.",
+      "nSquared": "n² is different: it bends upward and leaves the others behind.",
+      "summary": "n, 2n and 3n have the same shape, so they are all O(n). We drop the constant."
+    },
+    "nestedGrid": {
+      "title": "O(n²): every guest greets every guest",
+      "count": "{{cells}} of {{n}} × {{n}} cells",
+      "start": "Each row is a guest (i). For every row, the inner loop goes through every column (j).",
+      "row": "{{guest}}'s row is done: the inner loop ran {{n}} times. Grey cells are a guest meeting themselves (skipped).",
+      "full": "3 guests → 3 × 3 = {{total}} inner steps.",
+      "double": "Double the guests to {{n}}: {{n}} × {{n}} = {{total}} steps. Twice the guests, 4 times the work!",
+      "summary": "A loop inside a loop over the same list is O(n²), quadratic time."
+    },
+    "dominantTerm": {
+      "title": "Drop the non-dominant terms",
+      "share": "The n part is {{share}}% of the work.",
+      "size": "n = {{n}}: n² is {{squared}} and n adds only {{n}} more. The n part is {{share}}% of {{total}}.",
+      "summary": "As n grows, n² does almost all the work. So O(n² + n) is written O(n²)."
+    },
+    "twoInputs": {
+      "title": "Two inputs: guests (a) and helpers (b)",
+      "start": "The party has 4 guests (a) and 2 helpers (b): two different lists.",
+      "guests": "First loop: welcome every guest. That's a steps.",
+      "helpers": "Then a second loop over the helpers: b more steps. In total: O(a + b).",
+      "grid": "Now every guest thanks every helper: a loop over helpers inside a loop over guests. That's a × b steps: O(a · b).",
+      "summary": "Don't call both sizes n: there could be 4 guests and 1,000 helpers. Use one letter per input."
+    },
+    "memoryBoxes": {
+      "title": "Space: how much memory grows?",
+      "memory": "extra memory",
+      "boxes_one": "{{count}} box of memory",
+      "boxes_other": "{{count}} boxes of memory",
+      "counter": "Counting {{n}} guests only needs one box: the counter.",
+      "counterBig": "With {{n}} guests it's still one box. O(1) space.",
+      "tags": "Making a name tag for each of {{n}} guests needs a new box per guest.",
+      "tagsBig": "{{n}} guests → {{n}} name tags. The memory grows with n: O(n) space.",
+      "summary": "Space complexity counts the extra memory the code creates as the input grows."
+    },
+    "halvingCount": {
+      "title": "Logarithms count halvings",
+      "counter_one": "{{left}} left after {{count}} halving",
+      "counter_other": "{{left}} left after {{count}} halvings",
+      "start": "16 boxes. How many times can we cut them in half until 1 is left?",
+      "half": "Cut in half: {{left}} left.",
+      "one": "Only 1 left after {{halvings}} halvings. So log₂(16) = 4.",
+      "big": "1,024 boxes need only 10 halvings, and a million need about 20. That's why O(log n) is so fast."
+    },
+    "trace": {
+      "pickInput": "Pick an input",
+      "console": "console",
+      "counters": {
+        "checks_one": "check",
+        "checks_other": "checks",
+        "operations_one": "operation",
+        "operations_other": "operations",
+        "messages_one": "message",
+        "messages_other": "messages",
+        "innerSteps_one": "inner step",
+        "innerSteps_other": "inner steps"
+      },
+      "isInvited": {
+        "title": "isInvited: stop as soon as you find the name",
+        "input": "find '{{name}}'",
+        "start": "Is '{{name}}' on the list of {{count}} guests? Start at i = 0.",
+        "noMatch": "Is guests[{{i}}] ('{{guest}}') equal to '{{name}}'? No → keep going.",
+        "match": "guests[{{i}}] is '{{guest}}'. Found it! Return true after {{ops}} checks.",
+        "notFound": "The loop ended: '{{name}}' isn't on the list. Return false after {{ops}} checks."
+      },
+      "isInvitedAll": {
+        "title": "isInvitedAll: always read the whole list",
+        "input": "find '{{name}}'",
+        "start": "Is '{{name}}' on the list of {{count}} guests? found starts as false.",
+        "noMatch": "Is guests[{{i}}] ('{{guest}}') equal to '{{name}}'? No.",
+        "match": "guests[{{i}}] is '{{name}}': found = true… but the loop doesn't stop!",
+        "keepReading": "'{{guest}}': we already found the name, but we keep reading anyway.",
+        "end": "Return {{found}} after {{ops}} checks: every guest, every time."
+      },
+      "countShortNames": {
+        "title": "Counting operations",
+        "input": "{{n}} guests",
+        "init": "let count = 0: one operation.",
+        "loopCheck": "Is i ({{i}}) < {{n}}? Yes, so the loop runs again: one operation.",
+        "isShort": "'{{guest}}' has {{length}} letters, 3 or fewer: one operation for the check…",
+        "isLong": "'{{guest}}' has {{length}} letters, more than 3: one operation for the check.",
+        "addOne": "…and one for count = count + 1 (now {{count}}). Then i++ is one more.",
+        "fastForward": "With {{n}} guests we skip to the end. Each guest costs 3 or 4 operations.",
+        "end": "Done: {{ops}} operations for {{n}} guests. Try the other sizes: the total grows with n."
+      },
+      "welcomeAll": {
+        "title": "welcomeAll: one message per guest",
+        "input": "{{n}} guests",
+        "start": "Welcome {{n}} guests, one at a time.",
+        "print": "i = {{i}}: print 'Welcome, {{guest}}!'",
+        "end": "{{n}} guests → {{n}} messages. The work grows with n: O(n)."
+      },
+      "welcomeAndGoodbye": {
+        "title": "Two loops in a row",
+        "input": "{{n}} guests",
+        "start": "First welcome every guest, then say goodbye to every guest.",
+        "welcome": "Welcome, {{guest}}!",
+        "secondLoop": "The first loop is done ({{n}} messages). Now the second loop starts.",
+        "goodbye": "Goodbye, {{guest}}!",
+        "end": "{{n}} + {{n}} = {{total}} messages: 2n. Drop the constant: it's still O(n)."
+      },
+      "greetEveryone": {
+        "title": "greetEveryone: a loop inside a loop",
+        "input": "{{n}} guests",
+        "start": "For each guest i, the inner loop goes through every guest j.",
+        "self": "i and j are both {{a}}: you don't greet yourself, but the inner loop still took a step.",
+        "greet": "{{a}} greets {{b}}. 👋",
+        "end": "{{n}} × {{n}} = {{steps}} inner steps ({{greetings}} greetings). That's O(n²)."
+      },
+      "partySummary": {
+        "title": "Rules of thumb: the cost of each line",
+        "index": "guests[0]: reading by index is one step. O(1).",
+        "math": "guests.length + 2: math on numbers is O(1), however big the numbers are.",
+        "assign": "let longNames = 0: giving a variable a value is O(1).",
+        "inside": "Inside the loop: one check and maybe one addition. O(1) each time…",
+        "loop": "…but the loop runs n times. Cost of a loop = times it runs × work inside = n × O(1) = O(n).",
+        "total": "Add it up: O(1) + O(1) + O(1) + O(n) + O(1). Drop the small terms: O(n)."
+      }
     }
   },
   "runnable": {

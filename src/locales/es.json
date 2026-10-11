@@ -166,21 +166,192 @@
     },
     "arrayReindex": {
       "title": "Operaciones de array y reindexado",
-      "start": "Cada elemento de un array tiene un índice, empezando en 0.",
-      "push": "push(17) agrega al final. Ningún otro elemento se mueve: O(1).",
-      "pop": "pop() quita del final. Ningún otro elemento se mueve: O(1).",
-      "shift": "shift() quita el primer elemento, así que todos los demás bajan un índice: O(n).",
-      "unshift": "unshift(11) agrega al inicio, así que todos los elementos suben un índice: O(n).",
+      "start": "Cada invitado del array tiene un índice, empezando en 0.",
+      "push": "push('Eli') agrega al final. Ningún otro invitado se mueve: O(1).",
+      "pop": "pop() quita del final. Ningún otro invitado se mueve: O(1).",
+      "shift": "shift() quita al primer invitado, así que todos los demás bajan un índice: O(n).",
+      "unshift": "unshift('Ana') agrega al principio, así que todos los invitados suben un índice: O(n).",
       "legendNew": "nuevo",
       "legendMoved": "reindexado",
       "index": "índice {{index}}"
     },
     "binarySearch": {
-      "title": "Búsqueda binaria: cortar a la mitad",
-      "start": "Busca {{target}} en un array ordenado de {{count}} elementos.",
-      "goRight": "El centro es {{middle}}, menor que {{target}}: descarta la mitad izquierda.",
-      "goLeft": "El centro es {{middle}}, mayor que {{target}}: descarta la mitad derecha.",
-      "found": "Encontramos {{target}} después de {{checks}} revisiones. log₂(8) = 3: eso es O(log n)."
+      "title": "Búsqueda binaria: parte la lista a la mitad",
+      "start": "Busca a '{{target}}' en una lista de {{count}} invitados ordenada de la A a la Z.",
+      "goRight": "El nombre del medio es '{{middle}}', que va antes de '{{target}}' en orden alfabético: descarta la mitad izquierda.",
+      "goLeft": "El nombre del medio es '{{middle}}', que va después de '{{target}}' en orden alfabético: descarta la mitad derecha.",
+      "found": "Encontramos a '{{target}}' después de {{checks}} revisiones. log₂(8) = 3: eso es O(log n)."
+    },
+    "stopwatchRace": {
+      "title": "Midiendo el mismo código en dos computadoras",
+      "laptop": "Laptop rápida",
+      "phone": "Teléfono viejo",
+      "steps_one": "{{count}} paso",
+      "steps_other": "{{count}} pasos",
+      "start": "El mismo código da la bienvenida a {{n}} invitados. Vamos a medirlo en una laptop rápida y en un teléfono viejo.",
+      "firstRun": "La laptop es mucho más rápida… pero las dos hicieron exactamente {{n}} pasos.",
+      "secondRun": "Ejecútalo otra vez: ¡tiempos distintos! Otras apps y el navegador cambian en cada ejecución. Los pasos siguen siendo {{n}}.",
+      "moreGuests": "Ahora {{n}} invitados. Los tiempos vuelven a cambiar, pero los pasos simplemente se duplicaron a {{n}}.",
+      "summary": "Los segundos dependen de la máquina. Los pasos dependen solo del código y de n. Big O cuenta pasos."
+    },
+    "searchCases": {
+      "title": "Mejor caso, caso promedio y peor caso",
+      "looking": "Buscando a",
+      "checks_one": "{{count}} revisión",
+      "checks_other": "{{count}} revisiones",
+      "start": "isInvited lee la lista desde el principio. Cuánto trabajo hace depende de dónde está el nombre.",
+      "best": "'{{name}}' es el primero: encontrado en {{checks}} revisión. El mejor caso se llama Ω (omega).",
+      "average": "'{{name}}' está en el medio: {{checks}} revisiones. El caso promedio se llama Θ (theta).",
+      "worst": "'{{name}}' no está en la lista: se revisaron los {{checks}} nombres. El peor caso se llama O: big O.",
+      "summary": "Big O siempre significa el peor caso: el código nunca será más lento que esto."
+    },
+    "linearBoxes": {
+      "title": "O(n): un paso por invitado",
+      "chartLabel": "Los pasos crecen en línea recta con el número de invitados",
+      "stepsAxis": "pasos",
+      "count": "{{n}} invitados → {{count}} pasos",
+      "one": "Bienvenida a {{guest}}: un paso.",
+      "four": "4 invitados, 4 pasos.",
+      "eight": "Duplica los invitados (8) y el trabajo también se duplica: 8 pasos.",
+      "sixteen": "16 invitados → 16 pasos.",
+      "line": "Los puntos forman una línea recta. El trabajo que crece así es O(n), tiempo lineal."
+    },
+    "constantJump": {
+      "title": "O(1): salta directo a la caja",
+      "steps_one": "{{count}} paso",
+      "steps_other": "{{count}} pasos",
+      "start": "La lista de invitados. Cada caja tiene un índice.",
+      "jump": "guests[3] salta directo a la caja 3. No hace falta mirar las cajas 0, 1 y 2.",
+      "length": "guests.length también es un solo paso: el array ya sabe su tamaño.",
+      "huge": "Con un millón de invitados, guests[500000] sigue saltando directo: 1 paso.",
+      "summary": "El trabajo no cambia con el tamaño de la lista. Eso es O(1), tiempo constante: el mejor Big O."
+    },
+    "sameShape": {
+      "title": "Elimina las constantes: la misma forma",
+      "axisOps": "pasos",
+      "n": "Un bucle sobre los invitados: n pasos. Una línea recta.",
+      "twoN": "Dos bucles seguidos: 2n pasos. Más inclinada, pero sigue siendo una línea recta.",
+      "threeN": "3n: todavía más inclinada, y sigue siendo una línea recta.",
+      "nSquared": "n² es distinta: se curva hacia arriba y deja atrás a las demás.",
+      "summary": "n, 2n y 3n tienen la misma forma, así que todas son O(n). Eliminamos la constante."
+    },
+    "nestedGrid": {
+      "title": "O(n²): cada invitado saluda a cada invitado",
+      "count": "{{cells}} de {{n}} × {{n}} celdas",
+      "start": "Cada fila es un invitado (i). Por cada fila, el bucle de adentro recorre todas las columnas (j).",
+      "row": "La fila de {{guest}} está lista: el bucle de adentro corrió {{n}} veces. Las celdas grises son un invitado consigo mismo (se saltan).",
+      "full": "3 invitados → 3 × 3 = {{total}} pasos internos.",
+      "double": "Duplica los invitados a {{n}}: {{n}} × {{n}} = {{total}} pasos. ¡El doble de invitados, 4 veces el trabajo!",
+      "summary": "Un bucle dentro de otro sobre la misma lista es O(n²), tiempo cuadrático."
+    },
+    "dominantTerm": {
+      "title": "Elimina los términos no dominantes",
+      "share": "La parte n es el {{share}}% del trabajo.",
+      "size": "n = {{n}}: n² es {{squared}} y n solo suma {{n}} más. La parte n es el {{share}}% de {{total}}.",
+      "summary": "Cuando n crece, n² hace casi todo el trabajo. Por eso O(n² + n) se escribe O(n²)."
+    },
+    "twoInputs": {
+      "title": "Dos entradas: invitados (a) y ayudantes (b)",
+      "start": "La fiesta tiene 4 invitados (a) y 2 ayudantes (b): dos listas distintas.",
+      "guests": "Primer bucle: dar la bienvenida a cada invitado. Son a pasos.",
+      "helpers": "Después, un segundo bucle sobre los ayudantes: b pasos más. En total: O(a + b).",
+      "grid": "Ahora cada invitado le agradece a cada ayudante: un bucle sobre los ayudantes dentro de un bucle sobre los invitados. Son a × b pasos: O(a · b).",
+      "summary": "No llames n a los dos tamaños: podría haber 4 invitados y 1,000 ayudantes. Usa una letra por entrada."
+    },
+    "memoryBoxes": {
+      "title": "Espacio: ¿cuánta memoria crece?",
+      "memory": "memoria extra",
+      "boxes_one": "{{count}} caja de memoria",
+      "boxes_other": "{{count}} cajas de memoria",
+      "counter": "Contar {{n}} invitados solo necesita una caja: el contador.",
+      "counterBig": "Con {{n}} invitados sigue siendo una caja. Espacio O(1).",
+      "tags": "Hacer un gafete para cada uno de los {{n}} invitados necesita una caja nueva por invitado.",
+      "tagsBig": "{{n}} invitados → {{n}} gafetes. La memoria crece con n: espacio O(n).",
+      "summary": "La complejidad espacial cuenta la memoria extra que crea el código cuando crece la entrada."
+    },
+    "halvingCount": {
+      "title": "Los logaritmos cuentan mitades",
+      "counter_one": "quedan {{left}} después de {{count}} mitad",
+      "counter_other": "quedan {{left}} después de {{count}} mitades",
+      "start": "16 cajas. ¿Cuántas veces podemos partirlas a la mitad hasta que quede 1?",
+      "half": "Parte a la mitad: quedan {{left}}.",
+      "one": "Solo queda 1 después de {{halvings}} mitades. Entonces log₂(16) = 4.",
+      "big": "1,024 cajas necesitan solo 10 mitades, y un millón necesita unas 20. Por eso O(log n) es tan rápido."
+    },
+    "trace": {
+      "pickInput": "Elige una entrada",
+      "console": "consola",
+      "counters": {
+        "checks_one": "revisión",
+        "checks_other": "revisiones",
+        "operations_one": "operación",
+        "operations_other": "operaciones",
+        "messages_one": "mensaje",
+        "messages_other": "mensajes",
+        "innerSteps_one": "paso interno",
+        "innerSteps_other": "pasos internos"
+      },
+      "isInvited": {
+        "title": "isInvited: detente en cuanto encuentres el nombre",
+        "input": "buscar a '{{name}}'",
+        "start": "¿'{{name}}' está en la lista de {{count}} invitados? Empieza en i = 0.",
+        "noMatch": "¿guests[{{i}}] ('{{guest}}') es igual a '{{name}}'? No → sigue.",
+        "match": "guests[{{i}}] es '{{guest}}'. ¡Lo encontramos! Devuelve true después de {{ops}} revisiones.",
+        "notFound": "El bucle terminó: '{{name}}' no está en la lista. Devuelve false después de {{ops}} revisiones."
+      },
+      "isInvitedAll": {
+        "title": "isInvitedAll: siempre lee toda la lista",
+        "input": "buscar a '{{name}}'",
+        "start": "¿'{{name}}' está en la lista de {{count}} invitados? found empieza en false.",
+        "noMatch": "¿guests[{{i}}] ('{{guest}}') es igual a '{{name}}'? No.",
+        "match": "guests[{{i}}] es '{{name}}': found = true… ¡pero el bucle no se detiene!",
+        "keepReading": "'{{guest}}': ya encontramos el nombre, pero seguimos leyendo de todos modos.",
+        "end": "Devuelve {{found}} después de {{ops}} revisiones: todos los invitados, siempre."
+      },
+      "countShortNames": {
+        "title": "Contando operaciones",
+        "input": "{{n}} invitados",
+        "init": "let count = 0: una operación.",
+        "loopCheck": "¿i ({{i}}) < {{n}}? Sí, así que el bucle corre otra vez: una operación.",
+        "isShort": "'{{guest}}' tiene {{length}} letras, 3 o menos: una operación por la revisión…",
+        "isLong": "'{{guest}}' tiene {{length}} letras, más de 3: una operación por la revisión.",
+        "addOne": "…y una por count = count + 1 (ahora {{count}}). Después i++ es una más.",
+        "fastForward": "Con {{n}} invitados saltamos al final. Cada invitado cuesta 3 o 4 operaciones.",
+        "end": "Listo: {{ops}} operaciones para {{n}} invitados. Prueba los otros tamaños: el total crece con n."
+      },
+      "welcomeAll": {
+        "title": "welcomeAll: un mensaje por invitado",
+        "input": "{{n}} invitados",
+        "start": "Da la bienvenida a {{n}} invitados, uno por uno.",
+        "print": "i = {{i}}: imprime 'Welcome, {{guest}}!'",
+        "end": "{{n}} invitados → {{n}} mensajes. El trabajo crece con n: O(n)."
+      },
+      "welcomeAndGoodbye": {
+        "title": "Dos bucles seguidos",
+        "input": "{{n}} invitados",
+        "start": "Primero da la bienvenida a cada invitado y después despídete de cada invitado.",
+        "welcome": "Welcome, {{guest}}!",
+        "secondLoop": "El primer bucle terminó ({{n}} mensajes). Ahora empieza el segundo bucle.",
+        "goodbye": "Goodbye, {{guest}}!",
+        "end": "{{n}} + {{n}} = {{total}} mensajes: 2n. Elimina la constante: sigue siendo O(n)."
+      },
+      "greetEveryone": {
+        "title": "greetEveryone: un bucle dentro de otro",
+        "input": "{{n}} invitados",
+        "start": "Por cada invitado i, el bucle de adentro recorre a todos los invitados j.",
+        "self": "i y j son {{a}}: nadie se saluda a sí mismo, pero el bucle de adentro igual dio un paso.",
+        "greet": "{{a}} saluda a {{b}}. 👋",
+        "end": "{{n}} × {{n}} = {{steps}} pasos internos ({{greetings}} saludos). Eso es O(n²)."
+      },
+      "partySummary": {
+        "title": "Reglas prácticas: el costo de cada línea",
+        "index": "guests[0]: leer por índice es un paso. O(1).",
+        "math": "guests.length + 2: las operaciones con números son O(1), sin importar qué tan grandes sean.",
+        "assign": "let longNames = 0: darle un valor a una variable es O(1).",
+        "inside": "Dentro del bucle: una revisión y quizá una suma. O(1) cada vez…",
+        "loop": "…pero el bucle corre n veces. Costo de un bucle = veces que corre × trabajo de adentro = n × O(1) = O(n).",
+        "total": "Súmalo todo: O(1) + O(1) + O(1) + O(n) + O(1). Quita los términos pequeños: O(n)."
+      }
     }
   },
   "runnable": {
