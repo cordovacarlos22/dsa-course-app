@@ -86,17 +86,11 @@ Big O mide dos cosas:
 
 Nuestra lista de invitados muestra el intercambio. El Set es más rápido, pero es una **segunda copia** de todos los nombres, así que usa memoria extra: O(n) de espacio. La versión con la lista no usa memoria extra: O(1) de espacio. En una entrevista te pueden decir: _"Muy bien, es rápido. ¿Puedes hacerlo con menos memoria?"_ Vamos a hablar sobre todo del tiempo, pero ten en cuenta el espacio.
 
-## Resumen de Big O
+En resumen:
 
 | Código                | Tiempo           | Espacio extra |
 | --------------------- | ---------------- | ------------- |
 | `isInvitedList(name)` | O(n)             | O(1)          |
 | `isInvitedSet(name)`  | O(1) en promedio | O(n)          |
-
-## Compruébalo tú mismo
-
-1. ¿Por qué no medimos la velocidad del código con un cronómetro?
-2. Si la lista de invitados se hace 10 veces más grande, ¿qué pasa con el trabajo de `isInvitedList`? ¿Y con el de `isInvitedSet`?
-3. La versión con el Set es más rápida. ¿Qué cuesta a cambio?
 
 Cuando termines las lecciones de Big O, haz el **cuestionario de Big O** en la página del módulo.
