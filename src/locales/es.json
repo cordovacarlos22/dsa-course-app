@@ -14,34 +14,119 @@
     "es": "Español"
   },
   "landing": {
-    "headline": "Aprende estructuras de datos y algoritmos en JavaScript",
-    "subheadline": "Lecciones paso a paso con animaciones y código que puedes ejecutar, cuestionarios y ejercicios con tiempo, con un tutor de IA a tu lado.",
+    "badge": "Gratis durante la beta",
+    "headline": "Aprende estructuras de datos y algoritmos en JavaScript, paso a paso",
+    "subheadline": "Mira moverse cada algoritmo, ejecuta código real en tu navegador y practica hasta que las entrevistas técnicas se sientan fáciles, con un tutor de IA a tu lado.",
     "cta": "Empezar a aprender",
-    "featuresTitle": "Cómo vas a aprender",
+    "ctaSecondary": "Ver el temario",
+    "howTitle": "Cómo vas a aprender",
+    "howSubtitle": "Las ideas difíciles se vuelven fáciles cuando puedes verlas y probarlas tú mismo.",
+    "comingSoon": "Próximamente",
     "features": {
-      "lessons": {
-        "title": "Lecciones animadas",
-        "text": "Mira cada algoritmo moverse paso a paso y luego ejecuta y edita el código tú mismo."
+      "animations": {
+        "title": "Animaciones paso a paso",
+        "text": "Mira cómo se mueven las listas enlazadas, los árboles y los algoritmos de ordenamiento, un paso a la vez y a tu ritmo."
+      },
+      "code": {
+        "title": "Código en tu navegador",
+        "text": "Cada lección tiene código que puedes editar y ejecutar en la misma página. No hay que instalar nada."
       },
       "practice": {
         "title": "Cuestionarios y ejercicios con tiempo",
-        "text": "Comprueba lo que aprendiste y practica problemas estilo LeetCode contra el reloj."
+        "text": "Comprueba lo que aprendiste después de cada módulo y resuelve problemas estilo LeetCode contra el reloj."
       },
       "tutor": {
-        "title": "Un tutor de IA",
+        "title": "Tutor de IA",
         "text": "Haz preguntas sobre cualquier lección, recibe pistas cuando te atasques y comentarios sobre tu código."
       }
-    }
+    },
+    "learnTitle": "Lo que vas a aprender",
+    "learnItems": [
+      "Analizar la complejidad temporal y espacial de cualquier código con Big O",
+      "Construir desde cero listas enlazadas, pilas, colas, árboles, tablas hash, grafos y heaps",
+      "Entender el ordenamiento, la recursión y la programación dinámica en lugar de memorizarlos",
+      "Resolver problemas estilo LeetCode contra el reloj",
+      "Elegir la estructura de datos correcta para cada problema y explicar por qué",
+      "Llegar a tus entrevistas técnicas listo para explicar tu razonamiento en voz alta"
+    ],
+    "curriculumTitle": "El temario",
+    "curriculumSubtitle": "{{modules}} módulos en {{parts}} partes. Se agregan módulos nuevos a medida que crece el curso.",
+    "audienceTitle": "¿Para quién es este curso?",
+    "audience": [
+      {
+        "title": "Preparación para entrevistas",
+        "text": "Desarrolladores de JavaScript que quieren llegar con confianza a sus entrevistas técnicas."
+      },
+      {
+        "title": "Estudiantes universitarios",
+        "text": "Estudiantes que quieren que su clase de estructuras de datos y algoritmos por fin les haga clic."
+      },
+      {
+        "title": "Programadores autodidactas",
+        "text": "Programadores que quieren llenar los huecos de ciencias de la computación que nadie les enseñó."
+      },
+      {
+        "title": "Cambio de carrera",
+        "text": "Personas que están entrando al mundo tech y necesitan bases sólidas, rápido."
+      }
+    ],
+    "requirementsTitle": "Lo que necesitas",
+    "requirements": [
+      "JavaScript básico: variables, bucles, funciones y arrays",
+      "No necesitas experiencia con estructuras de datos ni algoritmos",
+      "Curiosidad y un poco de práctica cada día"
+    ],
+    "instructor": {
+      "title": "Conoce a tu instructor",
+      "name": "Carlos Cordova",
+      "role": "Ingeniero de software · charliecodeacademy",
+      "photoAlt": "Carlos Cordova, el instructor del curso",
+      "bio": [
+        "Hola, soy Carlos. Soy ingeniero de software full-stack y no llegué aquí por el camino tradicional.",
+        "Terminé mi licenciatura en Ingeniería en Computación y obtuve mi certificación AWS Certified Cloud Practitioner mientras trabajaba tiempo completo como chofer de tráiler e instructor de choferes. Estudié estructuras de datos y algoritmos entre turnos largos, así que sé lo que es aprender esto después de un día completo de trabajo.",
+        "Entrenar a choferes nuevos me enseñó a dividir habilidades difíciles en pasos pequeños y claros, y así es exactamente como funciona este curso. Lo creé para que fuera el curso que me hubiera gustado tener: visual, práctico y en inglés y en español."
+      ],
+      "links": {
+        "github": "GitHub",
+        "linkedin": "LinkedIn",
+        "website": "Sitio web"
+      }
+    },
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "q": "¿Es gratis?",
+        "a": "Sí. Todo el curso es gratis durante la beta."
+      },
+      {
+        "q": "¿Tengo que instalar algo?",
+        "a": "No. Las lecciones, las animaciones y el código funcionan en tu navegador."
+      },
+      {
+        "q": "¿Está en inglés o en español?",
+        "a": "En los dos. Elige tu idioma la primera vez que entres y cámbialo cuando quieras desde la barra superior."
+      },
+      {
+        "q": "¿Qué pasa si me atasco?",
+        "a": "En cada lección puedes cambiar y volver a ejecutar el código, y el cuestionario de cada módulo explica cada respuesta. Pronto llegará un tutor de IA que responde preguntas y da pistas."
+      },
+      {
+        "q": "¿Necesito saber estructuras de datos?",
+        "a": "No. Empezamos desde cero con Big O. Solo necesitas JavaScript básico."
+      }
+    ],
+    "finalTitle": "¿Listo para empezar?",
+    "finalText": "Los primeros módulos ya están listos. Empieza por la introducción y aprende a tu ritmo."
   },
   "course": {
     "title": "Módulos del curso",
-    "subtitle": "Avanza por los módulos en orden. Se agregan nuevos a medida que crece el curso.",
     "moduleNumber": "Módulo {{number}}",
     "comingSoon": "Próximamente",
     "questions_one": "{{count}} pregunta",
     "questions_other": "{{count}} preguntas",
     "exercises_one": "{{count}} ejercicio",
-    "exercises_other": "{{count}} ejercicios"
+    "exercises_other": "{{count}} ejercicios",
+    "partTitle": "Parte {{number}}: {{title}}"
   },
   "module": {
     "back": "Todos los módulos",
