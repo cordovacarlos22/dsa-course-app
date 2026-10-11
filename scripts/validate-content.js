@@ -185,6 +185,21 @@ export function validatePractice(data) {
   }
   for (const exercise of practice.exercises) {
     errors.push(...checkSolution(exercise))
+    const code = [
+      ...Object.values(exercise.starterCode),
+      ...Object.values(exercise.solution),
+    ].join('\n')
+    errors.push(
+      ...findAdvancedLoops(code).map((error) => `${exercise.slug}: ${error}`),
+    )
+  }
+  for (const question of practice.questions) {
+    if (!question.code) continue
+    errors.push(
+      ...findAdvancedLoops(question.code).map(
+        (error) => `question "${question.id}": ${error}`,
+      ),
+    )
   }
   return errors
 }
@@ -208,6 +223,20 @@ export function countMissingSpanish(value) {
 const LESSON_FILE_NAME = /^((\d{2})-[a-z0-9]+(?:-[a-z0-9]+)*)\.(en|es)\.md$/
 
 // Checks one lesson file. An empty list means it's valid.
+// Teaching code is written for people who only know basic JavaScript, so
+// loops use an index: for (let i = 0; i < guests.length; i++) { guests[i] }.
+// Returns a message when `code` uses a loop style beginners find harder.
+const BEGINNER_LOOP_RULES = [
+  { pattern: /for\s*\(\s*(const|let|var)\s+\w+\s+of\b/, name: 'for...of' },
+  { pattern: /\.forEach\s*\(/, name: '.forEach' },
+]
+export function findAdvancedLoops(code) {
+  return BEGINNER_LOOP_RULES.filter(({ pattern }) => pattern.test(code)).map(
+    ({ name }) =>
+      `uses ${name}: write loops as for (let i = 0; i < list.length; i++)`,
+  )
+}
+
 export function validateLesson({ moduleSlug, fileName, text }, course) {
   const errors = []
   if (!course.modules.some((module) => module.slug === moduleSlug)) {
@@ -251,6 +280,11 @@ export function validateLesson({ moduleSlug, fileName, text }, course) {
       } catch (error) {
         errors.push(`js-run block does not compile (${error.message})`)
       }
+      errors.push(
+        ...findAdvancedLoops(block.code).map(
+          (error) => `js-run block ${error}`,
+        ),
+      )
     }
   }
   return errors
@@ -280,6 +314,14 @@ export function validateLessonChecks(data, stepCounts) {
   steps.forEach((checkpoint, index) => {
     if (checkpoint.type !== 'code') return
     const label = `checkpoint ${index + 1}`
+    const teachingText = [
+      checkpoint.starterCode,
+      checkpoint.solution,
+      ...Object.values(checkpoint.hint),
+    ].join('\n')
+    errors.push(
+      ...findAdvancedLoops(teachingText).map((error) => `${label} ${error}`),
+    )
     // Reuse the exercise checker: same test format, same sandbox.
     const asExercise = (code) => ({
       ...checkpoint,

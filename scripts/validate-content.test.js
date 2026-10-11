@@ -4,6 +4,7 @@ import {
   checkPracticeInCourse,
   countMissingSpanish,
   countSteps,
+  findAdvancedLoops,
   findLessonsMissingEnglish,
   validateCourse,
   validateLesson,
@@ -481,6 +482,28 @@ describe('validateLessonChecks', () => {
     checks.steps[1].starterCode = 'function isEven(n) {'
     expect(validateLessonChecks(checks, { en: 2 }).join()).toMatch(
       /starter code does not compile/,
+    )
+  })
+})
+
+describe('findAdvancedLoops', () => {
+  it('accepts indexed loops', () => {
+    expect(
+      findAdvancedLoops('for (let i = 0; i < guests.length; i++) {}'),
+    ).toEqual([])
+  })
+
+  it('rejects for...of and forEach', () => {
+    expect(findAdvancedLoops('for (const guest of guests) {}')).toHaveLength(1)
+    expect(findAdvancedLoops('guests.forEach((g) => g)')).toHaveLength(1)
+  })
+
+  it('is applied to a checkpoint solution', () => {
+    const checks = makeValidChecks()
+    checks.steps[1].solution =
+      'function isEven(n) {\n  for (const x of [n]) return x % 2 === 0\n}'
+    expect(validateLessonChecks(checks, { en: 2 }).join()).toMatch(
+      /for\.\.\.of/,
     )
   })
 })
