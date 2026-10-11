@@ -16,6 +16,14 @@ describe('parseFrontMatter', () => {
     )
   })
 
+  it('removes the quotes around a quoted value', () => {
+    const text = '---\ntitle: \'O(n): linear time\'\nsubtitle: "Hi"\n---\n'
+    expect(parseFrontMatter(text).data).toEqual({
+      title: 'O(n): linear time',
+      subtitle: 'Hi',
+    })
+  })
+
   it('handles Windows line endings', () => {
     expect(parseFrontMatter('---\r\norder: 2\r\n---\r\nText').data).toEqual({
       order: 2,

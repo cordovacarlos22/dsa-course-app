@@ -46,22 +46,22 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Big O (`big-o`)
 
-**Status:** 🟡 1 of 12 lessons (EN + ES) · ✅ quiz (EN + ES) · ✅ 3 interview problems · ⬜ slides
+**Status:** ✅ 12 lessons (EN + ES) · ✅ quiz (EN + ES) · 🟡 3 of 4 interview problems · ⬜ slides
 **Goal:** measure and compare the efficiency of code, in time and space.
 
 - **Lessons:**
   1. What is Big O? ✅ (`big-o-growth-chart`)
-  2. Why a stopwatch isn't enough: timing vs. counting operations
-  3. Best, average and worst case (Ω, Θ, O)
-  4. O(n): linear time
-  5. Dropping constants
-  6. O(n²): nested loops
-  7. Dropping non-dominant terms
-  8. O(1): constant time
-  9. Different inputs, different variables (O(a + b) vs. O(a · b))
-  10. Space complexity
-  11. Logarithms and O(log n) (`binary-search-halving`)
-  12. Wrap-up: comparing growth rates
+  2. Why a stopwatch isn't enough: timing vs. counting operations ✅
+  3. Best, average and worst case (Ω, Θ, O) ✅
+  4. O(n): linear time ✅
+  5. Dropping constants ✅
+  6. O(n²): nested loops ✅
+  7. Dropping non-dominant terms ✅
+  8. O(1): constant time ✅
+  9. Different inputs, different variables (O(a + b) vs. O(a · b)) ✅
+  10. Space complexity ✅
+  11. Logarithms and O(log n) ✅ (`binary-search-halving`)
+  12. Wrap-up: comparing growth rates ✅ (`big-o-growth-chart`)
 - **Quiz:** reading the Big O of code, simplification rules, Ω/Θ/O, space complexity, logarithms.
 - **Build it:** none.
 - **Interview problems:** ✅ Find the Maximum · ✅ Contains Duplicate · ✅ Binary Search · Count the Operations (predict the count, then check it)
