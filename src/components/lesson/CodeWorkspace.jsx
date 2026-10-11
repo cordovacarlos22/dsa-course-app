@@ -5,6 +5,7 @@ import { localize } from '../../lib/course'
 import { TRIES_BEFORE_SOLUTION } from '../../lib/progress'
 import { RUN_TIMEOUT_MS, checkJavaScript, runJavaScript } from '../../runners'
 import LessonMarkdown from '../LessonMarkdown'
+import InlineMarkdown from './InlineMarkdown'
 
 // CodeMirror is big, so it's only downloaded when a coding step opens.
 const CodeEditor = lazy(() => import('./CodeEditor'))
@@ -85,7 +86,7 @@ function CodeWorkspace({
         ))}
       </div>
 
-      <div className="grid gap-4 lg:h-[calc(100vh-15rem)] lg:min-h-[32rem] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)_minmax(0,1fr)]">
+      <div className="grid gap-4 lg:h-[calc(100vh-17rem)] lg:min-h-[32rem] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)_minmax(0,1fr)]">
         <section
           aria-label={t('workspace.learn')}
           className={`${paneClass('learn')} overflow-y-auto rounded-2xl border border-slate-200 bg-white p-5`}
@@ -105,7 +106,9 @@ function CodeWorkspace({
           {failedTries > 0 && !isPassed && (
             <div className="mt-4 rounded-xl bg-amber-50 p-4 text-amber-900">
               <span className="font-semibold">{t('checkpoint.hint')}:</span>{' '}
-              {localize(checkpoint.hint, language)}
+              <InlineMarkdown>
+                {localize(checkpoint.hint, language)}
+              </InlineMarkdown>
             </div>
           )}
         </section>
@@ -114,7 +117,7 @@ function CodeWorkspace({
           aria-label={t('workspace.code')}
           className={`${paneClass('code')} overflow-hidden rounded-2xl border border-slate-700 bg-[#282c34]`}
         >
-          <div className="h-80 min-h-0 flex-1 overflow-auto lg:h-auto">
+          <div className="h-80 overflow-auto lg:h-auto lg:min-h-0 lg:flex-1">
             <Suspense
               fallback={
                 <p className="p-4 text-sm text-slate-400">

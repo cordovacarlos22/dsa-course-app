@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useLanguage } from '../../hooks/useLanguage'
 import { localize } from '../../lib/course'
 import { TRIES_BEFORE_SOLUTION } from '../../lib/progress'
+import InlineMarkdown from './InlineMarkdown'
 
 // A multiple-choice question at the end of a step.
 // A wrong answer shows the hint; after a few wrong tries the right answer
@@ -47,7 +48,9 @@ function ChoiceCheckpoint({
           {t('checkpoint.title')}
         </legend>
         <p className="mt-2 text-lg font-semibold">
-          {localize(checkpoint.question, language)}
+          <InlineMarkdown>
+            {localize(checkpoint.question, language)}
+          </InlineMarkdown>
         </p>
         <div className="mt-4 space-y-2">
           {checkpoint.options.map((option, index) => {
@@ -72,7 +75,7 @@ function ChoiceCheckpoint({
                   disabled={verdict === 'correct'}
                   className="accent-brand"
                 />
-                {localize(option, language)}
+                <InlineMarkdown>{localize(option, language)}</InlineMarkdown>
               </label>
             )
           })}
@@ -104,7 +107,11 @@ function ChoiceCheckpoint({
         {verdict === 'correct' && (
           <div className="rounded-xl bg-green-50 p-4 text-green-900">
             <p className="font-bold">✓ {t('checkpoint.correct')}</p>
-            <p className="mt-1">{localize(checkpoint.explanation, language)}</p>
+            <p className="mt-1">
+              <InlineMarkdown>
+                {localize(checkpoint.explanation, language)}
+              </InlineMarkdown>
+            </p>
           </div>
         )}
         {verdict === 'wrong' && (
@@ -112,7 +119,9 @@ function ChoiceCheckpoint({
             <p className="font-bold">{t('checkpoint.wrong')}</p>
             <p className="mt-1">
               <span className="font-semibold">{t('checkpoint.hint')}:</span>{' '}
-              {localize(checkpoint.hint, language)}
+              <InlineMarkdown>
+                {localize(checkpoint.hint, language)}
+              </InlineMarkdown>
             </p>
           </div>
         )}

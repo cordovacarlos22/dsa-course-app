@@ -96,7 +96,9 @@ describe('lesson page', () => {
     const output = screen.getByRole('region', { name: 'Output' })
     expect(within(output).getByText(/0 of 1 tests passed/)).toBeInTheDocument()
     expect(within(output).getByText(/should return true/)).toBeInTheDocument()
-    expect(screen.getByText(/use a `for...of` loop/i)).toBeInTheDocument()
+    expect(
+      screen.getByText('for...of', { selector: 'code' }),
+    ).toBeInTheDocument()
     expect(
       screen.queryByRole('button', { name: 'Show solution' }),
     ).not.toBeInTheDocument()
