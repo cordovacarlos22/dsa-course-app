@@ -10,6 +10,9 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Decisions
 
+- 2026-10-11: **PIVOT: from "companion tool" to Carlos's own course app with an AI tutor.** Students learn inside the app: original written lessons + step-by-step animations + runnable code, quizzes, timed exercises, and an AI tutor (lesson chat, hints, code review, mock interview) through a Supabase Edge Function calling Claude. Free with login while building; daily AI quota per student; payments later. Lessons are **original, in Carlos's words**; the translated transcripts are only an example of topic order and depth. This replaces "companion for the Udemy course" in every decision below.
+- 2026-10-11: **Content is static in the repo** (`content/course.json`, `content/lessons/`, `content/sections/`), bundled with `import.meta.glob`. No content tables and no seed step. Supabase stores only users, progress and tutor messages.
+
 - 2026-10-11: **React + Vite, not Next.js.** The app is interactive and behind a login, with no need for SEO or server rendering. Supabase is the backend. Vite is simpler for juniors.
 - 2026-10-11: **Plain JavaScript, no TypeScript.** Carlos's preference: he's learning DSA in JS.
 - 2026-10-11: **Tailwind CSS v4** for styling, **Supabase** for database + auth, **Vercel** for hosting.
@@ -17,7 +20,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-11: **Blue/green deploys:** deploy green with `--skip-domain`, smoke test it, then `vercel promote`. Rollback = `vercel rollback`. Migrations must be backward compatible (expand, then contract).
 - 2026-10-11: **Two Supabase projects:** `staging` (PR previews) and `production` (`main`).
 - 2026-10-11: **Multi-user from the start.** Supabase Auth with email magic link. Roles: `student` and `admin`. RLS: students see only their own attempts.
-- 2026-10-11: **Content pipeline v1:** Carlos puts .docx files in `content/notes/<section>/` → Claude Code generates `content/sections/<section>.json` → validate + seed scripts. v2 (later): upload page + Claude API in a Supabase Edge Function.
+- 2026-10-11 (replaced by the pivot): **Content pipeline v1:** Carlos puts .docx files in `content/notes/<section>/` → Claude Code generates `content/sections/<section>.json` → validate + seed scripts. v2 (later): upload page + Claude API in a Supabase Edge Function.
 - 2026-10-11: **Bilingual (en/es):** content stored as `{ en, es }` jsonb. UI uses react-i18next.
 - 2026-10-11: **Exercises in JavaScript** run in a Web Worker. The runner design allows adding Python (Pyodide) later.
 - 2026-10-11: **Notes stay on Carlos's Desktop** (course folder, outside the repo), not in `content/notes/`. Agents read the .docx text, the images embedded in it, and the PDF/JS resources. Questions use **original wording only** (no copying Udemy quizzes). This replaces the `content/notes/` part of the content pipeline v1 decision.
@@ -28,19 +31,20 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-11: **Language picker on first visit** (ES/EN, remembered; changeable in the profile). Built in stage 8.
 - 2026-10-11: **Timer is a user setting:** `countdown` (Easy 15 / Medium 25 / Hard 40 min), `stopwatch`, or `off`. The time taken is always saved.
 
-## Stages
+## Stages (after the pivot)
 
-1. Scaffold: Vite React JS, Tailwind, ESLint/Prettier, Vitest, agent files
-2. CI: `ci.yml`, GitHub repo, branch protection, Vercel project
-3. Supabase schema + RLS, auth, profile page
-   3b. Deploy pipeline: Playwright smoke test, `preview.yml`, `deploy.yml` (blue/green), `rollback.yml`
-4. Content pipeline: schema + validate + Section 2 ✅; seed into Supabase (after stage 3)
-5. Course and sections UI with progress bars
-6. Quiz flow
-7. Exercises: editor, JS runner, timer
-8. i18n (ES/EN)
-9. Admin progress dashboard
-10. Later: Claude API upload pipeline, Python runner
+1. ✅ Scaffold
+2. ✅ CI + GitHub: private repo `cordovacarlos22/dsa-course-app`, `ci.yml`, stacked PRs #1–#4 (Actions runs not starting yet: see Open questions)
+3. ✅ Pivot docs: AGENTS.md, memory.md, README, app title (branch `docs/pivot-course-app`)
+4. App shell + i18n: router, layout, react-i18next, first-visit language picker, landing, course home ← next
+5. Lesson system: lesson schema + validation, Markdown renderer, StepPlayer, first 3 animations, runnable snippets (Web Worker)
+6. Original lessons for modules 01–03 (EN), reviewed by Carlos
+7. Quiz + exercise pages (CodeMirror, runner, timer)
+8. Supabase: schema + RLS, magic-link auth, profile, progress
+9. Deploy pipeline: preview / deploy (blue/green) / rollback, Playwright smoke test
+10. AI tutor v1: `tutor` Edge Function (streaming, quota), lesson chat, hints
+11. AI tutor v2: code review, mock interview
+12. Admin dashboard, Spanish pass, modules 04+, payments later
 
 ## Done
 
@@ -55,10 +59,10 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Next
 
-- Push `main`, `chore/scaffold`, `feat/content-pipeline` and `feat/course-content` to GitHub and open the PRs in order (each branch is built on the previous one).
-- Stage 2: Carlos installs `gh` (`brew install gh` then `gh auth login`) and creates the GitHub repo. Then add `ci.yml`.
-- Spanish translation pass for sections 01 and 03 (and 02's new title fields) when Carlos is ready: `content:validate` shows the count.
-- Carlos reviews the Section 3 and Section 1 questions.
+- **Carlos:** check https://github.com/cordovacarlos22/dsa-course-app/actions to see why CI runs don't start (billing/spending limit or account setting), then merge PRs **#1 → #2 → #3 → #4 in order** with "Create a merge commit" (squash is disabled so the stack stays intact; merged branches auto-delete and GitHub retargets the next PR to `main`).
+- Stage 4 (app shell + i18n): branch from `docs/pivot-course-app` (or from `main` once all 4 PRs are merged).
+- Carlos reviews the Section 1 and Section 3 questions.
+- Spanish pass later (`content:validate` shows the count).
 
 ## Course sections imported
 
@@ -72,6 +76,11 @@ Modules 04–17 have empty folders; they appear in `course.json` as "coming soon
 
 ## Open questions
 
+- 2026-10-11: **GitHub Actions doesn't start any run** on the new private repo (0 runs after pushes, PR opens and a reopen; Actions is enabled; `ci.yml` is on the PR branches). Likely an account-level Actions/billing setting. Needs Carlos to look at the Actions tab or Settings → Billing.
+- Branch protection is unavailable (GitHub returns 403: "Upgrade to GitHub Pro or make this repository public"). Options: GitHub Pro (free with GitHub Education) or a public repo.
+
+- App name and domain (placeholder title: "DSA in JavaScript").
+- Daily AI limit per student (default 40 messages).
 - Carlos mentioned 20 modules, but 17 folders exist. Which 3 are missing?
 - The Spanish `O(n^2)` script says O(n²) is "generally efficient"; the English translation says **inefficient** (matches the wrap-up). Carlos should fix the Spanish script.
 - The Intro slide 3 still says "Scott Barrett" (original instructor) instead of charliecodeacademy.
