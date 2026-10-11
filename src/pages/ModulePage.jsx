@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useLanguage } from '../hooks/useLanguage'
 import { getModule, localize } from '../lib/course'
 import { getLessonVersion } from '../lib/lessons'
+import { loadProgress } from '../lib/progress'
 import NotFoundPage from './NotFoundPage'
 
 // One module: its lessons, then its quiz + exercises (pages in stage 7).
@@ -44,24 +45,52 @@ function ModulePage() {
             <p className="mt-2 text-slate-600">{t('module.lessonsSoon')}</p>
           ) : (
             <ol className="mt-4 space-y-2">
-              {lessons.map((lesson) => (
-                <li key={lesson.slug}>
-                  <Link
-                    to={`/learn/${module.slug}/${lesson.slug}`}
-                    className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white px-4 py-3 hover:border-brand"
-                  >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/10 text-sm font-bold text-brand">
-                      {lesson.order}
-                    </span>
-                    <span className="font-semibold">
-                      {getLessonVersion(lesson, language).title}
-                    </span>
-                    <span className="ml-auto text-sm text-slate-500">
-                      {t('lesson.minutes', { count: lesson.minutes })}
-                    </span>
-                  </Link>
-                </li>
-              ))}
+              {lessons.map((lesson) => {
+                const progress = loadProgress(module.slug, lesson.slug)
+                const status = progress.completed
+                  ? 'completed'
+                  : progress.passed.length > 0
+                    ? 'inProgress'
+                    : null
+                return (
+                  <li key={lesson.slug}>
+                    <Link
+                      to={`/learn/${module.slug}/${lesson.slug}`}
+                      className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white px-4 py-3 hover:border-brand"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold ${
+                          status === 'completed'
+                            ? 'bg-green-500 text-white'
+                            : 'bg-brand/10 text-brand'
+                        }`}
+                      >
+                        {status === 'completed' ? '✓' : lesson.order}
+                      </span>
+                      <span className="font-semibold">
+                        {getLessonVersion(lesson, language).title}
+                      </span>
+                      <span className="ml-auto flex items-center gap-3 text-sm text-slate-500">
+                        {status && (
+                          <span
+                            className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
+                              status === 'completed'
+                                ? 'bg-green-100 text-green-800'
+                                : 'bg-amber-100 text-amber-800'
+                            }`}
+                          >
+                            {t(`lesson.${status}`)}
+                          </span>
+                        )}
+                        <span className="hidden sm:inline">
+                          {t('lesson.minutes', { count: lesson.minutes })}
+                        </span>
+                      </span>
+                    </Link>
+                  </li>
+                )
+              })}
             </ol>
           )}
         </>
