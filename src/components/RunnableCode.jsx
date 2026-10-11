@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { runJavaScript } from '../runners'
+import { RUN_TIMEOUT_MS, runJavaScript } from '../runners'
 
 // A code box the student can edit and run, with the printed output below.
 // (A full code editor arrives with the exercise pages in stage 7; a plain
@@ -68,7 +68,15 @@ function RunnableCode({ initialCode }) {
           aria-label={t('runnable.output')}
           className="border-t border-slate-700 bg-black/40 px-4 py-3 font-mono text-sm"
         >
-          {result.logs.length === 0 && !result.error && (
+          {result.problem === 'timeout' && (
+            <p className="text-red-400">
+              {t('runnable.timedOut', { seconds: RUN_TIMEOUT_MS / 1000 })}
+            </p>
+          )}
+          {result.problem === 'crash' && !result.error && (
+            <p className="text-red-400">{t('runnable.crashed')}</p>
+          )}
+          {result.logs.length === 0 && !result.error && !result.problem && (
             <p className="text-slate-400">{t('runnable.noOutput')}</p>
           )}
           {result.logs.map((line, index) => (

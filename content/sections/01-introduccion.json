@@ -1,166 +1,321 @@
 {
   "slug": "01-introduccion",
   "order": 1,
-  "title": { "en": "Introduction" },
+  "title": {
+    "en": "Introduction",
+    "es": "Introducción"
+  },
   "sourceFolder": "recursos originales/modulo-01-introduccion",
   "questions": [
     {
       "id": "what-big-o-measures",
-      "topic": "Overview",
-      "prompt": { "en": "In one sentence, what is Big O?" },
+      "topic": "Getting the most out of it",
+      "prompt": {
+        "en": "In one sentence, what is Big O?",
+        "es": "En una frase, ¿qué es Big O?"
+      },
       "options": [
-        { "en": "A JavaScript library for sorting arrays" },
-        { "en": "A way to measure how efficient your code is" },
-        { "en": "The biggest number JavaScript can store" },
-        { "en": "A Chrome DevTools panel" }
+        {
+          "en": "A JavaScript library for sorting arrays",
+          "es": "Una librería de JavaScript para ordenar arrays"
+        },
+        {
+          "en": "A way to measure how efficient your code is",
+          "es": "Una forma de medir qué tan eficiente es tu código"
+        },
+        {
+          "en": "The biggest number JavaScript can store",
+          "es": "El número más grande que JavaScript puede guardar"
+        },
+        {
+          "en": "A Chrome DevTools panel",
+          "es": "Un panel de Chrome DevTools"
+        }
       ],
       "correctIndex": 1,
       "explanation": {
-        "en": "Big O is the language we use to talk about efficiency. The course uses it for every data structure and algorithm, and it comes up in practically every coding interview."
+        "en": "Big O is the language we use to talk about efficiency. The course uses it for every data structure and algorithm, and it comes up in practically every coding interview.",
+        "es": "Big O es el lenguaje que usamos para hablar de eficiencia. El curso lo usa para cada estructura de datos y algoritmo, y aparece en prácticamente todas las entrevistas técnicas."
       }
     },
     {
       "id": "remove-last-item",
-      "topic": "Overview",
+      "topic": "Getting the most out of it",
       "prompt": {
-        "en": "Your app must remove the last item of a list as efficiently as possible. According to the overview, which structure is much better at this?"
+        "en": "Your app must remove the last item of a list as efficiently as possible. According to the lessons, which structure is much better at this?",
+        "es": "Tu app debe quitar el último elemento de una lista de la forma más eficiente posible. Según las lecciones, ¿qué estructura es mucho mejor para esto?"
       },
       "options": [
-        { "en": "A singly linked list" },
-        { "en": "Both are exactly the same" },
-        { "en": "A doubly linked list" },
-        { "en": "Neither: you must use a hash table" }
+        {
+          "en": "A singly linked list",
+          "es": "Una lista enlazada simple"
+        },
+        {
+          "en": "Both are exactly the same",
+          "es": "Las dos son exactamente iguales"
+        },
+        {
+          "en": "A doubly linked list",
+          "es": "Una lista doblemente enlazada"
+        },
+        {
+          "en": "Neither: you must use a hash table",
+          "es": "Ninguna: hay que usar una tabla hash"
+        }
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "A doubly linked list is much more efficient at removing the last item. The course explains why later, using Big O to compare the two."
+        "en": "A doubly linked list is much more efficient at removing the last item. The course explains why later, using Big O to compare the two.",
+        "es": "Una lista doblemente enlazada es mucho más eficiente para quitar el último elemento. El curso explica por qué más adelante, usando Big O para comparar las dos."
       }
     },
     {
       "id": "data-structures-as-classes",
-      "topic": "Overview",
+      "topic": "Getting the most out of it",
       "prompt": {
-        "en": "How will every data structure in this course be built?"
+        "en": "How will every data structure in this course be built?",
+        "es": "¿Cómo se va a construir cada estructura de datos en este curso?"
       },
       "options": [
-        { "en": "As a plain array" },
-        { "en": "As a JSON file" },
-        { "en": "As a single global function" },
-        { "en": "As a class (for example, a `LinkedList` class)" }
+        {
+          "en": "As a plain array",
+          "es": "Como un array simple"
+        },
+        {
+          "en": "As a JSON file",
+          "es": "Como un archivo JSON"
+        },
+        {
+          "en": "As a single global function",
+          "es": "Como una sola función global"
+        },
+        {
+          "en": "As a class (for example, a `LinkedList` class)",
+          "es": "Como una clase (por ejemplo, una clase `LinkedList`)"
+        }
       ],
       "correctIndex": 3,
       "explanation": {
-        "en": "Every data structure uses a class, which is why the short Classes & Pointers section comes before linked lists."
+        "en": "Every data structure uses a class, which is why the short Classes & Pointers module comes before linked lists.",
+        "es": "Cada estructura de datos usa una clase, por eso el módulo corto de Clases y Punteros va antes de las listas enlazadas."
       }
     },
     {
       "id": "head-and-tail",
-      "topic": "Overview",
+      "topic": "Getting the most out of it",
       "prompt": {
-        "en": "In a linked list diagram, what are `head` and `tail`?"
+        "en": "In a linked list diagram, what are `head` and `tail`?",
+        "es": "En el diagrama de una lista enlazada, ¿qué son `head` y `tail`?"
       },
       "options": [
         {
-          "en": "Variables that are pointers to nodes; they are not nodes themselves"
+          "en": "Variables that are pointers to nodes; they are not nodes themselves",
+          "es": "Variables que son punteros a nodos; no son nodos en sí"
         },
-        { "en": "The first and last nodes themselves" },
-        { "en": "Two numbers that store the list's length" },
-        { "en": "Methods that add and remove nodes" }
+        {
+          "en": "The first and last nodes themselves",
+          "es": "El primer y el último nodo en sí"
+        },
+        {
+          "en": "Two numbers that store the list's length",
+          "es": "Dos números que guardan el largo de la lista"
+        },
+        {
+          "en": "Methods that add and remove nodes",
+          "es": "Métodos que agregan y quitan nodos"
+        }
       ],
       "correctIndex": 0,
       "explanation": {
-        "en": "A common mistake is pointing at the first and last nodes and calling them head and tail. `head` and `tail` are variables that point to nodes, and pointers behave differently from variables like integers."
+        "en": "A common mistake is pointing at the first and last nodes and calling them head and tail. `head` and `tail` are variables that point to nodes, and pointers behave differently from variables like numbers.",
+        "es": "Un error común es señalar el primer y el último nodo y llamarlos head y tail. `head` y `tail` son variables que apuntan a nodos, y los punteros se comportan distinto que variables como los números."
       }
     },
     {
       "id": "add-to-end",
-      "topic": "Intro",
+      "topic": "Getting the most out of it",
       "prompt": {
-        "en": "The intro animation adds a new node to the end of a linked list. Which two lines does it run, in order?"
+        "en": "In the lesson's code, a new node is added to the end of a linked list. Which two lines run, in order?",
+        "es": "En el código de la lección se agrega un nodo nuevo al final de una lista enlazada. ¿Qué dos líneas se ejecutan, en orden?"
       },
       "options": [
-        { "en": "`tail = newNode`, then `tail.next = newNode`" },
-        { "en": "`head.next = newNode`, then `head = newNode`" },
-        { "en": "`tail.next = newNode`, then `tail = newNode`" },
-        { "en": "`newNode.next = tail`, then `head = tail`" }
+        {
+          "en": "`tail = newNode`, then `tail.next = newNode`",
+          "es": "`tail = newNode` y luego `tail.next = newNode`"
+        },
+        {
+          "en": "`head.next = newNode`, then `head = newNode`",
+          "es": "`head.next = newNode` y luego `head = newNode`"
+        },
+        {
+          "en": "`tail.next = newNode`, then `tail = newNode`",
+          "es": "`tail.next = newNode` y luego `tail = newNode`"
+        },
+        {
+          "en": "`newNode.next = tail`, then `head = tail`",
+          "es": "`newNode.next = tail` y luego `head = tail`"
+        }
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "First the current last node points to the new node (`tail.next = newNode`); then `tail` moves to the new node (`tail = newNode`). Doing it in the other order would lose the link."
+        "en": "First the current last node points to the new node (`tail.next = newNode`); then `tail` moves to the new node (`tail = newNode`). Doing it in the other order would lose the link.",
+        "es": "Primero el último nodo actual apunta al nodo nuevo (`tail.next = newNode`); luego `tail` se mueve al nodo nuevo (`tail = newNode`). Si lo haces en el otro orden, pierdes el enlace."
       }
     },
     {
       "id": "when-to-do-exercises",
-      "topic": "Overview",
+      "topic": "Getting the most out of it",
       "prompt": {
-        "en": "What's the best way to use the coding exercises in this course?"
+        "en": "What's the best way to practice in this course?",
+        "es": "¿Cuál es la mejor forma de practicar en este curso?"
       },
       "options": [
-        { "en": "Watch the whole course first, then do all the exercises" },
         {
-          "en": "Do each exercise right after the video that covers its code, either from the downloaded file or in the browser (not both)"
+          "en": "Read the whole course first, then do all the practice at the end",
+          "es": "Leer todo el curso primero y hacer toda la práctica al final"
         },
         {
-          "en": "Do every exercise twice: once downloaded and once in the browser"
+          "en": "Play with each lesson's code, then take the module's quiz and timed exercises right after the module",
+          "es": "Jugar con el código de cada lección y luego hacer el cuestionario y los ejercicios con tiempo justo después del módulo"
         },
-        { "en": "Skip them and focus on the quizzes" }
+        {
+          "en": "Only read the lessons; the code boxes are optional",
+          "es": "Solo leer las lecciones; las cajas de código son opcionales"
+        },
+        {
+          "en": "Skip the quizzes and only do the exercises",
+          "es": "Saltarse los cuestionarios y hacer solo los ejercicios"
+        }
       ],
       "correctIndex": 1,
       "explanation": {
-        "en": "Doing the exercise immediately reinforces what you just learned. The downloadable file and the in-browser version are the same exercise, so pick one."
+        "en": "Practicing right after you learn makes it stick. A little practice after each module works much better than a lot of practice months later.",
+        "es": "Practicar justo después de aprender hace que se te quede. Un poco de práctica después de cada módulo funciona mucho mejor que mucha práctica meses después."
       }
     },
     {
       "id": "snippets-tab",
-      "topic": "Code editor",
+      "topic": "Running code",
       "prompt": {
-        "en": "In Chrome DevTools, which tab holds the code snippets used throughout the course?"
+        "en": "In Chrome DevTools, which tab holds your code snippets?",
+        "es": "En Chrome DevTools, ¿qué pestaña guarda tus snippets de código?"
       },
       "options": [
-        { "en": "Elements" },
-        { "en": "Network" },
-        { "en": "Application" },
-        { "en": "Sources" }
+        {
+          "en": "Elements",
+          "es": "Elements"
+        },
+        {
+          "en": "Network",
+          "es": "Network"
+        },
+        {
+          "en": "Application",
+          "es": "Application"
+        },
+        {
+          "en": "Sources",
+          "es": "Sources"
+        }
       ],
       "correctIndex": 3,
       "explanation": {
-        "en": "Open DevTools (⋮ → More tools → Developer tools), undock it into its own window, go to Sources and open the navigator to see your snippets."
+        "en": "Open DevTools (⋮ → More tools → Developer tools), undock it into its own window, go to Sources and open Snippets to see and create your snippets.",
+        "es": "Abre DevTools (⋮ → Más herramientas → Herramientas para desarrolladores), desacóplalo en su propia ventana, ve a Sources y abre Snippets para ver y crear tus snippets."
       }
     },
     {
       "id": "run-snippet",
-      "topic": "Code editor",
+      "topic": "Running code",
       "prompt": {
-        "en": "How do you run a DevTools snippet from the keyboard?"
+        "en": "How do you run code from the keyboard, both in the course and in DevTools snippets?",
+        "es": "¿Cómo ejecutas código con el teclado, tanto en el curso como en los snippets de DevTools?"
       },
       "options": [
         {
-          "en": "Command + Enter on a Mac, Control + Enter on Windows or a Chromebook"
+          "en": "Command + Enter on a Mac, Control + Enter on Windows or a Chromebook",
+          "es": "Command + Enter en Mac, Control + Enter en Windows o Chromebook"
         },
-        { "en": "F5 on every system" },
-        { "en": "Shift + S on a Mac, Alt + S on Windows" },
-        { "en": "You can only run it with the mouse" }
+        {
+          "en": "F5 on every system",
+          "es": "F5 en todos los sistemas"
+        },
+        {
+          "en": "Shift + S on a Mac, Alt + S on Windows",
+          "es": "Shift + S en Mac, Alt + S en Windows"
+        },
+        {
+          "en": "You can only run it with the mouse",
+          "es": "Solo se puede ejecutar con el mouse"
+        }
       ],
       "correctIndex": 0,
       "explanation": {
-        "en": "Cmd/Ctrl + Enter runs the snippet (same as the play button). You can also call its functions afterwards from the console."
+        "en": "Cmd/Ctrl + Enter runs the code, the same as the Run button. In DevTools you can also call your functions afterwards from the console.",
+        "es": "Cmd/Ctrl + Enter ejecuta el código, igual que el botón Ejecutar. En DevTools también puedes llamar a tus funciones después desde la consola."
       }
     },
     {
       "id": "efficient-sorts",
-      "topic": "Intro",
+      "topic": "Welcome",
       "prompt": {
-        "en": "Which two sorting algorithms does the course describe as generally more efficient, but harder to write?"
+        "en": "Which two sorting algorithms does the course describe as generally more efficient, but harder to write?",
+        "es": "¿Qué dos algoritmos de ordenamiento describe el curso como generalmente más eficientes, pero más difíciles de escribir?"
       },
       "options": [
-        { "en": "Bubble sort and selection sort" },
-        { "en": "Insertion sort and bubble sort" },
-        { "en": "Merge sort and quicksort" },
-        { "en": "Selection sort and insertion sort" }
+        {
+          "en": "Bubble sort and selection sort",
+          "es": "Bubble sort y selection sort"
+        },
+        {
+          "en": "Insertion sort and bubble sort",
+          "es": "Insertion sort y bubble sort"
+        },
+        {
+          "en": "Merge sort and quick sort",
+          "es": "Merge sort y quick sort"
+        },
+        {
+          "en": "Selection sort and insertion sort",
+          "es": "Selection sort e insertion sort"
+        }
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "The basic sorts are bubble, selection and insertion sort. Merge sort and quicksort are usually more efficient, but trickier to implement."
+        "en": "The basic sorts are bubble, selection and insertion sort. Merge sort and quick sort are usually more efficient, but trickier to implement.",
+        "es": "Los ordenamientos básicos son bubble, selection e insertion sort. Merge sort y quick sort suelen ser más eficientes, pero más difíciles de implementar."
+      }
+    },
+    {
+      "id": "infinite-loop-protection",
+      "topic": "Running code",
+      "prompt": {
+        "en": "What happens if you run `while (true) {}` in one of the course's code boxes?",
+        "es": "¿Qué pasa si ejecutas `while (true) {}` en una de las cajas de código del curso?"
+      },
+      "code": "while (true) {}",
+      "options": [
+        {
+          "en": "The page freezes until you close the tab",
+          "es": "La página se congela hasta que cierras la pestaña"
+        },
+        {
+          "en": "JavaScript fixes the loop for you",
+          "es": "JavaScript arregla el bucle por ti"
+        },
+        {
+          "en": "It prints \"true\" forever",
+          "es": "Imprime \"true\" para siempre"
+        },
+        {
+          "en": "The course stops it after 2 seconds and shows a message",
+          "es": "El curso lo detiene después de 2 segundos y muestra un mensaje"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "The code runs separately from the page, so an infinite loop can't freeze it. After 2 seconds the course stops the code and tells you there may be an infinite loop.",
+        "es": "El código se ejecuta separado de la página, así que un bucle infinito no puede congelarla. Después de 2 segundos el curso detiene el código y te avisa que puede haber un bucle infinito."
       }
     }
   ],

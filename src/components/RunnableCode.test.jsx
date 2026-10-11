@@ -7,7 +7,11 @@ import { executeCode } from '../runners/executeCode'
 
 // jsdom has no Web Workers, so the test runs the code directly instead.
 vi.mock('../runners', () => ({
-  runJavaScript: vi.fn(async (code) => executeCode(code)),
+  RUN_TIMEOUT_MS: 2000,
+  runJavaScript: vi.fn(async (code) => ({
+    ...executeCode(code),
+    problem: null,
+  })),
 }))
 
 describe('RunnableCode', () => {
@@ -47,5 +51,25 @@ describe('RunnableCode', () => {
     await user.click(screen.getByRole('button', { name: 'Reset' }))
 
     expect(editor).toHaveValue('let a = 1')
+  })
+})
+
+describe('RunnableCode problems', () => {
+  it("explains a timeout in the student's language", async () => {
+    const user = userEvent.setup()
+    runJavaScript.mockResolvedValueOnce({
+      logs: [],
+      error: null,
+      problem: 'timeout',
+    })
+    const { default: i18n } = await import('../i18n')
+    await i18n.changeLanguage('es')
+    render(<RunnableCode initialCode="while (true) {}" />)
+
+    await user.click(screen.getByRole('button', { name: /ejecutar/i }))
+
+    expect(screen.getByRole('status')).toHaveTextContent(
+      'Se detuvo después de 2 segundos. ¿Hay un bucle infinito?',
+    )
   })
 })

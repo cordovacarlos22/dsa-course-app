@@ -102,7 +102,9 @@
     "reset": "Restablecer",
     "output": "Salida",
     "noOutput": "(no se imprimió nada)",
-    "hint": "Edita el código y presiona Ejecutar (o Ctrl/Cmd + Enter)."
+    "hint": "Edita el código y presiona Ejecutar (o Ctrl/Cmd + Enter).",
+    "timedOut": "Se detuvo después de {{seconds}} segundos. ¿Hay un bucle infinito?",
+    "crashed": "El código no se pudo ejecutar."
   },
   "lesson": {
     "lessonsTitle": "Lecciones",

@@ -102,7 +102,9 @@
     "reset": "Reset",
     "output": "Output",
     "noOutput": "(nothing was printed)",
-    "hint": "Edit the code and press Run (or Ctrl/Cmd + Enter)."
+    "hint": "Edit the code and press Run (or Ctrl/Cmd + Enter).",
+    "timedOut": "Stopped after {{seconds}} seconds. Is there an infinite loop?",
+    "crashed": "The code could not run."
   },
   "lesson": {
     "lessonsTitle": "Lessons",
