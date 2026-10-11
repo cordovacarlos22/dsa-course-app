@@ -9,7 +9,8 @@ const PLAY_INTERVAL_MS = 2200
 // - renderStep(step): draws one step.
 // Every animation in src/visualizations/ uses this, so they all look and
 // behave the same (Previous / Play / Next, keyboard friendly).
-function StepPlayer({ title, steps, renderStep }) {
+// - toolbar: optional controls shown under the title (e.g. an input picker).
+function StepPlayer({ title, steps, renderStep, toolbar = null }) {
   const { t } = useTranslation()
   const [index, setIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -44,6 +45,7 @@ function StepPlayer({ title, steps, renderStep }) {
   return (
     <figure className="not-prose my-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
       <figcaption className="text-sm font-bold">{title}</figcaption>
+      {toolbar}
 
       <div className="mt-3 overflow-x-auto">{renderStep(step)}</div>
 
