@@ -43,7 +43,7 @@ A companion app for the Udemy course _DSA + LeetCode for Coding Interviews_:
 AGENTS.md            # this file
 CLAUDE.md            # points Claude Code to this file
 memory.md            # project memory (see above)
-content/notes/       # Carlos's .docx notes and transcripts, one folder per section
+content/course.json  # course outline: all modules, in order
 content/sections/    # generated quiz + exercise JSON, one file per section
 scripts/             # Node scripts (content validation, seeding)
 supabase/migrations/ # SQL schema and RLS policies
@@ -101,25 +101,42 @@ Before every commit, run: `npm run lint && npm run format:check && npm test && n
 
 When Carlos says _"generate content for section N"_:
 
-1. **Find the sources.** They live **outside the repo**, in the course folder on Carlos's Desktop:
-   `~/Desktop/DSA + LEETCODE for Coding Interviews — Clear, Step-by-Step Animated Walkthroughs!/<Section N - Name>/`
-   - `<…> notes.docx`: Carlos's notes and/or the transcript
-   - `resources/<lesson>/`: `.js` examples and `.pdf` handouts from the course
-   - Skip Word lock files (`~$*.docx`) and `.DS_Store`. Folder names may have trailing spaces, so always quote paths.
-   - (Optional alternative: `.docx` files in `content/notes/<section-slug>/`, which are git-ignored.)
-2. **Read everything:**
-   - `.docx` text: `textutil -convert txt -stdout "<path>.docx"`
-   - Images inside the `.docx` (notes are often mostly screenshots): `unzip -j "<path>.docx" 'word/media/*' -d <scratchpad dir>`, then view each image.
-   - `.pdf` and `.js` resources: read them directly.
-3. **Write `content/sections/<NN-slug>.json`** (for example `02-big-o.json`):
-   - **10–16 multiple-choice questions** covering every lesson in the section: 4 options each, exactly one correct, a short explanation. Test understanding (why, when, Big O), not just memorization. Use the `code` field for "what is the Big O of this code?" questions. Spread the correct answer across positions 0–3.
-   - **0–3 exercises**, only if the section teaches something you can practice in code. Each one has a difficulty (`easy` / `medium` / `hard`), a description, JS starter code, a reference solution, **at least 5 tests** (include edge cases: empty input, one element, negatives, not found), and the expected time/space complexity.
-   - Every text field in **both English and Spanish**: `{ "en": "...", "es": "..." }`.
-   - **Original wording only.** Use the course material to learn _what_ to test, but never copy Udemy quiz questions, transcripts or slides word for word.
-4. Run `npm run content:validate` and fix every error. It checks the schema (`scripts/content-schema.js`), unique ids, and runs every reference solution against its tests.
-5. Add the section to **Course sections imported** in `memory.md`.
+1. **Find the sources.** They live **outside the repo**, in Carlos's course folder:
+
+   ```
+   ~/Desktop/curso por mi /Curso-de-Estructuras-de-Datos-y-Algoritmos-en-JavaScript-con-Ejercicios-de-LEETCODE/
+   ├── recursos originales/modulo-NN-<slug>/   ← THE source (English version)
+   │   ├── guiones/*.md                        ← English lesson transcripts + slide outlines
+   │   └── *.pdf, *.js, images                 ← English resources
+   └── recursos /guiones/modulo-NN-<slug>/     ← Spanish transcripts (.docx), only to translate from
+   ```
+
+   - Folder names contain **trailing spaces** (`curso por mi /`, `recursos /`), so always quote paths.
+   - Skip binary and junk files: `.key`, `.m4v`, `.mov`, `.mp3`, `.DS_Store`, `.textClipping`, `~$*.docx`.
+   - No other folders are sources (not the Udemy notes folder, not old exercise repos).
+
+2. **If the module has no English transcripts yet**, translate them first:
+   - Read each Spanish script with `textutil -convert txt -stdout "<path>.docx"`.
+   - Write one file per lesson to `recursos originales/modulo-NN-<slug>/guiones/NN-<lesson>.md`, numbered in course order.
+   - Format: `# <Lesson title>`, then `> Translated from recursos /guiones/<file>.docx`, then `## Transcript` (a faithful translation; keep code names as in the English `.js` resources) and `## Slides`. Drop the chatbot footer line ("Estas diapositivas proporcionan…").
+   - Never write into `recursos /` and never touch the course folder's git state.
+
+3. **Read everything** in `recursos originales/modulo-NN-<slug>/`: the `guiones/*.md`, the `.pdf`s and the `.js` files.
+
+4. **Write `content/sections/<NN-slug>.json`.** The slug is the module folder name (`02-big-o`, `03-clases-punteros`); `content/course.json` lists them all.
+   - **English first.** `en` is required; `es` can be added later (the validator warns about missing Spanish).
+   - **10–16 multiple-choice questions** covering every lesson: 4 options each, exactly one correct, a short explanation. Test understanding (why, when, Big O), not just memorization. Use the `code` field for "what does this code do / what's its Big O?" questions. Spread the correct answer across positions 0–3.
+   - **0–3 exercises**, only if the module teaches something you can practice in code:
+     - `kind: "function"` (default): `functionName` + tests `{ args, expected }`.
+     - `kind: "class"`: `className` + tests made of steps: `{ create: [args] }`, `{ call: "method", args: [], expected }`, `{ read: "prop.path", expected }`.
+     - Each has a difficulty (`easy` / `medium` / `hard`), a description, JS starter code, a reference solution, **at least 5 tests** (include edge cases), and the expected time/space complexity.
+   - **Original wording only.** Use the transcripts to learn _what_ to test, but never copy questions, transcripts or slides word for word.
+
+5. Run `npm run content:validate` and fix every error. It checks the schemas (`scripts/content-schema.js`), that the slug exists in `course.json`, unique ids, and runs every reference solution against its tests.
+
+6. Add the section to **Course sections imported** in `memory.md`.
 
 ## Privacy
 
-- Never commit Carlos's notes, transcripts, or course resources. Only the generated `content/sections/*.json` goes in git.
+- Never commit Carlos's transcripts or course resources. Only the generated `content/course.json` and `content/sections/*.json` go in git.
 - Never write the Udemy course URL into this repo. The repo may become public.

@@ -22,11 +22,14 @@ npm run dev                  # http://localhost:5173
 | `npm run format:check` | Check formatting (used by CI)     |
 | `npm run build`        | Build for production into `dist/` |
 
-## Adding course notes
+## Adding course content
 
-1. Save your `.docx` notes or transcript in `content/notes/<section-slug>/`, for example `content/notes/02-big-o/notes.docx`.
-2. Ask Claude Code: _"generate content for section 02-big-o"_.
-3. Review the generated `content/sections/02-big-o.json`, then commit it on a branch and open a PR.
+The course material lives **outside this repo**, in the course folder on Carlos's Desktop:
+`curso por mi /Curso-de-…-LEETCODE/recursos originales/modulo-NN-<slug>/` (English transcripts in `guiones/` plus PDFs and code).
+
+1. Add the module's material to its `recursos originales/modulo-NN-<slug>/` folder. If you only have Spanish scripts in `recursos /guiones/`, Claude Code translates them first.
+2. Ask Claude Code: _"generate content for section 03"_.
+3. Review the generated `content/sections/<NN-slug>.json`, run `npm run content:validate`, then commit it on a branch and open a PR.
 
 ## For AI agents
 
