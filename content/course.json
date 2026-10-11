@@ -161,6 +161,14 @@
         "es": "Programación dinámica"
       },
       "sourceFolder": "recursos originales/modulo-17-programacion-dimanica"
+    },
+    {
+      "slug": "18-problemas-arrays",
+      "order": 18,
+      "title": {
+        "en": "Array Interview Problems",
+        "es": "Problemas de entrevista con arrays"
+      }
     }
   ],
   "parts": [
@@ -219,6 +227,14 @@
         "es": "Programación dinámica"
       },
       "modules": ["17-programacion-dinamica"]
+    },
+    {
+      "slug": "interview-practice",
+      "title": {
+        "en": "Interview Practice",
+        "es": "Práctica de entrevistas"
+      },
+      "modules": ["18-problemas-arrays"]
     }
   ]
 }

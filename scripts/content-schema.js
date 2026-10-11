@@ -41,6 +41,9 @@ const exerciseBase = {
   title: localizedText,
   description: localizedText,
   difficulty: z.enum(['easy', 'medium', 'hard']),
+  // "build": implement the module's data structure/algorithm step by step.
+  // "interview": a LeetCode-style problem that uses it.
+  category: z.enum(['build', 'interview']),
   starterCode: codeByLanguage,
   solution: codeByLanguage,
   expectedComplexity: z.object({ time: nonEmpty, space: nonEmpty }).strict(),
@@ -137,8 +140,9 @@ const moduleSchema = z
     slug,
     order: z.number().int().positive(),
     title: localizedText,
-    // Module folder in Carlos's course folder (outside the repo).
-    sourceFolder: nonEmpty,
+    // Module folder in Carlos's course folder (outside the repo). Optional:
+    // modules we designed ourselves (like 18) have no source folder.
+    sourceFolder: nonEmpty.optional(),
   })
   .strict()
 

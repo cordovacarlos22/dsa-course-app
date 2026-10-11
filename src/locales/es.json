@@ -133,9 +133,10 @@
     "lessonsSoon": "Las lecciones de este módulo están en camino.",
     "practiceTitle": "Práctica",
     "quiz": "Cuestionario",
-    "exercises": "Ejercicios",
     "availableSoon": "Disponible pronto",
-    "notReady": "Este módulo aún no está listo. ¡Vuelve pronto!"
+    "notReady": "Este módulo aún no está listo. ¡Vuelve pronto!",
+    "buildIt": "Constrúyelo",
+    "interviewProblems": "Problemas de entrevista"
   },
   "notFound": {
     "title": "Página no encontrada",

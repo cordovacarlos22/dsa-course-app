@@ -10,6 +10,9 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Decisions
 
+- 2026-10-11: **Course blueprint: `docs/curriculum.md` (18 modules, 6 parts).** Built from the original course's table of contents (structure only; its exercises and material are examples, never copied). Module 18 "Array Interview Problems" was added in a 6th part, "Interview Practice"; Sets live inside Hash Tables. About 110 exercises are planned (57 build it, 52 interview problems).
+- 2026-10-11: **Exercise categories:** every exercise has `category: "build"` (implement the structure step by step) or `"interview"` (LeetCode-style). The module page shows both counts.
+
 - 2026-10-11: **Landing page and course story.** Built from Carlos's course description (structure only, original wording) and his resume. Public bio facts: software engineer, B.S. Computer Engineering (UTEL 2026), AWS Certified Cloud Practitioner, DEV.F bootcamp, learned and studied while working full-time as a truck driver and driver trainer, bilingual. **Never publish his phone, email or city** (a landing test checks there's no email or phone number). Photo: `public/images/carlos-cordova.jpg` (cropped from his course image). Price: "Free during the beta".
 - 2026-10-11: **No borrowed testimonials.** The reviews in the original course description belong to another instructor's students and are not used. Add real reviews from Carlos's own students later.
 - 2026-10-11: **Course parts:** `content/course.json` has `parts` (Foundations, Data Structures, Recursion & Trees, Sorting, Dynamic Programming); every module must be in exactly one part (`content:validate` checks it). The landing curriculum and the course home both use them.
@@ -72,9 +75,9 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Next
 
-- Carlos reviews the Module 1 lessons (EN + ES) and the first Big O lesson (voice, length, format).
-- Next modules' lessons: Big O (02) and Classes & Pointers (03), EN + ES like Module 1.
-- Spanish pass for the remaining content (`content:validate` shows the count; 75 texts left after Module 1).
+- Follow `docs/curriculum.md` module by module, one PR per module (lessons EN + ES, quiz, build it, interview problems). **Next: Module 02 Big O lessons 2–11**, then Module 03 lessons.
+- Stage 7 (quiz + exercise pages) so students can take the quizzes and solve the exercises.
+- Carlos reviews the lessons already written (Module 1, Big O lesson 1).
 
 ## Course sections imported
 
@@ -100,6 +103,6 @@ Modules 04–17 have empty folders; they appear in `course.json` as "coming soon
 
 - App name and domain (placeholder title: "DSA in JavaScript").
 - Daily AI limit per student (default 40 messages).
-- Carlos mentioned 20 modules, but 17 folders exist. Which 3 are missing?
+- (solved) 18 modules (Carlos chose 17 + Array Interview Problems).
 - The Spanish `O(n^2)` script says O(n²) is "generally efficient"; the English translation says **inefficient** (matches the wrap-up). Carlos should fix the Spanish script.
 - The Intro slide 3 still says "Scott Barrett" (original instructor) instead of charliecodeacademy.

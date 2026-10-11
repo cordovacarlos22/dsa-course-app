@@ -617,6 +617,7 @@
         "es": "Escribe una función `findMax(nums)` que devuelva el número más grande del arreglo. Si el arreglo está vacío, devuelve `null`. No uses `Math.max(...nums)`: recorre el arreglo tú mismo.\n\nEjemplo: `findMax([3, 1, 4, 1, 5])` → `5`\n\nMeta: tiempo O(n), espacio O(1)."
       },
       "difficulty": "easy",
+      "category": "interview",
       "functionName": "findMax",
       "starterCode": {
         "javascript": "function findMax(nums) {\n  // Your code here\n}"
@@ -666,6 +667,7 @@
         "es": "Escribe una función `containsDuplicate(nums)` que devuelva `true` si algún valor aparece al menos dos veces en el arreglo, y `false` si todos los valores son diferentes.\n\nEjemplo: `containsDuplicate([1, 2, 3, 1])` → `true`\n\nLa solución obvia compara cada par con dos ciclos anidados: O(n²). ¿Puedes lograrlo en tiempo O(n)? Pista: un `Set` recuerda lo que ya viste."
       },
       "difficulty": "easy",
+      "category": "interview",
       "functionName": "containsDuplicate",
       "starterCode": {
         "javascript": "function containsDuplicate(nums) {\n  // Your code here\n}"
@@ -715,6 +717,7 @@
         "es": "Escribe una función `binarySearch(nums, target)`. `nums` está ordenado de menor a mayor y no tiene valores repetidos. Devuelve el índice de `target`, o `-1` si no está en el arreglo.\n\nEjemplo: `binarySearch([-1, 0, 3, 5, 9, 12], 9)` → `4`\n\nNo revises cada elemento (eso es O(n)). Mira el centro y descarta la mitad que no puede contener el objetivo. Meta: tiempo O(log n)."
       },
       "difficulty": "medium",
+      "category": "interview",
       "functionName": "binarySearch",
       "starterCode": {
         "javascript": "function binarySearch(nums, target) {\n  // Your code here\n}"
