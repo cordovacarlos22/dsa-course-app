@@ -1,7 +1,7 @@
 ---
 title: Bienvenido al curso
 order: 1
-minutes: 5
+minutes: 6
 ---
 
 > **Meta:** saber qué cubre este curso, cómo funciona cada lección y qué vas a poder hacer al final.
@@ -12,6 +12,7 @@ Las estructuras de datos y algoritmos (DSA) son la caja de herramientas que todo
 
 - aprendiste a programar por tu cuenta y nunca tuviste una clase formal de ciencias de la computación,
 - estudias ciencias de la computación y quieres que DSA por fin te _haga clic_,
+- estás cambiando de carrera hacia el mundo tech y necesitas bases sólidas, rápido,
 - o tienes una entrevista técnica cerca y quieres llegar con confianza.
 
 Solo necesitas JavaScript básico: variables, funciones, bucles y arrays. Las clases las vemos juntos en el Módulo 3.
@@ -51,9 +52,14 @@ Es mucho, y algunos temas asustan de lejos. Por eso cada uno está dividido en p
 
 ## Al terminar el curso
 
-- Vas a **construir** cada estructura de datos tú mismo, en JavaScript.
-- Vas a explicar la **complejidad temporal y espacial** de tu código con Big O.
-- Vas a **resolver** problemas de entrevista y explicar tu razonamiento en voz alta.
+- Vas a analizar la **complejidad temporal y espacial** de cualquier código con Big O.
+- Vas a **construir** desde cero listas enlazadas, pilas, colas, árboles, tablas hash, grafos y heaps.
+- Vas a **entender** el ordenamiento, la recursión y la programación dinámica en lugar de memorizarlos.
+- Vas a **resolver** problemas estilo LeetCode y explicar tu razonamiento en voz alta en tus entrevistas.
+
+## Conoce a tu instructor
+
+¡Hola, soy Carlos! Soy ingeniero de software y aprendí todo esto por el camino largo: terminé mi carrera de Ingeniería en Computación mientras trabajaba tiempo completo como chofer de tráiler e instructor de choferes, estudiando entre turnos. Entrenar a choferes nuevos me enseñó que cualquier habilidad difícil se vuelve fácil cuando la divides en pasos pequeños y claros. Así funciona cada lección de este curso, y voy a estar contigo todo el camino.
 
 ## Resumen
 

@@ -162,6 +162,22 @@ export function validateCourse(data) {
       errors.push(`module "${module.slug}" should have order ${index + 1}`)
     }
   })
+
+  // Every module must appear in exactly one part.
+  const slugsInParts = result.data.parts.flatMap((part) => part.modules)
+  for (const moduleSlug of slugsInParts) {
+    if (!modules.some((module) => module.slug === moduleSlug)) {
+      errors.push(`part lists "${moduleSlug}", which is not a module`)
+    }
+  }
+  for (const moduleSlug of findDuplicates(slugsInParts)) {
+    errors.push(`module "${moduleSlug}" is in more than one part`)
+  }
+  for (const module of modules) {
+    if (!slugsInParts.includes(module.slug)) {
+      errors.push(`module "${module.slug}" is not in any part`)
+    }
+  }
   return errors
 }
 

@@ -1,7 +1,7 @@
 ---
 title: Welcome to the course
 order: 1
-minutes: 5
+minutes: 6
 ---
 
 > **Goal:** know what this course covers, how each lesson works, and what you'll be able to do at the end.
@@ -12,6 +12,7 @@ Data structures and algorithms (DSA) are the toolbox every programmer reaches fo
 
 - you learned to code on your own and never had a formal CS class,
 - you're a computer science student who wants DSA to finally _click_,
+- you're switching careers into tech and need strong fundamentals, fast,
 - or you have a coding interview coming up and want to walk in confident.
 
 All you need is basic JavaScript: variables, functions, loops and arrays. We'll cover classes together in Module 3.
@@ -51,9 +52,14 @@ It's a lot, and some topics look scary from far away. That's why every one of th
 
 ## By the end of the course
 
-- You'll **build** each data structure yourself, in JavaScript.
-- You'll explain the **time and space complexity** of your code with Big O.
-- You'll **solve** interview-style problems and explain your reasoning out loud.
+- You'll analyze the **time and space complexity** of any code with Big O.
+- You'll **build** linked lists, stacks, queues, trees, hash tables, graphs and heaps from scratch.
+- You'll **understand** sorting, recursion and dynamic programming instead of memorizing them.
+- You'll **solve** LeetCode-style problems and explain your reasoning out loud in interviews.
+
+## Meet your instructor
+
+Hi, I'm Carlos! I'm a software engineer, and I learned all of this the long way: I earned my Computer Engineering degree while working full-time as a truck driver and driver trainer, studying between shifts. Training new drivers taught me that any hard skill becomes easy when you break it into small, clear steps. That's how every lesson here works, and I'll be with you the whole way.
 
 ## Recap
 

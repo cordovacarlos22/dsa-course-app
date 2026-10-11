@@ -14,34 +14,119 @@
     "es": "Español"
   },
   "landing": {
-    "headline": "Learn data structures and algorithms in JavaScript",
-    "subheadline": "Step-by-step lessons with animations and runnable code, quizzes and timed exercises, with an AI tutor by your side.",
+    "badge": "Free during the beta",
+    "headline": "Learn data structures and algorithms in JavaScript, step by step",
+    "subheadline": "Watch every algorithm move, run real code in your browser and practice until coding interviews feel easy, with an AI tutor by your side.",
     "cta": "Start learning",
-    "featuresTitle": "How you'll learn",
+    "ctaSecondary": "See the curriculum",
+    "howTitle": "How you'll learn",
+    "howSubtitle": "Hard ideas become easy when you can see them and try them yourself.",
+    "comingSoon": "Coming soon",
     "features": {
-      "lessons": {
-        "title": "Animated lessons",
-        "text": "See every algorithm move step by step, then run and edit the code yourself."
+      "animations": {
+        "title": "Step-by-step animations",
+        "text": "Watch linked lists, trees and sorting algorithms move one step at a time, at your own pace."
+      },
+      "code": {
+        "title": "Code in your browser",
+        "text": "Every lesson has code you can edit and run right on the page. Nothing to install."
       },
       "practice": {
         "title": "Quizzes and timed exercises",
-        "text": "Check what you learned and practice LeetCode-style problems against the clock."
+        "text": "Check what you learned after each module, then solve LeetCode-style problems against the clock."
       },
       "tutor": {
-        "title": "An AI tutor",
+        "title": "AI tutor",
         "text": "Ask questions about any lesson, get hints when you're stuck and feedback on your code."
       }
-    }
+    },
+    "learnTitle": "What you'll learn",
+    "learnItems": [
+      "Analyze the time and space complexity of any code with Big O",
+      "Build linked lists, stacks, queues, trees, hash tables, graphs and heaps from scratch",
+      "Understand sorting, recursion and dynamic programming instead of memorizing them",
+      "Solve LeetCode-style problems against the clock",
+      "Pick the right data structure for each problem, and explain why",
+      "Walk into technical interviews ready to explain your reasoning out loud"
+    ],
+    "curriculumTitle": "The curriculum",
+    "curriculumSubtitle": "{{modules}} modules in {{parts}} parts. New modules are added as the course grows.",
+    "audienceTitle": "Who this course is for",
+    "audience": [
+      {
+        "title": "Interview prep",
+        "text": "JavaScript developers who want to walk into technical interviews with confidence."
+      },
+      {
+        "title": "University students",
+        "text": "Students who want their data structures and algorithms class to finally click."
+      },
+      {
+        "title": "Self-taught developers",
+        "text": "Programmers filling the computer science gaps nobody taught them."
+      },
+      {
+        "title": "Career switchers",
+        "text": "People moving into tech who need strong fundamentals, fast."
+      }
+    ],
+    "requirementsTitle": "What you need",
+    "requirements": [
+      "Basic JavaScript: variables, loops, functions and arrays",
+      "No experience with data structures or algorithms",
+      "Curiosity and a little practice every day"
+    ],
+    "instructor": {
+      "title": "Meet your instructor",
+      "name": "Carlos Cordova",
+      "role": "Software engineer · charliecodeacademy",
+      "photoAlt": "Carlos Cordova, the course instructor",
+      "bio": [
+        "Hi, I'm Carlos. I'm a full-stack software engineer, and I didn't take the usual path to get here.",
+        "I earned my B.S. in Computer Engineering and my AWS Certified Cloud Practitioner certification while working full-time as a commercial truck driver and driver trainer. I studied data structures and algorithms between long shifts, so I know what it's like to learn this on top of a full day of work.",
+        "Training new drivers taught me to break hard skills into small, clear steps, and that's exactly how this course works. I built it to be the course I wish I'd had: visual, hands-on, and in both English and Spanish."
+      ],
+      "links": {
+        "github": "GitHub",
+        "linkedin": "LinkedIn",
+        "website": "Website"
+      }
+    },
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "q": "Is it free?",
+        "a": "Yes. The whole course is free during the beta."
+      },
+      {
+        "q": "Do I need to install anything?",
+        "a": "No. Lessons, animations and code all run in your browser."
+      },
+      {
+        "q": "Is it in English or Spanish?",
+        "a": "Both. Pick your language on your first visit and switch any time from the top bar."
+      },
+      {
+        "q": "What if I get stuck?",
+        "a": "Every lesson lets you change and rerun the code, and each module's quiz explains every answer. An AI tutor that answers questions and gives hints is coming soon."
+      },
+      {
+        "q": "Do I need to know data structures already?",
+        "a": "No. We start from zero with Big O. You only need basic JavaScript."
+      }
+    ],
+    "finalTitle": "Ready to start?",
+    "finalText": "The first modules are ready. Start with the introduction and learn at your own pace."
   },
   "course": {
     "title": "Course modules",
-    "subtitle": "Work through the modules in order. New ones are added as the course grows.",
     "moduleNumber": "Module {{number}}",
     "comingSoon": "Coming soon",
     "questions_one": "{{count}} question",
     "questions_other": "{{count}} questions",
     "exercises_one": "{{count}} exercise",
-    "exercises_other": "{{count}} exercises"
+    "exercises_other": "{{count}} exercises",
+    "partTitle": "Part {{number}}: {{title}}"
   },
   "module": {
     "back": "All modules",
