@@ -1,8 +1,11 @@
 import { z } from 'zod'
 
-// Every text a student reads must exist in English and Spanish.
+// Content is written in English first. Spanish is added later, so it's
+// optional here; validate-content.js warns about every missing translation.
 const nonEmpty = z.string().trim().min(1)
-export const localizedText = z.object({ en: nonEmpty, es: nonEmpty }).strict()
+export const localizedText = z
+  .object({ en: nonEmpty, es: nonEmpty.optional() })
+  .strict()
 
 // Code is keyed by language so we can add Python later without changing the shape.
 const codeByLanguage = z.object({ javascript: nonEmpty }).strict()
@@ -59,7 +62,8 @@ export const sectionSchema = z
     slug,
     order: z.number().int().positive(),
     title: localizedText,
-    // Folder name of Carlos's notes for this section (outside the repo).
+    // Module folder in Carlos's course folder (outside the repo), e.g.
+    // "recursos originales/modulo-02-big-o".
     sourceFolder: nonEmpty,
     questions: z.array(questionSchema).min(1),
     exercises: z.array(exerciseSchema),

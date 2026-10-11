@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { describe, it, expect } from 'vitest'
-import { validateSection } from './validate-content.js'
+import { countMissingSpanish, validateSection } from './validate-content.js'
 
 const text = (en) => ({ en, es: `${en} (es)` })
 
@@ -48,12 +48,18 @@ describe('validateSection', () => {
     expect(validateSection(makeValidSection())).toEqual([])
   })
 
-  it('rejects a missing Spanish translation', () => {
+  it('rejects a missing English text', () => {
+    const section = makeValidSection()
+    delete section.questions[0].prompt.en
+    expect(validateSection(section)).toEqual([
+      expect.stringContaining('questions.0.prompt.en'),
+    ])
+  })
+
+  it('accepts a missing Spanish translation (English first)', () => {
     const section = makeValidSection()
     delete section.questions[0].prompt.es
-    expect(validateSection(section)).toEqual([
-      expect.stringContaining('questions.0.prompt.es'),
-    ])
+    expect(validateSection(section)).toEqual([])
   })
 
   it('rejects a question with only 3 options', () => {
@@ -103,5 +109,16 @@ describe('validateSection', () => {
     expect(validateSection(section)).toEqual([
       expect.stringContaining('solution does not compile'),
     ])
+  })
+})
+
+describe('countMissingSpanish', () => {
+  it('counts every text that has English but no Spanish', () => {
+    const section = makeValidSection()
+    expect(countMissingSpanish(section)).toBe(0)
+
+    delete section.title.es
+    delete section.questions[0].options[2].es
+    expect(countMissingSpanish(section)).toBe(2)
   })
 })

@@ -87,11 +87,27 @@ export function validateSection(data) {
   return errors
 }
 
+// A localized text is any object with an `en` string. Returns how many of
+// them still have no Spanish translation, so the backlog stays visible.
+export function countMissingSpanish(value) {
+  if (Array.isArray(value)) {
+    return value.reduce((total, item) => total + countMissingSpanish(item), 0)
+  }
+  if (value === null || typeof value !== 'object') return 0
+  if (typeof value.en === 'string') return value.es ? 0 : 1
+
+  return Object.values(value).reduce(
+    (total, child) => total + countMissingSpanish(child),
+    0,
+  )
+}
+
 async function main() {
   const files = (await readdir(SECTIONS_DIR))
     .filter((name) => name.endsWith('.json'))
     .sort()
   let hasErrors = false
+  let missingSpanish = 0
 
   for (const file of files) {
     const data = JSON.parse(await readFile(join(SECTIONS_DIR, file), 'utf8'))
@@ -101,6 +117,8 @@ async function main() {
     if (data.slug && file !== `${data.slug}.json`) {
       errors.push(`file name should be "${data.slug}.json"`)
     }
+
+    missingSpanish += countMissingSpanish(data)
 
     if (errors.length > 0) {
       hasErrors = true
@@ -114,6 +132,9 @@ async function main() {
   }
 
   if (files.length === 0) console.log('No section files found.')
+  if (missingSpanish > 0) {
+    console.warn(`⚠ ${missingSpanish} texts still need a Spanish translation`)
+  }
   if (hasErrors) process.exit(1)
 }
 
