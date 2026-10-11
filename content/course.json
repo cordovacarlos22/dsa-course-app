@@ -1,0 +1,121 @@
+{
+  "slug": "dsa-javascript-leetcode",
+  "title": {
+    "en": "Data Structures & Algorithms in JavaScript with LeetCode Exercises",
+    "es": "Curso de Estructuras de Datos y Algoritmos en JavaScript con Ejercicios de LEETCODE"
+  },
+  "description": {
+    "en": "Learn data structures and algorithms step by step with animations, then practice with coding exercises so you're ready for technical interviews.",
+    "es": "Aprende estructuras de datos y algoritmos paso a paso con animaciones y practica con ejercicios de codificación para llegar preparado a tus entrevistas técnicas."
+  },
+  "modules": [
+    {
+      "slug": "01-introduccion",
+      "order": 1,
+      "title": { "en": "Introduction", "es": "Introducción" },
+      "sourceFolder": "recursos originales/modulo-01-introduccion"
+    },
+    {
+      "slug": "02-big-o",
+      "order": 2,
+      "title": { "en": "Big O", "es": "Big O" },
+      "sourceFolder": "recursos originales/modulo-02-big-o"
+    },
+    {
+      "slug": "03-clases-punteros",
+      "order": 3,
+      "title": { "en": "Classes & Pointers", "es": "Clases y punteros" },
+      "sourceFolder": "recursos originales/modulo-03-clases-punteros"
+    },
+    {
+      "slug": "04-listas-enlazadas",
+      "order": 4,
+      "title": { "en": "Linked Lists", "es": "Listas enlazadas" },
+      "sourceFolder": "recursos originales/modulo-04-listas-enlazadas"
+    },
+    {
+      "slug": "05-listas-doblemente-enlazadas",
+      "order": 5,
+      "title": {
+        "en": "Doubly Linked Lists",
+        "es": "Listas doblemente enlazadas"
+      },
+      "sourceFolder": "recursos originales/modulo-05-listas-doblemente-enlazadas"
+    },
+    {
+      "slug": "06-pilas-colas",
+      "order": 6,
+      "title": { "en": "Stacks & Queues", "es": "Pilas y colas" },
+      "sourceFolder": "recursos originales/modulo-06-pilas-colas"
+    },
+    {
+      "slug": "07-arboles",
+      "order": 7,
+      "title": { "en": "Trees", "es": "Árboles" },
+      "sourceFolder": "recursos originales/modulo-07-arboles"
+    },
+    {
+      "slug": "08-tablas-hash",
+      "order": 8,
+      "title": { "en": "Hash Tables", "es": "Tablas hash" },
+      "sourceFolder": "recursos originales/modulo-08-tablas-hash"
+    },
+    {
+      "slug": "09-grafos",
+      "order": 9,
+      "title": { "en": "Graphs", "es": "Grafos" },
+      "sourceFolder": "recursos originales/modulo-09-grafos"
+    },
+    {
+      "slug": "10-heaps",
+      "order": 10,
+      "title": { "en": "Heaps", "es": "Heaps" },
+      "sourceFolder": "recursos originales/modulo-10-heaps"
+    },
+    {
+      "slug": "11-recursion",
+      "order": 11,
+      "title": { "en": "Recursion", "es": "Recursión" },
+      "sourceFolder": "recursos originales/modulo-11-recursion"
+    },
+    {
+      "slug": "12-busqueda-recursiva-arbol-binario",
+      "order": 12,
+      "title": {
+        "en": "Recursive Binary Search Tree",
+        "es": "Búsqueda recursiva en árbol binario"
+      },
+      "sourceFolder": "recursos originales/modulo-12-búsqueda recursiva de árbol binario"
+    },
+    {
+      "slug": "13-recorridos-arboles",
+      "order": 13,
+      "title": { "en": "Tree Traversal", "es": "Recorridos de árboles" },
+      "sourceFolder": "recursos originales/modulo-13-recorridos-arboles"
+    },
+    {
+      "slug": "14-ordenamiento-basico",
+      "order": 14,
+      "title": { "en": "Basic Sorts", "es": "Ordenamiento básico" },
+      "sourceFolder": "recursos originales/modulo-14-ordenamiento-basico"
+    },
+    {
+      "slug": "15-ordenamiento-merge-sort",
+      "order": 15,
+      "title": { "en": "Merge Sort", "es": "Merge Sort" },
+      "sourceFolder": "recursos originales/modulo-15-ordenamiento-merge-sort"
+    },
+    {
+      "slug": "16-ordenamiento-quick-sort",
+      "order": 16,
+      "title": { "en": "Quick Sort", "es": "Quick Sort" },
+      "sourceFolder": "recursos originales/modulo-16-ordenamiento-quick-sort"
+    },
+    {
+      "slug": "17-programacion-dinamica",
+      "order": 17,
+      "title": { "en": "Dynamic Programming", "es": "Programación dinámica" },
+      "sourceFolder": "recursos originales/modulo-17-programacion-dimanica"
+    }
+  ]
+}
