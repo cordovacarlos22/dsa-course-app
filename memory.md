@@ -10,6 +10,8 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Decisions
 
+- 2026-10-11: **Lessons are written in English and Spanish together** from Module 1 on (Carlos's choice). Spanish is natural, not word for word, using his terms (bucle, array, nodo, puntero…). Code names stay in English; comments and printed strings are translated. Messages from the app itself (like the runner's timeout) come from `src/locales`, never hard-coded.
+
 - 2026-10-11: **Vercel is connected** (Carlos linked the repo; Vercel team `carloscordovadevs`). Production: https://dsa-course-app.vercel.app. Vercel's Git integration currently deploys every PR (preview, behind Vercel's login wall) and `main` (production). `vercel.json` rewrites every route to `index.html` so deep links work. Stage 9 switches to the blue/green flow (turn off Git auto-deploys, deploy from GitHub Actions).
 
 - 2026-10-11: **Lesson system.** Lessons are `content/lessons/<module-slug>/<NN-slug>.<en|es>.md` with front matter (`title`, `order`, `minutes`). Two special blocks: ` ```viz ` (the block contains an animation name; names in `src/visualizations/names.js`, components in `index.js`) and ` ```js-run ` (editable code run in a Web Worker with a 2 s limit; `src/runners/`). Rendered with react-markdown + remark-gfm + @tailwindcss/typography. The lesson page is lazy-loaded to keep the first load small. Spanish lessons fall back to English.
@@ -66,19 +68,26 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Next
 
-- Carlos reviews the first lesson (`content/lessons/02-big-o/01-what-is-big-o.en.md`): voice, length, format. Then Stage 6 writes the rest of modules 01–03 in the same style.
-- Carlos reviews the Section 1 and Section 3 questions.
-- Spanish pass later (`content:validate` shows the count).
+- Carlos reviews the Module 1 lessons (EN + ES) and the first Big O lesson (voice, length, format).
+- Next modules' lessons: Big O (02) and Classes & Pointers (03), EN + ES like Module 1.
+- Spanish pass for the remaining content (`content:validate` shows the count; 75 texts left after Module 1).
 
 ## Course sections imported
 
 | Section               | File                                       | Questions | Exercises                                                          | Spanish | Date       |
 | --------------------- | ------------------------------------------ | --------- | ------------------------------------------------------------------ | ------- | ---------- |
-| 1: Introduction       | `content/sections/01-introduccion.json`    | 9         | none                                                               | missing | 2026-10-11 |
+| 1: Introduction       | `content/sections/01-introduccion.json`    | 10        | none                                                               | done    | 2026-10-11 |
 | 2: Big O              | `content/sections/02-big-o.json`           | 19        | find-max (easy), contains-duplicate (easy), binary-search (medium) | done    | 2026-10-11 |
 | 3: Classes & Pointers | `content/sections/03-clases-punteros.json` | 12        | cookie-class (easy, class)                                         | missing | 2026-10-11 |
 
 Modules 04–17 have empty folders; they appear in `course.json` as "coming soon".
+
+### Lessons written
+
+| Module          | Lessons                                                             | Languages | Date       |
+| --------------- | ------------------------------------------------------------------- | --------- | ---------- |
+| 01 Introduction | `01-welcome`, `02-how-to-get-the-most-out-of-it`, `03-running-code` | EN + ES   | 2026-10-11 |
+| 02 Big O        | `01-what-is-big-o`                                                  | EN        | 2026-10-11 |
 
 ## Open questions
 
