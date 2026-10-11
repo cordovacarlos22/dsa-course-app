@@ -1,6 +1,11 @@
 // @vitest-environment node
 import { describe, it, expect } from 'vitest'
-import { validateSection } from './validate-content.js'
+import {
+  checkSectionInCourse,
+  countMissingSpanish,
+  validateCourse,
+  validateSection,
+} from './validate-content.js'
 
 const text = (en) => ({ en, es: `${en} (es)` })
 
@@ -48,12 +53,18 @@ describe('validateSection', () => {
     expect(validateSection(makeValidSection())).toEqual([])
   })
 
-  it('rejects a missing Spanish translation', () => {
+  it('rejects a missing English text', () => {
+    const section = makeValidSection()
+    delete section.questions[0].prompt.en
+    expect(validateSection(section)).toEqual([
+      expect.stringContaining('questions.0.prompt.en'),
+    ])
+  })
+
+  it('accepts a missing Spanish translation (English first)', () => {
     const section = makeValidSection()
     delete section.questions[0].prompt.es
-    expect(validateSection(section)).toEqual([
-      expect.stringContaining('questions.0.prompt.es'),
-    ])
+    expect(validateSection(section)).toEqual([])
   })
 
   it('rejects a question with only 3 options', () => {
@@ -102,6 +113,152 @@ describe('validateSection', () => {
       'function add(a, b) { return a + }'
     expect(validateSection(section)).toEqual([
       expect.stringContaining('solution does not compile'),
+    ])
+  })
+})
+
+describe('countMissingSpanish', () => {
+  it('counts every text that has English but no Spanish', () => {
+    const section = makeValidSection()
+    expect(countMissingSpanish(section)).toBe(0)
+
+    delete section.title.es
+    delete section.questions[0].options[2].es
+    expect(countMissingSpanish(section)).toBe(2)
+  })
+})
+
+function makeValidCourse() {
+  return {
+    slug: 'sample-course',
+    title: text('Sample course'),
+    description: text('A course for tests'),
+    modules: [
+      { slug: '01-intro', order: 1, title: text('Intro'), sourceFolder: 'a' },
+      { slug: '02-next', order: 2, title: text('Next'), sourceFolder: 'b' },
+    ],
+  }
+}
+
+describe('validateCourse', () => {
+  it('accepts a valid outline', () => {
+    expect(validateCourse(makeValidCourse())).toEqual([])
+  })
+
+  it('rejects modules that are out of order', () => {
+    const course = makeValidCourse()
+    course.modules[1].order = 3
+    expect(validateCourse(course)).toEqual([
+      'module "02-next" should have order 2',
+    ])
+  })
+
+  it('rejects duplicate module slugs', () => {
+    const course = makeValidCourse()
+    course.modules[1].slug = '01-intro'
+    expect(validateCourse(course)).toContain('duplicate module slug "01-intro"')
+  })
+})
+
+describe('checkSectionInCourse', () => {
+  it('accepts a section that matches a module', () => {
+    const section = { slug: '02-next', order: 2 }
+    expect(checkSectionInCourse(section, makeValidCourse())).toEqual([])
+  })
+
+  it('rejects a section whose slug is not in the outline', () => {
+    const section = { slug: '99-sample', order: 99 }
+    expect(checkSectionInCourse(section, makeValidCourse())).toEqual([
+      'slug "99-sample" is not a module in course.json',
+    ])
+  })
+
+  it('rejects a section with a different order', () => {
+    const section = { slug: '02-next', order: 5 }
+    expect(checkSectionInCourse(section, makeValidCourse())).toEqual([
+      'order should be 2 (as in course.json)',
+    ])
+  })
+})
+
+// A section whose only exercise is a class with 5 step-based tests.
+function makeClassSection() {
+  const section = makeValidSection()
+  const createAndRead = (start) => ({
+    steps: [
+      { create: [start] },
+      { call: 'increment' },
+      { read: 'count', expected: start + 1 },
+    ],
+  })
+  section.exercises = [
+    {
+      slug: 'counter',
+      kind: 'class',
+      title: text('Counter'),
+      description: text('Build a Counter class.'),
+      difficulty: 'easy',
+      className: 'Counter',
+      starterCode: { javascript: 'class Counter {\n}' },
+      solution: {
+        javascript:
+          'class Counter {\n  constructor(start) { this.count = start }\n  increment() { this.count++; return this.count }\n}',
+      },
+      tests: [
+        createAndRead(0),
+        createAndRead(5),
+        createAndRead(-1),
+        createAndRead(99),
+        {
+          steps: [
+            { create: [1] },
+            { call: 'increment', args: [], expected: 2 },
+            { call: 'increment', expected: 3 },
+          ],
+        },
+      ],
+      expectedComplexity: { time: 'O(1)', space: 'O(1)' },
+    },
+  ]
+  return section
+}
+
+describe('class exercises', () => {
+  it('accepts a class solution that passes every step', () => {
+    expect(validateSection(makeClassSection())).toEqual([])
+  })
+
+  it('reports the step that got a wrong value', () => {
+    const section = makeClassSection()
+    section.exercises[0].tests[4].steps[2].expected = 4
+    expect(validateSection(section)).toEqual([
+      'exercise "counter" test 5: step 3: expected 4, got 3',
+    ])
+  })
+
+  it('reports a method that does not exist', () => {
+    const section = makeClassSection()
+    section.exercises[0].solution.javascript =
+      'class Counter { constructor(start) { this.count = start } }'
+    const errors = validateSection(section)
+    expect(errors).toHaveLength(5)
+    expect(errors[0]).toContain('method "increment" does not exist')
+  })
+
+  it('stops a method that loops forever', () => {
+    const section = makeClassSection()
+    section.exercises[0].tests = section.exercises[0].tests.slice(0, 5)
+    section.exercises[0].solution.javascript =
+      'class Counter { constructor(start) { this.count = start } increment() { while (true) {} } }'
+    const errors = validateSection(section)
+    expect(errors[0]).toContain('timed out')
+  }, 15_000)
+
+  it('requires the first step to create the instance', () => {
+    const section = makeClassSection()
+    section.exercises[0].tests[0].steps.shift()
+    expect(validateSection(section)).toEqual([
+      expect.stringContaining('the first step must be { create: [...] }'),
     ])
   })
 })

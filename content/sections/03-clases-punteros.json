@@ -1,0 +1,281 @@
+{
+  "slug": "03-clases-punteros",
+  "order": 3,
+  "title": { "en": "Classes & Pointers" },
+  "sourceFolder": "recursos originales/modulo-03-clases-punteros",
+  "questions": [
+    {
+      "id": "cookie-cutter",
+      "topic": "Classes",
+      "prompt": {
+        "en": "In the cookie-cutter analogy for classes, what are the cookie cutter and the cookies?"
+      },
+      "options": [
+        { "en": "The cookie cutter is an instance; the cookies are classes" },
+        {
+          "en": "The cookie cutter is the class; each cookie is an instance created from it"
+        },
+        { "en": "The cookie cutter is a method; the cookies are properties" },
+        { "en": "The cookie cutter is `this`; the cookies are constructors" }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "A class is the template (the cutter). Every time you use `new`, you stamp out a new instance (a cookie) with its own data."
+      }
+    },
+    {
+      "id": "class-naming",
+      "topic": "Classes",
+      "prompt": {
+        "en": "By convention, how do you name a class in JavaScript?"
+      },
+      "options": [
+        { "en": "all lowercase: `cookie`" },
+        { "en": "ALL CAPS: `COOKIE`" },
+        { "en": "With a capital first letter: `Cookie`" },
+        { "en": "With a `class_` prefix: `class_cookie`" }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "Class names are capitalized (`Cookie`, `LinkedList`). That makes it easy to tell a class apart from regular variables and functions."
+      }
+    },
+    {
+      "id": "constructor-role",
+      "topic": "Classes",
+      "prompt": { "en": "What is the job of a class's `constructor`?" },
+      "options": [
+        { "en": "It deletes an instance when you no longer need it" },
+        { "en": "It turns the class into a string" },
+        { "en": "It runs every time any method is called" },
+        {
+          "en": "It runs when `new` creates an instance and sets that instance's starting properties"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "The constructor is what \"creates the cookies\": `new Cookie('green')` runs it once, and it stores `color` on the new instance."
+      }
+    },
+    {
+      "id": "new-keyword",
+      "topic": "Classes",
+      "prompt": { "en": "What does the `new` keyword do on this line?" },
+      "code": "let cookieOne = new Cookie('green')",
+      "options": [
+        {
+          "en": "It creates a new instance of `Cookie` by calling the constructor with 'green'"
+        },
+        { "en": "It changes the `Cookie` class so every cookie is green" },
+        { "en": "It copies an existing cookie called `cookieOne`" },
+        { "en": "It declares a new class called `cookieOne`" }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "`new` calls the constructor and returns a brand-new instance. `cookieOne` points to that green cookie; the class itself doesn't change."
+      }
+    },
+    {
+      "id": "this-keyword",
+      "topic": "Classes",
+      "prompt": {
+        "en": "Inside `getColor`, what does `this` refer to when you run `cookieTwo.getColor()`?"
+      },
+      "code": "class Cookie {\n  constructor(color) {\n    this.color = color\n  }\n  getColor() {\n    return this.color\n  }\n}\n\nlet cookieOne = new Cookie('green')\nlet cookieTwo = new Cookie('blue')",
+      "options": [
+        { "en": "The `Cookie` class" },
+        { "en": "`cookieOne`, because it was created first" },
+        { "en": "`cookieTwo`, the instance the method was called on" },
+        { "en": "Every cookie at once" }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "`this` is the specific instance the method is called on. `cookieTwo.getColor()` reads `cookieTwo`'s color, so it returns 'blue'."
+      }
+    },
+    {
+      "id": "getters-setters-output",
+      "topic": "Classes",
+      "prompt": {
+        "en": "After running this code, what do `cookieOne.getColor()` and `cookieTwo.getColor()` return?"
+      },
+      "code": "let cookieOne = new Cookie('green')\nlet cookieTwo = new Cookie('blue')\n\ncookieOne.setColor('yellow')",
+      "options": [
+        { "en": "'green' and 'blue'" },
+        { "en": "'yellow' and 'yellow'" },
+        { "en": "'green' and 'yellow'" },
+        { "en": "'yellow' and 'blue'" }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "`setColor` changes only the instance it's called on. `cookieOne` becomes yellow; `cookieTwo` is a separate instance and stays blue."
+      }
+    },
+    {
+      "id": "getter-vs-setter",
+      "topic": "Classes",
+      "prompt": {
+        "en": "Which statement about getters and setters is correct?"
+      },
+      "options": [
+        {
+          "en": "A getter returns a value from the instance; a setter changes a value on the instance"
+        },
+        { "en": "A getter creates instances; a setter deletes them" },
+        { "en": "Getters and setters can only be used inside the constructor" },
+        { "en": "A setter must always return the new value" }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "`getColor` reads (gets) `this.color`; `setColor` writes (sets) it. Most methods you'll write for data structures fall into one of these two groups."
+      }
+    },
+    {
+      "id": "why-classes",
+      "topic": "Classes",
+      "prompt": {
+        "en": "Why does this course build every data structure (like a linked list) as a class?"
+      },
+      "options": [
+        { "en": "Because JavaScript doesn't allow functions outside a class" },
+        {
+          "en": "Because a class keeps the data (head, tail, length) together with the methods that work on it (push, pop, shift…)"
+        },
+        { "en": "Because classes make code run in O(1)" },
+        { "en": "Because classes use less memory than arrays" }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "A `LinkedList` class bundles its data with methods like `push`, `pop`, `unshift`, `insert` and `remove`, and you can create as many independent lists as you need with `new`."
+      }
+    },
+    {
+      "id": "primitive-copy",
+      "topic": "Pointers",
+      "prompt": { "en": "What is the value of `num2` after this code runs?" },
+      "code": "let num1 = 5\nlet num2 = num1\nnum1 = 10",
+      "options": [
+        { "en": "10" },
+        { "en": "undefined" },
+        { "en": "5" },
+        { "en": "15" }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "Numbers are copied. `num2 = num1` copies the 5 at that moment; changing `num1` later doesn't affect `num2`. No pointer is involved."
+      }
+    },
+    {
+      "id": "object-reference",
+      "topic": "Pointers",
+      "prompt": { "en": "What is `obj2.value` after this code runs?" },
+      "code": "let obj1 = { value: 11 }\nlet obj2 = obj1\nobj1.value = 22",
+      "options": [
+        { "en": "11, because obj2 is a copy" },
+        { "en": "undefined" },
+        { "en": "33" },
+        {
+          "en": "22, because obj1 and obj2 point to the same object in memory"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "`obj2 = obj1` doesn't copy the object; it makes `obj2` point to the same object. Changing the value through `obj1` is visible through `obj2`."
+      }
+    },
+    {
+      "id": "move-pointer",
+      "topic": "Pointers",
+      "prompt": {
+        "en": "After this code runs, what are `obj1.value` and `obj2.value`?"
+      },
+      "code": "let obj1 = { value: 11 }\nlet obj2 = obj1\nlet obj3 = { value: 33 }\nobj2 = obj3",
+      "options": [
+        { "en": "obj1.value is 11 and obj2.value is 33" },
+        { "en": "Both are 33" },
+        { "en": "Both are 11" },
+        { "en": "obj1.value is 33 and obj2.value is 11" }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Reassigning `obj2` only moves that one pointer to a different object. `obj1` still points to `{ value: 11 }`."
+      }
+    },
+    {
+      "id": "garbage-collection",
+      "topic": "Pointers",
+      "prompt": {
+        "en": "After this code, nothing points to `{ value: 11 }` anymore. What happens to that object?"
+      },
+      "code": "let obj1 = { value: 11 }\nlet obj3 = { value: 33 }\nobj1 = obj3",
+      "options": [
+        { "en": "obj3 now contains both objects" },
+        {
+          "en": "It can't be reached, so JavaScript eventually removes it with garbage collection"
+        },
+        { "en": "It throws an error on the next line" },
+        { "en": "It's merged into obj3, so obj3.value becomes 44" }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "You can only reach an object through a variable that points to it. An object nothing points to just takes up memory, so JavaScript's garbage collector cleans it up."
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "slug": "cookie-class",
+      "kind": "class",
+      "title": { "en": "The Cookie Class" },
+      "description": {
+        "en": "Write a class `Cookie`:\n\n- `constructor(color)` stores the color on the instance as `this.color`.\n- `getColor()` returns the cookie's color.\n- `setColor(color)` changes the cookie's color.\n\nExample:\n\n```js\nconst cookieOne = new Cookie('green')\ncookieOne.getColor() // 'green'\ncookieOne.setColor('yellow')\ncookieOne.getColor() // 'yellow'\n```\n\nEach cookie must keep its own color: changing one cookie never changes another."
+      },
+      "difficulty": "easy",
+      "className": "Cookie",
+      "starterCode": {
+        "javascript": "class Cookie {\n  constructor(color) {\n    // Your code here\n  }\n\n  getColor() {\n    // Your code here\n  }\n\n  setColor(color) {\n    // Your code here\n  }\n}"
+      },
+      "solution": {
+        "javascript": "class Cookie {\n  constructor(color) {\n    this.color = color\n  }\n\n  getColor() {\n    return this.color\n  }\n\n  setColor(color) {\n    this.color = color\n  }\n}"
+      },
+      "tests": [
+        {
+          "steps": [
+            { "create": ["green"] },
+            { "call": "getColor", "expected": "green" }
+          ]
+        },
+        {
+          "steps": [
+            { "create": ["blue"] },
+            { "read": "color", "expected": "blue" }
+          ]
+        },
+        {
+          "steps": [
+            { "create": ["green"] },
+            { "call": "setColor", "args": ["yellow"] },
+            { "call": "getColor", "expected": "yellow" }
+          ]
+        },
+        {
+          "steps": [
+            { "create": ["red"] },
+            { "call": "setColor", "args": ["pink"] },
+            { "call": "setColor", "args": ["brown"] },
+            { "read": "color", "expected": "brown" }
+          ]
+        },
+        {
+          "steps": [
+            { "create": [""] },
+            { "call": "getColor", "expected": "" },
+            { "call": "setColor", "args": ["chocolate"] },
+            { "call": "getColor", "expected": "chocolate" }
+          ]
+        }
+      ],
+      "expectedComplexity": { "time": "O(1)", "space": "O(1)" }
+    }
+  ]
+}

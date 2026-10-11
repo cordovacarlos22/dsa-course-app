@@ -6,7 +6,7 @@ describe('App', () => {
   it('shows the app title', () => {
     render(<App />)
     expect(
-      screen.getByRole('heading', { name: 'DSA Course Companion' }),
+      screen.getByRole('heading', { name: 'DSA in JavaScript' }),
     ).toBeInTheDocument()
   })
 })

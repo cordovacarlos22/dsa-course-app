@@ -1,0 +1,168 @@
+{
+  "slug": "01-introduccion",
+  "order": 1,
+  "title": { "en": "Introduction" },
+  "sourceFolder": "recursos originales/modulo-01-introduccion",
+  "questions": [
+    {
+      "id": "what-big-o-measures",
+      "topic": "Overview",
+      "prompt": { "en": "In one sentence, what is Big O?" },
+      "options": [
+        { "en": "A JavaScript library for sorting arrays" },
+        { "en": "A way to measure how efficient your code is" },
+        { "en": "The biggest number JavaScript can store" },
+        { "en": "A Chrome DevTools panel" }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "Big O is the language we use to talk about efficiency. The course uses it for every data structure and algorithm, and it comes up in practically every coding interview."
+      }
+    },
+    {
+      "id": "remove-last-item",
+      "topic": "Overview",
+      "prompt": {
+        "en": "Your app must remove the last item of a list as efficiently as possible. According to the overview, which structure is much better at this?"
+      },
+      "options": [
+        { "en": "A singly linked list" },
+        { "en": "Both are exactly the same" },
+        { "en": "A doubly linked list" },
+        { "en": "Neither: you must use a hash table" }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "A doubly linked list is much more efficient at removing the last item. The course explains why later, using Big O to compare the two."
+      }
+    },
+    {
+      "id": "data-structures-as-classes",
+      "topic": "Overview",
+      "prompt": {
+        "en": "How will every data structure in this course be built?"
+      },
+      "options": [
+        { "en": "As a plain array" },
+        { "en": "As a JSON file" },
+        { "en": "As a single global function" },
+        { "en": "As a class (for example, a `LinkedList` class)" }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Every data structure uses a class, which is why the short Classes & Pointers section comes before linked lists."
+      }
+    },
+    {
+      "id": "head-and-tail",
+      "topic": "Overview",
+      "prompt": {
+        "en": "In a linked list diagram, what are `head` and `tail`?"
+      },
+      "options": [
+        {
+          "en": "Variables that are pointers to nodes; they are not nodes themselves"
+        },
+        { "en": "The first and last nodes themselves" },
+        { "en": "Two numbers that store the list's length" },
+        { "en": "Methods that add and remove nodes" }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "A common mistake is pointing at the first and last nodes and calling them head and tail. `head` and `tail` are variables that point to nodes, and pointers behave differently from variables like integers."
+      }
+    },
+    {
+      "id": "add-to-end",
+      "topic": "Intro",
+      "prompt": {
+        "en": "The intro animation adds a new node to the end of a linked list. Which two lines does it run, in order?"
+      },
+      "options": [
+        { "en": "`tail = newNode`, then `tail.next = newNode`" },
+        { "en": "`head.next = newNode`, then `head = newNode`" },
+        { "en": "`tail.next = newNode`, then `tail = newNode`" },
+        { "en": "`newNode.next = tail`, then `head = tail`" }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "First the current last node points to the new node (`tail.next = newNode`); then `tail` moves to the new node (`tail = newNode`). Doing it in the other order would lose the link."
+      }
+    },
+    {
+      "id": "when-to-do-exercises",
+      "topic": "Overview",
+      "prompt": {
+        "en": "What's the best way to use the coding exercises in this course?"
+      },
+      "options": [
+        { "en": "Watch the whole course first, then do all the exercises" },
+        {
+          "en": "Do each exercise right after the video that covers its code, either from the downloaded file or in the browser (not both)"
+        },
+        {
+          "en": "Do every exercise twice: once downloaded and once in the browser"
+        },
+        { "en": "Skip them and focus on the quizzes" }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "Doing the exercise immediately reinforces what you just learned. The downloadable file and the in-browser version are the same exercise, so pick one."
+      }
+    },
+    {
+      "id": "snippets-tab",
+      "topic": "Code editor",
+      "prompt": {
+        "en": "In Chrome DevTools, which tab holds the code snippets used throughout the course?"
+      },
+      "options": [
+        { "en": "Elements" },
+        { "en": "Network" },
+        { "en": "Application" },
+        { "en": "Sources" }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Open DevTools (⋮ → More tools → Developer tools), undock it into its own window, go to Sources and open the navigator to see your snippets."
+      }
+    },
+    {
+      "id": "run-snippet",
+      "topic": "Code editor",
+      "prompt": {
+        "en": "How do you run a DevTools snippet from the keyboard?"
+      },
+      "options": [
+        {
+          "en": "Command + Enter on a Mac, Control + Enter on Windows or a Chromebook"
+        },
+        { "en": "F5 on every system" },
+        { "en": "Shift + S on a Mac, Alt + S on Windows" },
+        { "en": "You can only run it with the mouse" }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Cmd/Ctrl + Enter runs the snippet (same as the play button). You can also call its functions afterwards from the console."
+      }
+    },
+    {
+      "id": "efficient-sorts",
+      "topic": "Intro",
+      "prompt": {
+        "en": "Which two sorting algorithms does the course describe as generally more efficient, but harder to write?"
+      },
+      "options": [
+        { "en": "Bubble sort and selection sort" },
+        { "en": "Insertion sort and bubble sort" },
+        { "en": "Merge sort and quicksort" },
+        { "en": "Selection sort and insertion sort" }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "The basic sorts are bubble, selection and insertion sort. Merge sort and quicksort are usually more efficient, but trickier to implement."
+      }
+    }
+  ],
+  "exercises": []
+}
