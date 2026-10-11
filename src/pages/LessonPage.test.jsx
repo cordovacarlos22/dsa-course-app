@@ -174,21 +174,23 @@ describe('lesson page', () => {
     expect(await screen.findByText('Step 1 of 4')).toBeInTheDocument()
   })
 
-  it('finishes a lesson without checkpoints by reading every step', async () => {
+  it('completes the lesson when the last checkpoint passes', async () => {
     const user = userEvent.setup()
+    saveProgress('introduction', '01-welcome', {
+      ...emptyProgress(),
+      passed: [0, 1, 2],
+    })
     renderAt('/learn/introduction/01-welcome')
-    await screen.findByText(/^Step 1 of/)
 
-    while (screen.queryByRole('button', { name: 'Finish lesson' }) === null) {
-      await user.click(nextButton())
-    }
-    await user.click(screen.getByRole('button', { name: 'Finish lesson' }))
+    expect(await screen.findByText('Step 4 of 4')).toBeInTheDocument()
+    await user.click(screen.getByRole('radio', { name: /small, clear steps/i }))
+    await user.click(screen.getByRole('button', { name: 'Check answer' }))
+
     expect(screen.getByText(/lesson complete/i)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /next lesson:/i })).toHaveAttribute(
       'href',
-      expect.stringMatching(/^\/learn\/introduction\/02-/),
+      '/learn/introduction/02-how-to-get-the-most-out-of-it',
     )
-    expect(loadProgress('big-o', '01-what-is-big-o').completed).toBe(false)
     expect(loadProgress('introduction', '01-welcome').completed).toBe(true)
   })
 
