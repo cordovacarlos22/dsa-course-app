@@ -10,6 +10,8 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Decisions
 
+- 2026-10-11: **Vercel is connected** (Carlos linked the repo; Vercel team `carloscordovadevs`). Production: https://dsa-course-app.vercel.app. Vercel's Git integration currently deploys every PR (preview, behind Vercel's login wall) and `main` (production). `vercel.json` rewrites every route to `index.html` so deep links work. Stage 9 switches to the blue/green flow (turn off Git auto-deploys, deploy from GitHub Actions).
+
 - 2026-10-11: **Lesson system.** Lessons are `content/lessons/<module-slug>/<NN-slug>.<en|es>.md` with front matter (`title`, `order`, `minutes`). Two special blocks: ` ```viz ` (the block contains an animation name; names in `src/visualizations/names.js`, components in `index.js`) and ` ```js-run ` (editable code run in a Web Worker with a 2 s limit; `src/runners/`). Rendered with react-markdown + remark-gfm + @tailwindcss/typography. The lesson page is lazy-loaded to keep the first load small. Spanish lessons fall back to English.
 
 - 2026-10-11: **Repo is public** (Carlos's choice). Branch protection on `main`: PR required, the `Lint, test, validate, build` check must pass, admins included, no force pushes, 0 approvals (a solo dev can't approve their own PR).
