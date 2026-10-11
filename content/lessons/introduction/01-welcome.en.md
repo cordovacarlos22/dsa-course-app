@@ -40,7 +40,7 @@ After the lessons, each module has a **quiz** to check what you learned and **ti
 
 Here's the map, in order:
 
-| Part                    | What you'll learn                                                                                                                    |
+| Section                 | What you'll learn                                                                                                                    |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | **Foundations**         | Big O (how to measure efficient code), the Big O of arrays and objects, classes and pointers                                         |
 | **Problem solving**     | A 5-step method for any problem, common patterns (frequency counter, two pointers, sliding window, divide and conquer) and recursion |

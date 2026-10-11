@@ -50,7 +50,7 @@ CLAUDE.md            # points Claude Code to this file
 memory.md            # project memory (see above)
 content/course.json  # course outline: all modules, in order
 content/lessons/     # lessons: <module-slug>/<NN-lesson>.en.md (+ .es.md later)
-content/sections/    # quiz + exercise JSON, one file per module
+content/practice/    # module quiz + exercise JSON, one file per module
 scripts/             # Node scripts (content validation)
 supabase/migrations/ # SQL schema and RLS policies
 supabase/functions/  # Edge Functions (tutor: the AI tutor)
@@ -117,9 +117,10 @@ Before every commit, run: `npm run lint && npm run format:check && npm test && n
 
 ## Course blueprint and originality (read before writing any content)
 
-- **[`docs/curriculum.md`](./docs/curriculum.md) is the plan for the whole course**: 24 modules in 7 parts (algorithms first), and for each module its lessons, animations, quiz topics, **Build it** exercises, **Interview problems** and slides. Write content in that order, and update the module's **Status** in the blueprint when its content is merged.
+- **[`docs/curriculum.md`](./docs/curriculum.md) is the plan for the whole course**: 24 modules in 7 sections (algorithms first), and for each module its lessons, animations, quiz topics, **Build it** exercises, **Interview problems** and slides. Write content in that order, and update the module's **Status** in the blueprint when its content is merged.
 - **The two courses Carlos took are examples of structure only.** Their lessons, slides, coding exercises, starter files, solutions, quizzes and wording are **never copied, edited, paraphrased or reused**, including the course 2 slide PDFs in Carlos's Desktop folder. Every lesson, slide, problem statement, example, test and solution here is written from scratch. Classic problem _names_ (e.g. "Two Sum") are fine; their text and tests must be ours.
 - **Slides are ours too:** each module gets its own deck (original text and diagrams, Carlos's brand, EN + ES), built in a later stage.
+- **Course levels: Section → Module → Lesson → Step** (ES: Sección → Módulo → Lección → Paso). `content/course.json` groups modules into `sections`.
 - **Module slugs are English names without numbers** (`big-o`, `linked-lists`, `dijkstra`). The order lives only in `content/course.json`, so reordering never breaks links. `sourceFolder` (optional) points to the matching folder in Carlos's course material.
 
 ## Lesson-writing procedure
@@ -181,7 +182,7 @@ When Carlos says _"generate content for section N"_:
 
 3. **Read everything** in `recursos originales/modulo-NN-<slug>/`: the `guiones/*.md`, the `.pdf`s and the `.js` files.
 
-4. **Write `content/sections/<module-slug>.json`** (e.g. `big-o.json`). The slug is the module's English name from `content/course.json`; its `sourceFolder` tells you which `recursos originales/modulo-NN-…` folder has the material.
+4. **Write `content/practice/<module-slug>.json`** (e.g. `big-o.json`). The slug is the module's English name from `content/course.json`; its `sourceFolder` tells you which `recursos originales/modulo-NN-…` folder has the material.
    - **English first.** `en` is required; `es` can be added later (the validator warns about missing Spanish).
    - **10–16 multiple-choice questions** covering every lesson: 4 options each, exactly one correct, a short explanation. Test understanding (why, when, Big O), not just memorization. Use the `code` field for "what does this code do / what's its Big O?" questions. Spread the correct answer across positions 0–3.
    - **Exercises**, as listed for the module in `docs/curriculum.md`:
@@ -198,5 +199,5 @@ When Carlos says _"generate content for section N"_:
 
 ## Privacy
 
-- Never commit Carlos's transcripts or course resources. Only the generated `content/course.json` and `content/sections/*.json` go in git.
+- Never commit Carlos's transcripts or course resources. Only the generated `content/course.json`, `content/lessons/` and `content/practice/*.json` go in git.
 - Never write the Udemy course URL into this repo. The repo may become public.

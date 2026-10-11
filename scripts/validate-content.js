@@ -1,4 +1,4 @@
-// Checks every content/sections/*.json file before it reaches the app.
+// Checks every content/practice/*.json file before it reaches the app.
 // Run with: npm run content:validate
 import { readdir, readFile } from 'node:fs/promises'
 import { join } from 'node:path'
@@ -8,7 +8,7 @@ import vm from 'node:vm'
 import {
   courseSchema,
   lessonFrontMatterSchema,
-  sectionSchema,
+  practiceSchema,
 } from './content-schema.js'
 import { parseFrontMatter } from '../src/lib/frontMatter.js'
 import {
@@ -18,7 +18,7 @@ import {
 } from '../src/lib/markdownBlocks.js'
 import { VISUALIZATION_NAMES } from '../src/visualizations/names.js'
 
-const SECTIONS_DIR = 'content/sections'
+const PRACTICE_DIR = 'content/practice'
 const COURSE_FILE = 'content/course.json'
 const LESSONS_DIR = 'content/lessons'
 
@@ -163,51 +163,53 @@ export function validateCourse(data) {
     }
   })
 
-  // Every module must appear in exactly one part.
-  const slugsInParts = result.data.parts.flatMap((part) => part.modules)
-  for (const moduleSlug of slugsInParts) {
+  // Every module must appear in exactly one section.
+  const slugsInSections = result.data.sections.flatMap(
+    (section) => section.modules,
+  )
+  for (const moduleSlug of slugsInSections) {
     if (!modules.some((module) => module.slug === moduleSlug)) {
-      errors.push(`part lists "${moduleSlug}", which is not a module`)
+      errors.push(`section lists "${moduleSlug}", which is not a module`)
     }
   }
-  for (const moduleSlug of findDuplicates(slugsInParts)) {
-    errors.push(`module "${moduleSlug}" is in more than one part`)
+  for (const moduleSlug of findDuplicates(slugsInSections)) {
+    errors.push(`module "${moduleSlug}" is in more than one section`)
   }
   for (const module of modules) {
-    if (!slugsInParts.includes(module.slug)) {
-      errors.push(`module "${module.slug}" is not in any part`)
+    if (!slugsInSections.includes(module.slug)) {
+      errors.push(`module "${module.slug}" is not in any section`)
     }
   }
   return errors
 }
 
-// A section must belong to a module in the outline, with the same order.
-export function checkSectionInCourse(section, course) {
-  const module = course.modules.find((m) => m.slug === section.slug)
-  if (!module) return [`slug "${section.slug}" is not a module in course.json`]
-  if (module.order !== section.order) {
+// A practice file must belong to a module in the outline, with the same order.
+export function checkPracticeInCourse(practice, course) {
+  const module = course.modules.find((m) => m.slug === practice.slug)
+  if (!module) return [`slug "${practice.slug}" is not a module in course.json`]
+  if (module.order !== practice.order) {
     return [`order should be ${module.order} (as in course.json)`]
   }
   return []
 }
 
-// Returns a list of readable error messages. An empty list means the section is valid.
-export function validateSection(data) {
-  const result = sectionSchema.safeParse(data)
+// Returns a list of readable error messages. An empty list means the practice file is valid.
+export function validatePractice(data) {
+  const result = practiceSchema.safeParse(data)
   if (!result.success) return formatIssues(result.error)
 
-  const section = result.data
+  const practice = result.data
   const errors = []
 
-  for (const id of findDuplicates(section.questions.map((q) => q.id))) {
+  for (const id of findDuplicates(practice.questions.map((q) => q.id))) {
     errors.push(`duplicate question id "${id}"`)
   }
   for (const exerciseSlug of findDuplicates(
-    section.exercises.map((e) => e.slug),
+    practice.exercises.map((e) => e.slug),
   )) {
     errors.push(`duplicate exercise slug "${exerciseSlug}"`)
   }
-  for (const exercise of section.exercises) {
+  for (const exercise of practice.exercises) {
     errors.push(...checkSolution(exercise))
   }
   return errors
@@ -330,13 +332,13 @@ function plural(count, word) {
 }
 
 // e.g. "12 questions, 1 exercise, all solutions pass"
-function describeSection(section) {
-  const parts = [
-    plural(section.questions.length, 'question'),
-    plural(section.exercises.length, 'exercise'),
+function describePractice(practice) {
+  const summary = [
+    plural(practice.questions.length, 'question'),
+    plural(practice.exercises.length, 'exercise'),
   ]
-  if (section.exercises.length > 0) parts.push('all solutions pass')
-  return parts.join(', ')
+  if (practice.exercises.length > 0) summary.push('all solutions pass')
+  return summary.join(', ')
 }
 
 async function main() {
@@ -349,18 +351,18 @@ async function main() {
   }
   console.log(`✓ course.json (${course.modules.length} modules)`)
 
-  const files = (await readdir(SECTIONS_DIR))
+  const files = (await readdir(PRACTICE_DIR))
     .filter((name) => name.endsWith('.json'))
     .sort()
   let hasErrors = false
   let missingSpanish = countMissingSpanish(course)
 
   for (const file of files) {
-    const data = JSON.parse(await readFile(join(SECTIONS_DIR, file), 'utf8'))
-    const errors = validateSection(data)
-    if (errors.length === 0) errors.push(...checkSectionInCourse(data, course))
+    const data = JSON.parse(await readFile(join(PRACTICE_DIR, file), 'utf8'))
+    const errors = validatePractice(data)
+    if (errors.length === 0) errors.push(...checkPracticeInCourse(data, course))
 
-    // The file name must match the slug so it's easy to find a section's file.
+    // The file name must match the slug so it's easy to find a module's practice file.
     if (data.slug && file !== `${data.slug}.json`) {
       errors.push(`file name should be "${data.slug}.json"`)
     }
@@ -372,11 +374,11 @@ async function main() {
       console.error(`✗ ${file}`)
       errors.forEach((error) => console.error(`    - ${error}`))
     } else {
-      console.log(`✓ ${file} (${describeSection(data)})`)
+      console.log(`✓ ${file} (${describePractice(data)})`)
     }
   }
 
-  if (files.length === 0) console.log('No section files found.')
+  if (files.length === 0) console.log('No practice files found.')
 
   const lessons = await validateAllLessons(course)
   if (lessons.hasErrors) hasErrors = true

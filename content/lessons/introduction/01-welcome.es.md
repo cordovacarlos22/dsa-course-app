@@ -40,7 +40,7 @@ Después de las lecciones, cada módulo tiene un **cuestionario** para comprobar
 
 Este es el mapa, en orden:
 
-| Parte                       | Qué vas a aprender                                                                                                                                           |
+| Sección                     | Qué vas a aprender                                                                                                                                           |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Fundamentos**             | Big O (cómo medir si tu código es eficiente), el Big O de arrays y objetos, clases y punteros                                                                |
 | **Resolución de problemas** | Un método de 5 pasos para cualquier problema, patrones comunes (contador de frecuencias, dos punteros, ventana deslizante, dividir y conquistar) y recursión |

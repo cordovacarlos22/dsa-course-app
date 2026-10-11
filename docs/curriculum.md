@@ -17,9 +17,9 @@ This is the plan for the whole course: what each module teaches and what student
 6. **English and Spanish.** Lessons, quizzes and slides are written in both languages (see `AGENTS.md` for the Spanish terms).
 7. **Animations** are named in `kebab-case` (e.g. `linked-list-push`) and built with `StepPlayer` when the lesson needs them.
 
-## Parts and modules
+## Sections and modules
 
-| Part                   | Modules                                                                                                                                      |
+| Section                | Modules                                                                                                                                      |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1. Foundations         | Introduction · Big O · Big O of Arrays & Objects · Classes & Pointers                                                                        |
 | 2. Problem Solving     | A Problem-Solving Approach · Problem-Solving Patterns · Recursion                                                                            |
@@ -33,7 +33,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ---
 
-# Part 1 · Foundations
+# Section 1 · Foundations
 
 ## Introduction (`introduction`)
 
@@ -88,7 +88,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ---
 
-# Part 2 · Problem Solving
+# Section 2 · Problem Solving
 
 ## A Problem-Solving Approach (`problem-solving-approach`)
 
@@ -140,7 +140,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ---
 
-# Part 3 · Searching & Sorting
+# Section 3 · Searching & Sorting
 
 ## Searching Algorithms (`searching`)
 
@@ -195,7 +195,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ---
 
-# Part 4 · Data Structures
+# Section 4 · Data Structures
 
 ## Linked Lists (`linked-lists`)
 
@@ -287,7 +287,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ---
 
-# Part 5 · Graph Algorithms
+# Section 5 · Graph Algorithms
 
 ## Graph Traversal (`graph-traversal`)
 
@@ -312,7 +312,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ---
 
-# Part 6 · Dynamic Programming
+# Section 6 · Dynamic Programming
 
 ## Dynamic Programming (`dynamic-programming`)
 
@@ -326,7 +326,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ---
 
-# Part 7 · Interview Practice
+# Section 7 · Interview Practice
 
 ## Array Interview Problems (`array-interview-problems`)
 

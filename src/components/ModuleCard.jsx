@@ -8,7 +8,7 @@ import { localize } from '../lib/course'
 function ModuleCard({ module }) {
   const { t } = useTranslation()
   const { language } = useLanguage()
-  const { lessons, section } = module
+  const { lessons, practice } = module
   const title = localize(module.title, language)
 
   const header = (
@@ -33,9 +33,9 @@ function ModuleCard({ module }) {
   if (lessons.length > 0) {
     summary.push(t('lesson.lessons', { count: lessons.length }))
   }
-  if (section) {
-    summary.push(t('course.questions', { count: section.questions.length }))
-    summary.push(t('course.exercises', { count: section.exercises.length }))
+  if (practice) {
+    summary.push(t('course.questions', { count: practice.questions.length }))
+    summary.push(t('course.exercises', { count: practice.exercises.length }))
   }
 
   return (
