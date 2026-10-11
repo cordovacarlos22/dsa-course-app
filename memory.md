@@ -82,7 +82,16 @@ Agents: read this at the start of every session and update it at the end (see `A
   - Class exercises (`kind: "class"`, step tests: create / call / read).
   - Sections 01, 02 (3 new questions) and 03. 22 unit tests.
 
+- 2026-10-11, `feat/step-checkpoints` (Codecademy-style learning, Carlos's request):
+  - Lessons are played **step by step** (`## ` = a step, `?step=N` in the URL). Each step has a checkpoint in `<lesson>.checks.json`; **Next stays locked** until it passes. Lessons without a checks file can be clicked through (until PR 3 converts them).
+  - Coding steps: **3 panes** Learn | Editor (CodeMirror, lazy-loaded) | Output (✓/✗ per test + console); tabs below 1024 px. Run / Check / Reset; hint after the first failed check, **Show solution after 3** (saved as `viewedSolution`).
+  - Shared grading in `src/runners/testHarness.js` (browser worker + validator). Test messages are English (code-like) in both languages.
+  - Progress in localStorage (`progress:<module>/<lesson>`), shown on the module page (✓ Completed / In progress). Moves to Supabase in stage 8.
+  - Pilot: Big O lesson 1 has 4 steps (2 code + 2 choice), EN + ES.
+
 ## Next
+
+- **PR 3 `feat/lesson-checkpoints-content`:** convert the other 14 lessons (Introduction 1–3, Big O 2–12) to steps + `.checks.json`, EN + ES.
 
 - Big O module still needs: the interview problem "Count the Operations" and its slides (later stage).
 - Next content (per `docs/curriculum.md`): **Big O of Arrays & Objects**, then **Classes & Pointers** lessons.

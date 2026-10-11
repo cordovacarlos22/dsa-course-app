@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from 'react-router'
+import { Link, NavLink, Outlet, useMatch } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
 import FirstVisitLanguagePicker from './FirstVisitLanguagePicker'
@@ -6,11 +6,16 @@ import FirstVisitLanguagePicker from './FirstVisitLanguagePicker'
 // The frame around every page: header, the page itself, footer.
 function Layout() {
   const { t } = useTranslation()
+  // Lessons get the full width for the 3-pane coding workspace.
+  const isLesson = useMatch('/learn/:moduleSlug/:lessonSlug')
+  const width = isLesson ? 'max-w-screen-2xl' : 'max-w-5xl'
 
   return (
     <div className="flex min-h-screen flex-col bg-surface text-ink">
       <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
+        <div
+          className={`mx-auto flex ${width} items-center justify-between gap-4 px-4 py-3`}
+        >
           <Link to="/" className="flex items-center gap-2 font-bold">
             <span className="rounded-md bg-accent px-1.5 py-0.5 text-sm text-ink">
               JS
@@ -34,7 +39,7 @@ function Layout() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
+      <main className={`mx-auto w-full ${width} flex-1 px-4 py-8`}>
         <Outlet />
       </main>
 

@@ -174,3 +174,67 @@ export const lessonFrontMatterSchema = z
     minutes: z.number().int().positive(),
   })
   .strict()
+
+// ---------------------------------------------------------------------------
+// Lesson checkpoints: content/lessons/<module>/<NN-lesson>.checks.json
+// One checkpoint per step of the lesson, in order. Students must pass it to
+// unlock the next step.
+
+const choiceCheckpointSchema = z
+  .object({
+    type: z.literal('choice'),
+    question: localizedText,
+    options: z
+      .array(localizedText)
+      .min(2, 'a choice checkpoint needs 2–4 options')
+      .max(4, 'a choice checkpoint needs 2–4 options'),
+    answer: z.number().int().min(0),
+    hint: localizedText,
+    explanation: localizedText,
+  })
+  .strict()
+  .refine((checkpoint) => checkpoint.answer < checkpoint.options.length, {
+    message: 'answer must be the index of one of the options',
+    path: ['answer'],
+  })
+
+// Fields every code checkpoint has, whatever it tests.
+const codeCheckpointBase = {
+  type: z.literal('code'),
+  task: localizedText,
+  hint: localizedText,
+  starterCode: nonEmpty,
+  solution: nonEmpty,
+}
+
+const codeFunctionCheckpointSchema = z
+  .object({
+    ...codeCheckpointBase,
+    kind: z.literal('function'),
+    functionName: jsName,
+    tests: z
+      .array(functionTestSchema)
+      .min(2, 'a code checkpoint needs at least 2 tests'),
+  })
+  .strict()
+
+const codeClassCheckpointSchema = z
+  .object({
+    ...codeCheckpointBase,
+    kind: z.literal('class'),
+    className: jsName,
+    tests: z
+      .array(classTestSchema)
+      .min(2, 'a code checkpoint needs at least 2 tests'),
+  })
+  .strict()
+
+export const checkpointSchema = z.union([
+  choiceCheckpointSchema,
+  codeFunctionCheckpointSchema,
+  codeClassCheckpointSchema,
+])
+
+export const lessonChecksSchema = z
+  .object({ steps: z.array(checkpointSchema).min(1) })
+  .strict()

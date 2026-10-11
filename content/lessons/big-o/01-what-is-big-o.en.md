@@ -86,17 +86,11 @@ Big O measures two things:
 
 Our guest list shows the trade-off. The Set is faster, but it's a **second copy** of every name, so it uses extra memory: O(n) space. The list version uses no extra memory: O(1) space. In an interview you may hear, _"Great, it's fast. Can you do it with less memory?"_ We'll mostly talk about time, but keep space in mind.
 
-## Big O recap
+In short:
 
 | Code                  | Time            | Extra space |
 | --------------------- | --------------- | ----------- |
 | `isInvitedList(name)` | O(n)            | O(1)        |
 | `isInvitedSet(name)`  | O(1) on average | O(n)        |
-
-## Check yourself
-
-1. Why don't we measure code speed with a stopwatch?
-2. If the guest list gets 10 times bigger, what happens to the work of `isInvitedList`? And `isInvitedSet`?
-3. The Set version is faster. What does it cost in exchange?
 
 When you finish the Big O lessons, take the **Big O quiz** on the module page.

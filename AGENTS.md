@@ -130,7 +130,12 @@ When Carlos says _"write the lessons for module N"_:
 1. Read the module's English transcripts in `recursos originales/modulo-NN-*/guiones/` (see the content procedure below for the path) **only to get the topic list, order and depth**.
 2. Write each lesson **from scratch in Carlos's voice**: new explanations, new examples, new analogies, new code. Never copy or paraphrase the transcripts sentence by sentence.
 3. Save it as `content/lessons/<module-slug>/<NN-lesson-slug>.en.md` with front-matter (`title`, `order`, `minutes`).
-4. Each lesson has: a one-line goal, the explanation, at least one runnable snippet, an animation when the topic is visual, a "Big O recap", and 2–3 "check yourself" questions pointing to the module quiz.
+4. **Every `## ` heading starts a step** (the goal line before the first `##` belongs to step 1). Aim for 3–6 short steps. Each lesson has: a one-line goal, the explanation, at least one runnable snippet, an animation when the topic is visual, and the Big O summary inside the last step (no separate "recap" or "check yourself" sections: the checkpoints replace them).
+   - **Checkpoints:** `content/lessons/<module-slug>/<NN-lesson-slug>.checks.json` holds `{ "steps": [ … ] }`, **one checkpoint per step, in order**. The student can't press Next until the step's checkpoint passes. Mix both kinds:
+     - `{ "type": "choice", "question", "options" (2–4), "answer" (index), "hint", "explanation" }`
+     - `{ "type": "code", "task", "hint", "starterCode", "solution", "kind": "function", "functionName", "tests": [{ "args", "expected" }] }` (or `"kind": "class"`, `"className"` and step tests, like exercises).
+   - Text fields are `{ "en", "es" }` and may use inline Markdown (`code`, **bold**). Code isn't translated. The starter code must compile and must **fail** the tests; the solution must pass them. A wrong try shows the hint; after 3 the student can reveal the answer.
+   - Example: `content/lessons/big-o/01-what-is-big-o.checks.json`.
 5. Lesson syntax (Markdown + two special blocks):
 
    ````md
@@ -154,7 +159,7 @@ When Carlos says _"write the lessons for module N"_:
    - ` ```viz `: the block contains an animation name from `src/visualizations/names.js`. Available: `big-o-growth-chart`, `array-reindex`, `binary-search-halving`.
    - New animation: build it with `StepPlayer` in `src/visualizations/`, add its name to `names.js` **and** register it in `index.js`, and put its captions in `src/locales/*.json` under `viz`.
 
-6. Run `npm run content:validate` (checks file names, front matter, animation names, and that every `js-run` block compiles), then open a PR for Carlos to review.
+6. Run `npm run content:validate` (checks file names, front matter, animation names, that every `js-run` block compiles, and that each `.checks.json` has one checkpoint per step in every language with passing solutions and failing starter code), then open a PR for Carlos to review.
 
 ## Content generation procedure
 

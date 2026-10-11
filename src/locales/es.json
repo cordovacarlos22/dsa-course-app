@@ -202,6 +202,42 @@
     "backToModule": "Volver a {{module}}",
     "unknownViz": "No se encontró la animación \"{{name}}\".",
     "lessons_one": "{{count}} lección",
-    "lessons_other": "{{count}} lecciones"
+    "lessons_other": "{{count}} lecciones",
+    "back": "Atrás",
+    "nextStep": "Siguiente",
+    "finish": "Terminar lección",
+    "nextLocked": "Pasa la comprobación para continuar",
+    "stepOf": "Paso {{current}} de {{total}}",
+    "goToStep": "Paso {{number}}: {{title}}",
+    "stepNavigation": "Pasos",
+    "complete": "¡Lección completada!",
+    "completeText": "Buen trabajo. Pasaste todas las comprobaciones.",
+    "completed": "Completada",
+    "inProgress": "En progreso"
+  },
+  "checkpoint": {
+    "title": "Comprueba lo que aprendiste",
+    "checkAnswer": "Comprobar respuesta",
+    "correct": "¡Correcto!",
+    "wrong": "No exactamente. Inténtalo de nuevo.",
+    "hint": "Pista",
+    "showAnswer": "Mostrar respuesta",
+    "answerShown": "La respuesta correcta está marcada en verde. Selecciónala y vuelve a comprobar.",
+    "passedBefore": "Ya pasaste este paso."
+  },
+  "workspace": {
+    "panes": "Espacio de trabajo",
+    "learn": "Aprende",
+    "code": "Código",
+    "output": "Resultado",
+    "task": "Tu tarea",
+    "check": "Comprobar",
+    "editorLabel": "Editor de código",
+    "showSolution": "Mostrar solución",
+    "empty": "Presiona Ejecutar para ver lo que imprime tu código, o Comprobar para probarlo.",
+    "allPassed": "¡Pasaron todas las pruebas!",
+    "somePassed": "Pasaron {{passed}} de {{total}} pruebas",
+    "console": "Consola",
+    "loadingEditor": "Cargando el editor…"
   }
 }
