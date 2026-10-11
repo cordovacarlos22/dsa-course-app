@@ -1,0 +1,105 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "`lowAndHigh` walks the array twice. How many steps does it take for 100 temperatures?",
+        "es": "`lowAndHigh` recorre el array dos veces. ¿Cuántos pasos da con 100 temperaturas?"
+      },
+      "options": [
+        {
+          "en": "100",
+          "es": "100"
+        },
+        {
+          "en": "102",
+          "es": "102"
+        },
+        {
+          "en": "200",
+          "es": "200"
+        },
+        {
+          "en": "10,000",
+          "es": "10,000"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Two loops, one after the other, each with one step per temperature.",
+        "es": "Dos bucles, uno después del otro, cada uno con un paso por temperatura."
+      },
+      "explanation": {
+        "en": "n + n = 2n, so 200 steps. (Two loops one after the other add; they don't multiply.)",
+        "es": "n + n = 2n, así que 200 pasos. (Dos bucles uno después del otro se suman, no se multiplican.)"
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "A function always does exactly 12 operations, whatever the input. What's its Big O?",
+        "es": "Una función siempre hace exactamente 12 operaciones, sin importar la entrada. ¿Cuál es su Big O?"
+      },
+      "options": [
+        {
+          "en": "O(12)",
+          "es": "O(12)"
+        },
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(12n)",
+          "es": "O(12n)"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Rule 1: drop the constants.",
+        "es": "Regla 1: elimina las constantes."
+      },
+      "explanation": {
+        "en": "A fixed number of operations is constant time, written O(1), never O(12).",
+        "es": "Un número fijo de operaciones es tiempo constante y se escribe O(1), nunca O(12)."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `lowAndHigh(temperatures)` that finds the lowest and the highest temperature in **one pass**, and returns them as `[low, high]`.",
+        "es": "Escribe `lowAndHigh(temperatures)` que encuentre la temperatura más baja y la más alta en **una sola pasada** y las devuelva como `[low, high]`."
+      },
+      "hint": {
+        "en": "Start both `low` and `high` at `temperatures[0]`, then update both inside the same loop.",
+        "es": "Empieza `low` y `high` en `temperatures[0]` y actualiza los dos dentro del mismo bucle."
+      },
+      "starterCode": "function lowAndHigh(temperatures) {\n  let low = temperatures[0]\n  let high = temperatures[0]\n  // One loop that updates both.\n  return [low, high]\n}\n\nconsole.log(lowAndHigh([18, 22, 15, 30, 25])) // [15, 30]\n",
+      "solution": "function lowAndHigh(temperatures) {\n  let low = temperatures[0]\n  let high = temperatures[0]\n  for (const t of temperatures) {\n    if (t < low) low = t\n    if (t > high) high = t\n  }\n  return [low, high]\n}\n\nconsole.log(lowAndHigh([18, 22, 15, 30, 25])) // [15, 30]\n",
+      "kind": "function",
+      "functionName": "lowAndHigh",
+      "tests": [
+        {
+          "args": [[18, 22, 15, 30, 25]],
+          "expected": [15, 30]
+        },
+        {
+          "args": [[5]],
+          "expected": [5, 5]
+        },
+        {
+          "args": [[-2, -9, 4]],
+          "expected": [-9, 4]
+        },
+        {
+          "args": [[30, 20, 10]],
+          "expected": [10, 30]
+        }
+      ]
+    }
+  ]
+}

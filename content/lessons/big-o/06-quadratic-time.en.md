@@ -53,14 +53,8 @@ A third nested loop multiplies again: **n × n × n = O(n³)**, which grows even
 
 Nested loops aren't always avoidable, but they're often a hint that there's a smarter way. Many interview problems start with an O(n²) idea and ask you to get it to O(n). In this course, the patterns module will show you how.
 
-## Recap
+In short:
 
 - A loop inside a loop over the same input → **O(n²)**.
 - 10× the input → 100× the work.
 - Three nested loops → O(n³).
-
-## Check yourself
-
-1. Two nested loops over an array of 50 items: how many inner steps?
-2. If n goes from 1,000 to 2,000, how much more work does O(n²) code do?
-3. What Big O do three nested loops over the same array have?

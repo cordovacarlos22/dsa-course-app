@@ -1,0 +1,108 @@
+{
+  "steps": [
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `allGames(players)`: return every game as a string `'<white> vs <black>'`, for every pair of **different** players, in loop order (white is the outer loop).",
+        "es": "Escribe `allGames(players)`: devuelve cada partida como un texto `'<white> vs <black>'`, para cada pareja de jugadores **distintos**, en el orden de los bucles (las blancas son el bucle de afuera)."
+      },
+      "hint": {
+        "en": "A loop inside a loop: `for (const white of players)` and inside it `for (const black of players)`. Skip the game when `white === black`, otherwise `push` the text.",
+        "es": "Un bucle dentro de otro: `for (const white of players)` y dentro `for (const black of players)`. Sáltate la partida cuando `white === black`; si no, haz `push` del texto."
+      },
+      "starterCode": "function allGames(players) {\n  const games = []\n  // Two nested loops over players.\n  return games\n}\n\nconsole.log(allGames(['Ada', 'Ben']))\n",
+      "solution": "function allGames(players) {\n  const games = []\n  for (const white of players) {\n    for (const black of players) {\n      if (white !== black) games.push(white + ' vs ' + black)\n    }\n  }\n  return games\n}\n\nconsole.log(allGames(['Ada', 'Ben']))\n",
+      "kind": "function",
+      "functionName": "allGames",
+      "tests": [
+        {
+          "args": [["Ada", "Ben"]],
+          "expected": ["Ada vs Ben", "Ben vs Ada"]
+        },
+        {
+          "args": [["Ada", "Ben", "Cy"]],
+          "expected": [
+            "Ada vs Ben",
+            "Ada vs Cy",
+            "Ben vs Ada",
+            "Ben vs Cy",
+            "Cy vs Ada",
+            "Cy vs Ben"
+          ]
+        },
+        {
+          "args": [["Solo"]],
+          "expected": []
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "n goes from 1,000 to 2,000. How much more work does O(n²) code do?",
+        "es": "n pasa de 1,000 a 2,000. ¿Cuánto más trabajo hace un código O(n²)?"
+      },
+      "options": [
+        {
+          "en": "The same work",
+          "es": "El mismo trabajo"
+        },
+        {
+          "en": "2 times more",
+          "es": "2 veces más"
+        },
+        {
+          "en": "4 times more",
+          "es": "4 veces más"
+        },
+        {
+          "en": "1,000 times more",
+          "es": "1,000 veces más"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Square both: 1,000² and 2,000². How do they compare?",
+        "es": "Eleva los dos al cuadrado: 1,000² y 2,000². ¿Cómo se comparan?"
+      },
+      "explanation": {
+        "en": "(2n)² = 4n²: double the input, four times the work.",
+        "es": "(2n)² = 4n²: el doble de entrada, cuatro veces el trabajo."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "What's the Big O of three nested loops over the same array?",
+        "es": "¿Cuál es el Big O de tres bucles anidados sobre el mismo array?"
+      },
+      "options": [
+        {
+          "en": "O(3n)",
+          "es": "O(3n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        },
+        {
+          "en": "O(n³)",
+          "es": "O(n³)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Each nested loop multiplies by n again.",
+        "es": "Cada bucle anidado vuelve a multiplicar por n."
+      },
+      "explanation": {
+        "en": "n × n × n = n³, which grows even faster than O(n²).",
+        "es": "n × n × n = n³, que crece todavía más rápido que O(n²)."
+      }
+    }
+  ]
+}

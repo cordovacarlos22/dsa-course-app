@@ -72,14 +72,8 @@ console.log(lowAndHighOnePass([18, 22, 15, 30, 25]))
 
 Both versions are O(n). Big O tells you they grow the same way. Constants still matter in practice, but they're a smaller, second-level improvement. Big O is about the big picture first.
 
-## Recap
+In short:
 
 - **Drop the constants:** O(2n) → O(n), O(500) → O(1), O(3n²) → O(n²).
 - Big O keeps the shape of the growth, not the exact number of steps.
 - Two separate loops over the same array are still O(n).
-
-## Check yourself
-
-1. How do you write O(4n + 4n) in Big O?
-2. A function always does exactly 12 operations. What's its Big O?
-3. Is the one-pass version better than O(n)?

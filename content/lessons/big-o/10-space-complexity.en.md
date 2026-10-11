@@ -10,7 +10,7 @@ minutes: 6
 
 So far we've counted steps. **Space complexity** counts something else: how much **extra memory** the code creates as the input grows. (The input itself doesn't count; we only measure what the code adds.)
 
-## A few rules of thumb
+### A few rules of thumb
 
 - Numbers, booleans, `undefined` and `null` take a fixed amount of space → O(1).
 - Strings take space proportional to their length.
@@ -57,14 +57,8 @@ This one builds a **new array** with one item per score. Double the scores and y
 
 Interviewers often ask both: _"What's the time complexity? And the space?"_ Sometimes you'll trade one for the other, like the guest list in the first lesson: the `Set` made lookups faster by using more memory.
 
-## Recap
+In short:
 
 - **Space complexity** = how much extra memory grows with the input.
 - A few variables → O(1) space. A new array/object/string that grows with the input → O(n) space.
 - Always answer time **and** space when asked.
-
-## Check yourself
-
-1. A function counts the vowels in a string using one counter variable. What's its space complexity?
-2. A function returns a reversed copy of an array. Space complexity?
-3. Can a function be O(n) time and O(1) space? Give an example from this lesson.

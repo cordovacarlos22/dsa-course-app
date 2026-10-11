@@ -57,14 +57,8 @@ The same idea works for any mix. Keep the fastest-growing term:
 
 Remember both rules together: first drop the constants, then the non-dominant terms.
 
-## Recap
+In short:
 
 - **Drop the non-dominant terms:** keep only the part that grows fastest.
 - O(n² + n) → O(n²), O(n + 1000) → O(n).
 - Combined with rule 1: O(2n² + 7n + 3) → O(n²).
-
-## Check yourself
-
-1. Simplify O(n² + 50n).
-2. Simplify O(n + 1,000,000). (Careful: the big number is still a constant!)
-3. A function has a nested loop, then two single loops over the same array. What's its Big O?

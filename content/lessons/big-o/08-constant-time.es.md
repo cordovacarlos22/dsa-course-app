@@ -53,14 +53,8 @@ En una gráfica, O(1) es una **línea plana** abajo de todo. Nada crece más len
 
 Pero cuidado: una sola línea de código no es automáticamente O(1). `array.includes(x)` es una línea, pero recorre todo el array: O(n).
 
-## Resumen
+En resumen:
 
 - Trabajo que no crece con la entrada → **O(1)**, tiempo constante.
 - Acceso por índice, claves de objetos, matemática simple, push/pop.
 - Una línea no significa O(1): busca bucles escondidos.
-
-## Compruébalo tú mismo
-
-1. ¿Cuál es el Big O de `arr[arr.length - 1]`?
-2. Una función siempre hace 3 sumas y 2 comparaciones. ¿Big O?
-3. ¿Por qué `array.indexOf(x)` no es O(1)?

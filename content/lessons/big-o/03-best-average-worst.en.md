@@ -47,14 +47,8 @@ A common mix-up is saying "the best-case Big O". Technically, the best case is o
 
 Why focus on the worst case? Because it's the one that bites you. A search that's usually fast but sometimes checks a million items will eventually do exactly that, for a real user.
 
-## Recap
+In short:
 
 - The same code can do different amounts of work for different inputs.
 - Ω = best case, Θ = average case, **O = worst case**.
 - "What's the Big O?" always asks about the worst case.
-
-## Check yourself
-
-1. In the playlist example, what input gives the best case? And the worst?
-2. Which letter describes the average case?
-3. Why is the worst case the most useful one to know?

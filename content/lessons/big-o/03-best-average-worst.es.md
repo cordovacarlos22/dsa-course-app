@@ -47,14 +47,8 @@ Una confusión común es decir "el Big O del mejor caso". Técnicamente, el mejo
 
 ¿Por qué fijarnos en el peor caso? Porque es el que te muerde. Una búsqueda que casi siempre es rápida, pero a veces revisa un millón de elementos, tarde o temprano va a hacer justo eso con un usuario real.
 
-## Resumen
+En resumen:
 
 - El mismo código puede hacer distinta cantidad de trabajo con distintas entradas.
 - Ω = mejor caso, Θ = caso promedio, **O = peor caso**.
 - "¿Cuál es el Big O?" siempre pregunta por el peor caso.
-
-## Compruébalo tú mismo
-
-1. En el ejemplo de la playlist, ¿qué entrada da el mejor caso? ¿Y el peor?
-2. ¿Qué letra describe el caso promedio?
-3. ¿Por qué el peor caso es el más útil de conocer?

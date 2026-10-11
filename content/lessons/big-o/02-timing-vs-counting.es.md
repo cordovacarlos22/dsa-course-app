@@ -66,14 +66,8 @@ Si contaras cada operación de `countEvens` (asignar `count`, cada comparación,
 
 Lo que nos importa es la **forma** del crecimiento: ¿el trabajo se queda plano, crece en línea recta o explota? Eso es exactamente lo que captura Big O, y en las próximas lecciones vas a aprender las reglas sencillas para leerlo.
 
-## Resumen
+En resumen:
 
 - Medir el tiempo depende de la máquina y cambia en cada ejecución.
 - Contar operaciones depende solo del código y del tamaño de la entrada.
 - Big O ignora la cuenta exacta y se queda con la **forma** del crecimiento.
-
-## Compruébalo tú mismo
-
-1. Menciona dos razones por las que medir el tiempo del mismo código puede dar resultados distintos.
-2. Si `countChecks` hace 10,000 revisiones con 10,000 números, ¿cuántas hará con 50,000?
-3. ¿Por qué no nos importa si una función hace `2n + 2` o `3n + 5` operaciones?

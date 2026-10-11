@@ -57,14 +57,8 @@ Look for a single loop that touches each item a fixed number of times:
 
 Built-in methods count too: `array.includes(x)`, `array.indexOf(x)` and `array.map(fn)` all walk through the array, so they're O(n).
 
-## Recap
+In short:
 
 - One pass over the input → **O(n)**, linear time.
 - Double the input → double the work. On a chart it's a straight line.
 - Hidden loops (`includes`, `indexOf`, `map`…) are O(n) too.
-
-## Check yourself
-
-1. What's the Big O of finding the largest number in an unsorted array?
-2. If `totalSales` takes 1,000 additions for 1,000 orders, how many for 3,000?
-3. Why is `array.includes(x)` O(n) even though it's one line?
