@@ -5,10 +5,22 @@ import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { isDeepStrictEqual } from 'node:util'
 import vm from 'node:vm'
-import { courseSchema, sectionSchema } from './content-schema.js'
+import {
+  courseSchema,
+  lessonFrontMatterSchema,
+  sectionSchema,
+} from './content-schema.js'
+import { parseFrontMatter } from '../src/lib/frontMatter.js'
+import {
+  extractFencedBlocks,
+  RUNNABLE_LANGUAGE,
+  VIZ_LANGUAGE,
+} from '../src/lib/markdownBlocks.js'
+import { VISUALIZATION_NAMES } from '../src/visualizations/names.js'
 
 const SECTIONS_DIR = 'content/sections'
 const COURSE_FILE = 'content/course.json'
+const LESSONS_DIR = 'content/lessons'
 
 // A buggy solution can loop forever, so each test gets a time limit.
 const TEST_TIMEOUT_MS = 1000
@@ -200,6 +212,103 @@ export function countMissingSpanish(value) {
   )
 }
 
+// "01-what-is-big-o.en.md" → { order: 1, slug: "01-what-is-big-o", language: "en" }
+const LESSON_FILE_NAME = /^((\d{2})-[a-z0-9]+(?:-[a-z0-9]+)*)\.(en|es)\.md$/
+
+// Checks one lesson file. An empty list means it's valid.
+export function validateLesson({ moduleSlug, fileName, text }, course) {
+  const errors = []
+  if (!course.modules.some((module) => module.slug === moduleSlug)) {
+    errors.push(`folder "${moduleSlug}" is not a module in course.json`)
+  }
+
+  const nameMatch = LESSON_FILE_NAME.exec(fileName)
+  if (!nameMatch) {
+    return [
+      ...errors,
+      'file name must look like "01-lesson-name.en.md" (or .es.md)',
+    ]
+  }
+
+  const { data, body } = parseFrontMatter(text)
+  const result = lessonFrontMatterSchema.safeParse(data)
+  if (!result.success) {
+    return [
+      ...errors,
+      ...formatIssues(result.error).map((e) => `front matter ${e}`),
+    ]
+  }
+  if (result.data.order !== Number(nameMatch[2])) {
+    errors.push(
+      `order should be ${Number(nameMatch[2])} (it comes from the file name)`,
+    )
+  }
+
+  for (const block of extractFencedBlocks(body)) {
+    if (block.language === VIZ_LANGUAGE) {
+      const name = block.code.trim()
+      if (!VISUALIZATION_NAMES.includes(name)) {
+        errors.push(
+          `unknown animation "${name}" (known: ${VISUALIZATION_NAMES.join(', ')})`,
+        )
+      }
+    }
+    if (block.language === RUNNABLE_LANGUAGE) {
+      try {
+        new vm.Script(block.code) // only checks the syntax
+      } catch (error) {
+        errors.push(`js-run block does not compile (${error.message})`)
+      }
+    }
+  }
+  return errors
+}
+
+// English is written first: every Spanish lesson needs its English original.
+export function findLessonsMissingEnglish(fileNames) {
+  return fileNames
+    .filter((name) => name.endsWith('.es.md'))
+    .filter((name) => !fileNames.includes(name.replace(/\.es\.md$/, '.en.md')))
+}
+
+async function validateAllLessons(course) {
+  let moduleFolders = []
+  try {
+    moduleFolders = (await readdir(LESSONS_DIR, { withFileTypes: true }))
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name)
+      .sort()
+  } catch {
+    return { lessonCount: 0, hasErrors: false } // no lessons folder yet
+  }
+
+  let lessonCount = 0
+  let hasErrors = false
+  for (const moduleSlug of moduleFolders) {
+    const folder = join(LESSONS_DIR, moduleSlug)
+    const fileNames = (await readdir(folder)).filter((name) =>
+      name.endsWith('.md'),
+    )
+
+    for (const fileName of fileNames.sort()) {
+      const text = await readFile(join(folder, fileName), 'utf8')
+      const errors = validateLesson({ moduleSlug, fileName, text }, course)
+      lessonCount++
+      if (errors.length > 0) {
+        hasErrors = true
+        console.error(`✗ lessons/${moduleSlug}/${fileName}`)
+        errors.forEach((error) => console.error(`    - ${error}`))
+      }
+    }
+    for (const fileName of findLessonsMissingEnglish(fileNames)) {
+      hasErrors = true
+      console.error(`✗ lessons/${moduleSlug}/${fileName}`)
+      console.error('    - has no English version (.en.md)')
+    }
+  }
+  return { lessonCount, hasErrors }
+}
+
 function plural(count, word) {
   return `${count} ${word}${count === 1 ? '' : 's'}`
 }
@@ -252,6 +361,11 @@ async function main() {
   }
 
   if (files.length === 0) console.log('No section files found.')
+
+  const lessons = await validateAllLessons(course)
+  if (lessons.hasErrors) hasErrors = true
+  else console.log(`✓ lessons (${plural(lessons.lessonCount, 'file')})`)
+
   if (missingSpanish > 0) {
     console.warn(`⚠ ${missingSpanish} texts still need a Spanish translation`)
   }
