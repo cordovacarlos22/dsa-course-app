@@ -34,7 +34,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 ## Stages (after the pivot)
 
 1. ✅ Scaffold
-2. CI + GitHub: `ci.yml`, push the branches, PRs in order, branch protection
+2. ✅ CI + GitHub: private repo `cordovacarlos22/dsa-course-app`, `ci.yml`, stacked PRs #1–#4 (Actions runs not starting yet: see Open questions)
 3. ✅ Pivot docs: AGENTS.md, memory.md, README, app title (branch `docs/pivot-course-app`)
 4. App shell + i18n: router, layout, react-i18next, first-visit language picker, landing, course home ← next
 5. Lesson system: lesson schema + validation, Markdown renderer, StepPlayer, first 3 animations, runnable snippets (Web Worker)
@@ -59,8 +59,8 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Next
 
-- Stage 4 (app shell + i18n) can start now; no accounts needed.
-- Stage 2 needs Carlos: `brew install gh`, `gh auth login`, and a public/private decision. Then push `main`, `chore/scaffold`, `feat/content-pipeline`, `feat/course-content`, `docs/pivot-course-app` and open PRs in order.
+- **Carlos:** check https://github.com/cordovacarlos22/dsa-course-app/actions to see why CI runs don't start (billing/spending limit or account setting), then merge PRs **#1 → #2 → #3 → #4 in order** with "Create a merge commit" (squash is disabled so the stack stays intact; merged branches auto-delete and GitHub retargets the next PR to `main`).
+- Stage 4 (app shell + i18n): branch from `docs/pivot-course-app` (or from `main` once all 4 PRs are merged).
 - Carlos reviews the Section 1 and Section 3 questions.
 - Spanish pass later (`content:validate` shows the count).
 
@@ -75,6 +75,9 @@ Agents: read this at the start of every session and update it at the end (see `A
 Modules 04–17 have empty folders; they appear in `course.json` as "coming soon".
 
 ## Open questions
+
+- 2026-10-11: **GitHub Actions doesn't start any run** on the new private repo (0 runs after pushes, PR opens and a reopen; Actions is enabled; `ci.yml` is on the PR branches). Likely an account-level Actions/billing setting. Needs Carlos to look at the Actions tab or Settings → Billing.
+- Branch protection is unavailable (GitHub returns 403: "Upgrade to GitHub Pro or make this repository public"). Options: GitHub Pro (free with GitHub Education) or a public repo.
 
 - App name and domain (placeholder title: "DSA in JavaScript").
 - Daily AI limit per student (default 40 messages).
