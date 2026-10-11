@@ -3,7 +3,6 @@
 import { readdir, readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { isDeepStrictEqual } from 'node:util'
 import vm from 'node:vm'
 import {
   courseSchema,
@@ -17,6 +16,8 @@ import {
   VIZ_LANGUAGE,
 } from '../src/lib/markdownBlocks.js'
 import { VISUALIZATION_NAMES } from '../src/visualizations/names.js'
+// The same test logic the browser uses to grade students (shared on purpose).
+import { deepEqual, playClassSteps } from '../src/runners/testHarness.js'
 
 const PRACTICE_DIR = 'content/practice'
 const COURSE_FILE = 'content/course.json'
@@ -44,32 +45,6 @@ function runFunctionTest(code, functionName, args) {
   )
 }
 
-// This function runs INSIDE the sandbox (we send its source code there).
-// It plays the steps of one class test and returns what each step produced.
-function playClassSteps(TheClass, steps) {
-  let instance
-  const results = steps.map((step) => {
-    if ('create' in step) {
-      instance = new TheClass(...step.create)
-      return null
-    }
-    let value
-    if ('call' in step) {
-      if (typeof instance[step.call] !== 'function') {
-        throw new Error(`method "${step.call}" does not exist`)
-      }
-      value = instance[step.call](...step.args)
-    } else {
-      // "head.value" → instance.head.value (undefined if a link is missing)
-      value = step.read.split('.').reduce((obj, key) => obj?.[key], instance)
-    }
-    // Only keep values we'll compare: a method that returns `this` could
-    // point back to itself, and that can't be turned into JSON.
-    return 'expected' in step ? value : null
-  })
-  return JSON.stringify(results)
-}
-
 function runClassTest(code, className, steps) {
   return runInSandbox(
     `${code}\n(${playClassSteps.toString()})(${className}, JSON.parse(stepsJson))`,
@@ -85,16 +60,13 @@ function describeMismatch(expected, actual) {
 // Returns error messages (empty list = the test passed).
 function compareResults(exercise, test, actual) {
   if (exercise.kind === 'function') {
-    return isDeepStrictEqual(actual, test.expected)
+    return deepEqual(actual, test.expected)
       ? []
       : [describeMismatch(test.expected, actual)]
   }
   const errors = []
   test.steps.forEach((step, stepIndex) => {
-    if (
-      'expected' in step &&
-      !isDeepStrictEqual(actual[stepIndex], step.expected)
-    ) {
+    if ('expected' in step && !deepEqual(actual[stepIndex], step.expected)) {
       errors.push(
         `step ${stepIndex + 1}: ${describeMismatch(step.expected, actual[stepIndex])}`,
       )
