@@ -1,0 +1,44 @@
+# Runs on every pull request (and on main after a merge).
+# A PR can only be merged when this passes (branch protection).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Cancel an older run of the same PR when new commits are pushed.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Lint, test, validate, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Unit tests
+        run: npm test
+
+      # --if-present: older branches don't have this script yet.
+      - name: Validate course content
+        run: npm run content:validate --if-present
+
+      - name: Build
+        run: npm run build

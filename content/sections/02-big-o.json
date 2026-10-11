@@ -1,0 +1,455 @@
+{
+  "slug": "02-big-o",
+  "order": 2,
+  "title": { "en": "Big O", "es": "Big O" },
+  "sourceFolder": "Section 2 - Big o",
+  "questions": [
+    {
+      "id": "time-and-space",
+      "topic": "Big O: Intro",
+      "prompt": {
+        "en": "Big O lets us compare two solutions to the same problem. Which two things does it measure?",
+        "es": "Big O nos permite comparar dos soluciones al mismo problema. ¿Qué dos cosas mide?"
+      },
+      "options": [
+        {
+          "en": "Lines of code and readability",
+          "es": "Líneas de código y legibilidad"
+        },
+        {
+          "en": "Time complexity and space complexity",
+          "es": "Complejidad de tiempo y complejidad de espacio"
+        },
+        {
+          "en": "Compile time and file size",
+          "es": "Tiempo de compilación y tamaño del archivo"
+        },
+        {
+          "en": "CPU speed and amount of RAM",
+          "es": "Velocidad del CPU y cantidad de RAM"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "Time complexity measures how the number of operations grows with the input; space complexity measures how much extra memory the code needs.",
+        "es": "La complejidad de tiempo mide cómo crece el número de operaciones según la entrada; la complejidad de espacio mide cuánta memoria extra necesita el código."
+      }
+    },
+    {
+      "id": "operations-not-seconds",
+      "topic": "Big O: Intro",
+      "prompt": {
+        "en": "Why does Big O count operations instead of timing the code in seconds?",
+        "es": "¿Por qué Big O cuenta operaciones en lugar de medir el código en segundos?"
+      },
+      "options": [
+        {
+          "en": "Seconds are too small to measure",
+          "es": "Los segundos son demasiado pequeños para medirlos"
+        },
+        {
+          "en": "Counting operations is always faster",
+          "es": "Contar operaciones siempre es más rápido"
+        },
+        {
+          "en": "Seconds depend on the computer, but the number of operations depends only on the code and the input size",
+          "es": "Los segundos dependen de la computadora, pero el número de operaciones depende solo del código y del tamaño de la entrada"
+        },
+        {
+          "en": "JavaScript cannot measure time",
+          "es": "JavaScript no puede medir el tiempo"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "The same code runs faster on a fast computer and slower on an old one. Counting operations gives a measure that doesn't change with the machine.",
+        "es": "El mismo código corre más rápido en una computadora potente y más lento en una vieja. Contar operaciones da una medida que no cambia según la máquina."
+      }
+    },
+    {
+      "id": "best-case-omega",
+      "topic": "Big O: Worst Case",
+      "prompt": {
+        "en": "You search an unsorted array of n items one by one, and the item you want is at index 0. Which notation describes this best-case scenario?",
+        "es": "Buscas en un arreglo desordenado de n elementos uno por uno, y el elemento que quieres está en el índice 0. ¿Qué notación describe este mejor caso?"
+      },
+      "options": [
+        { "en": "Omega: Ω(1)", "es": "Omega: Ω(1)" },
+        { "en": "Big O: O(n)", "es": "Big O: O(n)" },
+        { "en": "Theta: Θ(n²)", "es": "Theta: Θ(n²)" },
+        { "en": "Big O: O(log n)", "es": "Big O: O(log n)" }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Omega (Ω) is the best case (lower bound). Finding the item on the first try is one operation, so Ω(1). Theta (Θ) is the average case and Big O (O) is the worst case.",
+        "es": "Omega (Ω) es el mejor caso (límite inferior). Encontrar el elemento al primer intento es una operación, así que Ω(1). Theta (Θ) es el caso promedio y Big O (O) es el peor caso."
+      }
+    },
+    {
+      "id": "worst-case-default",
+      "topic": "Big O: Worst Case",
+      "prompt": {
+        "en": "In a coding interview, when someone asks for the \"Big O\" of your solution, which scenario are they asking about?",
+        "es": "En una entrevista de programación, cuando te preguntan el \"Big O\" de tu solución, ¿qué escenario te están preguntando?"
+      },
+      "options": [
+        { "en": "The best case", "es": "El mejor caso" },
+        { "en": "The average case", "es": "El caso promedio" },
+        {
+          "en": "The case with the smallest input",
+          "es": "El caso con la entrada más pequeña"
+        },
+        { "en": "The worst case", "es": "El peor caso" }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Big O is the upper bound: the slowest the code can run as the input grows. That's why it's the number interviewers care about.",
+        "es": "Big O es el límite superior: lo más lento que puede correr el código cuando la entrada crece. Por eso es el número que importa en las entrevistas."
+      }
+    },
+    {
+      "id": "single-loop",
+      "topic": "Big O: O(n)",
+      "prompt": {
+        "en": "What is the time complexity of this function?",
+        "es": "¿Cuál es la complejidad de tiempo de esta función?"
+      },
+      "code": "function printNumbers(n) {\n  for (let i = 0; i < n; i++) {\n    console.log(i)\n  }\n}",
+      "options": [
+        { "en": "O(1)", "es": "O(1)" },
+        { "en": "O(log n)", "es": "O(log n)" },
+        { "en": "O(n)", "es": "O(n)" },
+        { "en": "O(n²)", "es": "O(n²)" }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "The loop runs once for each value from 0 to n - 1, so the work grows in a straight line with n: O(n).",
+        "es": "El ciclo se ejecuta una vez por cada valor de 0 a n - 1, así que el trabajo crece en línea recta con n: O(n)."
+      }
+    },
+    {
+      "id": "two-loops-drop-constants",
+      "topic": "Big O: Drop Constants",
+      "prompt": {
+        "en": "This function has two loops, one after the other. What is its Big O?",
+        "es": "Esta función tiene dos ciclos, uno después del otro. ¿Cuál es su Big O?"
+      },
+      "code": "function printTwice(n) {\n  for (let i = 0; i < n; i++) {\n    console.log(i)\n  }\n  for (let j = 0; j < n; j++) {\n    console.log(j)\n  }\n}",
+      "options": [
+        { "en": "O(2n)", "es": "O(2n)" },
+        { "en": "O(n)", "es": "O(n)" },
+        { "en": "O(n²)", "es": "O(n²)" },
+        { "en": "O(n + 2)", "es": "O(n + 2)" }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "It does n + n = 2n operations, but we drop constants: O(2n) is written O(n). The growth is still a straight line.",
+        "es": "Hace n + n = 2n operaciones, pero eliminamos las constantes: O(2n) se escribe O(n). El crecimiento sigue siendo una línea recta."
+      }
+    },
+    {
+      "id": "simplify-constant-multiplier",
+      "topic": "Big O: Drop Constants",
+      "prompt": {
+        "en": "How should O(50n³) be written?",
+        "es": "¿Cómo se debe escribir O(50n³)?"
+      },
+      "options": [
+        { "en": "O(50n)", "es": "O(50n)" },
+        { "en": "O(n³)", "es": "O(n³)" },
+        { "en": "O(n⁵⁰)", "es": "O(n⁵⁰)" },
+        { "en": "O(150n)", "es": "O(150n)" }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "Constant multipliers like 50 don't change the shape of the growth, so we drop them: O(n³).",
+        "es": "Los multiplicadores constantes como 50 no cambian la forma del crecimiento, así que los eliminamos: O(n³)."
+      }
+    },
+    {
+      "id": "three-nested-loops",
+      "topic": "Big O: O(n^2)",
+      "prompt": {
+        "en": "What is the time complexity of this function?",
+        "es": "¿Cuál es la complejidad de tiempo de esta función?"
+      },
+      "code": "function printTriples(n) {\n  for (let i = 0; i < n; i++) {\n    for (let j = 0; j < n; j++) {\n      for (let k = 0; k < n; k++) {\n        console.log(i, j, k)\n      }\n    }\n  }\n}",
+      "options": [
+        { "en": "O(3n)", "es": "O(3n)" },
+        { "en": "O(n)", "es": "O(n)" },
+        { "en": "O(n²)", "es": "O(n²)" },
+        { "en": "O(n³)", "es": "O(n³)" }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Each loop is nested inside the previous one, so the counts multiply: n × n × n = O(n³). Nested loops multiply; loops one after another add.",
+        "es": "Cada ciclo está anidado dentro del anterior, así que las cantidades se multiplican: n × n × n = O(n³). Los ciclos anidados se multiplican; los ciclos uno tras otro se suman."
+      }
+    },
+    {
+      "id": "drop-non-dominant",
+      "topic": "Big O: Drop Non-Dominants",
+      "prompt": {
+        "en": "This function has a nested loop followed by a single loop. What is its Big O?",
+        "es": "Esta función tiene un ciclo anidado seguido de un ciclo simple. ¿Cuál es su Big O?"
+      },
+      "code": "function printAll(n) {\n  for (let i = 0; i < n; i++) {\n    for (let j = 0; j < n; j++) {\n      console.log(i, j)\n    }\n  }\n  for (let k = 0; k < n; k++) {\n    console.log(k)\n  }\n}",
+      "options": [
+        { "en": "O(n² + n)", "es": "O(n² + n)" },
+        { "en": "O(n)", "es": "O(n)" },
+        { "en": "O(n²)", "es": "O(n²)" },
+        { "en": "O(n³)", "es": "O(n³)" }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "The total is n² + n. When n is large, n² is so much bigger that n barely matters, so we drop the non-dominant term: O(n²).",
+        "es": "El total es n² + n. Cuando n es grande, n² es tanto mayor que n casi no importa, así que eliminamos el término no dominante: O(n²)."
+      }
+    },
+    {
+      "id": "constant-time",
+      "topic": "Big O: O(1)",
+      "prompt": {
+        "en": "What is the time complexity of this function?",
+        "es": "¿Cuál es la complejidad de tiempo de esta función?"
+      },
+      "code": "function tripleIt(n) {\n  return n + n + n\n}",
+      "options": [
+        { "en": "O(1)", "es": "O(1)" },
+        { "en": "O(3)", "es": "O(3)" },
+        { "en": "O(n)", "es": "O(n)" },
+        { "en": "O(3n)", "es": "O(3n)" }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "It always does the same two additions, whether n is 5 or 5 million. The work doesn't grow with n, so it's constant time: O(1). We never write O(3).",
+        "es": "Siempre hace las mismas dos sumas, sin importar si n es 5 o 5 millones. El trabajo no crece con n, así que es tiempo constante: O(1). Nunca escribimos O(3)."
+      }
+    },
+    {
+      "id": "log-n-halving",
+      "topic": "Big O: O(log n)",
+      "prompt": {
+        "en": "You look for a number in a sorted array of 1,024 items by checking the middle and discarding half each time. At most, how many halvings until one item is left?",
+        "es": "Buscas un número en un arreglo ordenado de 1,024 elementos revisando el centro y descartando la mitad cada vez. Como máximo, ¿cuántas divisiones hasta que quede un solo elemento?"
+      },
+      "options": [
+        { "en": "10", "es": "10" },
+        { "en": "32", "es": "32" },
+        { "en": "512", "es": "512" },
+        { "en": "1,024", "es": "1,024" }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "2¹⁰ = 1,024, so log₂(1,024) = 10. Dividing the data in half each step (divide and conquer) is O(log n), which grows very slowly.",
+        "es": "2¹⁰ = 1,024, así que log₂(1,024) = 10. Dividir los datos a la mitad en cada paso (divide y vencerás) es O(log n), que crece muy lentamente."
+      }
+    },
+    {
+      "id": "different-inputs-sequential",
+      "topic": "Big O: Different Terms for Input",
+      "prompt": {
+        "en": "This function receives two different inputs, a and b. What is its Big O?",
+        "es": "Esta función recibe dos entradas diferentes, a y b. ¿Cuál es su Big O?"
+      },
+      "code": "function printBoth(a, b) {\n  for (let i = 0; i < a; i++) {\n    console.log(i)\n  }\n  for (let j = 0; j < b; j++) {\n    console.log(j)\n  }\n}",
+      "options": [
+        { "en": "O(n)", "es": "O(n)" },
+        { "en": "O(2n)", "es": "O(2n)" },
+        { "en": "O(a + b)", "es": "O(a + b)" },
+        { "en": "O(a × b)", "es": "O(a × b)" }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "a and b are different sizes, so we can't call both of them n. The loops run one after the other, so we add: O(a + b).",
+        "es": "a y b son tamaños diferentes, así que no podemos llamar n a los dos. Los ciclos corren uno tras otro, así que sumamos: O(a + b)."
+      }
+    },
+    {
+      "id": "different-inputs-nested",
+      "topic": "Big O: Different Terms for Input",
+      "prompt": {
+        "en": "Now the loop over b is nested inside the loop over a. What is the Big O?",
+        "es": "Ahora el ciclo sobre b está anidado dentro del ciclo sobre a. ¿Cuál es el Big O?"
+      },
+      "code": "function printPairs(a, b) {\n  for (let i = 0; i < a; i++) {\n    for (let j = 0; j < b; j++) {\n      console.log(i, j)\n    }\n  }\n}",
+      "options": [
+        { "en": "O(n²)", "es": "O(n²)" },
+        { "en": "O(a × b)", "es": "O(a × b)" },
+        { "en": "O(a + b)", "es": "O(a + b)" },
+        { "en": "O(a²)", "es": "O(a²)" }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "For every one of the a iterations, the inner loop runs b times, so we multiply: O(a × b). It's only O(n²) if a and b are the same input.",
+        "es": "Por cada una de las a iteraciones, el ciclo interno corre b veces, así que multiplicamos: O(a × b). Solo es O(n²) si a y b son la misma entrada."
+      }
+    },
+    {
+      "id": "array-push-vs-unshift",
+      "topic": "Big O: Arrays",
+      "prompt": {
+        "en": "Which of these array operations is O(1)?",
+        "es": "¿Cuál de estas operaciones de arreglo es O(1)?"
+      },
+      "options": [
+        {
+          "en": "arr.unshift(x): add to the start",
+          "es": "arr.unshift(x): agregar al inicio"
+        },
+        {
+          "en": "arr.shift(): remove from the start",
+          "es": "arr.shift(): quitar del inicio"
+        },
+        {
+          "en": "arr.splice(2, 0, x): insert in the middle",
+          "es": "arr.splice(2, 0, x): insertar en el medio"
+        },
+        {
+          "en": "arr.push(x): add to the end",
+          "es": "arr.push(x): agregar al final"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Adding or removing at the end (push/pop) doesn't move other items: O(1). Changing the start or middle forces every later item to be re-indexed: O(n).",
+        "es": "Agregar o quitar al final (push/pop) no mueve los demás elementos: O(1). Cambiar el inicio o el medio obliga a reindexar todos los elementos siguientes: O(n)."
+      }
+    },
+    {
+      "id": "array-access-vs-search",
+      "topic": "Big O: Arrays",
+      "prompt": {
+        "en": "In an unsorted array, what is the Big O of reading arr[500] versus finding the index of the value 42?",
+        "es": "En un arreglo desordenado, ¿cuál es el Big O de leer arr[500] comparado con encontrar el índice del valor 42?"
+      },
+      "options": [
+        { "en": "Both O(1)", "es": "Ambos O(1)" },
+        {
+          "en": "Reading by index O(1); searching by value O(n)",
+          "es": "Leer por índice O(1); buscar por valor O(n)"
+        },
+        {
+          "en": "Reading by index O(n); searching by value O(1)",
+          "es": "Leer por índice O(n); buscar por valor O(1)"
+        },
+        { "en": "Both O(n)", "es": "Ambos O(n)" }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "With the index, JavaScript jumps straight to the item: O(1). With only the value, you may have to check every item: O(n).",
+        "es": "Con el índice, JavaScript va directo al elemento: O(1). Con solo el valor, puede que tengas que revisar cada elemento: O(n)."
+      }
+    },
+    {
+      "id": "rank-complexities",
+      "topic": "Big O: Wrap Up",
+      "prompt": {
+        "en": "Which list is ordered from MOST efficient to LEAST efficient for large inputs?",
+        "es": "¿Qué lista está ordenada de MÁS eficiente a MENOS eficiente para entradas grandes?"
+      },
+      "options": [
+        {
+          "en": "O(n), O(1), O(log n), O(n²)",
+          "es": "O(n), O(1), O(log n), O(n²)"
+        },
+        {
+          "en": "O(1), O(n), O(log n), O(n²)",
+          "es": "O(1), O(n), O(log n), O(n²)"
+        },
+        {
+          "en": "O(1), O(log n), O(n), O(n²)",
+          "es": "O(1), O(log n), O(n), O(n²)"
+        },
+        {
+          "en": "O(log n), O(1), O(n²), O(n)",
+          "es": "O(log n), O(1), O(n²), O(n)"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "O(1) never grows, O(log n) grows very slowly, O(n) grows in a straight line, and O(n²) grows much faster. O(n log n), used by good sorting algorithms, sits between O(n) and O(n²).",
+        "es": "O(1) nunca crece, O(log n) crece muy lento, O(n) crece en línea recta y O(n²) crece mucho más rápido. O(n log n), usado por buenos algoritmos de ordenamiento, está entre O(n) y O(n²)."
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "slug": "find-max",
+      "title": { "en": "Find the Maximum", "es": "Encontrar el máximo" },
+      "description": {
+        "en": "Write a function `findMax(nums)` that returns the largest number in the array. If the array is empty, return `null`. Don't use `Math.max(...nums)`: walk through the array yourself.\n\nExample: `findMax([3, 1, 4, 1, 5])` → `5`\n\nGoal: O(n) time, O(1) space.",
+        "es": "Escribe una función `findMax(nums)` que devuelva el número más grande del arreglo. Si el arreglo está vacío, devuelve `null`. No uses `Math.max(...nums)`: recorre el arreglo tú mismo.\n\nEjemplo: `findMax([3, 1, 4, 1, 5])` → `5`\n\nMeta: tiempo O(n), espacio O(1)."
+      },
+      "difficulty": "easy",
+      "functionName": "findMax",
+      "starterCode": {
+        "javascript": "function findMax(nums) {\n  // Your code here\n}"
+      },
+      "solution": {
+        "javascript": "function findMax(nums) {\n  if (nums.length === 0) return null\n\n  let max = nums[0]\n  for (let i = 1; i < nums.length; i++) {\n    if (nums[i] > max) max = nums[i]\n  }\n  return max\n}"
+      },
+      "tests": [
+        { "args": [[3, 1, 4, 1, 5]], "expected": 5 },
+        { "args": [[-5, -2, -9]], "expected": -2 },
+        { "args": [[7]], "expected": 7 },
+        { "args": [[]], "expected": null },
+        { "args": [[2, 2, 2]], "expected": 2 },
+        { "args": [[0, -1, 100, 99]], "expected": 100 }
+      ],
+      "expectedComplexity": { "time": "O(n)", "space": "O(1)" }
+    },
+    {
+      "slug": "contains-duplicate",
+      "title": { "en": "Contains Duplicate", "es": "Contiene duplicados" },
+      "description": {
+        "en": "Write a function `containsDuplicate(nums)` that returns `true` if any value appears at least twice in the array, and `false` if every value is different.\n\nExample: `containsDuplicate([1, 2, 3, 1])` → `true`\n\nThe obvious solution compares every pair with two nested loops: O(n²). Can you get it to O(n) time? Hint: a `Set` remembers what you've already seen.",
+        "es": "Escribe una función `containsDuplicate(nums)` que devuelva `true` si algún valor aparece al menos dos veces en el arreglo, y `false` si todos los valores son diferentes.\n\nEjemplo: `containsDuplicate([1, 2, 3, 1])` → `true`\n\nLa solución obvia compara cada par con dos ciclos anidados: O(n²). ¿Puedes lograrlo en tiempo O(n)? Pista: un `Set` recuerda lo que ya viste."
+      },
+      "difficulty": "easy",
+      "functionName": "containsDuplicate",
+      "starterCode": {
+        "javascript": "function containsDuplicate(nums) {\n  // Your code here\n}"
+      },
+      "solution": {
+        "javascript": "function containsDuplicate(nums) {\n  const seen = new Set()\n  for (const num of nums) {\n    if (seen.has(num)) return true\n    seen.add(num)\n  }\n  return false\n}"
+      },
+      "tests": [
+        { "args": [[1, 2, 3, 1]], "expected": true },
+        { "args": [[1, 2, 3, 4]], "expected": false },
+        { "args": [[]], "expected": false },
+        { "args": [[5]], "expected": false },
+        { "args": [[-1, -1]], "expected": true },
+        { "args": [[1, 1, 1, 3, 3, 4, 3, 2, 4, 2]], "expected": true }
+      ],
+      "expectedComplexity": { "time": "O(n)", "space": "O(n)" }
+    },
+    {
+      "slug": "binary-search",
+      "title": { "en": "Binary Search", "es": "Búsqueda binaria" },
+      "description": {
+        "en": "Write a function `binarySearch(nums, target)`. `nums` is sorted in ascending order with no repeated values. Return the index of `target`, or `-1` if it isn't in the array.\n\nExample: `binarySearch([-1, 0, 3, 5, 9, 12], 9)` → `4`\n\nDon't check every item (that's O(n)). Look at the middle, then discard the half that can't contain the target. Goal: O(log n) time.",
+        "es": "Escribe una función `binarySearch(nums, target)`. `nums` está ordenado de menor a mayor y no tiene valores repetidos. Devuelve el índice de `target`, o `-1` si no está en el arreglo.\n\nEjemplo: `binarySearch([-1, 0, 3, 5, 9, 12], 9)` → `4`\n\nNo revises cada elemento (eso es O(n)). Mira el centro y descarta la mitad que no puede contener el objetivo. Meta: tiempo O(log n)."
+      },
+      "difficulty": "medium",
+      "functionName": "binarySearch",
+      "starterCode": {
+        "javascript": "function binarySearch(nums, target) {\n  // Your code here\n}"
+      },
+      "solution": {
+        "javascript": "function binarySearch(nums, target) {\n  let left = 0\n  let right = nums.length - 1\n\n  while (left <= right) {\n    const middle = Math.floor((left + right) / 2)\n    if (nums[middle] === target) return middle\n    if (nums[middle] < target) {\n      left = middle + 1\n    } else {\n      right = middle - 1\n    }\n  }\n  return -1\n}"
+      },
+      "tests": [
+        { "args": [[-1, 0, 3, 5, 9, 12], 9], "expected": 4 },
+        { "args": [[-1, 0, 3, 5, 9, 12], 2], "expected": -1 },
+        { "args": [[], 5], "expected": -1 },
+        { "args": [[5], 5], "expected": 0 },
+        { "args": [[1, 3], 1], "expected": 0 },
+        { "args": [[1, 3], 3], "expected": 1 },
+        { "args": [[2, 4, 6, 8, 10, 12, 14], 14], "expected": 6 },
+        { "args": [[2, 4, 6, 8, 10, 12, 14], 1], "expected": -1 }
+      ],
+      "expectedComplexity": { "time": "O(log n)", "space": "O(1)" }
+    }
+  ]
+}
