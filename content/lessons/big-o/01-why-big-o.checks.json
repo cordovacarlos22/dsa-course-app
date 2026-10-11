@@ -1,0 +1,105 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "With the list Ana, Ben, Cleo, Dev, Eli, Fay, how many checks does `isInvited` do to find 'Dev'?",
+        "es": "Con la lista Ana, Ben, Cleo, Dev, Eli, Fay, ¿cuántas revisiones hace `isInvited` para encontrar a 'Dev'?"
+      },
+      "options": [
+        {
+          "en": "1",
+          "es": "1"
+        },
+        {
+          "en": "4",
+          "es": "4"
+        },
+        {
+          "en": "6",
+          "es": "6"
+        },
+        {
+          "en": "3",
+          "es": "3"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Count the boxes from Ana up to and including Dev. Pick **find 'Dev'** in the animation.",
+        "es": "Cuenta las cajas desde Ana hasta Dev, incluyéndolo. Elige **buscar a 'Dev'** en la animación."
+      },
+      "explanation": {
+        "en": "Ana, Ben, Cleo, Dev: 4 checks, then it stops because it found the name.",
+        "es": "Ana, Ben, Cleo, Dev: 4 revisiones, y luego se detiene porque encontró el nombre."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `isInvited(guests, name)`: go through the list with `i` and **return `true` as soon as** `guests[i] === name`. If the loop ends, return `false`.",
+        "es": "Escribe `isInvited(guests, name)`: recorre la lista con `i` y **devuelve `true` en cuanto** `guests[i] === name`. Si el bucle termina, devuelve `false`."
+      },
+      "hint": {
+        "en": "Inside the loop: `if (guests[i] === name) return true`.",
+        "es": "Dentro del bucle: `if (guests[i] === name) return true`."
+      },
+      "starterCode": "function isInvited(guests, name) {\n  for (let i = 0; i < guests.length; i++) {\n    // Return true when guests[i] is the name.\n  }\n  return false\n}\n\nconsole.log(isInvited(['Ana', 'Ben', 'Cleo'], 'Ben')) // true\n",
+      "solution": "function isInvited(guests, name) {\n  for (let i = 0; i < guests.length; i++) {\n    if (guests[i] === name) return true\n  }\n  return false\n}\n\nconsole.log(isInvited(['Ana', 'Ben', 'Cleo'], 'Ben')) // true\n",
+      "kind": "function",
+      "functionName": "isInvited",
+      "tests": [
+        {
+          "args": [["Ana", "Ben", "Cleo", "Dev", "Eli", "Fay"], "Dev"],
+          "expected": true
+        },
+        {
+          "args": [["Ana", "Ben", "Cleo", "Dev", "Eli", "Fay"], "Ana"],
+          "expected": true
+        },
+        {
+          "args": [["Ana", "Ben", "Cleo", "Dev", "Eli", "Fay"], "Zoe"],
+          "expected": false
+        },
+        {
+          "args": [[], "Ana"],
+          "expected": false
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "What does Big O describe?",
+        "es": "¿Qué describe Big O?"
+      },
+      "options": [
+        {
+          "en": "How many seconds the code takes on your computer",
+          "es": "Cuántos segundos tarda el código en tu computadora"
+        },
+        {
+          "en": "How many lines of code a function has",
+          "es": "Cuántas líneas de código tiene una función"
+        },
+        {
+          "en": "How the work grows as the input grows",
+          "es": "Cómo crece el trabajo cuando crece la entrada"
+        },
+        {
+          "en": "Whether the code has bugs",
+          "es": "Si el código tiene errores"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Think about the chart: the input size is on the bottom.",
+        "es": "Piensa en la gráfica: el tamaño de la entrada está abajo."
+      },
+      "explanation": {
+        "en": "Big O is a label for how the work grows as the input (n) grows, so we can compare solutions.",
+        "es": "Big O es una etiqueta para cómo crece el trabajo cuando crece la entrada (n), para poder comparar soluciones."
+      }
+    }
+  ]
+}

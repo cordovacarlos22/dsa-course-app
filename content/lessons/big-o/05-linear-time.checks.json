@@ -1,0 +1,67 @@
+{
+  "steps": [
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `welcomeMessages(guests)`: return a new array with `'Welcome, <name>!'` for every guest, in order.",
+        "es": "Escribe `welcomeMessages(guests)`: devuelve un array nuevo con `'Welcome, <name>!'` para cada invitado, en orden."
+      },
+      "hint": {
+        "en": "Start with `const messages = []`, and inside the loop `messages.push('Welcome, ' + guests[i] + '!')`.",
+        "es": "Empieza con `const messages = []` y dentro del bucle haz `messages.push('Welcome, ' + guests[i] + '!')`."
+      },
+      "starterCode": "function welcomeMessages(guests) {\n  const messages = []\n  for (let i = 0; i < guests.length; i++) {\n    // Add one message per guest.\n  }\n  return messages\n}\n\nconsole.log(welcomeMessages(['Ana', 'Ben']))\n",
+      "solution": "function welcomeMessages(guests) {\n  const messages = []\n  for (let i = 0; i < guests.length; i++) {\n    messages.push('Welcome, ' + guests[i] + '!')\n  }\n  return messages\n}\n\nconsole.log(welcomeMessages(['Ana', 'Ben']))\n",
+      "kind": "function",
+      "functionName": "welcomeMessages",
+      "tests": [
+        {
+          "args": [["Ana", "Ben"]],
+          "expected": ["Welcome, Ana!", "Welcome, Ben!"]
+        },
+        {
+          "args": [["Cleo"]],
+          "expected": ["Welcome, Cleo!"]
+        },
+        {
+          "args": [[]],
+          "expected": []
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "An O(n) function takes 1,000 steps for 1,000 guests. About how many for 3,000 guests?",
+        "es": "Una función O(n) da 1,000 pasos con 1,000 invitados. ¿Más o menos cuántos con 3,000 invitados?"
+      },
+      "options": [
+        {
+          "en": "1,000",
+          "es": "1,000"
+        },
+        {
+          "en": "3,000",
+          "es": "3,000"
+        },
+        {
+          "en": "9,000",
+          "es": "9,000"
+        },
+        {
+          "en": "9,000,000",
+          "es": "9,000,000"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "O(n) is a straight line: the work grows in step with n.",
+        "es": "O(n) es una línea recta: el trabajo crece al mismo ritmo que n."
+      },
+      "explanation": {
+        "en": "Linear time: 3 times the guests, 3 times the steps.",
+        "es": "Tiempo lineal: el triple de invitados, el triple de pasos."
+      }
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What is log₂(16)?",
+        "es": "¿Cuánto es log₂(16)?"
+      },
+      "options": [
+        {
+          "en": "2",
+          "es": "2"
+        },
+        {
+          "en": "4",
+          "es": "4"
+        },
+        {
+          "en": "8",
+          "es": "8"
+        },
+        {
+          "en": "16",
+          "es": "16"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "How many halvings from 16 down to 1?",
+        "es": "¿Cuántas mitades de 16 hasta 1?"
+      },
+      "explanation": {
+        "en": "16 → 8 → 4 → 2 → 1: four halvings.",
+        "es": "16 → 8 → 4 → 2 → 1: cuatro mitades."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Why does binary search need the guest list **sorted from A to Z**?",
+        "es": "¿Por qué la búsqueda binaria necesita la lista **ordenada de la A a la Z**?"
+      },
+      "options": [
+        {
+          "en": "So it knows which half can't have the name and can throw it away",
+          "es": "Para saber qué mitad no puede tener el nombre y descartarla"
+        },
+        {
+          "en": "Sorted lists use less memory",
+          "es": "Las listas ordenadas usan menos memoria"
+        },
+        {
+          "en": "It doesn't, it works on any list",
+          "es": "No la necesita, funciona con cualquier lista"
+        },
+        {
+          "en": "JavaScript can only search sorted arrays",
+          "es": "JavaScript solo puede buscar en arrays ordenados"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "After looking at the middle name, how do you choose a half?",
+        "es": "Después de mirar el nombre del medio, ¿cómo eliges una mitad?"
+      },
+      "explanation": {
+        "en": "Only in ABC order does \"'Gus' comes after the middle name\" mean it must be in the right half.",
+        "es": "Solo en orden alfabético \"'Gus' va después del nombre del medio\" significa que tiene que estar en la mitad derecha."
+      }
+    }
+  ]
+}

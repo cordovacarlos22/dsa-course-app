@@ -1,0 +1,72 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which line is **not** O(1)?",
+        "es": "¿Qué línea **no** es O(1)?"
+      },
+      "options": [
+        {
+          "en": "`const first = guests[0]`",
+          "es": "`const first = guests[0]`"
+        },
+        {
+          "en": "`const chairs = guests.length + 2`",
+          "es": "`const chairs = guests.length + 2`"
+        },
+        {
+          "en": "`let count = 0`",
+          "es": "`let count = 0`"
+        },
+        {
+          "en": "`for (let i = 0; i < guests.length; i++) { … }`",
+          "es": "`for (let i = 0; i < guests.length; i++) { … }`"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "Which one runs once per guest?",
+        "es": "¿Cuál corre una vez por invitado?"
+      },
+      "explanation": {
+        "en": "Index lookups, math and assignments are O(1). A loop over the guests runs n times: O(n).",
+        "es": "Leer por índice, las operaciones y las asignaciones son O(1). Un bucle sobre los invitados corre n veces: O(n)."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "A loop over the guests runs n times, and inside it there's **another loop over the guests**. What's the cost?",
+        "es": "Un bucle sobre los invitados corre n veces, y adentro hay **otro bucle sobre los invitados**. ¿Cuál es el costo?"
+      },
+      "options": [
+        {
+          "en": "n + n = O(n)",
+          "es": "n + n = O(n)"
+        },
+        {
+          "en": "n × 1 = O(n)",
+          "es": "n × 1 = O(n)"
+        },
+        {
+          "en": "n × n = O(n²)",
+          "es": "n × n = O(n²)"
+        },
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Cost of a loop = times it runs × the work inside.",
+        "es": "Costo de un bucle = veces que corre × el trabajo de adentro."
+      },
+      "explanation": {
+        "en": "n times, and each time n more steps: n × n = O(n²).",
+        "es": "n veces, y cada vez n pasos más: n × n = O(n²)."
+      }
+    }
+  ]
+}

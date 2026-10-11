@@ -1,0 +1,72 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "You time the same code twice on the same laptop. What happens?",
+        "es": "Mides el mismo código dos veces en la misma laptop. ¿Qué pasa?"
+      },
+      "options": [
+        {
+          "en": "The times are a bit different, but the steps are the same",
+          "es": "Los tiempos son un poco distintos, pero los pasos son los mismos"
+        },
+        {
+          "en": "Both the times and the steps change",
+          "es": "Cambian los tiempos y los pasos"
+        },
+        {
+          "en": "Everything is exactly the same",
+          "es": "Todo es exactamente igual"
+        },
+        {
+          "en": "The steps change, but the time is the same",
+          "es": "Los pasos cambian, pero el tiempo es el mismo"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "Look at the second step of the stopwatch animation.",
+        "es": "Mira el segundo paso de la animación del cronómetro."
+      },
+      "explanation": {
+        "en": "Other apps and the browser change every run, so the time moves around. The code does the same steps every time.",
+        "es": "Otras apps y el navegador cambian en cada ejecución, así que el tiempo varía. El código hace los mismos pasos cada vez."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "`welcomeAll` prints 3 messages for 3 guests. How many does it print for 300 guests?",
+        "es": "`welcomeAll` imprime 3 mensajes con 3 invitados. ¿Cuántos imprime con 300 invitados?"
+      },
+      "options": [
+        {
+          "en": "3",
+          "es": "3"
+        },
+        {
+          "en": "30",
+          "es": "30"
+        },
+        {
+          "en": "300",
+          "es": "300"
+        },
+        {
+          "en": "90,000",
+          "es": "90,000"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "One message per guest.",
+        "es": "Un mensaje por invitado."
+      },
+      "explanation": {
+        "en": "One message per guest: 300 guests, 300 messages, on any computer.",
+        "es": "Un mensaje por invitado: 300 invitados, 300 mensajes, en cualquier computadora."
+      }
+    }
+  ]
+}

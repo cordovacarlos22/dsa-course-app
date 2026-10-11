@@ -1,0 +1,67 @@
+{
+  "steps": [
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `lastGuest(guests)`: return the last name on the list in **O(1)**, with no loop.",
+        "es": "Escribe `lastGuest(guests)`: devuelve el último nombre de la lista en **O(1)**, sin bucles."
+      },
+      "hint": {
+        "en": "The last index is `guests.length - 1`.",
+        "es": "El último índice es `guests.length - 1`."
+      },
+      "starterCode": "function lastGuest(guests) {\n  // Jump straight to the last box.\n  return guests[0]\n}\n\nconsole.log(lastGuest(['Ana', 'Ben', 'Cleo'])) // 'Cleo'\n",
+      "solution": "function lastGuest(guests) {\n  return guests[guests.length - 1]\n}\n\nconsole.log(lastGuest(['Ana', 'Ben', 'Cleo'])) // 'Cleo'\n",
+      "kind": "function",
+      "functionName": "lastGuest",
+      "tests": [
+        {
+          "args": [["Ana", "Ben", "Cleo"]],
+          "expected": "Cleo"
+        },
+        {
+          "args": [["Ana", "Ben", "Cleo", "Dev", "Eli", "Fay"]],
+          "expected": "Fay"
+        },
+        {
+          "args": [["Zoe"]],
+          "expected": "Zoe"
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "A function always does exactly 5 steps, for any number of guests. What's its Big O?",
+        "es": "Una función siempre hace exactamente 5 pasos, con cualquier número de invitados. ¿Cuál es su Big O?"
+      },
+      "options": [
+        {
+          "en": "O(5)",
+          "es": "O(5)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(5n)",
+          "es": "O(5n)"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Does it grow with n? Then drop the constant.",
+        "es": "¿Crece con n? Entonces elimina la constante."
+      },
+      "explanation": {
+        "en": "A fixed number of steps is constant time: O(1), never O(5).",
+        "es": "Un número fijo de pasos es tiempo constante: O(1), nunca O(5)."
+      }
+    }
+  ]
+}
