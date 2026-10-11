@@ -1,6 +1,7 @@
 // Reads the course content that lives in the repo (content/ folder).
 // It's bundled with the app, so there's nothing to fetch.
 import course from '../../content/course.json'
+import { getLessons } from './lessons'
 
 // Every content/sections/<module-slug>.json file (quiz + exercises).
 const sectionFiles = import.meta.glob('../../content/sections/*.json', {
@@ -23,13 +24,19 @@ export function getCourse() {
   return course
 }
 
-// Each module from the outline, plus its quiz/exercises when they exist
-// (`section` is null for modules that are still "coming soon").
+// Each module from the outline, plus its lessons and its quiz/exercises when
+// they exist. A module with neither is still "coming soon".
 export function getModules() {
-  return course.modules.map((module) => ({
-    ...module,
-    section: sectionsBySlug[module.slug] ?? null,
-  }))
+  return course.modules.map((module) => {
+    const lessons = getLessons(module.slug)
+    const section = sectionsBySlug[module.slug] ?? null
+    return {
+      ...module,
+      lessons,
+      section,
+      isAvailable: lessons.length > 0 || section !== null,
+    }
+  })
 }
 
 export function getModule(slug) {

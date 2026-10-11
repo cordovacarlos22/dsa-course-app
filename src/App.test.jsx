@@ -99,7 +99,7 @@ describe('course home', () => {
       '/learn/02-big-o',
     )
     expect(screen.getByRole('link', { name: /Big O/ })).toHaveTextContent(
-      '19 questions · 3 exercises',
+      '1 lesson · 19 questions · 3 exercises',
     )
     expect(
       screen.queryByRole('link', { name: /Linked Lists/ }),

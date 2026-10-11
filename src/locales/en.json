@@ -56,5 +56,62 @@
     "title": "Page not found",
     "text": "We couldn't find that page.",
     "backHome": "Back to the course"
+  },
+  "stepPlayer": {
+    "previous": "Previous step",
+    "next": "Next step",
+    "play": "Play",
+    "pause": "Pause",
+    "restart": "Restart",
+    "stepOf": "Step {{current}} of {{total}}"
+  },
+  "viz": {
+    "bigOGrowth": {
+      "title": "How Big O grows",
+      "axisN": "n (input size)",
+      "axisOps": "operations",
+      "constant": "O(1): the line stays flat. The work doesn't grow with n.",
+      "log": "O(log n): grows very slowly. Doubling n adds only one more step.",
+      "linear": "O(n): a straight line. Twice the input means twice the work.",
+      "quadratic": "O(n²): shoots up. At n = 1,000 it's already 1,000,000 operations.",
+      "summary": "From best to worst: O(1), O(log n), O(n), O(n²)."
+    },
+    "arrayReindex": {
+      "title": "Array operations and re-indexing",
+      "start": "Every item in an array has an index, starting at 0.",
+      "push": "push(17) adds to the end. No other item moves: O(1).",
+      "pop": "pop() removes from the end. No other item moves: O(1).",
+      "shift": "shift() removes the first item, so every other item moves down one index: O(n).",
+      "unshift": "unshift(11) adds to the start, so every item moves up one index: O(n).",
+      "legendNew": "new",
+      "legendMoved": "re-indexed",
+      "index": "index {{index}}"
+    },
+    "binarySearch": {
+      "title": "Binary search: cut it in half",
+      "start": "Find {{target}} in a sorted array of {{count}} items.",
+      "goRight": "The middle is {{middle}}, smaller than {{target}}: throw away the left half.",
+      "goLeft": "The middle is {{middle}}, bigger than {{target}}: throw away the right half.",
+      "found": "Found {{target}} after {{checks}} checks. log₂(8) = 3: that's O(log n)."
+    }
+  },
+  "runnable": {
+    "label": "Editable JavaScript code",
+    "run": "Run",
+    "running": "Running…",
+    "reset": "Reset",
+    "output": "Output",
+    "noOutput": "(nothing was printed)",
+    "hint": "Edit the code and press Run (or Ctrl/Cmd + Enter)."
+  },
+  "lesson": {
+    "lessonsTitle": "Lessons",
+    "minutes": "{{count}} min",
+    "previous": "Previous lesson",
+    "next": "Next lesson",
+    "backToModule": "Back to {{module}}",
+    "unknownViz": "Animation \"{{name}}\" not found.",
+    "lessons_one": "{{count}} lesson",
+    "lessons_other": "{{count}} lessons"
   }
 }

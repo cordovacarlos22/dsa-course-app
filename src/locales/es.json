@@ -56,5 +56,62 @@
     "title": "Página no encontrada",
     "text": "No pudimos encontrar esa página.",
     "backHome": "Volver al curso"
+  },
+  "stepPlayer": {
+    "previous": "Paso anterior",
+    "next": "Paso siguiente",
+    "play": "Reproducir",
+    "pause": "Pausar",
+    "restart": "Reiniciar",
+    "stepOf": "Paso {{current}} de {{total}}"
+  },
+  "viz": {
+    "bigOGrowth": {
+      "title": "Cómo crece Big O",
+      "axisN": "n (tamaño de la entrada)",
+      "axisOps": "operaciones",
+      "constant": "O(1): la línea se queda plana. El trabajo no crece con n.",
+      "log": "O(log n): crece muy lento. Duplicar n agrega solo un paso más.",
+      "linear": "O(n): una línea recta. El doble de entrada es el doble de trabajo.",
+      "quadratic": "O(n²): se dispara. Con n = 1,000 ya son 1,000,000 de operaciones.",
+      "summary": "De mejor a peor: O(1), O(log n), O(n), O(n²)."
+    },
+    "arrayReindex": {
+      "title": "Operaciones de array y reindexado",
+      "start": "Cada elemento de un array tiene un índice, empezando en 0.",
+      "push": "push(17) agrega al final. Ningún otro elemento se mueve: O(1).",
+      "pop": "pop() quita del final. Ningún otro elemento se mueve: O(1).",
+      "shift": "shift() quita el primer elemento, así que todos los demás bajan un índice: O(n).",
+      "unshift": "unshift(11) agrega al inicio, así que todos los elementos suben un índice: O(n).",
+      "legendNew": "nuevo",
+      "legendMoved": "reindexado",
+      "index": "índice {{index}}"
+    },
+    "binarySearch": {
+      "title": "Búsqueda binaria: cortar a la mitad",
+      "start": "Busca {{target}} en un array ordenado de {{count}} elementos.",
+      "goRight": "El centro es {{middle}}, menor que {{target}}: descarta la mitad izquierda.",
+      "goLeft": "El centro es {{middle}}, mayor que {{target}}: descarta la mitad derecha.",
+      "found": "Encontramos {{target}} después de {{checks}} revisiones. log₂(8) = 3: eso es O(log n)."
+    }
+  },
+  "runnable": {
+    "label": "Código JavaScript editable",
+    "run": "Ejecutar",
+    "running": "Ejecutando…",
+    "reset": "Restablecer",
+    "output": "Salida",
+    "noOutput": "(no se imprimió nada)",
+    "hint": "Edita el código y presiona Ejecutar (o Ctrl/Cmd + Enter)."
+  },
+  "lesson": {
+    "lessonsTitle": "Lecciones",
+    "minutes": "{{count}} min",
+    "previous": "Lección anterior",
+    "next": "Lección siguiente",
+    "backToModule": "Volver a {{module}}",
+    "unknownViz": "No se encontró la animación \"{{name}}\".",
+    "lessons_one": "{{count}} lección",
+    "lessons_other": "{{count}} lecciones"
   }
 }
