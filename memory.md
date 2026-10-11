@@ -81,9 +81,9 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Next
 
-- Follow `docs/curriculum.md` module by module, one PR per module (lessons EN + ES, quiz, build it, interview problems). **Next: Big O lessons 2–12**, then Big O of Arrays & Objects, Classes & Pointers.
+- Big O module still needs: the interview problem "Count the Operations" and its slides (later stage).
+- Next content (per `docs/curriculum.md`): **Big O of Arrays & Objects**, then **Classes & Pointers** lessons.
 - Stage 7 (quiz + exercise pages) so students can take the quizzes and solve the exercises.
-- A later stage: our own slide decks per module.
 - Carlos: delete the iCloud duplicate `src/pages/LandingPage.test 2.jsx`.
 
 ## Course sections imported
@@ -101,7 +101,7 @@ Modules 04–17 have empty folders; they appear in `course.json` as "coming soon
 | Module          | Lessons                                                             | Languages | Date       |
 | --------------- | ------------------------------------------------------------------- | --------- | ---------- |
 | 01 Introduction | `01-welcome`, `02-how-to-get-the-most-out-of-it`, `03-running-code` | EN + ES   | 2026-10-11 |
-| 02 Big O        | `01-what-is-big-o`                                                  | EN        | 2026-10-11 |
+| 02 Big O        | 12 lessons (`01-what-is-big-o` … `12-wrap-up`)                      | EN + ES   | 2026-10-11 |
 
 ## Open questions
 
