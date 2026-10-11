@@ -40,19 +40,22 @@ After the lessons, each module has a **quiz** to check what you learned and **ti
 
 Here's the map, in order:
 
-| Part                    | What you'll learn                                                                              |
-| ----------------------- | ---------------------------------------------------------------------------------------------- |
-| **Foundations**         | Big O (how to measure efficient code), classes and pointers                                    |
-| **Data structures**     | Linked lists, doubly linked lists, stacks and queues, trees, hash tables, graphs, heaps        |
-| **Recursion**           | Thinking recursively, recursive binary search trees, tree traversals                           |
-| **Sorting**             | Basic sorts (bubble, selection, insertion), then the efficient ones: merge sort and quick sort |
-| **Dynamic programming** | Solving big problems by reusing the answers to smaller ones                                    |
+| Part                    | What you'll learn                                                                                                                    |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Foundations**         | Big O (how to measure efficient code), the Big O of arrays and objects, classes and pointers                                         |
+| **Problem solving**     | A 5-step method for any problem, common patterns (frequency counter, two pointers, sliding window, divide and conquer) and recursion |
+| **Searching & sorting** | Linear and binary search, then six sorts: bubble, selection, insertion, merge, quick and radix                                       |
+| **Data structures**     | Linked lists, doubly linked lists, stacks and queues, binary search trees, tree traversal, heaps, hash tables and graphs             |
+| **Graph algorithms**    | Visiting every node of a graph, and Dijkstra's shortest path                                                                         |
+| **Dynamic programming** | Solving big problems by reusing the answers to smaller ones                                                                          |
+| **Interview practice**  | The array problems interviews ask for most                                                                                           |
 
 It's a lot, and some topics look scary from far away. That's why every one of them is broken into small steps, with an animation whenever a picture helps more than words.
 
 ## By the end of the course
 
 - You'll analyze the **time and space complexity** of any code with Big O.
+- You'll have a **method** for solving problems you've never seen before.
 - You'll **build** linked lists, stacks, queues, trees, hash tables, graphs and heaps from scratch.
 - You'll **understand** sorting, recursion and dynamic programming instead of memorizing them.
 - You'll **solve** LeetCode-style problems and explain your reasoning out loud in interviews.
@@ -65,7 +68,7 @@ Hi, I'm Carlos! I'm a software engineer, and I learned all of this the long way:
 
 - Lessons = explanation + animations + runnable code.
 - Each module ends with a quiz and timed exercises.
-- We start with the foundations (Big O, classes and pointers) because everything else builds on them.
+- We start with the foundations (Big O, classes and pointers) and a method for solving problems, because everything else builds on them.
 
 ## Check yourself
 

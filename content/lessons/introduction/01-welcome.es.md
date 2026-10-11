@@ -40,19 +40,22 @@ Después de las lecciones, cada módulo tiene un **cuestionario** para comprobar
 
 Este es el mapa, en orden:
 
-| Parte                     | Qué vas a aprender                                                                                   |
-| ------------------------- | ---------------------------------------------------------------------------------------------------- |
-| **Fundamentos**           | Big O (cómo medir si tu código es eficiente), clases y punteros                                      |
-| **Estructuras de datos**  | Listas enlazadas, listas doblemente enlazadas, pilas y colas, árboles, tablas hash, grafos, heaps    |
-| **Recursión**             | Pensar de forma recursiva, árboles binarios de búsqueda recursivos, recorridos de árboles            |
-| **Ordenamiento**          | Ordenamientos básicos (bubble, selection, insertion) y luego los eficientes: merge sort y quick sort |
-| **Programación dinámica** | Resolver problemas grandes reutilizando las respuestas de problemas más pequeños                     |
+| Parte                       | Qué vas a aprender                                                                                                                                           |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Fundamentos**             | Big O (cómo medir si tu código es eficiente), el Big O de arrays y objetos, clases y punteros                                                                |
+| **Resolución de problemas** | Un método de 5 pasos para cualquier problema, patrones comunes (contador de frecuencias, dos punteros, ventana deslizante, dividir y conquistar) y recursión |
+| **Búsqueda y ordenamiento** | Búsqueda lineal y binaria, y luego seis ordenamientos: bubble, selection, insertion, merge, quick y radix                                                    |
+| **Estructuras de datos**    | Listas enlazadas, listas doblemente enlazadas, pilas y colas, árboles binarios de búsqueda, recorridos de árboles, heaps, tablas hash y grafos               |
+| **Algoritmos de grafos**    | Recorrer todos los nodos de un grafo y el camino más corto de Dijkstra                                                                                       |
+| **Programación dinámica**   | Resolver problemas grandes reutilizando las respuestas de problemas más pequeños                                                                             |
+| **Práctica de entrevistas** | Los problemas con arrays que más preguntan en las entrevistas                                                                                                |
 
 Es mucho, y algunos temas asustan de lejos. Por eso cada uno está dividido en pasos pequeños, con una animación cada vez que una imagen ayuda más que las palabras.
 
 ## Al terminar el curso
 
 - Vas a analizar la **complejidad temporal y espacial** de cualquier código con Big O.
+- Vas a tener un **método** para resolver problemas que nunca has visto.
 - Vas a **construir** desde cero listas enlazadas, pilas, colas, árboles, tablas hash, grafos y heaps.
 - Vas a **entender** el ordenamiento, la recursión y la programación dinámica en lugar de memorizarlos.
 - Vas a **resolver** problemas estilo LeetCode y explicar tu razonamiento en voz alta en tus entrevistas.
@@ -65,7 +68,7 @@ Es mucho, y algunos temas asustan de lejos. Por eso cada uno está dividido en p
 
 - Lecciones = explicación + animaciones + código ejecutable.
 - Cada módulo termina con un cuestionario y ejercicios con tiempo.
-- Empezamos por los fundamentos (Big O, clases y punteros) porque todo lo demás se construye sobre ellos.
+- Empezamos por los fundamentos (Big O, clases y punteros) y un método para resolver problemas, porque todo lo demás se construye sobre ellos.
 
 ## Compruébalo tú mismo
 
