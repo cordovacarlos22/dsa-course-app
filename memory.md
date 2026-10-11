@@ -4,7 +4,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Current stage
 
-**Stage 1: Scaffold** (branch `chore/scaffold`)
+**Stage 1: Scaffold is done** (branch `chore/scaffold`, waiting for a GitHub repo to open the PR). Next up: Stage 2 (CI).
 
 ## Decisions
 
@@ -36,11 +36,11 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Done
 
-- Stage 1 (in progress): Vite React (JS) scaffold, Tailwind v4, Vitest + Testing Library, Prettier + ESLint, `.env.example`, AGENTS.md / CLAUDE.md / memory.md, README.
+- 2026-10-11, Stage 1 (committed on `chore/scaffold`; no remote yet, so no PR): Vite React (JS) scaffold, Tailwind v4, Vitest + Testing Library, Prettier + ESLint, `.env.example`, AGENTS.md / CLAUDE.md / memory.md, README. `.docx` notes are git-ignored. lint, format check, tests and build all pass.
 
 ## Next
 
-- Finish Stage 1 and commit.
+- Push `main` and `chore/scaffold` to GitHub and open the Stage 1 PR.
 - Stage 2: Carlos installs `gh` (`brew install gh` then `gh auth login`) and creates the GitHub repo. Then add `ci.yml`.
 
 ## Course sections imported
