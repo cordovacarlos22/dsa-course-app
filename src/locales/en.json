@@ -133,9 +133,10 @@
     "lessonsSoon": "The lessons for this module are on the way.",
     "practiceTitle": "Practice",
     "quiz": "Quiz",
-    "exercises": "Exercises",
     "availableSoon": "Available soon",
-    "notReady": "This module isn't ready yet. Check back soon!"
+    "notReady": "This module isn't ready yet. Check back soon!",
+    "buildIt": "Build it",
+    "interviewProblems": "Interview problems"
   },
   "notFound": {
     "title": "Page not found",

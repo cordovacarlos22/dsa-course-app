@@ -107,7 +107,13 @@ describe('module page', () => {
       screen.getByRole('heading', { level: 1, name: 'Classes & Pointers' }),
     ).toBeInTheDocument()
     expect(screen.getByText('12 questions')).toBeInTheDocument()
-    expect(screen.getByText('1 exercise')).toBeInTheDocument()
+    // Practice is split into "Build it" and "Interview problems".
+    expect(
+      screen.getByRole('heading', { name: 'Build it' }).closest('li'),
+    ).toHaveTextContent('1 exercise')
+    expect(
+      screen.getByRole('heading', { name: 'Interview problems' }).closest('li'),
+    ).toHaveTextContent('0 exercises')
   })
 
   it('says a module without content is not ready yet', () => {

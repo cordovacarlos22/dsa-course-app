@@ -72,7 +72,7 @@ function ModulePage() {
           <h2 className="mt-10 text-xl font-bold">
             {t('module.practiceTitle')}
           </h2>
-          <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+          <ul className="mt-4 grid gap-4 sm:grid-cols-3">
             <PracticeItem
               title={t('module.quiz')}
               detail={t('course.questions', {
@@ -80,9 +80,15 @@ function ModulePage() {
               })}
             />
             <PracticeItem
-              title={t('module.exercises')}
+              title={t('module.buildIt')}
               detail={t('course.exercises', {
-                count: section.exercises.length,
+                count: countByCategory(section, 'build'),
+              })}
+            />
+            <PracticeItem
+              title={t('module.interviewProblems')}
+              detail={t('course.exercises', {
+                count: countByCategory(section, 'interview'),
               })}
             />
           </ul>
@@ -90,6 +96,11 @@ function ModulePage() {
       )}
     </div>
   )
+}
+
+function countByCategory(section, category) {
+  return section.exercises.filter((exercise) => exercise.category === category)
+    .length
 }
 
 // Quiz and exercise pages arrive in stage 7, so these aren't links yet.
