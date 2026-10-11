@@ -10,6 +10,9 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Decisions
 
+- 2026-10-11: **Codecademy-style learning (Carlos).** Students must prove they understood before moving on: lessons are split into **steps** (each `##` heading), every step ends with a **checkpoint** (quick question or small code task checked by tests), and **Next stays locked until it passes**. Stuck → hint, then the solution after 3 failed tries (recorded as "viewed solution"). Coding steps use a **3-pane workspace** (Learn | Editor | Output). Being built in `feat/step-checkpoints`.
+- 2026-10-11: **Naming: Section → Module → Lesson → Step** (ES: Sección → Módulo → Lección → Paso). `course.json` `parts` became `sections`; the per-module quiz/exercise files moved from `content/sections/` to **`content/practice/`** (`practiceSchema`, `module.practice`).
+
 - 2026-10-11: **Two courses combined into one (replaces the 18-module outline).** Carlos is taking two DSA courses and combines their structure into his own: **24 modules in 7 parts, algorithms first** (Foundations → Problem Solving → Searching & Sorting → Data Structures → Graph Algorithms → Dynamic Programming → Interview Practice). Blueprint v2 is in `docs/curriculum.md` (~155 exercises: 70 build it, 86 interview problems). New topics from course 2: 5-step problem-solving approach, patterns, deeper recursion, searching, radix sort, graph traversal, Dijkstra.
 - 2026-10-11: **Slugs are English names without numbers** (`introduction`, `big-o`, `linked-lists`…). Existing content was renamed (old URLs like `/learn/02-big-o` now 404; no students yet).
 - 2026-10-11: **Our own slides.** Carlos asked to modify the course 2 instructor's slide PDFs; that would reuse copyrighted material, so we make original slide decks per module instead (later stage). The PDFs are a topic reference only.
@@ -88,11 +91,11 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Course sections imported
 
-| Section               | File                                       | Questions | Exercises                                                          | Spanish | Date       |
-| --------------------- | ------------------------------------------ | --------- | ------------------------------------------------------------------ | ------- | ---------- |
-| 1: Introduction       | `content/sections/01-introduccion.json`    | 10        | none                                                               | done    | 2026-10-11 |
-| 2: Big O              | `content/sections/02-big-o.json`           | 19        | find-max (easy), contains-duplicate (easy), binary-search (medium) | done    | 2026-10-11 |
-| 3: Classes & Pointers | `content/sections/03-clases-punteros.json` | 12        | cookie-class (easy, class)                                         | missing | 2026-10-11 |
+| Section               | File                                         | Questions | Exercises                                                          | Spanish | Date       |
+| --------------------- | -------------------------------------------- | --------- | ------------------------------------------------------------------ | ------- | ---------- |
+| 1: Introduction       | `content/practice/introduction.json`         | 10        | none                                                               | done    | 2026-10-11 |
+| 2: Big O              | `content/practice/big-o.json`                | 19        | find-max (easy), contains-duplicate (easy), binary-search (medium) | done    | 2026-10-11 |
+| 3: Classes & Pointers | `content/practice/classes-and-pointers.json` | 12        | cookie-class (easy, class)                                         | missing | 2026-10-11 |
 
 Modules 04–17 have empty folders; they appear in `course.json` as "coming soon".
 
