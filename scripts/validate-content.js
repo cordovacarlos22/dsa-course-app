@@ -200,6 +200,20 @@ export function countMissingSpanish(value) {
   )
 }
 
+function plural(count, word) {
+  return `${count} ${word}${count === 1 ? '' : 's'}`
+}
+
+// e.g. "12 questions, 1 exercise, all solutions pass"
+function describeSection(section) {
+  const parts = [
+    plural(section.questions.length, 'question'),
+    plural(section.exercises.length, 'exercise'),
+  ]
+  if (section.exercises.length > 0) parts.push('all solutions pass')
+  return parts.join(', ')
+}
+
 async function main() {
   const course = JSON.parse(await readFile(COURSE_FILE, 'utf8'))
   const courseErrors = validateCourse(course)
@@ -233,9 +247,7 @@ async function main() {
       console.error(`✗ ${file}`)
       errors.forEach((error) => console.error(`    - ${error}`))
     } else {
-      console.log(
-        `✓ ${file} (${data.questions.length} questions, ${data.exercises.length} exercises, all solutions pass)`,
-      )
+      console.log(`✓ ${file} (${describeSection(data)})`)
     }
   }
 
