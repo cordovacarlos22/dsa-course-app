@@ -151,3 +151,12 @@ export const courseSchema = z
     modules: z.array(moduleSchema).min(1),
   })
   .strict()
+
+// The front matter at the top of every lesson file.
+export const lessonFrontMatterSchema = z
+  .object({
+    title: nonEmpty,
+    order: z.number().int().positive(),
+    minutes: z.number().int().positive(),
+  })
+  .strict()

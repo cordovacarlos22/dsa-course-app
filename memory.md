@@ -10,6 +10,10 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Decisions
 
+- 2026-10-11: **Vercel is connected** (Carlos linked the repo; Vercel team `carloscordovadevs`). Production: https://dsa-course-app.vercel.app. Vercel's Git integration currently deploys every PR (preview, behind Vercel's login wall) and `main` (production). `vercel.json` rewrites every route to `index.html` so deep links work. Stage 9 switches to the blue/green flow (turn off Git auto-deploys, deploy from GitHub Actions).
+
+- 2026-10-11: **Lesson system.** Lessons are `content/lessons/<module-slug>/<NN-slug>.<en|es>.md` with front matter (`title`, `order`, `minutes`). Two special blocks: ` ```viz ` (the block contains an animation name; names in `src/visualizations/names.js`, components in `index.js`) and ` ```js-run ` (editable code run in a Web Worker with a 2 s limit; `src/runners/`). Rendered with react-markdown + remark-gfm + @tailwindcss/typography. The lesson page is lazy-loaded to keep the first load small. Spanish lessons fall back to English.
+
 - 2026-10-11: **Repo is public** (Carlos's choice). Branch protection on `main`: PR required, the `Lint, test, validate, build` check must pass, admins included, no force pushes, 0 approvals (a solo dev can't approve their own PR).
 - 2026-10-11: **App shell:** React Router v7 (`<BrowserRouter>` in `main.jsx`, routes in `App.jsx`), i18next + react-i18next (`src/i18n.js`, text in `src/locales/*.json`), language saved in localStorage (`src/lib/languageStorage.js`, try/catch so blocked storage never crashes), brand colors as Tailwind tokens in `src/index.css` (`brand`, `accent`, `ink`, `surface`). Course content is read from `content/` through `src/lib/course.js` (`import.meta.glob`, English fallback via `localize`).
 
@@ -40,8 +44,8 @@ Agents: read this at the start of every session and update it at the end (see `A
 2. ✅ CI + GitHub: repo `cordovacarlos22/dsa-course-app` (public since 2026-10-11), `ci.yml`, stacked PRs #1–#4 merged on 2026-10-11; CI runs on every PR and push to `main`
 3. ✅ Pivot docs: AGENTS.md, memory.md, README, app title (branch `docs/pivot-course-app`)
 4. ✅ App shell + i18n: router, layout, react-i18next, first-visit language picker, landing, course home (branch `feat/app-shell`)
-5. Lesson system ← next: lesson schema + validation, Markdown renderer, StepPlayer, first 3 animations, runnable snippets (Web Worker)
-6. Original lessons for modules 01–03 (EN), reviewed by Carlos
+5. ✅ Lesson system: lesson files + validation, Markdown renderer, StepPlayer, 3 animations, runnable snippets (Web Worker), first lesson (branch `feat/lesson-system`)
+6. Original lessons for modules 01–03 (EN), reviewed by Carlos ← next
 7. Quiz + exercise pages (CodeMirror, runner, timer)
 8. Supabase: schema + RLS, magic-link auth, profile, progress
 9. Deploy pipeline: preview / deploy (blue/green) / rollback, Playwright smoke test
@@ -62,7 +66,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Next
 
-- Stage 5 (lesson system): lesson schema + validation, Markdown renderer, StepPlayer, first 3 animations, runnable snippets (Web Worker). Branch from `main` after `feat/app-shell` is merged.
+- Carlos reviews the first lesson (`content/lessons/02-big-o/01-what-is-big-o.en.md`): voice, length, format. Then Stage 6 writes the rest of modules 01–03 in the same style.
 - Carlos reviews the Section 1 and Section 3 questions.
 - Spanish pass later (`content:validate` shows the count).
 

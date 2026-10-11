@@ -122,8 +122,31 @@ When Carlos says _"write the lessons for module N"_:
 1. Read the module's English transcripts in `recursos originales/modulo-NN-*/guiones/` (see the content procedure below for the path) **only to get the topic list, order and depth**.
 2. Write each lesson **from scratch in Carlos's voice**: new explanations, new examples, new analogies, new code. Never copy or paraphrase the transcripts sentence by sentence.
 3. Save it as `content/lessons/<module-slug>/<NN-lesson-slug>.en.md` with front-matter (`title`, `order`, `minutes`).
-4. Each lesson has: a one-line goal, the explanation, at least one ` ```js run ` snippet, a ` ```viz <name> ` animation when the topic is visual, a "Big O recap", and 2–3 "check yourself" questions pointing to the module quiz.
-5. Run `npm run content:validate`, then open a PR for Carlos to review.
+4. Each lesson has: a one-line goal, the explanation, at least one runnable snippet, an animation when the topic is visual, a "Big O recap", and 2–3 "check yourself" questions pointing to the module quiz.
+5. Lesson syntax (Markdown + two special blocks):
+
+   ````md
+   ---
+   title: What is Big O?
+   order: 1
+   minutes: 7
+   ---
+
+   ```js-run
+   console.log('students can edit and run this')
+   ```
+
+   ```viz
+   big-o-growth-chart
+   ```
+   ````
+
+   - `order` must match the `NN` at the start of the file name. No comments in the front matter.
+   - ` ```js-run `: editable code the student runs in the browser (Web Worker, 2 s limit). Use `console.log` to show results.
+   - ` ```viz `: the block contains an animation name from `src/visualizations/names.js`. Available: `big-o-growth-chart`, `array-reindex`, `binary-search-halving`.
+   - New animation: build it with `StepPlayer` in `src/visualizations/`, add its name to `names.js` **and** register it in `index.js`, and put its captions in `src/locales/*.json` under `viz`.
+
+6. Run `npm run content:validate` (checks file names, front matter, animation names, and that every `js-run` block compiles), then open a PR for Carlos to review.
 
 ## Content generation procedure
 

@@ -2,9 +2,10 @@ import { Link, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { useLanguage } from '../hooks/useLanguage'
 import { getModule, localize } from '../lib/course'
+import { getLessonVersion } from '../lib/lessons'
 import NotFoundPage from './NotFoundPage'
 
-// One module: its lessons (stage 5) and its quiz + exercises (stage 7).
+// One module: its lessons, then its quiz + exercises (pages in stage 7).
 function ModulePage() {
   const { moduleSlug } = useParams()
   const { t } = useTranslation()
@@ -13,7 +14,7 @@ function ModulePage() {
 
   if (!module) return <NotFoundPage />
 
-  const { section } = module
+  const { lessons, section } = module
 
   return (
     <div>
@@ -30,9 +31,44 @@ function ModulePage() {
         {localize(module.title, language)}
       </h1>
 
-      {section ? (
+      {!module.isAvailable && (
+        <p className="mt-4 text-slate-600">{t('module.notReady')}</p>
+      )}
+
+      {module.isAvailable && (
         <>
-          <p className="mt-4 text-slate-600">{t('module.lessonsSoon')}</p>
+          <h2 className="mt-10 text-xl font-bold">
+            {t('lesson.lessonsTitle')}
+          </h2>
+          {lessons.length === 0 ? (
+            <p className="mt-2 text-slate-600">{t('module.lessonsSoon')}</p>
+          ) : (
+            <ol className="mt-4 space-y-2">
+              {lessons.map((lesson) => (
+                <li key={lesson.slug}>
+                  <Link
+                    to={`/learn/${module.slug}/${lesson.slug}`}
+                    className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white px-4 py-3 hover:border-brand"
+                  >
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand/10 text-sm font-bold text-brand">
+                      {lesson.order}
+                    </span>
+                    <span className="font-semibold">
+                      {getLessonVersion(lesson, language).title}
+                    </span>
+                    <span className="ml-auto text-sm text-slate-500">
+                      {t('lesson.minutes', { count: lesson.minutes })}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          )}
+        </>
+      )}
+
+      {section && (
+        <>
           <h2 className="mt-10 text-xl font-bold">
             {t('module.practiceTitle')}
           </h2>
@@ -51,8 +87,6 @@ function ModulePage() {
             />
           </ul>
         </>
-      ) : (
-        <p className="mt-4 text-slate-600">{t('module.notReady')}</p>
       )}
     </div>
   )

@@ -1,4 +1,13 @@
 @import 'tailwindcss';
+/* Nice default styles for lesson text (headings, lists, code). */
+@plugin '@tailwindcss/typography';
+
+/* The typography plugin wraps blockquotes in curly quotes. Lessons use
+   blockquotes for the "Goal" line, which isn't a quote, so remove them. */
+.prose blockquote p::before,
+.prose blockquote p::after {
+  content: none;
+}
 
 /* Design tokens: the app's colors in one place (charliecodeacademy brand).
    Use them as Tailwind classes: bg-brand, text-ink, bg-accent, bg-surface… */

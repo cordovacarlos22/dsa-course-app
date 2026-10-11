@@ -3,7 +3,9 @@ import { describe, it, expect } from 'vitest'
 import {
   checkSectionInCourse,
   countMissingSpanish,
+  findLessonsMissingEnglish,
   validateCourse,
+  validateLesson,
   validateSection,
 } from './validate-content.js'
 
@@ -260,5 +262,96 @@ describe('class exercises', () => {
     expect(validateSection(section)).toEqual([
       expect.stringContaining('the first step must be { create: [...] }'),
     ])
+  })
+})
+
+// A lesson in module "01-intro" of makeValidCourse(), with every feature.
+function makeLesson(overrides = {}) {
+  return {
+    moduleSlug: '01-intro',
+    fileName: '02-sample-lesson.en.md',
+    text: [
+      '---',
+      'title: A sample lesson',
+      'order: 2',
+      'minutes: 5',
+      '---',
+      '',
+      'Some text.',
+      '',
+      '```viz',
+      'big-o-growth-chart',
+      '```',
+      '',
+      '```js-run',
+      'console.log(1 + 1)',
+      '```',
+    ].join('\n'),
+    ...overrides,
+  }
+}
+
+describe('validateLesson', () => {
+  it('accepts a valid lesson', () => {
+    expect(validateLesson(makeLesson(), makeValidCourse())).toEqual([])
+  })
+
+  it('rejects a lesson in a folder that is not a module', () => {
+    const lesson = makeLesson({ moduleSlug: '99-nope' })
+    expect(validateLesson(lesson, makeValidCourse())).toEqual([
+      'folder "99-nope" is not a module in course.json',
+    ])
+  })
+
+  it('rejects a badly named file', () => {
+    const lesson = makeLesson({ fileName: 'sample.md' })
+    expect(validateLesson(lesson, makeValidCourse())).toEqual([
+      expect.stringContaining('file name must look like'),
+    ])
+  })
+
+  it('rejects missing front matter fields', () => {
+    const lesson = makeLesson({ text: '---\ntitle: No order\n---\nText' })
+    const errors = validateLesson(lesson, makeValidCourse())
+    expect(errors).toEqual([
+      expect.stringContaining('front matter order'),
+      expect.stringContaining('front matter minutes'),
+    ])
+  })
+
+  it('rejects an order that does not match the file name', () => {
+    const lesson = makeLesson({ fileName: '03-sample-lesson.en.md' })
+    expect(validateLesson(lesson, makeValidCourse())).toEqual([
+      'order should be 3 (it comes from the file name)',
+    ])
+  })
+
+  it('rejects an animation that does not exist', () => {
+    const lesson = makeLesson()
+    lesson.text = lesson.text.replace('big-o-growth-chart', 'dancing-tree')
+    expect(validateLesson(lesson, makeValidCourse())).toEqual([
+      expect.stringContaining('unknown animation "dancing-tree"'),
+    ])
+  })
+
+  it('rejects runnable code that does not compile', () => {
+    const lesson = makeLesson()
+    lesson.text = lesson.text.replace('console.log(1 + 1)', 'console.log(')
+    expect(validateLesson(lesson, makeValidCourse())).toEqual([
+      expect.stringContaining('js-run block does not compile'),
+    ])
+  })
+})
+
+describe('findLessonsMissingEnglish', () => {
+  it('finds Spanish lessons without an English original', () => {
+    expect(
+      findLessonsMissingEnglish([
+        '01-a.en.md',
+        '01-a.es.md',
+        '02-b.es.md',
+        '03-c.en.md',
+      ]),
+    ).toEqual(['02-b.es.md'])
   })
 })
