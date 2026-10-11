@@ -46,23 +46,26 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Big O (`big-o`)
 
-**Status:** ✅ 12 lessons (EN + ES, 38 checkpoints) · ✅ quiz (EN + ES) · 🟡 3 of 4 interview problems · ⬜ slides
+**Status:** ✅ 14 lessons, visual-first (EN + ES, 29 checkpoints) · ✅ quiz (EN + ES) · 🟡 3 of 4 interview problems · ⬜ slides
 **Goal:** measure and compare the efficiency of code, in time and space.
+**Style:** every step opens with an animation, then 1–3 short sentences. One story for the whole module: the party **guest list**. Loops are always `for (let i = 0; i < guests.length; i++)`.
 
-- **Lessons:**
-  1. What is Big O? ✅ (`big-o-growth-chart`)
-  2. Why a stopwatch isn't enough: timing vs. counting operations ✅
-  3. Best, average and worst case (Ω, Θ, O) ✅
-  4. O(n): linear time ✅
-  5. Dropping constants ✅
-  6. O(n²): nested loops ✅
-  7. Dropping non-dominant terms ✅
-  8. O(1): constant time ✅
-  9. Different inputs, different variables (O(a + b) vs. O(a · b)) ✅
-  10. Space complexity ✅
-  11. Logarithms and O(log n) ✅ (`binary-search-halving`)
-  12. Wrap-up: comparing growth rates ✅ (`big-o-growth-chart`)
-- **Quiz:** reading the Big O of code, simplification rules, Ω/Θ/O, space complexity, logarithms.
+- **Lessons** (animations in parentheses):
+  1. Why Big O? ✅ (`trace-is-invited`, `trace-is-invited-all`, `big-o-growth-chart`)
+  2. Why a stopwatch isn't enough ✅ (`stopwatch-race`, `trace-welcome-all`)
+  3. Counting operations ✅ (`trace-count-short-names`, `linear-boxes`)
+  4. Best, average and worst case (Ω, Θ, O) ✅ (`search-cases`, `trace-is-invited`)
+  5. O(n): linear time ✅ (`trace-welcome-all`, `linear-boxes`)
+  6. Drop the constants ✅ (`trace-welcome-and-goodbye`, `same-shape`)
+  7. O(n²): a loop inside a loop ✅ (`nested-grid`, `trace-greet-everyone`)
+  8. Drop the non-dominant terms ✅ (`dominant-term`, `big-o-growth-chart`)
+  9. O(1): constant time ✅ (`constant-jump`, `big-o-growth-chart`)
+  10. Rules of thumb: the cost of each line ✅ (`trace-party-summary`, `trace-greet-everyone`)
+  11. Different inputs, different letters (O(a + b) vs. O(a · b)) ✅ (`two-inputs`, `trace-welcome-and-goodbye`)
+  12. Space complexity ✅ (`memory-boxes`, `trace-welcome-all`)
+  13. Logarithms and O(log n) ✅ (`halving-count`, `binary-search-halving`)
+  14. Wrap-up: all the shapes ✅ (`big-o-growth-chart`, `search-cases`)
+- **Quiz:** reading the Big O of guest-list code, simplification rules, rules of thumb, Ω/Θ/O, space complexity, logarithms. (Array operation questions move to the arrays module.)
 - **Build it:** none.
 - **Interview problems:** ✅ Find the Maximum · ✅ Contains Duplicate · ✅ Binary Search · Count the Operations (predict the count, then check it)
 

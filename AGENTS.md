@@ -130,12 +130,15 @@ When Carlos says _"write the lessons for module N"_:
 1. Read the module's English transcripts in `recursos originales/modulo-NN-*/guiones/` (see the content procedure below for the path) **only to get the topic list, order and depth**.
 2. Write each lesson **from scratch in Carlos's voice**: new explanations, new examples, new analogies, new code. Never copy or paraphrase the transcripts sentence by sentence.
 3. Save it as `content/lessons/<module-slug>/<NN-lesson-slug>.en.md` with front-matter (`title`, `order`, `minutes`).
-4. **Every `## ` heading starts a step** (the goal line before the first `##` belongs to step 1). Aim for 3–6 short steps. Each lesson has: a one-line goal, the explanation, at least one runnable snippet, an animation when the topic is visual, and the Big O summary inside the last step (no separate "recap" or "check yourself" sections: the checkpoints replace them).
+4. **Visual first.** Many students prefer pictures to reading. Every step **opens with a ` ```viz ` animation**, followed by 1–3 short sentences (put longer explanations in the animation captions), and optionally a small ` ```js-run `.
+   - **One story per module** (Big O: the party guest list), so students don't learn a new example every lesson.
+   - **Beginner code style:** loops are written `for (let i = 0; i < guests.length; i++) { … guests[i] … }`. No `for...of` or `.forEach` in lessons, checkpoints or practice code (`content:validate` rejects them). Avoid `Set`, `map` and other advanced tools until the module that teaches them.
+   - **Steps:** every `## ` heading starts a step (the goal line before the first `##` belongs to step 1). Aim for 3–6 short steps. Each lesson has: a one-line goal, the explanation, at least one runnable snippet, an animation when the topic is visual, and the Big O summary inside the last step (no separate "recap" or "check yourself" sections: the checkpoints replace them).
    - **Checkpoints:** `content/lessons/<module-slug>/<NN-lesson-slug>.checks.json` holds `{ "steps": [ … ] }`, **one checkpoint per step, in order**. The student can't press Next until the step's checkpoint passes. Mix both kinds:
      - `{ "type": "choice", "question", "options" (2–4), "answer" (index), "hint", "explanation" }`
      - `{ "type": "code", "task", "hint", "starterCode", "solution", "kind": "function", "functionName", "tests": [{ "args", "expected" }] }` (or `"kind": "class"`, `"className"` and step tests, like exercises).
    - Text fields are `{ "en", "es" }` and may use inline Markdown (`code`, **bold**). Code isn't translated. The starter code must compile and must **fail** the tests; the solution must pass them. A wrong try shows the hint; after 3 the student can reveal the answer.
-   - Example: `content/lessons/big-o/01-what-is-big-o.checks.json`.
+   - Example: `content/lessons/big-o/01-why-big-o.checks.json`.
 5. Lesson syntax (Markdown + two special blocks):
 
    ````md
@@ -160,7 +163,7 @@ When Carlos says _"write the lessons for module N"_:
    - New **code trace**: add a file to `src/visualizations/traces/` (the code + a generator that yields one step per highlighted line), register it in `traces/index.js` and `names.js`, and add its captions under `viz.trace.<key>`. `traces.test.js` runs the code for real and checks the trace ends with the same result.
    - New animation: build it with `StepPlayer` in `src/visualizations/`, add its name to `names.js` **and** register it in `index.js`, and put its captions in `src/locales/*.json` under `viz`.
 
-6. Run `npm run content:validate` (checks file names, front matter, animation names, that every `js-run` block compiles, and that each `.checks.json` has one checkpoint per step in every language with passing solutions and failing starter code), then open a PR for Carlos to review.
+6. Run `npm run content:validate` (checks file names, front matter, animation names, that every `js-run` block compiles, the beginner loop style, and that each `.checks.json` has one checkpoint per step in every language with passing solutions and failing starter code), then open a PR for Carlos to review.
 
 ## Content generation procedure
 
