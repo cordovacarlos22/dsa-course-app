@@ -14,7 +14,11 @@ const FRONT_MATTER = /^---\n([\s\S]*?)\n---\n?/
 
 function parseValue(rawValue) {
   const value = rawValue.trim()
-  return /^\d+$/.test(value) ? Number(value) : value
+  if (/^\d+$/.test(value)) return Number(value)
+  // Titles that contain ": " must be quoted to be valid YAML, e.g.
+  // title: 'O(n): linear time'. The quotes aren't part of the title.
+  const quoted = /^(['"])(.*)\1$/.exec(value)
+  return quoted ? quoted[2] : value
 }
 
 // Returns { data, body }. `data` is {} when the file has no front matter.
