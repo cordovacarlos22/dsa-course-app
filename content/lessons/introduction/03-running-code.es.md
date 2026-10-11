@@ -16,6 +16,8 @@ Cada caja oscura con un botón **Ejecutar** es un pequeño editor de código:
 
 Todo lo que tu código imprima con `console.log` aparece debajo de la caja.
 
+Las **comprobaciones** de código usan un espacio de trabajo más grande: la lección a la izquierda, el editor en el centro y el resultado a la derecha (pestañas en el teléfono). **Ejecutar** muestra lo que imprime tu código, y **Comprobar** ejecuta pruebas sobre tu código y te dice cuáles pasan. Lo vas a probar en los siguientes pasos.
+
 ## Imprimir valores
 
 `console.log` puede imprimir varios valores a la vez. Pone un espacio entre ellos:
@@ -69,7 +71,7 @@ console.log('¡Listo!')
 
 Ejecútalo y espera dos segundos. Luego arréglalo: agrega `count++` dentro del bucle y ejecútalo otra vez. Ahora verás `¡Listo!`.
 
-## Opcional: practicar en Chrome DevTools
+### Opcional: practicar en Chrome DevTools
 
 Las cajas de código son perfectas para las lecciones. Para sesiones de práctica más largas, también puedes usar el editor de código que trae Google Chrome:
 
@@ -80,17 +82,11 @@ Las cajas de código son perfectas para las lecciones. Para sesiones de práctic
 
 La salida aparece en la **Console** (consola) de abajo. También puedes llamar a tus funciones directamente desde la consola después de ejecutar el snippet.
 
-## Resumen
+En resumen:
 
 - **Ejecutar** = el botón o **Ctrl/Cmd + Enter**. **Restablecer** vuelve al código original.
 - `console.log(a, b, c)` imprime varios valores separados por espacios.
 - Un mensaje de error = un **tipo** + un **mensaje**. Lo que se imprimió antes del error sigue apareciendo.
 - Los bucles infinitos se detienen después de **2 segundos**.
-
-## Compruébalo tú mismo
-
-1. ¿Qué atajo de teclado ejecuta el código?
-2. En `ReferenceError: gret is not defined`, ¿qué parte te dice la clase de problema?
-3. ¿Qué pasa si tu código ejecuta un bucle que nunca termina?
 
 Ya estás listo para el **cuestionario del Módulo 1**. Después de eso, ¡a Big O!

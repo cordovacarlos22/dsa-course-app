@@ -1,0 +1,126 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which keyboard shortcut runs the code in a code box?",
+        "es": "¿Qué atajo de teclado ejecuta el código de una caja de código?"
+      },
+      "options": [
+        {
+          "en": "Ctrl + S (Cmd + S on a Mac)",
+          "es": "Ctrl + S (Cmd + S en Mac)"
+        },
+        {
+          "en": "Ctrl + Enter (Cmd + Enter on a Mac)",
+          "es": "Ctrl + Enter (Cmd + Enter en Mac)"
+        },
+        {
+          "en": "Shift + Tab",
+          "es": "Shift + Tab"
+        },
+        {
+          "en": "Alt + R",
+          "es": "Alt + R"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "It's in the list at the top of this step, next to **Run**.",
+        "es": "Está en la lista al principio de este paso, junto a **Ejecutar**."
+      },
+      "explanation": {
+        "en": "Ctrl + Enter (Cmd + Enter on a Mac) runs the code, just like the Run button.",
+        "es": "Ctrl + Enter (Cmd + Enter en Mac) ejecuta el código, igual que el botón Ejecutar."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "What does `console.log('Year:', 1995)` print?",
+        "es": "¿Qué imprime `console.log('Year:', 1995)`?"
+      },
+      "options": [
+        {
+          "en": "`'Year:', 1995`",
+          "es": "`'Year:', 1995`"
+        },
+        {
+          "en": "`Year:1995`",
+          "es": "`Year:1995`"
+        },
+        {
+          "en": "An error, because you can't mix text and numbers",
+          "es": "Un error, porque no puedes mezclar texto y números"
+        },
+        {
+          "en": "`Year: 1995`",
+          "es": "`Year: 1995`"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "`console.log` puts something between the values it prints. Try it in the code box above.",
+        "es": "`console.log` pone algo entre los valores que imprime. Pruébalo en la caja de código de arriba."
+      },
+      "explanation": {
+        "en": "`console.log` prints every value you give it, separated by a space.",
+        "es": "`console.log` imprime todos los valores que le das, separados por un espacio."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "This code has a bug. Press **Run**, read the error message, and fix the code so `double(number)` returns the number times 2.",
+        "es": "Este código tiene un error. Presiona **Ejecutar**, lee el mensaje de error y arregla el código para que `double(number)` devuelva el número por 2."
+      },
+      "hint": {
+        "en": "The error says `numbr is not defined`: a typo. What is the parameter really called?",
+        "es": "El error dice `numbr is not defined`: un error de escritura. ¿Cómo se llama de verdad el parámetro?"
+      },
+      "starterCode": "function double(number) {\n  return numbr * 2\n}\n\nconsole.log(double(5))\n",
+      "solution": "function double(number) {\n  return number * 2\n}\n\nconsole.log(double(5))\n",
+      "kind": "function",
+      "functionName": "double",
+      "tests": [
+        {
+          "args": [2],
+          "expected": 4
+        },
+        {
+          "args": [5],
+          "expected": 10
+        },
+        {
+          "args": [-3],
+          "expected": -6
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "This loop never stops. Press **Check** and you'll see it get stopped after 2 seconds. Then fix it so `sumTo(n)` returns 1 + 2 + … + n.",
+        "es": "Este bucle nunca termina. Presiona **Comprobar** y verás que se detiene después de 2 segundos. Después arréglalo para que `sumTo(n)` devuelva 1 + 2 + … + n."
+      },
+      "hint": {
+        "en": "`count` never changes, so `count <= n` is always true. Add `count++` inside the loop.",
+        "es": "`count` nunca cambia, así que `count <= n` siempre es verdadero. Agrega `count++` dentro del bucle."
+      },
+      "starterCode": "function sumTo(n) {\n  let total = 0\n  let count = 1\n  while (count <= n) {\n    total += count\n  }\n  return total\n}\n\nconsole.log(sumTo(3)) // 6\n",
+      "solution": "function sumTo(n) {\n  let total = 0\n  let count = 1\n  while (count <= n) {\n    total += count\n    count++\n  }\n  return total\n}\n\nconsole.log(sumTo(3)) // 6\n",
+      "kind": "function",
+      "functionName": "sumTo",
+      "tests": [
+        {
+          "args": [3],
+          "expected": 6
+        },
+        {
+          "args": [5],
+          "expected": 15
+        }
+      ]
+    }
+  ]
+}

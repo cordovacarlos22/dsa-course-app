@@ -19,13 +19,14 @@ Solo necesitas JavaScript básico: variables, funciones, bucles y arrays. Las cl
 
 ## Cómo funciona una lección
 
-Cada lección combina tres cosas:
+Cada lección es una serie corta de **pasos**, y cada paso combina:
 
 1. **Explicaciones cortas** en lenguaje sencillo.
 2. **Animaciones** que controlas paso a paso, para que _veas_ moverse un algoritmo en lugar de imaginarlo.
 3. **Código que puedes ejecutar** aquí mismo, en la página.
+4. **Una comprobación rápida al final:** una pregunta o una pequeña tarea de código. El botón **Siguiente** se desbloquea cuando la pasas. ¿Te atascaste? Un intento fallido te muestra una pista, y después de 3 intentos puedes ver la respuesta.
 
-Probemos lo último ahora. Cambia el nombre y presiona **Ejecutar**:
+Probemos ejecutar código ahora. Cambia el nombre y presiona **Ejecutar**:
 
 ```js-run
 const name = 'Ada'
@@ -52,7 +53,7 @@ Este es el mapa, en orden:
 
 Es mucho, y algunos temas asustan de lejos. Por eso cada uno está dividido en pasos pequeños, con una animación cada vez que una imagen ayuda más que las palabras.
 
-## Al terminar el curso
+### Al terminar el curso
 
 - Vas a analizar la **complejidad temporal y espacial** de cualquier código con Big O.
 - Vas a tener un **método** para resolver problemas que nunca has visto.
@@ -64,15 +65,10 @@ Es mucho, y algunos temas asustan de lejos. Por eso cada uno está dividido en p
 
 ¡Hola, soy Carlos! Soy ingeniero de software y aprendí todo esto por el camino largo: terminé mi carrera de Ingeniería en Computación mientras trabajaba tiempo completo como chofer de tráiler e instructor de choferes, estudiando entre turnos. Entrenar a choferes nuevos me enseñó que cualquier habilidad difícil se vuelve fácil cuando la divides en pasos pequeños y claros. Así funciona cada lección de este curso, y voy a estar contigo todo el camino.
 
-## Resumen
+En resumen:
 
-- Lecciones = explicación + animaciones + código ejecutable.
+- Lecciones = pasos cortos con explicaciones, animaciones, código ejecutable y una comprobación al final de cada paso.
 - Cada módulo termina con un cuestionario y ejercicios con tiempo.
 - Empezamos por los fundamentos (Big O, clases y punteros) y un método para resolver problemas, porque todo lo demás se construye sobre ellos.
 
-## Compruébalo tú mismo
-
-1. ¿Cuáles son los dos algoritmos de ordenamiento "eficientes" de este curso?
-2. ¿Qué tres cosas combina cada lección?
-
-Encontrarás más preguntas como estas en el **cuestionario del Módulo 1**, en la página del módulo.
+Al final del módulo, el **cuestionario del Módulo 1**, en la página del módulo, repasa todo junto.
