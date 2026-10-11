@@ -4,33 +4,45 @@ import { readdir, readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { isDeepStrictEqual } from 'node:util'
+import vm from 'node:vm'
 import { sectionSchema } from './content-schema.js'
 
 const SECTIONS_DIR = 'content/sections'
 
-// Turns the solution source code into a real function we can call.
-function loadFunction(code, functionName) {
-  return new Function(`${code}\nreturn ${functionName}`)()
+// A buggy solution can loop forever, so each test gets a time limit.
+const TEST_TIMEOUT_MS = 1000
+
+// Runs one test in a separate JS context (node:vm) with a timeout.
+// Note: node:vm is NOT a security sandbox. That's fine here because we only
+// run our own reference solutions, never code typed by students.
+// Args go in as JSON and the result comes out as JSON, so every test gets
+// fresh copies and the values are plain objects we can compare.
+function runTest(code, functionName, args) {
+  const script = `${code}\nJSON.stringify(${functionName}(...JSON.parse(argsJson)))`
+  const resultJson = vm.runInNewContext(
+    script,
+    { argsJson: JSON.stringify(args) },
+    { timeout: TEST_TIMEOUT_MS },
+  )
+  return resultJson === undefined ? undefined : JSON.parse(resultJson)
 }
 
 // Runs the reference solution against every test, so we never ship
 // an exercise whose own answer is wrong.
 export function checkSolution(exercise) {
-  const errors = []
-  let solve
+  const code = exercise.solution.javascript
   try {
-    solve = loadFunction(exercise.solution.javascript, exercise.functionName)
+    new vm.Script(code) // only checks the syntax, doesn't run anything
   } catch (error) {
     return [
       `exercise "${exercise.slug}": solution does not compile (${error.message})`,
     ]
   }
 
+  const errors = []
   exercise.tests.forEach((test, index) => {
-    // Copy the args so a solution that changes its input can't affect other tests.
-    const args = structuredClone(test.args)
     try {
-      const actual = solve(...args)
+      const actual = runTest(code, exercise.functionName, test.args)
       if (!isDeepStrictEqual(actual, test.expected)) {
         errors.push(
           `exercise "${exercise.slug}" test ${index + 1}: expected ${JSON.stringify(test.expected)}, got ${JSON.stringify(actual)}`,

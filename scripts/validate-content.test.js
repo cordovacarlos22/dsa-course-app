@@ -87,6 +87,15 @@ describe('validateSection', () => {
     expect(errors[0]).toContain('exercise "add" test 1: expected 3, got -1')
   })
 
+  it('stops a solution that loops forever', () => {
+    const section = makeValidSection()
+    section.exercises[0].solution.javascript =
+      'function add(a, b) { while (true) {} }'
+    const errors = validateSection(section)
+    expect(errors).toHaveLength(5)
+    expect(errors[0]).toContain('timed out')
+  }, 15_000)
+
   it('rejects a solution that does not compile', () => {
     const section = makeValidSection()
     section.exercises[0].solution.javascript =
