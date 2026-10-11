@@ -10,6 +10,10 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Decisions
 
+- 2026-10-11: **Landing page and course story.** Built from Carlos's course description (structure only, original wording) and his resume. Public bio facts: software engineer, B.S. Computer Engineering (UTEL 2026), AWS Certified Cloud Practitioner, DEV.F bootcamp, learned and studied while working full-time as a truck driver and driver trainer, bilingual. **Never publish his phone, email or city** (a landing test checks there's no email or phone number). Photo: `public/images/carlos-cordova.jpg` (cropped from his course image). Price: "Free during the beta".
+- 2026-10-11: **No borrowed testimonials.** The reviews in the original course description belong to another instructor's students and are not used. Add real reviews from Carlos's own students later.
+- 2026-10-11: **Course parts:** `content/course.json` has `parts` (Foundations, Data Structures, Recursion & Trees, Sorting, Dynamic Programming); every module must be in exactly one part (`content:validate` checks it). The landing curriculum and the course home both use them.
+
 - 2026-10-11: **Lessons are written in English and Spanish together** from Module 1 on (Carlos's choice). Spanish is natural, not word for word, using his terms (bucle, array, nodo, puntero…). Code names stay in English; comments and printed strings are translated. Messages from the app itself (like the runner's timeout) come from `src/locales`, never hard-coded.
 
 - 2026-10-11: **Vercel is connected** (Carlos linked the repo; Vercel team `carloscordovadevs`). Production: https://dsa-course-app.vercel.app. Vercel's Git integration currently deploys every PR (preview, behind Vercel's login wall) and `main` (production). `vercel.json` rewrites every route to `index.html` so deep links work. Stage 9 switches to the blue/green flow (turn off Git auto-deploys, deploy from GitHub Actions).
