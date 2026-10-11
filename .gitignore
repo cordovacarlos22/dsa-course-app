@@ -41,3 +41,6 @@ playwright-report
 # Only the generated content in content/sections/ is committed.
 content/notes/**
 !content/notes/.gitkeep
+
+# Duplicates that macOS / iCloud create, like "file 2.jsx"
+* [0-9].*
