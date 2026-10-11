@@ -35,8 +35,8 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 1. ✅ Scaffold
 2. CI + GitHub: `ci.yml`, push the branches, PRs in order, branch protection
-3. Pivot docs: AGENTS.md, memory.md, README, app title ← current
-4. App shell + i18n: router, layout, react-i18next, first-visit language picker, landing, course home
+3. ✅ Pivot docs: AGENTS.md, memory.md, README, app title (branch `docs/pivot-course-app`)
+4. App shell + i18n: router, layout, react-i18next, first-visit language picker, landing, course home ← next
 5. Lesson system: lesson schema + validation, Markdown renderer, StepPlayer, first 3 animations, runnable snippets (Web Worker)
 6. Original lessons for modules 01–03 (EN), reviewed by Carlos
 7. Quiz + exercise pages (CodeMirror, runner, timer)
