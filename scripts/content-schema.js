@@ -41,6 +41,9 @@ const exerciseBase = {
   title: localizedText,
   description: localizedText,
   difficulty: z.enum(['easy', 'medium', 'hard']),
+  // "build": implement the module's data structure/algorithm step by step.
+  // "interview": a LeetCode-style problem that uses it.
+  category: z.enum(['build', 'interview']),
   starterCode: codeByLanguage,
   solution: codeByLanguage,
   expectedComplexity: z.object({ time: nonEmpty, space: nonEmpty }).strict(),

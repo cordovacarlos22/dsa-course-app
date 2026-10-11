@@ -34,6 +34,7 @@ function makeValidSection() {
         title: text('Add'),
         description: text('Return a + b.'),
         difficulty: 'easy',
+        category: 'interview',
         functionName: 'add',
         starterCode: { javascript: 'function add(a, b) {\n}' },
         solution: { javascript: 'function add(a, b) { return a + b }' },
@@ -67,6 +68,14 @@ describe('validateSection', () => {
     const section = makeValidSection()
     delete section.questions[0].prompt.es
     expect(validateSection(section)).toEqual([])
+  })
+
+  it('rejects an exercise without a valid category', () => {
+    const section = makeValidSection()
+    section.exercises[0].category = 'homework'
+    expect(validateSection(section)).toEqual([
+      expect.stringContaining('exercises.0'),
+    ])
   })
 
   it('rejects a question with only 3 options', () => {
@@ -235,6 +244,7 @@ function makeClassSection() {
       title: text('Counter'),
       description: text('Build a Counter class.'),
       difficulty: 'easy',
+      category: 'build',
       className: 'Counter',
       starterCode: { javascript: 'class Counter {\n}' },
       solution: {
