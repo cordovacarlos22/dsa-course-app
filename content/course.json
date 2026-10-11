@@ -5,12 +5,12 @@
     "es": "Curso de Estructuras de Datos y Algoritmos en JavaScript con Ejercicios de LEETCODE"
   },
   "description": {
-    "en": "Learn data structures and algorithms in JavaScript one small step at a time. Watch every idea move in step-by-step animations, run real code right in your browser, and practice with quizzes and timed, interview-style exercises until you can solve problems and explain your reasoning with confidence.",
-    "es": "Aprende estructuras de datos y algoritmos en JavaScript un paso pequeño a la vez. Mira cada idea moverse en animaciones paso a paso, ejecuta código real en tu navegador y practica con cuestionarios y ejercicios con tiempo, estilo entrevista, hasta que puedas resolver problemas y explicar tu razonamiento con confianza."
+    "en": "Learn data structures and algorithms in JavaScript one small step at a time. Start with Big O and a clear method for solving any problem, then master the patterns, searching, six sorting algorithms, the classic data structures and graph algorithms like Dijkstra's shortest path. Watch every idea move in step-by-step animations, run real code in your browser, and practice with quizzes and timed, interview-style exercises until you can solve problems and explain your reasoning with confidence.",
+    "es": "Aprende estructuras de datos y algoritmos en JavaScript un paso pequeño a la vez. Empieza con Big O y un método claro para resolver cualquier problema, y luego domina los patrones, la búsqueda, seis algoritmos de ordenamiento, las estructuras de datos clásicas y algoritmos de grafos como el camino más corto de Dijkstra. Mira cada idea moverse en animaciones paso a paso, ejecuta código real en tu navegador y practica con cuestionarios y ejercicios con tiempo, estilo entrevista, hasta que puedas resolver problemas y explicar tu razonamiento con confianza."
   },
   "modules": [
     {
-      "slug": "01-introduccion",
+      "slug": "introduction",
       "order": 1,
       "title": {
         "en": "Introduction",
@@ -19,7 +19,7 @@
       "sourceFolder": "recursos originales/modulo-01-introduccion"
     },
     {
-      "slug": "02-big-o",
+      "slug": "big-o",
       "order": 2,
       "title": {
         "en": "Big O",
@@ -28,8 +28,16 @@
       "sourceFolder": "recursos originales/modulo-02-big-o"
     },
     {
-      "slug": "03-clases-punteros",
+      "slug": "arrays-and-objects",
       "order": 3,
+      "title": {
+        "en": "Big O of Arrays & Objects",
+        "es": "Big O de arrays y objetos"
+      }
+    },
+    {
+      "slug": "classes-and-pointers",
+      "order": 4,
       "title": {
         "en": "Classes & Pointers",
         "es": "Clases y punteros"
@@ -37,71 +45,24 @@
       "sourceFolder": "recursos originales/modulo-03-clases-punteros"
     },
     {
-      "slug": "04-listas-enlazadas",
-      "order": 4,
-      "title": {
-        "en": "Linked Lists",
-        "es": "Listas enlazadas"
-      },
-      "sourceFolder": "recursos originales/modulo-04-listas-enlazadas"
-    },
-    {
-      "slug": "05-listas-doblemente-enlazadas",
+      "slug": "problem-solving-approach",
       "order": 5,
       "title": {
-        "en": "Doubly Linked Lists",
-        "es": "Listas doblemente enlazadas"
-      },
-      "sourceFolder": "recursos originales/modulo-05-listas-doblemente-enlazadas"
+        "en": "A Problem-Solving Approach",
+        "es": "Un método para resolver problemas"
+      }
     },
     {
-      "slug": "06-pilas-colas",
+      "slug": "problem-solving-patterns",
       "order": 6,
       "title": {
-        "en": "Stacks & Queues",
-        "es": "Pilas y colas"
-      },
-      "sourceFolder": "recursos originales/modulo-06-pilas-colas"
+        "en": "Problem-Solving Patterns",
+        "es": "Patrones para resolver problemas"
+      }
     },
     {
-      "slug": "07-arboles",
+      "slug": "recursion",
       "order": 7,
-      "title": {
-        "en": "Trees",
-        "es": "Árboles"
-      },
-      "sourceFolder": "recursos originales/modulo-07-arboles"
-    },
-    {
-      "slug": "08-tablas-hash",
-      "order": 8,
-      "title": {
-        "en": "Hash Tables",
-        "es": "Tablas hash"
-      },
-      "sourceFolder": "recursos originales/modulo-08-tablas-hash"
-    },
-    {
-      "slug": "09-grafos",
-      "order": 9,
-      "title": {
-        "en": "Graphs",
-        "es": "Grafos"
-      },
-      "sourceFolder": "recursos originales/modulo-09-grafos"
-    },
-    {
-      "slug": "10-heaps",
-      "order": 10,
-      "title": {
-        "en": "Heaps",
-        "es": "Heaps"
-      },
-      "sourceFolder": "recursos originales/modulo-10-heaps"
-    },
-    {
-      "slug": "11-recursion",
-      "order": 11,
       "title": {
         "en": "Recursion",
         "es": "Recursión"
@@ -109,35 +70,25 @@
       "sourceFolder": "recursos originales/modulo-11-recursion"
     },
     {
-      "slug": "12-busqueda-recursiva-arbol-binario",
-      "order": 12,
+      "slug": "searching",
+      "order": 8,
       "title": {
-        "en": "Recursive Binary Search Tree",
-        "es": "Búsqueda recursiva en árbol binario"
-      },
-      "sourceFolder": "recursos originales/modulo-12-búsqueda recursiva de árbol binario"
+        "en": "Searching Algorithms",
+        "es": "Algoritmos de búsqueda"
+      }
     },
     {
-      "slug": "13-recorridos-arboles",
-      "order": 13,
-      "title": {
-        "en": "Tree Traversal",
-        "es": "Recorridos de árboles"
-      },
-      "sourceFolder": "recursos originales/modulo-13-recorridos-arboles"
-    },
-    {
-      "slug": "14-ordenamiento-basico",
-      "order": 14,
+      "slug": "basic-sorts",
+      "order": 9,
       "title": {
         "en": "Basic Sorts",
-        "es": "Ordenamiento básico"
+        "es": "Ordenamientos básicos"
       },
       "sourceFolder": "recursos originales/modulo-14-ordenamiento-basico"
     },
     {
-      "slug": "15-ordenamiento-merge-sort",
-      "order": 15,
+      "slug": "merge-sort",
+      "order": 10,
       "title": {
         "en": "Merge Sort",
         "es": "Merge Sort"
@@ -145,8 +96,8 @@
       "sourceFolder": "recursos originales/modulo-15-ordenamiento-merge-sort"
     },
     {
-      "slug": "16-ordenamiento-quick-sort",
-      "order": 16,
+      "slug": "quick-sort",
+      "order": 11,
       "title": {
         "en": "Quick Sort",
         "es": "Quick Sort"
@@ -154,8 +105,104 @@
       "sourceFolder": "recursos originales/modulo-16-ordenamiento-quick-sort"
     },
     {
-      "slug": "17-programacion-dinamica",
+      "slug": "radix-sort",
+      "order": 12,
+      "title": {
+        "en": "Radix Sort",
+        "es": "Radix Sort"
+      }
+    },
+    {
+      "slug": "linked-lists",
+      "order": 13,
+      "title": {
+        "en": "Linked Lists",
+        "es": "Listas enlazadas"
+      },
+      "sourceFolder": "recursos originales/modulo-04-listas-enlazadas"
+    },
+    {
+      "slug": "doubly-linked-lists",
+      "order": 14,
+      "title": {
+        "en": "Doubly Linked Lists",
+        "es": "Listas doblemente enlazadas"
+      },
+      "sourceFolder": "recursos originales/modulo-05-listas-doblemente-enlazadas"
+    },
+    {
+      "slug": "stacks-and-queues",
+      "order": 15,
+      "title": {
+        "en": "Stacks & Queues",
+        "es": "Pilas y colas"
+      },
+      "sourceFolder": "recursos originales/modulo-06-pilas-colas"
+    },
+    {
+      "slug": "binary-search-trees",
+      "order": 16,
+      "title": {
+        "en": "Binary Search Trees",
+        "es": "Árboles binarios de búsqueda"
+      },
+      "sourceFolder": "recursos originales/modulo-07-arboles"
+    },
+    {
+      "slug": "tree-traversal",
       "order": 17,
+      "title": {
+        "en": "Tree Traversal",
+        "es": "Recorridos de árboles"
+      },
+      "sourceFolder": "recursos originales/modulo-13-recorridos-arboles"
+    },
+    {
+      "slug": "heaps-and-priority-queues",
+      "order": 18,
+      "title": {
+        "en": "Heaps & Priority Queues",
+        "es": "Heaps y colas de prioridad"
+      },
+      "sourceFolder": "recursos originales/modulo-10-heaps"
+    },
+    {
+      "slug": "hash-tables",
+      "order": 19,
+      "title": {
+        "en": "Hash Tables",
+        "es": "Tablas hash"
+      },
+      "sourceFolder": "recursos originales/modulo-08-tablas-hash"
+    },
+    {
+      "slug": "graphs",
+      "order": 20,
+      "title": {
+        "en": "Graphs",
+        "es": "Grafos"
+      },
+      "sourceFolder": "recursos originales/modulo-09-grafos"
+    },
+    {
+      "slug": "graph-traversal",
+      "order": 21,
+      "title": {
+        "en": "Graph Traversal",
+        "es": "Recorridos de grafos"
+      }
+    },
+    {
+      "slug": "dijkstra",
+      "order": 22,
+      "title": {
+        "en": "Dijkstra's Shortest Path",
+        "es": "El camino más corto de Dijkstra"
+      }
+    },
+    {
+      "slug": "dynamic-programming",
+      "order": 23,
       "title": {
         "en": "Dynamic Programming",
         "es": "Programación dinámica"
@@ -163,8 +210,8 @@
       "sourceFolder": "recursos originales/modulo-17-programacion-dimanica"
     },
     {
-      "slug": "18-problemas-arrays",
-      "order": 18,
+      "slug": "array-interview-problems",
+      "order": 24,
       "title": {
         "en": "Array Interview Problems",
         "es": "Problemas de entrevista con arrays"
@@ -178,7 +225,38 @@
         "en": "Foundations",
         "es": "Fundamentos"
       },
-      "modules": ["01-introduccion", "02-big-o", "03-clases-punteros"]
+      "modules": [
+        "introduction",
+        "big-o",
+        "arrays-and-objects",
+        "classes-and-pointers"
+      ]
+    },
+    {
+      "slug": "problem-solving",
+      "title": {
+        "en": "Problem Solving",
+        "es": "Resolución de problemas"
+      },
+      "modules": [
+        "problem-solving-approach",
+        "problem-solving-patterns",
+        "recursion"
+      ]
+    },
+    {
+      "slug": "searching-and-sorting",
+      "title": {
+        "en": "Searching & Sorting",
+        "es": "Búsqueda y ordenamiento"
+      },
+      "modules": [
+        "searching",
+        "basic-sorts",
+        "merge-sort",
+        "quick-sort",
+        "radix-sort"
+      ]
     },
     {
       "slug": "data-structures",
@@ -187,38 +265,23 @@
         "es": "Estructuras de datos"
       },
       "modules": [
-        "04-listas-enlazadas",
-        "05-listas-doblemente-enlazadas",
-        "06-pilas-colas",
-        "07-arboles",
-        "08-tablas-hash",
-        "09-grafos",
-        "10-heaps"
+        "linked-lists",
+        "doubly-linked-lists",
+        "stacks-and-queues",
+        "binary-search-trees",
+        "tree-traversal",
+        "heaps-and-priority-queues",
+        "hash-tables",
+        "graphs"
       ]
     },
     {
-      "slug": "recursion-and-trees",
+      "slug": "graph-algorithms",
       "title": {
-        "en": "Recursion & Trees",
-        "es": "Recursión y árboles"
+        "en": "Graph Algorithms",
+        "es": "Algoritmos de grafos"
       },
-      "modules": [
-        "11-recursion",
-        "12-busqueda-recursiva-arbol-binario",
-        "13-recorridos-arboles"
-      ]
-    },
-    {
-      "slug": "sorting",
-      "title": {
-        "en": "Sorting",
-        "es": "Ordenamiento"
-      },
-      "modules": [
-        "14-ordenamiento-basico",
-        "15-ordenamiento-merge-sort",
-        "16-ordenamiento-quick-sort"
-      ]
+      "modules": ["graph-traversal", "dijkstra"]
     },
     {
       "slug": "dynamic-programming",
@@ -226,7 +289,7 @@
         "en": "Dynamic Programming",
         "es": "Programación dinámica"
       },
-      "modules": ["17-programacion-dinamica"]
+      "modules": ["dynamic-programming"]
     },
     {
       "slug": "interview-practice",
@@ -234,7 +297,7 @@
         "en": "Interview Practice",
         "es": "Práctica de entrevistas"
       },
-      "modules": ["18-problemas-arrays"]
+      "modules": ["array-interview-problems"]
     }
   ]
 }

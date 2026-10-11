@@ -8,8 +8,8 @@ const lessonFiles = import.meta.glob('../../content/lessons/*/*.md', {
   eager: true,
 })
 
-// "../../content/lessons/02-big-o/01-what-is-big-o.en.md"
-//   → { moduleSlug: "02-big-o", slug: "01-what-is-big-o", language: "en" }
+// "../../content/lessons/big-o/01-what-is-big-o.en.md"
+//   → { moduleSlug: "big-o", slug: "01-what-is-big-o", language: "en" }
 const LESSON_PATH = /lessons\/([^/]+)\/([^/]+)\.(en|es)\.md$/
 
 // Builds { [moduleSlug]: [lesson, …] }, each list sorted by `order`.

@@ -13,7 +13,7 @@ function FinalCallToAction() {
         {t('landing.finalText')}
       </p>
       <Link
-        to="/learn/01-introduccion"
+        to="/learn/introduction"
         className="mt-8 inline-block rounded-full bg-accent px-8 py-3 font-bold text-ink hover:brightness-105"
       >
         {t('landing.cta')}

@@ -16,7 +16,7 @@
   "landing": {
     "badge": "Free during the beta",
     "headline": "Learn data structures and algorithms in JavaScript, step by step",
-    "subheadline": "Watch every algorithm move, run real code in your browser and practice until coding interviews feel easy, with an AI tutor by your side.",
+    "subheadline": "Learn a clear method for solving problems, watch every algorithm move, run real code in your browser and practice until coding interviews feel easy, with an AI tutor by your side.",
     "cta": "Start learning",
     "ctaSecondary": "See the curriculum",
     "howTitle": "How you'll learn",
@@ -43,10 +43,12 @@
     "learnTitle": "What you'll learn",
     "learnItems": [
       "Analyze the time and space complexity of any code with Big O",
-      "Build linked lists, stacks, queues, trees, hash tables, graphs and heaps from scratch",
-      "Understand sorting, recursion and dynamic programming instead of memorizing them",
-      "Solve LeetCode-style problems against the clock",
-      "Pick the right data structure for each problem, and explain why",
+      "Solve new problems with a 5-step method and common patterns like sliding window and two pointers",
+      "Think recursively and use searching algorithms like binary search",
+      "Write 6 sorting algorithms, from bubble sort to merge, quick and radix sort",
+      "Build linked lists, stacks, queues, trees, heaps, hash tables and graphs from scratch",
+      "Traverse graphs and find shortest paths with Dijkstra's algorithm",
+      "Understand dynamic programming instead of memorizing it",
       "Walk into technical interviews ready to explain your reasoning out loud"
     ],
     "curriculumTitle": "The curriculum",
@@ -112,7 +114,7 @@
       },
       {
         "q": "Do I need to know data structures already?",
-        "a": "No. We start from zero with Big O. You only need basic JavaScript."
+        "a": "No. We start from zero with Big O and a method for solving problems. You only need basic JavaScript."
       }
     ],
     "finalTitle": "Ready to start?",

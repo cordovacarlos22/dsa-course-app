@@ -28,8 +28,8 @@ The course material lives **outside this repo**, in the course folder on Carlos'
 `curso por mi /Curso-de-…-LEETCODE/recursos originales/modulo-NN-<slug>/` (English transcripts in `guiones/` plus PDFs and code).
 
 1. Add the module's material to its `recursos originales/modulo-NN-<slug>/` folder. If you only have Spanish scripts in `recursos /guiones/`, Claude Code translates them first.
-2. Ask Claude Code: _"generate content for section 03"_.
-3. Review the generated `content/sections/<NN-slug>.json`, run `npm run content:validate`, then commit it on a branch and open a PR.
+2. Ask Claude Code: _"write the lessons for the Big O module"_ (modules are listed in `docs/curriculum.md`).
+3. Review the generated lessons (`content/lessons/<module-slug>/`) and quiz/exercises (`content/sections/<module-slug>.json`), run `npm run content:validate`, then commit on a branch and open a PR.
 
 ## For AI agents
 

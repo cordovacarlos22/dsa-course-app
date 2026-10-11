@@ -117,8 +117,10 @@ Before every commit, run: `npm run lint && npm run format:check && npm test && n
 
 ## Course blueprint and originality (read before writing any content)
 
-- **[`docs/curriculum.md`](./docs/curriculum.md) is the plan for the whole course**: 18 modules in 6 parts, and for each module its lessons, animations, quiz topics, **Build it** exercises and **Interview problems**. Write content in that order, and update the module's **Status** in the blueprint when its content is merged.
-- **The original course is an example of structure only.** Its lessons, coding exercises, starter files, solutions, quizzes and wording are **never copied or paraphrased**. Every lesson, problem statement, example, test and solution here is written from scratch. Classic problem _names_ (e.g. "Two Sum") are fine; their text and tests must be ours.
+- **[`docs/curriculum.md`](./docs/curriculum.md) is the plan for the whole course**: 24 modules in 7 parts (algorithms first), and for each module its lessons, animations, quiz topics, **Build it** exercises, **Interview problems** and slides. Write content in that order, and update the module's **Status** in the blueprint when its content is merged.
+- **The two courses Carlos took are examples of structure only.** Their lessons, slides, coding exercises, starter files, solutions, quizzes and wording are **never copied, edited, paraphrased or reused**, including the course 2 slide PDFs in Carlos's Desktop folder. Every lesson, slide, problem statement, example, test and solution here is written from scratch. Classic problem _names_ (e.g. "Two Sum") are fine; their text and tests must be ours.
+- **Slides are ours too:** each module gets its own deck (original text and diagrams, Carlos's brand, EN + ES), built in a later stage.
+- **Module slugs are English names without numbers** (`big-o`, `linked-lists`, `dijkstra`). The order lives only in `content/course.json`, so reordering never breaks links. `sourceFolder` (optional) points to the matching folder in Carlos's course material.
 
 ## Lesson-writing procedure
 
@@ -179,7 +181,7 @@ When Carlos says _"generate content for section N"_:
 
 3. **Read everything** in `recursos originales/modulo-NN-<slug>/`: the `guiones/*.md`, the `.pdf`s and the `.js` files.
 
-4. **Write `content/sections/<NN-slug>.json`.** The slug is the module folder name (`02-big-o`, `03-clases-punteros`); `content/course.json` lists them all.
+4. **Write `content/sections/<module-slug>.json`** (e.g. `big-o.json`). The slug is the module's English name from `content/course.json`; its `sourceFolder` tells you which `recursos originales/modulo-NN-…` folder has the material.
    - **English first.** `en` is required; `es` can be added later (the validator warns about missing Spanish).
    - **10–16 multiple-choice questions** covering every lesson: 4 options each, exactly one correct, a short explanation. Test understanding (why, when, Big O), not just memorization. Use the `code` field for "what does this code do / what's its Big O?" questions. Spread the correct answer across positions 0–3.
    - **Exercises**, as listed for the module in `docs/curriculum.md`:

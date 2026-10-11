@@ -16,7 +16,7 @@
   "landing": {
     "badge": "Gratis durante la beta",
     "headline": "Aprende estructuras de datos y algoritmos en JavaScript, paso a paso",
-    "subheadline": "Mira moverse cada algoritmo, ejecuta código real en tu navegador y practica hasta que las entrevistas técnicas se sientan fáciles, con un tutor de IA a tu lado.",
+    "subheadline": "Aprende un método claro para resolver problemas, mira moverse cada algoritmo, ejecuta código real en tu navegador y practica hasta que las entrevistas técnicas se sientan fáciles, con un tutor de IA a tu lado.",
     "cta": "Empezar a aprender",
     "ctaSecondary": "Ver el temario",
     "howTitle": "Cómo vas a aprender",
@@ -43,10 +43,12 @@
     "learnTitle": "Lo que vas a aprender",
     "learnItems": [
       "Analizar la complejidad temporal y espacial de cualquier código con Big O",
-      "Construir desde cero listas enlazadas, pilas, colas, árboles, tablas hash, grafos y heaps",
-      "Entender el ordenamiento, la recursión y la programación dinámica en lugar de memorizarlos",
-      "Resolver problemas estilo LeetCode contra el reloj",
-      "Elegir la estructura de datos correcta para cada problema y explicar por qué",
+      "Resolver problemas nuevos con un método de 5 pasos y patrones comunes como la ventana deslizante y los dos punteros",
+      "Pensar de forma recursiva y usar algoritmos de búsqueda como la búsqueda binaria",
+      "Escribir 6 algoritmos de ordenamiento, desde bubble sort hasta merge, quick y radix sort",
+      "Construir desde cero listas enlazadas, pilas, colas, árboles, heaps, tablas hash y grafos",
+      "Recorrer grafos y encontrar el camino más corto con el algoritmo de Dijkstra",
+      "Entender la programación dinámica en lugar de memorizarla",
       "Llegar a tus entrevistas técnicas listo para explicar tu razonamiento en voz alta"
     ],
     "curriculumTitle": "El temario",
@@ -112,7 +114,7 @@
       },
       {
         "q": "¿Necesito saber estructuras de datos?",
-        "a": "No. Empezamos desde cero con Big O. Solo necesitas JavaScript básico."
+        "a": "No. Empezamos desde cero con Big O y un método para resolver problemas. Solo necesitas JavaScript básico."
       }
     ],
     "finalTitle": "¿Listo para empezar?",

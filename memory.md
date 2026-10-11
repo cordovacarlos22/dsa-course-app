@@ -10,6 +10,12 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Decisions
 
+- 2026-10-11: **Two courses combined into one (replaces the 18-module outline).** Carlos is taking two DSA courses and combines their structure into his own: **24 modules in 7 parts, algorithms first** (Foundations → Problem Solving → Searching & Sorting → Data Structures → Graph Algorithms → Dynamic Programming → Interview Practice). Blueprint v2 is in `docs/curriculum.md` (~155 exercises: 70 build it, 86 interview problems). New topics from course 2: 5-step problem-solving approach, patterns, deeper recursion, searching, radix sort, graph traversal, Dijkstra.
+- 2026-10-11: **Slugs are English names without numbers** (`introduction`, `big-o`, `linked-lists`…). Existing content was renamed (old URLs like `/learn/02-big-o` now 404; no students yet).
+- 2026-10-11: **Our own slides.** Carlos asked to modify the course 2 instructor's slide PDFs; that would reuse copyrighted material, so we make original slide decks per module instead (later stage). The PDFs are a topic reference only.
+- 2026-10-11: **Big O lesson 1 uses an original example** (guest list: array search O(n) vs. Set lookup O(1)), replacing "loop vs. formula", which matched a course 2 slide.
+- 2026-10-11: Ignore macOS/iCloud duplicate files (`name 2.ext`) in git, ESLint and Prettier: one (`src/pages/LandingPage.test 2.jsx`) appeared and hangs any tool that reads it. Carlos should delete it.
+
 - 2026-10-11: **Course blueprint: `docs/curriculum.md` (18 modules, 6 parts).** Built from the original course's table of contents (structure only; its exercises and material are examples, never copied). Module 18 "Array Interview Problems" was added in a 6th part, "Interview Practice"; Sets live inside Hash Tables. About 110 exercises are planned (57 build it, 52 interview problems).
 - 2026-10-11: **Exercise categories:** every exercise has `category: "build"` (implement the structure step by step) or `"interview"` (LeetCode-style). The module page shows both counts.
 
@@ -75,9 +81,10 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Next
 
-- Follow `docs/curriculum.md` module by module, one PR per module (lessons EN + ES, quiz, build it, interview problems). **Next: Module 02 Big O lessons 2–11**, then Module 03 lessons.
+- Follow `docs/curriculum.md` module by module, one PR per module (lessons EN + ES, quiz, build it, interview problems). **Next: Big O lessons 2–12**, then Big O of Arrays & Objects, Classes & Pointers.
 - Stage 7 (quiz + exercise pages) so students can take the quizzes and solve the exercises.
-- Carlos reviews the lessons already written (Module 1, Big O lesson 1).
+- A later stage: our own slide decks per module.
+- Carlos: delete the iCloud duplicate `src/pages/LandingPage.test 2.jsx`.
 
 ## Course sections imported
 

@@ -5,7 +5,16 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import prettier from 'eslint-config-prettier'
 
 export default [
-  { ignores: ['dist', '.vite', 'playwright-report', 'test-results'] },
+  {
+    ignores: [
+      'dist',
+      '.vite',
+      'playwright-report',
+      'test-results',
+      // Duplicates that macOS / iCloud create, like "file 2.jsx"
+      '**/* [0-9].*',
+    ],
+  },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
