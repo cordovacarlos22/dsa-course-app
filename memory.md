@@ -10,6 +10,9 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Decisions
 
+- 2026-10-11: **Repo is public** (Carlos's choice). Branch protection on `main`: PR required, the `Lint, test, validate, build` check must pass, admins included, no force pushes, 0 approvals (a solo dev can't approve their own PR).
+- 2026-10-11: **App shell:** React Router v7 (`<BrowserRouter>` in `main.jsx`, routes in `App.jsx`), i18next + react-i18next (`src/i18n.js`, text in `src/locales/*.json`), language saved in localStorage (`src/lib/languageStorage.js`, try/catch so blocked storage never crashes), brand colors as Tailwind tokens in `src/index.css` (`brand`, `accent`, `ink`, `surface`). Course content is read from `content/` through `src/lib/course.js` (`import.meta.glob`, English fallback via `localize`).
+
 - 2026-10-11: **PIVOT: from "companion tool" to Carlos's own course app with an AI tutor.** Students learn inside the app: original written lessons + step-by-step animations + runnable code, quizzes, timed exercises, and an AI tutor (lesson chat, hints, code review, mock interview) through a Supabase Edge Function calling Claude. Free with login while building; daily AI quota per student; payments later. Lessons are **original, in Carlos's words**; the translated transcripts are only an example of topic order and depth. This replaces "companion for the Udemy course" in every decision below.
 - 2026-10-11: **Content is static in the repo** (`content/course.json`, `content/lessons/`, `content/sections/`), bundled with `import.meta.glob`. No content tables and no seed step. Supabase stores only users, progress and tutor messages.
 
@@ -34,10 +37,10 @@ Agents: read this at the start of every session and update it at the end (see `A
 ## Stages (after the pivot)
 
 1. ✅ Scaffold
-2. ✅ CI + GitHub: private repo `cordovacarlos22/dsa-course-app`, `ci.yml`, stacked PRs #1–#4 merged on 2026-10-11; CI runs on every PR and push to `main`
+2. ✅ CI + GitHub: repo `cordovacarlos22/dsa-course-app` (public since 2026-10-11), `ci.yml`, stacked PRs #1–#4 merged on 2026-10-11; CI runs on every PR and push to `main`
 3. ✅ Pivot docs: AGENTS.md, memory.md, README, app title (branch `docs/pivot-course-app`)
-4. App shell + i18n: router, layout, react-i18next, first-visit language picker, landing, course home ← next
-5. Lesson system: lesson schema + validation, Markdown renderer, StepPlayer, first 3 animations, runnable snippets (Web Worker)
+4. ✅ App shell + i18n: router, layout, react-i18next, first-visit language picker, landing, course home (branch `feat/app-shell`)
+5. Lesson system ← next: lesson schema + validation, Markdown renderer, StepPlayer, first 3 animations, runnable snippets (Web Worker)
 6. Original lessons for modules 01–03 (EN), reviewed by Carlos
 7. Quiz + exercise pages (CodeMirror, runner, timer)
 8. Supabase: schema + RLS, magic-link auth, profile, progress
@@ -59,7 +62,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Next
 
-- Stage 4 (app shell + i18n): branch from `main`.
+- Stage 5 (lesson system): lesson schema + validation, Markdown renderer, StepPlayer, first 3 animations, runnable snippets (Web Worker). Branch from `main` after `feat/app-shell` is merged.
 - Carlos reviews the Section 1 and Section 3 questions.
 - Spanish pass later (`content:validate` shows the count).
 
@@ -76,7 +79,7 @@ Modules 04–17 have empty folders; they appear in `course.json` as "coming soon
 ## Open questions
 
 - 2026-10-11 (solved): Actions didn't start on the new repo until Carlos added a starter workflow (`blank.yml`) to `main`. That file then failed our Prettier check, so it was removed in `fix/ci-remove-starter-workflow`.
-- Branch protection is unavailable (GitHub returns 403: "Upgrade to GitHub Pro or make this repository public"). Options: GitHub Pro (free with GitHub Education) or a public repo.
+- (solved) Branch protection is on now that the repo is public.
 
 - App name and domain (placeholder title: "DSA in JavaScript").
 - Daily AI limit per student (default 40 messages).

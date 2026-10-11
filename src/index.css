@@ -1,1 +1,10 @@
 @import 'tailwindcss';
+
+/* Design tokens: the app's colors in one place (charliecodeacademy brand).
+   Use them as Tailwind classes: bg-brand, text-ink, bg-accent, bg-surface… */
+@theme {
+  --color-brand: #0b84d8;
+  --color-accent: #f5b700;
+  --color-ink: #0f172a;
+  --color-surface: #f8fafc;
+}

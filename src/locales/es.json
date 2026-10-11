@@ -1,0 +1,60 @@
+{
+  "app": {
+    "name": "DSA en JavaScript",
+    "footer": "Hecho por charliecodeacademy"
+  },
+  "nav": {
+    "learn": "Curso",
+    "mainNavigation": "Navegación principal"
+  },
+  "language": {
+    "pickerSubtitle": "Puedes cambiarlo cuando quieras desde la barra superior.",
+    "switcherLabel": "Idioma",
+    "en": "English",
+    "es": "Español"
+  },
+  "landing": {
+    "headline": "Aprende estructuras de datos y algoritmos en JavaScript",
+    "subheadline": "Lecciones paso a paso con animaciones y código que puedes ejecutar, cuestionarios y ejercicios con tiempo, con un tutor de IA a tu lado.",
+    "cta": "Empezar a aprender",
+    "featuresTitle": "Cómo vas a aprender",
+    "features": {
+      "lessons": {
+        "title": "Lecciones animadas",
+        "text": "Mira cada algoritmo moverse paso a paso y luego ejecuta y edita el código tú mismo."
+      },
+      "practice": {
+        "title": "Cuestionarios y ejercicios con tiempo",
+        "text": "Comprueba lo que aprendiste y practica problemas estilo LeetCode contra el reloj."
+      },
+      "tutor": {
+        "title": "Un tutor de IA",
+        "text": "Haz preguntas sobre cualquier lección, recibe pistas cuando te atasques y comentarios sobre tu código."
+      }
+    }
+  },
+  "course": {
+    "title": "Módulos del curso",
+    "subtitle": "Avanza por los módulos en orden. Se agregan nuevos a medida que crece el curso.",
+    "moduleNumber": "Módulo {{number}}",
+    "comingSoon": "Próximamente",
+    "questions_one": "{{count}} pregunta",
+    "questions_other": "{{count}} preguntas",
+    "exercises_one": "{{count}} ejercicio",
+    "exercises_other": "{{count}} ejercicios"
+  },
+  "module": {
+    "back": "Todos los módulos",
+    "lessonsSoon": "Las lecciones de este módulo están en camino.",
+    "practiceTitle": "Práctica",
+    "quiz": "Cuestionario",
+    "exercises": "Ejercicios",
+    "availableSoon": "Disponible pronto",
+    "notReady": "Este módulo aún no está listo. ¡Vuelve pronto!"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "text": "No pudimos encontrar esa página.",
+    "backHome": "Volver al curso"
+  }
+}
