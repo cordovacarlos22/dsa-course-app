@@ -237,6 +237,7 @@
     "empty": "Presiona Ejecutar para ver lo que imprime tu código, o Comprobar para probarlo.",
     "allPassed": "¡Pasaron todas las pruebas!",
     "somePassed": "Pasaron {{passed}} de {{total}} pruebas",
-    "console": "Consola"
+    "console": "Consola",
+    "loadingEditor": "Cargando el editor…"
   }
 }

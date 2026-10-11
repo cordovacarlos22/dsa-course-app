@@ -77,9 +77,9 @@ describe('lesson page', () => {
     ).toBeInTheDocument()
     // Step 1 is a coding step: Learn, Code and Output panes.
     expect(screen.getByRole('region', { name: 'Learn' })).toBeInTheDocument()
-    expect(
-      screen.getByRole('textbox', { name: 'Code editor' }).value,
-    ).toContain('function isInvited(guests, name)')
+    // The editor is loaded on demand too.
+    const editor = await screen.findByRole('textbox', { name: 'Code editor' })
+    expect(editor.value).toContain('function isInvited(guests, name)')
     expect(nextButton()).toBeDisabled()
     expect(
       screen.getByRole('link', { name: /back to big o/i }),

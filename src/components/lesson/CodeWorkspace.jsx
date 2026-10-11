@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLanguage } from '../../hooks/useLanguage'
 import { localize } from '../../lib/course'
 import { TRIES_BEFORE_SOLUTION } from '../../lib/progress'
 import { RUN_TIMEOUT_MS, checkJavaScript, runJavaScript } from '../../runners'
 import LessonMarkdown from '../LessonMarkdown'
-import CodeEditor from './CodeEditor'
+
+// CodeMirror is big, so it's only downloaded when a coding step opens.
+const CodeEditor = lazy(() => import('./CodeEditor'))
 
 const PANES = ['learn', 'code', 'output']
 
@@ -113,11 +115,19 @@ function CodeWorkspace({
           className={`${paneClass('code')} overflow-hidden rounded-2xl border border-slate-700 bg-[#282c34]`}
         >
           <div className="h-80 min-h-0 flex-1 overflow-auto lg:h-auto">
-            <CodeEditor
-              value={code}
-              onChange={setCode}
-              label={t('workspace.editorLabel')}
-            />
+            <Suspense
+              fallback={
+                <p className="p-4 text-sm text-slate-400">
+                  {t('workspace.loadingEditor')}
+                </p>
+              }
+            >
+              <CodeEditor
+                value={code}
+                onChange={setCode}
+                label={t('workspace.editorLabel')}
+              />
+            </Suspense>
           </div>
           <div className="flex flex-wrap items-center gap-2 border-t border-slate-700 bg-slate-900 px-3 py-2">
             <button

@@ -237,6 +237,7 @@
     "empty": "Press Run to see what your code prints, or Check to test it.",
     "allPassed": "All tests passed!",
     "somePassed": "{{passed}} of {{total}} tests passed",
-    "console": "Console"
+    "console": "Console",
+    "loadingEditor": "Loading the editor…"
   }
 }
