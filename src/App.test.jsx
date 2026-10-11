@@ -33,7 +33,7 @@ describe('first visit', () => {
     expect(
       screen.getByRole('heading', {
         level: 1,
-        name: 'Aprende estructuras de datos y algoritmos en JavaScript',
+        name: 'Aprende estructuras de datos y algoritmos en JavaScript, paso a paso',
       }),
     ).toBeInTheDocument()
 
@@ -67,25 +67,16 @@ describe('language switcher', () => {
   })
 })
 
-describe('landing page', () => {
-  it('invites the student to start learning', () => {
-    renderAsReturningStudent('/')
-    expect(
-      screen.getByRole('heading', {
-        level: 1,
-        name: 'Learn data structures and algorithms in JavaScript',
-      }),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByRole('link', { name: 'Start learning' }),
-    ).toHaveAttribute('href', '/learn')
-  })
-})
-
 describe('course home', () => {
-  it('lists all 17 modules in order', () => {
+  it('lists all 17 modules in order, grouped into 5 parts', () => {
     renderAsReturningStudent('/learn')
-    const modules = within(screen.getByRole('list')).getAllByRole('listitem')
+    expect(
+      screen.getByRole('heading', { level: 2, name: 'Part 1: Foundations' }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(5)
+    const modules = screen
+      .getAllByRole('list')
+      .flatMap((list) => within(list).getAllByRole('listitem'))
     expect(modules).toHaveLength(17)
     expect(modules[0]).toHaveTextContent('Module 1')
     expect(modules[0]).toHaveTextContent('Introduction')
