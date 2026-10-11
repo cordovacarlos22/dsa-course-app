@@ -99,15 +99,27 @@ Before every commit, run: `npm run lint && npm run format:check && npm test && n
 
 ## Content generation procedure
 
-When Carlos says _"generate content for section X"_:
+When Carlos says _"generate content for section N"_:
 
-1. Find the notes in `content/notes/<section-slug>/` (`.docx` files).
-2. Convert each one to text (macOS): `textutil -convert txt -stdout "content/notes/<section-slug>/<file>.docx"`
-3. Write `content/sections/<section-slug>.json` with:
-   - **8–12 multiple-choice questions**: 4 options each, exactly one correct, plus a short explanation. Test understanding (why, when, Big-O), not just memorization.
-   - **0–3 exercises**, only if the section teaches something you can practice in code. Each exercise has a difficulty (`easy` / `medium` / `hard`), a description, JS starter code, at least 5 test cases (include edge cases), and a reference solution.
+1. **Find the sources.** They live **outside the repo**, in the course folder on Carlos's Desktop:
+   `~/Desktop/DSA + LEETCODE for Coding Interviews — Clear, Step-by-Step Animated Walkthroughs!/<Section N - Name>/`
+   - `<…> notes.docx`: Carlos's notes and/or the transcript
+   - `resources/<lesson>/`: `.js` examples and `.pdf` handouts from the course
+   - Skip Word lock files (`~$*.docx`) and `.DS_Store`. Folder names may have trailing spaces, so always quote paths.
+   - (Optional alternative: `.docx` files in `content/notes/<section-slug>/`, which are git-ignored.)
+2. **Read everything:**
+   - `.docx` text: `textutil -convert txt -stdout "<path>.docx"`
+   - Images inside the `.docx` (notes are often mostly screenshots): `unzip -j "<path>.docx" 'word/media/*' -d <scratchpad dir>`, then view each image.
+   - `.pdf` and `.js` resources: read them directly.
+3. **Write `content/sections/<NN-slug>.json`** (for example `02-big-o.json`):
+   - **10–16 multiple-choice questions** covering every lesson in the section: 4 options each, exactly one correct, a short explanation. Test understanding (why, when, Big O), not just memorization. Use the `code` field for "what is the Big O of this code?" questions. Spread the correct answer across positions 0–3.
+   - **0–3 exercises**, only if the section teaches something you can practice in code. Each one has a difficulty (`easy` / `medium` / `hard`), a description, JS starter code, a reference solution, **at least 5 tests** (include edge cases: empty input, one element, negatives, not found), and the expected time/space complexity.
    - Every text field in **both English and Spanish**: `{ "en": "...", "es": "..." }`.
-4. Run `npm run content:validate` (available from stage 4) and fix any errors.
+   - **Original wording only.** Use the course material to learn _what_ to test, but never copy Udemy quiz questions, transcripts or slides word for word.
+4. Run `npm run content:validate` and fix every error. It checks the schema (`scripts/content-schema.js`), unique ids, and runs every reference solution against its tests.
 5. Add the section to **Course sections imported** in `memory.md`.
 
-The exact JSON schema lives in `scripts/content-schema.js` (stage 4).
+## Privacy
+
+- Never commit Carlos's notes, transcripts, or course resources. Only the generated `content/sections/*.json` goes in git.
+- Never write the Udemy course URL into this repo. The repo may become public.
