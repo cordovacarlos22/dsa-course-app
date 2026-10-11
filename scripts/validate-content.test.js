@@ -180,3 +180,85 @@ describe('checkSectionInCourse', () => {
     ])
   })
 })
+
+// A section whose only exercise is a class with 5 step-based tests.
+function makeClassSection() {
+  const section = makeValidSection()
+  const createAndRead = (start) => ({
+    steps: [
+      { create: [start] },
+      { call: 'increment' },
+      { read: 'count', expected: start + 1 },
+    ],
+  })
+  section.exercises = [
+    {
+      slug: 'counter',
+      kind: 'class',
+      title: text('Counter'),
+      description: text('Build a Counter class.'),
+      difficulty: 'easy',
+      className: 'Counter',
+      starterCode: { javascript: 'class Counter {\n}' },
+      solution: {
+        javascript:
+          'class Counter {\n  constructor(start) { this.count = start }\n  increment() { this.count++; return this.count }\n}',
+      },
+      tests: [
+        createAndRead(0),
+        createAndRead(5),
+        createAndRead(-1),
+        createAndRead(99),
+        {
+          steps: [
+            { create: [1] },
+            { call: 'increment', args: [], expected: 2 },
+            { call: 'increment', expected: 3 },
+          ],
+        },
+      ],
+      expectedComplexity: { time: 'O(1)', space: 'O(1)' },
+    },
+  ]
+  return section
+}
+
+describe('class exercises', () => {
+  it('accepts a class solution that passes every step', () => {
+    expect(validateSection(makeClassSection())).toEqual([])
+  })
+
+  it('reports the step that got a wrong value', () => {
+    const section = makeClassSection()
+    section.exercises[0].tests[4].steps[2].expected = 4
+    expect(validateSection(section)).toEqual([
+      'exercise "counter" test 5: step 3: expected 4, got 3',
+    ])
+  })
+
+  it('reports a method that does not exist', () => {
+    const section = makeClassSection()
+    section.exercises[0].solution.javascript =
+      'class Counter { constructor(start) { this.count = start } }'
+    const errors = validateSection(section)
+    expect(errors).toHaveLength(5)
+    expect(errors[0]).toContain('method "increment" does not exist')
+  })
+
+  it('stops a method that loops forever', () => {
+    const section = makeClassSection()
+    section.exercises[0].tests = section.exercises[0].tests.slice(0, 5)
+    section.exercises[0].solution.javascript =
+      'class Counter { constructor(start) { this.count = start } increment() { while (true) {} } }'
+    const errors = validateSection(section)
+    expect(errors[0]).toContain('timed out')
+  }, 15_000)
+
+  it('requires the first step to create the instance', () => {
+    const section = makeClassSection()
+    section.exercises[0].tests[0].steps.shift()
+    expect(validateSection(section)).toEqual([
+      expect.stringContaining('the first step must be { create: [...] }'),
+    ])
+  })
+})
