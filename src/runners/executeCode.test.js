@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { executeCode, formatValue } from './executeCode'
+import { checkCode, executeCode, formatValue } from './executeCode'
 
 describe('executeCode', () => {
   it('captures console.log output', () => {
@@ -37,5 +37,32 @@ describe('formatValue', () => {
     const node = { value: 1 }
     node.next = node
     expect(formatValue(node)).toBe('[object Object]')
+  })
+})
+
+describe('checkCode', () => {
+  const checkpoint = {
+    kind: 'function',
+    functionName: 'double',
+    tests: [
+      { args: [2], expected: 4 },
+      { args: [0], expected: 0 },
+    ],
+  }
+
+  it('grades the code and keeps what it printed', () => {
+    const result = checkCode(
+      'console.log("hi"); function double(n) { return n * 2 }',
+      checkpoint,
+    )
+    expect(result.passed).toBe(true)
+    expect(result.logs).toEqual(['hi'])
+    expect(result.results).toHaveLength(2)
+  })
+
+  it('reports code that does not load as an error', () => {
+    const result = checkCode('function double(n) { return n * }', checkpoint)
+    expect(result.passed).toBe(false)
+    expect(result.error).toMatch(/^SyntaxError/)
   })
 })
