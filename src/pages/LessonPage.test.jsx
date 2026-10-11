@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router'
 import { describe, it, expect, vi } from 'vitest'
 import App from '../App'
 import { saveLanguage } from '../lib/languageStorage'
-import { buildLessonIndex } from '../lib/lessons'
+import { buildChecksIndex, buildLessonIndex } from '../lib/lessons'
 
 vi.mock('../runners', () => ({ RUN_TIMEOUT_MS: 2000, runJavaScript: vi.fn() }))
 
@@ -69,5 +69,16 @@ describe('buildLessonIndex', () => {
     ])
     expect(lessons[0].versions.es.title).toBe('Primero')
     expect(lessons[1].versions.es).toBeUndefined()
+  })
+
+  it('attaches each lesson its checkpoints', () => {
+    const checks = buildChecksIndex({
+      '../../content/lessons/big-o/01-first.checks.json': {
+        steps: [{ type: 'choice' }],
+      },
+    })
+    const lessons = buildLessonIndex(files, checks)['big-o']
+    expect(lessons[0].checkpoints).toEqual([{ type: 'choice' }])
+    expect(lessons[1].checkpoints).toEqual([])
   })
 })

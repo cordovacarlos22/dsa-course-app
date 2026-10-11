@@ -1,6 +1,9 @@
 // Reads the lessons in content/lessons/<module-slug>/<NN-lesson-slug>.<lang>.md
 // They're bundled with the app as plain text (`?raw`), then parsed here.
+// A lesson can have checkpoints next to it: <NN-lesson-slug>.checks.json
+// (one per step; see scripts/content-schema.js).
 import { parseFrontMatter } from './frontMatter'
+import { splitSteps } from './steps'
 
 const lessonFiles = import.meta.glob('../../content/lessons/*/*.md', {
   query: '?raw',
@@ -12,9 +15,27 @@ const lessonFiles = import.meta.glob('../../content/lessons/*/*.md', {
 //   → { moduleSlug: "big-o", slug: "01-what-is-big-o", language: "en" }
 const LESSON_PATH = /lessons\/([^/]+)\/([^/]+)\.(en|es)\.md$/
 
+const checksFiles = import.meta.glob('../../content/lessons/*/*.checks.json', {
+  import: 'default',
+  eager: true,
+})
+const CHECKS_PATH = /lessons\/([^/]+)\/([^/]+)\.checks\.json$/
+
+// { "big-o/01-what-is-big-o": [checkpoint, …] }
+export function buildChecksIndex(files) {
+  const checks = {}
+  for (const [path, data] of Object.entries(files)) {
+    const match = CHECKS_PATH.exec(path)
+    if (match) checks[`${match[1]}/${match[2]}`] = data.steps
+  }
+  return checks
+}
+
 // Builds { [moduleSlug]: [lesson, …] }, each list sorted by `order`.
 // A lesson has one "version" per language it's written in.
-export function buildLessonIndex(files) {
+// `checks` is the result of buildChecksIndex; lessons without checkpoints get
+// `checkpoints: []`.
+export function buildLessonIndex(files, checks = {}) {
   const lessons = {}
 
   for (const [path, text] of Object.entries(files)) {
@@ -24,7 +45,12 @@ export function buildLessonIndex(files) {
     const { data, body } = parseFrontMatter(text)
 
     lessons[moduleSlug] ??= {}
-    lessons[moduleSlug][slug] ??= { moduleSlug, slug, versions: {} }
+    lessons[moduleSlug][slug] ??= {
+      moduleSlug,
+      slug,
+      versions: {},
+      checkpoints: checks[`${moduleSlug}/${slug}`] ?? [],
+    }
     const lesson = lessons[moduleSlug][slug]
     lesson.versions[language] = { title: data.title, body }
     // English is written first, so its order/minutes are the reference.
@@ -42,7 +68,7 @@ export function buildLessonIndex(files) {
   )
 }
 
-const lessonIndex = buildLessonIndex(lessonFiles)
+const lessonIndex = buildLessonIndex(lessonFiles, buildChecksIndex(checksFiles))
 
 export function getLessons(moduleSlug) {
   return lessonIndex[moduleSlug] ?? []
@@ -55,4 +81,15 @@ export function getLesson(moduleSlug, slug) {
 // The lesson in the student's language, or English if it isn't translated yet.
 export function getLessonVersion(lesson, language) {
   return lesson.versions[language] ?? lesson.versions.en
+}
+
+// The lesson's steps in one language: [{ title, body, checkpoint }].
+// `checkpoint` is null when the lesson has no checkpoints yet (Next is then
+// always open). The validator makes sure the counts match when it has them.
+export function getLessonSteps(lesson, language) {
+  const { body } = getLessonVersion(lesson, language)
+  return splitSteps(body).map((step, index) => ({
+    ...step,
+    checkpoint: lesson.checkpoints[index] ?? null,
+  }))
 }
