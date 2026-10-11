@@ -202,6 +202,41 @@
     "backToModule": "Back to {{module}}",
     "unknownViz": "Animation \"{{name}}\" not found.",
     "lessons_one": "{{count}} lesson",
-    "lessons_other": "{{count}} lessons"
+    "lessons_other": "{{count}} lessons",
+    "back": "Back",
+    "nextStep": "Next",
+    "finish": "Finish lesson",
+    "nextLocked": "Pass the check to continue",
+    "stepOf": "Step {{current}} of {{total}}",
+    "goToStep": "Step {{number}}: {{title}}",
+    "stepNavigation": "Steps",
+    "complete": "Lesson complete!",
+    "completeText": "Nice work. Every check passed.",
+    "completed": "Completed",
+    "inProgress": "In progress"
+  },
+  "checkpoint": {
+    "title": "Check your understanding",
+    "checkAnswer": "Check answer",
+    "correct": "Correct!",
+    "wrong": "Not quite. Try again.",
+    "hint": "Hint",
+    "showAnswer": "Show answer",
+    "answerShown": "The right answer is highlighted in green. Select it and check again.",
+    "passedBefore": "You already passed this step."
+  },
+  "workspace": {
+    "panes": "Workspace",
+    "learn": "Learn",
+    "code": "Code",
+    "output": "Output",
+    "task": "Your task",
+    "check": "Check",
+    "editorLabel": "Code editor",
+    "showSolution": "Show solution",
+    "empty": "Press Run to see what your code prints, or Check to test it.",
+    "allPassed": "All tests passed!",
+    "somePassed": "{{passed}} of {{total}} tests passed",
+    "console": "Console"
   }
 }
