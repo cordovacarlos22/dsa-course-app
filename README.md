@@ -1,6 +1,6 @@
-# DSA Course Companion
+# DSA in JavaScript (course app)
 
-Multiple-choice quizzes and timed LeetCode-style exercises for each section of the Udemy course _DSA + LeetCode for Coding Interviews_. Built so students can check that they really learned each topic. English and Spanish.
+A course app for learning data structures and algorithms in JavaScript: original written lessons with step-by-step animations and runnable code, quizzes, timed LeetCode-style exercises, and an **AI tutor** (lesson chat, hints, code review, mock interviews). English first, Spanish later.
 
 ## Getting started
 
