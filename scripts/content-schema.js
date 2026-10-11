@@ -122,7 +122,7 @@ export const exerciseSchema = z.preprocess(
   z.discriminatedUnion('kind', [functionExerciseSchema, classExerciseSchema]),
 )
 
-export const sectionSchema = z
+export const practiceSchema = z
   .object({
     slug,
     order: z.number().int().positive(),
@@ -146,8 +146,8 @@ const moduleSchema = z
   })
   .strict()
 
-// Modules are grouped into parts ("Foundations", "Sorting"…) for display.
-const partSchema = z
+// Modules are grouped into sections ("Foundations", "Sorting"…) for display.
+const sectionSchema = z
   .object({
     slug,
     title: localizedText,
@@ -162,7 +162,7 @@ export const courseSchema = z
     title: localizedText,
     description: localizedText,
     modules: z.array(moduleSchema).min(1),
-    parts: z.array(partSchema).min(1),
+    sections: z.array(sectionSchema).min(1),
   })
   .strict()
 

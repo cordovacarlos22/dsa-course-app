@@ -3,14 +3,14 @@
 import course from '../../content/course.json'
 import { getLessons } from './lessons'
 
-// Every content/sections/<module-slug>.json file (quiz + exercises).
-const sectionFiles = import.meta.glob('../../content/sections/*.json', {
+// Every content/practice/<module-slug>.json file (the module's quiz + exercises).
+const practiceFiles = import.meta.glob('../../content/practice/*.json', {
   eager: true,
   import: 'default',
 })
 
-const sectionsBySlug = Object.fromEntries(
-  Object.values(sectionFiles).map((section) => [section.slug, section]),
+const practiceBySlug = Object.fromEntries(
+  Object.values(practiceFiles).map((practice) => [practice.slug, practice]),
 )
 
 // Picks the text in the student's language. Content is written in English
@@ -29,12 +29,12 @@ export function getCourse() {
 export function getModules() {
   return course.modules.map((module) => {
     const lessons = getLessons(module.slug)
-    const section = sectionsBySlug[module.slug] ?? null
+    const practice = practiceBySlug[module.slug] ?? null
     return {
       ...module,
       lessons,
-      section,
-      isAvailable: lessons.length > 0 || section !== null,
+      practice,
+      isAvailable: lessons.length > 0 || practice !== null,
     }
   })
 }
@@ -43,13 +43,13 @@ export function getModule(slug) {
   return getModules().find((module) => module.slug === slug) ?? null
 }
 
-// The course's parts ("Foundations", "Sorting"…), each with its modules.
-export function getParts() {
+// The course's sections ("Foundations", "Sorting"…), each with its modules.
+export function getSections() {
   const modulesBySlug = Object.fromEntries(
     getModules().map((module) => [module.slug, module]),
   )
-  return course.parts.map((part) => ({
-    ...part,
-    modules: part.modules.map((slug) => modulesBySlug[slug]),
+  return course.sections.map((section) => ({
+    ...section,
+    modules: section.modules.map((slug) => modulesBySlug[slug]),
   }))
 }

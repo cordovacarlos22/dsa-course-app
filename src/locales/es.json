@@ -52,7 +52,7 @@
       "Llegar a tus entrevistas técnicas listo para explicar tu razonamiento en voz alta"
     ],
     "curriculumTitle": "El temario",
-    "curriculumSubtitle": "{{modules}} módulos en {{parts}} partes. Se agregan módulos nuevos a medida que crece el curso.",
+    "curriculumSubtitle": "{{modules}} módulos en {{sections}} secciones. Se agregan módulos nuevos a medida que crece el curso.",
     "audienceTitle": "¿Para quién es este curso?",
     "audience": [
       {
@@ -128,7 +128,7 @@
     "questions_other": "{{count}} preguntas",
     "exercises_one": "{{count}} ejercicio",
     "exercises_other": "{{count}} ejercicios",
-    "partTitle": "Parte {{number}}: {{title}}"
+    "sectionTitle": "Sección {{number}}: {{title}}"
   },
   "module": {
     "back": "Todos los módulos",

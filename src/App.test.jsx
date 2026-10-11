@@ -68,10 +68,10 @@ describe('language switcher', () => {
 })
 
 describe('course home', () => {
-  it('lists all 24 modules in order, grouped into 7 parts', () => {
+  it('lists all 24 modules in order, grouped into 7 sections', () => {
     renderAsReturningStudent('/learn')
     expect(
-      screen.getByRole('heading', { level: 2, name: 'Part 1: Foundations' }),
+      screen.getByRole('heading', { level: 2, name: 'Section 1: Foundations' }),
     ).toBeInTheDocument()
     expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(7)
     const modules = screen

@@ -14,7 +14,7 @@ function ModulePage() {
 
   if (!module) return <NotFoundPage />
 
-  const { lessons, section } = module
+  const { lessons, practice } = module
 
   return (
     <div>
@@ -67,7 +67,7 @@ function ModulePage() {
         </>
       )}
 
-      {section && (
+      {practice && (
         <>
           <h2 className="mt-10 text-xl font-bold">
             {t('module.practiceTitle')}
@@ -76,19 +76,19 @@ function ModulePage() {
             <PracticeItem
               title={t('module.quiz')}
               detail={t('course.questions', {
-                count: section.questions.length,
+                count: practice.questions.length,
               })}
             />
             <PracticeItem
               title={t('module.buildIt')}
               detail={t('course.exercises', {
-                count: countByCategory(section, 'build'),
+                count: countByCategory(practice, 'build'),
               })}
             />
             <PracticeItem
               title={t('module.interviewProblems')}
               detail={t('course.exercises', {
-                count: countByCategory(section, 'interview'),
+                count: countByCategory(practice, 'interview'),
               })}
             />
           </ul>
@@ -98,8 +98,8 @@ function ModulePage() {
   )
 }
 
-function countByCategory(section, category) {
-  return section.exercises.filter((exercise) => exercise.category === category)
+function countByCategory(practice, category) {
+  return practice.exercises.filter((exercise) => exercise.category === category)
     .length
 }
 

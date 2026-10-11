@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getModule, getModules, getParts, localize } from './course'
+import { getModule, getModules, getSections, localize } from './course'
 
 describe('localize', () => {
   it('picks the requested language', () => {
@@ -19,8 +19,8 @@ describe('getModules', () => {
   it('attaches the quiz/exercises to modules that have them', () => {
     const modules = getModules()
     expect(modules).toHaveLength(24)
-    expect(getModule('big-o').section.questions.length).toBeGreaterThan(0)
-    expect(getModule('linked-lists').section).toBeNull()
+    expect(getModule('big-o').practice.questions.length).toBeGreaterThan(0)
+    expect(getModule('linked-lists').practice).toBeNull()
   })
 
   it('returns null for an unknown module', () => {
@@ -28,10 +28,10 @@ describe('getModules', () => {
   })
 })
 
-describe('getParts', () => {
-  it('groups all 24 modules into 7 parts, in order', () => {
-    const parts = getParts()
-    expect(parts.map((part) => part.slug)).toEqual([
+describe('getSections', () => {
+  it('groups all 24 modules into 7 sections, in order', () => {
+    const sections = getSections()
+    expect(sections.map((section) => section.slug)).toEqual([
       'foundations',
       'problem-solving',
       'searching-and-sorting',
@@ -40,7 +40,7 @@ describe('getParts', () => {
       'dynamic-programming',
       'interview-practice',
     ])
-    expect(parts.flatMap((part) => part.modules)).toHaveLength(24)
-    expect(parts[0].modules[1].slug).toBe('big-o')
+    expect(sections.flatMap((section) => section.modules)).toHaveLength(24)
+    expect(sections[0].modules[1].slug).toBe('big-o')
   })
 })

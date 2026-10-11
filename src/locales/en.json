@@ -52,7 +52,7 @@
       "Walk into technical interviews ready to explain your reasoning out loud"
     ],
     "curriculumTitle": "The curriculum",
-    "curriculumSubtitle": "{{modules}} modules in {{parts}} parts. New modules are added as the course grows.",
+    "curriculumSubtitle": "{{modules}} modules in {{sections}} sections. New modules are added as the course grows.",
     "audienceTitle": "Who this course is for",
     "audience": [
       {
@@ -128,7 +128,7 @@
     "questions_other": "{{count}} questions",
     "exercises_one": "{{count}} exercise",
     "exercises_other": "{{count}} exercises",
-    "partTitle": "Part {{number}}: {{title}}"
+    "sectionTitle": "Section {{number}}: {{title}}"
   },
   "module": {
     "back": "All modules",

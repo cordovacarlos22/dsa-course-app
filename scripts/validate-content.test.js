@@ -1,23 +1,23 @@
 // @vitest-environment node
 import { describe, it, expect } from 'vitest'
 import {
-  checkSectionInCourse,
+  checkPracticeInCourse,
   countMissingSpanish,
   findLessonsMissingEnglish,
   validateCourse,
   validateLesson,
-  validateSection,
+  validatePractice,
 } from './validate-content.js'
 
 const text = (en) => ({ en, es: `${en} (es)` })
 
-// A small section that passes every rule. Each test breaks one thing.
-function makeValidSection() {
+// A small practice file that passes every rule. Each test breaks one thing.
+function makeValidPractice() {
   return {
     slug: '99-sample',
     order: 99,
     title: text('Sample'),
-    sourceFolder: 'Section 99 - Sample',
+    sourceFolder: 'Module 99 - Sample',
     questions: [
       {
         id: 'q1',
@@ -51,78 +51,78 @@ function makeValidSection() {
   }
 }
 
-describe('validateSection', () => {
-  it('accepts a valid section', () => {
-    expect(validateSection(makeValidSection())).toEqual([])
+describe('validatePractice', () => {
+  it('accepts a valid practice file', () => {
+    expect(validatePractice(makeValidPractice())).toEqual([])
   })
 
   it('rejects a missing English text', () => {
-    const section = makeValidSection()
-    delete section.questions[0].prompt.en
-    expect(validateSection(section)).toEqual([
+    const practice = makeValidPractice()
+    delete practice.questions[0].prompt.en
+    expect(validatePractice(practice)).toEqual([
       expect.stringContaining('questions.0.prompt.en'),
     ])
   })
 
   it('accepts a missing Spanish translation (English first)', () => {
-    const section = makeValidSection()
-    delete section.questions[0].prompt.es
-    expect(validateSection(section)).toEqual([])
+    const practice = makeValidPractice()
+    delete practice.questions[0].prompt.es
+    expect(validatePractice(practice)).toEqual([])
   })
 
   it('rejects an exercise without a valid category', () => {
-    const section = makeValidSection()
-    section.exercises[0].category = 'homework'
-    expect(validateSection(section)).toEqual([
+    const practice = makeValidPractice()
+    practice.exercises[0].category = 'homework'
+    expect(validatePractice(practice)).toEqual([
       expect.stringContaining('exercises.0'),
     ])
   })
 
   it('rejects a question with only 3 options', () => {
-    const section = makeValidSection()
-    section.questions[0].options.pop()
-    expect(validateSection(section)).toEqual([
+    const practice = makeValidPractice()
+    practice.questions[0].options.pop()
+    expect(validatePractice(practice)).toEqual([
       expect.stringContaining('exactly 4 options'),
     ])
   })
 
   it('rejects a correctIndex outside 0-3', () => {
-    const section = makeValidSection()
-    section.questions[0].correctIndex = 4
-    expect(validateSection(section)).toEqual([
+    const practice = makeValidPractice()
+    practice.questions[0].correctIndex = 4
+    expect(validatePractice(practice)).toEqual([
       expect.stringContaining('questions.0.correctIndex'),
     ])
   })
 
   it('rejects duplicate question ids', () => {
-    const section = makeValidSection()
-    section.questions.push({ ...section.questions[0] })
-    expect(validateSection(section)).toEqual(['duplicate question id "q1"'])
+    const practice = makeValidPractice()
+    practice.questions.push({ ...practice.questions[0] })
+    expect(validatePractice(practice)).toEqual(['duplicate question id "q1"'])
   })
 
   it('rejects a solution that fails its tests', () => {
-    const section = makeValidSection()
-    section.exercises[0].solution.javascript =
+    const practice = makeValidPractice()
+    practice.exercises[0].solution.javascript =
       'function add(a, b) { return a - b }'
-    const errors = validateSection(section)
+    const errors = validatePractice(practice)
     expect(errors.length).toBeGreaterThan(0)
     expect(errors[0]).toContain('exercise "add" test 1: expected 3, got -1')
   })
 
   it('stops a solution that loops forever', () => {
-    const section = makeValidSection()
-    section.exercises[0].solution.javascript =
+    const practice = makeValidPractice()
+    practice.exercises[0].solution.javascript =
       'function add(a, b) { while (true) {} }'
-    const errors = validateSection(section)
+    const errors = validatePractice(practice)
     expect(errors).toHaveLength(5)
     expect(errors[0]).toContain('timed out')
   }, 15_000)
 
   it('rejects a solution that does not compile', () => {
-    const section = makeValidSection()
-    section.exercises[0].solution.javascript =
+    const practice = makeValidPractice()
+    practice.exercises[0].solution.javascript =
       'function add(a, b) { return a + }'
-    expect(validateSection(section)).toEqual([
+    expect(validatePractice(practice)).toEqual([
       expect.stringContaining('solution does not compile'),
     ])
   })
@@ -130,12 +130,12 @@ describe('validateSection', () => {
 
 describe('countMissingSpanish', () => {
   it('counts every text that has English but no Spanish', () => {
-    const section = makeValidSection()
-    expect(countMissingSpanish(section)).toBe(0)
+    const practice = makeValidPractice()
+    expect(countMissingSpanish(practice)).toBe(0)
 
-    delete section.title.es
-    delete section.questions[0].options[2].es
-    expect(countMissingSpanish(section)).toBe(2)
+    delete practice.title.es
+    delete practice.questions[0].options[2].es
+    expect(countMissingSpanish(practice)).toBe(2)
   })
 })
 
@@ -148,7 +148,7 @@ function makeValidCourse() {
       { slug: '01-intro', order: 1, title: text('Intro'), sourceFolder: 'a' },
       { slug: '02-next', order: 2, title: text('Next'), sourceFolder: 'b' },
     ],
-    parts: [
+    sections: [
       {
         slug: 'basics',
         title: text('Basics'),
@@ -171,31 +171,31 @@ describe('validateCourse', () => {
     ])
   })
 
-  it('rejects a module that is not in any part', () => {
+  it('rejects a module that is not in any section', () => {
     const course = makeValidCourse()
-    course.parts[0].modules = ['01-intro']
+    course.sections[0].modules = ['01-intro']
     expect(validateCourse(course)).toEqual([
-      'module "02-next" is not in any part',
+      'module "02-next" is not in any section',
     ])
   })
 
-  it('rejects a module listed in two parts', () => {
+  it('rejects a module listed in two sections', () => {
     const course = makeValidCourse()
-    course.parts.push({
+    course.sections.push({
       slug: 'more',
       title: text('More'),
       modules: ['02-next'],
     })
     expect(validateCourse(course)).toEqual([
-      'module "02-next" is in more than one part',
+      'module "02-next" is in more than one section',
     ])
   })
 
-  it('rejects a part that lists a module that does not exist', () => {
+  it('rejects a section that lists a module that does not exist', () => {
     const course = makeValidCourse()
-    course.parts[0].modules.push('99-ghost')
+    course.sections[0].modules.push('99-ghost')
     expect(validateCourse(course)).toEqual([
-      'part lists "99-ghost", which is not a module',
+      'section lists "99-ghost", which is not a module',
     ])
   })
 
@@ -206,30 +206,30 @@ describe('validateCourse', () => {
   })
 })
 
-describe('checkSectionInCourse', () => {
-  it('accepts a section that matches a module', () => {
-    const section = { slug: '02-next', order: 2 }
-    expect(checkSectionInCourse(section, makeValidCourse())).toEqual([])
+describe('checkPracticeInCourse', () => {
+  it('accepts a practice file that matches a module', () => {
+    const practice = { slug: '02-next', order: 2 }
+    expect(checkPracticeInCourse(practice, makeValidCourse())).toEqual([])
   })
 
-  it('rejects a section whose slug is not in the outline', () => {
-    const section = { slug: '99-sample', order: 99 }
-    expect(checkSectionInCourse(section, makeValidCourse())).toEqual([
+  it('rejects a practice file whose slug is not in the outline', () => {
+    const practice = { slug: '99-sample', order: 99 }
+    expect(checkPracticeInCourse(practice, makeValidCourse())).toEqual([
       'slug "99-sample" is not a module in course.json',
     ])
   })
 
-  it('rejects a section with a different order', () => {
-    const section = { slug: '02-next', order: 5 }
-    expect(checkSectionInCourse(section, makeValidCourse())).toEqual([
+  it('rejects a practice file with a different order', () => {
+    const practice = { slug: '02-next', order: 5 }
+    expect(checkPracticeInCourse(practice, makeValidCourse())).toEqual([
       'order should be 2 (as in course.json)',
     ])
   })
 })
 
-// A section whose only exercise is a class with 5 step-based tests.
-function makeClassSection() {
-  const section = makeValidSection()
+// A practice whose only exercise is a class with 5 step-based tests.
+function makeClassPractice() {
+  const practice = makeValidPractice()
   const createAndRead = (start) => ({
     steps: [
       { create: [start] },
@@ -237,7 +237,7 @@ function makeClassSection() {
       { read: 'count', expected: start + 1 },
     ],
   })
-  section.exercises = [
+  practice.exercises = [
     {
       slug: 'counter',
       kind: 'class',
@@ -267,44 +267,44 @@ function makeClassSection() {
       expectedComplexity: { time: 'O(1)', space: 'O(1)' },
     },
   ]
-  return section
+  return practice
 }
 
 describe('class exercises', () => {
   it('accepts a class solution that passes every step', () => {
-    expect(validateSection(makeClassSection())).toEqual([])
+    expect(validatePractice(makeClassPractice())).toEqual([])
   })
 
   it('reports the step that got a wrong value', () => {
-    const section = makeClassSection()
-    section.exercises[0].tests[4].steps[2].expected = 4
-    expect(validateSection(section)).toEqual([
+    const practice = makeClassPractice()
+    practice.exercises[0].tests[4].steps[2].expected = 4
+    expect(validatePractice(practice)).toEqual([
       'exercise "counter" test 5: step 3: expected 4, got 3',
     ])
   })
 
   it('reports a method that does not exist', () => {
-    const section = makeClassSection()
-    section.exercises[0].solution.javascript =
+    const practice = makeClassPractice()
+    practice.exercises[0].solution.javascript =
       'class Counter { constructor(start) { this.count = start } }'
-    const errors = validateSection(section)
+    const errors = validatePractice(practice)
     expect(errors).toHaveLength(5)
     expect(errors[0]).toContain('method "increment" does not exist')
   })
 
   it('stops a method that loops forever', () => {
-    const section = makeClassSection()
-    section.exercises[0].tests = section.exercises[0].tests.slice(0, 5)
-    section.exercises[0].solution.javascript =
+    const practice = makeClassPractice()
+    practice.exercises[0].tests = practice.exercises[0].tests.slice(0, 5)
+    practice.exercises[0].solution.javascript =
       'class Counter { constructor(start) { this.count = start } increment() { while (true) {} } }'
-    const errors = validateSection(section)
+    const errors = validatePractice(practice)
     expect(errors[0]).toContain('timed out')
   }, 15_000)
 
   it('requires the first step to create the instance', () => {
-    const section = makeClassSection()
-    section.exercises[0].tests[0].steps.shift()
-    expect(validateSection(section)).toEqual([
+    const practice = makeClassPractice()
+    practice.exercises[0].tests[0].steps.shift()
+    expect(validatePractice(practice)).toEqual([
       expect.stringContaining('the first step must be { create: [...] }'),
     ])
   })
