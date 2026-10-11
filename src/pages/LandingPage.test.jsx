@@ -61,14 +61,14 @@ describe('landing page', () => {
     expect(tutorCard).toHaveTextContent('Coming soon')
   })
 
-  it('shows the whole curriculum: 5 parts and 17 modules', () => {
+  it('shows the whole curriculum: 6 parts and 18 modules', () => {
     renderLanding()
     const curriculum = section('The curriculum')
-    expect(curriculum).toHaveTextContent('17 modules in 5 parts')
+    expect(curriculum).toHaveTextContent('18 modules in 6 parts')
     expect(
       within(curriculum).getAllByRole('heading', { level: 3 }),
-    ).toHaveLength(5)
-    expect(within(curriculum).getAllByRole('listitem')).toHaveLength(17)
+    ).toHaveLength(6)
+    expect(within(curriculum).getAllByRole('listitem')).toHaveLength(18)
     // Ready modules are links; the rest are marked "Coming soon".
     expect(
       within(curriculum).getByRole('link', { name: '2. Big O' }),
@@ -124,7 +124,7 @@ describe('landing page', () => {
       }),
     ).toBeInTheDocument()
     expect(screen.getByText('Gratis durante la beta')).toBeInTheDocument()
-    expect(section('El temario')).toHaveTextContent('17 módulos en 5 partes')
+    expect(section('El temario')).toHaveTextContent('18 módulos en 6 partes')
     expect(section('Conoce a tu instructor')).toHaveTextContent(
       'chofer de tráiler e instructor de choferes',
     )

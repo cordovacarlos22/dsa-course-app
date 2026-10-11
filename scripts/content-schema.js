@@ -137,8 +137,9 @@ const moduleSchema = z
     slug,
     order: z.number().int().positive(),
     title: localizedText,
-    // Module folder in Carlos's course folder (outside the repo).
-    sourceFolder: nonEmpty,
+    // Module folder in Carlos's course folder (outside the repo). Optional:
+    // modules we designed ourselves (like 18) have no source folder.
+    sourceFolder: nonEmpty.optional(),
   })
   .strict()
 

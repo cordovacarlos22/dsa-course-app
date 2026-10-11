@@ -18,7 +18,7 @@ describe('localize', () => {
 describe('getModules', () => {
   it('attaches the quiz/exercises to modules that have them', () => {
     const modules = getModules()
-    expect(modules).toHaveLength(17)
+    expect(modules).toHaveLength(18)
     expect(getModule('02-big-o').section.questions.length).toBeGreaterThan(0)
     expect(getModule('04-listas-enlazadas').section).toBeNull()
   })
@@ -29,7 +29,7 @@ describe('getModules', () => {
 })
 
 describe('getParts', () => {
-  it('groups all 17 modules into 5 parts, in order', () => {
+  it('groups all 18 modules into 6 parts, in order', () => {
     const parts = getParts()
     expect(parts.map((part) => part.slug)).toEqual([
       'foundations',
@@ -37,8 +37,9 @@ describe('getParts', () => {
       'recursion-and-trees',
       'sorting',
       'dynamic-programming',
+      'interview-practice',
     ])
-    expect(parts.flatMap((part) => part.modules)).toHaveLength(17)
+    expect(parts.flatMap((part) => part.modules)).toHaveLength(18)
     expect(parts[0].modules[1].slug).toBe('02-big-o')
   })
 })

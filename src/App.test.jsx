@@ -68,19 +68,20 @@ describe('language switcher', () => {
 })
 
 describe('course home', () => {
-  it('lists all 17 modules in order, grouped into 5 parts', () => {
+  it('lists all 18 modules in order, grouped into 6 parts', () => {
     renderAsReturningStudent('/learn')
     expect(
       screen.getByRole('heading', { level: 2, name: 'Part 1: Foundations' }),
     ).toBeInTheDocument()
-    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(5)
+    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(6)
     const modules = screen
       .getAllByRole('list')
       .flatMap((list) => within(list).getAllByRole('listitem'))
-    expect(modules).toHaveLength(17)
+    expect(modules).toHaveLength(18)
     expect(modules[0]).toHaveTextContent('Module 1')
     expect(modules[0]).toHaveTextContent('Introduction')
     expect(modules[16]).toHaveTextContent('Dynamic Programming')
+    expect(modules[17]).toHaveTextContent('Array Interview Problems')
   })
 
   it('links modules that have content and marks the rest as coming soon', () => {
@@ -95,7 +96,7 @@ describe('course home', () => {
     expect(
       screen.queryByRole('link', { name: /Linked Lists/ }),
     ).not.toBeInTheDocument()
-    expect(screen.getAllByText('Coming soon')).toHaveLength(14)
+    expect(screen.getAllByText('Coming soon')).toHaveLength(15)
   })
 })
 
