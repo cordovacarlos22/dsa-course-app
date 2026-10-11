@@ -5,7 +5,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 ## Current stage
 
 - **Stage 1: Scaffold is done** (branch `chore/scaffold`, waiting for a GitHub repo to open the PR).
-- **Stage 4 (offline part) is done** (branch `feat/content-pipeline`, built on top of `chore/scaffold`). It was brought forward because Carlos's notes were ready.
+- **Stage 4 (offline part) is done** (`feat/content-pipeline`), plus **course content** (`feat/course-content`, built on top of it).
 - Next up: Stage 2 (CI). It needs a GitHub repo.
 
 ## Decisions
@@ -44,24 +44,34 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Done
 
-- 2026-10-11, Stage 1 (committed on `chore/scaffold`; no remote yet, so no PR): Vite React (JS) scaffold, Tailwind v4, Vitest + Testing Library, Prettier + ESLint, `.env.example`, AGENTS.md / CLAUDE.md / memory.md, README. `.docx` notes are git-ignored. lint, format check, tests and build all pass.
-
-- 2026-10-11, Stage 4 offline part (branch `feat/content-pipeline`): `scripts/content-schema.js` (Zod), `npm run content:validate` (+ 8 tests), `content/sections/02-big-o.json`.
+- 2026-10-11, Stage 1 (committed on `chore/scaffold`; no remote yet, so no PR): Vite React (JS) scaffold, Tailwind v4, Vitest + Testing Library, Prettier + ESLint, `.env.example`, AGENTS.md / CLAUDE.md / memory.md, README. lint, format check, tests and build all pass.
+- 2026-10-11, Stage 4 offline part (`feat/content-pipeline`): `scripts/content-schema.js` (Zod), `npm run content:validate` (runs reference solutions in `node:vm` with a 1 s timeout).
+- 2026-10-11, course content (`feat/course-content`):
+  - English transcripts for modules 01–03 written to the course folder (`recursos originales/modulo-0{1,2,3}-*/guiones/*.md`, 17 files, outside the repo).
+  - Spanish is now optional in content (English first); `content:validate` warns about missing translations.
+  - `content/course.json`: outline with all 17 modules; each section must match a module.
+  - Class exercises (`kind: "class"`, step tests: create / call / read).
+  - Sections 01, 02 (3 new questions) and 03. 22 unit tests.
 
 ## Next
 
-- Push `main` and `chore/scaffold` to GitHub and open the Stage 1 PR.
-- Open a PR for `feat/content-pipeline` after Stage 1 is merged (rebase onto `main`).
+- Push `main`, `chore/scaffold`, `feat/content-pipeline` and `feat/course-content` to GitHub and open the PRs in order (each branch is built on the previous one).
 - Stage 2: Carlos installs `gh` (`brew install gh` then `gh auth login`) and creates the GitHub repo. Then add `ci.yml`.
+- Spanish translation pass for sections 01 and 03 (and 02's new title fields) when Carlos is ready: `content:validate` shows the count.
+- Carlos reviews the Section 3 and Section 1 questions.
 
 ## Course sections imported
 
-| Section                 | File                             | Questions | Exercises                                                          | Date       |
-| ----------------------- | -------------------------------- | --------- | ------------------------------------------------------------------ | ---------- |
-| 2: Big O (lessons 3–13) | `content/sections/02-big-o.json` | 16        | find-max (easy), contains-duplicate (easy), binary-search (medium) | 2026-10-11 |
+| Section               | File                                       | Questions | Exercises                                                          | Spanish | Date       |
+| --------------------- | ------------------------------------------ | --------- | ------------------------------------------------------------------ | ------- | ---------- |
+| 1: Introduction       | `content/sections/01-introduccion.json`    | 9         | none                                                               | missing | 2026-10-11 |
+| 2: Big O              | `content/sections/02-big-o.json`           | 19        | find-max (easy), contains-duplicate (easy), binary-search (medium) | done    | 2026-10-11 |
+| 3: Classes & Pointers | `content/sections/03-clases-punteros.json` | 12        | cookie-class (easy, class)                                         | missing | 2026-10-11 |
 
-Skipped: Section 1 (Introduction). It's a course overview with nothing to quiz yet.
+Modules 04–17 have empty folders; they appear in `course.json` as "coming soon".
 
 ## Open questions
 
-- `.docx` notes are git-ignored by default (they may contain copyrighted transcripts). Change `.gitignore` if Carlos wants them committed (private repo only).
+- Carlos mentioned 20 modules, but 17 folders exist. Which 3 are missing?
+- The Spanish `O(n^2)` script says O(n²) is "generally efficient"; the English translation says **inefficient** (matches the wrap-up). Carlos should fix the Spanish script.
+- The Intro slide 3 still says "Scott Barrett" (original instructor) instead of charliecodeacademy.
