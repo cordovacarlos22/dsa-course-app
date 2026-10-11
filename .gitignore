@@ -1,0 +1,41 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment variables (secrets). Only .env.example is committed.
+.env
+.env.*
+!.env.example
+
+# Vercel CLI
+.vercel
+
+# Playwright
+test-results
+playwright-report
+
+# Course notes/transcripts stay private (they may contain copyrighted course content).
+# Only the generated content in content/sections/ is committed.
+content/notes/**
+!content/notes/.gitkeep
