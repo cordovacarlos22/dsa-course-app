@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getModule, getModules, localize } from './course'
+import { getModule, getModules, getParts, localize } from './course'
 
 describe('localize', () => {
   it('picks the requested language', () => {
@@ -25,5 +25,20 @@ describe('getModules', () => {
 
   it('returns null for an unknown module', () => {
     expect(getModule('nope')).toBeNull()
+  })
+})
+
+describe('getParts', () => {
+  it('groups all 17 modules into 5 parts, in order', () => {
+    const parts = getParts()
+    expect(parts.map((part) => part.slug)).toEqual([
+      'foundations',
+      'data-structures',
+      'recursion-and-trees',
+      'sorting',
+      'dynamic-programming',
+    ])
+    expect(parts.flatMap((part) => part.modules)).toHaveLength(17)
+    expect(parts[0].modules[1].slug).toBe('02-big-o')
   })
 })

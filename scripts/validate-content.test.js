@@ -139,6 +139,13 @@ function makeValidCourse() {
       { slug: '01-intro', order: 1, title: text('Intro'), sourceFolder: 'a' },
       { slug: '02-next', order: 2, title: text('Next'), sourceFolder: 'b' },
     ],
+    parts: [
+      {
+        slug: 'basics',
+        title: text('Basics'),
+        modules: ['01-intro', '02-next'],
+      },
+    ],
   }
 }
 
@@ -152,6 +159,34 @@ describe('validateCourse', () => {
     course.modules[1].order = 3
     expect(validateCourse(course)).toEqual([
       'module "02-next" should have order 2',
+    ])
+  })
+
+  it('rejects a module that is not in any part', () => {
+    const course = makeValidCourse()
+    course.parts[0].modules = ['01-intro']
+    expect(validateCourse(course)).toEqual([
+      'module "02-next" is not in any part',
+    ])
+  })
+
+  it('rejects a module listed in two parts', () => {
+    const course = makeValidCourse()
+    course.parts.push({
+      slug: 'more',
+      title: text('More'),
+      modules: ['02-next'],
+    })
+    expect(validateCourse(course)).toEqual([
+      'module "02-next" is in more than one part',
+    ])
+  })
+
+  it('rejects a part that lists a module that does not exist', () => {
+    const course = makeValidCourse()
+    course.parts[0].modules.push('99-ghost')
+    expect(validateCourse(course)).toEqual([
+      'part lists "99-ghost", which is not a module',
     ])
   })
 

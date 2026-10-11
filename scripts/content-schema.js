@@ -142,6 +142,15 @@ const moduleSchema = z
   })
   .strict()
 
+// Modules are grouped into parts ("Foundations", "Sorting"…) for display.
+const partSchema = z
+  .object({
+    slug,
+    title: localizedText,
+    modules: z.array(slug).min(1),
+  })
+  .strict()
+
 // The course outline: every module in order, even the ones with no quiz yet.
 export const courseSchema = z
   .object({
@@ -149,6 +158,7 @@ export const courseSchema = z
     title: localizedText,
     description: localizedText,
     modules: z.array(moduleSchema).min(1),
+    parts: z.array(partSchema).min(1),
   })
   .strict()
 

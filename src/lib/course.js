@@ -42,3 +42,14 @@ export function getModules() {
 export function getModule(slug) {
   return getModules().find((module) => module.slug === slug) ?? null
 }
+
+// The course's parts ("Foundations", "Sorting"…), each with its modules.
+export function getParts() {
+  const modulesBySlug = Object.fromEntries(
+    getModules().map((module) => [module.slug, module]),
+  )
+  return course.parts.map((part) => ({
+    ...part,
+    modules: part.modules.map((slug) => modulesBySlug[slug]),
+  }))
+}
