@@ -5,7 +5,7 @@ import App from '../App'
 import { saveLanguage } from '../lib/languageStorage'
 import { buildLessonIndex } from '../lib/lessons'
 
-vi.mock('../runners', () => ({ runJavaScript: vi.fn() }))
+vi.mock('../runners', () => ({ RUN_TIMEOUT_MS: 2000, runJavaScript: vi.fn() }))
 
 function renderAt(path) {
   saveLanguage('en')
