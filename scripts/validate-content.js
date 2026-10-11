@@ -5,9 +5,10 @@ import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { isDeepStrictEqual } from 'node:util'
 import vm from 'node:vm'
-import { sectionSchema } from './content-schema.js'
+import { courseSchema, sectionSchema } from './content-schema.js'
 
 const SECTIONS_DIR = 'content/sections'
+const COURSE_FILE = 'content/course.json'
 
 // A buggy solution can loop forever, so each test gets a time limit.
 const TEST_TIMEOUT_MS = 1000
@@ -61,14 +62,45 @@ function findDuplicates(values) {
   return values.filter((value, index) => values.indexOf(value) !== index)
 }
 
+function formatIssues(zodError) {
+  return zodError.issues.map(
+    (issue) => `${issue.path.join('.') || '(root)'}: ${issue.message}`,
+  )
+}
+
+// Checks the course outline. An empty list means it's valid.
+export function validateCourse(data) {
+  const result = courseSchema.safeParse(data)
+  if (!result.success) return formatIssues(result.error)
+
+  const { modules } = result.data
+  const errors = []
+  for (const moduleSlug of findDuplicates(modules.map((m) => m.slug))) {
+    errors.push(`duplicate module slug "${moduleSlug}"`)
+  }
+  modules.forEach((module, index) => {
+    // Orders must be 1, 2, 3… so the app can show modules in sequence.
+    if (module.order !== index + 1) {
+      errors.push(`module "${module.slug}" should have order ${index + 1}`)
+    }
+  })
+  return errors
+}
+
+// A section must belong to a module in the outline, with the same order.
+export function checkSectionInCourse(section, course) {
+  const module = course.modules.find((m) => m.slug === section.slug)
+  if (!module) return [`slug "${section.slug}" is not a module in course.json`]
+  if (module.order !== section.order) {
+    return [`order should be ${module.order} (as in course.json)`]
+  }
+  return []
+}
+
 // Returns a list of readable error messages. An empty list means the section is valid.
 export function validateSection(data) {
   const result = sectionSchema.safeParse(data)
-  if (!result.success) {
-    return result.error.issues.map(
-      (issue) => `${issue.path.join('.') || '(root)'}: ${issue.message}`,
-    )
-  }
+  if (!result.success) return formatIssues(result.error)
 
   const section = result.data
   const errors = []
@@ -103,15 +135,25 @@ export function countMissingSpanish(value) {
 }
 
 async function main() {
+  const course = JSON.parse(await readFile(COURSE_FILE, 'utf8'))
+  const courseErrors = validateCourse(course)
+  if (courseErrors.length > 0) {
+    console.error('✗ course.json')
+    courseErrors.forEach((error) => console.error(`    - ${error}`))
+    process.exit(1)
+  }
+  console.log(`✓ course.json (${course.modules.length} modules)`)
+
   const files = (await readdir(SECTIONS_DIR))
     .filter((name) => name.endsWith('.json'))
     .sort()
   let hasErrors = false
-  let missingSpanish = 0
+  let missingSpanish = countMissingSpanish(course)
 
   for (const file of files) {
     const data = JSON.parse(await readFile(join(SECTIONS_DIR, file), 'utf8'))
     const errors = validateSection(data)
+    if (errors.length === 0) errors.push(...checkSectionInCourse(data, course))
 
     // The file name must match the slug so it's easy to find a section's file.
     if (data.slug && file !== `${data.slug}.json`) {

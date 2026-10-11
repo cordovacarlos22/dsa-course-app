@@ -69,3 +69,23 @@ export const sectionSchema = z
     exercises: z.array(exerciseSchema),
   })
   .strict()
+
+const moduleSchema = z
+  .object({
+    slug,
+    order: z.number().int().positive(),
+    title: localizedText,
+    // Module folder in Carlos's course folder (outside the repo).
+    sourceFolder: nonEmpty,
+  })
+  .strict()
+
+// The course outline: every module in order, even the ones with no quiz yet.
+export const courseSchema = z
+  .object({
+    slug,
+    title: localizedText,
+    description: localizedText,
+    modules: z.array(moduleSchema).min(1),
+  })
+  .strict()

@@ -1,6 +1,11 @@
 // @vitest-environment node
 import { describe, it, expect } from 'vitest'
-import { countMissingSpanish, validateSection } from './validate-content.js'
+import {
+  checkSectionInCourse,
+  countMissingSpanish,
+  validateCourse,
+  validateSection,
+} from './validate-content.js'
 
 const text = (en) => ({ en, es: `${en} (es)` })
 
@@ -120,5 +125,58 @@ describe('countMissingSpanish', () => {
     delete section.title.es
     delete section.questions[0].options[2].es
     expect(countMissingSpanish(section)).toBe(2)
+  })
+})
+
+function makeValidCourse() {
+  return {
+    slug: 'sample-course',
+    title: text('Sample course'),
+    description: text('A course for tests'),
+    modules: [
+      { slug: '01-intro', order: 1, title: text('Intro'), sourceFolder: 'a' },
+      { slug: '02-next', order: 2, title: text('Next'), sourceFolder: 'b' },
+    ],
+  }
+}
+
+describe('validateCourse', () => {
+  it('accepts a valid outline', () => {
+    expect(validateCourse(makeValidCourse())).toEqual([])
+  })
+
+  it('rejects modules that are out of order', () => {
+    const course = makeValidCourse()
+    course.modules[1].order = 3
+    expect(validateCourse(course)).toEqual([
+      'module "02-next" should have order 2',
+    ])
+  })
+
+  it('rejects duplicate module slugs', () => {
+    const course = makeValidCourse()
+    course.modules[1].slug = '01-intro'
+    expect(validateCourse(course)).toContain('duplicate module slug "01-intro"')
+  })
+})
+
+describe('checkSectionInCourse', () => {
+  it('accepts a section that matches a module', () => {
+    const section = { slug: '02-next', order: 2 }
+    expect(checkSectionInCourse(section, makeValidCourse())).toEqual([])
+  })
+
+  it('rejects a section whose slug is not in the outline', () => {
+    const section = { slug: '99-sample', order: 99 }
+    expect(checkSectionInCourse(section, makeValidCourse())).toEqual([
+      'slug "99-sample" is not a module in course.json',
+    ])
+  })
+
+  it('rejects a section with a different order', () => {
+    const section = { slug: '02-next', order: 5 }
+    expect(checkSectionInCourse(section, makeValidCourse())).toEqual([
+      'order should be 2 (as in course.json)',
+    ])
   })
 })
