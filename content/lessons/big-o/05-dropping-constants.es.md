@@ -72,14 +72,8 @@ console.log(lowAndHighOnePass([18, 22, 15, 30, 25]))
 
 Las dos versiones son O(n). Big O te dice que crecen de la misma forma. Las constantes importan en la práctica, pero son una mejora más pequeña, de segundo nivel. Big O primero te da el panorama completo.
 
-## Resumen
+En resumen:
 
 - **Elimina las constantes:** O(2n) → O(n), O(500) → O(1), O(3n²) → O(n²).
 - Big O se queda con la forma del crecimiento, no con el número exacto de pasos.
 - Dos bucles separados sobre el mismo array siguen siendo O(n).
-
-## Compruébalo tú mismo
-
-1. ¿Cómo escribes O(4n + 4n) en Big O?
-2. Una función siempre hace exactamente 12 operaciones. ¿Cuál es su Big O?
-3. ¿La versión de una sola pasada es mejor que O(n)?

@@ -66,14 +66,8 @@ If you counted every single operation in `countEvens` (setting `count`, each com
 
 What we care about is the **shape** of the growth: does the work stay flat, grow in a straight line, or explode? That's exactly what Big O captures, and in the next lessons you'll learn the simple rules for reading it.
 
-## Recap
+In short:
 
 - Timing depends on the machine and changes on every run.
 - Counting operations depends only on the code and the input size.
 - Big O ignores the exact count and keeps the **shape** of the growth.
-
-## Check yourself
-
-1. Name two reasons why timing the same code can give different results.
-2. If `countChecks` does 10,000 checks for 10,000 numbers, how many will it do for 50,000?
-3. Why don't we care whether a function does `2n + 2` or `3n + 5` operations?

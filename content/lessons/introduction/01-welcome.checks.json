@@ -1,0 +1,135 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What do you need to know before starting this course?",
+        "es": "¿Qué necesitas saber antes de empezar este curso?"
+      },
+      "options": [
+        {
+          "en": "A computer science degree",
+          "es": "Una carrera de ciencias de la computación"
+        },
+        {
+          "en": "Basic JavaScript: variables, functions, loops and arrays",
+          "es": "JavaScript básico: variables, funciones, bucles y arrays"
+        },
+        {
+          "en": "Advanced classes and TypeScript",
+          "es": "Clases avanzadas y TypeScript"
+        },
+        {
+          "en": "How to solve LeetCode hard problems",
+          "es": "Cómo resolver problemas difíciles de LeetCode"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Look at the last paragraph of this step: \"All you need is…\"",
+        "es": "Mira el último párrafo de este paso: \"Todo lo que necesitas es…\""
+      },
+      "explanation": {
+        "en": "Basic JavaScript is enough. Classes are taught in Module 3, and everything else is built up step by step.",
+        "es": "Con JavaScript básico es suficiente. Las clases se enseñan en el Módulo 3 y todo lo demás se construye paso a paso."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Your first coding check! Write `greet(name)` so it **returns** (not prints) the text `Hi <name>!`. For example, `greet('Ada')` returns `'Hi Ada!'`. Press **Check** when you're ready.",
+        "es": "¡Tu primera comprobación de código! Escribe `greet(name)` para que **devuelva** (no que imprima) el texto `Hi <name>!`. Por ejemplo, `greet('Ada')` devuelve `'Hi Ada!'`. Presiona **Comprobar** cuando estés listo."
+      },
+      "hint": {
+        "en": "Join the pieces with `+`: `return 'Hi ' + name + '!'`. Watch the space after `Hi`.",
+        "es": "Une las piezas con `+`: `return 'Hi ' + name + '!'`. Fíjate en el espacio después de `Hi`."
+      },
+      "starterCode": "function greet(name) {\n  // Return the greeting here.\n}\n\nconsole.log(greet('Ada'))\n",
+      "solution": "function greet(name) {\n  return 'Hi ' + name + '!'\n}\n\nconsole.log(greet('Ada'))\n",
+      "kind": "function",
+      "functionName": "greet",
+      "tests": [
+        {
+          "args": ["Ada"],
+          "expected": "Hi Ada!"
+        },
+        {
+          "args": ["Grace"],
+          "expected": "Hi Grace!"
+        },
+        {
+          "args": ["Luis"],
+          "expected": "Hi Luis!"
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which section comes right after **Foundations**?",
+        "es": "¿Qué sección viene justo después de **Fundamentos**?"
+      },
+      "options": [
+        {
+          "en": "Data structures",
+          "es": "Estructuras de datos"
+        },
+        {
+          "en": "Dynamic programming",
+          "es": "Programación dinámica"
+        },
+        {
+          "en": "Problem solving",
+          "es": "Resolución de problemas"
+        },
+        {
+          "en": "Interview practice",
+          "es": "Práctica de entrevistas"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Read the table from the top: the second row is the answer.",
+        "es": "Lee la tabla desde arriba: la segunda fila es la respuesta."
+      },
+      "explanation": {
+        "en": "After the foundations comes a method for solving problems, then searching and sorting, then the data structures.",
+        "es": "Después de los fundamentos viene un método para resolver problemas, luego búsqueda y ordenamiento, y después las estructuras de datos."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "What did training new truck drivers teach Carlos about learning hard skills?",
+        "es": "¿Qué le enseñó a Carlos entrenar a choferes nuevos sobre aprender habilidades difíciles?"
+      },
+      "options": [
+        {
+          "en": "You have to be naturally talented",
+          "es": "Hay que tener talento natural"
+        },
+        {
+          "en": "Memorize everything before you practice",
+          "es": "Hay que memorizar todo antes de practicar"
+        },
+        {
+          "en": "Practice only at the very end",
+          "es": "Hay que practicar solo al final"
+        },
+        {
+          "en": "Any hard skill gets easy when you break it into small, clear steps",
+          "es": "Cualquier habilidad difícil se vuelve fácil cuando la divides en pasos pequeños y claros"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "Think about how this lesson is built.",
+        "es": "Piensa en cómo está construida esta lección."
+      },
+      "explanation": {
+        "en": "Small, clear steps: that's why every lesson is split into steps with a check at the end of each one.",
+        "es": "Pasos pequeños y claros: por eso cada lección está dividida en pasos con una comprobación al final de cada uno."
+      }
+    }
+  ]
+}

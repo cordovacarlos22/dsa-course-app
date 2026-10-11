@@ -89,9 +89,9 @@ Agents: read this at the start of every session and update it at the end (see `A
   - Progress in localStorage (`progress:<module>/<lesson>`), shown on the module page (✓ Completed / In progress). Moves to Supabase in stage 8.
   - Pilot: Big O lesson 1 has 4 steps (2 code + 2 choice), EN + ES.
 
-## Next
+- 2026-10-11, `feat/lesson-checkpoints-content` (PR 3): every lesson (Introduction 1–3, Big O 1–12) is now 2–4 steps with checkpoints, EN + ES: 49 checkpoints (choice + code). "Recap" folded into the last step ("In short:"), "Check yourself" removed. Intro 1 and 3 explain steps, checks and the Check workspace.
 
-- **PR 3 `feat/lesson-checkpoints-content`:** convert the other 14 lessons (Introduction 1–3, Big O 2–12) to steps + `.checks.json`, EN + ES.
+## Next
 
 - Big O module still needs: the interview problem "Count the Operations" and its slides (later stage).
 - Next content (per `docs/curriculum.md`): **Big O of Arrays & Objects**, then **Classes & Pointers** lessons.

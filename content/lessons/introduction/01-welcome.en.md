@@ -19,13 +19,14 @@ All you need is basic JavaScript: variables, functions, loops and arrays. We'll 
 
 ## How a lesson works
 
-Every lesson mixes three things:
+Every lesson is a short series of **steps**, and each step mixes:
 
 1. **Short explanations** in plain language.
 2. **Animations** you control step by step, so you can _see_ an algorithm move instead of imagining it.
 3. **Code you can run** right here on the page.
+4. **A quick check at the end:** a question or a small coding task. The **Next** button unlocks when you pass it. Stuck? A wrong try shows a hint, and after 3 tries you can see the answer.
 
-Let's try that last one now. Change the name and press **Run**:
+Let's try running code now. Change the name and press **Run**:
 
 ```js-run
 const name = 'Ada'
@@ -52,7 +53,7 @@ Here's the map, in order:
 
 It's a lot, and some topics look scary from far away. That's why every one of them is broken into small steps, with an animation whenever a picture helps more than words.
 
-## By the end of the course
+### By the end of the course
 
 - You'll analyze the **time and space complexity** of any code with Big O.
 - You'll have a **method** for solving problems you've never seen before.
@@ -64,15 +65,10 @@ It's a lot, and some topics look scary from far away. That's why every one of th
 
 Hi, I'm Carlos! I'm a software engineer, and I learned all of this the long way: I earned my Computer Engineering degree while working full-time as a truck driver and driver trainer, studying between shifts. Training new drivers taught me that any hard skill becomes easy when you break it into small, clear steps. That's how every lesson here works, and I'll be with you the whole way.
 
-## Recap
+In short:
 
-- Lessons = explanation + animations + runnable code.
+- Lessons = short steps with explanations, animations, runnable code and a check at the end of each step.
 - Each module ends with a quiz and timed exercises.
 - We start with the foundations (Big O, classes and pointers) and a method for solving problems, because everything else builds on them.
 
-## Check yourself
-
-1. Which two sorting algorithms are the "efficient" ones in this course?
-2. What three things does every lesson mix together?
-
-You'll find more questions like these in the **Module 1 quiz** on the module page.
+At the end of the module, the **Module 1 quiz** on the module page checks everything together.

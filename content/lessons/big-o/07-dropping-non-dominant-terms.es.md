@@ -57,14 +57,8 @@ La misma idea sirve para cualquier combinación. Quédate con el término que cr
 
 Recuerda las dos reglas juntas: primero elimina las constantes y luego los términos no dominantes.
 
-## Resumen
+En resumen:
 
 - **Elimina los términos no dominantes:** quédate solo con la parte que crece más rápido.
 - O(n² + n) → O(n²), O(n + 1000) → O(n).
 - Junto con la regla 1: O(2n² + 7n + 3) → O(n²).
-
-## Compruébalo tú mismo
-
-1. Simplifica O(n² + 50n).
-2. Simplifica O(n + 1,000,000). (Cuidado: ¡el número grande sigue siendo una constante!)
-3. Una función tiene un bucle anidado y luego dos bucles simples sobre el mismo array. ¿Cuál es su Big O?

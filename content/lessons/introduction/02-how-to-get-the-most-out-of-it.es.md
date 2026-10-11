@@ -10,7 +10,7 @@ minutes: 6
 
 Puedes. Si solo quieres escribir código, ve directo al módulo de Listas Enlazadas. Pero los dos módulos siguientes son cortos y hacen que todo lo demás sea más fácil. Te explico por qué.
 
-## Por qué Big O va primero
+### Por qué Big O va primero
 
 Imagina que estás construyendo una app y lo más importante que hace es **quitar el último elemento** de una lista, miles de veces por segundo. Podrías guardar la lista como una **lista enlazada simple** o como una **lista doblemente enlazada**. ¿Cuál eliges?
 
@@ -58,17 +58,11 @@ La forma más rápida de aprender DSA es **practicar justo después de aprender*
 
 No dejes toda la práctica para el final del curso. Un poco de práctica después de cada módulo se te queda mucho mejor que mucha práctica meses después.
 
-## Resumen
+En resumen:
 
 - **Big O** es cómo comparamos código. Todos los temas lo usan, te ayuda a elegir estructuras de datos y en las entrevistas lo preguntan.
 - Cada estructura de datos es una **clase**.
 - `head` y `tail` son **punteros** a nodos, no los nodos en sí.
 - Practica justo después de cada módulo.
 
-## Compruébalo tú mismo
-
-1. ¿Cuál es mejor para quitar el último elemento: una lista enlazada simple o una doblemente enlazada?
-2. En el código de arriba, ¿qué línea hace que el antiguo último nodo apunte al nodo nuevo?
-3. ¿Por qué `head` sigue siendo `4` al final?
-
-Más preguntas como estas te esperan en el **cuestionario del Módulo 1**.
+Cuando termines este módulo, el **cuestionario del Módulo 1** te espera en la página del módulo.

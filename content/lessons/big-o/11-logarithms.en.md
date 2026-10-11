@@ -54,14 +54,8 @@ That technique of cutting the problem in half again and again is called **divide
 - **O(log n):** binary search, and searching balanced trees (later in the course).
 - **O(n log n):** the best general-purpose sorting algorithms, like merge sort. That's `n` items times `log n` levels of splitting. You'll build it yourself in the Merge Sort module.
 
-## Recap
+In short:
 
 - log₂(n) = how many times you can halve `n` before reaching 1.
 - **O(log n)** grows incredibly slowly: a billion items → about 30 steps.
 - "Divide and conquer" → O(log n). Good sorting → O(n log n).
-
-## Check yourself
-
-1. What is log₂(16)?
-2. Why does binary search need a sorted array?
-3. If n goes from 1,000 to 1,000,000, about how many more steps does an O(log n) algorithm need?

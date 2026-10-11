@@ -1,0 +1,139 @@
+{
+  "steps": [
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `countHalvings(n)`: return how many times you can replace `n` with `Math.floor(n / 2)` before `n` is 1 or less.",
+        "es": "Escribe `countHalvings(n)`: devuelve cuántas veces puedes reemplazar `n` por `Math.floor(n / 2)` antes de que `n` sea 1 o menos."
+      },
+      "hint": {
+        "en": "`while (n > 1) { n = Math.floor(n / 2); steps++ }`, then return `steps`.",
+        "es": "`while (n > 1) { n = Math.floor(n / 2); steps++ }`, y después devuelve `steps`."
+      },
+      "starterCode": "function countHalvings(n) {\n  let steps = 0\n  // Halve n until it's 1 or less.\n  return steps\n}\n\nconsole.log(countHalvings(8)) // 3\n",
+      "solution": "function countHalvings(n) {\n  let steps = 0\n  while (n > 1) {\n    n = Math.floor(n / 2)\n    steps++\n  }\n  return steps\n}\n\nconsole.log(countHalvings(8)) // 3\n",
+      "kind": "function",
+      "functionName": "countHalvings",
+      "tests": [
+        {
+          "args": [8],
+          "expected": 3
+        },
+        {
+          "args": [1024],
+          "expected": 10
+        },
+        {
+          "args": [100],
+          "expected": 6
+        },
+        {
+          "args": [1],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "What is log₂(16)?",
+        "es": "¿Cuánto es log₂(16)?"
+      },
+      "options": [
+        {
+          "en": "2",
+          "es": "2"
+        },
+        {
+          "en": "4",
+          "es": "4"
+        },
+        {
+          "en": "8",
+          "es": "8"
+        },
+        {
+          "en": "16",
+          "es": "16"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "How many times can you cut 16 in half until you reach 1?",
+        "es": "¿Cuántas veces puedes partir 16 a la mitad hasta llegar a 1?"
+      },
+      "explanation": {
+        "en": "16 → 8 → 4 → 2 → 1: four halvings. Or: 2 × 2 × 2 × 2 = 16.",
+        "es": "16 → 8 → 4 → 2 → 1: cuatro mitades. O también: 2 × 2 × 2 × 2 = 16."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Why does binary search need a **sorted** array?",
+        "es": "¿Por qué la búsqueda binaria necesita un array **ordenado**?"
+      },
+      "options": [
+        {
+          "en": "Sorted arrays use less memory",
+          "es": "Los arrays ordenados usan menos memoria"
+        },
+        {
+          "en": "So it can tell which half can't contain the target and throw it away",
+          "es": "Para saber qué mitad no puede tener el objetivo y descartarla"
+        },
+        {
+          "en": "JavaScript only allows searching sorted arrays",
+          "es": "JavaScript solo permite buscar en arrays ordenados"
+        },
+        {
+          "en": "It doesn't: it works on any array",
+          "es": "No la necesita: funciona con cualquier array"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "After looking at the middle item, how do you know which half to keep?",
+        "es": "Después de mirar el elemento del medio, ¿cómo sabes qué mitad conservar?"
+      },
+      "explanation": {
+        "en": "Only in sorted data does \"the target is bigger than the middle\" tell you it must be in the right half.",
+        "es": "Solo en datos ordenados \"el objetivo es mayor que el del medio\" te dice que tiene que estar en la mitad derecha."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "n goes from 1,000 to 1,000,000. About how many more steps does an O(log n) algorithm need?",
+        "es": "n pasa de 1,000 a 1,000,000. ¿Más o menos cuántos pasos más necesita un algoritmo O(log n)?"
+      },
+      "options": [
+        {
+          "en": "About 10 more (from about 10 to about 20)",
+          "es": "Unos 10 más (de unos 10 a unos 20)"
+        },
+        {
+          "en": "About 1,000 times more",
+          "es": "Unas 1,000 veces más"
+        },
+        {
+          "en": "About 999,000 more",
+          "es": "Unos 999,000 más"
+        },
+        {
+          "en": "Exactly the same number",
+          "es": "Exactamente el mismo número"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "log₂(1,000) ≈ 10 and log₂(1,000,000) ≈ 20.",
+        "es": "log₂(1,000) ≈ 10 y log₂(1,000,000) ≈ 20."
+      },
+      "explanation": {
+        "en": "Each extra halving doubles what you can handle, so 1,000 times more data needs only about 10 more steps.",
+        "es": "Cada mitad extra duplica lo que puedes manejar, así que 1,000 veces más datos necesitan solo unos 10 pasos más."
+      }
+    }
+  ]
+}

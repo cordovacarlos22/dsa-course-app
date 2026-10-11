@@ -23,7 +23,7 @@ console.log(sendMessages(['Ana', 'Bo', 'Cai'], ['Dr. Lee']))
 
 Two loops, one after the other. The tempting answer: "each loop is O(n), so O(2n), which is O(n)." **That's wrong.**
 
-## Why it's wrong
+### Why it's wrong
 
 `n` means "the size of the input", but there are **two** inputs, and they can be completely different sizes. What if there are 3 students and 1 million mentors? Calling both sizes `n` hides that.
 
@@ -57,16 +57,10 @@ console.log(scheduleMeetings(['Ana', 'Bo', 'Cai'], ['Dr. Lee', 'Ms. Ruiz']))
 
 It's only O(n²) if both loops go over the **same** input.
 
-## Recap
+In short:
 
 | Code shape                           | Big O    |
 | ------------------------------------ | -------- |
 | Loop over `a`, then loop over `b`    | O(a + b) |
 | Loop over `b` inside a loop over `a` | O(a · b) |
 | Nested loops over the same array     | O(n²)    |
-
-## Check yourself
-
-1. A function loops over `orders` and then over `customers`. What's its Big O?
-2. Why can't you simplify O(a + b) to O(n)?
-3. When does O(a · b) become O(n²)?

@@ -23,7 +23,7 @@ console.log(sendMessages(['Ana', 'Bo', 'Cai'], ['Dr. Lee']))
 
 Dos bucles, uno después del otro. La respuesta tentadora: "cada bucle es O(n), entonces O(2n), que es O(n)". **Eso está mal.**
 
-## Por qué está mal
+### Por qué está mal
 
 `n` significa "el tamaño de la entrada", pero aquí hay **dos** entradas y pueden tener tamaños completamente distintos. ¿Y si hay 3 estudiantes y 1 millón de mentores? Llamar `n` a los dos tamaños esconde eso.
 
@@ -57,16 +57,10 @@ console.log(scheduleMeetings(['Ana', 'Bo', 'Cai'], ['Dr. Lee', 'Ms. Ruiz']))
 
 Solo es O(n²) si los dos bucles recorren la **misma** entrada.
 
-## Resumen
+En resumen:
 
 | Forma del código                             | Big O    |
 | -------------------------------------------- | -------- |
 | Bucle sobre `a`, luego bucle sobre `b`       | O(a + b) |
 | Bucle sobre `b` dentro de un bucle sobre `a` | O(a · b) |
 | Bucles anidados sobre el mismo array         | O(n²)    |
-
-## Compruébalo tú mismo
-
-1. Una función recorre `orders` y luego `customers`. ¿Cuál es su Big O?
-2. ¿Por qué no puedes simplificar O(a + b) a O(n)?
-3. ¿Cuándo O(a · b) se convierte en O(n²)?

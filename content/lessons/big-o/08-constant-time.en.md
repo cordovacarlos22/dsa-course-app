@@ -53,14 +53,8 @@ On a chart, O(1) is a **flat line** at the bottom. Nothing grows more slowly. Wh
 
 Careful, though: one line of code isn't automatically O(1). `array.includes(x)` is one line, but it walks the whole array: O(n).
 
-## Recap
+In short:
 
 - Work that doesn't grow with the input → **O(1)**, constant time.
 - Index lookups, object keys, simple math, push/pop.
 - One line doesn't mean O(1): look for hidden loops.
-
-## Check yourself
-
-1. What's the Big O of `arr[arr.length - 1]`?
-2. A function does 3 additions and 2 comparisons, always. Big O?
-3. Why isn't `array.indexOf(x)` O(1)?

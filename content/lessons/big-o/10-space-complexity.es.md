@@ -10,7 +10,7 @@ minutes: 6
 
 Hasta ahora contamos pasos. La **complejidad espacial** cuenta otra cosa: cuánta **memoria extra** crea el código cuando crece la entrada. (La entrada en sí no cuenta; solo medimos lo que agrega el código.)
 
-## Algunas reglas prácticas
+### Algunas reglas prácticas
 
 - Los números, los booleanos, `undefined` y `null` ocupan un espacio fijo → O(1).
 - Los strings ocupan espacio proporcional a su largo.
@@ -57,14 +57,8 @@ Esta función construye un **array nuevo** con un elemento por cada calificació
 
 En las entrevistas muchas veces preguntan las dos cosas: _"¿Cuál es la complejidad temporal? ¿Y la espacial?"_ A veces vas a cambiar una por la otra, como en la lista de invitados de la primera lección: el `Set` hizo las búsquedas más rápidas usando más memoria.
 
-## Resumen
+En resumen:
 
 - **Complejidad espacial** = cuánta memoria extra crece con la entrada.
 - Unas pocas variables → espacio O(1). Un array/objeto/string nuevo que crece con la entrada → espacio O(n).
 - Cuando te pregunten, responde tiempo **y** espacio.
-
-## Compruébalo tú mismo
-
-1. Una función cuenta las vocales de un string usando una variable contador. ¿Cuál es su complejidad espacial?
-2. Una función devuelve una copia invertida de un array. ¿Complejidad espacial?
-3. ¿Puede una función ser O(n) en tiempo y O(1) en espacio? Da un ejemplo de esta lección.
