@@ -18,9 +18,9 @@ describe('localize', () => {
 describe('getModules', () => {
   it('attaches the quiz/exercises to modules that have them', () => {
     const modules = getModules()
-    expect(modules).toHaveLength(18)
-    expect(getModule('02-big-o').section.questions.length).toBeGreaterThan(0)
-    expect(getModule('04-listas-enlazadas').section).toBeNull()
+    expect(modules).toHaveLength(24)
+    expect(getModule('big-o').section.questions.length).toBeGreaterThan(0)
+    expect(getModule('linked-lists').section).toBeNull()
   })
 
   it('returns null for an unknown module', () => {
@@ -29,17 +29,18 @@ describe('getModules', () => {
 })
 
 describe('getParts', () => {
-  it('groups all 18 modules into 6 parts, in order', () => {
+  it('groups all 24 modules into 7 parts, in order', () => {
     const parts = getParts()
     expect(parts.map((part) => part.slug)).toEqual([
       'foundations',
+      'problem-solving',
+      'searching-and-sorting',
       'data-structures',
-      'recursion-and-trees',
-      'sorting',
+      'graph-algorithms',
       'dynamic-programming',
       'interview-practice',
     ])
-    expect(parts.flatMap((part) => part.modules)).toHaveLength(18)
-    expect(parts[0].modules[1].slug).toBe('02-big-o')
+    expect(parts.flatMap((part) => part.modules)).toHaveLength(24)
+    expect(parts[0].modules[1].slug).toBe('big-o')
   })
 })

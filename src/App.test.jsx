@@ -68,27 +68,27 @@ describe('language switcher', () => {
 })
 
 describe('course home', () => {
-  it('lists all 18 modules in order, grouped into 6 parts', () => {
+  it('lists all 24 modules in order, grouped into 7 parts', () => {
     renderAsReturningStudent('/learn')
     expect(
       screen.getByRole('heading', { level: 2, name: 'Part 1: Foundations' }),
     ).toBeInTheDocument()
-    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(6)
+    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(7)
     const modules = screen
       .getAllByRole('list')
       .flatMap((list) => within(list).getAllByRole('listitem'))
-    expect(modules).toHaveLength(18)
+    expect(modules).toHaveLength(24)
     expect(modules[0]).toHaveTextContent('Module 1')
     expect(modules[0]).toHaveTextContent('Introduction')
-    expect(modules[16]).toHaveTextContent('Dynamic Programming')
-    expect(modules[17]).toHaveTextContent('Array Interview Problems')
+    expect(modules[22]).toHaveTextContent('Dynamic Programming')
+    expect(modules[23]).toHaveTextContent('Array Interview Problems')
   })
 
   it('links modules that have content and marks the rest as coming soon', () => {
     renderAsReturningStudent('/learn')
     expect(screen.getByRole('link', { name: /Big O/ })).toHaveAttribute(
       'href',
-      '/learn/02-big-o',
+      '/learn/big-o',
     )
     expect(screen.getByRole('link', { name: /Big O/ })).toHaveTextContent(
       '1 lesson · 19 questions · 3 exercises',
@@ -96,13 +96,13 @@ describe('course home', () => {
     expect(
       screen.queryByRole('link', { name: /Linked Lists/ }),
     ).not.toBeInTheDocument()
-    expect(screen.getAllByText('Coming soon')).toHaveLength(15)
+    expect(screen.getAllByText('Coming soon')).toHaveLength(21)
   })
 })
 
 describe('module page', () => {
   it('shows the module title and what you can practice', () => {
-    renderAsReturningStudent('/learn/03-clases-punteros')
+    renderAsReturningStudent('/learn/classes-and-pointers')
     expect(
       screen.getByRole('heading', { level: 1, name: 'Classes & Pointers' }),
     ).toBeInTheDocument()
@@ -117,7 +117,7 @@ describe('module page', () => {
   })
 
   it('says a module without content is not ready yet', () => {
-    renderAsReturningStudent('/learn/04-listas-enlazadas')
+    renderAsReturningStudent('/learn/linked-lists')
     expect(
       screen.getByText("This module isn't ready yet. Check back soon!"),
     ).toBeInTheDocument()
