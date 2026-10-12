@@ -71,7 +71,7 @@ describe('lesson page', () => {
     expect(
       await screen.findByRole('heading', { level: 1, name: 'Why Big O?' }),
     ).toBeInTheDocument()
-    expect(screen.getByText('Step 1 of 3')).toBeInTheDocument()
+    expect(screen.getByText('Step 1 of 4')).toBeInTheDocument()
     expect(
       screen.getByRole('heading', { name: 'Two versions that both work' }),
     ).toBeInTheDocument()
@@ -122,7 +122,7 @@ describe('lesson page', () => {
 
     // Resumes at the first step that hasn't passed: a coding step with the
     // Learn, Code and Output panes.
-    expect(await screen.findByText('Step 2 of 3')).toBeInTheDocument()
+    expect(await screen.findByText('Step 2 of 4')).toBeInTheDocument()
     expect(screen.getByRole('region', { name: 'Learn' })).toBeInTheDocument()
     // The editor is loaded on demand too.
     const editor = await screen.findByRole('textbox', { name: 'Code editor' })
@@ -159,12 +159,12 @@ describe('lesson page', () => {
     await user.click(check)
     expect(nextButton()).toBeEnabled()
     await user.click(nextButton())
-    expect(screen.getByText('Step 3 of 3')).toBeInTheDocument()
+    expect(screen.getByText('Step 3 of 4')).toBeInTheDocument()
   })
 
   it('does not let a student skip ahead with the URL', async () => {
-    renderAt(`${LESSON}?step=3`)
-    expect(await screen.findByText('Step 1 of 3')).toBeInTheDocument()
+    renderAt(`${LESSON}?step=4`)
+    expect(await screen.findByText('Step 1 of 4')).toBeInTheDocument()
   })
 
   it('completes the lesson when the last checkpoint passes', async () => {
