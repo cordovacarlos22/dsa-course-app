@@ -144,6 +144,7 @@
     "notReady": "This module isn't ready yet. Check back soon!",
     "complete": "Module complete!",
     "completeText": "You finished every lesson in {{module}}. The quiz and exercises come next.",
+    "completedBadge": "Module complete",
     "buildIt": "Build it",
     "interviewProblems": "Interview problems"
   },

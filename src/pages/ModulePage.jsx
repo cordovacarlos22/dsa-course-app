@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useLanguage } from '../hooks/useLanguage'
 import { getModule, localize } from '../lib/course'
 import { getLessonVersion } from '../lib/lessons'
-import { loadProgress } from '../lib/progress'
+import { isModuleComplete, loadProgress } from '../lib/progress'
 import NotFoundPage from './NotFoundPage'
 
 // One module: its lessons, then its quiz + exercises (pages in stage 7).
@@ -31,6 +31,11 @@ function ModulePage() {
       <h1 className="text-3xl font-extrabold">
         {localize(module.title, language)}
       </h1>
+      {lessons.length > 0 && isModuleComplete(module.slug, lessons) && (
+        <p className="mt-3 inline-block rounded-full bg-accent/20 px-3 py-1 text-sm font-bold">
+          🏆 {t('module.completedBadge')}
+        </p>
+      )}
 
       {!module.isAvailable && (
         <p className="mt-4 text-slate-600">{t('module.notReady')}</p>

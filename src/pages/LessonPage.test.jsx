@@ -227,6 +227,15 @@ describe('lesson page', () => {
     expect(link).toHaveTextContent('In progress')
   })
 
+  it('gives a finished module a trophy on its page', () => {
+    const finished = { ...emptyProgress(), passed: [0], completed: true }
+    saveProgress('introduction', '01-welcome', finished)
+    saveProgress('introduction', '02-how-to-get-the-most-out-of-it', finished)
+    saveProgress('introduction', '03-running-code', finished)
+    renderAt('/learn/introduction')
+    expect(screen.getByText(/module complete/i)).toBeInTheDocument()
+  })
+
   it('shows "page not found" for a lesson that does not exist', async () => {
     renderAt('/learn/big-o/99-nope')
     expect(

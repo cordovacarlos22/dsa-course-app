@@ -144,6 +144,7 @@
     "notReady": "Este módulo aún no está listo. ¡Vuelve pronto!",
     "complete": "¡Módulo completado!",
     "completeText": "Terminaste todas las lecciones de {{module}}. Ahora siguen el cuestionario y los ejercicios.",
+    "completedBadge": "Módulo completado",
     "buildIt": "Constrúyelo",
     "interviewProblems": "Problemas de entrevista"
   },
