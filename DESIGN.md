@@ -175,7 +175,11 @@ This file describes the look the app **already has**. Change it only in a PR tha
 - **Checkpoint feedback:** a correct answer shows a green box that pops in (`motion-safe:animate-pop`) with "✓ Correct!" plus a cheer. A wrong answer shows the amber hint box.
 - **Step progress:** one rounded segment per step: green when passed, brand blue for the current step (with a `ring-2 ring-brand/40` ring), `slate-200` otherwise. Colors change with `transition-colors duration-500`.
 - **Lesson-complete card:** a green card with 🎉, the stats chips, ⭐ for a perfect lesson, and a yellow 🏆 box inside it when the module is also finished.
-- **Header:** white with a bottom border. The JS logo chip and app name on the left; **Learn**, the 🔊 sound toggle and the language switcher on the right.
+- **Header:** white with a bottom border. The JS logo chip and app name on the left; **Learn**, the 🔊 sound toggle and the language switcher on the right. These small controls get an invisible tap area (`after:absolute after:-inset-…`) so they're about 44 px tall for fingers, with no visual change.
+- **Skip link:** "Skip to content" is hidden until the first Tab, then shows as a brand-blue pill at the top left.
+- **Focus:** buttons and links use the browser's focus ring. Code areas (the lesson code box and the editor) use a yellow `accent` ring inside the box instead, because the browser's ring is hard to see on the dark panels.
+- **Language dialog:** the first-visit picker is a native `<dialog>` opened with `showModal()`, over a backdrop of `ink` at 60%.
+- **Favicon:** the header's yellow "JS" chip (`public/favicon.svg`, plus PNG and Apple touch icon versions).
 - **Landing page:** a brand-blue hero panel (`rounded-3xl`) with a yellow call-to-action and a white outline button, centered sections, and a dark ink panel for the final call to action.
 
 ## Do's and Don'ts
@@ -199,6 +203,4 @@ This file describes the look the app **already has**. Change it only in a PR tha
 
 These are true today, so don't assume otherwise:
 
-- The favicon is still Vite's default (`public/vite.svg`).
 - There's no dark mode.
-- There are no custom focus styles. Buttons and links use the browser's default focus ring.
