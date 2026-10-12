@@ -1,6 +1,7 @@
 import { Link, NavLink, Outlet, useMatch } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
+import SoundToggle from './SoundToggle'
 import FirstVisitLanguagePicker from './FirstVisitLanguagePicker'
 
 // The frame around every page: header, the page itself, footer.
@@ -20,7 +21,9 @@ function Layout() {
             <span className="rounded-md bg-accent px-1.5 py-0.5 text-sm text-ink">
               JS
             </span>
-            {t('app.name')}
+            {/* On the smallest phones (320 px) only the JS logo shows, so the
+                header buttons fit. Screen readers still read the name. */}
+            <span className="max-[359px]:sr-only">{t('app.name')}</span>
           </Link>
           <nav
             aria-label={t('nav.mainNavigation')}
@@ -34,6 +37,7 @@ function Layout() {
             >
               {t('nav.learn')}
             </NavLink>
+            <SoundToggle />
             <LanguageSwitcher />
           </nav>
         </div>

@@ -4,14 +4,14 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Current stage
 
-- **Stage 1: Scaffold is done** (branch `chore/scaffold`, waiting for a GitHub repo to open the PR).
-- **Stage 4 (offline part) is done** (`feat/content-pipeline`), plus **course content** (`feat/course-content`, built on top of it).
-- Next up: Stage 2 (CI). It needs a GitHub repo.
+- Stages 1–5 are done. **Stage 6 (lessons)** is in progress: Introduction (3 lessons) and Big O (17 lessons) are merged, EN + ES, with checkpoints.
+- 2026-10-12: game-style **celebrations** (confetti + sounds) on `feat/celebrations`.
 
 ## Decisions
 
 - 2026-10-11 (replaced the same day, see below): **Lessons are visual-first** (an animation opens every step, 1–3 sentences after it), **one story per module** (Big O: guest list), and **beginner loops** (`for (let i = 0; …; i++)`, no `for...of`/`forEach`). Reason: Carlos's students prefer visuals and many only know basic JavaScript.
 - 2026-10-11: **Show, then explain.** Carlos: keeping the reading low didn't mean erasing it. Every step keeps its animation, but lessons teach at the depth of the course notes and transcripts (300–500 words, every point covered, in our own words). **Coding steps use Learn | Editor over Output** (two columns, the editor above the output), because three columns were too tight.
+- 2026-10-12: **Celebrations, like a game** (Carlos: "like Duolingo, where they celebrate each of your achievements"). The first time a step's check passes: a small confetti burst and a cheer ("Great job!", or "🔥 3 in a row on the first try!"). The lesson's last step: two confetti cannons and a "Lesson complete" card with stats (checks, first tries, "Perfect lesson"). The module's last lesson: star fireworks and a 🏆, plus a badge on the module page. Revisits stay quiet. **Sounds** are made with Web Audio (no audio files), with a 🔊 mute button in the header (saved as `sounds` in localStorage). Devices that ask for less motion get no confetti or pop animations. One entry point, `celebrate(level)` in `src/lib/celebrate.js` (reuse it for quizzes); `canvas-confetti` is loaded on demand. **XP points, daily streaks and badges come in stage 8**, with Supabase (Carlos's choice), so they follow students across devices.
 - 2026-10-11 (later): **Big O follows both courses closely.** Carlos: "still not enough … missing a lot of the content from the 2 files … even if we are going to be super close to the original 2 courses". One lesson per lecture (17), the courses' own examples plus the guest-list animations, every point of both files (text, slides and quizzes) covered; sentences stay ours. **Sources for Big O are his two `.docx` files** in the "DSA + LEETCODE…" Desktop folder, not `guiones/`; he'll add files for the other modules later.
 
 - 2026-10-11: **Codecademy-style learning (Carlos).** Students must prove they understood before moving on: lessons are split into **steps** (each `##` heading), every step ends with a **checkpoint** (quick question or small code task checked by tests), and **Next stays locked until it passes**. Stuck → hint, then the solution after 3 failed tries (recorded as "viewed solution"). Coding steps use a **3-pane workspace** (Learn | Editor | Output). Being built in `feat/step-checkpoints`.
@@ -69,7 +69,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 5. ✅ Lesson system: lesson files + validation, Markdown renderer, StepPlayer, 3 animations, runnable snippets (Web Worker), first lesson (branch `feat/lesson-system`)
 6. Original lessons for modules 01–03 (EN), reviewed by Carlos ← next
 7. Quiz + exercise pages (CodeMirror, runner, timer)
-8. Supabase: schema + RLS, magic-link auth, profile, progress
+8. Supabase: schema + RLS, magic-link auth, profile, progress, then XP points, daily streaks and badges (Carlos, 2026-10-12)
 9. Deploy pipeline: preview / deploy (blue/green) / rollback, Playwright smoke test
 10. AI tutor v1: `tutor` Edge Function (streaming, quota), lesson chat, hints
 11. AI tutor v2: code review, mock interview
@@ -103,7 +103,11 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 - 2026-10-11, PR #17 third round: 17 Big O lessons (9,060 English words, 51 steps and checkpoints, EN + ES), quiz 33 questions; new traces (`sumUpTo` loop vs formula, `printNumbers`, `printPairs`, `doubleArray`), `timing-chart` and `array-splice`; `content:validate` also rejects repeated options.
 
+- 2026-10-12, `feat/celebrations`: confetti and sounds for each win (step, lesson, module), cheers and first-try streaks, the "Lesson complete" card with stats, the module 🏆 badge, and the 🔊 mute button. Reduced motion respected.
+
 ## Next
+
+- **Security tools** (Carlos, 2026-10-12): he has security projects made by someone else, maybe MCP servers. His 15 attachments didn't arrive, so ask for GitHub links or folder paths. Read each tool's code before installing it. MCP servers go in a committed `.mcp.json`, with secrets only in environment variables. One small PR per tool. If a Content-Security-Policy is added, confetti needs `worker-src 'self' blob:`.
 
 - Big O module still needs: the interview problem "Count the Operations" and its slides (later stage).
 - Next content (per `docs/curriculum.md`): **Big O of Arrays & Objects**, then **Classes & Pointers** lessons.
@@ -115,7 +119,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 | Section               | File                                         | Questions | Exercises                                                          | Spanish | Date       |
 | --------------------- | -------------------------------------------- | --------- | ------------------------------------------------------------------ | ------- | ---------- |
 | 1: Introduction       | `content/practice/introduction.json`         | 10        | none                                                               | done    | 2026-10-11 |
-| 2: Big O              | `content/practice/big-o.json`                | 19        | find-max (easy), contains-duplicate (easy), binary-search (medium) | done    | 2026-10-11 |
+| 2: Big O              | `content/practice/big-o.json`                | 33        | find-max (easy), contains-duplicate (easy), binary-search (medium) | done    | 2026-10-11 |
 | 3: Classes & Pointers | `content/practice/classes-and-pointers.json` | 12        | cookie-class (easy, class)                                         | missing | 2026-10-11 |
 
 Modules 04–17 have empty folders; they appear in `course.json` as "coming soon".
@@ -125,7 +129,7 @@ Modules 04–17 have empty folders; they appear in `course.json` as "coming soon
 | Module          | Lessons                                                             | Languages | Date       |
 | --------------- | ------------------------------------------------------------------- | --------- | ---------- |
 | 01 Introduction | `01-welcome`, `02-how-to-get-the-most-out-of-it`, `03-running-code` | EN + ES   | 2026-10-11 |
-| 02 Big O        | 14 visual-first lessons (`01-why-big-o` … `14-wrap-up`)             | EN + ES   | 2026-10-11 |
+| 02 Big O        | 17 lessons, one per lecture (`01-why-big-o` … `17-wrap-up`)         | EN + ES   | 2026-10-11 |
 
 ## Open questions
 

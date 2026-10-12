@@ -2,11 +2,15 @@ import { useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { useLanguage } from '../hooks/useLanguage'
+import { celebrate } from '../lib/celebrate'
 import { getModule, localize } from '../lib/course'
 import { getLessonSteps, getLessonVersion } from '../lib/lessons'
 import {
+  countFirstTry,
   failedAttempts,
+  firstTryStreak,
   firstUnpassedStep,
+  isModuleComplete,
   loadProgress,
   markStepPassed,
   recordFailedAttempt,
@@ -16,7 +20,11 @@ import {
 import LessonMarkdown from '../components/LessonMarkdown'
 import ChoiceCheckpoint from '../components/lesson/ChoiceCheckpoint'
 import CodeWorkspace from '../components/lesson/CodeWorkspace'
+import LessonComplete from '../components/lesson/LessonComplete'
 import NotFoundPage from './NotFoundPage'
+
+// From this many first-try steps in a row, the cheer becomes "🔥 3 in a row".
+const STREAK_TO_CHEER = 3
 
 // One lesson, played step by step (/learn/:module/:lesson?step=2).
 // Each step ends with a checkpoint, and Next stays locked until it passes.
@@ -50,6 +58,8 @@ function LessonPlayer({ module, lessonIndex }) {
   )
   // Steps where the student pressed "Show answer" on a question.
   const [shownAnswers, setShownAnswers] = useState([])
+  // The step that just passed (and was celebrated) during this visit.
+  const [celebratedStep, setCelebratedStep] = useState(null)
 
   // Without ?step=, the lesson resumes where the student left off. (Kept in
   // state so passing a step doesn't move the student before they press Next.)
@@ -75,14 +85,31 @@ function LessonPlayer({ module, lessonIndex }) {
     })
   }
 
-  const markPassed = () =>
+  // The first time a step passes, celebrate it: a small burst for a step,
+  // more for the lesson's last step, the most when that finishes the module.
+  // (Here in the event handler: React may run state updaters twice.)
+  function celebratePass() {
+    const finishesLesson =
+      !progress.completed &&
+      markStepPassed(progress, stepIndex, steps.length).completed
+    const otherLessons = module.lessons.filter((other) => other !== lesson)
+    const finishesModule =
+      finishesLesson && isModuleComplete(module.slug, otherLessons)
+    celebrate(finishesModule ? 'module' : finishesLesson ? 'lesson' : 'step')
+    setCelebratedStep(stepIndex)
+  }
+
+  const markPassed = () => {
+    if (!isPassed) celebratePass()
     update((current) => markStepPassed(current, stepIndex, steps.length))
+  }
   const markFailed = () =>
     update((current) => recordFailedAttempt(current, stepIndex))
   const markSolutionViewed = () =>
     update((current) => recordViewedSolution(current, stepIndex))
 
   function goToStep(index) {
+    setCelebratedStep(null)
     setSearchParams({ step: String(index + 1) })
     window.scrollTo({ top: 0 })
   }
@@ -97,6 +124,9 @@ function LessonPlayer({ module, lessonIndex }) {
   const isCodeStep = step.checkpoint?.type === 'code'
   const canGoNext = isPassed || !step.checkpoint
   const isLessonDone = progress.completed
+  const cheer = cheerFor(t, progress, stepIndex)
+  // Next (or "Next lesson") bounces once when the step just passed.
+  const nudge = celebratedStep === stepIndex ? 'motion-safe:animate-nudge' : ''
 
   return (
     <article className={isCodeStep ? '' : 'mx-auto max-w-3xl'}>
@@ -123,6 +153,7 @@ function LessonPlayer({ module, lessonIndex }) {
         currentIndex={stepIndex}
         furthestStep={furthestStep}
         passed={progress.passed}
+        celebratedStep={celebratedStep}
         onSelect={goToStep}
       />
 
@@ -132,6 +163,7 @@ function LessonPlayer({ module, lessonIndex }) {
             key={stepIndex}
             step={step}
             isPassed={isPassed}
+            cheer={cheer}
             failedTries={tries}
             onPassed={markPassed}
             onFailed={markFailed}
@@ -148,6 +180,7 @@ function LessonPlayer({ module, lessonIndex }) {
                 key={stepIndex}
                 checkpoint={step.checkpoint}
                 isPassed={isPassed}
+                cheer={cheer}
                 failedTries={tries}
                 isAnswerShown={shownAnswers.includes(stepIndex)}
                 onCorrect={markPassed}
@@ -163,13 +196,12 @@ function LessonPlayer({ module, lessonIndex }) {
       </div>
 
       {isLastStep && isLessonDone && (
-        <div
-          role="status"
-          className="mt-8 rounded-2xl bg-green-50 p-6 text-center text-green-900"
-        >
-          <p className="text-xl font-extrabold">🎉 {t('lesson.complete')}</p>
-          <p className="mt-1">{t('lesson.completeText')}</p>
-        </div>
+        <LessonComplete
+          checkCount={steps.length}
+          firstTryCount={countFirstTry(progress, steps.length)}
+          isModuleDone={isModuleComplete(module.slug, module.lessons)}
+          moduleTitle={moduleTitle}
+        />
       )}
 
       <nav
@@ -202,7 +234,7 @@ function LessonPlayer({ module, lessonIndex }) {
                 ? `/learn/${module.slug}/${nextLesson.slug}`
                 : `/learn/${module.slug}`
             }
-            className="rounded-xl bg-brand px-5 py-2 font-bold text-white"
+            className={`rounded-xl bg-brand px-5 py-2 font-bold text-white ${nudge}`}
           >
             {nextLesson
               ? `${t('lesson.next')}: ${getLessonVersion(nextLesson, language).title} →`
@@ -213,7 +245,7 @@ function LessonPlayer({ module, lessonIndex }) {
             type="button"
             onClick={goNext}
             disabled={!canGoNext}
-            className="rounded-xl bg-brand px-5 py-2 font-bold text-white disabled:cursor-not-allowed disabled:bg-slate-300"
+            className={`rounded-xl bg-brand px-5 py-2 font-bold text-white disabled:cursor-not-allowed disabled:bg-slate-300 ${nudge}`}
           >
             {isLastStep ? t('lesson.finish') : `${t('lesson.nextStep')} →`}
           </button>
@@ -223,9 +255,28 @@ function LessonPlayer({ module, lessonIndex }) {
   )
 }
 
+// A cheer for a passed step: "🔥 3 in a row on the first try!" during a
+// streak, otherwise one of a few phrases, picked by step so it changes.
+function cheerFor(t, progress, stepIndex) {
+  const streak = firstTryStreak(progress, stepIndex)
+  if (streak >= STREAK_TO_CHEER) {
+    return t('checkpoint.streak', { count: streak })
+  }
+  const cheers = t('checkpoint.cheers', { returnObjects: true })
+  return cheers[stepIndex % cheers.length]
+}
+
 // "Step 2 of 5" and one segment per step. Passed and current steps can be
-// clicked; the ones after the first unpassed step are locked.
-function StepProgress({ steps, currentIndex, furthestStep, passed, onSelect }) {
+// clicked; the ones after the first unpassed step are locked. A passed step
+// turns green (the current one keeps a ring), and pops when it just passed.
+function StepProgress({
+  steps,
+  currentIndex,
+  furthestStep,
+  passed,
+  celebratedStep,
+  onSelect,
+}) {
   const { t } = useTranslation()
   return (
     <div className="mt-4">
@@ -238,12 +289,14 @@ function StepProgress({ steps, currentIndex, furthestStep, passed, onSelect }) {
       <ol className="mt-2 flex gap-1.5">
         {steps.map((step, index) => {
           const isLocked = index > furthestStep
-          const color =
-            index === currentIndex
+          const color = passed.includes(index)
+            ? 'bg-green-500'
+            : index === currentIndex
               ? 'bg-brand'
-              : passed.includes(index)
-                ? 'bg-green-500'
-                : 'bg-slate-200'
+              : 'bg-slate-200'
+          const ring =
+            index === currentIndex ? 'ring-2 ring-brand/40 ring-offset-1' : ''
+          const pop = index === celebratedStep ? 'motion-safe:animate-pop' : ''
           return (
             <li key={index} className="flex-1">
               <button
@@ -256,7 +309,7 @@ function StepProgress({ steps, currentIndex, furthestStep, passed, onSelect }) {
                   title: step.title ?? '',
                 })}
                 title={step.title ?? undefined}
-                className={`block h-2 w-full rounded-full ${color} disabled:cursor-not-allowed`}
+                className={`block h-2 w-full rounded-full transition-colors duration-500 ${color} ${ring} ${pop} disabled:cursor-not-allowed`}
               />
             </li>
           )

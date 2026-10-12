@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import App from '../App'
+import { celebrate } from '../lib/celebrate'
 import { saveLanguage } from '../lib/languageStorage'
 import { buildChecksIndex, buildLessonIndex } from '../lib/lessons'
 import { loadProgress, saveProgress, emptyProgress } from '../lib/progress'
@@ -13,6 +14,10 @@ vi.mock('../runners', () => ({
   runJavaScript: vi.fn(),
   checkJavaScript: vi.fn(),
 }))
+
+// Confetti needs a real canvas, and sounds need Web Audio: the tests only
+// check which celebration was asked for.
+vi.mock('../lib/celebrate', () => ({ celebrate: vi.fn() }))
 
 // CodeMirror needs a real browser layout; a textarea is enough for tests.
 vi.mock('../components/lesson/CodeEditor', () => ({
@@ -60,6 +65,7 @@ const nextButton = () =>
 
 beforeEach(() => {
   checkJavaScript.mockReset()
+  celebrate.mockReset()
   window.scrollTo = vi.fn() // jsdom doesn't scroll
 })
 
@@ -198,6 +204,11 @@ describe('lesson page', () => {
     await user.click(screen.getByRole('button', { name: 'Check answer' }))
 
     expect(screen.getByText(/lesson complete/i)).toBeInTheDocument()
+    expect(celebrate).toHaveBeenCalledWith('lesson')
+    // The card shows how it went: every check on the first try.
+    expect(screen.getByText(/4 checks passed/)).toBeInTheDocument()
+    expect(screen.getByText(/4 of 4 on the first try/)).toBeInTheDocument()
+    expect(screen.getByText(/perfect lesson/i)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /next lesson:/i })).toHaveAttribute(
       'href',
       '/learn/introduction/02-how-to-get-the-most-out-of-it',
@@ -216,11 +227,97 @@ describe('lesson page', () => {
     expect(link).toHaveTextContent('In progress')
   })
 
+  it('gives a finished module a trophy on its page', () => {
+    const finished = { ...emptyProgress(), passed: [0], completed: true }
+    saveProgress('introduction', '01-welcome', finished)
+    saveProgress('introduction', '02-how-to-get-the-most-out-of-it', finished)
+    saveProgress('introduction', '03-running-code', finished)
+    renderAt('/learn/introduction')
+    expect(screen.getByText(/module complete/i)).toBeInTheDocument()
+  })
+
   it('shows "page not found" for a lesson that does not exist', async () => {
     renderAt('/learn/big-o/99-nope')
     expect(
       await screen.findByRole('heading', { name: 'Page not found' }),
     ).toBeInTheDocument()
+  })
+})
+
+describe('celebrations', () => {
+  const WELCOME = '/learn/introduction/01-welcome'
+
+  it('celebrates a passed step with a cheer, but not a wrong answer', async () => {
+    const user = userEvent.setup()
+    renderAt(WELCOME)
+    await screen.findByText('Step 1 of 4', { selector: 'p' })
+
+    await user.click(
+      screen.getByRole('radio', { name: 'A computer science degree' }),
+    )
+    await user.click(screen.getByRole('button', { name: 'Check answer' }))
+    expect(celebrate).not.toHaveBeenCalled()
+
+    await user.click(screen.getByRole('radio', { name: /basic javascript/i }))
+    await user.click(screen.getByRole('button', { name: 'Check answer' }))
+    expect(celebrate).toHaveBeenCalledTimes(1)
+    expect(celebrate).toHaveBeenCalledWith('step')
+    expect(screen.getByText('✓ Correct! Nice!')).toBeInTheDocument()
+  })
+
+  it('cheers a streak of answers right on the first try', async () => {
+    const user = userEvent.setup()
+    saveProgress('introduction', '01-welcome', {
+      ...emptyProgress(),
+      passed: [0, 1],
+    })
+    renderAt(WELCOME)
+    await screen.findByText('Step 3 of 4', { selector: 'p' })
+
+    await user.click(screen.getByRole('radio', { name: 'Problem solving' }))
+    await user.click(screen.getByRole('button', { name: 'Check answer' }))
+    expect(screen.getByText(/3 in a row on the first try/)).toBeInTheDocument()
+  })
+
+  it('does not celebrate a step that passed before', async () => {
+    const user = userEvent.setup()
+    checkJavaScript.mockResolvedValue(passedCheck)
+    saveProgress('introduction', '01-welcome', {
+      ...emptyProgress(),
+      passed: [0, 1],
+    })
+    // Step 2 is a coding step the student already passed: checking it
+    // again passes, but it's not a new win.
+    renderAt(`${WELCOME}?step=2`)
+    await screen.findByText('Step 2 of 4', { selector: 'p' })
+    await user.click(screen.getByRole('button', { name: '✓ Check' }))
+    expect(await screen.findByText(/All tests passed!/)).toBeInTheDocument()
+    expect(celebrate).not.toHaveBeenCalled()
+  })
+
+  it('celebrates the whole module when its last lesson is finished', async () => {
+    const user = userEvent.setup()
+    checkJavaScript.mockResolvedValue(passedCheck)
+    saveProgress('introduction', '01-welcome', {
+      ...emptyProgress(),
+      passed: [0, 1, 2, 3],
+      completed: true,
+    })
+    saveProgress('introduction', '02-how-to-get-the-most-out-of-it', {
+      ...emptyProgress(),
+      passed: [0, 1, 2],
+      completed: true,
+    })
+    saveProgress('introduction', '03-running-code', {
+      ...emptyProgress(),
+      passed: [0, 1, 2],
+    })
+    renderAt('/learn/introduction/03-running-code')
+    await screen.findByText('Step 4 of 4', { selector: 'p' })
+
+    await user.click(screen.getByRole('button', { name: '✓ Check' }))
+    expect(celebrate).toHaveBeenCalledWith('module')
+    expect(screen.getByText(/module complete!/i)).toBeInTheDocument()
   })
 })
 

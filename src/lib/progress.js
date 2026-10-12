@@ -81,3 +81,38 @@ export function firstUnpassedStep(progress, stepCount) {
   }
   return stepCount - 1
 }
+
+// Passed "on the first try": no wrong tries and no revealed answer.
+function passedOnFirstTry(progress, stepIndex) {
+  return (
+    progress.passed.includes(stepIndex) &&
+    failedAttempts(progress, stepIndex) === 0 &&
+    !progress.viewedSolution.includes(stepIndex)
+  )
+}
+
+// How many of the lesson's steps passed on the first try.
+export function countFirstTry(progress, stepCount) {
+  let count = 0
+  for (let index = 0; index < stepCount; index++) {
+    if (passedOnFirstTry(progress, index)) count++
+  }
+  return count
+}
+
+// How many steps in a row, ending at stepIndex, passed on the first try.
+export function firstTryStreak(progress, stepIndex) {
+  let streak = 0
+  for (let index = stepIndex; index >= 0; index--) {
+    if (!passedOnFirstTry(progress, index)) break
+    streak++
+  }
+  return streak
+}
+
+// True when every one of these lessons (of one module) is complete.
+export function isModuleComplete(moduleSlug, lessons) {
+  return lessons.every(
+    (lesson) => loadProgress(moduleSlug, lesson.slug).completed,
+  )
+}

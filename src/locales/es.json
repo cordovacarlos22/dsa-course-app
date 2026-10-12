@@ -13,6 +13,11 @@
     "en": "English",
     "es": "Español"
   },
+  "sound": {
+    "label": "Sonidos",
+    "turnOn": "Activar los sonidos",
+    "turnOff": "Silenciar los sonidos"
+  },
   "landing": {
     "badge": "Gratis durante la beta",
     "headline": "Aprende estructuras de datos y algoritmos en JavaScript, paso a paso",
@@ -137,6 +142,9 @@
     "quiz": "Cuestionario",
     "availableSoon": "Disponible pronto",
     "notReady": "Este módulo aún no está listo. ¡Vuelve pronto!",
+    "complete": "¡Módulo completado!",
+    "completeText": "Terminaste todas las lecciones de {{module}}. Ahora siguen el cuestionario y los ejercicios.",
+    "completedBadge": "Módulo completado",
     "buildIt": "Constrúyelo",
     "interviewProblems": "Problemas de entrevista"
   },
@@ -467,7 +475,11 @@
     "goToStep": "Paso {{number}}: {{title}}",
     "stepNavigation": "Pasos",
     "complete": "¡Lección completada!",
-    "completeText": "Buen trabajo. Pasaste todas las comprobaciones.",
+    "completeText": "¡Buen trabajo! Así te fue:",
+    "checksPassed_one": "{{count}} comprobación superada",
+    "checksPassed_other": "{{count}} comprobaciones superadas",
+    "firstTry": "{{count}} de {{total}} a la primera",
+    "perfect": "Lección perfecta: ¡todas las comprobaciones a la primera!",
     "completed": "Completada",
     "inProgress": "En progreso"
   },
@@ -475,6 +487,15 @@
     "title": "Comprueba lo que aprendiste",
     "checkAnswer": "Comprobar respuesta",
     "correct": "¡Correcto!",
+    "cheers": [
+      "¡Bien!",
+      "¡Buen trabajo!",
+      "¡Lo lograste!",
+      "¡Genial!",
+      "¡Muy bien!",
+      "¡Exacto!"
+    ],
+    "streak": "🔥 ¡{{count}} seguidas a la primera!",
     "wrong": "No exactamente. Inténtalo de nuevo.",
     "hint": "Pista",
     "showAnswer": "Mostrar respuesta",
