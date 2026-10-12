@@ -2,6 +2,7 @@
 // The list of names lives in ./names.js so the content validator can use it.
 import { createElement } from 'react'
 import ArrayReindex from './ArrayReindex'
+import ArraySplice from './ArraySplice'
 import BigOGrowthChart from './BigOGrowthChart'
 import BinarySearchHalving from './BinarySearchHalving'
 import CodeTrace from './CodeTrace'
@@ -14,6 +15,7 @@ import NestedGrid from './NestedGrid'
 import SameShape from './SameShape'
 import SearchCases from './SearchCases'
 import StopwatchRace from './StopwatchRace'
+import TimingChart from './TimingChart'
 import TwoInputs from './TwoInputs'
 import { traces } from './traces'
 
@@ -39,5 +41,7 @@ export const visualizations = {
   'two-inputs': TwoInputs,
   'memory-boxes': MemoryBoxes,
   'halving-count': HalvingCount,
+  'timing-chart': TimingChart,
+  'array-splice': ArraySplice,
   ...traceComponents,
 }

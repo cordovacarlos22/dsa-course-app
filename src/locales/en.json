@@ -292,7 +292,11 @@
         "innerSteps_one": "inner step",
         "innerSteps_other": "inner steps",
         "gifts_one": "gift",
-        "gifts_other": "gifts"
+        "gifts_other": "gifts",
+        "lines_one": "line printed",
+        "lines_other": "lines printed",
+        "memoryBoxes_one": "new box of memory",
+        "memoryBoxes_other": "new boxes of memory"
       },
       "isInvited": {
         "title": "isInvited: stop as soon as you find the name",
@@ -374,7 +378,65 @@
         "limit": "i is {{i}}, so i < 5 is false: the loop stops, even though {{left}} guests are left.",
         "noMoreGuests": "No more guests: the loop ends before reaching the limit.",
         "end": "{{gifts}} gifts for {{n}} guests. Pick 20 guests: still 5. The loop never runs more than 5 times, so it's O(1)."
+      },
+      "sumLoop": {
+        "title": "sumUpTo: add the numbers one by one",
+        "input": "n = {{n}}",
+        "init": "let total = 0: 1 operation. It happens once, whatever n is.",
+        "startLoop": "let i = 1: 1 more operation, also only once.",
+        "compare": "Is i ({{i}}) <= n ({{n}})? A comparison: 1 operation. Yes, so the loop runs.",
+        "add": "total = total + {{i}}: an addition and an assignment, 2 operations. total is now {{total}}. Then i++ adds 2 more.",
+        "fastForward": "With n = {{n}} we skip to the end: every number costs the same 5 operations.",
+        "end": "The sum of 1 to {{n}} is {{total}}, after {{ops}} operations: 5n + 2. The bigger n is, the more work."
+      },
+      "sumFormula": {
+        "title": "sumUpToFormula: one formula, no loop",
+        "input": "n = {{n}}",
+        "start": "The same question for n = {{n}}, answered with a formula instead of a loop.",
+        "plusOne": "n + 1 = {{value}}: 1 operation (an addition).",
+        "times": "n * (n + 1) = {{value}}: 2 operations (a multiplication).",
+        "divide": "÷ 2 = {{value}}: 3 operations (a division).",
+        "end": "The sum of 1 to {{n}} is {{value}}, in 3 operations. Try n = 1,000,000: still 3."
+      },
+      "printNumbers": {
+        "title": "printNumbers: n in, n lines out",
+        "input": "n = {{n}}",
+        "start": "Give the function n = {{n}}. The loop goes from i = 0 while i < {{n}}.",
+        "print": "i = {{i}}: print {{i}}.",
+        "end": "We passed in {{n}} and it ran {{n}} times: {{n}} lines. That's O(n)."
+      },
+      "printPairs": {
+        "title": "printPairs: a loop inside a loop",
+        "input": "n = {{n}}",
+        "start": "For every i, the inner loop goes through every j.",
+        "print": "Print the pair {{i}}, {{j}}.",
+        "end": "n = {{n}} gives {{n}} × {{n}} = {{lines}} lines. That's O(n²)."
+      },
+      "doubleArray": {
+        "title": "doubleArray: a new array that grows",
+        "input": "{{n}} numbers",
+        "start": "doubled starts as an empty array. It's new memory the function creates.",
+        "push": "{{value}} × 2 = {{doubled}}: one more box in doubled.",
+        "end": "{{n}} numbers in, {{n}} new boxes of memory. The extra memory grows with n: O(n) space."
       }
+    },
+    "timingChart": {
+      "title": "Timing both versions as n grows",
+      "loopLegend": "with a loop",
+      "formulaLegend": "with the formula",
+      "start": "We time sumUpTo for bigger and bigger n, from 200 million to 1 billion, and put each time on a chart.",
+      "firstPoint": "With n = 200 million, the loop takes about a quarter of a second.",
+      "loopLine": "Each time n grows by 200 million, the time grows by about the same amount. The points line up: a straight line.",
+      "formula": "The formula takes almost no time, whatever n is: a flat line along the bottom.",
+      "noise": "These are example times. Run it on your computer and they'll be a little different, and tiny inputs jump around. What stays the same is the shape.",
+      "summary": "The loop's time grows in a line with n (O(n)); the formula's stays flat (O(1)). Big O names these shapes."
+    },
+    "arraySplice": {
+      "title": "Adding and removing in the middle",
+      "start": "Five guests, each with an index.",
+      "insert": "splice(1, 0, 'Zoe') puts Zoe at index 1. Ben, Cleo, Dev and Eli all move up one index.",
+      "remove": "splice(2, 1) removes Ben. Cleo, Dev and Eli all move down one index.",
+      "notHalf": "In the middle, about half the items move, but it's still O(n): Big O is the worst case (inserting at index 0 moves them all), and ½n drops its constant anyway."
     }
   },
   "runnable": {

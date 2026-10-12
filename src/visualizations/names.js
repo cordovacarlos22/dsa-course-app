@@ -18,6 +18,8 @@ export const VISUALIZATION_NAMES = [
   'two-inputs',
   'memory-boxes',
   'halving-count',
+  'timing-chart',
+  'array-splice',
   'trace-is-invited',
   'trace-is-invited-all',
   'trace-count-short-names',
@@ -27,4 +29,9 @@ export const VISUALIZATION_NAMES = [
   'trace-welcome-and-goodbye',
   'trace-greet-everyone',
   'trace-party-summary',
+  'trace-sum-loop',
+  'trace-sum-formula',
+  'trace-print-numbers',
+  'trace-print-pairs',
+  'trace-double-array',
 ]
