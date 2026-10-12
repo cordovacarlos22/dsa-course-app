@@ -1,45 +1,47 @@
 ---
 title: Counting operations
 order: 3
-minutes: 6
+minutes: 7
 ---
 
-> **Goal:** count the operations in a function, and see why the exact number doesn't matter.
+> **Goal:** count the simple operations of a function instead of timing it, and see why the exact count doesn't matter.
 
-## What counts as an operation?
+## Count the formula
 
-If we're going to count steps, we need to agree on what a step is. A **simple operation** is one small thing the computer does:
+If seconds change from machine to machine, what doesn't? The **number of simple operations** the computer has to do. A simple operation is one small step: an addition, a multiplication, a division, a comparison, giving a variable a value. Five operations are five operations on a fast laptop or an old phone.
 
-- giving a variable a value (`count = 0`),
-- math (`count + 1`),
-- a comparison (`i < guests.length`, `guests[i].length <= 3`).
-
-Watch every operation of this function, one at a time:
+Let's count the formula version first:
 
 ```viz
-trace-count-short-names
+trace-sum-formula
 ```
 
-Notice the two kinds of lines. `let count = 0` runs **once**, no matter how many guests there are. The lines inside the loop run **once per guest**, so the more guests, the more times they run. Play it with **4 guests**, then pick **8** and **16** and compare the totals.
+`n * (n + 1) / 2` has one addition, one multiplication and one division: **3 operations**. The numbers 1 and 2 aren't operations; they're just values. And here's the important part: it doesn't matter if n is 2 or 1,000,000,000. It's always **3 operations**. Pick **n = 1,000,000** in the animation and watch the counter stop at 3.
 
-## One step or n steps?
+## Count the loop
 
-Here's another way to see it. This function counts the guests one by one:
+Now the loop version. Its `+` isn't one operation anymore, because it sits **inside a loop**:
 
 ```viz
-trace-count-guests
+trace-sum-loop
 ```
 
-Every guest costs the same 5 operations: a comparison, an addition and an assignment for `count = count + 1`, and another addition and assignment for `i++`. Add the 3 operations that happen only once and you get **5n + 3**. With 4 guests that's 23 operations; with 16 guests, 83.
+Let's go line by line:
 
-But JavaScript already keeps track of the size of an array. `guests.length` gives the same answer in **1 step**, whether there are 4 guests or 4 million:
+- `total = total + i` is an addition **and** an assignment, and it runs once per number: n additions and n assignments. If n is 5, that's 5 of each; if n is a billion, a billion of each.
+- `i++` is short for `i = i + 1`: another addition and another assignment, again n times.
+- `i <= n` is a comparison, checked n times.
+- `let total = 0` and `let i = 1` happen only **once**, at the start.
 
-```js-run
-const guests = ['Ana', 'Ben', 'Cleo', 'Dev']
-console.log('Guests:', guests.length)
-```
+Add it up and you get about **5n + 2** operations. With n = 10, that's 52 operations; with n = 1,000, it's 5,002. Pick **n = 10** in the animation to see it.
 
-Same answer, very different growth: one grows with n, the other doesn't grow at all. That difference is exactly what Big O captures.
+| n     | Loop (5n + 2) | Formula |
+| ----- | ------------- | ------- |
+| 5     | 27            | 3       |
+| 10    | 52            | 3       |
+| 1,000 | 5,002         | 3       |
+
+You could also count it differently. Is the comparison that finally ends the loop one more operation? Is `i++` one operation or two? People get slightly different totals, and that's fine.
 
 ## Fuzzy counting
 
@@ -47,6 +49,14 @@ Same answer, very different growth: one grows with n, the other doesn't grow at 
 linear-boxes
 ```
 
-Was it really 5n + 3? You could say `i++` is one operation, not two, and get 4n + 3. Someone else might count 3n + 2. The good news: **it doesn't matter**.
+Here's the good news: **the exact number doesn't matter**. Whether it's 5n + 2, 3n or 2n, what matters is the **general trend**: as n grows, the number of operations grows **roughly in proportion to n**. Double n and you double the work. That's the big picture, and the big picture is what Big O cares about.
 
-All of those have the same shape. Double the guests and the work doubles; the dots line up in a straight line. Big O is a kind of **fuzzy counting**: we count roughly, then keep only the big picture of how the count grows. In the next lessons you'll learn the rules for going from "5n + 3" to that big picture.
+The same thing happens with the guest list. Counting the guests one by one with a loop takes about 5 operations per guest:
+
+```viz
+trace-count-guests
+```
+
+But JavaScript already knows the length of an array, so `guests.length` gives the same answer in **1 step**, whether there are 4 guests or 4 million. Same answer, completely different growth.
+
+So we won't count every single operation from now on. Big O is a kind of **fuzzy counting**: count roughly, then keep only how the count grows. The next lessons show how.
