@@ -67,6 +67,40 @@
         "en": "n, 2n and 100n have the same shape, so they're all O(n).",
         "es": "n, 2n y 100n tienen la misma forma, así que todas son O(n)."
       }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Using the official definition, why is 5n + 3 still O(n)?",
+        "es": "Con la definición oficial, ¿por qué 5n + 3 sigue siendo O(n)?"
+      },
+      "options": [
+        {
+          "en": "Because 5n + 3 is smaller than n",
+          "es": "Porque 5n + 3 es menor que n"
+        },
+        {
+          "en": "Because once n is big enough, 5n + 3 is never more than a constant times n (like 6n)",
+          "es": "Porque cuando n es lo bastante grande, 5n + 3 nunca es mayor que una constante por n (como 6n)"
+        },
+        {
+          "en": "Because we only count the 3",
+          "es": "Porque solo contamos el 3"
+        },
+        {
+          "en": "It isn't: it's O(5n + 3)",
+          "es": "No lo es: es O(5n + 3)"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "The definition says: never more than some constant times f(n), once n is big enough.",
+        "es": "La definición dice: nunca mayor que alguna constante por f(n), cuando n es lo bastante grande."
+      },
+      "explanation": {
+        "en": "For n ≥ 3, 5n + 3 ≤ 6n. A constant times n is a straight line, so it's O(n).",
+        "es": "Para n ≥ 3, 5n + 3 ≤ 6n. Una constante por n es una línea recta, así que es O(n)."
+      }
     }
   ]
 }

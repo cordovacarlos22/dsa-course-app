@@ -36,6 +36,40 @@
     {
       "type": "choice",
       "question": {
+        "en": "Which gives the number of guests in **1 step**, whether there are 10 guests or 10,000?",
+        "es": "¿Qué da el número de invitados en **1 paso**, haya 10 invitados o 10,000?"
+      },
+      "options": [
+        {
+          "en": "A loop that counts the guests one by one",
+          "es": "Un bucle que cuenta a los invitados uno por uno"
+        },
+        {
+          "en": "`guests.length`",
+          "es": "`guests.length`"
+        },
+        {
+          "en": "Two loops, one inside the other",
+          "es": "Dos bucles, uno dentro del otro"
+        },
+        {
+          "en": "Checking every name with `===`",
+          "es": "Revisar cada nombre con `===`"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Which option doesn't have to visit the guests?",
+        "es": "¿Qué opción no tiene que visitar a los invitados?"
+      },
+      "explanation": {
+        "en": "The array already knows its size, so `guests.length` is 1 step. The loop costs about 5n + 3 operations.",
+        "es": "El array ya sabe su tamaño, así que `guests.length` es 1 paso. El bucle cuesta unas 5n + 3 operaciones."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
         "en": "A function does about 3 operations per guest. The list grows from 8 to 16 guests. What happens to the total?",
         "es": "Una función hace unas 3 operaciones por invitado. La lista crece de 8 a 16 invitados. ¿Qué pasa con el total?"
       },

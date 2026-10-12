@@ -26,8 +26,8 @@
       ],
       "answer": 0,
       "hint": {
-        "en": "Look at the second step of the stopwatch animation.",
-        "es": "Mira el segundo paso de la animación del cronómetro."
+        "en": "Look at what happens when the stopwatch animation runs the same code a second time.",
+        "es": "Mira qué pasa cuando la animación del cronómetro corre el mismo código por segunda vez."
       },
       "explanation": {
         "en": "Other apps and the browser change every run, so the time moves around. The code does the same steps every time.",

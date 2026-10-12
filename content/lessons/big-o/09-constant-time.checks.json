@@ -62,6 +62,40 @@
         "en": "A fixed number of steps is constant time: O(1), never O(5).",
         "es": "Un número fijo de pasos es tiempo constante: O(1), nunca O(5)."
       }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which line hides a loop, so it's O(n)?",
+        "es": "¿Qué línea esconde un bucle, así que es O(n)?"
+      },
+      "options": [
+        {
+          "en": "`guests[3]`",
+          "es": "`guests[3]`"
+        },
+        {
+          "en": "`guests.length`",
+          "es": "`guests.length`"
+        },
+        {
+          "en": "`guests.includes('Zoe')`",
+          "es": "`guests.includes('Zoe')`"
+        },
+        {
+          "en": "`guests.length * 2`",
+          "es": "`guests.length * 2`"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Which one has to check the guests one by one to answer?",
+        "es": "¿Cuál tiene que revisar a los invitados uno por uno para responder?"
+      },
+      "explanation": {
+        "en": "`includes` looks at the guests one by one until it finds 'Zoe' or runs out: O(n). The others jump straight to the answer.",
+        "es": "`includes` mira a los invitados uno por uno hasta encontrar a 'Zoe' o quedarse sin invitados: O(n). Los demás saltan directo a la respuesta."
+      }
     }
   ]
 }

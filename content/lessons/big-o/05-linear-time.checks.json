@@ -62,6 +62,40 @@
         "en": "Linear time: 3 times the guests, 3 times the steps.",
         "es": "Tiempo lineal: el triple de invitados, el triple de pasos."
       }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which of these is O(n)?",
+        "es": "¿Cuál de estas es O(n)?"
+      },
+      "options": [
+        {
+          "en": "Reading `guests[0]`",
+          "es": "Leer `guests[0]`"
+        },
+        {
+          "en": "Reading `guests.length`",
+          "es": "Leer `guests.length`"
+        },
+        {
+          "en": "Finding the longest name on the list",
+          "es": "Encontrar el nombre más largo de la lista"
+        },
+        {
+          "en": "Adding two numbers",
+          "es": "Sumar dos números"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Which one has to look at every guest?",
+        "es": "¿Cuál tiene que mirar a cada invitado?"
+      },
+      "explanation": {
+        "en": "To find the longest name you have to look at every name once: one loop, O(n). The others are a single step.",
+        "es": "Para encontrar el nombre más largo tienes que mirar cada nombre una vez: un bucle, O(n). Los demás son un solo paso."
+      }
     }
   ]
 }

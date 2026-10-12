@@ -66,6 +66,40 @@
           "expected": 0
         }
       ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "An O(n²) function runs with 1,000 guests. About how many steps does it take?",
+        "es": "Una función O(n²) corre con 1,000 invitados. ¿Más o menos cuántos pasos da?"
+      },
+      "options": [
+        {
+          "en": "en",
+          "es": "es"
+        },
+        {
+          "en": "en",
+          "es": "es"
+        },
+        {
+          "en": "en",
+          "es": "es"
+        },
+        {
+          "en": "en",
+          "es": "es"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "n² means n × n.",
+        "es": "n² quiere decir n × n."
+      },
+      "explanation": {
+        "en": "1,000 × 1,000 = 1,000,000 steps. That's why O(n²) is a warning sign with real data.",
+        "es": "1,000 × 1,000 = 1,000,000 de pasos. Por eso O(n²) es una señal de alerta con datos reales."
+      }
     }
   ]
 }

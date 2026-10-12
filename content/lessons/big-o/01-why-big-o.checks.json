@@ -100,6 +100,40 @@
         "en": "Big O is a label for how the work grows as the input (n) grows, so we can compare solutions.",
         "es": "Big O es una etiqueta para cómo crece el trabajo cuando crece la entrada (n), para poder comparar soluciones."
       }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "What does **space complexity** describe?",
+        "es": "¿Qué describe la **complejidad espacial**?"
+      },
+      "options": [
+        {
+          "en": "How many seconds the code takes",
+          "es": "Cuántos segundos tarda el código"
+        },
+        {
+          "en": "How the extra memory the code needs grows with the input",
+          "es": "Cómo crece con la entrada la memoria extra que necesita el código"
+        },
+        {
+          "en": "How many lines of code the function has",
+          "es": "Cuántas líneas de código tiene la función"
+        },
+        {
+          "en": "How big the input list is",
+          "es": "Qué tan grande es la lista de entrada"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Time complexity counts steps. What does space complexity count?",
+        "es": "La complejidad temporal cuenta pasos. ¿Qué cuenta la complejidad espacial?"
+      },
+      "explanation": {
+        "en": "Space complexity is how the extra memory grows as the input grows, like one box for a counter vs one box per guest.",
+        "es": "La complejidad espacial es cómo crece la memoria extra cuando crece la entrada, como una caja para un contador contra una caja por invitado."
+      }
     }
   ]
 }

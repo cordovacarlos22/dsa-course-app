@@ -37,6 +37,40 @@
     {
       "type": "choice",
       "question": {
+        "en": "Which phrase goes with O(log n)?",
+        "es": "¿Qué frase va con O(log n)?"
+      },
+      "options": [
+        {
+          "en": "\"A loop inside a loop\"",
+          "es": "\"Un bucle dentro de otro bucle\""
+        },
+        {
+          "en": "\"Divide and conquer\"",
+          "es": "\"Dividir y conquistar\""
+        },
+        {
+          "en": "\"Proportional\"",
+          "es": "\"Proporcional\""
+        },
+        {
+          "en": "\"Constant time\"",
+          "es": "\"Tiempo constante\""
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Binary search cuts the problem in half again and again.",
+        "es": "La búsqueda binaria parte el problema a la mitad una y otra vez."
+      },
+      "explanation": {
+        "en": "Cutting the problem in half at every step is divide and conquer: O(log n).",
+        "es": "Partir el problema a la mitad en cada paso es dividir y conquistar: O(log n)."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
         "en": "Simplify O(3n² + 10n + 7).",
         "es": "Simplifica O(3n² + 10n + 7)."
       },

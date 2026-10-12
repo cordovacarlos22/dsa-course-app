@@ -67,6 +67,39 @@
         "en": "n times, and each time n more steps: n × n = O(n²).",
         "es": "n veces, y cada vez n pasos más: n × n = O(n²)."
       }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `firstFiveGuests(guests)`: return a **new** array with the first 5 names, or all of them if there are fewer than 5. The loop must stop at 5, so it's O(1) however long the list is.",
+        "es": "Escribe `firstFiveGuests(guests)`: devuelve un array **nuevo** con los primeros 5 nombres, o todos si hay menos de 5. El bucle debe detenerse en 5, así que es O(1) sin importar qué tan larga sea la lista."
+      },
+      "hint": {
+        "en": "Use the same loop as `giveGifts`: `for (let i = 0; i < guests.length && i < 5; i++)` and `push(guests[i])`.",
+        "es": "Usa el mismo bucle que `giveGifts`: `for (let i = 0; i < guests.length && i < 5; i++)` y `push(guests[i])`."
+      },
+      "starterCode": "function firstFiveGuests(guests) {\n  const firstFive = []\n  // A loop that stops at the end of the list or at 5.\n  return firstFive\n}\n\nconsole.log(firstFiveGuests(['Ana', 'Ben', 'Cleo']))\n",
+      "solution": "function firstFiveGuests(guests) {\n  const firstFive = []\n  for (let i = 0; i < guests.length && i < 5; i++) {\n    firstFive.push(guests[i])\n  }\n  return firstFive\n}\n\nconsole.log(firstFiveGuests(['Ana', 'Ben', 'Cleo']))\n",
+      "kind": "function",
+      "functionName": "firstFiveGuests",
+      "tests": [
+        {
+          "args": [["Ana", "Ben", "Cleo"]],
+          "expected": ["Ana", "Ben", "Cleo"]
+        },
+        {
+          "args": [["Ana", "Ben", "Cleo", "Dev", "Eli", "Fay", "Gus", "Hana"]],
+          "expected": ["Ana", "Ben", "Cleo", "Dev", "Eli"]
+        },
+        {
+          "args": [["Ana", "Ben", "Cleo", "Dev", "Eli"]],
+          "expected": ["Ana", "Ben", "Cleo", "Dev", "Eli"]
+        },
+        {
+          "args": [[]],
+          "expected": []
+        }
+      ]
     }
   ]
 }

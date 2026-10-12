@@ -67,6 +67,40 @@
         "en": "Only in ABC order does \"'Gus' comes after the middle name\" mean it must be in the right half.",
         "es": "Solo en orden alfabético \"'Gus' va después del nombre del medio\" significa que tiene que estar en la mitad derecha."
       }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which Big O do the best general-purpose sorting algorithms, like merge sort, have?",
+        "es": "¿Qué Big O tienen los mejores algoritmos de ordenamiento de uso general, como merge sort?"
+      },
+      "options": [
+        {
+          "en": "en",
+          "es": "es"
+        },
+        {
+          "en": "en",
+          "es": "es"
+        },
+        {
+          "en": "en",
+          "es": "es"
+        },
+        {
+          "en": "en",
+          "es": "es"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "n items times log n rounds of splitting.",
+        "es": "n elementos por log n rondas de división."
+      },
+      "explanation": {
+        "en": "Merge sort and other efficient sorts are O(n log n): better than O(n²), not as good as O(n).",
+        "es": "Merge sort y otros ordenamientos eficientes son O(n log n): mejor que O(n²), no tan bueno como O(n)."
+      }
     }
   ]
 }
