@@ -7,7 +7,8 @@
   },
   "nav": {
     "learn": "Curso",
-    "mainNavigation": "Navegación principal"
+    "mainNavigation": "Navegación principal",
+    "skipToContent": "Saltar al contenido"
   },
   "language": {
     "pickerSubtitle": "Puedes cambiarlo cuando quieras desde la barra superior.",

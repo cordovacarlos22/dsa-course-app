@@ -67,6 +67,19 @@ describe('language switcher', () => {
   })
 })
 
+describe('skip link', () => {
+  it('is the first thing the Tab key reaches and jumps to the content', async () => {
+    const user = userEvent.setup()
+    renderAsReturningStudent('/learn')
+
+    await user.tab()
+    const skipLink = screen.getByRole('link', { name: 'Skip to content' })
+    expect(skipLink).toHaveFocus()
+    expect(skipLink).toHaveAttribute('href', '#main-content')
+    expect(screen.getByRole('main')).toHaveAttribute('id', 'main-content')
+  })
+})
+
 describe('tab titles', () => {
   it('names each page in the browser tab', () => {
     const { unmount } = renderAsReturningStudent('/')

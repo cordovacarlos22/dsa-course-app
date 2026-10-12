@@ -7,7 +7,8 @@
   },
   "nav": {
     "learn": "Course",
-    "mainNavigation": "Main navigation"
+    "mainNavigation": "Main navigation",
+    "skipToContent": "Skip to content"
   },
   "language": {
     "pickerSubtitle": "You can change it any time from the top bar.",
