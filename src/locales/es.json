@@ -13,6 +13,11 @@
     "en": "English",
     "es": "Español"
   },
+  "sound": {
+    "label": "Sonidos",
+    "turnOn": "Activar los sonidos",
+    "turnOff": "Silenciar los sonidos"
+  },
   "landing": {
     "badge": "Gratis durante la beta",
     "headline": "Aprende estructuras de datos y algoritmos en JavaScript, paso a paso",

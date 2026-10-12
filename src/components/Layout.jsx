@@ -1,6 +1,7 @@
 import { Link, NavLink, Outlet, useMatch } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
+import SoundToggle from './SoundToggle'
 import FirstVisitLanguagePicker from './FirstVisitLanguagePicker'
 
 // The frame around every page: header, the page itself, footer.
@@ -34,6 +35,7 @@ function Layout() {
             >
               {t('nav.learn')}
             </NavLink>
+            <SoundToggle />
             <LanguageSwitcher />
           </nav>
         </div>
