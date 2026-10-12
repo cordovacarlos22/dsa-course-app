@@ -7,6 +7,10 @@ on:
   push:
     branches: [main]
 
+# The job only reads the code, so its GitHub token can only read too.
+permissions:
+  contents: read
+
 # Cancel an older run of the same PR when new commits are pushed.
 concurrency:
   group: ci-${{ github.ref }}
