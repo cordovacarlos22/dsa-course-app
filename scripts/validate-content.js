@@ -194,6 +194,11 @@ export function validatePractice(data) {
     )
   }
   for (const question of practice.questions) {
+    errors.push(
+      ...findDuplicateOptions(question.options).map(
+        (error) => `question "${question.id}" ${error}`,
+      ),
+    )
     if (!question.code) continue
     errors.push(
       ...findAdvancedLoops(question.code).map(
@@ -230,6 +235,19 @@ const BEGINNER_LOOP_RULES = [
   { pattern: /for\s*\(\s*(const|let|var)\s+\w+\s+of\b/, name: 'for...of' },
   { pattern: /\.forEach\s*\(/, name: '.forEach' },
 ]
+// Every option of a multiple-choice question must be different, in each
+// language (two identical options usually means a typo or a broken script).
+export function findDuplicateOptions(options) {
+  const errors = []
+  for (const language of ['en', 'es']) {
+    const texts = options.map((option) => option[language]).filter(Boolean)
+    if (new Set(texts).size !== texts.length) {
+      errors.push(`has the same ${language} option twice`)
+    }
+  }
+  return errors
+}
+
 export function findAdvancedLoops(code) {
   return BEGINNER_LOOP_RULES.filter(({ pattern }) => pattern.test(code)).map(
     ({ name }) =>
@@ -312,8 +330,15 @@ export function validateLessonChecks(data, stepCounts) {
   }
 
   steps.forEach((checkpoint, index) => {
-    if (checkpoint.type !== 'code') return
     const label = `checkpoint ${index + 1}`
+    if (checkpoint.type === 'choice') {
+      errors.push(
+        ...findDuplicateOptions(checkpoint.options).map(
+          (error) => `${label} ${error}`,
+        ),
+      )
+      return
+    }
     const teachingText = [
       checkpoint.starterCode,
       checkpoint.solution,
