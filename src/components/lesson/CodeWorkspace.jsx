@@ -12,8 +12,8 @@ const CodeEditor = lazy(() => import('./CodeEditor'))
 
 const PANES = ['learn', 'code', 'output']
 
-// A coding step, Codecademy style: Learn | Editor | Output side by side on
-// wide screens, and tabs on small ones.
+// A coding step. On wide screens: the lesson (Learn) on the left half, and on
+// the right the editor with the output below it. On small screens: tabs.
 // "Run" just runs the code; "Check" runs the checkpoint's tests.
 function CodeWorkspace({
   step,
@@ -86,7 +86,7 @@ function CodeWorkspace({
         ))}
       </div>
 
-      <div className="grid gap-4 lg:h-[calc(100vh-17rem)] lg:min-h-[32rem] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)_minmax(0,1fr)]">
+      <div className="grid gap-4 lg:h-[calc(100dvh-19rem)] lg:min-h-[30rem] lg:grid-cols-2">
         <section
           aria-label={t('workspace.learn')}
           className={`${paneClass('learn')} overflow-y-auto rounded-2xl border border-slate-200 bg-white p-5`}
@@ -113,69 +113,74 @@ function CodeWorkspace({
           )}
         </section>
 
-        <section
-          aria-label={t('workspace.code')}
-          className={`${paneClass('code')} overflow-hidden rounded-2xl border border-slate-700 bg-[#282c34]`}
-        >
-          <div className="h-80 overflow-auto lg:h-auto lg:min-h-0 lg:flex-1">
-            <Suspense
-              fallback={
-                <p className="p-4 text-sm text-slate-400">
-                  {t('workspace.loadingEditor')}
-                </p>
-              }
-            >
-              <CodeEditor
-                value={code}
-                onChange={setCode}
-                label={t('workspace.editorLabel')}
-              />
-            </Suspense>
-          </div>
-          <div className="flex flex-wrap items-center gap-2 border-t border-slate-700 bg-slate-900 px-3 py-2">
-            <button
-              type="button"
-              onClick={run}
-              disabled={isBusy}
-              className="rounded-lg border border-slate-500 px-3 py-1.5 text-sm font-semibold text-white disabled:opacity-60"
-            >
-              ▶ {t('runnable.run')}
-            </button>
-            <button
-              type="button"
-              onClick={check}
-              disabled={isBusy}
-              className="rounded-lg bg-accent px-4 py-1.5 text-sm font-bold text-ink disabled:opacity-60"
-            >
-              {isBusy ? t('runnable.running') : `✓ ${t('workspace.check')}`}
-            </button>
-            <button
-              type="button"
-              onClick={() => setCode(checkpoint.starterCode)}
-              className="rounded-lg px-3 py-1.5 text-sm text-slate-300 hover:text-white"
-            >
-              {t('runnable.reset')}
-            </button>
-            {canShowSolution && (
+        {/* Right column: the editor on top, the output below it. On small
+            screens this wrapper disappears (contents) and the tabs decide
+            which pane shows. */}
+        <div className="contents lg:grid lg:min-h-0 lg:grid-rows-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-4">
+          <section
+            aria-label={t('workspace.code')}
+            className={`${paneClass('code')} overflow-hidden rounded-2xl border border-slate-700 bg-[#282c34]`}
+          >
+            <div className="h-80 overflow-auto lg:h-auto lg:min-h-0 lg:flex-1">
+              <Suspense
+                fallback={
+                  <p className="p-4 text-sm text-slate-400">
+                    {t('workspace.loadingEditor')}
+                  </p>
+                }
+              >
+                <CodeEditor
+                  value={code}
+                  onChange={setCode}
+                  label={t('workspace.editorLabel')}
+                />
+              </Suspense>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 border-t border-slate-700 bg-slate-900 px-3 py-2">
               <button
                 type="button"
-                onClick={showSolution}
-                className="ml-auto rounded-lg px-3 py-1.5 text-sm text-slate-300 underline hover:text-white"
+                onClick={run}
+                disabled={isBusy}
+                className="rounded-lg border border-slate-500 px-3 py-1.5 text-sm font-semibold text-white disabled:opacity-60"
               >
-                {t('workspace.showSolution')}
+                ▶ {t('runnable.run')}
               </button>
-            )}
-          </div>
-        </section>
+              <button
+                type="button"
+                onClick={check}
+                disabled={isBusy}
+                className="rounded-lg bg-accent px-4 py-1.5 text-sm font-bold text-ink disabled:opacity-60"
+              >
+                {isBusy ? t('runnable.running') : `✓ ${t('workspace.check')}`}
+              </button>
+              <button
+                type="button"
+                onClick={() => setCode(checkpoint.starterCode)}
+                className="rounded-lg px-3 py-1.5 text-sm text-slate-300 hover:text-white"
+              >
+                {t('runnable.reset')}
+              </button>
+              {canShowSolution && (
+                <button
+                  type="button"
+                  onClick={showSolution}
+                  className="ml-auto rounded-lg px-3 py-1.5 text-sm text-slate-300 underline hover:text-white"
+                >
+                  {t('workspace.showSolution')}
+                </button>
+              )}
+            </div>
+          </section>
 
-        <section
-          aria-label={t('workspace.output')}
-          className={`${paneClass('output')} overflow-y-auto rounded-2xl border border-slate-700 bg-slate-950 p-4 font-mono text-sm text-slate-100`}
-        >
-          <div role="status">
-            <Output output={output} isPassed={isPassed} />
-          </div>
-        </section>
+          <section
+            aria-label={t('workspace.output')}
+            className={`${paneClass('output')} overflow-y-auto rounded-2xl border border-slate-700 bg-slate-950 p-4 font-mono text-sm text-slate-100`}
+          >
+            <div role="status">
+              <Output output={output} isPassed={isPassed} />
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   )

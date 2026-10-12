@@ -62,10 +62,10 @@ function CodeTrace({ trace }) {
 function TraceStep({ trace, input, step }) {
   const { t } = useTranslation()
   const lines = trace.code.split('\n')
-  // Side by side only when the animation itself is wide enough (36rem);
+  // Side by side only when the animation itself is wide enough (42rem);
   // otherwise the code goes on top and the guest list below it.
   return (
-    <div className="grid gap-3 @xl:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+    <div className="grid gap-3 @2xl:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
       <pre className="overflow-x-auto rounded-xl bg-slate-900 py-3 text-[13px] leading-6 text-slate-100">
         {lines.map((line, index) => {
           const number = index + 1
