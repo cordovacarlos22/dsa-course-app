@@ -9,37 +9,47 @@ import StepPlayer from '../components/StepPlayer'
 const STEPS = [
   {
     captionKey: 'start',
-    items: [{ value: 11 }, { value: 3 }, { value: 23 }, { value: 7 }],
+    items: [
+      { value: 'Ana' },
+      { value: 'Ben' },
+      { value: 'Cleo' },
+      { value: 'Dev' },
+    ],
   },
   {
     captionKey: 'push',
     items: [
-      { value: 11 },
-      { value: 3 },
-      { value: 23 },
-      { value: 7 },
-      { value: 17, change: 'new' },
+      { value: 'Ana' },
+      { value: 'Ben' },
+      { value: 'Cleo' },
+      { value: 'Dev' },
+      { value: 'Eli', change: 'new' },
     ],
   },
   {
     captionKey: 'pop',
-    items: [{ value: 11 }, { value: 3 }, { value: 23 }, { value: 7 }],
+    items: [
+      { value: 'Ana' },
+      { value: 'Ben' },
+      { value: 'Cleo' },
+      { value: 'Dev' },
+    ],
   },
   {
     captionKey: 'shift',
     items: [
-      { value: 3, change: 'moved' },
-      { value: 23, change: 'moved' },
-      { value: 7, change: 'moved' },
+      { value: 'Ben', change: 'moved' },
+      { value: 'Cleo', change: 'moved' },
+      { value: 'Dev', change: 'moved' },
     ],
   },
   {
     captionKey: 'unshift',
     items: [
-      { value: 11, change: 'new' },
-      { value: 3, change: 'moved' },
-      { value: 23, change: 'moved' },
-      { value: 7, change: 'moved' },
+      { value: 'Ana', change: 'new' },
+      { value: 'Ben', change: 'moved' },
+      { value: 'Cleo', change: 'moved' },
+      { value: 'Dev', change: 'moved' },
     ],
   },
 ]
@@ -53,11 +63,11 @@ function ArrayBoxes({ items }) {
   const { t } = useTranslation()
   return (
     <div>
-      <ol className="flex gap-2">
+      <ol className="flex flex-wrap gap-2">
         {items.map((item, index) => (
           <li
             key={`${index}-${item.value}`}
-            className={`flex w-16 flex-col items-center rounded-lg border-2 py-2 transition-colors duration-500 ${
+            className={`flex min-w-16 flex-col px-1 items-center rounded-lg border-2 py-2 transition-colors duration-500 ${
               CHANGE_STYLES[item.change] ?? 'border-slate-300 bg-white'
             }`}
           >

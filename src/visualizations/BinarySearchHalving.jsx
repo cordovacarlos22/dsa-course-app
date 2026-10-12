@@ -1,16 +1,18 @@
 import { useTranslation } from 'react-i18next'
 import StepPlayer from '../components/StepPlayer'
 import { buildBinarySearchSteps } from './binarySearchSteps'
+import { guestList } from './guests'
 
-// Walks through a real binary search, so the animation can never disagree
-// with the algorithm: each check throws away half of what's left.
+// Walks through a real binary search on the (alphabetical) guest list, so
+// the animation can never disagree with the algorithm: each check throws away
+// half of what's left.
 
-const VALUES = [2, 4, 6, 8, 10, 12, 14, 16]
-const TARGET = 14
+const VALUES = guestList(8)
+const TARGET = 'Gus'
 
 function SearchRow({ step }) {
   return (
-    <ol className="flex gap-1.5">
+    <ol className="flex flex-wrap gap-1.5">
       {VALUES.map((value, index) => {
         const isOutOfRange = index < step.low || index > step.high
         const isMiddle = index === step.middle
@@ -22,7 +24,7 @@ function SearchRow({ step }) {
         return (
           <li
             key={value}
-            className={`flex h-12 w-11 items-center justify-center rounded-lg border-2 font-bold transition-colors duration-500 ${style}`}
+            className={`flex h-12 min-w-12 items-center px-1 justify-center rounded-lg border-2 font-bold transition-colors duration-500 ${style}`}
           >
             {value}
           </li>

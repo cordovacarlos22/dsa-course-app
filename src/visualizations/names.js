@@ -2,8 +2,27 @@
 // Kept in its own plain-JS file so scripts/validate-content.js can check that
 // every lesson only uses animations that exist. When you add an animation,
 // add its name here AND register its component in ./index.js.
+// (Code traces are registered automatically from ./traces/index.js, but their
+// names must be listed here too.)
 export const VISUALIZATION_NAMES = [
   'big-o-growth-chart',
   'array-reindex',
   'binary-search-halving',
+  'stopwatch-race',
+  'search-cases',
+  'linear-boxes',
+  'same-shape',
+  'nested-grid',
+  'dominant-term',
+  'constant-jump',
+  'two-inputs',
+  'memory-boxes',
+  'halving-count',
+  'trace-is-invited',
+  'trace-is-invited-all',
+  'trace-count-short-names',
+  'trace-welcome-all',
+  'trace-welcome-and-goodbye',
+  'trace-greet-everyone',
+  'trace-party-summary',
 ]
