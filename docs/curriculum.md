@@ -37,7 +37,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Introduction (`introduction`)
 
-**Status:** ✅ 3 lessons (EN + ES) · ✅ quiz (EN + ES) · ⬜ slides
+**Status:** ✅ 3 lessons (EN + ES, 11 checkpoints) · ✅ quiz (EN + ES) · ⬜ slides
 **Goal:** know what the course covers, how to study, and how to run code in the app.
 
 - **Lessons:** Welcome to the course · How to get the most out of this course · Running code in this course
@@ -46,7 +46,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Big O (`big-o`)
 
-**Status:** ✅ 12 lessons (EN + ES) · ✅ quiz (EN + ES) · 🟡 3 of 4 interview problems · ⬜ slides
+**Status:** ✅ 12 lessons (EN + ES, 38 checkpoints) · ✅ quiz (EN + ES) · 🟡 3 of 4 interview problems · ⬜ slides
 **Goal:** measure and compare the efficiency of code, in time and space.
 
 - **Lessons:**

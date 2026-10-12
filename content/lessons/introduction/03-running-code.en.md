@@ -16,6 +16,8 @@ Every dark box with a **Run** button is a small code editor:
 
 Whatever your code prints with `console.log` shows up under the box.
 
+Coding **checks** use a bigger workspace: the lesson on the left, the editor in the middle and the output on the right (tabs on a phone). **Run** shows what your code prints, and **Check** runs tests on your code and tells you which ones pass. You'll try it in the next steps.
+
 ## Printing values
 
 `console.log` can print several values at once. It puts a space between them:
@@ -69,7 +71,7 @@ console.log('Done!')
 
 Run it and wait two seconds. Then fix it: add `count++` inside the loop and run it again. Now you'll see `Done!`.
 
-## Optional: practicing in Chrome DevTools
+### Optional: practicing in Chrome DevTools
 
 The code boxes are perfect for lessons. For longer practice sessions, you can also use the code editor that comes with Google Chrome:
 
@@ -80,17 +82,11 @@ The code boxes are perfect for lessons. For longer practice sessions, you can al
 
 The output appears in the **Console** below. You can also call your functions directly from the Console after running the snippet.
 
-## Recap
+In short:
 
 - **Run** = the button or **Ctrl/Cmd + Enter**. **Reset** brings back the original code.
 - `console.log(a, b, c)` prints several values separated by spaces.
 - An error message = a **type** + a **message**. Output before the error still appears.
 - Infinite loops are stopped after **2 seconds**.
-
-## Check yourself
-
-1. What keyboard shortcut runs the code?
-2. In `ReferenceError: gret is not defined`, which part tells you the kind of problem?
-3. What happens if your code runs a loop that never ends?
 
 Now you're ready for the **Module 1 quiz**. After that, on to Big O!

@@ -10,7 +10,7 @@ minutes: 6
 
 You can. If you only want to write code, jump to the Linked Lists module. But the next two modules are short, and they make everything after them easier. Here's why.
 
-## Why Big O comes first
+### Why Big O comes first
 
 Imagine you're building an app, and the most important thing it does is **remove the last item** from a list, thousands of times per second. You could store the list as a **singly linked list** or as a **doubly linked list**. Which one should you pick?
 
@@ -58,17 +58,11 @@ The fastest way to learn DSA is to **practice right after you learn**:
 
 Don't save all the practice for the end of the course. A little practice after each module sticks much better than a lot of practice months later.
 
-## Recap
+In short:
 
 - **Big O** is how we compare code. Every topic uses it, it helps you choose data structures, and interviews ask about it.
 - Every data structure is a **class**.
 - `head` and `tail` are **pointers** to nodes, not the nodes themselves.
 - Practice right after each module.
 
-## Check yourself
-
-1. Which is better at removing the last item: a singly or a doubly linked list?
-2. In the code above, which line makes the old last node point to the new node?
-3. Why is `head` still `4` at the end?
-
-More questions like these are waiting in the **Module 1 quiz**.
+When you finish this module, the **Module 1 quiz** is waiting on the module page.

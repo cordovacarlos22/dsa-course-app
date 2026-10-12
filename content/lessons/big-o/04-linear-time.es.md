@@ -57,14 +57,8 @@ Busca un solo bucle que toque cada elemento un número fijo de veces:
 
 Los métodos de JavaScript también cuentan: `array.includes(x)`, `array.indexOf(x)` y `array.map(fn)` recorren el array, así que son O(n).
 
-## Resumen
+En resumen:
 
 - Una pasada por la entrada → **O(n)**, tiempo lineal.
 - El doble de entrada → el doble de trabajo. En una gráfica es una línea recta.
 - Los bucles escondidos (`includes`, `indexOf`, `map`…) también son O(n).
-
-## Compruébalo tú mismo
-
-1. ¿Cuál es el Big O de encontrar el número más grande de un array desordenado?
-2. Si `totalSales` hace 1,000 sumas con 1,000 órdenes, ¿cuántas hará con 3,000?
-3. ¿Por qué `array.includes(x)` es O(n) aunque sea una sola línea?

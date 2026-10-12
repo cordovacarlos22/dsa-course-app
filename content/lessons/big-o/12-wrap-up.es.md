@@ -25,7 +25,7 @@ for (const row of rows) console.log(row)
 
 Con n = 1,000,000, O(log n) necesita unos **20** pasos, O(n) necesita **un millón** y O(n²) necesita **un billón** (un millón de millones). Esa diferencia es la razón por la que elegir el algoritmo correcto importa más que tener una computadora más rápida.
 
-## Las formas
+### Las formas
 
 ```viz
 big-o-growth-chart
@@ -54,14 +54,8 @@ De mejor a peor: **O(1) < O(log n) < O(n) < O(n log n) < O(n²)**.
 5. **Entradas distintas, variables distintas:** O(a + b), O(a · b).
 6. Mide también el **espacio**, no solo el tiempo.
 
-## Lo que sigue
+### Lo que sigue
 
 Próximo módulo: el Big O de las herramientas que usas todos los días, los **arrays y los objetos**. Después vas a aprender un método paso a paso para resolver problemas que nunca has visto.
 
 Antes de seguir, haz el **cuestionario de Big O** en la página del módulo y prueba los **problemas de entrevista de Big O**.
-
-## Compruébalo tú mismo
-
-1. Ordena de más rápido a más lento: O(n²), O(1), O(n log n), O(log n), O(n).
-2. ¿Qué frase va con O(log n)?
-3. Simplifica O(3n² + 10n + 7).

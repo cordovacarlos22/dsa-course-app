@@ -54,14 +54,8 @@ Esa técnica de cortar el problema a la mitad una y otra vez se llama **dividir 
 - **O(log n):** la búsqueda binaria y la búsqueda en árboles balanceados (más adelante en el curso).
 - **O(n log n):** los mejores algoritmos de ordenamiento de uso general, como merge sort. Son `n` elementos por `log n` niveles de división. Lo vas a construir tú mismo en el módulo de Merge Sort.
 
-## Resumen
+En resumen:
 
 - log₂(n) = cuántas veces puedes dividir `n` a la mitad hasta llegar a 1.
 - **O(log n)** crece increíblemente lento: mil millones de elementos → unos 30 pasos.
 - "Dividir y conquistar" → O(log n). Un buen ordenamiento → O(n log n).
-
-## Compruébalo tú mismo
-
-1. ¿Cuánto es log₂(16)?
-2. ¿Por qué la búsqueda binaria necesita un array ordenado?
-3. Si n pasa de 1,000 a 1,000,000, ¿más o menos cuántos pasos más necesita un algoritmo O(log n)?

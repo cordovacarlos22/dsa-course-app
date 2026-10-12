@@ -1,0 +1,105 @@
+{
+  "steps": [
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `findLargest(numbers)`: return the largest number in a non-empty array, using one pass over the array.",
+        "es": "Escribe `findLargest(numbers)`: devuelve el número más grande de un array que no está vacío, recorriéndolo una sola vez."
+      },
+      "hint": {
+        "en": "Start with `let largest = numbers[0]`, then loop and replace it whenever you find a bigger number.",
+        "es": "Empieza con `let largest = numbers[0]`, luego recorre el array y reemplázalo cada vez que encuentres un número más grande."
+      },
+      "starterCode": "function findLargest(numbers) {\n  let largest = numbers[0]\n  // Look at every number once.\n  return largest\n}\n\nconsole.log(findLargest([3, 9, 2])) // 9\n",
+      "solution": "function findLargest(numbers) {\n  let largest = numbers[0]\n  for (const number of numbers) {\n    if (number > largest) largest = number\n  }\n  return largest\n}\n\nconsole.log(findLargest([3, 9, 2])) // 9\n",
+      "kind": "function",
+      "functionName": "findLargest",
+      "tests": [
+        {
+          "args": [[3, 9, 2]],
+          "expected": 9
+        },
+        {
+          "args": [[-5, -1, -8]],
+          "expected": -1
+        },
+        {
+          "args": [[7]],
+          "expected": 7
+        },
+        {
+          "args": [[1, 2, 3, 4, 5]],
+          "expected": 5
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "`totalSales` does 1,000 additions for 1,000 orders. How many does it do for 3,000 orders?",
+        "es": "`totalSales` hace 1,000 sumas con 1,000 pedidos. ¿Cuántas hace con 3,000 pedidos?"
+      },
+      "options": [
+        {
+          "en": "1,000",
+          "es": "1,000"
+        },
+        {
+          "en": "3,000",
+          "es": "3,000"
+        },
+        {
+          "en": "9,000",
+          "es": "9,000"
+        },
+        {
+          "en": "9,000,000",
+          "es": "9,000,000"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "O(n): one addition per order.",
+        "es": "O(n): una suma por pedido."
+      },
+      "explanation": {
+        "en": "Linear time: 3 times the orders, 3 times the additions.",
+        "es": "Tiempo lineal: el triple de pedidos, el triple de sumas."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "`array.includes(x)` is a single line. Why is it still O(n)?",
+        "es": "`array.includes(x)` es una sola línea. ¿Por qué sigue siendo O(n)?"
+      },
+      "options": [
+        {
+          "en": "Because built-in methods are always slow",
+          "es": "Porque los métodos integrados siempre son lentos"
+        },
+        {
+          "en": "It isn't: one line of code is always O(1)",
+          "es": "No lo es: una línea de código siempre es O(1)"
+        },
+        {
+          "en": "Because it uses a lot of memory",
+          "es": "Porque usa mucha memoria"
+        },
+        {
+          "en": "Behind the scenes it walks through the array, checking items one by one",
+          "es": "Por dentro recorre el array, revisando los elementos uno por uno"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "Think about what `includes` has to do when `x` isn't in the array.",
+        "es": "Piensa en lo que tiene que hacer `includes` cuando `x` no está en el array."
+      },
+      "explanation": {
+        "en": "`includes`, `indexOf` and `map` hide a loop over the array, so they're O(n).",
+        "es": "`includes`, `indexOf` y `map` esconden un bucle sobre el array, así que son O(n)."
+      }
+    }
+  ]
+}

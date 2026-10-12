@@ -1,0 +1,125 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "Why does the course teach Big O before the data structures?",
+        "es": "¿Por qué el curso enseña Big O antes de las estructuras de datos?"
+      },
+      "options": [
+        {
+          "en": "Because JavaScript needs it to run your code",
+          "es": "Porque JavaScript lo necesita para ejecutar tu código"
+        },
+        {
+          "en": "Every topic uses it, it helps you choose between data structures, and interviews ask about it",
+          "es": "Todos los temas lo usan, te ayuda a elegir entre estructuras de datos y en las entrevistas lo preguntan"
+        },
+        {
+          "en": "It's the hardest topic, so it's best to get it over with",
+          "es": "Es el tema más difícil, así que mejor terminarlo pronto"
+        },
+        {
+          "en": "You can't write a loop without it",
+          "es": "No puedes escribir un bucle sin él"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "The step lists three reasons. Which option has all three?",
+        "es": "El paso da tres razones. ¿Qué opción las tiene todas?"
+      },
+      "explanation": {
+        "en": "Big O is the shared language for comparing code: every module, every choice of data structure and every interview uses it.",
+        "es": "Big O es el lenguaje común para comparar código: lo usan todos los módulos, cada elección de estructura de datos y cada entrevista."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Practice moving a pointer. Each node looks like `{ value, next }`, and the last node has `next: null`. Write `lastValue(head)`: start at `head`, follow the `next` pointers to the last node, and return its `value`.",
+        "es": "Practica mover un puntero. Cada nodo se ve así: `{ value, next }`, y el último nodo tiene `next: null`. Escribe `lastValue(head)`: empieza en `head`, sigue los punteros `next` hasta el último nodo y devuelve su `value`."
+      },
+      "hint": {
+        "en": "Use a variable `current = head`, and move it with `current = current.next` while `current.next !== null`. Then return `current.value`.",
+        "es": "Usa una variable `current = head` y muévela con `current = current.next` mientras `current.next !== null`. Después devuelve `current.value`."
+      },
+      "starterCode": "function lastValue(head) {\n  let current = head\n  // Move current forward until it reaches the last node.\n  return current.value\n}\n\nconst list = { value: 4, next: { value: 7, next: null } }\nconsole.log(lastValue(list)) // 7\n",
+      "solution": "function lastValue(head) {\n  let current = head\n  while (current.next !== null) {\n    current = current.next\n  }\n  return current.value\n}\n\nconst list = { value: 4, next: { value: 7, next: null } }\nconsole.log(lastValue(list)) // 7\n",
+      "kind": "function",
+      "functionName": "lastValue",
+      "tests": [
+        {
+          "args": [
+            {
+              "value": 4,
+              "next": {
+                "value": 7,
+                "next": null
+              }
+            }
+          ],
+          "expected": 7
+        },
+        {
+          "args": [
+            {
+              "value": 1,
+              "next": {
+                "value": 2,
+                "next": {
+                  "value": 3,
+                  "next": null
+                }
+              }
+            }
+          ],
+          "expected": 3
+        },
+        {
+          "args": [
+            {
+              "value": 9,
+              "next": null
+            }
+          ],
+          "expected": 9
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "When is the best time to take a module's quiz and exercises?",
+        "es": "¿Cuál es el mejor momento para hacer el cuestionario y los ejercicios de un módulo?"
+      },
+      "options": [
+        {
+          "en": "At the end of the whole course",
+          "es": "Al final de todo el curso"
+        },
+        {
+          "en": "Only before an interview",
+          "es": "Solo antes de una entrevista"
+        },
+        {
+          "en": "Right after you finish the module's lessons",
+          "es": "Justo después de terminar las lecciones del módulo"
+        },
+        {
+          "en": "Never, reading the lessons is enough",
+          "es": "Nunca, con leer las lecciones basta"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Practice sticks best when the topic is still fresh.",
+        "es": "La práctica funciona mejor cuando el tema todavía está fresco."
+      },
+      "explanation": {
+        "en": "A little practice right after each module sticks much better than a lot of practice months later.",
+        "es": "Un poco de práctica justo después de cada módulo se queda mucho mejor que mucha práctica meses después."
+      }
+    }
+  ]
+}

@@ -53,14 +53,8 @@ Un tercer bucle anidado vuelve a multiplicar: **n × n × n = O(n³)**, que crec
 
 Los bucles anidados no siempre se pueden evitar, pero muchas veces son una pista de que hay una forma más inteligente. Muchos problemas de entrevista empiezan con una idea O(n²) y te piden llevarla a O(n). En este curso, el módulo de patrones te va a enseñar cómo.
 
-## Resumen
+En resumen:
 
 - Un bucle dentro de otro bucle sobre la misma entrada → **O(n²)**.
 - 10× la entrada → 100× el trabajo.
 - Tres bucles anidados → O(n³).
-
-## Compruébalo tú mismo
-
-1. Dos bucles anidados sobre un array de 50 elementos: ¿cuántos pasos internos?
-2. Si n pasa de 1,000 a 2,000, ¿cuánto más trabajo hace el código O(n²)?
-3. ¿Qué Big O tienen tres bucles anidados sobre el mismo array?
