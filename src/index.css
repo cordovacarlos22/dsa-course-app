@@ -9,6 +9,13 @@
   content: none;
 }
 
+/* Lessons keep Back / Next in a sticky bar at the bottom of the screen. When
+   keyboard focus moves to something low on the page, the browser scrolls it
+   above that bar instead of leaving it hidden underneath. */
+html {
+  scroll-padding-bottom: 6rem;
+}
+
 /* Design tokens: the app's colors in one place (charliecodeacademy brand).
    Use them as Tailwind classes: bg-brand, text-ink, bg-accent, bg-surface… */
 @theme {

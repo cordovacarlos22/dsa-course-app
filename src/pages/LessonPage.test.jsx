@@ -353,3 +353,44 @@ describe('buildLessonIndex', () => {
     expect(lessons[1].checkpoints).toEqual([])
   })
 })
+
+describe('keyboard focus', () => {
+  const WELCOME = '/learn/introduction/01-welcome'
+
+  it('moves to the new step’s title after Next and Back', async () => {
+    const user = userEvent.setup()
+    saveProgress('introduction', '01-welcome', {
+      ...emptyProgress(),
+      passed: [0, 1, 2],
+    })
+    renderAt(`${WELCOME}?step=1`)
+    const firstTitle = await screen.findByRole('heading', {
+      level: 2,
+      name: 'Who this course is for',
+    })
+    // Opening the page doesn't move focus.
+    expect(firstTitle).not.toHaveFocus()
+
+    await user.click(nextButton())
+    // Step 2 is a coding step: its title is in the Learn pane.
+    expect(
+      await screen.findByRole('heading', {
+        level: 2,
+        name: 'How a lesson works',
+      }),
+    ).toHaveFocus()
+
+    await user.click(nextButton())
+    expect(
+      await screen.findByRole('heading', { level: 2, name: 'The road ahead' }),
+    ).toHaveFocus()
+
+    await user.click(screen.getByRole('button', { name: '← Back' }))
+    expect(
+      await screen.findByRole('heading', {
+        level: 2,
+        name: 'How a lesson works',
+      }),
+    ).toHaveFocus()
+  })
+})

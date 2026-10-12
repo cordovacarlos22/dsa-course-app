@@ -17,6 +17,7 @@ const PANES = ['learn', 'code', 'output']
 // "Run" just runs the code; "Check" runs the checkpoint's tests.
 function CodeWorkspace({
   step,
+  titleRef,
   isPassed,
   cheer,
   failedTries,
@@ -93,7 +94,13 @@ function CodeWorkspace({
           className={`${paneClass('learn')} overflow-y-auto rounded-2xl border border-slate-200 bg-white p-5`}
         >
           {step.title && (
-            <h2 className="mb-3 text-xl font-extrabold">{step.title}</h2>
+            <h2
+              ref={titleRef}
+              tabIndex={-1}
+              className="mb-3 text-xl font-extrabold"
+            >
+              {step.title}
+            </h2>
           )}
           <LessonMarkdown markdown={step.body} />
           <div className="mt-6 rounded-xl border-2 border-brand/30 bg-brand/5 p-4">

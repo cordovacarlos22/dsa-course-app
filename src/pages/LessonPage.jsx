@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
@@ -79,6 +79,19 @@ function LessonPlayer({ module, lessonIndex }) {
   const isLastStep = stepIndex === steps.length - 1
   const tries = failedAttempts(progress, stepIndex)
 
+  // After Back, Next or a progress segment, keyboard focus moves to the new
+  // step's title: screen readers read it, and Tab continues from there.
+  // (Not on the first visit: the page has only just opened.)
+  const stepTitleRef = useRef(null)
+  const lessonTitleRef = useRef(null)
+  const shownStepRef = useRef(stepIndex)
+  useEffect(() => {
+    if (shownStepRef.current === stepIndex) return
+    shownStepRef.current = stepIndex
+    const title = stepTitleRef.current ?? lessonTitleRef.current
+    title?.focus({ preventScroll: true })
+  }, [stepIndex])
+
   function update(change) {
     setProgress((current) => {
       const next = change(current)
@@ -145,6 +158,8 @@ function LessonPlayer({ module, lessonIndex }) {
         {moduleTitle} · {t('lesson.minutes', { count: lesson.minutes })}
       </p>
       <h1
+        ref={lessonTitleRef}
+        tabIndex={-1}
         className={`font-extrabold ${isCodeStep ? 'text-xl sm:text-2xl' : 'text-2xl sm:text-3xl'}`}
       >
         {getLessonVersion(lesson, language).title}
@@ -164,6 +179,7 @@ function LessonPlayer({ module, lessonIndex }) {
           <CodeWorkspace
             key={stepIndex}
             step={step}
+            titleRef={stepTitleRef}
             isPassed={isPassed}
             cheer={cheer}
             failedTries={tries}
@@ -174,7 +190,13 @@ function LessonPlayer({ module, lessonIndex }) {
         ) : (
           <>
             {step.title && (
-              <h2 className="mb-4 text-2xl font-extrabold">{step.title}</h2>
+              <h2
+                ref={stepTitleRef}
+                tabIndex={-1}
+                className="mb-4 text-2xl font-extrabold"
+              >
+                {step.title}
+              </h2>
             )}
             <LessonMarkdown markdown={step.body} />
             {step.checkpoint && (
@@ -209,7 +231,7 @@ function LessonPlayer({ module, lessonIndex }) {
       <nav
         aria-label={t('lesson.stepNavigation')}
         // Sticky: Back and Next stay on screen while the student reads.
-        className="sticky bottom-0 z-10 mt-8 flex items-center justify-between gap-4 border-t border-slate-200 bg-surface/95 py-3 backdrop-blur"
+        className="sticky bottom-0 z-10 mt-8 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-slate-200 bg-surface/95 py-3 backdrop-blur"
       >
         {stepIndex > 0 ? (
           <button
@@ -223,9 +245,10 @@ function LessonPlayer({ module, lessonIndex }) {
           <span />
         )}
 
+        {/* On phones the note gets its own line above Back and Next. */}
         {!canGoNext && (
-          <p className="hidden text-sm text-slate-500 sm:block">
-            🔒 {t('lesson.nextLocked')}
+          <p className="order-first w-full text-center text-xs text-slate-500 sm:order-none sm:w-auto sm:text-sm">
+            <span aria-hidden="true">🔒</span> {t('lesson.nextLocked')}
           </p>
         )}
 
