@@ -357,6 +357,39 @@ describe('buildLessonIndex', () => {
 describe('keyboard focus', () => {
   const WELCOME = '/learn/introduction/01-welcome'
 
+  it('moves between the coding tabs with the arrow keys', async () => {
+    const user = userEvent.setup()
+    saveProgress('introduction', '01-welcome', {
+      ...emptyProgress(),
+      passed: [0],
+    })
+    renderAt(`${WELCOME}?step=2`)
+    const learn = await screen.findByRole('tab', { name: 'Learn' })
+    const code = screen.getByRole('tab', { name: 'Code' })
+    const output = screen.getByRole('tab', { name: 'Output' })
+    // Only the selected tab is in the Tab order.
+    expect(learn).toHaveAttribute('tabindex', '0')
+    expect(code).toHaveAttribute('tabindex', '-1')
+    // Each tab says which pane it shows.
+    expect(
+      document.getElementById(code.getAttribute('aria-controls')),
+    ).toHaveAttribute('aria-label', 'Code')
+
+    learn.focus()
+    await user.keyboard('{ArrowRight}')
+    expect(code).toHaveFocus()
+    expect(code).toHaveAttribute('aria-selected', 'true')
+
+    await user.keyboard('{End}')
+    expect(output).toHaveFocus()
+    await user.keyboard('{Home}')
+    expect(learn).toHaveFocus()
+    // From the first tab, ArrowLeft wraps around to the last one.
+    await user.keyboard('{ArrowLeft}')
+    expect(output).toHaveFocus()
+    expect(output).toHaveAttribute('aria-selected', 'true')
+  })
+
   it('moves to the new step’s title after Next and Back', async () => {
     const user = userEvent.setup()
     saveProgress('introduction', '01-welcome', {
