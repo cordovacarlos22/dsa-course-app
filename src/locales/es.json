@@ -1,7 +1,9 @@
 {
   "app": {
     "name": "DSA en JavaScript",
-    "footer": "Hecho por charliecodeacademy"
+    "footer": "Hecho por charliecodeacademy",
+    "title": "DSA en JavaScript · Aprende estructuras de datos y algoritmos paso a paso",
+    "pageTitle": "{{page}} · DSA en JavaScript"
   },
   "nav": {
     "learn": "Curso",

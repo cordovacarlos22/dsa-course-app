@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useLanguage } from '../hooks/useLanguage'
 import { celebrate } from '../lib/celebrate'
 import { getModule, localize } from '../lib/course'
@@ -52,6 +53,7 @@ function LessonPlayer({ module, lessonIndex }) {
   const [searchParams, setSearchParams] = useSearchParams()
   const lesson = module.lessons[lessonIndex]
   const nextLesson = module.lessons[lessonIndex + 1]
+  useDocumentTitle(getLessonVersion(lesson, language).title)
   const steps = getLessonSteps(lesson, language)
   const [progress, setProgress] = useState(() =>
     loadProgress(module.slug, lesson.slug),

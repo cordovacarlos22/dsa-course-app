@@ -1,8 +1,10 @@
 import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 function NotFoundPage() {
   const { t } = useTranslation()
+  useDocumentTitle(t('notFound.title'))
 
   return (
     <div className="py-16 text-center">

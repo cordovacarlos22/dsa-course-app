@@ -67,6 +67,39 @@ describe('language switcher', () => {
   })
 })
 
+describe('tab titles', () => {
+  it('names each page in the browser tab', () => {
+    const { unmount } = renderAsReturningStudent('/')
+    expect(document.title).toBe(
+      'DSA in JavaScript · Learn data structures & algorithms step by step',
+    )
+    unmount()
+
+    renderAsReturningStudent('/learn/big-o')
+    expect(document.title).toBe('Big O · DSA in JavaScript')
+  })
+
+  it('names a lesson by its title', async () => {
+    renderAsReturningStudent('/learn/big-o/01-why-big-o')
+    await screen.findByRole('heading', { level: 1, name: 'Why Big O?' })
+    expect(document.title).toBe('Why Big O? · DSA in JavaScript')
+  })
+
+  it('says when a page does not exist', () => {
+    renderAsReturningStudent('/learn/no-such-module')
+    expect(document.title).toBe('Page not found · DSA in JavaScript')
+  })
+
+  it('follows the language switch', async () => {
+    const user = userEvent.setup()
+    renderAsReturningStudent('/learn')
+    expect(document.title).toBe('Course modules · DSA in JavaScript')
+
+    await user.click(screen.getByRole('button', { name: 'Español' }))
+    expect(document.title).toBe('Módulos del curso · DSA en JavaScript')
+  })
+})
+
 describe('course home', () => {
   it('lists all 24 modules in order, grouped into 7 sections', () => {
     renderAsReturningStudent('/learn')
