@@ -118,7 +118,8 @@ Before every commit, run: `npm run lint && npm run format:check && npm test && n
 ## Course blueprint and originality (read before writing any content)
 
 - **[`docs/curriculum.md`](./docs/curriculum.md) is the plan for the whole course**: 24 modules in 7 sections (algorithms first), and for each module its lessons, animations, quiz topics, **Build it** exercises, **Interview problems** and slides. Write content in that order, and update the module's **Status** in the blueprint when its content is merged.
-- **The two courses Carlos took are examples of structure only.** Their lessons, slides, coding exercises, starter files, solutions, quizzes and wording are **never copied, edited, paraphrased or reused**, including the course 2 slide PDFs in Carlos's Desktop folder. Every lesson, slide, problem statement, example, test and solution here is written from scratch. Classic problem _names_ (e.g. "Two Sum") are fine; their text and tests must be ours.
+- **Lessons follow the two courses Carlos took closely** (Carlos, 2026-10-11: "even if we are going to be super close to the original 2 courses"). Same topics, same order, same depth, and the same classic examples are fine (e.g. adding 1 to n with a loop vs a formula, `printNumbers(n)`, nested loops printing pairs, `push`/`shift`/`splice` on an array).
+- **The sentences are always ours.** Never paste transcript, slide or quiz text. Write every explanation fresh, in Carlos's voice, and write our own quiz questions, coding tasks, tests and solutions (they may test the same ideas). Practice exercises (Build it / Interview problems) are still written from scratch; classic problem _names_ (e.g. "Two Sum") are fine.
 - **Slides are ours too:** each module gets its own deck (original text and diagrams, Carlos's brand, EN + ES), built in a later stage.
 - **Course levels: Section → Module → Lesson → Step** (ES: Sección → Módulo → Lección → Paso). `content/course.json` groups modules into `sections`.
 - **Module slugs are English names without numbers** (`big-o`, `linked-lists`, `dijkstra`). The order lives only in `content/course.json`, so reordering never breaks links. `sourceFolder` (optional) points to the matching folder in Carlos's course material.
@@ -127,12 +128,17 @@ Before every commit, run: `npm run lint && npm run format:check && npm test && n
 
 When Carlos says _"write the lessons for module N"_:
 
-1. Read the module's English transcripts in `recursos originales/modulo-NN-*/guiones/` (see the content procedure below for the path) **only to get the topic list, order and depth**.
-2. Write each lesson **from scratch in Carlos's voice**: new explanations, new examples, new analogies, new code. Never copy or paraphrase the transcripts sentence by sentence.
+1. **Read the module's source files from Carlos**, both the text **and the images** (slides, charts and quiz screenshots count as content). For **Big O** they are these two files (folder names end in spaces, so quote the paths):
+   - `~/Desktop/DSA + LEETCODE for Coding Interviews — Clear, Step-by-Step Animated Walkthroughs!/course 1 /Section 2 - Big o /Section 2 -  Big o  notes.docx`
+   - `~/Desktop/DSA + LEETCODE for Coding Interviews — Clear, Step-by-Step Animated Walkthroughs!/course 2/section 2 - big o /Intro to Big O.docx`
+
+   Read the text with `textutil -convert txt -stdout "<file>"` and extract the images with `unzip "<file>" 'word/media/*' -d <scratch dir>`. For **other modules**, Carlos adds his files to the same "DSA + LEETCODE…" folder: ask him for the paths. Don't use `recursos originales/…/guiones/` for a module he has given files for.
+
+2. **One lesson per lecture.** Follow both courses' lectures in order, merging the ones they share. Cover every point, example and number from the sources, writing the explanations in Carlos's voice (see the closeness rules above).
 3. Save it as `content/lessons/<module-slug>/<NN-lesson-slug>.en.md` with front-matter (`title`, `order`, `minutes`).
-4. **Show, then explain.** Many students prefer pictures, but they still need the full explanation. Every step has **a ` ```viz ` animation and a real explanation**: a 1–2 sentence lead-in, the animation, then about 90–170 words (paragraphs, a list or a table) and optionally a small ` ```js-run `. A lesson is usually 300–500 words.
-   - **Teach at the depth of the source notes.** Cover every point the course transcripts and notes make for the module, in our own words and examples. Never cut content just to make a lesson shorter (Carlos, 2026-10-11).
-   - **One story per module** (Big O: the party guest list), so students don't learn a new example every lesson.
+4. **Show, then explain.** Many students prefer pictures, but they still need the full explanation. Every step has **a ` ```viz ` animation and a real explanation**: a 1–2 sentence lead-in, the animation, then a full explanation (paragraphs, a list or a table) and a ` ```js-run ` wherever the course runs code. A lesson is usually 450–900 words.
+   - **Teach at the depth of the source notes.** Cover every point the course files make for the module, in our own words (the courses' own examples are welcome). Never cut content just to make a lesson shorter (Carlos, 2026-10-11).
+   - **The courses' examples plus one story per module.** Walk through the examples the courses use, and use one story for the animations (Big O: the party guest list), so students don't learn a new story every lesson.
    - **Beginner code style:** loops are written `for (let i = 0; i < guests.length; i++) { … guests[i] … }`. No `for...of` or `.forEach` in lessons, checkpoints or practice code (`content:validate` rejects them). Avoid `Set`, `map` and other advanced tools until the module that teaches them.
    - **Steps:** every `## ` heading starts a step (the goal line before the first `##` belongs to step 1). Aim for 3–6 short steps. Each lesson has: a one-line goal, the explanation, at least one runnable snippet, an animation when the topic is visual, and the Big O summary inside the last step (no separate "recap" or "check yourself" sections: the checkpoints replace them).
    - **Checkpoints:** `content/lessons/<module-slug>/<NN-lesson-slug>.checks.json` holds `{ "steps": [ … ] }`, **one checkpoint per step, in order**. The student can't press Next until the step's checkpoint passes. Mix both kinds:
@@ -170,7 +176,7 @@ When Carlos says _"write the lessons for module N"_:
 
 When Carlos says _"generate content for section N"_:
 
-1. **Find the sources.** They live **outside the repo**, in Carlos's course folder:
+1. **Find the sources.** If Carlos gave you files for the module (see the lesson-writing procedure; for Big O, the two `.docx` files), use those, quizzes and images included. Otherwise they live **outside the repo**, in Carlos's course folder:
 
    ```
    ~/Desktop/curso por mi /Curso-de-Estructuras-de-Datos-y-Algoritmos-en-JavaScript-con-Ejercicios-de-LEETCODE/

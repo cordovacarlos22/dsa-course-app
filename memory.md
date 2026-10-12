@@ -12,6 +12,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 - 2026-10-11 (replaced the same day, see below): **Lessons are visual-first** (an animation opens every step, 1–3 sentences after it), **one story per module** (Big O: guest list), and **beginner loops** (`for (let i = 0; …; i++)`, no `for...of`/`forEach`). Reason: Carlos's students prefer visuals and many only know basic JavaScript.
 - 2026-10-11: **Show, then explain.** Carlos: keeping the reading low didn't mean erasing it. Every step keeps its animation, but lessons teach at the depth of the course notes and transcripts (300–500 words, every point covered, in our own words). **Coding steps use Learn | Editor over Output** (two columns, the editor above the output), because three columns were too tight.
+- 2026-10-11 (later): **Big O follows both courses closely.** Carlos: "still not enough … missing a lot of the content from the 2 files … even if we are going to be super close to the original 2 courses". One lesson per lecture (17), the courses' own examples plus the guest-list animations, every point of both files (text, slides and quizzes) covered; sentences stay ours. **Sources for Big O are his two `.docx` files** in the "DSA + LEETCODE…" Desktop folder, not `guiones/`; he'll add files for the other modules later.
 
 - 2026-10-11: **Codecademy-style learning (Carlos).** Students must prove they understood before moving on: lessons are split into **steps** (each `##` heading), every step ends with a **checkpoint** (quick question or small code task checked by tests), and **Next stays locked until it passes**. Stuck → hint, then the solution after 3 failed tries (recorded as "viewed solution"). Coding steps use a **3-pane workspace** (Learn | Editor | Output). Being built in `feat/step-checkpoints`.
 - 2026-10-11: **Naming: Section → Module → Lesson → Step** (ES: Sección → Módulo → Lección → Paso). `course.json` `parts` became `sections`; the per-module quiz/exercise files moved from `content/sections/` to **`content/practice/`** (`practiceSchema`, `module.practice`).
@@ -99,6 +100,8 @@ Agents: read this at the start of every session and update it at the end (see `A
   - PR B (`content/big-o-visual`): 14 lessons (topics merged from Carlos's two courses' Big O notes, examples ours), 29 checkpoints, quiz rewritten with guest-list code (the copied `printNumbers`/`splice "hi"`/2³¹ examples are gone; array questions move to the arrays module). `content:validate` rejects `for...of` / `.forEach` in teaching code.
 
 - 2026-10-11, PR #17 fixes (after Carlos's review): Big O lessons rewritten at transcript depth (38 steps, 38 checkpoints, EN + ES); animations sized by container queries; new traces `trace-count-guests` and `trace-give-gifts`; stopwatch "too fast to measure" step; coding workspace is Learn | Editor over Output with a sticky Back / Next bar. The PR's merge conflict came from merging #15 into the branch separately; merging `main` into the branch fixed it (never resolve such conflicts in GitHub's editor).
+
+- 2026-10-11, PR #17 third round: 17 Big O lessons (9,060 English words, 51 steps and checkpoints, EN + ES), quiz 33 questions; new traces (`sumUpTo` loop vs formula, `printNumbers`, `printPairs`, `doubleArray`), `timing-chart` and `array-splice`; `content:validate` also rejects repeated options.
 
 ## Next
 
