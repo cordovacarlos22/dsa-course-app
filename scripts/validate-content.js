@@ -369,6 +369,12 @@ export function validateLessonChecks(data, stepCounts) {
   return errors
 }
 
+// macOS / iCloud sometimes copies a file as "name 2.ext". git, ESLint and
+// Prettier already ignore those copies; the validator skips them too.
+export function isIcloudDuplicate(fileName) {
+  return / \d+\.[^.]+$/.test(fileName)
+}
+
 // English is written first: every Spanish lesson needs its English original.
 export function findLessonsMissingEnglish(fileNames) {
   return fileNames
@@ -392,7 +398,9 @@ async function validateAllLessons(course) {
   let hasErrors = false
   for (const moduleSlug of moduleFolders) {
     const folder = join(LESSONS_DIR, moduleSlug)
-    const allFiles = await readdir(folder)
+    const allFiles = (await readdir(folder)).filter(
+      (name) => !isIcloudDuplicate(name),
+    )
     const fileNames = allFiles.filter((name) => name.endsWith('.md'))
     const checksFiles = allFiles.filter((name) => name.endsWith('.checks.json'))
 
@@ -463,7 +471,7 @@ async function main() {
   console.log(`✓ course.json (${course.modules.length} modules)`)
 
   const files = (await readdir(PRACTICE_DIR))
-    .filter((name) => name.endsWith('.json'))
+    .filter((name) => name.endsWith('.json') && !isIcloudDuplicate(name))
     .sort()
   let hasErrors = false
   let missingSpanish = countMissingSpanish(course)

@@ -7,6 +7,7 @@ import {
   findAdvancedLoops,
   findDuplicateOptions,
   findLessonsMissingEnglish,
+  isIcloudDuplicate,
   validateCourse,
   validateLesson,
   validateLessonChecks,
@@ -389,6 +390,20 @@ describe('validateLesson', () => {
     expect(validateLesson(lesson, makeValidCourse())).toEqual([
       expect.stringContaining('js-run block does not compile'),
     ])
+  })
+})
+
+describe('isIcloudDuplicate', () => {
+  it('spots the copies macOS / iCloud make', () => {
+    expect(isIcloudDuplicate('17-wrap-up.es 2.md')).toBe(true)
+    expect(isIcloudDuplicate('01-why-big-o.checks 3.json')).toBe(true)
+    expect(isIcloudDuplicate('big-o 2.json')).toBe(true)
+  })
+
+  it('keeps real lesson and practice files', () => {
+    expect(isIcloudDuplicate('17-wrap-up.es.md')).toBe(false)
+    expect(isIcloudDuplicate('01-why-big-o.checks.json')).toBe(false)
+    expect(isIcloudDuplicate('big-o.json')).toBe(false)
   })
 })
 
