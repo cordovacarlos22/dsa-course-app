@@ -10,6 +10,8 @@ const STEPS = [
   { captionKey: 'firstRun', guests: 6, laptop: 0.4, phone: 2.1 },
   { captionKey: 'secondRun', guests: 6, laptop: 0.7, phone: 1.6 },
   { captionKey: 'moreGuests', guests: 12, laptop: 0.9, phone: 3.8 },
+  // Tiny jobs finish faster than the stopwatch can measure.
+  { captionKey: 'tooFast', guests: 2, laptop: 0, phone: 0 },
   { captionKey: 'summary', guests: 12, laptop: 0.9, phone: 3.8 },
 ]
 
@@ -21,7 +23,7 @@ function Machine({ icon, label, ms, steps }) {
         <span aria-hidden="true">{icon}</span> {label}
       </p>
       <p className="mt-2 text-2xl font-extrabold tabular-nums">
-        ⏱ {ms === null ? '—' : `${ms} ms`}
+        ⏱ {ms === null ? '—' : `${ms.toFixed(1)} ms`}
       </p>
       <p className="mt-2 text-xs text-slate-500">
         {t('viz.stopwatchRace.steps', { count: ms === null ? 0 : steps })}
@@ -46,7 +48,7 @@ function StopwatchRace() {
       title={t('viz.stopwatchRace.title')}
       steps={steps}
       renderStep={(step) => (
-        <div className="flex flex-col gap-3 sm:flex-row">
+        <div className="flex flex-col gap-3 @md:flex-row">
           <Machine
             icon="💻"
             label={t('viz.stopwatchRace.laptop')}
