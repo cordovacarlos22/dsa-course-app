@@ -19,7 +19,7 @@ function Faq() {
               {q}
               <span
                 aria-hidden="true"
-                className="text-brand transition-transform group-open:rotate-45"
+                className="text-brand group-open:rotate-45 motion-safe:transition-transform"
               >
                 +
               </span>

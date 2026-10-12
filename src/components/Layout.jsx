@@ -40,7 +40,7 @@ function Layout() {
             <NavLink
               to="/learn"
               className={({ isActive }) =>
-                `font-medium hover:text-brand ${isActive ? 'text-brand' : 'text-slate-700'}`
+                `relative font-medium after:absolute after:-inset-x-1 after:-inset-y-2.5 hover:text-brand ${isActive ? 'text-brand' : 'text-slate-700'}`
               }
             >
               {t('nav.learn')}

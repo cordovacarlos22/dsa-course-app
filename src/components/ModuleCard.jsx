@@ -42,7 +42,7 @@ function ModuleCard({ module }) {
     <li>
       <Link
         to={`/learn/${module.slug}`}
-        className="block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand hover:shadow-md"
+        className="block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition motion-safe:hover:-translate-y-0.5 hover:border-brand hover:shadow-md"
       >
         {header}
         <p className="mt-3 text-sm text-slate-600">{summary.join(' · ')}</p>
