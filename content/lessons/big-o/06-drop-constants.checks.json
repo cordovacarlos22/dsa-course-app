@@ -1,0 +1,106 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "`welcomeAndGoodbye` runs for 50 guests. How many messages does it print?",
+        "es": "`welcomeAndGoodbye` se ejecuta con 50 invitados. ¿Cuántos mensajes imprime?"
+      },
+      "options": [
+        {
+          "en": "50",
+          "es": "50"
+        },
+        {
+          "en": "100",
+          "es": "100"
+        },
+        {
+          "en": "2,500",
+          "es": "2,500"
+        },
+        {
+          "en": "52",
+          "es": "52"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "One loop of welcomes, then one loop of goodbyes.",
+        "es": "Un bucle de bienvenidas y luego un bucle de despedidas."
+      },
+      "explanation": {
+        "en": "50 welcomes + 50 goodbyes = 100 = 2n.",
+        "es": "50 bienvenidas + 50 despedidas = 100 = 2n."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "How do you write O(2n) in Big O?",
+        "es": "¿Cómo se escribe O(2n) en Big O?"
+      },
+      "options": [
+        {
+          "en": "O(2n)",
+          "es": "O(2n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(2)",
+          "es": "O(2)"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "2n is still a straight line. Rule 1: drop the constants.",
+        "es": "2n sigue siendo una línea recta. Regla 1: elimina las constantes."
+      },
+      "explanation": {
+        "en": "n, 2n and 100n have the same shape, so they're all O(n).",
+        "es": "n, 2n y 100n tienen la misma forma, así que todas son O(n)."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Using the official definition, why is 5n + 3 still O(n)?",
+        "es": "Con la definición oficial, ¿por qué 5n + 3 sigue siendo O(n)?"
+      },
+      "options": [
+        {
+          "en": "Because 5n + 3 is smaller than n",
+          "es": "Porque 5n + 3 es menor que n"
+        },
+        {
+          "en": "Because once n is big enough, 5n + 3 is never more than a constant times n (like 6n)",
+          "es": "Porque cuando n es lo bastante grande, 5n + 3 nunca es mayor que una constante por n (como 6n)"
+        },
+        {
+          "en": "Because we only count the 3",
+          "es": "Porque solo contamos el 3"
+        },
+        {
+          "en": "It isn't: it's O(5n + 3)",
+          "es": "No lo es: es O(5n + 3)"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "The definition says: never more than some constant times f(n), once n is big enough.",
+        "es": "La definición dice: nunca mayor que alguna constante por f(n), cuando n es lo bastante grande."
+      },
+      "explanation": {
+        "en": "For n ≥ 3, 5n + 3 ≤ 6n. A constant times n is a straight line, so it's O(n).",
+        "es": "Para n ≥ 3, 5n + 3 ≤ 6n. Una constante por n es una línea recta, así que es O(n)."
+      }
+    }
+  ]
+}

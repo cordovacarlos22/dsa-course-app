@@ -42,8 +42,10 @@ function StepPlayer({ title, steps, renderStep, toolbar = null }) {
 
   const step = steps[index]
 
+  // @container: animations size their layout to this box, not to the screen,
+  // so they also fit inside a narrow pane (like the coding step's Learn pane).
   return (
-    <figure className="not-prose my-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <figure className="@container not-prose my-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
       <figcaption className="text-sm font-bold">{title}</figcaption>
       {toolbar}
 

@@ -10,6 +10,9 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Decisions
 
+- 2026-10-11 (replaced the same day, see below): **Lessons are visual-first** (an animation opens every step, 1–3 sentences after it), **one story per module** (Big O: guest list), and **beginner loops** (`for (let i = 0; …; i++)`, no `for...of`/`forEach`). Reason: Carlos's students prefer visuals and many only know basic JavaScript.
+- 2026-10-11: **Show, then explain.** Carlos: keeping the reading low didn't mean erasing it. Every step keeps its animation, but lessons teach at the depth of the course notes and transcripts (300–500 words, every point covered, in our own words). **Coding steps use Learn | Editor over Output** (two columns, the editor above the output), because three columns were too tight.
+
 - 2026-10-11: **Codecademy-style learning (Carlos).** Students must prove they understood before moving on: lessons are split into **steps** (each `##` heading), every step ends with a **checkpoint** (quick question or small code task checked by tests), and **Next stays locked until it passes**. Stuck → hint, then the solution after 3 failed tries (recorded as "viewed solution"). Coding steps use a **3-pane workspace** (Learn | Editor | Output). Being built in `feat/step-checkpoints`.
 - 2026-10-11: **Naming: Section → Module → Lesson → Step** (ES: Sección → Módulo → Lección → Paso). `course.json` `parts` became `sections`; the per-module quiz/exercise files moved from `content/sections/` to **`content/practice/`** (`practiceSchema`, `module.practice`).
 
@@ -91,6 +94,12 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 - 2026-10-11, `feat/lesson-checkpoints-content` (PR 3): every lesson (Introduction 1–3, Big O 1–12) is now 2–4 steps with checkpoints, EN + ES: 49 checkpoints (choice + code). "Recap" folded into the last step ("In short:"), "Check yourself" removed. Intro 1 and 3 explain steps, checks and the Check workspace.
 
+- 2026-10-11, Big O rebuilt visual-first (Carlos: "too much reading, no step-by-step animations, loops too advanced"):
+  - PR A (`feat/big-o-animations`): code tracer (`CodeTrace` + generator traces in `src/visualizations/traces/`, tested against the real code) and 10 topic animations, all on the guest list. `/dev/animations` shows them all. `array-reindex` no longer uses course 1's values.
+  - PR B (`content/big-o-visual`): 14 lessons (topics merged from Carlos's two courses' Big O notes, examples ours), 29 checkpoints, quiz rewritten with guest-list code (the copied `printNumbers`/`splice "hi"`/2³¹ examples are gone; array questions move to the arrays module). `content:validate` rejects `for...of` / `.forEach` in teaching code.
+
+- 2026-10-11, PR #17 fixes (after Carlos's review): Big O lessons rewritten at transcript depth (38 steps, 38 checkpoints, EN + ES); animations sized by container queries; new traces `trace-count-guests` and `trace-give-gifts`; stopwatch "too fast to measure" step; coding workspace is Learn | Editor over Output with a sticky Back / Next bar. The PR's merge conflict came from merging #15 into the branch separately; merging `main` into the branch fixed it (never resolve such conflicts in GitHub's editor).
+
 ## Next
 
 - Big O module still needs: the interview problem "Count the Operations" and its slides (later stage).
@@ -113,7 +122,7 @@ Modules 04–17 have empty folders; they appear in `course.json` as "coming soon
 | Module          | Lessons                                                             | Languages | Date       |
 | --------------- | ------------------------------------------------------------------- | --------- | ---------- |
 | 01 Introduction | `01-welcome`, `02-how-to-get-the-most-out-of-it`, `03-running-code` | EN + ES   | 2026-10-11 |
-| 02 Big O        | 12 lessons (`01-what-is-big-o` … `12-wrap-up`)                      | EN + ES   | 2026-10-11 |
+| 02 Big O        | 14 visual-first lessons (`01-why-big-o` … `14-wrap-up`)             | EN + ES   | 2026-10-11 |
 
 ## Open questions
 

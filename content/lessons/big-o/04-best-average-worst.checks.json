@@ -1,0 +1,64 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which letter describes the **average** case?",
+        "es": "¿Qué letra describe el caso **promedio**?"
+      },
+      "options": [
+        {
+          "en": "Ω (omega)",
+          "es": "Ω (omega)"
+        },
+        {
+          "en": "Θ (theta)",
+          "es": "Θ (theta)"
+        },
+        {
+          "en": "O (big O)",
+          "es": "O (big O)"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Look at the middle row of the table.",
+        "es": "Mira la fila del medio de la tabla."
+      },
+      "explanation": {
+        "en": "Ω is the best case, Θ the average case and O the worst case.",
+        "es": "Ω es el mejor caso, Θ el caso promedio y O el peor caso."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "An interviewer asks: \"What's the Big O of `isInvited`?\" Which case is that?",
+        "es": "Te preguntan en una entrevista: \"¿Cuál es el Big O de `isInvited`?\". ¿Qué caso es?"
+      },
+      "options": [
+        {
+          "en": "The best case: the name is first",
+          "es": "El mejor caso: el nombre es el primero"
+        },
+        {
+          "en": "The average case: the name is in the middle",
+          "es": "El caso promedio: el nombre está en el medio"
+        },
+        {
+          "en": "The worst case: the name isn't on the list, so it checks all n guests",
+          "es": "El peor caso: el nombre no está, así que revisa a los n invitados"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Big O is the promise \"never slower than this\".",
+        "es": "Big O es la promesa de \"nunca más lento que esto\"."
+      },
+      "explanation": {
+        "en": "Big O is the worst case. For isInvited that's n checks: O(n).",
+        "es": "Big O es el peor caso. Para isInvited son n revisiones: O(n)."
+      }
+    }
+  ]
+}

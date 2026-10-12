@@ -59,6 +59,22 @@ describe('trace counters', () => {
     expect(all.ops).toBe(input.guests.length)
   })
 
+  it('counts 5n + 3 operations for countGuests', () => {
+    const trace = traces['trace-count-guests']
+    for (const input of trace.inputs) {
+      const last = Array.from(trace.run(input)).at(-1)
+      expect(last.ops).toBe(5 * input.guests.length + 3)
+    }
+  })
+
+  it('never gives more than 5 gifts, however long the list (O(1))', () => {
+    const trace = traces['trace-give-gifts']
+    const gifts = trace.inputs.map(
+      (input) => Array.from(trace.run(input)).at(-1).ops,
+    )
+    expect(gifts).toEqual([3, 5, 5])
+  })
+
   it('counts more operations for more guests', () => {
     const trace = traces['trace-count-short-names']
     const totals = trace.inputs.map(

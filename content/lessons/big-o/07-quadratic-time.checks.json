@@ -1,0 +1,105 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "3 guests make a 3 × 3 grid: 9 steps. How many steps for 6 guests?",
+        "es": "3 invitados forman una cuadrícula de 3 × 3: 9 pasos. ¿Cuántos pasos con 6 invitados?"
+      },
+      "options": [
+        {
+          "en": "12",
+          "es": "12"
+        },
+        {
+          "en": "18",
+          "es": "18"
+        },
+        {
+          "en": "36",
+          "es": "36"
+        },
+        {
+          "en": "6",
+          "es": "6"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "n × n with n = 6.",
+        "es": "n × n con n = 6."
+      },
+      "explanation": {
+        "en": "6 × 6 = 36: twice the guests, 4 times the steps. That's O(n²).",
+        "es": "6 × 6 = 36: el doble de invitados, 4 veces los pasos. Eso es O(n²)."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `countGreetings(guests)` with **two nested loops** (`i` outside, `j` inside): count 1 greeting every time `i !== j`, and return the total.",
+        "es": "Escribe `countGreetings(guests)` con **dos bucles anidados** (`i` afuera, `j` adentro): cuenta 1 saludo cada vez que `i !== j` y devuelve el total."
+      },
+      "hint": {
+        "en": "Copy the shape of `greetEveryone`: `for (let i …) { for (let j …) { if (i !== j) greetings = greetings + 1 } }`.",
+        "es": "Copia la forma de `greetEveryone`: `for (let i …) { for (let j …) { if (i !== j) greetings = greetings + 1 } }`."
+      },
+      "starterCode": "function countGreetings(guests) {\n  let greetings = 0\n  // A loop with i, and inside it a loop with j.\n  return greetings\n}\n\nconsole.log(countGreetings(['Ana', 'Ben', 'Cleo'])) // 6\n",
+      "solution": "function countGreetings(guests) {\n  let greetings = 0\n  for (let i = 0; i < guests.length; i++) {\n    for (let j = 0; j < guests.length; j++) {\n      if (i !== j) greetings = greetings + 1\n    }\n  }\n  return greetings\n}\n\nconsole.log(countGreetings(['Ana', 'Ben', 'Cleo'])) // 6\n",
+      "kind": "function",
+      "functionName": "countGreetings",
+      "tests": [
+        {
+          "args": [["Ana", "Ben", "Cleo"]],
+          "expected": 6
+        },
+        {
+          "args": [["Ana", "Ben"]],
+          "expected": 2
+        },
+        {
+          "args": [["Ana", "Ben", "Cleo", "Dev", "Eli", "Fay"]],
+          "expected": 30
+        },
+        {
+          "args": [["Ana"]],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "An O(n²) function runs with 1,000 guests. About how many steps does it take?",
+        "es": "Una función O(n²) corre con 1,000 invitados. ¿Más o menos cuántos pasos da?"
+      },
+      "options": [
+        {
+          "en": "en",
+          "es": "es"
+        },
+        {
+          "en": "en",
+          "es": "es"
+        },
+        {
+          "en": "en",
+          "es": "es"
+        },
+        {
+          "en": "en",
+          "es": "es"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "n² means n × n.",
+        "es": "n² quiere decir n × n."
+      },
+      "explanation": {
+        "en": "1,000 × 1,000 = 1,000,000 steps. That's why O(n²) is a warning sign with real data.",
+        "es": "1,000 × 1,000 = 1,000,000 de pasos. Por eso O(n²) es una señal de alerta con datos reales."
+      }
+    }
+  ]
+}

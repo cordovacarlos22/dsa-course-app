@@ -106,10 +106,15 @@ function LessonPlayer({ module, lessonIndex }) {
       >
         ← {t('lesson.backToModule', { module: moduleTitle })}
       </Link>
-      <p className="mt-4 text-xs font-semibold tracking-wide text-slate-500 uppercase">
+      {/* Coding steps get a smaller header, so the workspace gets more room. */}
+      <p
+        className={`${isCodeStep ? 'mt-2' : 'mt-4'} text-xs font-semibold tracking-wide text-slate-500 uppercase`}
+      >
         {moduleTitle} · {t('lesson.minutes', { count: lesson.minutes })}
       </p>
-      <h1 className="text-2xl font-extrabold sm:text-3xl">
+      <h1
+        className={`font-extrabold ${isCodeStep ? 'text-xl sm:text-2xl' : 'text-2xl sm:text-3xl'}`}
+      >
         {getLessonVersion(lesson, language).title}
       </h1>
 
@@ -121,7 +126,7 @@ function LessonPlayer({ module, lessonIndex }) {
         onSelect={goToStep}
       />
 
-      <div className="mt-6">
+      <div className={isCodeStep ? 'mt-4' : 'mt-6'}>
         {isCodeStep ? (
           <CodeWorkspace
             key={stepIndex}
@@ -169,7 +174,8 @@ function LessonPlayer({ module, lessonIndex }) {
 
       <nav
         aria-label={t('lesson.stepNavigation')}
-        className="mt-8 flex items-center justify-between gap-4 border-t border-slate-200 pt-6"
+        // Sticky: Back and Next stay on screen while the student reads.
+        className="sticky bottom-0 z-10 mt-8 flex items-center justify-between gap-4 border-t border-slate-200 bg-surface/95 py-3 backdrop-blur"
       >
         {stepIndex > 0 ? (
           <button

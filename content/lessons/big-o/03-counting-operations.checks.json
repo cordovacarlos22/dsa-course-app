@@ -1,0 +1,105 @@
+{
+  "steps": [
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `countLongNames(guests)`: return how many names have **more than 3 letters**. Use an indexed loop and a counter.",
+        "es": "Escribe `countLongNames(guests)`: devuelve cuántos nombres tienen **más de 3 letras**. Usa un bucle con índice y un contador."
+      },
+      "hint": {
+        "en": "`if (guests[i].length > 3) count = count + 1`, then return `count` after the loop.",
+        "es": "`if (guests[i].length > 3) count = count + 1`, y devuelve `count` después del bucle."
+      },
+      "starterCode": "function countLongNames(guests) {\n  let count = 0\n  for (let i = 0; i < guests.length; i++) {\n    // Add 1 when the name has more than 3 letters.\n  }\n  return count\n}\n\nconsole.log(countLongNames(['Ana', 'Cleo', 'Hana'])) // 2\n",
+      "solution": "function countLongNames(guests) {\n  let count = 0\n  for (let i = 0; i < guests.length; i++) {\n    if (guests[i].length > 3) count = count + 1\n  }\n  return count\n}\n\nconsole.log(countLongNames(['Ana', 'Cleo', 'Hana'])) // 2\n",
+      "kind": "function",
+      "functionName": "countLongNames",
+      "tests": [
+        {
+          "args": [["Ana", "Cleo", "Hana"]],
+          "expected": 2
+        },
+        {
+          "args": [["Ana", "Ben", "Cleo", "Dev", "Eli", "Fay"]],
+          "expected": 1
+        },
+        {
+          "args": [["Ana", "Ben"]],
+          "expected": 0
+        },
+        {
+          "args": [["Quinn", "Rosa", "Tess"]],
+          "expected": 3
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which gives the number of guests in **1 step**, whether there are 10 guests or 10,000?",
+        "es": "¿Qué da el número de invitados en **1 paso**, haya 10 invitados o 10,000?"
+      },
+      "options": [
+        {
+          "en": "A loop that counts the guests one by one",
+          "es": "Un bucle que cuenta a los invitados uno por uno"
+        },
+        {
+          "en": "`guests.length`",
+          "es": "`guests.length`"
+        },
+        {
+          "en": "Two loops, one inside the other",
+          "es": "Dos bucles, uno dentro del otro"
+        },
+        {
+          "en": "Checking every name with `===`",
+          "es": "Revisar cada nombre con `===`"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Which option doesn't have to visit the guests?",
+        "es": "¿Qué opción no tiene que visitar a los invitados?"
+      },
+      "explanation": {
+        "en": "The array already knows its size, so `guests.length` is 1 step. The loop costs about 5n + 3 operations.",
+        "es": "El array ya sabe su tamaño, así que `guests.length` es 1 paso. El bucle cuesta unas 5n + 3 operaciones."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "A function does about 3 operations per guest. The list grows from 8 to 16 guests. What happens to the total?",
+        "es": "Una función hace unas 3 operaciones por invitado. La lista crece de 8 a 16 invitados. ¿Qué pasa con el total?"
+      },
+      "options": [
+        {
+          "en": "It stays the same",
+          "es": "Se queda igual"
+        },
+        {
+          "en": "It about doubles",
+          "es": "Más o menos se duplica"
+        },
+        {
+          "en": "It grows 16 times",
+          "es": "Crece 16 veces"
+        },
+        {
+          "en": "It goes up by exactly 3",
+          "es": "Sube exactamente 3"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Twice the guests, and each guest costs about the same.",
+        "es": "El doble de invitados, y cada invitado cuesta más o menos lo mismo."
+      },
+      "explanation": {
+        "en": "About 3 × 8 = 24 becomes about 3 × 16 = 48: it doubles. The exact 3 doesn't matter, the shape does.",
+        "es": "Unas 3 × 8 = 24 se vuelven unas 3 × 16 = 48: se duplica. El 3 exacto no importa, la forma sí."
+      }
+    }
+  ]
+}

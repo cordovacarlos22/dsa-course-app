@@ -192,7 +192,8 @@
       "firstRun": "The laptop is much faster… but both did exactly {{n}} steps.",
       "secondRun": "Run it again: different times! Other apps and the browser change every run. The steps are still {{n}}.",
       "moreGuests": "Now {{n}} guests. The times change again, but the steps simply doubled to {{n}}.",
-      "summary": "Seconds depend on the machine. Steps depend only on the code and n. Big O counts steps."
+      "summary": "Seconds depend on the machine. Steps depend only on the code and n. Big O counts steps.",
+      "tooFast": "A tiny job (2 guests): both show 0.0 ms. Code this fast can't be measured, so the stopwatch can't tell which version is faster."
     },
     "searchCases": {
       "title": "Best, average and worst case",
@@ -289,7 +290,9 @@
         "messages_one": "message",
         "messages_other": "messages",
         "innerSteps_one": "inner step",
-        "innerSteps_other": "inner steps"
+        "innerSteps_other": "inner steps",
+        "gifts_one": "gift",
+        "gifts_other": "gifts"
       },
       "isInvited": {
         "title": "isInvited: stop as soon as you find the name",
@@ -351,6 +354,26 @@
         "inside": "Inside the loop: one check and maybe one addition. O(1) each time…",
         "loop": "…but the loop runs n times. Cost of a loop = times it runs × work inside = n × O(1) = O(n).",
         "total": "Add it up: O(1) + O(1) + O(1) + O(n) + O(1). Drop the small terms: O(n)."
+      },
+      "countGuests": {
+        "title": "Counting every operation",
+        "input": "{{n}} guests",
+        "init": "let count = 0: giving a variable a value is 1 operation.",
+        "startLoop": "let i = 0: 1 more operation. It runs only once, when the loop starts.",
+        "compare": "Is i ({{i}}) < {{n}}? A comparison: 1 operation. Yes, so the loop runs.",
+        "add": "count = count + 1: an addition and an assignment, 2 operations. count is now {{count}}.",
+        "next": "i++ is short for i = i + 1: 2 more operations. Back to the comparison.",
+        "fastForward": "With {{n}} guests we jump to the end. Every guest costs the same 5 operations.",
+        "end": "{{ops}} operations to count {{n}} guests: 5 per guest plus 3, or 5n + 3. guests.length gives the same answer ({{count}}) in 1 step."
+      },
+      "giveGifts": {
+        "title": "A loop with a limit",
+        "input": "{{n}} guests",
+        "start": "{{n}} guests are on the list, but only the first 5 get a gift.",
+        "give": "i = {{i}}: a gift for {{guest}}. 🎁",
+        "limit": "i is {{i}}, so i < 5 is false: the loop stops, even though {{left}} guests are left.",
+        "noMoreGuests": "No more guests: the loop ends before reaching the limit.",
+        "end": "{{gifts}} gifts for {{n}} guests. Pick 20 guests: still 5. The loop never runs more than 5 times, so it's O(1)."
       }
     }
   },

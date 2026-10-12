@@ -25,7 +25,7 @@ vi.mock('../components/lesson/CodeEditor', () => ({
   ),
 }))
 
-const LESSON = '/learn/big-o/01-what-is-big-o'
+const LESSON = '/learn/big-o/01-why-big-o'
 
 const failedCheck = {
   logs: [],
@@ -69,35 +69,74 @@ describe('lesson page', () => {
 
     // The lesson page is loaded on demand, so wait for it to appear.
     expect(
-      await screen.findByRole('heading', { level: 1, name: 'What is Big O?' }),
+      await screen.findByRole('heading', { level: 1, name: 'Why Big O?' }),
     ).toBeInTheDocument()
     expect(screen.getByText('Step 1 of 4')).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: 'Two ways to check a guest list' }),
+      screen.getByRole('heading', { name: 'Two versions that both work' }),
     ).toBeInTheDocument()
-    // Step 1 is a coding step: Learn, Code and Output panes.
-    expect(screen.getByRole('region', { name: 'Learn' })).toBeInTheDocument()
-    // The editor is loaded on demand too.
-    const editor = await screen.findByRole('textbox', { name: 'Code editor' })
-    expect(editor.value).toContain('function isInvited(guests, name)')
+    // Every step starts with an animation: here, the isInvited code trace.
+    expect(
+      screen.getByText('isInvited: stop as soon as you find the name'),
+    ).toBeInTheDocument()
     expect(nextButton()).toBeDisabled()
     expect(
       screen.getByRole('link', { name: /back to big o/i }),
     ).toHaveAttribute('href', '/learn/big-o')
   })
 
+  it('shows the hint after a wrong answer and unlocks Next when right', async () => {
+    const user = userEvent.setup()
+    renderAt(LESSON)
+
+    await user.click(await screen.findByRole('radio', { name: '1' }))
+    await user.click(screen.getByRole('button', { name: 'Check answer' }))
+    expect(screen.getByText('Not quite. Try again.')).toBeInTheDocument()
+    expect(screen.getByText(/Count the boxes from Ana/)).toBeInTheDocument()
+    expect(nextButton()).toBeDisabled()
+
+    await user.click(screen.getByRole('radio', { name: '4' }))
+    await user.click(screen.getByRole('button', { name: 'Check answer' }))
+    expect(screen.getByText(/Correct!/)).toBeInTheDocument()
+    expect(nextButton()).toBeEnabled()
+    expect(loadProgress('big-o', '01-why-big-o').passed).toEqual([0])
+  })
+
+  it('offers the answer after 3 wrong tries', async () => {
+    const user = userEvent.setup()
+    renderAt(LESSON)
+    await user.click(await screen.findByRole('radio', { name: '1' }))
+    for (let i = 0; i < 3; i++) {
+      await user.click(screen.getByRole('button', { name: 'Check answer' }))
+    }
+    await user.click(screen.getByRole('button', { name: 'Show answer' }))
+    expect(screen.getByText(/highlighted in green/)).toBeInTheDocument()
+    expect(loadProgress('big-o', '01-why-big-o').viewedSolution).toEqual([0])
+  })
+
   it('shows the hint after a failed check and the solution after 3', async () => {
     const user = userEvent.setup()
     checkJavaScript.mockResolvedValue(failedCheck)
+    saveProgress('big-o', '01-why-big-o', { ...emptyProgress(), passed: [0] })
     renderAt(LESSON)
-    const check = await screen.findByRole('button', { name: '✓ Check' })
+
+    // Resumes at the first step that hasn't passed: a coding step with the
+    // Learn, Code and Output panes.
+    expect(await screen.findByText('Step 2 of 4')).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Learn' })).toBeInTheDocument()
+    // The editor is loaded on demand too.
+    const editor = await screen.findByRole('textbox', { name: 'Code editor' })
+    expect(editor.value).toContain('function isInvited(guests, name)')
+    const check = screen.getByRole('button', { name: '✓ Check' })
 
     await user.click(check)
     const output = screen.getByRole('region', { name: 'Output' })
     expect(within(output).getByText(/0 of 1 tests passed/)).toBeInTheDocument()
     expect(within(output).getByText(/should return true/)).toBeInTheDocument()
     expect(
-      screen.getByText('for...of', { selector: 'code' }),
+      screen.getByText('if (guests[i] === name) return true', {
+        selector: 'code',
+      }),
     ).toBeInTheDocument()
     expect(
       screen.queryByRole('button', { name: 'Show solution' }),
@@ -108,10 +147,10 @@ describe('lesson page', () => {
     await user.click(screen.getByRole('button', { name: 'Show solution' }))
     expect(
       screen.getByRole('textbox', { name: 'Code editor' }).value,
-    ).toContain('return false')
-    expect(loadProgress('big-o', '01-what-is-big-o')).toMatchObject({
-      attempts: { 0: 3 },
-      viewedSolution: [0],
+    ).toContain('if (guests[i] === name) return true')
+    expect(loadProgress('big-o', '01-why-big-o')).toMatchObject({
+      attempts: { 1: 3 },
+      viewedSolution: [1],
     })
     expect(nextButton()).toBeDisabled()
 
@@ -120,53 +159,7 @@ describe('lesson page', () => {
     await user.click(check)
     expect(nextButton()).toBeEnabled()
     await user.click(nextButton())
-    expect(screen.getByText('Step 2 of 4')).toBeInTheDocument()
-  })
-
-  it('shows the hint after a wrong answer and unlocks Next when right', async () => {
-    const user = userEvent.setup()
-    saveProgress('big-o', '01-what-is-big-o', {
-      ...emptyProgress(),
-      passed: [0, 1],
-    })
-    renderAt(LESSON)
-
-    // Resumes at the first step that hasn't passed: the growth chart.
-    expect(await screen.findByText('Step 3 of 4')).toBeInTheDocument()
-    expect(screen.getByText('How Big O grows')).toBeInTheDocument()
-    expect(nextButton()).toBeDisabled()
-
-    await user.click(screen.getByRole('radio', { name: 'It stays the same' }))
-    await user.click(screen.getByRole('button', { name: 'Check answer' }))
-    expect(screen.getByText('Not quite. Try again.')).toBeInTheDocument()
-    expect(screen.getByText(/one check per guest/)).toBeInTheDocument()
-    expect(nextButton()).toBeDisabled()
-
-    await user.click(screen.getByRole('radio', { name: 'It doubles' }))
-    await user.click(screen.getByRole('button', { name: 'Check answer' }))
-    expect(screen.getByText(/Correct!/)).toBeInTheDocument()
-    expect(nextButton()).toBeEnabled()
-    expect(loadProgress('big-o', '01-what-is-big-o').passed).toEqual([0, 1, 2])
-  })
-
-  it('offers the answer after 3 wrong tries', async () => {
-    const user = userEvent.setup()
-    saveProgress('big-o', '01-what-is-big-o', {
-      ...emptyProgress(),
-      passed: [0, 1],
-    })
-    renderAt(LESSON)
-    await user.click(
-      await screen.findByRole('radio', { name: 'It stays the same' }),
-    )
-    for (let i = 0; i < 3; i++) {
-      await user.click(screen.getByRole('button', { name: 'Check answer' }))
-    }
-    await user.click(screen.getByRole('button', { name: 'Show answer' }))
-    expect(screen.getByText(/highlighted in green/)).toBeInTheDocument()
-    expect(loadProgress('big-o', '01-what-is-big-o').viewedSolution).toEqual([
-      2,
-    ])
+    expect(screen.getByText('Step 3 of 4')).toBeInTheDocument()
   })
 
   it('does not let a student skip ahead with the URL', async () => {
@@ -195,12 +188,12 @@ describe('lesson page', () => {
   })
 
   it('is listed on its module page with its progress', () => {
-    saveProgress('big-o', '01-what-is-big-o', {
+    saveProgress('big-o', '01-why-big-o', {
       ...emptyProgress(),
       passed: [0],
     })
     renderAt('/learn/big-o')
-    const link = screen.getByRole('link', { name: /what is big o\?/i })
+    const link = screen.getByRole('link', { name: /why big o\?/i })
     expect(link).toHaveAttribute('href', LESSON)
     expect(link).toHaveTextContent('In progress')
   })
