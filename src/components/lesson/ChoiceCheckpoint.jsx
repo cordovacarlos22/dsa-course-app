@@ -7,10 +7,12 @@ import InlineMarkdown from './InlineMarkdown'
 
 // A multiple-choice question at the end of a step.
 // A wrong answer shows the hint; after a few wrong tries the right answer
-// can be revealed (the student still selects it to pass).
+// can be revealed (the student still selects it to pass). A right answer
+// gets a cheer ("Great job!").
 function ChoiceCheckpoint({
   checkpoint,
   isPassed,
+  cheer,
   failedTries,
   isAnswerShown,
   onCorrect,
@@ -105,8 +107,10 @@ function ChoiceCheckpoint({
 
       <div role="status" className="mt-4 empty:hidden">
         {verdict === 'correct' && (
-          <div className="rounded-xl bg-green-50 p-4 text-green-900">
-            <p className="font-bold">✓ {t('checkpoint.correct')}</p>
+          <div className="rounded-xl bg-green-50 p-4 text-green-900 motion-safe:animate-pop">
+            <p className="font-bold">
+              ✓ {t('checkpoint.correct')} {cheer}
+            </p>
             <p className="mt-1">
               <InlineMarkdown>
                 {localize(checkpoint.explanation, language)}

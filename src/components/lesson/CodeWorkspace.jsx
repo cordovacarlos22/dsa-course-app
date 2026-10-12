@@ -18,6 +18,7 @@ const PANES = ['learn', 'code', 'output']
 function CodeWorkspace({
   step,
   isPassed,
+  cheer,
   failedTries,
   onPassed,
   onFailed,
@@ -177,7 +178,7 @@ function CodeWorkspace({
             className={`${paneClass('output')} overflow-y-auto rounded-2xl border border-slate-700 bg-slate-950 p-4 font-mono text-sm text-slate-100`}
           >
             <div role="status">
-              <Output output={output} isPassed={isPassed} />
+              <Output output={output} isPassed={isPassed} cheer={cheer} />
             </div>
           </section>
         </div>
@@ -186,7 +187,7 @@ function CodeWorkspace({
   )
 }
 
-function Output({ output, isPassed }) {
+function Output({ output, isPassed, cheer }) {
   const { t } = useTranslation()
   if (!output) {
     return (
@@ -219,7 +220,7 @@ function Output({ output, isPassed }) {
             className={`font-sans font-bold ${result.passed ? 'text-green-400' : 'text-amber-300'}`}
           >
             {result.passed
-              ? `✓ ${t('workspace.allPassed')}`
+              ? `✓ ${t('workspace.allPassed')} ${cheer}`
               : t('workspace.somePassed', {
                   passed: passedCount,
                   total: result.results.length,

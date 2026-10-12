@@ -142,6 +142,8 @@
     "quiz": "Quiz",
     "availableSoon": "Available soon",
     "notReady": "This module isn't ready yet. Check back soon!",
+    "complete": "Module complete!",
+    "completeText": "You finished every lesson in {{module}}. The quiz and exercises come next.",
     "buildIt": "Build it",
     "interviewProblems": "Interview problems"
   },
@@ -472,7 +474,11 @@
     "goToStep": "Step {{number}}: {{title}}",
     "stepNavigation": "Steps",
     "complete": "Lesson complete!",
-    "completeText": "Nice work. Every check passed.",
+    "completeText": "Nice work! Here's how it went:",
+    "checksPassed_one": "{{count}} check passed",
+    "checksPassed_other": "{{count}} checks passed",
+    "firstTry": "{{count}} of {{total}} on the first try",
+    "perfect": "Perfect lesson: every check on the first try!",
     "completed": "Completed",
     "inProgress": "In progress"
   },
@@ -480,6 +486,15 @@
     "title": "Check your understanding",
     "checkAnswer": "Check answer",
     "correct": "Correct!",
+    "cheers": [
+      "Nice!",
+      "Great job!",
+      "You got it!",
+      "Awesome!",
+      "Well done!",
+      "Exactly right!"
+    ],
+    "streak": "🔥 {{count}} in a row on the first try!",
     "wrong": "Not quite. Try again.",
     "hint": "Hint",
     "showAnswer": "Show answer",

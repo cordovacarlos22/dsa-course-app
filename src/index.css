@@ -16,4 +16,34 @@
   --color-accent: #f5b700;
   --color-ink: #0f172a;
   --color-surface: #f8fafc;
+
+  /* Celebrations: new wins "pop" in, and Next bounces once when it unlocks.
+     Always used as motion-safe:animate-…, so students who ask their device
+     for less motion don't get them. */
+  --animate-pop: pop 0.4s ease-out;
+  --animate-nudge: nudge 0.5s ease-in-out;
+
+  @keyframes pop {
+    0% {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.03);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes nudge {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
 }
