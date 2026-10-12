@@ -1,9 +1,9 @@
-import { render, screen, within } from '@testing-library/react'
+import { act, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
 import { describe, it, expect } from 'vitest'
 import App from './App'
-import { saveLanguage } from './lib/languageStorage'
+import { getSavedLanguage, saveLanguage } from './lib/languageStorage'
 
 // Renders the whole app at a given URL, like a student opening that page.
 function renderAppAt(path) {
@@ -42,6 +42,25 @@ describe('first visit', () => {
     renderAppAt('/')
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Curso' })).toBeInTheDocument()
+  })
+})
+
+describe('first visit, closing the picker with Escape', () => {
+  it('keeps English and does not ask again', () => {
+    renderAppAt('/')
+    const picker = screen.getByRole('dialog', { name: /choose your language/i })
+
+    // Escape closes a modal dialog without a return value.
+    act(() => picker.close())
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    expect(getSavedLanguage()).toBe('en')
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        name: 'Learn data structures and algorithms in JavaScript, step by step',
+      }),
+    ).toBeInTheDocument()
   })
 })
 
