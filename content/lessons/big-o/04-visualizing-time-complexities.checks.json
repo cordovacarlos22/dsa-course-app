@@ -1,0 +1,106 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "You time the loop version for bigger and bigger n. What shape do the points make on the chart?",
+        "es": "Mides la versión con el bucle con n cada vez más grande. ¿Qué forma hacen los puntos en la gráfica?"
+      },
+      "options": [
+        {
+          "en": "A flat line",
+          "es": "Una línea plana"
+        },
+        {
+          "en": "A straight line going up",
+          "es": "Una línea recta que sube"
+        },
+        {
+          "en": "A curve that shoots up",
+          "es": "Una curva que se dispara"
+        },
+        {
+          "en": "Random dots with no shape",
+          "es": "Puntos al azar sin ninguna forma"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Each time n grows by the same amount, the time grows by about the same amount.",
+        "es": "Cada vez que n crece la misma cantidad, el tiempo crece más o menos lo mismo."
+      },
+      "explanation": {
+        "en": "The loop's time grows in proportion to n: a straight line, O(n). The formula stays flat: O(1).",
+        "es": "El tiempo del bucle crece en proporción a n: una línea recta, O(n). La fórmula se queda plana: O(1)."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "With tiny inputs, your timings jump around from run to run. What should you pay attention to?",
+        "es": "Con entradas muy pequeñas, tus tiempos brincan de una ejecución a otra. ¿En qué deberías fijarte?"
+      },
+      "options": [
+        {
+          "en": "The exact number of milliseconds of the fastest run",
+          "es": "El número exacto de milisegundos de la ejecución más rápida"
+        },
+        {
+          "en": "The general trend as n gets big",
+          "es": "La tendencia general cuando n se hace grande"
+        },
+        {
+          "en": "Only the very first run",
+          "es": "Solo la primera ejecución"
+        },
+        {
+          "en": "Nothing: timing is always useless",
+          "es": "Nada: medir el tiempo siempre es inútil"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Read the last sentence of this step.",
+        "es": "Lee la última frase de este paso."
+      },
+      "explanation": {
+        "en": "Don't read the exact numbers, read the trend. That's what Big O describes.",
+        "es": "No leas los números exactos, lee la tendencia. Eso es lo que describe Big O."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "The input grows from 1,000 to 1,000,000 items (1,000 times more). How much more work does O(n²) code do?",
+        "es": "La entrada crece de 1,000 a 1,000,000 de elementos (1,000 veces más). ¿Cuánto más trabajo hace un código O(n²)?"
+      },
+      "options": [
+        {
+          "en": "The same work",
+          "es": "El mismo trabajo"
+        },
+        {
+          "en": "1,000 times more",
+          "es": "1,000 veces más"
+        },
+        {
+          "en": "A million times more",
+          "es": "Un millón de veces más"
+        },
+        {
+          "en": "Twice as much",
+          "es": "El doble"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Square the growth: 1,000 × 1,000.",
+        "es": "Eleva el crecimiento al cuadrado: 1,000 × 1,000."
+      },
+      "explanation": {
+        "en": "O(1) does the same work, O(n) 1,000 times more, and O(n²) 1,000 × 1,000 = a million times more.",
+        "es": "O(1) hace el mismo trabajo, O(n) 1,000 veces más, y O(n²) 1,000 × 1,000 = un millón de veces más."
+      }
+    }
+  ]
+}

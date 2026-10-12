@@ -1,0 +1,106 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "`printTwice(n)` has two loops in a row, each running n times. How many lines does `printTwice(50)` print?",
+        "es": "`printTwice(n)` tiene dos bucles seguidos, cada uno corre n veces. ¿Cuántas líneas imprime `printTwice(50)`?"
+      },
+      "options": [
+        {
+          "en": "50",
+          "es": "50"
+        },
+        {
+          "en": "100",
+          "es": "100"
+        },
+        {
+          "en": "2,500",
+          "es": "2,500"
+        },
+        {
+          "en": "52",
+          "es": "52"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "One loop of n, then another loop of n.",
+        "es": "Un bucle de n y luego otro bucle de n."
+      },
+      "explanation": {
+        "en": "50 + 50 = 100 = 2n.",
+        "es": "50 + 50 = 100 = 2n."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "How do you write O(2n) in Big O?",
+        "es": "¿Cómo se escribe O(2n) en Big O?"
+      },
+      "options": [
+        {
+          "en": "O(2n)",
+          "es": "O(2n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(2)",
+          "es": "O(2)"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "2n is still a straight line. Rule 1: drop the constants.",
+        "es": "2n sigue siendo una línea recta. Regla 1: elimina las constantes."
+      },
+      "explanation": {
+        "en": "n, 2n and 100n have the same shape, so they're all O(n).",
+        "es": "n, 2n y 100n tienen la misma forma, así que todas son O(n)."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Simplify O(n + n + n + n).",
+        "es": "Simplifica O(n + n + n + n)."
+      },
+      "options": [
+        {
+          "en": "O(4n)",
+          "es": "O(4n)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n⁴)",
+          "es": "O(n⁴)"
+        },
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Add them up first, then drop the constant.",
+        "es": "Primero súmalos y luego elimina la constante."
+      },
+      "explanation": {
+        "en": "n + n + n + n = 4n, and dropping the constant gives O(n).",
+        "es": "n + n + n + n = 4n, y al eliminar la constante queda O(n)."
+      }
+    }
+  ]
+}

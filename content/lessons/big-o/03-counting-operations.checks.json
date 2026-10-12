@@ -1,0 +1,106 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "How many operations does `n * (n + 1) / 2` do when n is 1,000,000?",
+        "es": "¿Cuántas operaciones hace `n * (n + 1) / 2` cuando n es 1,000,000?"
+      },
+      "options": [
+        {
+          "en": "1,000,000",
+          "es": "1,000,000"
+        },
+        {
+          "en": "3",
+          "es": "3"
+        },
+        {
+          "en": "5,000,002",
+          "es": "5,000,002"
+        },
+        {
+          "en": "2",
+          "es": "2"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Count the +, × and ÷. Does n change how many there are?",
+        "es": "Cuenta el +, el × y el ÷. ¿n cambia cuántos hay?"
+      },
+      "explanation": {
+        "en": "One addition, one multiplication and one division: 3 operations, whatever n is.",
+        "es": "Una suma, una multiplicación y una división: 3 operaciones, sea cual sea n."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "The loop version does about 5n + 2 operations. About how many is that for n = 10?",
+        "es": "La versión con el bucle hace unas 5n + 2 operaciones. ¿Más o menos cuántas son con n = 10?"
+      },
+      "options": [
+        {
+          "en": "10",
+          "es": "10"
+        },
+        {
+          "en": "52",
+          "es": "52"
+        },
+        {
+          "en": "3",
+          "es": "3"
+        },
+        {
+          "en": "100",
+          "es": "100"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "5 × 10 + 2.",
+        "es": "5 × 10 + 2."
+      },
+      "explanation": {
+        "en": "5 × 10 + 2 = 52. With n = 1,000 it's 5,002: it grows with n.",
+        "es": "5 × 10 + 2 = 52. Con n = 1,000 son 5,002: crece con n."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "A function does about 5 operations per item. The input grows from 8 to 16 items. What happens to the total?",
+        "es": "Una función hace unas 5 operaciones por elemento. La entrada crece de 8 a 16 elementos. ¿Qué pasa con el total?"
+      },
+      "options": [
+        {
+          "en": "It stays the same",
+          "es": "Se queda igual"
+        },
+        {
+          "en": "It about doubles",
+          "es": "Más o menos se duplica"
+        },
+        {
+          "en": "It grows 16 times",
+          "es": "Crece 16 veces"
+        },
+        {
+          "en": "It goes up by exactly 5",
+          "es": "Sube exactamente 5"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Twice the items, and each item costs about the same.",
+        "es": "El doble de elementos, y cada elemento cuesta más o menos lo mismo."
+      },
+      "explanation": {
+        "en": "About 40 becomes about 80: it doubles. The exact 5 doesn't matter; the trend does.",
+        "es": "Unas 40 se vuelven unas 80: se duplica. El 5 exacto no importa; la tendencia sí."
+      }
+    }
+  ]
+}

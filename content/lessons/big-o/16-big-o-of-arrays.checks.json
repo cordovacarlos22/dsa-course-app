@@ -1,0 +1,106 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which of these array operations is O(1)?",
+        "es": "¿Cuál de estas operaciones de array es O(1)?"
+      },
+      "options": [
+        {
+          "en": "`unshift(x)`: add to the start",
+          "es": "`unshift(x)`: agregar al principio"
+        },
+        {
+          "en": "`shift()`: remove from the start",
+          "es": "`shift()`: quitar del principio"
+        },
+        {
+          "en": "`push(x)`: add to the end",
+          "es": "`push(x)`: agregar al final"
+        },
+        {
+          "en": "`splice(1, 0, x)`: insert near the start",
+          "es": "`splice(1, 0, x)`: insertar cerca del principio"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Which one doesn't make any other item change its index?",
+        "es": "¿Cuál no obliga a ningún otro elemento a cambiar de índice?"
+      },
+      "explanation": {
+        "en": "Adding or removing at the end doesn't re-index anything: O(1). The start and the middle re-index the rest: O(n).",
+        "es": "Agregar o quitar al final no reindexa nada: O(1). El principio y el medio reindexan el resto: O(n)."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "`myArray.splice(1, 0, 'hi')` inserts an item near the middle. A classmate says it's O(n/2) because only half the items move. What's the correct Big O?",
+        "es": "`myArray.splice(1, 0, 'hi')` inserta un elemento cerca del medio. Un compañero dice que es O(n/2) porque solo se mueve la mitad de los elementos. ¿Cuál es el Big O correcto?"
+      },
+      "options": [
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(n/2)",
+          "es": "O(n/2)"
+        },
+        {
+          "en": "O(log n)",
+          "es": "O(log n)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "Two reasons: which case does Big O measure, and what do we do with constants?",
+        "es": "Dos razones: ¿qué caso mide Big O y qué hacemos con las constantes?"
+      },
+      "explanation": {
+        "en": "Big O is the worst case (inserting at index 0 moves everything), and ½n drops its constant anyway: O(n).",
+        "es": "Big O es el peor caso (insertar en el índice 0 mueve todo), y además ½n pierde su constante: O(n)."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "In an array of a million items, what's the Big O of reading `arr[400000]`, and of finding where the value 7 is?",
+        "es": "En un array de un millón de elementos, ¿cuál es el Big O de leer `arr[400000]`, y de encontrar dónde está el valor 7?"
+      },
+      "options": [
+        {
+          "en": "Both O(1)",
+          "es": "Los dos O(1)"
+        },
+        {
+          "en": "Reading by index O(1); finding by value O(n)",
+          "es": "Leer por índice O(1); buscar por valor O(n)"
+        },
+        {
+          "en": "Reading by index O(n); finding by value O(1)",
+          "es": "Leer por índice O(n); buscar por valor O(1)"
+        },
+        {
+          "en": "Both O(n)",
+          "es": "Los dos O(n)"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Does the array know where the value 7 is?",
+        "es": "¿El array sabe dónde está el valor 7?"
+      },
+      "explanation": {
+        "en": "The index jumps straight to the spot in memory: O(1). Finding a value means checking item by item: O(n).",
+        "es": "El índice salta directo al lugar en la memoria: O(1). Buscar un valor obliga a revisar elemento por elemento: O(n)."
+      }
+    }
+  ]
+}
