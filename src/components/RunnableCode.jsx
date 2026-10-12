@@ -40,7 +40,7 @@ function RunnableCode({ initialCode }) {
         onKeyDown={handleKeyDown}
         rows={Math.min(Math.max(lineCount, 3), 20)}
         spellCheck={false}
-        className="block w-full resize-y bg-transparent p-4 font-mono text-sm leading-6 outline-none"
+        className="block w-full resize-y bg-transparent p-4 font-mono text-sm leading-6 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent"
       />
       <div className="flex items-center gap-2 border-t border-slate-700 px-4 py-2">
         <button
@@ -66,7 +66,9 @@ function RunnableCode({ initialCode }) {
         <div
           role="status"
           aria-label={t('runnable.output')}
-          className="border-t border-slate-700 bg-black/40 px-4 py-3 font-mono text-sm"
+          // wrap-anywhere: printed arrays like [0,10,20,…] have no spaces, so
+          // without it a long one runs off the box and gets cut off.
+          className="border-t border-slate-700 bg-black/40 px-4 py-3 font-mono text-sm wrap-anywhere"
         >
           {result.problem === 'timeout' && (
             <p className="text-red-400">

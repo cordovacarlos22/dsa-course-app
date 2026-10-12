@@ -200,8 +200,9 @@ function Output({ output, isPassed, cheer }) {
   const { mode, result } = output
   const passedCount = result.results?.filter((test) => test.ok).length ?? 0
 
+  // wrap-anywhere: a long printed array has no spaces to wrap at.
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 wrap-anywhere">
       {result.problem === 'timeout' && (
         <p className="text-red-400">
           {t('runnable.timedOut', { seconds: RUN_TIMEOUT_MS / 1000 })}
