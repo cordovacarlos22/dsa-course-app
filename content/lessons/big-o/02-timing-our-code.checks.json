@@ -1,0 +1,138 @@
+{
+  "steps": [
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `sumUpTo(n)` **with a loop**: start `total` at 0, add every number from 1 to n, and return the total.",
+        "es": "Escribe `sumUpTo(n)` **con un bucle**: empieza `total` en 0, suma cada número del 1 al n y devuelve el total."
+      },
+      "hint": {
+        "en": "`for (let i = 1; i <= n; i++) { total = total + i }`, then `return total`.",
+        "es": "`for (let i = 1; i <= n; i++) { total = total + i }`, y luego `return total`."
+      },
+      "starterCode": "function sumUpTo(n) {\n  let total = 0\n  // Add every number from 1 to n.\n  return total\n}\n\nconsole.log(sumUpTo(3)) // 6\n",
+      "solution": "function sumUpTo(n) {\n  let total = 0\n  for (let i = 1; i <= n; i++) {\n    total = total + i\n  }\n  return total\n}\n\nconsole.log(sumUpTo(3)) // 6\n",
+      "kind": "function",
+      "functionName": "sumUpTo",
+      "tests": [
+        {
+          "args": [3],
+          "expected": 6
+        },
+        {
+          "args": [6],
+          "expected": 21
+        },
+        {
+          "args": [100],
+          "expected": 5050
+        },
+        {
+          "args": [1],
+          "expected": 1
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Now write `sumUpToFormula(n)` **without a loop**, using the formula n × (n + 1) ÷ 2.",
+        "es": "Ahora escribe `sumUpToFormula(n)` **sin bucle**, con la fórmula n × (n + 1) ÷ 2."
+      },
+      "hint": {
+        "en": "One line: `return n * (n + 1) / 2`.",
+        "es": "Una sola línea: `return n * (n + 1) / 2`."
+      },
+      "starterCode": "function sumUpToFormula(n) {\n  // One line of math, no loop.\n  return n\n}\n\nconsole.log(sumUpToFormula(3)) // 6\n",
+      "solution": "function sumUpToFormula(n) {\n  return n * (n + 1) / 2\n}\n\nconsole.log(sumUpToFormula(3)) // 6\n",
+      "kind": "function",
+      "functionName": "sumUpToFormula",
+      "tests": [
+        {
+          "args": [3],
+          "expected": 6
+        },
+        {
+          "args": [100],
+          "expected": 5050
+        },
+        {
+          "args": [1],
+          "expected": 1
+        },
+        {
+          "args": [1000000],
+          "expected": 500000500000
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "When developers compare solutions, which two things usually matter most?",
+        "es": "Cuando los desarrolladores comparan soluciones, ¿qué dos cosas suelen importar más?"
+      },
+      "options": [
+        {
+          "en": "Speed and memory",
+          "es": "La velocidad y la memoria"
+        },
+        {
+          "en": "The number of characters and the variable names",
+          "es": "El número de caracteres y los nombres de las variables"
+        },
+        {
+          "en": "The color of the editor and the font",
+          "es": "El color del editor y la letra"
+        },
+        {
+          "en": "How old the computer is",
+          "es": "Qué tan vieja es la computadora"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "Read the paragraph after the list of meanings of \"better\".",
+        "es": "Lee el párrafo después de la lista de significados de \"mejor\"."
+      },
+      "explanation": {
+        "en": "Speed and memory usually come first, and they often come at the cost of readability.",
+        "es": "La velocidad y la memoria suelen ir primero, y muchas veces se ganan a costa de la legibilidad."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which of these is a real problem with timing code with a stopwatch?",
+        "es": "¿Cuál de estos es un problema real de medir el código con un cronómetro?"
+      },
+      "options": [
+        {
+          "en": "`performance.now()` doesn't exist in browsers",
+          "es": "`performance.now()` no existe en los navegadores"
+        },
+        {
+          "en": "Timing always gives exactly the same number",
+          "es": "Medir el tiempo siempre da exactamente el mismo número"
+        },
+        {
+          "en": "Very fast code can be too fast to measure precisely",
+          "es": "El código muy rápido puede ser demasiado rápido para medirlo con precisión"
+        },
+        {
+          "en": "You can only time code that has a loop",
+          "es": "Solo puedes medir código que tiene un bucle"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "There are three problems in the list. Which option is one of them?",
+        "es": "En la lista hay tres problemas. ¿Qué opción es uno de ellos?"
+      },
+      "explanation": {
+        "en": "Times change between machines and between runs, and tiny times are too small to measure precisely.",
+        "es": "Los tiempos cambian entre máquinas y entre ejecuciones, y los tiempos mínimos son demasiado pequeños para medirlos con precisión."
+      }
+    }
+  ]
+}

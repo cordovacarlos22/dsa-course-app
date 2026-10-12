@@ -5,6 +5,7 @@ import {
   countMissingSpanish,
   countSteps,
   findAdvancedLoops,
+  findDuplicateOptions,
   findLessonsMissingEnglish,
   validateCourse,
   validateLesson,
@@ -504,6 +505,28 @@ describe('findAdvancedLoops', () => {
       'function isEven(n) {\n  for (const x of [n]) return x % 2 === 0\n}'
     expect(validateLessonChecks(checks, { en: 2 }).join()).toMatch(
       /for\.\.\.of/,
+    )
+  })
+})
+
+describe('findDuplicateOptions', () => {
+  it('accepts options that are all different', () => {
+    expect(findDuplicateOptions([text('O(1)'), text('O(n)')])).toEqual([])
+  })
+
+  it('rejects a question whose options repeat', () => {
+    const broken = [
+      { en: 'en', es: 'es' },
+      { en: 'en', es: 'es' },
+    ]
+    expect(findDuplicateOptions(broken)).toHaveLength(2)
+  })
+
+  it('is applied to lesson checkpoints', () => {
+    const checks = makeValidChecks()
+    checks.steps[0].options = [text('Same'), text('Same')]
+    expect(validateLessonChecks(checks, { en: 2 }).join()).toMatch(
+      /checkpoint 1 has the same en option twice/,
     )
   })
 })

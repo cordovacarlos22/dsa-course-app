@@ -9,6 +9,16 @@ export default defineConfig({
     // The code editor (CodeMirror, ~515 kB) is its own chunk, loaded only
     // when a coding step opens, so it doesn't slow down the first page.
     chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        // Course content (lessons, checkpoints, quizzes) goes in its own file:
+        // editing a lesson then only changes that file, so students don't
+        // re-download the app code.
+        manualChunks(id) {
+          if (id.includes('/content/')) return 'content'
+        },
+      },
+    },
   },
   test: {
     // jsdom gives tests a fake browser (document, window) to render React into.

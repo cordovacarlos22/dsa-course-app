@@ -46,26 +46,30 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Big O (`big-o`)
 
-**Status:** ✅ 14 lessons, 38 steps (EN + ES, 38 checkpoints) · ✅ quiz (EN + ES) · 🟡 3 of 4 interview problems · ⬜ slides
+**Status:** ✅ 17 lessons, 51 steps (EN + ES, 51 checkpoints) · ✅ quiz, 33 questions (EN + ES) · 🟡 3 of 4 interview problems · ⬜ slides
 **Goal:** measure and compare the efficiency of code, in time and space.
-**Style:** show, then explain: every step has an animation and a full explanation (300–500 words per lesson), covering every point of both courses' Big O notes in our own words. One story for the whole module: the party **guest list**. Loops are always `for (let i = 0; i < guests.length; i++)`.
+**Sources:** Carlos's two Big O files (course 1 "Section 2 - Big o notes.docx" and course 2 "Intro to Big O.docx", text and images; see AGENTS.md).
+**Style:** one lesson per lecture of both courses, at their depth (450–900 words each), with the courses' own examples written as indexed loops; every step has an animation, and the party **guest list** is the story of the animations.
 
-- **Lessons** (animations in parentheses):
-  1. Why Big O? ✅ (`trace-is-invited`, `trace-is-invited-all`, `big-o-growth-chart`, `memory-boxes`)
-  2. Why a stopwatch isn't enough ✅ (`stopwatch-race`, `trace-welcome-all`)
-  3. Counting operations ✅ (`trace-count-short-names`, `trace-count-guests`, `linear-boxes`)
-  4. Best, average and worst case (Ω, Θ, O) ✅ (`search-cases`, `trace-is-invited`)
-  5. O(n): linear time ✅ (`trace-welcome-all`, `linear-boxes`, `trace-is-invited`)
-  6. Drop the constants, and the official definition ✅ (`trace-welcome-and-goodbye`, `same-shape`, `big-o-growth-chart`)
-  7. O(n²): a loop inside a loop ✅ (`nested-grid`, `trace-greet-everyone`, `big-o-growth-chart`)
-  8. Drop the non-dominant terms ✅ (`dominant-term`, `big-o-growth-chart`)
-  9. O(1): constant time ✅ (`constant-jump`, `big-o-growth-chart`, `trace-is-invited`)
-  10. Rules of thumb: the cost of each line, loops with a limit ✅ (`trace-party-summary`, `trace-greet-everyone`, `trace-give-gifts`)
-  11. Different inputs, different letters (O(a + b) vs. O(a · b)) ✅ (`two-inputs`, `trace-welcome-and-goodbye`)
-  12. Space complexity ✅ (`memory-boxes`, `trace-welcome-all`)
-  13. Logarithms and O(log n) ✅ (`halving-count`, `binary-search-halving`, `big-o-growth-chart`)
-  14. Wrap-up: all the shapes ✅ (`big-o-growth-chart`, `search-cases`, `dominant-term`)
-- **Quiz:** reading the Big O of guest-list code, simplification rules, rules of thumb, Ω/Θ/O, space complexity, logarithms. (Array operation questions move to the arrays module.)
+- **Lessons** (sources and animations in parentheses):
+  1. Why Big O? ✅ (C2 intro + motivation, C1 intro: `big-o-growth-chart`, `trace-is-invited`, `trace-is-invited-all`, `stopwatch-race`, `memory-boxes`)
+  2. Timing our code ✅ (C2: `trace-sum-loop`, `trace-sum-formula`, `big-o-growth-chart`, `stopwatch-race`)
+  3. Counting operations ✅ (C2: `trace-sum-formula`, `trace-sum-loop`, `linear-boxes`, `trace-count-guests`)
+  4. Visualizing time complexities ✅ (C2: `timing-chart`, `stopwatch-race`, `big-o-growth-chart`)
+  5. The official intro to Big O ✅ (C2: `big-o-growth-chart`, `same-shape`, `trace-print-pairs`)
+  6. Best, average and worst case ✅ (C1 + Big O notes handout: `search-cases`, `trace-is-invited`)
+  7. O(n): linear time ✅ (C1: `trace-print-numbers`, `linear-boxes`, `trace-welcome-all`)
+  8. Drop the constants ✅ (C1 + C2: `trace-welcome-and-goodbye`, `same-shape`, `big-o-growth-chart`)
+  9. O(n²): a loop inside a loop ✅ (C1: `trace-print-pairs`, `nested-grid`, `big-o-growth-chart`)
+  10. Drop the non-dominant terms ✅ (C1 + C2: `dominant-term`, `big-o-growth-chart`)
+  11. O(1): constant time ✅ (C1: `trace-sum-formula`, `constant-jump`, `trace-is-invited`)
+  12. Rules of thumb ✅ (C2: `trace-party-summary`, `trace-greet-everyone`, `trace-give-gifts`)
+  13. Different terms for inputs ✅ (C1: `two-inputs`, `trace-welcome-and-goodbye`)
+  14. Space complexity ✅ (C2: `memory-boxes`, `trace-count-guests`, `trace-double-array`)
+  15. Logarithms and O(log n) ✅ (C1 + C2: `halving-count`, `binary-search-halving`, `big-o-growth-chart`)
+  16. Big O of arrays ✅ (C1: `array-reindex`, `array-splice`, `search-cases`)
+  17. Wrap-up ✅ (C1 wrap-up + cheat sheet, C2 recap: `big-o-growth-chart`, `search-cases`, `dominant-term`)
+- **Quiz:** the topics of course 1's quiz and course 2's three quizzes (simplifying, time complexity of functions, space complexity), plus timing and counting, Ω/Θ/O, logarithms and array operations. Our own questions and code.
 - **Build it:** none.
 - **Interview problems:** ✅ Find the Maximum · ✅ Contains Duplicate · ✅ Binary Search · Count the Operations (predict the count, then check it)
 
@@ -74,7 +78,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 **Status:** ⬜
 **Goal:** know the cost of the built-in tools you use every day.
 
-- **Lessons:** Objects: what's fast and what isn't · Object methods (keys, values, entries, hasOwnProperty) · When are arrays slow? (`array-reindex`) · Array methods and their Big O (push, pop, shift, unshift, slice, splice, sort, map, filter…)
+- **Lessons:** Objects: what's fast and what isn't · Object methods (keys, values, entries, hasOwnProperty) · Array methods and their Big O (slice, concat, sort, map, filter, forEach…). The basics of push / pop / shift / unshift / splice are already in Big O lesson 16.
 - **Quiz:** Big O of object vs. array operations, why `shift` is O(n), the cost of `sort`.
 - **Build it:** none.
 - **Interview problems:** Word Frequency (counting with an object) · Last Item Wins (use only O(1) operations) · Pick the Faster Version (two solutions: choose and explain)

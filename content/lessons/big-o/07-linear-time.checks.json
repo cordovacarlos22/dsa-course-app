@@ -1,0 +1,100 @@
+{
+  "steps": [
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `listNumbers(n)`: return a **new array** with the numbers from 0 to n − 1, using a loop. (Like `printNumbers`, but it returns them instead of printing.)",
+        "es": "Escribe `listNumbers(n)`: devuelve un **array nuevo** con los números de 0 a n − 1, usando un bucle. (Como `printNumbers`, pero los devuelve en lugar de imprimirlos.)"
+      },
+      "hint": {
+        "en": "Start with `const numbers = []`, loop with `for (let i = 0; i < n; i++)` and `numbers.push(i)`.",
+        "es": "Empieza con `const numbers = []`, recorre con `for (let i = 0; i < n; i++)` y haz `numbers.push(i)`."
+      },
+      "starterCode": "function listNumbers(n) {\n  const numbers = []\n  // One push per number from 0 to n - 1.\n  return numbers\n}\n\nconsole.log(listNumbers(5)) // [0, 1, 2, 3, 4]\n",
+      "solution": "function listNumbers(n) {\n  const numbers = []\n  for (let i = 0; i < n; i++) {\n    numbers.push(i)\n  }\n  return numbers\n}\n\nconsole.log(listNumbers(5)) // [0, 1, 2, 3, 4]\n",
+      "kind": "function",
+      "functionName": "listNumbers",
+      "tests": [
+        {
+          "args": [3],
+          "expected": [0, 1, 2]
+        },
+        {
+          "args": [5],
+          "expected": [0, 1, 2, 3, 4]
+        },
+        {
+          "args": [0],
+          "expected": []
+        },
+        {
+          "args": [1],
+          "expected": [0]
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "An O(n) function does 1,000 steps for 1,000 items. About how many for 3,000 items?",
+        "es": "Una función O(n) da 1,000 pasos con 1,000 elementos. ¿Más o menos cuántos con 3,000 elementos?"
+      },
+      "options": [
+        {
+          "en": "1,000",
+          "es": "1,000"
+        },
+        {
+          "en": "3,000",
+          "es": "3,000"
+        },
+        {
+          "en": "9,000",
+          "es": "9,000"
+        },
+        {
+          "en": "9,000,000",
+          "es": "9,000,000"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "O(n) is a straight line: proportional.",
+        "es": "O(n) es una línea recta: proporcional."
+      },
+      "explanation": {
+        "en": "Linear time: 3 times the items, 3 times the steps.",
+        "es": "Tiempo lineal: el triple de elementos, el triple de pasos."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `welcomeMessages(guests)`: return a new array with `'Welcome, <name>!'` for every guest, in order.",
+        "es": "Escribe `welcomeMessages(guests)`: devuelve un array nuevo con `'Welcome, <name>!'` para cada invitado, en orden."
+      },
+      "hint": {
+        "en": "Start with `const messages = []`, and inside the loop `messages.push('Welcome, ' + guests[i] + '!')`.",
+        "es": "Empieza con `const messages = []` y dentro del bucle haz `messages.push('Welcome, ' + guests[i] + '!')`."
+      },
+      "starterCode": "function welcomeMessages(guests) {\n  const messages = []\n  for (let i = 0; i < guests.length; i++) {\n    // Add one message per guest.\n  }\n  return messages\n}\n\nconsole.log(welcomeMessages(['Ana', 'Ben']))\n",
+      "solution": "function welcomeMessages(guests) {\n  const messages = []\n  for (let i = 0; i < guests.length; i++) {\n    messages.push('Welcome, ' + guests[i] + '!')\n  }\n  return messages\n}\n\nconsole.log(welcomeMessages(['Ana', 'Ben']))\n",
+      "kind": "function",
+      "functionName": "welcomeMessages",
+      "tests": [
+        {
+          "args": [["Ana", "Ben"]],
+          "expected": ["Welcome, Ana!", "Welcome, Ben!"]
+        },
+        {
+          "args": [["Cleo"]],
+          "expected": ["Welcome, Cleo!"]
+        },
+        {
+          "args": [[]],
+          "expected": []
+        }
+      ]
+    }
+  ]
+}

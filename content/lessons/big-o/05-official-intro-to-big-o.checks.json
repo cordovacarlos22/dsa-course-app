@@ -1,0 +1,105 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What does Big O describe?",
+        "es": "¿Qué describe Big O?"
+      },
+      "options": [
+        {
+          "en": "How the runtime of an algorithm grows as its input grows",
+          "es": "Cómo crece el tiempo de ejecución de un algoritmo cuando crece su entrada"
+        },
+        {
+          "en": "The exact number of seconds a function takes",
+          "es": "El número exacto de segundos que tarda una función"
+        },
+        {
+          "en": "How many lines of code a function has",
+          "es": "Cuántas líneas de código tiene una función"
+        },
+        {
+          "en": "Which programming language is fastest",
+          "es": "Qué lenguaje de programación es el más rápido"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "Big O is formalized fuzzy counting of…?",
+        "es": "Big O es una forma formal de contar \"a ojo\"… ¿qué cosa?"
+      },
+      "explanation": {
+        "en": "Big O describes the relationship between the input size and the runtime: only the broad trend.",
+        "es": "Big O describe la relación entre el tamaño de la entrada y el tiempo de ejecución: solo la tendencia general."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Using the official definition, why is 5n + 2 still O(n)?",
+        "es": "Con la definición oficial, ¿por qué 5n + 2 sigue siendo O(n)?"
+      },
+      "options": [
+        {
+          "en": "Because 5n + 2 is smaller than n",
+          "es": "Porque 5n + 2 es menor que n"
+        },
+        {
+          "en": "Because once n is big enough, 5n + 2 is never more than a constant times n (like 6n)",
+          "es": "Porque cuando n es lo bastante grande, 5n + 2 nunca es mayor que una constante por n (como 6n)"
+        },
+        {
+          "en": "Because we only count the 2",
+          "es": "Porque solo contamos el 2"
+        },
+        {
+          "en": "It isn't: it's O(5n + 2)",
+          "es": "No lo es: es O(5n + 2)"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "The definition says: eventually less than a constant times f(n).",
+        "es": "La definición dice: tarde o temprano menor que una constante por f(n)."
+      },
+      "explanation": {
+        "en": "For n ≥ 2, 5n + 2 ≤ 6n. A constant times n is a straight line, so it's O(n).",
+        "es": "Para n ≥ 2, 5n + 2 ≤ 6n. Una constante por n es una línea recta, así que es O(n)."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `countPairs(n)`: use **two nested loops** (`i` outside, `j` inside, both from 0 to n − 1) and return how many pairs they visit.",
+        "es": "Escribe `countPairs(n)`: usa **dos bucles anidados** (`i` afuera, `j` adentro, los dos de 0 a n − 1) y devuelve cuántas parejas visitan."
+      },
+      "hint": {
+        "en": "Like `printPairs`, but instead of printing, add 1 to a counter inside the inner loop.",
+        "es": "Como `printPairs`, pero en lugar de imprimir, suma 1 a un contador dentro del bucle de adentro."
+      },
+      "starterCode": "function countPairs(n) {\n  let pairs = 0\n  // A loop with i, and inside it a loop with j.\n  return pairs\n}\n\nconsole.log(countPairs(3)) // 9\n",
+      "solution": "function countPairs(n) {\n  let pairs = 0\n  for (let i = 0; i < n; i++) {\n    for (let j = 0; j < n; j++) {\n      pairs = pairs + 1\n    }\n  }\n  return pairs\n}\n\nconsole.log(countPairs(3)) // 9\n",
+      "kind": "function",
+      "functionName": "countPairs",
+      "tests": [
+        {
+          "args": [2],
+          "expected": 4
+        },
+        {
+          "args": [3],
+          "expected": 9
+        },
+        {
+          "args": [4],
+          "expected": 16
+        },
+        {
+          "args": [0],
+          "expected": 0
+        }
+      ]
+    }
+  ]
+}

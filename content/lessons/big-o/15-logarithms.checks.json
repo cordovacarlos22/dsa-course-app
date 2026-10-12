@@ -1,0 +1,106 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What is log₂(16)?",
+        "es": "¿Cuánto es log₂(16)?"
+      },
+      "options": [
+        {
+          "en": "2",
+          "es": "2"
+        },
+        {
+          "en": "4",
+          "es": "4"
+        },
+        {
+          "en": "8",
+          "es": "8"
+        },
+        {
+          "en": "16",
+          "es": "16"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "How many times can you divide 16 by 2 until you reach 1?",
+        "es": "¿Cuántas veces puedes dividir 16 entre 2 hasta llegar a 1?"
+      },
+      "explanation": {
+        "en": "16 → 8 → 4 → 2 → 1: four divisions. And 2⁴ = 16.",
+        "es": "16 → 8 → 4 → 2 → 1: cuatro divisiones. Y 2⁴ = 16."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "A sorted array has 2,147,483,648 items (that's 2³¹). About how many steps does divide and conquer need to find any item?",
+        "es": "Un array ordenado tiene 2,147,483,648 elementos (eso es 2³¹). ¿Más o menos cuántos pasos necesita dividir y conquistar para encontrar cualquier elemento?"
+      },
+      "options": [
+        {
+          "en": "31",
+          "es": "31"
+        },
+        {
+          "en": "1,000",
+          "es": "1,000"
+        },
+        {
+          "en": "1,073,741,824",
+          "es": "1,073,741,824"
+        },
+        {
+          "en": "2,147,483,648",
+          "es": "2,147,483,648"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "2³¹ items means 31 halvings until one is left.",
+        "es": "2³¹ elementos quiere decir 31 mitades hasta que quede uno."
+      },
+      "explanation": {
+        "en": "log₂(2³¹) = 31. Checking one by one could take over two billion steps.",
+        "es": "log₂(2³¹) = 31. Revisar uno por uno podría tomar más de dos mil millones de pasos."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which Big O do the best general-purpose sorting algorithms, like merge sort, have?",
+        "es": "¿Qué Big O tienen los mejores algoritmos de ordenamiento de uso general, como merge sort?"
+      },
+      "options": [
+        {
+          "en": "O(log n)",
+          "es": "O(log n)"
+        },
+        {
+          "en": "O(n log n)",
+          "es": "O(n log n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        },
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "n items times log n rounds of splitting.",
+        "es": "n elementos por log n rondas de división."
+      },
+      "explanation": {
+        "en": "Merge sort and quick sort are O(n log n): better than O(n²), not as good as O(n).",
+        "es": "Merge sort y quick sort son O(n log n): mejor que O(n²), no tan bueno como O(n)."
+      }
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "Simplify O(n² + n).",
+        "es": "Simplifica O(n² + n)."
+      },
+      "options": [
+        {
+          "en": "O(n² + n)",
+          "es": "O(n² + n)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        },
+        {
+          "en": "O(n³)",
+          "es": "O(n³)"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Which part does almost all the work when n is big?",
+        "es": "¿Qué parte hace casi todo el trabajo cuando n es grande?"
+      },
+      "explanation": {
+        "en": "n² is the dominant term; the extra n barely matters. O(n²).",
+        "es": "n² es el término dominante; la n extra casi no importa. O(n²)."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Simplify O(n² + n³).",
+        "es": "Simplifica O(n² + n³)."
+      },
+      "options": [
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n³)",
+          "es": "O(n³)"
+        },
+        {
+          "en": "O(n⁵)",
+          "es": "O(n⁵)"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Which one grows faster: n² or n³?",
+        "es": "¿Cuál crece más rápido: n² o n³?"
+      },
+      "explanation": {
+        "en": "n³ grows faster than n², so n³ is the dominant term: O(n³).",
+        "es": "n³ crece más rápido que n², así que n³ es el término dominante: O(n³)."
+      }
+    }
+  ]
+}

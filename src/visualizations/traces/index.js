@@ -19,6 +19,9 @@ import { giveGifts } from './giveGifts'
 import { welcomeAll, welcomeAndGoodbye } from './welcome'
 import { greetEveryone } from './greetEveryone'
 import { partySummary } from './partySummary'
+import { sumLoop, sumFormula } from './sumUpTo'
+import { printNumbers, printPairs } from './printNumbers'
+import { doubleArray } from './doubleArray'
 
 export const traces = {
   'trace-is-invited': isInvited,
@@ -30,4 +33,9 @@ export const traces = {
   'trace-welcome-and-goodbye': welcomeAndGoodbye,
   'trace-greet-everyone': greetEveryone,
   'trace-party-summary': partySummary,
+  'trace-sum-loop': sumLoop,
+  'trace-sum-formula': sumFormula,
+  'trace-print-numbers': printNumbers,
+  'trace-print-pairs': printPairs,
+  'trace-double-array': doubleArray,
 }

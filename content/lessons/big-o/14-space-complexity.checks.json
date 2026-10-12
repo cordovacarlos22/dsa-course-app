@@ -1,0 +1,101 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "When we measure space complexity in this course, what do we count?",
+        "es": "Cuando medimos la complejidad espacial en este curso, ¿qué contamos?"
+      },
+      "options": [
+        {
+          "en": "The memory of the input itself",
+          "es": "La memoria de la entrada misma"
+        },
+        {
+          "en": "Only the extra memory the algorithm creates (auxiliary space)",
+          "es": "Solo la memoria extra que crea el algoritmo (espacio auxiliar)"
+        },
+        {
+          "en": "How many seconds the code takes",
+          "es": "Cuántos segundos tarda el código"
+        },
+        {
+          "en": "The size of the whole program file",
+          "es": "El tamaño de todo el archivo del programa"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "The input grows anyway. What do we ignore?",
+        "es": "La entrada crece de todos modos. ¿Qué ignoramos?"
+      },
+      "explanation": {
+        "en": "We ignore the input and count only the space the algorithm needs on its own: auxiliary space.",
+        "es": "Ignoramos la entrada y contamos solo el espacio que necesita el algoritmo por sí mismo: el espacio auxiliar."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which of these takes **O(1)** space, whatever the input size?",
+        "es": "¿Cuál de estos ocupa espacio **O(1)**, sin importar el tamaño de la entrada?"
+      },
+      "options": [
+        {
+          "en": "A number",
+          "es": "Un número"
+        },
+        {
+          "en": "A string with n characters",
+          "es": "Un texto de n caracteres"
+        },
+        {
+          "en": "An array with n items",
+          "es": "Un array de n elementos"
+        },
+        {
+          "en": "An object with n keys",
+          "es": "Un objeto con n claves"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "Primitives vs strings, arrays and objects.",
+        "es": "Primitivos contra textos, arrays y objetos."
+      },
+      "explanation": {
+        "en": "Numbers, booleans, null and undefined take constant space. Strings, arrays and objects grow with their size.",
+        "es": "Los números, los booleanos, null y undefined ocupan espacio constante. Los textos, los arrays y los objetos crecen con su tamaño."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `doubleArray(numbers)`: return a **new** array with every number times 2 (don't change the original). This one is O(n) space.",
+        "es": "Escribe `doubleArray(numbers)`: devuelve un array **nuevo** con cada número multiplicado por 2 (no cambies el original). Este es espacio O(n)."
+      },
+      "hint": {
+        "en": "Create `const doubled = []`, loop over the numbers and `doubled.push(numbers[i] * 2)`.",
+        "es": "Crea `const doubled = []`, recorre los números y haz `doubled.push(numbers[i] * 2)`."
+      },
+      "starterCode": "function doubleArray(numbers) {\n  const doubled = []\n  // Fill doubled.\n  return doubled\n}\n\nconsole.log(doubleArray([1, 2, 3])) // [2, 4, 6]\n",
+      "solution": "function doubleArray(numbers) {\n  const doubled = []\n  for (let i = 0; i < numbers.length; i++) {\n    doubled.push(numbers[i] * 2)\n  }\n  return doubled\n}\n\nconsole.log(doubleArray([1, 2, 3])) // [2, 4, 6]\n",
+      "kind": "function",
+      "functionName": "doubleArray",
+      "tests": [
+        {
+          "args": [[1, 2, 3]],
+          "expected": [2, 4, 6]
+        },
+        {
+          "args": [[-1, 0, 5]],
+          "expected": [-2, 0, 10]
+        },
+        {
+          "args": [[]],
+          "expected": []
+        }
+      ]
+    }
+  ]
+}

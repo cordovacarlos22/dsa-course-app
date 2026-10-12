@@ -1,0 +1,70 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "A function loops over `guests` (a items), then over `helpers` (b items), one loop after the other. What's its Big O?",
+        "es": "Una función recorre `guests` (a elementos) y después `helpers` (b elementos), un bucle después del otro. ¿Cuál es su Big O?"
+      },
+      "options": [
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(2n)",
+          "es": "O(2n)"
+        },
+        {
+          "en": "O(a · b)",
+          "es": "O(a · b)"
+        },
+        {
+          "en": "O(a + b)",
+          "es": "O(a + b)"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "Two different inputs, one letter each. Loops one after the other add.",
+        "es": "Dos entradas distintas, una letra cada una. Los bucles uno después del otro se suman."
+      },
+      "explanation": {
+        "en": "a + b, and it can't be simplified further: you don't know which input is bigger.",
+        "es": "a + b, y no se puede simplificar más: no sabes cuál entrada es más grande."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `countThankYous(guests, helpers)`: every guest thanks every helper. Use a loop over `helpers` **inside** a loop over `guests`, and count the thank-yous. (That's O(a · b).)",
+        "es": "Escribe `countThankYous(guests, helpers)`: cada invitado le agradece a cada ayudante. Usa un bucle sobre `helpers` **dentro** de un bucle sobre `guests` y cuenta los agradecimientos. (Eso es O(a · b).)"
+      },
+      "hint": {
+        "en": "`for (let i = 0; i < guests.length; i++)` and inside it `for (let j = 0; j < helpers.length; j++)`. Add 1 each time.",
+        "es": "`for (let i = 0; i < guests.length; i++)` y adentro `for (let j = 0; j < helpers.length; j++)`. Suma 1 cada vez."
+      },
+      "starterCode": "function countThankYous(guests, helpers) {\n  let thanks = 0\n  // A loop over helpers inside a loop over guests.\n  return thanks\n}\n\nconsole.log(countThankYous(['Ana', 'Ben'], ['Rosa'])) // 2\n",
+      "solution": "function countThankYous(guests, helpers) {\n  let thanks = 0\n  for (let i = 0; i < guests.length; i++) {\n    for (let j = 0; j < helpers.length; j++) {\n      thanks = thanks + 1\n    }\n  }\n  return thanks\n}\n\nconsole.log(countThankYous(['Ana', 'Ben'], ['Rosa'])) // 2\n",
+      "kind": "function",
+      "functionName": "countThankYous",
+      "tests": [
+        {
+          "args": [["Ana", "Ben"], ["Rosa"]],
+          "expected": 2
+        },
+        {
+          "args": [
+            ["Ana", "Ben", "Cleo", "Dev"],
+            ["Rosa", "Sam"]
+          ],
+          "expected": 8
+        },
+        {
+          "args": [["Ana"], []],
+          "expected": 0
+        }
+      ]
+    }
+  ]
+}

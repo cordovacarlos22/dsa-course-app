@@ -1,0 +1,101 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What's the Big O of `return n + n + n`?",
+        "es": "¿Cuál es el Big O de `return n + n + n`?"
+      },
+      "options": [
+        {
+          "en": "O(3)",
+          "es": "O(3)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(3n)",
+          "es": "O(3n)"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Does the number of additions change when n changes?",
+        "es": "¿El número de sumas cambia cuando cambia n?"
+      },
+      "explanation": {
+        "en": "Two additions every time: O(2), which simplifies to O(1).",
+        "es": "Dos sumas cada vez: O(2), que se simplifica a O(1)."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `lastGuest(guests)`: return the last name on the list in **O(1)**, with no loop.",
+        "es": "Escribe `lastGuest(guests)`: devuelve el último nombre de la lista en **O(1)**, sin bucles."
+      },
+      "hint": {
+        "en": "The last index is `guests.length - 1`.",
+        "es": "El último índice es `guests.length - 1`."
+      },
+      "starterCode": "function lastGuest(guests) {\n  // Jump straight to the last box.\n  return guests[0]\n}\n\nconsole.log(lastGuest(['Ana', 'Ben', 'Cleo'])) // 'Cleo'\n",
+      "solution": "function lastGuest(guests) {\n  return guests[guests.length - 1]\n}\n\nconsole.log(lastGuest(['Ana', 'Ben', 'Cleo'])) // 'Cleo'\n",
+      "kind": "function",
+      "functionName": "lastGuest",
+      "tests": [
+        {
+          "args": [["Ana", "Ben", "Cleo"]],
+          "expected": "Cleo"
+        },
+        {
+          "args": [["Ana", "Ben", "Cleo", "Dev", "Eli", "Fay"]],
+          "expected": "Fay"
+        },
+        {
+          "args": [["Zoe"]],
+          "expected": "Zoe"
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which line hides a loop, so it's O(n)?",
+        "es": "¿Qué línea esconde un bucle, así que es O(n)?"
+      },
+      "options": [
+        {
+          "en": "`guests[3]`",
+          "es": "`guests[3]`"
+        },
+        {
+          "en": "`guests.length`",
+          "es": "`guests.length`"
+        },
+        {
+          "en": "`guests.includes('Zoe')`",
+          "es": "`guests.includes('Zoe')`"
+        },
+        {
+          "en": "`guests.length * 2`",
+          "es": "`guests.length * 2`"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Which one has to check the guests one by one to answer?",
+        "es": "¿Cuál tiene que revisar a los invitados uno por uno para responder?"
+      },
+      "explanation": {
+        "en": "`includes` looks at the guests one by one until it finds 'Zoe' or runs out: O(n). The others jump straight to the answer.",
+        "es": "`includes` mira a los invitados uno por uno hasta encontrar a 'Zoe' o quedarse sin invitados: O(n). Los demás saltan directo a la respuesta."
+      }
+    }
+  ]
+}

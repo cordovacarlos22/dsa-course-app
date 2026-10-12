@@ -603,6 +603,446 @@
         "en": "It builds a new array with one tag per guest, so the extra memory grows with n: O(n) space.",
         "es": "Construye un array nuevo con un gafete por invitado, así que la memoria extra crece con n: espacio O(n)."
       }
+    },
+    {
+      "id": "timing-formula-vs-loop",
+      "topic": "Big O: Timing Our Code",
+      "prompt": {
+        "en": "Two functions add up the numbers from 1 to n: one with a loop, one with the formula n × (n + 1) ÷ 2. How many operations does the formula do when n grows from 100 to 1,000,000?",
+        "es": "Dos funciones suman los números del 1 al n: una con un bucle y otra con la fórmula n × (n + 1) ÷ 2. ¿Cuántas operaciones hace la fórmula cuando n crece de 100 a 1,000,000?"
+      },
+      "options": [
+        {
+          "en": "It grows from about 100 to about 1,000,000",
+          "es": "Crece de unas 100 a unas 1,000,000"
+        },
+        {
+          "en": "It stays at 3",
+          "es": "Se queda en 3"
+        },
+        {
+          "en": "It grows from about 500 to about 5,000,000",
+          "es": "Crece de unas 500 a unas 5,000,000"
+        },
+        {
+          "en": "It doubles",
+          "es": "Se duplica"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "One multiplication, one addition and one division, whatever n is: always 3, so O(1). The loop does about 5n + 2, so O(n).",
+        "es": "Una multiplicación, una suma y una división, sea cual sea n: siempre 3, así que O(1). El bucle hace unas 5n + 2, así que O(n)."
+      }
+    },
+    {
+      "id": "simplify-a-constant",
+      "topic": "Big O: Drop Constants",
+      "prompt": {
+        "en": "Simplify O(25) as much as possible.",
+        "es": "Simplifica O(25) lo más posible."
+      },
+      "options": [
+        {
+          "en": "O(25)",
+          "es": "O(25)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n!)",
+          "es": "O(n!)"
+        },
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "25 operations every time is a constant amount of work, and constant work is written O(1).",
+        "es": "25 operaciones cada vez es una cantidad de trabajo constante, y el trabajo constante se escribe O(1)."
+      }
+    },
+    {
+      "id": "simplify-repeated-n",
+      "topic": "Big O: Drop Constants",
+      "prompt": {
+        "en": "Simplify O(n + n + n + n) as much as possible.",
+        "es": "Simplifica O(n + n + n + n) lo más posible."
+      },
+      "options": [
+        {
+          "en": "O(4n)",
+          "es": "O(4n)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        },
+        {
+          "en": "O(n⁴)",
+          "es": "O(n⁴)"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "n + n + n + n is 4n, and dropping the constant 4 leaves O(n).",
+        "es": "n + n + n + n es 4n, y al quitar la constante 4 queda O(n)."
+      }
+    },
+    {
+      "id": "simplify-n-squared-plus-n-cubed",
+      "topic": "Big O: Drop Non-Dominants",
+      "prompt": {
+        "en": "Simplify O(n² + n³) as much as possible.",
+        "es": "Simplifica O(n² + n³) lo más posible."
+      },
+      "options": [
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n³)",
+          "es": "O(n³)"
+        },
+        {
+          "en": "O(n⁵)",
+          "es": "O(n⁵)"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "n³ grows faster than n², so n³ is the dominant term and n² is dropped.",
+        "es": "n³ crece más rápido que n², así que n³ es el término dominante y n² se elimina."
+      }
+    },
+    {
+      "id": "time-at-least-ten",
+      "topic": "Big O: Rules of Thumb",
+      "prompt": {
+        "en": "What is the time complexity of this function?",
+        "es": "¿Cuál es la complejidad temporal de esta función?"
+      },
+      "code": "function printAtLeast10(n) {\n  for (let i = 1; i <= Math.max(n, 10); i++) {\n    console.log(i)\n  }\n}",
+      "options": [
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n log n)",
+          "es": "O(n log n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "For small n it always prints 10 numbers, but as n grows it prints n of them. Big O cares about large n: O(n).",
+        "es": "Con n pequeño siempre imprime 10 números, pero cuando n crece imprime n. A Big O le importa n grande: O(n)."
+      }
+    },
+    {
+      "id": "time-at-most-ten",
+      "topic": "Big O: Rules of Thumb",
+      "prompt": {
+        "en": "What is the time complexity of this function?",
+        "es": "¿Cuál es la complejidad temporal de esta función?"
+      },
+      "code": "function printAtMost10(n) {\n  for (let i = 1; i <= Math.min(n, 10); i++) {\n    console.log(i)\n  }\n}",
+      "options": [
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(log n)",
+          "es": "O(log n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "However big n gets, the loop never runs more than 10 times. A fixed maximum is constant: O(1).",
+        "es": "Por grande que sea n, el bucle nunca corre más de 10 veces. Un máximo fijo es constante: O(1)."
+      }
+    },
+    {
+      "id": "time-even-indexes",
+      "topic": "Big O: Rules of Thumb",
+      "prompt": {
+        "en": "What is the time complexity of this function?",
+        "es": "¿Cuál es la complejidad temporal de esta función?"
+      },
+      "code": "function evenIndexItems(items) {\n  const result = []\n  for (let i = 0; i < items.length; i++) {\n    if (i % 2 === 0) result.push(items[i])\n  }\n  return result\n}",
+      "options": [
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(log n)",
+          "es": "O(log n)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "One loop over the whole array, with O(1) work inside (a check and maybe a push): O(n).",
+        "es": "Un bucle sobre todo el array, con trabajo O(1) adentro (una revisión y quizá un push): O(n)."
+      }
+    },
+    {
+      "id": "time-running-totals",
+      "topic": "Big O: O(n^2)",
+      "prompt": {
+        "en": "What is the time complexity of this function?",
+        "es": "¿Cuál es la complejidad temporal de esta función?"
+      },
+      "code": "function runningTotals(numbers) {\n  const totals = []\n  for (let i = 0; i < numbers.length; i++) {\n    let total = 0\n    for (let j = 0; j <= i; j++) {\n      total = total + numbers[j]\n    }\n    totals.push(total)\n  }\n  return totals\n}",
+      "options": [
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n log n)",
+          "es": "O(n log n)"
+        },
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "The inner loop runs 1, then 2, … up to n times: about n² / 2 steps in total. Drop the constant: O(n²).",
+        "es": "El bucle de adentro corre 1, luego 2, … hasta n veces: unos n² / 2 pasos en total. Quita la constante: O(n²)."
+      }
+    },
+    {
+      "id": "space-print-up-to",
+      "topic": "Big O: Space Complexity",
+      "prompt": {
+        "en": "What is the **space** complexity of this function?",
+        "es": "¿Cuál es la complejidad **espacial** de esta función?"
+      },
+      "code": "function printUpTo(n) {\n  for (let i = 1; i <= n; i++) {\n    console.log(i)\n  }\n}",
+      "options": [
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n log n)",
+          "es": "O(n log n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "It only keeps one number, i, whatever n is. Printing doesn't store anything: O(1) space.",
+        "es": "Solo guarda un número, i, sea cual sea n. Imprimir no guarda nada: espacio O(1)."
+      }
+    },
+    {
+      "id": "space-even-indexes",
+      "topic": "Big O: Space Complexity",
+      "prompt": {
+        "en": "What is the **space** complexity of `evenIndexItems` (the function that copies the items at even indexes into a new array)?",
+        "es": "¿Cuál es la complejidad **espacial** de `evenIndexItems` (la función que copia los elementos de los índices pares en un array nuevo)?"
+      },
+      "options": [
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        },
+        {
+          "en": "O(log n)",
+          "es": "O(log n)"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "The new array holds about n / 2 items. Drop the ½: O(n) space.",
+        "es": "El array nuevo guarda unos n / 2 elementos. Quita el ½: espacio O(n)."
+      }
+    },
+    {
+      "id": "space-running-totals",
+      "topic": "Big O: Space Complexity",
+      "prompt": {
+        "en": "`runningTotals` uses nested loops and returns a new array with one total per number. What is its **space** complexity?",
+        "es": "`runningTotals` usa bucles anidados y devuelve un array nuevo con un total por número. ¿Cuál es su complejidad **espacial**?"
+      },
+      "options": [
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(log n)",
+          "es": "O(log n)"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "The new array has n items; total and j are just numbers. The nested loops cost time, not space: O(n) space.",
+        "es": "El array nuevo tiene n elementos; total y j solo son números. Los bucles anidados cuestan tiempo, no espacio: espacio O(n)."
+      }
+    },
+    {
+      "id": "array-push-vs-unshift",
+      "topic": "Big O: Arrays",
+      "prompt": {
+        "en": "Which of these array operations is O(1)?",
+        "es": "¿Cuál de estas operaciones de array es O(1)?"
+      },
+      "options": [
+        {
+          "en": "`guests.unshift('Zoe')`: add to the start",
+          "es": "`guests.unshift('Zoe')`: agregar al principio"
+        },
+        {
+          "en": "`guests.shift()`: remove from the start",
+          "es": "`guests.shift()`: quitar del principio"
+        },
+        {
+          "en": "`guests.splice(2, 0, 'Zoe')`: insert in the middle",
+          "es": "`guests.splice(2, 0, 'Zoe')`: insertar en el medio"
+        },
+        {
+          "en": "`guests.push('Zoe')`: add to the end",
+          "es": "`guests.push('Zoe')`: agregar al final"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Adding or removing at the end doesn't move any other item: O(1). The start and the middle re-index the items after them: O(n).",
+        "es": "Agregar o quitar al final no mueve ningún otro elemento: O(1). El principio y el medio reindexan los elementos que siguen: O(n)."
+      }
+    },
+    {
+      "id": "array-splice-middle",
+      "topic": "Big O: Arrays",
+      "prompt": {
+        "en": "`guests.splice(1, 0, 'Zoe')` inserts a name near the middle. A classmate says it's O(n/2), because only about half the names move. What's the correct Big O?",
+        "es": "`guests.splice(1, 0, 'Zoe')` inserta un nombre cerca del medio. Un compañero dice que es O(n/2), porque solo se mueve más o menos la mitad de los nombres. ¿Cuál es el Big O correcto?"
+      },
+      "code": "guests.splice(1, 0, 'Zoe')",
+      "options": [
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(n/2)",
+          "es": "O(n/2)"
+        },
+        {
+          "en": "O(log n)",
+          "es": "O(log n)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Two reasons: Big O is the worst case (inserting at index 0 moves every name), and even n/2 is n times a constant, which we drop. So O(n).",
+        "es": "Dos razones: Big O es el peor caso (insertar en el índice 0 mueve todos los nombres), y además n/2 es n por una constante, que se elimina. Así que O(n)."
+      }
+    },
+    {
+      "id": "array-index-vs-value",
+      "topic": "Big O: Arrays",
+      "prompt": {
+        "en": "In an unsorted array, what's the Big O of reading `guests[500]`, and of finding the index of 'Zoe'?",
+        "es": "En un array desordenado, ¿cuál es el Big O de leer `guests[500]`, y de encontrar el índice de 'Zoe'?"
+      },
+      "options": [
+        {
+          "en": "Both O(1)",
+          "es": "Los dos O(1)"
+        },
+        {
+          "en": "Reading by index O(1); finding by value O(n)",
+          "es": "Leer por índice O(1); buscar por valor O(n)"
+        },
+        {
+          "en": "Reading by index O(n); finding by value O(1)",
+          "es": "Leer por índice O(n); buscar por valor O(1)"
+        },
+        {
+          "en": "Both O(n)",
+          "es": "Los dos O(n)"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "With the index, the array jumps straight to the item: O(1). With only the value, it may have to check every item: O(n).",
+        "es": "Con el índice, el array salta directo al elemento: O(1). Con solo el valor, puede que tenga que revisar cada elemento: O(n)."
+      }
     }
   ],
   "exercises": [

@@ -1,45 +1,47 @@
 ---
 title: Contando operaciones
 order: 3
-minutes: 6
+minutes: 7
 ---
 
-> **Meta:** contar las operaciones de una función y ver por qué el número exacto no importa.
+> **Meta:** contar las operaciones simples de una función en lugar de medir su tiempo, y ver por qué el conteo exacto no importa.
 
-## ¿Qué cuenta como una operación?
+## Cuenta la fórmula
 
-Si vamos a contar pasos, tenemos que ponernos de acuerdo en qué es un paso. Una **operación simple** es una cosa pequeña que hace la computadora:
+Si los segundos cambian de una máquina a otra, ¿qué no cambia? El **número de operaciones simples** que tiene que hacer la computadora. Una operación simple es un paso pequeño: una suma, una multiplicación, una división, una comparación, darle un valor a una variable. Cinco operaciones son cinco operaciones en una laptop rápida o en un teléfono viejo.
 
-- darle un valor a una variable (`count = 0`),
-- una operación matemática (`count + 1`),
-- una comparación (`i < guests.length`, `guests[i].length <= 3`).
-
-Mira cada operación de esta función, una por una:
+Contemos primero la versión con la fórmula:
 
 ```viz
-trace-count-short-names
+trace-sum-formula
 ```
 
-Fíjate en los dos tipos de líneas. `let count = 0` corre **una sola vez**, sin importar cuántos invitados haya. Las líneas dentro del bucle corren **una vez por invitado**, así que entre más invitados, más veces corren. Reprodúcelo con **4 invitados**, luego elige **8** y **16** y compara los totales.
+`n * (n + 1) / 2` tiene una suma, una multiplicación y una división: **3 operaciones**. Los números 1 y 2 no son operaciones; solo son valores. Y esto es lo importante: no importa si n es 2 o 1,000,000,000. Siempre son **3 operaciones**. Elige **n = 1,000,000** en la animación y mira cómo el contador se queda en 3.
 
-## ¿Un paso o n pasos?
+## Cuenta el bucle
 
-Otra forma de verlo. Esta función cuenta a los invitados uno por uno:
+Ahora la versión con el bucle. Su `+` ya no es una sola operación, porque está **dentro de un bucle**:
 
 ```viz
-trace-count-guests
+trace-sum-loop
 ```
 
-Cada invitado cuesta las mismas 5 operaciones: una comparación, una suma y una asignación para `count = count + 1`, y otra suma y otra asignación para `i++`. Súmale las 3 operaciones que pasan una sola vez y obtienes **5n + 3**. Con 4 invitados son 23 operaciones; con 16 invitados, 83.
+Vamos línea por línea:
 
-Pero JavaScript ya lleva la cuenta del tamaño de un array. `guests.length` da la misma respuesta en **1 paso**, haya 4 invitados o 4 millones:
+- `total = total + i` es una suma **y** una asignación, y corre una vez por número: n sumas y n asignaciones. Si n es 5, son 5 de cada una; si n es mil millones, mil millones de cada una.
+- `i++` es la forma corta de `i = i + 1`: otra suma y otra asignación, otra vez n veces.
+- `i <= n` es una comparación, que se revisa n veces.
+- `let total = 0` y `let i = 1` pasan una **sola vez**, al principio.
 
-```js-run
-const guests = ['Ana', 'Ben', 'Cleo', 'Dev']
-console.log('Guests:', guests.length)
-```
+Súmalo todo y obtienes unas **5n + 2** operaciones. Con n = 10 son 52 operaciones; con n = 1,000, son 5,002. Elige **n = 10** en la animación para verlo.
 
-La misma respuesta, pero un crecimiento muy distinto: uno crece con n y el otro no crece nada. Esa diferencia es justo lo que captura Big O.
+| n     | Bucle (5n + 2) | Fórmula |
+| ----- | -------------- | ------- |
+| 5     | 27             | 3       |
+| 10    | 52             | 3       |
+| 1,000 | 5,002          | 3       |
+
+También podrías contarlo de otra manera. ¿La comparación que finalmente termina el bucle es una operación más? ¿`i++` es una operación o dos? Cada persona puede llegar a un total un poco distinto, y no pasa nada.
 
 ## Contar "a ojo"
 
@@ -47,6 +49,14 @@ La misma respuesta, pero un crecimiento muy distinto: uno crece con n y el otro 
 linear-boxes
 ```
 
-¿De verdad eran 5n + 3? Podrías decir que `i++` es una operación y no dos, y obtener 4n + 3. Otra persona podría contar 3n + 2. La buena noticia: **no importa**.
+La buena noticia: **el número exacto no importa**. Sea 5n + 2, 3n o 2n, lo que importa es la **tendencia general**: cuando n crece, el número de operaciones crece **más o menos en proporción a n**. Duplica n y duplicas el trabajo. Ese es el panorama general, y el panorama general es lo que le importa a Big O.
 
-Todas esas tienen la misma forma. Duplica los invitados y el trabajo se duplica; los puntos quedan en línea recta. Big O es una forma de **contar a ojo**: contamos más o menos y luego nos quedamos solo con el panorama general de cómo crece la cuenta. En las siguientes lecciones vas a aprender las reglas para pasar de "5n + 3" a ese panorama general.
+Lo mismo pasa con la lista de invitados. Contar a los invitados uno por uno con un bucle cuesta unas 5 operaciones por invitado:
+
+```viz
+trace-count-guests
+```
+
+Pero JavaScript ya sabe el tamaño de un array, así que `guests.length` da la misma respuesta en **1 paso**, haya 4 invitados o 4 millones. La misma respuesta, un crecimiento completamente distinto.
+
+Así que a partir de ahora no vamos a contar cada operación. Big O es una forma de **contar a ojo**: contar más o menos, y luego quedarse solo con cómo crece la cuenta. Las siguientes lecciones te muestran cómo.

@@ -71,14 +71,14 @@ describe('lesson page', () => {
     expect(
       await screen.findByRole('heading', { level: 1, name: 'Why Big O?' }),
     ).toBeInTheDocument()
-    expect(screen.getByText('Step 1 of 4')).toBeInTheDocument()
     expect(
-      screen.getByRole('heading', { name: 'Two versions that both work' }),
+      screen.getByText('Step 1 of 5', { selector: 'p' }),
     ).toBeInTheDocument()
-    // Every step starts with an animation: here, the isInvited code trace.
     expect(
-      screen.getByText('isInvited: stop as soon as you find the name'),
+      screen.getByRole('heading', { name: 'Big O is a big deal' }),
     ).toBeInTheDocument()
+    // Every step has an animation: here, the growth chart.
+    expect(screen.getByText('How Big O grows')).toBeInTheDocument()
     expect(nextButton()).toBeDisabled()
     expect(
       screen.getByRole('link', { name: /back to big o/i }),
@@ -87,9 +87,17 @@ describe('lesson page', () => {
 
   it('shows the hint after a wrong answer and unlocks Next when right', async () => {
     const user = userEvent.setup()
+    saveProgress('big-o', '01-why-big-o', { ...emptyProgress(), passed: [0] })
     renderAt(LESSON)
 
-    await user.click(await screen.findByRole('radio', { name: '1' }))
+    // Resumes at step 2: the isInvited trace and its question.
+    expect(
+      await screen.findByText('Step 2 of 5', { selector: 'p' }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText('isInvited: stop as soon as you find the name'),
+    ).toBeInTheDocument()
+    await user.click(screen.getByRole('radio', { name: '1' }))
     await user.click(screen.getByRole('button', { name: 'Check answer' }))
     expect(screen.getByText('Not quite. Try again.')).toBeInTheDocument()
     expect(screen.getByText(/Count the boxes from Ana/)).toBeInTheDocument()
@@ -99,11 +107,12 @@ describe('lesson page', () => {
     await user.click(screen.getByRole('button', { name: 'Check answer' }))
     expect(screen.getByText(/Correct!/)).toBeInTheDocument()
     expect(nextButton()).toBeEnabled()
-    expect(loadProgress('big-o', '01-why-big-o').passed).toEqual([0])
+    expect(loadProgress('big-o', '01-why-big-o').passed).toEqual([0, 1])
   })
 
   it('offers the answer after 3 wrong tries', async () => {
     const user = userEvent.setup()
+    saveProgress('big-o', '01-why-big-o', { ...emptyProgress(), passed: [0] })
     renderAt(LESSON)
     await user.click(await screen.findByRole('radio', { name: '1' }))
     for (let i = 0; i < 3; i++) {
@@ -111,18 +120,23 @@ describe('lesson page', () => {
     }
     await user.click(screen.getByRole('button', { name: 'Show answer' }))
     expect(screen.getByText(/highlighted in green/)).toBeInTheDocument()
-    expect(loadProgress('big-o', '01-why-big-o').viewedSolution).toEqual([0])
+    expect(loadProgress('big-o', '01-why-big-o').viewedSolution).toEqual([1])
   })
 
   it('shows the hint after a failed check and the solution after 3', async () => {
     const user = userEvent.setup()
     checkJavaScript.mockResolvedValue(failedCheck)
-    saveProgress('big-o', '01-why-big-o', { ...emptyProgress(), passed: [0] })
+    saveProgress('big-o', '01-why-big-o', {
+      ...emptyProgress(),
+      passed: [0, 1],
+    })
     renderAt(LESSON)
 
     // Resumes at the first step that hasn't passed: a coding step with the
     // Learn, Code and Output panes.
-    expect(await screen.findByText('Step 2 of 4')).toBeInTheDocument()
+    expect(
+      await screen.findByText('Step 3 of 5', { selector: 'p' }),
+    ).toBeInTheDocument()
     expect(screen.getByRole('region', { name: 'Learn' })).toBeInTheDocument()
     // The editor is loaded on demand too.
     const editor = await screen.findByRole('textbox', { name: 'Code editor' })
@@ -149,8 +163,8 @@ describe('lesson page', () => {
       screen.getByRole('textbox', { name: 'Code editor' }).value,
     ).toContain('if (guests[i] === name) return true')
     expect(loadProgress('big-o', '01-why-big-o')).toMatchObject({
-      attempts: { 1: 3 },
-      viewedSolution: [1],
+      attempts: { 2: 3 },
+      viewedSolution: [2],
     })
     expect(nextButton()).toBeDisabled()
 
@@ -159,12 +173,16 @@ describe('lesson page', () => {
     await user.click(check)
     expect(nextButton()).toBeEnabled()
     await user.click(nextButton())
-    expect(screen.getByText('Step 3 of 4')).toBeInTheDocument()
+    expect(
+      screen.getByText('Step 4 of 5', { selector: 'p' }),
+    ).toBeInTheDocument()
   })
 
   it('does not let a student skip ahead with the URL', async () => {
-    renderAt(`${LESSON}?step=4`)
-    expect(await screen.findByText('Step 1 of 4')).toBeInTheDocument()
+    renderAt(`${LESSON}?step=5`)
+    expect(
+      await screen.findByText('Step 1 of 5', { selector: 'p' }),
+    ).toBeInTheDocument()
   })
 
   it('completes the lesson when the last checkpoint passes', async () => {

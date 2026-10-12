@@ -75,6 +75,38 @@ describe('trace counters', () => {
     expect(gifts).toEqual([3, 5, 5])
   })
 
+  it('counts 5n + 2 operations for sumUpTo with a loop, and 3 for the formula', () => {
+    for (const input of traces['trace-sum-loop'].inputs) {
+      const last = Array.from(traces['trace-sum-loop'].run(input)).at(-1)
+      expect(last.ops).toBe(5 * input.n + 2)
+    }
+    for (const input of traces['trace-sum-formula'].inputs) {
+      const last = Array.from(traces['trace-sum-formula'].run(input)).at(-1)
+      expect(last.ops).toBe(3)
+    }
+  })
+
+  it('prints n lines for printNumbers and n × n for printPairs', () => {
+    for (const input of traces['trace-print-numbers'].inputs) {
+      expect(
+        Array.from(traces['trace-print-numbers'].run(input)).at(-1).ops,
+      ).toBe(input.n)
+    }
+    for (const input of traces['trace-print-pairs'].inputs) {
+      expect(
+        Array.from(traces['trace-print-pairs'].run(input)).at(-1).ops,
+      ).toBe(input.n * input.n)
+    }
+  })
+
+  it('creates one new box of memory per number in doubleArray', () => {
+    for (const input of traces['trace-double-array'].inputs) {
+      expect(
+        Array.from(traces['trace-double-array'].run(input)).at(-1).ops,
+      ).toBe(input.numbers.length)
+    }
+  })
+
   it('counts more operations for more guests', () => {
     const trace = traces['trace-count-short-names']
     const totals = trace.inputs.map(

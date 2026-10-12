@@ -3,6 +3,40 @@
     {
       "type": "choice",
       "question": {
+        "en": "Which of these will you be able to do by the end of this module?",
+        "es": "¿Cuál de estas cosas vas a poder hacer al terminar este módulo?"
+      },
+      "options": [
+        {
+          "en": "Make any code run in 0 seconds",
+          "es": "Hacer que cualquier código corra en 0 segundos"
+        },
+        {
+          "en": "Find the time and space complexity of a piece of code",
+          "es": "Encontrar la complejidad temporal y espacial de un código"
+        },
+        {
+          "en": "Never write a loop again",
+          "es": "No volver a escribir un bucle nunca"
+        },
+        {
+          "en": "Memorize the running time of every program",
+          "es": "Memorizar el tiempo de ejecución de todos los programas"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Look at the list of goals in this step.",
+        "es": "Mira la lista de metas de este paso."
+      },
+      "explanation": {
+        "en": "This module teaches you to describe how code grows, in time and in memory, and to simplify those descriptions.",
+        "es": "Este módulo te enseña a describir cómo crece el código, en tiempo y en memoria, y a simplificar esas descripciones."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
         "en": "With the list Ana, Ben, Cleo, Dev, Eli, Fay, how many checks does `isInvited` do to find 'Dev'?",
         "es": "Con la lista Ana, Ben, Cleo, Dev, Eli, Fay, ¿cuántas revisiones hace `isInvited` para encontrar a 'Dev'?"
       },
@@ -70,35 +104,35 @@
     {
       "type": "choice",
       "question": {
-        "en": "What does Big O describe?",
-        "es": "¿Qué describe Big O?"
+        "en": "Your code works. Why might its Big O still matter?",
+        "es": "Tu código funciona. ¿Por qué podría importar todavía su Big O?"
       },
       "options": [
         {
-          "en": "How many seconds the code takes on your computer",
-          "es": "Cuántos segundos tarda el código en tu computadora"
+          "en": "It doesn't: working code is always fast enough",
+          "es": "No importa: el código que funciona siempre es lo bastante rápido"
         },
         {
-          "en": "How many lines of code a function has",
-          "es": "Cuántas líneas de código tiene una función"
+          "en": "Big O makes code shorter",
+          "es": "Big O hace el código más corto"
         },
         {
-          "en": "How the work grows as the input grows",
-          "es": "Cómo crece el trabajo cuando crece la entrada"
+          "en": "With huge amounts of data a slower approach can cost hours, it helps you find slow code, and interviews ask about it",
+          "es": "Con muchísimos datos una idea más lenta puede costar horas, te ayuda a encontrar código lento y en las entrevistas lo preguntan"
         },
         {
-          "en": "Whether the code has bugs",
-          "es": "Si el código tiene errores"
+          "en": "Because JavaScript refuses to run O(n) code",
+          "es": "Porque JavaScript se niega a ejecutar código O(n)"
         }
       ],
       "answer": 2,
       "hint": {
-        "en": "Think about the chart: the input size is on the bottom.",
-        "es": "Piensa en la gráfica: el tamaño de la entrada está abajo."
+        "en": "Look at the list of situations in this step.",
+        "es": "Mira la lista de situaciones de este paso."
       },
       "explanation": {
-        "en": "Big O is a label for how the work grows as the input (n) grows, so we can compare solutions.",
-        "es": "Big O es una etiqueta para cómo crece el trabajo cuando crece la entrada (n), para poder comparar soluciones."
+        "en": "On small projects, working is enough. With big data, slow pages and interviews, knowing how code grows matters a lot.",
+        "es": "En proyectos pequeños, que funcione es suficiente. Con muchos datos, páginas lentas y entrevistas, saber cómo crece el código importa mucho."
       }
     },
     {
@@ -113,26 +147,26 @@
           "es": "Cuántos segundos tarda el código"
         },
         {
-          "en": "How the extra memory the code needs grows with the input",
-          "es": "Cómo crece con la entrada la memoria extra que necesita el código"
+          "en": "How the memory the code needs grows with the input",
+          "es": "Cómo crece con la entrada la memoria que necesita el código"
         },
         {
           "en": "How many lines of code the function has",
           "es": "Cuántas líneas de código tiene la función"
         },
         {
-          "en": "How big the input list is",
-          "es": "Qué tan grande es la lista de entrada"
+          "en": "How fast your computer is",
+          "es": "Qué tan rápida es tu computadora"
         }
       ],
       "answer": 1,
       "hint": {
-        "en": "Time complexity counts steps. What does space complexity count?",
-        "es": "La complejidad temporal cuenta pasos. ¿Qué cuenta la complejidad espacial?"
+        "en": "Time complexity counts operations. What does space complexity measure?",
+        "es": "La complejidad temporal cuenta operaciones. ¿Qué mide la complejidad espacial?"
       },
       "explanation": {
-        "en": "Space complexity is how the extra memory grows as the input grows, like one box for a counter vs one box per guest.",
-        "es": "La complejidad espacial es cómo crece la memoria extra cuando crece la entrada, como una caja para un contador contra una caja por invitado."
+        "en": "Space complexity is how much memory the code uses as the input grows. Code 2 can be slower but lighter.",
+        "es": "La complejidad espacial es cuánta memoria usa el código cuando crece la entrada. El código 2 puede ser más lento pero más ligero."
       }
     }
   ]

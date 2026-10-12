@@ -1,0 +1,106 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which list goes from **best** to **worst**?",
+        "es": "¿Qué lista va de la **mejor** a la **peor**?"
+      },
+      "options": [
+        {
+          "en": "O(n), O(1), O(log n), O(n²)",
+          "es": "O(n), O(1), O(log n), O(n²)"
+        },
+        {
+          "en": "O(1), O(log n), O(n), O(n²)",
+          "es": "O(1), O(log n), O(n), O(n²)"
+        },
+        {
+          "en": "O(log n), O(1), O(n²), O(n)",
+          "es": "O(log n), O(1), O(n²), O(n)"
+        },
+        {
+          "en": "O(n²), O(n), O(log n), O(1)",
+          "es": "O(n²), O(n), O(log n), O(1)"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Start with the flat line on the chart.",
+        "es": "Empieza con la línea plana de la gráfica."
+      },
+      "explanation": {
+        "en": "O(1) < O(log n) < O(n) < O(n log n) < O(n²).",
+        "es": "O(1) < O(log n) < O(n) < O(n log n) < O(n²)."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which phrase goes with O(log n)?",
+        "es": "¿Qué frase va con O(log n)?"
+      },
+      "options": [
+        {
+          "en": "\"A loop within a loop\"",
+          "es": "\"Un bucle dentro de otro bucle\""
+        },
+        {
+          "en": "\"Divide and conquer\"",
+          "es": "\"Dividir y conquistar\""
+        },
+        {
+          "en": "\"Proportional\"",
+          "es": "\"Proporcional\""
+        },
+        {
+          "en": "\"Constant time\"",
+          "es": "\"Tiempo constante\""
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Binary search cuts the problem in half again and again.",
+        "es": "La búsqueda binaria parte el problema a la mitad una y otra vez."
+      },
+      "explanation": {
+        "en": "Cutting the problem in half at every step is divide and conquer: O(log n).",
+        "es": "Partir el problema a la mitad en cada paso es dividir y conquistar: O(log n)."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Simplify O(3n² + 10n + 7).",
+        "es": "Simplifica O(3n² + 10n + 7)."
+      },
+      "options": [
+        {
+          "en": "O(3n²)",
+          "es": "O(3n²)"
+        },
+        {
+          "en": "O(n² + n)",
+          "es": "O(n² + n)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "Use both rules: drop the non-dominant terms and the constants.",
+        "es": "Usa las dos reglas: elimina los términos no dominantes y las constantes."
+      },
+      "explanation": {
+        "en": "Drop 10n and 7 (non-dominant), then the 3 (constant): O(n²).",
+        "es": "Quita 10n y 7 (no dominantes) y luego el 3 (constante): O(n²)."
+      }
+    }
+  ]
+}
