@@ -21,6 +21,8 @@ export const VISUALIZATION_NAMES = [
   'trace-is-invited',
   'trace-is-invited-all',
   'trace-count-short-names',
+  'trace-count-guests',
+  'trace-give-gifts',
   'trace-welcome-all',
   'trace-welcome-and-goodbye',
   'trace-greet-everyone',

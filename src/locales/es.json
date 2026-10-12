@@ -192,7 +192,8 @@
       "firstRun": "La laptop es mucho más rápida… pero las dos hicieron exactamente {{n}} pasos.",
       "secondRun": "Ejecútalo otra vez: ¡tiempos distintos! Otras apps y el navegador cambian en cada ejecución. Los pasos siguen siendo {{n}}.",
       "moreGuests": "Ahora {{n}} invitados. Los tiempos vuelven a cambiar, pero los pasos simplemente se duplicaron a {{n}}.",
-      "summary": "Los segundos dependen de la máquina. Los pasos dependen solo del código y de n. Big O cuenta pasos."
+      "summary": "Los segundos dependen de la máquina. Los pasos dependen solo del código y de n. Big O cuenta pasos.",
+      "tooFast": "Un trabajo muy pequeño (2 invitados): las dos muestran 0.0 ms. Un código así de rápido no se puede medir, así que el cronómetro no puede decir qué versión es más rápida."
     },
     "searchCases": {
       "title": "Mejor caso, caso promedio y peor caso",
@@ -289,7 +290,9 @@
         "messages_one": "mensaje",
         "messages_other": "mensajes",
         "innerSteps_one": "paso interno",
-        "innerSteps_other": "pasos internos"
+        "innerSteps_other": "pasos internos",
+        "gifts_one": "regalo",
+        "gifts_other": "regalos"
       },
       "isInvited": {
         "title": "isInvited: detente en cuanto encuentres el nombre",
@@ -351,6 +354,26 @@
         "inside": "Dentro del bucle: una revisión y quizá una suma. O(1) cada vez…",
         "loop": "…pero el bucle corre n veces. Costo de un bucle = veces que corre × trabajo de adentro = n × O(1) = O(n).",
         "total": "Súmalo todo: O(1) + O(1) + O(1) + O(n) + O(1). Quita los términos pequeños: O(n)."
+      },
+      "countGuests": {
+        "title": "Contando cada operación",
+        "input": "{{n}} invitados",
+        "init": "let count = 0: darle un valor a una variable es 1 operación.",
+        "startLoop": "let i = 0: 1 operación más. Corre una sola vez, cuando empieza el bucle.",
+        "compare": "¿i ({{i}}) < {{n}}? Una comparación: 1 operación. Sí, así que el bucle corre.",
+        "add": "count = count + 1: una suma y una asignación, 2 operaciones. Ahora count vale {{count}}.",
+        "next": "i++ es la forma corta de i = i + 1: 2 operaciones más. De vuelta a la comparación.",
+        "fastForward": "Con {{n}} invitados saltamos al final. Cada invitado cuesta las mismas 5 operaciones.",
+        "end": "{{ops}} operaciones para contar {{n}} invitados: 5 por invitado más 3, o sea 5n + 3. guests.length da la misma respuesta ({{count}}) en 1 paso."
+      },
+      "giveGifts": {
+        "title": "Un bucle con límite",
+        "input": "{{n}} invitados",
+        "start": "Hay {{n}} invitados en la lista, pero solo los primeros 5 reciben un regalo.",
+        "give": "i = {{i}}: un regalo para {{guest}}. 🎁",
+        "limit": "i vale {{i}}, así que i < 5 es falso: el bucle se detiene, aunque quedan {{left}} invitados.",
+        "noMoreGuests": "No hay más invitados: el bucle termina antes de llegar al límite.",
+        "end": "{{gifts}} regalos para {{n}} invitados. Elige 20 invitados: siguen siendo 5. El bucle nunca corre más de 5 veces, así que es O(1)."
       }
     }
   },

@@ -14,6 +14,8 @@
 // with the same result, so the animation can't disagree with its code.
 import { isInvited, isInvitedAll } from './isInvited'
 import { countShortNames } from './countShortNames'
+import { countGuests } from './countGuests'
+import { giveGifts } from './giveGifts'
 import { welcomeAll, welcomeAndGoodbye } from './welcome'
 import { greetEveryone } from './greetEveryone'
 import { partySummary } from './partySummary'
@@ -22,6 +24,8 @@ export const traces = {
   'trace-is-invited': isInvited,
   'trace-is-invited-all': isInvitedAll,
   'trace-count-short-names': countShortNames,
+  'trace-count-guests': countGuests,
+  'trace-give-gifts': giveGifts,
   'trace-welcome-all': welcomeAll,
   'trace-welcome-and-goodbye': welcomeAndGoodbye,
   'trace-greet-everyone': greetEveryone,
