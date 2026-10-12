@@ -4,8 +4,20 @@ import StepPlayer from '../components/StepPlayer'
 import GuestRow from './GuestRow'
 
 // Plays a piece of code line by line: the current line is highlighted, and
-// next to it the student sees the guest list, the variables, a counter of the
-// operations so far, and what the code printed. See ./traces/index.js.
+// next to it the student sees the input as boxes, the variables, a counter of
+// the operations so far, and what the code printed. See ./traces/index.js.
+
+// The size of an input: a number (n), or how many guests / numbers it has.
+function sizeOf(input) {
+  return input.n ?? (input.guests ?? input.numbers).length
+}
+
+// The boxes drawn under the code: the guest list by default. A trace can
+// draw its own boxes with items(input), or none by returning null.
+function itemsOf(trace, input) {
+  return trace.items ? trace.items(input) : input.guests
+}
+
 function CodeTrace({ trace }) {
   const { t } = useTranslation()
   const [inputIndex, setInputIndex] = useState(0)
@@ -37,7 +49,7 @@ function CodeTrace({ trace }) {
             }`}
           >
             {t(`viz.trace.${trace.key}.input`, {
-              n: option.guests.length,
+              n: sizeOf(option).toLocaleString('en-US'),
               name: option.name,
             })}
           </button>
@@ -94,11 +106,13 @@ function TraceStep({ trace, input, step }) {
       </pre>
 
       <div className="space-y-3">
-        <GuestRow
-          items={input.guests}
-          states={step.states}
-          pointers={step.pointers}
-        />
+        {itemsOf(trace, input) && (
+          <GuestRow
+            items={itemsOf(trace, input)}
+            states={step.states}
+            pointers={step.pointers}
+          />
+        )}
         {step.vars?.length > 0 && (
           <dl className="flex flex-wrap gap-2 text-sm">
             {step.vars.map(([name, value]) => (
