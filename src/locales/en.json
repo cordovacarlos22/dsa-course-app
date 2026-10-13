@@ -30,6 +30,16 @@
     "howTitle": "How you'll learn",
     "howSubtitle": "Hard ideas become easy when you can see them and try them yourself.",
     "comingSoon": "Coming soon",
+    "preview": {
+      "title": "Try a step right now",
+      "subtitle": "This is a real step from the Big O module. Play the animation, then answer the question.",
+      "xp": "+{{xp}} XP",
+      "continue": "Finish this lesson"
+    },
+    "reel": {
+      "title": "Watch the ideas move",
+      "subtitle": "Every lesson has animations like these. Pause one, or go through it step by step."
+    },
     "features": {
       "animations": {
         "title": "Step-by-step animations",

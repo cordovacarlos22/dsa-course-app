@@ -30,6 +30,16 @@
     "howTitle": "Cómo vas a aprender",
     "howSubtitle": "Las ideas difíciles se vuelven fáciles cuando puedes verlas y probarlas tú mismo.",
     "comingSoon": "Próximamente",
+    "preview": {
+      "title": "Prueba un paso ahora mismo",
+      "subtitle": "Este es un paso real del módulo de Big O. Reproduce la animación y luego responde la pregunta.",
+      "xp": "+{{xp}} XP",
+      "continue": "Termina esta lección"
+    },
+    "reel": {
+      "title": "Mira cómo se mueven las ideas",
+      "subtitle": "Cada lección tiene animaciones como estas. Pausa una o recórrela paso a paso."
+    },
     "features": {
       "animations": {
         "title": "Animaciones paso a paso",
