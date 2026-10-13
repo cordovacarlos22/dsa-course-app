@@ -181,6 +181,9 @@ This file describes the look the app **already has**. Change it only in a PR tha
 - **Language dialog:** the first-visit picker is a native `<dialog>` opened with `showModal()`, over a backdrop of `ink` at 60%.
 - **Favicon:** the header's yellow "JS" chip (`public/favicon.svg`, plus PNG and Apple touch icon versions).
 - **Landing page:** a brand-blue hero panel (`rounded-3xl`) with a yellow call-to-action and a white outline button, centered sections, and a dark ink panel for the final call to action.
+  - **"Try a step right now"** comes right after the hero. It shows a real lesson step: the animation on the left (3/5 of the width) and the question card on the right, stacked on phones.
+  - **A right answer** pops a yellow **XP chip** (`rounded-full bg-accent font-extrabold text-ink`, "⚡ +10 XP") next to a brand-blue "Finish this lesson" pill.
+  - **"Watch the ideas move"** shows one wide animation over two side by side. They play on their own and loop (`AutoPlayContext`), except on devices that ask for less motion, and every one keeps its Pause button.
 
 ## Do's and Don'ts
 

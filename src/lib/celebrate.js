@@ -1,4 +1,5 @@
 import { playSound } from './sounds'
+import { prefersReducedMotion } from './prefersReducedMotion'
 
 // Confetti and a sound for the student's wins, like in a game:
 //   'step'   a small burst: a step's check passed
@@ -68,12 +69,6 @@ function fireCannons(confetti) {
     spread: 60,
     origin: { x: 1, y: 0.7 },
   })
-}
-
-function prefersReducedMotion() {
-  return (
-    window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
-  )
 }
 
 export async function celebrate(level) {

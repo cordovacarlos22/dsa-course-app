@@ -2,6 +2,7 @@ import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, describe, it, expect, vi } from 'vitest'
 import StepPlayer from './StepPlayer'
+import { AutoPlayContext } from '../visualizations/autoPlay'
 
 const STEPS = [
   { caption: 'First step', value: 'A' },
@@ -55,5 +56,25 @@ describe('StepPlayer', () => {
     act(() => vi.advanceTimersByTime(2200))
     expect(screen.getByRole('button', { name: 'Restart' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /next/i })).toBeDisabled()
+  })
+
+  it('plays on its own and starts over inside AutoPlayContext', () => {
+    vi.useFakeTimers()
+    render(
+      <AutoPlayContext value>
+        <StepPlayer
+          title="Demo"
+          steps={STEPS}
+          renderStep={(step) => <p>Drawing {step.value}</p>}
+        />
+      </AutoPlayContext>,
+    )
+
+    expect(screen.getByRole('button', { name: 'Pause' })).toBeInTheDocument()
+    act(() => vi.advanceTimersByTime(2200))
+    act(() => vi.advanceTimersByTime(2200))
+    expect(screen.getByText('Third step')).toBeInTheDocument()
+    act(() => vi.advanceTimersByTime(2200))
+    expect(screen.getByText('First step')).toBeInTheDocument()
   })
 })

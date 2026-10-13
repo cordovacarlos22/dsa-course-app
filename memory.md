@@ -9,6 +9,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-12: **agent skills** (security + design) and `DESIGN.md` / `PRODUCT.md` on `chore/agent-skills` (PR #20).
 - 2026-10-12: **fixes from the tools' first runs** on `fix/tool-findings` (built on PR #20).
 - 2026-10-13: **Ponytail** recorded and limited to code on `docs/ponytail` (built on `fix/tool-findings`).
+- 2026-10-13: **Stage 8 roadmap** (accounts, a Duolingo-style lock, XP, 2-step), in 5 PRs. PR 1, the **landing preview**, is on `feat/landing-preview` (built on `docs/ponytail`).
 
 ## Decisions
 
@@ -18,6 +19,19 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-12: **Agent skills, reviewed and pinned** (Carlos: repos that give agents "superpowers… also security"). He named five; all were read before adding: Cloudflare `security-audit`, `impeccable` (pbakaus), taste-skill (`design-taste-frontend`), Vercel's web interface guidelines, and awesome-design-md (VoltAgent). The four skills live in `.claude/skills/`, pinned to the reviewed commit (table and update steps in `.claude/skills/README.md`). awesome-design-md only collects other brands' `DESIGN.md` files, so we wrote our own **`DESIGN.md`** (the current look) plus **`PRODUCT.md`** (audience and promise); design skills treat them as the brief. **Left out on purpose:** the Impeccable engine (its launcher downloads a compiled program and it sends usage pings by default) and Vercel's live rule download (we read a pinned copy). **Rules:** project rules win over skills; skills propose and Carlos decides; never auto-install or update skills; full security audits only when Carlos asks, with output kept outside the repo. They were skills, not MCP servers, so no `.mcp.json` was needed.
 - 2026-10-12: **Security headers in `vercel.json`** (Carlos: "fix everything that is needed" after the tools' first runs). A Content-Security-Policy allows only the app's own files, with two exceptions on purpose: `script-src 'unsafe-eval'` (the code runner uses `new Function` in its Web Worker; tested: without it Run and Check fail) and `worker-src blob:` (canvas-confetti). `style-src 'unsafe-inline'` covers CodeMirror's style fallback. Plus `frame-ancestors 'none'`/`X-Frame-Options`, `nosniff`, a referrer policy, a Permissions-Policy (no camera, microphone or location) and HSTS. **Stage 8 must add Supabase's origin to `connect-src`.** The Vercel toolbar on PR previews is blocked by the policy (accepted). CI's token is read-only. **Vitest 4.1.11** replaces 3.2.7 (tinypool and @vitest/mocker advisories); the `@tailwindcss/typography` → `postcss-selector-parser` moderate advisory stays (no fixed release, build-time only, our own CSS).
 - 2026-10-12: **UI fixes from the Vercel guidelines run:** code boxes wrap long output and show a yellow focus ring (also on CodeMirror), every page has a translated tab title (`useDocumentTitle`), a skip link, the language picker is a native modal `<dialog>`, focus moves to the new step's title on Back/Next, workspace tabs work with arrow keys, header tap areas are about 44 px, three animations respect reduced motion, and the favicon is the JS chip. `content:validate` skips iCloud `name 2.ext` copies like git, ESLint and Prettier do.
+- 2026-10-13: **Accounts and a lock, like Duolingo (replaces "email magic link" in the Supabase decisions below).** Carlos: "close to what Duolingo offers, XP… more like a game".
+  - **Free part:** without an account, people can do the landing page's preview, the whole Introduction module and Big O lesson 1. Then comes "Create a free account to keep going", and their progress moves into the new account.
+  - **Sign-in options:** Google, Apple, GitHub and an email code, all through Supabase Auth. Apple needs the Apple Developer Program ($99/year), and its secret expires every 6 months.
+  - **Bots:** Cloudflare Turnstile protects the email form.
+  - **2-step verification:** optional for students (an authenticator app), required for the admin. The admin role is set only with SQL in the Supabase dashboard.
+  - **XP:** worked out from progress (10 per step, +5 on the first try, +20 per lesson), with daily streaks.
+  - **Order of the PRs:** (1) landing preview, (2) sign-in, (3) the lock, (4) progress, XP and streaks in Supabase, (5) 2-step.
+  - **Reviews:** the `security-audit` skill reviews PRs 2–5 before they merge, and a full audit can follow once Carlos asks.
+  - **The lock is a door, not a safe.** The repo is public, so anyone can read the lessons on GitHub. **Before charging money, paid lessons must move out of the public repo into Supabase, behind access rules.**
+- 2026-10-13: **Landing preview** (Carlos chose both kinds).
+  - **"Try a step right now"** shows Big O lesson 1's `trace-is-invited` code trace and its real question (read from the lesson's checks file, so there's no new course text). A right answer gets confetti, "⚡ +10 XP" and a link to the lesson.
+  - **"Watch the ideas move"** shows `search-cases`, `nested-grid` and `binary-search-halving`. They play on their own through `AutoPlayContext` and loop, but not under reduced motion, and screen readers aren't flooded with captions.
+  - **Both sections load lazily,** so the first download grew by only about 1 KB.
 - 2026-10-13: **Ponytail, for code only.**
   - **Install:** Carlos asked "is ponytail active?", and then installed it himself from the plugin marketplace. It's installed for his user account, so it's on in every project: v5.2.0, commit `2961b52`, MIT.
   - **Review:** before he installed it, I had read the hooks and skills. They make no network calls and only write the current level to `~/.claude`. The installed files matched that reviewed commit.
@@ -81,7 +95,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 5. ✅ Lesson system: lesson files + validation, Markdown renderer, StepPlayer, 3 animations, runnable snippets (Web Worker), first lesson (branch `feat/lesson-system`)
 6. Original lessons for modules 01–03 (EN), reviewed by Carlos ← next
 7. Quiz + exercise pages (CodeMirror, runner, timer)
-8. Supabase: schema + RLS, magic-link auth, profile, progress, then XP points, daily streaks and badges (Carlos, 2026-10-12)
+8. Supabase: sign-in (Google, Apple, GitHub, email code), the free-lessons lock, schema + RLS, profile, progress, then XP points, daily streaks and badges, and optional 2-step (Carlos, 2026-10-12/13; five PRs, see Decisions)
 9. Deploy pipeline: preview / deploy (blue/green) / rollback, Playwright smoke test
 10. AI tutor v1: `tutor` Edge Function (streaming, quota), lesson chat, hints
 11. AI tutor v2: code review, mock interview
@@ -118,12 +132,14 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-12, `feat/celebrations` (PR #19): confetti and sounds for each win (step, lesson, module), cheers and first-try streaks, the "Lesson complete" card with stats, the module 🏆 badge, and the 🔊 mute button. Reduced motion respected.
 - 2026-10-12, `chore/agent-skills`: the four reviewed skills, `DESIGN.md`, `PRODUCT.md`, and the "Agent skills" section in `AGENTS.md`. First runs: the security review (guidance mode) found no vulnerabilities, and the Vercel UI review found 5 UI problems plus smaller ones.
 - 2026-10-12, `fix/tool-findings`: everything those runs found, fixed and checked in headless Chrome (focus, wrapping, dialog, tabs, tap areas, reduced motion, 320–1280 px), plus the security headers (tested with a local server that applies `vercel.json`: zero CSP violations), the read-only CI token and Vitest 4. 244 tests. The 35 iCloud duplicate files were moved to the Trash.
+- 2026-10-13, `feat/landing-preview`: the "Try a step right now" section (real animation, real question, confetti and XP) and the auto-playing animation reel. `StepPlayer` can now play on its own, and its buttons got hover states. 249 tests. Checked in headless Chrome under `vercel.json`'s headers: 0 CSP violations, 320–1280 px, reduced motion, Spanish.
 - 2026-10-13, `docs/ponytail`: Ponytail reviewed (no network calls; the installed files match the reviewed commit). `AGENTS.md` limits it to app code, and `.claude/skills/README.md` says what it runs and how to update or turn it off.
 
 ## Next
 
 - After `fix/tool-findings` merges: check production's headers (`curl -sI https://dsa-course-app.vercel.app/`) and run the app once in a browser for CSP errors.
 - **Design proposals** from the skills, for Carlos to decide: a self-hosted brand font, and no box nested inside the lesson-complete card.
+- **Stage 8, sign-in (PR 2):** Carlos sets up two Supabase projects (staging and production), Google and GitHub sign-in apps, Apple (when his developer account is ready), Cloudflare Turnstile, and an email-sending service. I send a step-by-step guide for each. Secrets stay in the dashboards; only `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` and `VITE_TURNSTILE_SITE_KEY` go to `.env.local` and Vercel.
 - **Ponytail status line:** in Carlos's first new session, Ponytail asks the agent to offer a `[PONYTAIL]` badge for the status line. It's a change to his global `~/.claude/settings.json`, so only with his yes. To check that it's on, type `/ponytail`: it answers with the level.
 
 - Big O module still needs: the interview problem "Count the Operations" and its slides (later stage).

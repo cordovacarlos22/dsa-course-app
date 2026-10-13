@@ -1,10 +1,19 @@
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
-import { describe, it, expect } from 'vitest'
+import { afterEach, describe, it, expect, vi } from 'vitest'
 import App from '../App'
 import { saveLanguage } from '../lib/languageStorage'
+import { celebrate } from '../lib/celebrate'
 import i18n from '../i18n'
+
+// jsdom can't draw confetti or play sounds.
+vi.mock('../lib/celebrate', () => ({ celebrate: vi.fn() }))
+
+afterEach(() => {
+  celebrate.mockReset()
+  vi.unstubAllGlobals()
+})
 
 function renderLanding(language = 'en') {
   // Like a returning student: the language was saved and is already active.
@@ -129,5 +138,64 @@ describe('landing page', () => {
       'chofer de tráiler e instructor de choferes',
     )
     expect(section('Preguntas frecuentes')).toBeInTheDocument()
+  })
+})
+
+describe('trying the course on the landing page', () => {
+  // The preview and the reel load after the rest of the page.
+  async function findSection(name) {
+    return screen.findByRole('region', { name })
+  }
+
+  it('lets visitors answer a real lesson question and earn XP', async () => {
+    const user = userEvent.setup()
+    renderLanding()
+    const preview = within(await findSection('Try a step right now'))
+
+    // The guest-list code trace from Big O lesson 1.
+    expect(preview.getByRole('figure')).toHaveTextContent('isInvited')
+
+    await user.click(preview.getByRole('radio', { name: '6' }))
+    await user.click(preview.getByRole('button', { name: 'Check answer' }))
+    expect(preview.getByText('Not quite. Try again.')).toBeInTheDocument()
+    expect(celebrate).not.toHaveBeenCalled()
+
+    await user.click(preview.getByRole('radio', { name: '4' }))
+    await user.click(preview.getByRole('button', { name: 'Check answer' }))
+    expect(preview.getByText('✓ Correct! Nice!')).toBeInTheDocument()
+    expect(celebrate).toHaveBeenCalledWith('step')
+    // In a live region, so screen readers announce it too.
+    expect(
+      preview
+        .getAllByRole('status')
+        .some((region) => region.textContent.includes('+10 XP')),
+    ).toBe(true)
+    expect(
+      preview.getByRole('link', { name: 'Finish this lesson →' }),
+    ).toHaveAttribute('href', '/learn/big-o/01-why-big-o')
+  })
+
+  it('shows three animations that play on their own', async () => {
+    renderLanding()
+    const reel = within(await findSection('Watch the ideas move'))
+    expect(reel.getAllByRole('figure')).toHaveLength(3)
+    expect(reel.getAllByRole('button', { name: 'Pause' })).toHaveLength(3)
+  })
+
+  it("doesn't play them on devices that ask for less motion", async () => {
+    vi.stubGlobal('matchMedia', (query) => ({
+      matches: query === '(prefers-reduced-motion: reduce)',
+    }))
+    renderLanding()
+    const reel = within(await findSection('Watch the ideas move'))
+    expect(reel.getAllByRole('button', { name: 'Play' })).toHaveLength(3)
+  })
+
+  it('is translated to Spanish', async () => {
+    renderLanding('es')
+    expect(await findSection('Prueba un paso ahora mismo')).toBeInTheDocument()
+    expect(
+      await findSection('Mira cómo se mueven las ideas'),
+    ).toBeInTheDocument()
   })
 })
