@@ -17,6 +17,27 @@ Every file here was **read before it was added** and is **pinned to the exact co
 - **The Impeccable engine** (`scripts/impeccable`). On first use, the launcher downloads a compiled program (about 16 MB) from the project's GitHub releases and runs it. A compiled program can't be read like the rest of the skill, and it sends usage pings to `impeccable.style` unless you set `DO_NOT_TRACK=1`. The skill works without it; the project note in `impeccable/SKILL.md` tells agents how.
 - **Live downloads of rules.** Vercel's original skill fetches its rules from GitHub on every review, so whoever controls that file controls the agent's instructions. The pinned `guidelines.md` changes only through a reviewed PR.
 
+## Installed as a plugin, outside the repo
+
+**Ponytail** ([DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail), MIT) makes the agent write the smallest complete change.
+
+- **Install:** Carlos added it from the plugin marketplace on 2026-10-13. It's installed for his user account, so it's on in all his projects, and nothing of it is in this repo.
+- **Reviewed:** v5.2.0, commit `2961b52`. The installed files matched that commit byte for byte.
+- **What runs:** three small Node hooks.
+  - At session start, it adds its rules plus a short list of the functions and components the code already exports.
+  - When a subagent starts, it gives the subagent the same rules.
+  - On each message, it listens for `/ponytail …` and "stop ponytail".
+- **What it does to your files:**
+  - It writes only its current level, to `~/.claude/.ponytail-active` and `~/.claude/ponytail-modes/`.
+  - The first time, it copies its status-line script into `~/.claude/`.
+  - It makes no network calls, downloads or tracking.
+- **Turning it off:**
+  - For one session: "stop ponytail" or `/ponytail off`.
+  - For good: `/plugin`, then disable it, or set `PONYTAIL_DEFAULT_MODE=off`.
+- **Updating:** auto-update stays off. Review the diff first (steps below), then run `/plugin marketplace update ponytail`.
+
+What it may and may not change in this project is under "Agent skills" in `AGENTS.md`.
+
 ## Updating a skill
 
 1. Clone the source repo into a temporary folder outside this repo.
