@@ -102,16 +102,20 @@ Before every commit, run: `npm run lint && npm run format:check && npm test && n
 
 Four third-party skills live in `.claude/skills/`. Claude Code loads them when a task matches; other agents should read the skill's `SKILL.md` themselves. Each was read before it was added and is pinned to the reviewed commit (see `.claude/skills/README.md`).
 
-| Skill                                 | Use it for                                                                                                                                                                                         |
-| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security-audit` (Cloudflare)         | Security questions and reviews, especially before merging anything that touches login, Supabase RLS, Edge Functions, the AI tutor, the code runner or secrets. A full audit only when Carlos asks. |
-| `impeccable`                          | Designing, critiquing and polishing app screens: lessons, quizzes, practice, dashboards.                                                                                                           |
-| `design-taste-frontend` (taste-skill) | The landing page and other marketing pages.                                                                                                                                                        |
-| `web-design-guidelines` (Vercel)      | Checking UI code against an accessibility and UX checklist before a UI PR.                                                                                                                         |
+Carlos also uses **Ponytail** ([DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)), a Claude Code plugin installed on his computer rather than in this repo. Its hooks switch it on at the start of every Claude Code session.
+
+| Skill                                 | Use it for                                                                                                                                                                                          |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `security-audit` (Cloudflare)         | Security questions and reviews, especially before merging anything that touches login, Supabase RLS, Edge Functions, the AI tutor, the code runner or secrets. A full audit only when Carlos asks.  |
+| `impeccable`                          | Designing, critiquing and polishing app screens: lessons, quizzes, practice, dashboards.                                                                                                            |
+| `design-taste-frontend` (taste-skill) | The landing page and other marketing pages.                                                                                                                                                         |
+| `web-design-guidelines` (Vercel)      | Checking UI code against an accessibility and UX checklist before a UI PR.                                                                                                                          |
+| `ponytail` (plugin, always on)        | The smallest complete change for app code. `/ponytail-review` reviews a diff, `/ponytail-audit` the whole repo, `/ponytail-debt` lists `shortcut:` comments. Levels: `/ponytail lite\|full\|ultra`. |
 
 - **Project rules win.** `AGENTS.md`, `DESIGN.md` (the look) and `PRODUCT.md` (who it's for) are the brief. When a skill disagrees with them (fonts, new libraries, emoji, Title Case, TypeScript), follow the project and say so.
 - **Skills advise; Carlos decides.** A skill's idea to change the look, add a library or restructure a page goes in the PR description as a proposal, not straight into the code.
-- **Never install or update skills automatically** (`npx skills add`, plugin marketplaces, the Impeccable engine). Follow "Updating a skill" in `.claude/skills/README.md`.
+- **Ponytail is for code, not course content.** Never cut or shorten lessons, quizzes, checkpoints or practice to make them smaller. Code in lessons, checkpoints and practice keeps the beginner style (`for (let i = 0; …)` loops, nothing the module hasn't taught), even when a one-liner is shorter. The test rule above still applies: every feature has tests of what the user sees. A deliberate shortcut in app code gets a `// shortcut: <the limit>, <when to upgrade>` comment. To pause Ponytail for one session, say "stop ponytail".
+- **Never install or update skills automatically** (`npx skills add`, plugin marketplaces, the Impeccable engine). Follow "Updating a skill" in `.claude/skills/README.md`. Ponytail's marketplace auto-update stays off, and an update gets the same review.
 - **Audit output stays out of git.** A full security audit writes to `~/security-audit-skill/…`, outside the repo, and its findings describe weaknesses that may still be open.
 
 ## Git workflow (like a big-tech team)
