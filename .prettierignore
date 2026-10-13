@@ -4,3 +4,5 @@ package-lock.json
 content/notes
 .vite
 * [0-9].*
+# Third-party agent skills stay byte-for-byte as reviewed (see .claude/skills/README.md)
+.claude/skills/*/

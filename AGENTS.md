@@ -49,6 +49,9 @@ Free with login while it's being built; payments come later.
 AGENTS.md            # this file
 CLAUDE.md            # points Claude Code to this file
 memory.md            # project memory (see above)
+DESIGN.md            # the app's look: colors, type, components (for design agents)
+PRODUCT.md           # who the app is for and what it promises (for design agents)
+.claude/skills/      # reviewed third-party agent skills (see "Agent skills")
 content/course.json  # course outline: all modules, in order
 content/lessons/     # lessons: <module-slug>/<NN-lesson>.en.md (+ .es.md later)
 content/practice/    # module quiz + exercise JSON, one file per module
@@ -92,6 +95,22 @@ Before every commit, run: `npm run lint && npm run format:check && npm test && n
 - UI text goes in `src/locales/*.json`, never hard-coded (once i18n is set up, stage 4).
 - Secrets live in `.env.local` (git-ignored). Only `VITE_` variables reach the browser, so never put a service-role key in one.
 - **The Anthropic API key never goes in the frontend or Vercel.** It's a Supabase function secret, used only by `supabase/functions/tutor`.
+
+## Agent skills
+
+Four third-party skills live in `.claude/skills/`. Claude Code loads them when a task matches; other agents should read the skill's `SKILL.md` themselves. Each was read before it was added and is pinned to the reviewed commit (see `.claude/skills/README.md`).
+
+| Skill                                 | Use it for                                                                                                                                                                                         |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `security-audit` (Cloudflare)         | Security questions and reviews, especially before merging anything that touches login, Supabase RLS, Edge Functions, the AI tutor, the code runner or secrets. A full audit only when Carlos asks. |
+| `impeccable`                          | Designing, critiquing and polishing app screens: lessons, quizzes, practice, dashboards.                                                                                                           |
+| `design-taste-frontend` (taste-skill) | The landing page and other marketing pages.                                                                                                                                                        |
+| `web-design-guidelines` (Vercel)      | Checking UI code against an accessibility and UX checklist before a UI PR.                                                                                                                         |
+
+- **Project rules win.** `AGENTS.md`, `DESIGN.md` (the look) and `PRODUCT.md` (who it's for) are the brief. When a skill disagrees with them (fonts, new libraries, emoji, Title Case, TypeScript), follow the project and say so.
+- **Skills advise; Carlos decides.** A skill's idea to change the look, add a library or restructure a page goes in the PR description as a proposal, not straight into the code.
+- **Never install or update skills automatically** (`npx skills add`, plugin marketplaces, the Impeccable engine). Follow "Updating a skill" in `.claude/skills/README.md`.
+- **Audit output stays out of git.** A full security audit writes to `~/security-audit-skill/…`, outside the repo, and its findings describe weaknesses that may still be open.
 
 ## Git workflow (like a big-tech team)
 

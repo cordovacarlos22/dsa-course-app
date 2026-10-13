@@ -5,13 +5,15 @@ Agents: read this at the start of every session and update it at the end (see `A
 ## Current stage
 
 - Stages 1–5 are done. **Stage 6 (lessons)** is in progress: Introduction (3 lessons) and Big O (17 lessons) are merged, EN + ES, with checkpoints.
-- 2026-10-12: game-style **celebrations** (confetti + sounds) on `feat/celebrations`.
+- 2026-10-12: game-style **celebrations** merged (PR #19).
+- 2026-10-12: **agent skills** (security + design) and `DESIGN.md` / `PRODUCT.md` on `chore/agent-skills`.
 
 ## Decisions
 
 - 2026-10-11 (replaced the same day, see below): **Lessons are visual-first** (an animation opens every step, 1–3 sentences after it), **one story per module** (Big O: guest list), and **beginner loops** (`for (let i = 0; …; i++)`, no `for...of`/`forEach`). Reason: Carlos's students prefer visuals and many only know basic JavaScript.
 - 2026-10-11: **Show, then explain.** Carlos: keeping the reading low didn't mean erasing it. Every step keeps its animation, but lessons teach at the depth of the course notes and transcripts (300–500 words, every point covered, in our own words). **Coding steps use Learn | Editor over Output** (two columns, the editor above the output), because three columns were too tight.
 - 2026-10-12: **Celebrations, like a game** (Carlos: "like Duolingo, where they celebrate each of your achievements"). The first time a step's check passes: a small confetti burst and a cheer ("Great job!", or "🔥 3 in a row on the first try!"). The lesson's last step: two confetti cannons and a "Lesson complete" card with stats (checks, first tries, "Perfect lesson"). The module's last lesson: star fireworks and a 🏆, plus a badge on the module page. Revisits stay quiet. **Sounds** are made with Web Audio (no audio files), with a 🔊 mute button in the header (saved as `sounds` in localStorage). Devices that ask for less motion get no confetti or pop animations. One entry point, `celebrate(level)` in `src/lib/celebrate.js` (reuse it for quizzes); `canvas-confetti` is loaded on demand. **XP points, daily streaks and badges come in stage 8**, with Supabase (Carlos's choice), so they follow students across devices.
+- 2026-10-12: **Agent skills, reviewed and pinned** (Carlos: repos that give agents "superpowers… also security"). He named five; all were read before adding: Cloudflare `security-audit`, `impeccable` (pbakaus), taste-skill (`design-taste-frontend`), Vercel's web interface guidelines, and awesome-design-md (VoltAgent). The four skills live in `.claude/skills/`, pinned to the reviewed commit (table and update steps in `.claude/skills/README.md`). awesome-design-md only collects other brands' `DESIGN.md` files, so we wrote our own **`DESIGN.md`** (the current look) plus **`PRODUCT.md`** (audience and promise); design skills treat them as the brief. **Left out on purpose:** the Impeccable engine (its launcher downloads a compiled program and it sends usage pings by default) and Vercel's live rule download (we read a pinned copy). **Rules:** project rules win over skills; skills propose and Carlos decides; never auto-install or update skills; full security audits only when Carlos asks, with output kept outside the repo. They were skills, not MCP servers, so no `.mcp.json` was needed.
 - 2026-10-11 (later): **Big O follows both courses closely.** Carlos: "still not enough … missing a lot of the content from the 2 files … even if we are going to be super close to the original 2 courses". One lesson per lecture (17), the courses' own examples plus the guest-list animations, every point of both files (text, slides and quizzes) covered; sentences stay ours. **Sources for Big O are his two `.docx` files** in the "DSA + LEETCODE…" Desktop folder, not `guiones/`; he'll add files for the other modules later.
 
 - 2026-10-11: **Codecademy-style learning (Carlos).** Students must prove they understood before moving on: lessons are split into **steps** (each `##` heading), every step ends with a **checkpoint** (quick question or small code task checked by tests), and **Next stays locked until it passes**. Stuck → hint, then the solution after 3 failed tries (recorded as "viewed solution"). Coding steps use a **3-pane workspace** (Learn | Editor | Output). Being built in `feat/step-checkpoints`.
@@ -103,16 +105,24 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 - 2026-10-11, PR #17 third round: 17 Big O lessons (9,060 English words, 51 steps and checkpoints, EN + ES), quiz 33 questions; new traces (`sumUpTo` loop vs formula, `printNumbers`, `printPairs`, `doubleArray`), `timing-chart` and `array-splice`; `content:validate` also rejects repeated options.
 
-- 2026-10-12, `feat/celebrations`: confetti and sounds for each win (step, lesson, module), cheers and first-try streaks, the "Lesson complete" card with stats, the module 🏆 badge, and the 🔊 mute button. Reduced motion respected.
+- 2026-10-12, `feat/celebrations` (PR #19): confetti and sounds for each win (step, lesson, module), cheers and first-try streaks, the "Lesson complete" card with stats, the module 🏆 badge, and the 🔊 mute button. Reduced motion respected.
+- 2026-10-12, `chore/agent-skills`: the four reviewed skills, `DESIGN.md`, `PRODUCT.md`, and the "Agent skills" section in `AGENTS.md`. First runs: the security review (guidance mode) found no vulnerabilities, and the Vercel UI review found the items listed under Next.
 
 ## Next
 
-- **Security tools** (Carlos, 2026-10-12): he has security projects made by someone else, maybe MCP servers. His 15 attachments didn't arrive, so ask for GitHub links or folder paths. Read each tool's code before installing it. MCP servers go in a committed `.mcp.json`, with secrets only in environment variables. One small PR per tool. If a Content-Security-Policy is added, confetti needs `worker-src 'self' blob:`.
+- **UI review fixes** (Vercel guidelines run, 2026-10-12), waiting for Carlos's OK:
+  1. `RunnableCode.jsx`: the code box has `outline-none` with no focus style, and long printed lines (e.g. `[1,2,3,…]`) get cut off by `overflow-hidden`.
+  2. Every page has the same English `<title>`; no "Skip to content" link.
+  3. `FirstVisitLanguagePicker`: the dialog doesn't take focus (a native `<dialog>` with `showModal()` would).
+  4. `LessonPage`: changing steps leaves focus on the button (move it to the step heading); the sticky Back/Next bar can cover focused elements (`scroll-padding-bottom`).
+  5. `DominantTerm.jsx`: `transition-all` on width, not behind `motion-safe:`. Smaller: header buttons about 28 px tall, the "Next is locked" note is hidden on phones, the workspace tabs lack arrow keys.
+- **Security hardening before stage 8 (accounts):** security headers in `vercel.json` (a CSP that allows `worker-src 'self' blob:` for confetti and the code runner, `frame-ancestors 'none'`, `nosniff`, a referrer policy); `permissions: contents: read` in `ci.yml`; upgrade Vitest to ≥ 4.1.11 (dev-only advisories in tinypool and @vitest/mocker; production dependencies have none).
+- **Design proposals** from the skills, for Carlos to decide: a real favicon (still Vite's), a self-hosted brand font, and no box nested inside the lesson-complete card.
 
 - Big O module still needs: the interview problem "Count the Operations" and its slides (later stage).
 - Next content (per `docs/curriculum.md`): **Big O of Arrays & Objects**, then **Classes & Pointers** lessons.
 - Stage 7 (quiz + exercise pages) so students can take the quizzes and solve the exercises.
-- Carlos: delete the iCloud duplicate `src/pages/LandingPage.test 2.jsx`.
+- Carlos: delete the iCloud duplicates `src/pages/LandingPage.test 2.jsx`, `src/components/SoundToggle.test 2.jsx` and `src/components/lesson/LessonComplete 2.jsx`.
 
 ## Course sections imported
 
