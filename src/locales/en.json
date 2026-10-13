@@ -1,11 +1,14 @@
 {
   "app": {
     "name": "DSA in JavaScript",
-    "footer": "Made by charliecodeacademy"
+    "footer": "Made by charliecodeacademy",
+    "title": "DSA in JavaScript · Learn data structures & algorithms step by step",
+    "pageTitle": "{{page}} · DSA in JavaScript"
   },
   "nav": {
     "learn": "Course",
-    "mainNavigation": "Main navigation"
+    "mainNavigation": "Main navigation",
+    "skipToContent": "Skip to content"
   },
   "language": {
     "pickerSubtitle": "You can change it any time from the top bar.",

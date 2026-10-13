@@ -22,7 +22,9 @@ function LanguageSwitcher() {
             onClick={() => setLanguage(code)}
             aria-pressed={isActive}
             aria-label={t(`language.${code}`)}
-            className={`rounded-full px-3 py-1 font-semibold uppercase transition-colors ${
+            // after:-inset-y-2.5: a taller tap area (about 46 px) with no visual
+            // change. Vertical only, so EN and ES don't overlap.
+            className={`relative rounded-full px-3 py-1 font-semibold uppercase transition-colors after:absolute after:inset-x-0 after:-inset-y-2.5 ${
               isActive ? 'bg-brand text-white' : 'text-slate-600 hover:text-ink'
             }`}
           >

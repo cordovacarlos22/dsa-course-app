@@ -41,13 +41,13 @@ function DominantTerm() {
           </p>
           <div className="flex h-10 w-full overflow-hidden rounded-lg border border-slate-300">
             <div
-              className="flex items-center justify-center bg-brand text-xs font-bold text-white transition-all duration-700"
+              className="flex items-center justify-center bg-brand text-xs font-bold text-white motion-safe:transition-[width] motion-safe:duration-700"
               style={{ width: `${100 - step.share}%` }}
             >
               n²
             </div>
             <div
-              className="flex items-center justify-center bg-accent text-xs font-bold transition-all duration-700"
+              className="flex items-center justify-center bg-accent text-xs font-bold motion-safe:transition-[width] motion-safe:duration-700"
               style={{ width: `${step.share}%`, minWidth: '4px' }}
             >
               {step.share > 8 ? 'n' : ''}

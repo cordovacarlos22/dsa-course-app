@@ -13,6 +13,14 @@ function Layout() {
 
   return (
     <div className="flex min-h-screen flex-col bg-surface text-ink">
+      {/* Hidden until the first Tab: lets keyboard users jump past the
+          header straight to the page's content. */}
+      <a
+        href="#main-content"
+        className="sr-only rounded-lg bg-brand px-4 py-2 font-bold text-white focus:not-sr-only focus:absolute focus:top-3 focus:left-4 focus:z-50"
+      >
+        {t('nav.skipToContent')}
+      </a>
       <header className="border-b border-slate-200 bg-white">
         <div
           className={`mx-auto flex ${width} items-center justify-between gap-4 px-4 py-3`}
@@ -32,7 +40,7 @@ function Layout() {
             <NavLink
               to="/learn"
               className={({ isActive }) =>
-                `font-medium hover:text-brand ${isActive ? 'text-brand' : 'text-slate-700'}`
+                `relative font-medium after:absolute after:-inset-x-1 after:-inset-y-2.5 hover:text-brand ${isActive ? 'text-brand' : 'text-slate-700'}`
               }
             >
               {t('nav.learn')}
@@ -43,7 +51,10 @@ function Layout() {
         </div>
       </header>
 
-      <main className={`mx-auto w-full ${width} flex-1 px-4 py-8`}>
+      <main
+        id="main-content"
+        className={`mx-auto w-full ${width} flex-1 px-4 py-8`}
+      >
         <Outlet />
       </main>
 

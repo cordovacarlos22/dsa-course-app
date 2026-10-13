@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import ModuleCard from '../components/ModuleCard'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useLanguage } from '../hooks/useLanguage'
 import { getCourse, getSections, localize } from '../lib/course'
 
@@ -8,6 +9,7 @@ function CourseHomePage() {
   const { t } = useTranslation()
   const { language } = useLanguage()
   const course = getCourse()
+  useDocumentTitle(t('course.title'))
 
   return (
     <div>

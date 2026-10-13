@@ -1,9 +1,9 @@
-import { render, screen, within } from '@testing-library/react'
+import { act, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
 import { describe, it, expect } from 'vitest'
 import App from './App'
-import { saveLanguage } from './lib/languageStorage'
+import { getSavedLanguage, saveLanguage } from './lib/languageStorage'
 
 // Renders the whole app at a given URL, like a student opening that page.
 function renderAppAt(path) {
@@ -45,6 +45,25 @@ describe('first visit', () => {
   })
 })
 
+describe('first visit, closing the picker with Escape', () => {
+  it('keeps English and does not ask again', () => {
+    renderAppAt('/')
+    const picker = screen.getByRole('dialog', { name: /choose your language/i })
+
+    // Escape closes a modal dialog without a return value.
+    act(() => picker.close())
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    expect(getSavedLanguage()).toBe('en')
+    expect(
+      screen.getByRole('heading', {
+        level: 1,
+        name: 'Learn data structures and algorithms in JavaScript, step by step',
+      }),
+    ).toBeInTheDocument()
+  })
+})
+
 describe('language switcher', () => {
   it('switches the interface between English and Spanish', async () => {
     const user = userEvent.setup()
@@ -64,6 +83,52 @@ describe('language switcher', () => {
       'true',
     )
     expect(document.documentElement.lang).toBe('es')
+  })
+})
+
+describe('skip link', () => {
+  it('is the first thing the Tab key reaches and jumps to the content', async () => {
+    const user = userEvent.setup()
+    renderAsReturningStudent('/learn')
+
+    await user.tab()
+    const skipLink = screen.getByRole('link', { name: 'Skip to content' })
+    expect(skipLink).toHaveFocus()
+    expect(skipLink).toHaveAttribute('href', '#main-content')
+    expect(screen.getByRole('main')).toHaveAttribute('id', 'main-content')
+  })
+})
+
+describe('tab titles', () => {
+  it('names each page in the browser tab', () => {
+    const { unmount } = renderAsReturningStudent('/')
+    expect(document.title).toBe(
+      'DSA in JavaScript · Learn data structures & algorithms step by step',
+    )
+    unmount()
+
+    renderAsReturningStudent('/learn/big-o')
+    expect(document.title).toBe('Big O · DSA in JavaScript')
+  })
+
+  it('names a lesson by its title', async () => {
+    renderAsReturningStudent('/learn/big-o/01-why-big-o')
+    await screen.findByRole('heading', { level: 1, name: 'Why Big O?' })
+    expect(document.title).toBe('Why Big O? · DSA in JavaScript')
+  })
+
+  it('says when a page does not exist', () => {
+    renderAsReturningStudent('/learn/no-such-module')
+    expect(document.title).toBe('Page not found · DSA in JavaScript')
+  })
+
+  it('follows the language switch', async () => {
+    const user = userEvent.setup()
+    renderAsReturningStudent('/learn')
+    expect(document.title).toBe('Course modules · DSA in JavaScript')
+
+    await user.click(screen.getByRole('button', { name: 'Español' }))
+    expect(document.title).toBe('Módulos del curso · DSA en JavaScript')
   })
 })
 

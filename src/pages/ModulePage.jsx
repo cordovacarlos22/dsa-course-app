@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useLanguage } from '../hooks/useLanguage'
 import { getModule, localize } from '../lib/course'
 import { getLessonVersion } from '../lib/lessons'
@@ -12,6 +13,10 @@ function ModulePage() {
   const { t } = useTranslation()
   const { language } = useLanguage()
   const module = getModule(moduleSlug)
+  // Called before the early return: hooks must run on every render.
+  useDocumentTitle(
+    module ? localize(module.title, language) : t('notFound.title'),
+  )
 
   if (!module) return <NotFoundPage />
 
