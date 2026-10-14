@@ -1,0 +1,128 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "An object has n properties. What are the time and the extra space of `Object.values(obj)`?",
+        "es": "Un objeto tiene n propiedades. ¿Cuál es el tiempo y el espacio extra de `Object.values(obj)`?"
+      },
+      "options": [
+        {
+          "en": "O(1) time, O(1) space",
+          "es": "Tiempo O(1), espacio O(1)"
+        },
+        {
+          "en": "O(n) time, O(1) space",
+          "es": "Tiempo O(n), espacio O(1)"
+        },
+        {
+          "en": "O(1) time, O(n) space",
+          "es": "Tiempo O(1), espacio O(n)"
+        },
+        {
+          "en": "O(n) time, O(n) space",
+          "es": "Tiempo O(n), espacio O(n)"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "It visits every property, and it returns something new.",
+        "es": "Visita cada propiedad, y devuelve algo nuevo."
+      },
+      "explanation": {
+        "en": "It visits all n properties (O(n) time) and returns a new array with n values (O(n) extra space).",
+        "es": "Visita las n propiedades (tiempo O(n)) y devuelve un array nuevo con n valores (espacio extra O(n))."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `hasReplied(rsvps, name)`, which returns `true` if the guest has a key in the object, and `false` if not. Make it O(1), and make sure inherited methods like `'toString'` don't count.",
+        "es": "Escribe `hasReplied(rsvps, name)`, que devuelve `true` si el invitado tiene una clave en el objeto, y `false` si no. Hazla O(1), y asegúrate de que los métodos heredados como `'toString'` no cuenten."
+      },
+      "hint": {
+        "en": "`in` counts inherited methods too. Which method only counts the keys the object owns?",
+        "es": "`in` también cuenta los métodos heredados. ¿Qué método solo cuenta las claves que el objeto posee?"
+      },
+      "starterCode": "function hasReplied(rsvps, name) {\n  // Is name one of the object's own keys?\n  return false\n}",
+      "solution": "function hasReplied(rsvps, name) {\n  return rsvps.hasOwnProperty(name)\n}",
+      "kind": "function",
+      "functionName": "hasReplied",
+      "tests": [
+        {
+          "args": [
+            {
+              "Ana": "yes",
+              "Ben": "no"
+            },
+            "Ana"
+          ],
+          "expected": true
+        },
+        {
+          "args": [
+            {
+              "Ana": "yes",
+              "Ben": "no"
+            },
+            "Zoe"
+          ],
+          "expected": false
+        },
+        {
+          "args": [
+            {
+              "Ana": "yes",
+              "Ben": "no"
+            },
+            "toString"
+          ],
+          "expected": false
+        },
+        {
+          "args": [
+            {
+              "Cleo": "maybe"
+            },
+            "Cleo"
+          ],
+          "expected": true
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "A function loops over the n keys of `rsvps`, and on every pass it reads `Object.keys(rsvps).length` to print the total. What's the Big O of the whole function?",
+        "es": "Una función recorre las n claves de `rsvps`, y en cada vuelta lee `Object.keys(rsvps).length` para imprimir el total. ¿Cuál es el Big O de toda la función?"
+      },
+      "options": [
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        },
+        {
+          "en": "O(log n)",
+          "es": "O(log n)"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "How many keys does `Object.keys` visit on each pass of the loop?",
+        "es": "¿Cuántas claves visita `Object.keys` en cada vuelta del bucle?"
+      },
+      "explanation": {
+        "en": "The loop runs n times, and each time `Object.keys` visits all n keys again: n × n, O(n²). Saving the length in a variable before the loop makes it O(n).",
+        "es": "El bucle da n vueltas, y en cada una `Object.keys` visita otra vez las n claves: n × n, O(n²). Guardar el tamaño en una variable antes del bucle lo vuelve O(n)."
+      }
+    }
+  ]
+}

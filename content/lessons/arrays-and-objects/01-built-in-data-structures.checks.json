@@ -1,0 +1,101 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "In the animation, Zoe was added at the start. Why did the array touch every box while the object touched only one?",
+        "es": "En la animación, Zoe se agregó al principio. ¿Por qué el array tocó todas las cajas y el objeto solo una?"
+      },
+      "options": [
+        {
+          "en": "The object is smaller than the array",
+          "es": "El objeto es más pequeño que el array"
+        },
+        {
+          "en": "The array keeps its items in order, so every guest got a new index; the object has no order, so it has no start",
+          "es": "El array guarda sus elementos en orden, así que cada invitado recibió un índice nuevo; el objeto no tiene orden, así que no tiene principio"
+        },
+        {
+          "en": "Objects are always faster than arrays",
+          "es": "Los objetos siempre son más rápidos que los arrays"
+        },
+        {
+          "en": "The array had to search for Zoe first",
+          "es": "El array tuvo que buscar a Zoe primero"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "What does an array keep that an object doesn't?",
+        "es": "¿Qué guarda un array que un objeto no?"
+      },
+      "explanation": {
+        "en": "The array pays for its order: adding at the start shifts every index. An object labels its values with keys and has no positions, so there's nothing to shift. That's the trade-off between them.",
+        "es": "El array paga por su orden: agregar al principio recorre todos los índices. Un objeto etiqueta sus valores con claves y no tiene posiciones, así que no hay nada que recorrer. Ese es el intercambio entre los dos."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `lastGuest(guests)` so it returns the last guest of the list **with access, not search**: no loop, one step whatever the size of the list.",
+        "es": "Escribe `lastGuest(guests)` para que devuelva el último invitado de la lista **accediendo, no buscando**: sin bucle, un solo paso sin importar el tamaño de la lista."
+      },
+      "hint": {
+        "en": "The last index is always one less than the length: `guests.length - 1`.",
+        "es": "El último índice siempre es uno menos que el tamaño: `guests.length - 1`."
+      },
+      "starterCode": "function lastGuest(guests) {\n  // Return the last guest, without a loop\n}",
+      "solution": "function lastGuest(guests) {\n  return guests[guests.length - 1]\n}",
+      "kind": "function",
+      "functionName": "lastGuest",
+      "tests": [
+        {
+          "args": [["Ana", "Ben", "Cleo"]],
+          "expected": "Cleo"
+        },
+        {
+          "args": [["Ana"]],
+          "expected": "Ana"
+        },
+        {
+          "args": [["Ana", "Ben", "Cleo", "Dev", "Eli", "Fay"]],
+          "expected": "Fay"
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "What's the simplest question to ask when you want to place a built-in method on the Big O scale?",
+        "es": "¿Cuál es la pregunta más sencilla para ubicar un método incluido en la escala de Big O?"
+      },
+      "options": [
+        {
+          "en": "How long is the line of code?",
+          "es": "¿Qué tan larga es la línea de código?"
+        },
+        {
+          "en": "Was it written by me or by JavaScript?",
+          "es": "¿Lo escribí yo o JavaScript?"
+        },
+        {
+          "en": "How many items does it touch as the data grows?",
+          "es": "¿Cuántos elementos toca conforme crecen los datos?"
+        },
+        {
+          "en": "How many milliseconds did it take on my computer?",
+          "es": "¿Cuántos milisegundos tardó en mi computadora?"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Big O is about how the work grows, not about the code's length or the machine.",
+        "es": "Big O trata de cómo crece el trabajo, no del largo del código ni de la máquina."
+      },
+      "explanation": {
+        "en": "One item whatever the size is O(1); every item once is O(n). A short line can hide a loop, and milliseconds depend on the machine, so count the items it touches.",
+        "es": "Un elemento sin importar el tamaño es O(1); cada elemento una vez es O(n). Una línea corta puede esconder un bucle, y los milisegundos dependen de la máquina, así que cuenta los elementos que toca."
+      }
+    }
+  ]
+}

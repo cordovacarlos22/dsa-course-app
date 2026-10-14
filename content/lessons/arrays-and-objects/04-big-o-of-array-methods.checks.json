@@ -1,0 +1,130 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What's the Big O of `shift()` on an array of n items?",
+        "es": "¿Cuál es el Big O de `shift()` en un array de n elementos?"
+      },
+      "options": [
+        { "en": "O(1)", "es": "O(1)" },
+        { "en": "O(n/2)", "es": "O(n/2)" },
+        { "en": "O(n)", "es": "O(n)" },
+        { "en": "O(log n)", "es": "O(log n)" }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "After the first item leaves, how many of the others need a new index? And what do we do with constants like ½?",
+        "es": "Cuando sale el primer elemento, ¿cuántos de los demás necesitan un índice nuevo? ¿Y qué hacemos con constantes como ½?"
+      },
+      "explanation": {
+        "en": "Every remaining item moves down one index, so the work grows with n. O(n/2) isn't a thing we write: constants are dropped, so it's O(n).",
+        "es": "Cada elemento que queda baja un índice, así que el trabajo crece con n. O(n/2) no se escribe: las constantes se eliminan, así que es O(n)."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "`guests.slice(0, 3)` runs on an array of 1,000,000 guests. How many items does it copy?",
+        "es": "`guests.slice(0, 3)` se ejecuta en un array de 1,000,000 de invitados. ¿Cuántos elementos copia?"
+      },
+      "options": [
+        { "en": "3", "es": "3" },
+        { "en": "1,000,000", "es": "1,000,000" },
+        { "en": "999,997", "es": "999,997" },
+        {
+          "en": "None: it changes the array in place",
+          "es": "Ninguno: cambia el array en su lugar"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "slice copies from the start index up to, but not including, the end index.",
+        "es": "slice copia desde el índice de inicio hasta el índice final, sin incluirlo."
+      },
+      "explanation": {
+        "en": "slice's cost is the size of the copy: indexes 0, 1 and 2, so 3 items. It's listed as O(n) because a slice can be as large as the whole array.",
+        "es": "El costo de slice es el tamaño de la copia: los índices 0, 1 y 2, o sea 3 elementos. Aparece como O(n) porque un slice puede ser tan grande como todo el array."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "What does `[3, 20, 100, 1].sort()` return?",
+        "es": "¿Qué devuelve `[3, 20, 100, 1].sort()`?"
+      },
+      "options": [
+        { "en": "`[1, 3, 20, 100]`", "es": "`[1, 3, 20, 100]`" },
+        { "en": "`[1, 100, 20, 3]`", "es": "`[1, 100, 20, 3]`" },
+        { "en": "`[100, 20, 3, 1]`", "es": "`[100, 20, 3, 1]`" },
+        { "en": "`[3, 20, 100, 1]`", "es": "`[3, 20, 100, 1]`" }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Without a compare function, sort compares the items as text, like words in a dictionary.",
+        "es": "Sin una función de comparación, sort compara los elementos como texto, como palabras en un diccionario."
+      },
+      "explanation": {
+        "en": "As text, '1' < '100' < '20' < '3', because strings are compared character by character. To sort numbers, use `sort((a, b) => a - b)`.",
+        "es": "Como texto, '1' < '100' < '20' < '3', porque los strings se comparan carácter por carácter. Para ordenar números, usa `sort((a, b) => a - b)`."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `shout(guests)`, which returns a **new** array with every name in capital letters, like `['ANA', 'BEN']`. Use `map` or a `for` loop: either way, it's O(n).",
+        "es": "Escribe `shout(guests)`, que devuelve un array **nuevo** con cada nombre en mayúsculas, como `['ANA', 'BEN']`. Usa `map` o un bucle `for`: de cualquier forma, es O(n)."
+      },
+      "hint": {
+        "en": "`name.toUpperCase()` gives you the name in capital letters. With map: `guests.map((name) => …)`.",
+        "es": "`name.toUpperCase()` te da el nombre en mayúsculas. Con map: `guests.map((name) => …)`."
+      },
+      "starterCode": "function shout(guests) {\n  // Return a new array with every name in capital letters\n  return []\n}",
+      "solution": "function shout(guests) {\n  return guests.map((name) => name.toUpperCase())\n}",
+      "kind": "function",
+      "functionName": "shout",
+      "tests": [
+        { "args": [["Ana", "Ben"]], "expected": ["ANA", "BEN"] },
+        {
+          "args": [["Cleo", "Dev", "Eli"]],
+          "expected": ["CLEO", "DEV", "ELI"]
+        },
+        { "args": [[]], "expected": [] }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Your app looks up a guest's answer by name thousands of times a night, and the order of the guests never matters. Which structure fits best?",
+        "es": "Tu app busca la respuesta de un invitado por su nombre miles de veces por noche, y el orden de los invitados nunca importa. ¿Qué estructura conviene más?"
+      },
+      "options": [
+        {
+          "en": "An array of names, searched with `indexOf`",
+          "es": "Un array de nombres, donde buscas con `indexOf`"
+        },
+        {
+          "en": "An object with the guests' names as keys",
+          "es": "Un objeto con los nombres de los invitados como claves"
+        },
+        {
+          "en": "An array you sort again before every lookup",
+          "es": "Un array que vuelves a ordenar antes de cada búsqueda"
+        },
+        {
+          "en": "An array where every new guest is added with `unshift`",
+          "es": "Un array donde cada invitado nuevo se agrega con `unshift`"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Order doesn't matter, and the job is \"look up by name\". Which structure does that in O(1)?",
+        "es": "El orden no importa, y el trabajo es \"buscar por nombre\". ¿Qué estructura hace eso en O(1)?"
+      },
+      "explanation": {
+        "en": "With names as keys, each lookup is O(1). Searching an array is O(n) per lookup, sorting is O(n log n) each time, and unshift is O(n) per guest.",
+        "es": "Con los nombres como claves, cada búsqueda es O(1). Buscar en un array es O(n) por búsqueda, ordenar es O(n log n) cada vez, y unshift es O(n) por invitado."
+      }
+    }
+  ]
+}

@@ -1,0 +1,680 @@
+{
+  "slug": "arrays-and-objects",
+  "order": 3,
+  "title": {
+    "en": "Big O of Arrays & Objects",
+    "es": "Big O de arrays y objetos"
+  },
+  "sourceFolder": "course 2/section 3 - ",
+  "questions": [
+    {
+      "id": "object-insert",
+      "topic": "Objects",
+      "prompt": {
+        "en": "What's the Big O of adding a new key to an object, like `rsvps.Fay = 'yes'`?",
+        "es": "¿Cuál es el Big O de agregar una clave nueva a un objeto, como `rsvps.Fay = 'yes'`?"
+      },
+      "options": [
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(log n)",
+          "es": "O(log n)"
+        },
+        {
+          "en": "O(n log n)",
+          "es": "O(n log n)"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "The key goes straight to its own slot, and no other key moves. Adding a key is O(1), whatever the size of the object.",
+        "es": "La clave va directo a su propia casilla, y ninguna otra clave se mueve. Agregar una clave es O(1), sin importar el tamaño del objeto."
+      }
+    },
+    {
+      "id": "object-remove",
+      "topic": "Objects",
+      "prompt": {
+        "en": "You run `delete rsvps.Cleo` on an object with 10,000 keys. How many of the other keys get re-indexed?",
+        "es": "Ejecutas `delete rsvps.Cleo` en un objeto con 10,000 claves. ¿Cuántas de las otras claves se reindexan?"
+      },
+      "options": [
+        {
+          "en": "All 9,999 of them",
+          "es": "Las 9,999"
+        },
+        {
+          "en": "About half of them",
+          "es": "Más o menos la mitad"
+        },
+        {
+          "en": "None: object keys have no indexes",
+          "es": "Ninguna: las claves de un objeto no tienen índices"
+        },
+        {
+          "en": "Only the keys added after Cleo",
+          "es": "Solo las claves que se agregaron después de Cleo"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "Objects have no order and no positions, so removing a key never moves the others. Removing a key is O(1).",
+        "es": "Los objetos no tienen orden ni posiciones, así que quitar una clave nunca mueve a las demás. Quitar una clave es O(1)."
+      }
+    },
+    {
+      "id": "object-search-value",
+      "topic": "Objects",
+      "prompt": {
+        "en": "Which of these is O(n) on an object with n properties?",
+        "es": "¿Cuál de estas es O(n) en un objeto con n propiedades?"
+      },
+      "options": [
+        {
+          "en": "Reading `rsvps['Dev']`",
+          "es": "Leer `rsvps['Dev']`"
+        },
+        {
+          "en": "`rsvps.hasOwnProperty('Dev')`",
+          "es": "`rsvps.hasOwnProperty('Dev')`"
+        },
+        {
+          "en": "Changing `rsvps.Dev = 'no'`",
+          "es": "Cambiar `rsvps.Dev = 'no'`"
+        },
+        {
+          "en": "Checking whether anyone's answer is `'maybe'`",
+          "es": "Revisar si la respuesta de alguien es `'maybe'`"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "The first three use a key, so they jump straight to it: O(1). Looking for a value has no shortcut, so every property may need to be checked: O(n).",
+        "es": "Las tres primeras usan una clave, así que saltan directo a ella: O(1). Buscar un valor no tiene atajo, así que quizá haya que revisar cada propiedad: O(n)."
+      }
+    },
+    {
+      "id": "object-keys-cost",
+      "topic": "Object methods",
+      "prompt": {
+        "en": "Why is `Object.keys(obj)` O(n)?",
+        "es": "¿Por qué `Object.keys(obj)` es O(n)?"
+      },
+      "options": [
+        {
+          "en": "It visits every property once to build a new array",
+          "es": "Visita cada propiedad una vez para construir un array nuevo"
+        },
+        {
+          "en": "It sorts the keys before returning them",
+          "es": "Ordena las claves antes de devolverlas"
+        },
+        {
+          "en": "It has to re-index the object",
+          "es": "Tiene que reindexar el objeto"
+        },
+        {
+          "en": "It isn't: it's O(1), like reading a key",
+          "es": "No lo es: es O(1), como leer una clave"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "To return every key, it has to visit every property and copy it into a new array. n properties means about n steps: O(n).",
+        "es": "Para devolver cada clave, tiene que visitar cada propiedad y copiarla a un array nuevo. n propiedades son más o menos n pasos: O(n)."
+      }
+    },
+    {
+      "id": "object-entries-space",
+      "topic": "Object methods",
+      "prompt": {
+        "en": "What's the extra **space** that `Object.entries(obj)` needs for an object with n properties?",
+        "es": "¿Cuánto **espacio** extra necesita `Object.entries(obj)` para un objeto con n propiedades?"
+      },
+      "options": [
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(log n)",
+          "es": "O(log n)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "It returns a new array with one `[key, value]` pair per property, so the memory grows with n: O(n) space.",
+        "es": "Devuelve un array nuevo con un par `[clave, valor]` por propiedad, así que la memoria crece con n: espacio O(n)."
+      }
+    },
+    {
+      "id": "has-own-property",
+      "topic": "Object methods",
+      "prompt": {
+        "en": "Why is `obj.hasOwnProperty(key)` O(1)?",
+        "es": "¿Por qué `obj.hasOwnProperty(key)` es O(1)?"
+      },
+      "options": [
+        {
+          "en": "It goes straight to where the key would be, the same jump as reading a key",
+          "es": "Va directo a donde estaría la clave, el mismo salto que leer una clave"
+        },
+        {
+          "en": "It stops as soon as it finds the key in a loop",
+          "es": "Se detiene en cuanto encuentra la clave en un bucle"
+        },
+        {
+          "en": "It only works on small objects",
+          "es": "Solo funciona con objetos pequeños"
+        },
+        {
+          "en": "It reads the keys in alphabetical order",
+          "es": "Lee las claves en orden alfabético"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Checking whether a key exists is the same trip as reading it: turn the key into its slot and look there. No loop: O(1).",
+        "es": "Revisar si una clave existe es el mismo viaje que leerla: convertir la clave en su casilla y mirar ahí. Sin bucle: O(1)."
+      }
+    },
+    {
+      "id": "array-push-many",
+      "topic": "Arrays",
+      "prompt": {
+        "en": "You add 10,000 guests to an array, one at a time. Which way costs O(1) per guest?",
+        "es": "Agregas 10,000 invitados a un array, uno por uno. ¿Qué forma cuesta O(1) por invitado?"
+      },
+      "options": [
+        {
+          "en": "`unshift` each guest",
+          "es": "Hacer `unshift` con cada invitado"
+        },
+        {
+          "en": "`splice(0, 0, guest)` each guest",
+          "es": "Hacer `splice(0, 0, guest)` con cada invitado"
+        },
+        {
+          "en": "`concat` a one-guest array each time",
+          "es": "Hacer `concat` con un array de un invitado cada vez"
+        },
+        {
+          "en": "`push` each guest",
+          "es": "Hacer `push` con cada invitado"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "push adds at the end, so nobody moves: O(1). unshift and splice at index 0 re-index everyone, and concat copies the whole array every time: O(n) each.",
+        "es": "push agrega al final, así que nadie se mueve: O(1). unshift y splice en el índice 0 reindexan a todos, y concat copia todo el array cada vez: O(n) cada uno."
+      }
+    },
+    {
+      "id": "shift-in-a-loop",
+      "topic": "Arrays",
+      "prompt": {
+        "en": "A loop empties an array of n items by calling `shift()` once per pass, until nothing is left. What's the Big O of the whole loop?",
+        "es": "Un bucle vacía un array de n elementos llamando a `shift()` una vez por vuelta, hasta que no queda nada. ¿Cuál es el Big O de todo el bucle?"
+      },
+      "options": [
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        },
+        {
+          "en": "O(n log n)",
+          "es": "O(n log n)"
+        },
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "The loop runs n times and each shift re-indexes what's left, which is O(n). n times O(n) is O(n²). Reading the items by index instead would be O(n).",
+        "es": "El bucle da n vueltas y cada shift reindexa lo que queda, que es O(n). n veces O(n) es O(n²). Leer los elementos por índice sería O(n)."
+      }
+    },
+    {
+      "id": "concat-two-arrays",
+      "topic": "Array methods",
+      "prompt": {
+        "en": "`a.concat(b)` joins an array `a` of n items with an array `b` of m items. What's its Big O?",
+        "es": "`a.concat(b)` une un array `a` de n elementos con un array `b` de m elementos. ¿Cuál es su Big O?"
+      },
+      "options": [
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(n + m)",
+          "es": "O(n + m)"
+        },
+        {
+          "en": "O(n · m)",
+          "es": "O(n · m)"
+        },
+        {
+          "en": "O(log(n + m))",
+          "es": "O(log(n + m))"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "concat copies every item of both arrays into a new one: n + m steps. You'll often see it written as O(n), with n meaning the size of the result.",
+        "es": "concat copia cada elemento de los dos arrays a uno nuevo: n + m pasos. Muchas veces lo vas a ver escrito como O(n), donde n es el tamaño del resultado."
+      }
+    },
+    {
+      "id": "which-method-changes",
+      "topic": "Array methods",
+      "prompt": {
+        "en": "Which of these methods changes the original array?",
+        "es": "¿Cuál de estos métodos cambia el array original?"
+      },
+      "options": [
+        {
+          "en": "`slice`",
+          "es": "`slice`"
+        },
+        {
+          "en": "`concat`",
+          "es": "`concat`"
+        },
+        {
+          "en": "`map`",
+          "es": "`map`"
+        },
+        {
+          "en": "`splice`",
+          "es": "`splice`"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "splice inserts and removes items in place, re-indexing everything after that spot. slice, concat and map all build a new array and leave the original alone.",
+        "es": "splice inserta y quita elementos en su lugar, reindexando todo lo que está después. slice, concat y map construyen un array nuevo y dejan el original en paz."
+      }
+    },
+    {
+      "id": "sort-big-o",
+      "topic": "Array methods",
+      "prompt": {
+        "en": "What's the Big O of JavaScript's built-in `sort`?",
+        "es": "¿Cuál es el Big O del `sort` incluido en JavaScript?"
+      },
+      "options": [
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(log n)",
+          "es": "O(log n)"
+        },
+        {
+          "en": "O(n log n)",
+          "es": "O(n log n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "Sorting needs comparisons: looking at each item once isn't enough. Good sorting algorithms, like the one JavaScript uses, need about n × log n of them.",
+        "es": "Ordenar necesita comparaciones: mirar cada elemento una vez no alcanza. Los buenos algoritmos de ordenamiento, como el que usa JavaScript, necesitan como n × log n."
+      }
+    },
+    {
+      "id": "sort-numbers",
+      "topic": "Array methods",
+      "prompt": {
+        "en": "How do you sort `[10, 9, 1]` from smallest to largest **as numbers**?",
+        "es": "¿Cómo ordenas `[10, 9, 1]` de menor a mayor **como números**?"
+      },
+      "options": [
+        {
+          "en": "`[10, 9, 1].sort((a, b) => a - b)`",
+          "es": "`[10, 9, 1].sort((a, b) => a - b)`"
+        },
+        {
+          "en": "`[10, 9, 1].sort()`",
+          "es": "`[10, 9, 1].sort()`"
+        },
+        {
+          "en": "`[10, 9, 1].reverse()`",
+          "es": "`[10, 9, 1].reverse()`"
+        },
+        {
+          "en": "`[10, 9, 1].sort('numbers')`",
+          "es": "`[10, 9, 1].sort('numbers')`"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Without a compare function, sort compares items as text and returns `[1, 10, 9]`. The compare function `(a, b) => a - b` compares them as numbers.",
+        "es": "Sin una función de comparación, sort compara los elementos como texto y devuelve `[1, 10, 9]`. La función de comparación `(a, b) => a - b` los compara como números."
+      }
+    },
+    {
+      "id": "map-and-filter",
+      "topic": "Array methods",
+      "prompt": {
+        "en": "Which statement about `map` and `filter` is true?",
+        "es": "¿Qué afirmación sobre `map` y `filter` es verdadera?"
+      },
+      "options": [
+        {
+          "en": "`map` is O(1) because it's a single line",
+          "es": "`map` es O(1) porque es una sola línea"
+        },
+        {
+          "en": "`filter` only visits the items that pass the test",
+          "es": "`filter` solo visita los elementos que pasan la prueba"
+        },
+        {
+          "en": "Both visit every item once (O(n)) and return a new array",
+          "es": "Los dos visitan cada elemento una vez (O(n)) y devuelven un array nuevo"
+        },
+        {
+          "en": "`filter` is O(n²) because it builds a new array",
+          "es": "`filter` es O(n²) porque construye un array nuevo"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "Both run your callback once per item, so both are O(n) time. Both return a new array: map with every result, filter with the items that passed.",
+        "es": "Los dos ejecutan tu callback una vez por elemento, así que los dos son tiempo O(n). Los dos devuelven un array nuevo: map con cada resultado, filter con los elementos que pasaron."
+      }
+    },
+    {
+      "id": "pick-the-faster-version",
+      "topic": "Choosing a structure",
+      "prompt": {
+        "en": "Two versions of `countArrived(guests, arrivals)`. Version A checks each arrival with `guests.includes(name)`. Version B first builds an object with every guest as a key, then checks each arrival with `hasOwnProperty`. With n guests and m arrivals, which is faster as both grow?",
+        "es": "Dos versiones de `countArrived(guests, arrivals)`. La versión A revisa cada llegada con `guests.includes(name)`. La versión B primero construye un objeto con cada invitado como clave, y luego revisa cada llegada con `hasOwnProperty`. Con n invitados y m llegadas, ¿cuál es más rápida conforme crecen los dos?"
+      },
+      "options": [
+        {
+          "en": "A, because `includes` is built in",
+          "es": "A, porque `includes` viene incluido"
+        },
+        {
+          "en": "B: O(n + m), while A is O(n · m)",
+          "es": "B: O(n + m), mientras que A es O(n · m)"
+        },
+        {
+          "en": "They're the same: both are O(n · m)",
+          "es": "Son iguales: las dos son O(n · m)"
+        },
+        {
+          "en": "A: O(n + m), while B is O(n · m)",
+          "es": "A: O(n + m), mientras que B es O(n · m)"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "A runs an O(n) search for each of the m arrivals: O(n · m). B spends O(n) once to build the object, then O(1) per arrival: O(n + m).",
+        "es": "A hace una búsqueda O(n) por cada una de las m llegadas: O(n · m). B gasta O(n) una vez para construir el objeto, y luego O(1) por llegada: O(n + m)."
+      }
+    },
+    {
+      "id": "callback-cost",
+      "topic": "Array methods",
+      "prompt": {
+        "en": "What's the Big O of `guests.map((name) => guests.indexOf(name))` for n guests?",
+        "es": "¿Cuál es el Big O de `guests.map((name) => guests.indexOf(name))` para n invitados?"
+      },
+      "options": [
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n log n)",
+          "es": "O(n log n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "map calls the callback n times, and each call runs indexOf, an O(n) search. n times O(n) is O(n²).",
+        "es": "map llama al callback n veces, y cada llamada ejecuta indexOf, una búsqueda O(n). n veces O(n) es O(n²)."
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "slug": "word-frequency",
+      "title": {
+        "en": "Word Frequency",
+        "es": "Frecuencia de palabras"
+      },
+      "description": {
+        "en": "Write `wordFrequency(text)`. `text` is a string of lowercase words separated by single spaces. Return an object where each key is a word and its value is how many times the word appears.\n\nExample: `wordFrequency('yes no yes')` → `{ yes: 2, no: 1 }`\n\nAn empty string returns `{}`. Every word counts, even one like `constructor` or `tostring`: remember from the object methods lesson which check only looks at the object's own keys.\n\nAim for O(n) time: one pass over the words, with an O(1) object update for each.",
+        "es": "Escribe `wordFrequency(text)`. `text` es un string de palabras en minúsculas separadas por un solo espacio. Devuelve un objeto donde cada clave es una palabra y su valor es cuántas veces aparece la palabra.\n\nEjemplo: `wordFrequency('yes no yes')` → `{ yes: 2, no: 1 }`\n\nUn string vacío devuelve `{}`. Toda palabra cuenta, incluso una como `constructor` o `tostring`: recuerda de la lección de métodos de objetos qué revisión solo mira las claves propias del objeto.\n\nApunta a tiempo O(n): una pasada por las palabras, con una actualización O(1) del objeto para cada una."
+      },
+      "difficulty": "easy",
+      "category": "interview",
+      "functionName": "wordFrequency",
+      "starterCode": {
+        "javascript": "function wordFrequency(text) {\n  const counts = {}\n  // Your code here\n  return counts\n}"
+      },
+      "solution": {
+        "javascript": "function wordFrequency(text) {\n  const counts = {}\n  if (text === '') return counts\n  const words = text.split(' ')\n  for (let i = 0; i < words.length; i++) {\n    const word = words[i]\n    if (counts.hasOwnProperty(word)) {\n      counts[word] = counts[word] + 1\n    } else {\n      counts[word] = 1\n    }\n  }\n  return counts\n}"
+      },
+      "tests": [
+        {
+          "args": ["yes no yes"],
+          "expected": {
+            "yes": 2,
+            "no": 1
+          }
+        },
+        {
+          "args": [""],
+          "expected": {}
+        },
+        {
+          "args": ["party"],
+          "expected": {
+            "party": 1
+          }
+        },
+        {
+          "args": ["a b a b a"],
+          "expected": {
+            "a": 3,
+            "b": 2
+          }
+        },
+        {
+          "args": ["the cat and the hat"],
+          "expected": {
+            "the": 2,
+            "cat": 1,
+            "and": 1,
+            "hat": 1
+          }
+        },
+        {
+          "args": ["constructor tostring constructor"],
+          "expected": {
+            "constructor": 2,
+            "tostring": 1
+          }
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(n)",
+        "space": "O(n)"
+      }
+    },
+    {
+      "slug": "last-answer-wins",
+      "title": {
+        "en": "Last Answer Wins",
+        "es": "Gana la última respuesta"
+      },
+      "description": {
+        "en": "Guests sometimes change their minds. Write `finalAnswers(responses)`, where `responses` is an array of `[name, answer]` pairs in the order they arrived. Return an object with each guest's **latest** answer.\n\nExample: `finalAnswers([['Ana', 'yes'], ['Ben', 'no'], ['Ana', 'maybe']])` → `{ Ana: 'maybe', Ben: 'no' }`\n\nSaving an answer in an object is O(1), whether the guest is new or not, so one pass gives you O(n) time.",
+        "es": "A veces los invitados cambian de opinión. Escribe `finalAnswers(responses)`, donde `responses` es un array de pares `[nombre, respuesta]` en el orden en que llegaron. Devuelve un objeto con la respuesta **más reciente** de cada invitado.\n\nEjemplo: `finalAnswers([['Ana', 'yes'], ['Ben', 'no'], ['Ana', 'maybe']])` → `{ Ana: 'maybe', Ben: 'no' }`\n\nGuardar una respuesta en un objeto es O(1), sea el invitado nuevo o no, así que una pasada te da tiempo O(n)."
+      },
+      "difficulty": "easy",
+      "category": "interview",
+      "functionName": "finalAnswers",
+      "starterCode": {
+        "javascript": "function finalAnswers(responses) {\n  const answers = {}\n  // Your code here\n  return answers\n}"
+      },
+      "solution": {
+        "javascript": "function finalAnswers(responses) {\n  const answers = {}\n  for (let i = 0; i < responses.length; i++) {\n    const name = responses[i][0]\n    const answer = responses[i][1]\n    answers[name] = answer\n  }\n  return answers\n}"
+      },
+      "tests": [
+        {
+          "args": [
+            [
+              ["Ana", "yes"],
+              ["Ben", "no"],
+              ["Ana", "maybe"]
+            ]
+          ],
+          "expected": {
+            "Ana": "maybe",
+            "Ben": "no"
+          }
+        },
+        {
+          "args": [[]],
+          "expected": {}
+        },
+        {
+          "args": [[["Cleo", "yes"]]],
+          "expected": {
+            "Cleo": "yes"
+          }
+        },
+        {
+          "args": [
+            [
+              ["Dev", "yes"],
+              ["Dev", "no"],
+              ["Dev", "yes"]
+            ]
+          ],
+          "expected": {
+            "Dev": "yes"
+          }
+        },
+        {
+          "args": [
+            [
+              ["Ana", "yes"],
+              ["Ben", "maybe"],
+              ["Ana", "no"],
+              ["Ben", "yes"],
+              ["Eli", "no"]
+            ]
+          ],
+          "expected": {
+            "Ana": "no",
+            "Ben": "yes",
+            "Eli": "no"
+          }
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(n)",
+        "space": "O(n)"
+      }
+    },
+    {
+      "slug": "guests-who-arrived",
+      "title": {
+        "en": "Guests Who Arrived",
+        "es": "Invitados que llegaron"
+      },
+      "description": {
+        "en": "Write `countArrived(guests, arrivals)`. `guests` is the list of invited names and `arrivals` is the list of people who showed up at the door, in order. Return how many arrivals are on the guest list. If an invited name arrives twice, count it twice.\n\nExample: `countArrived(['Ana', 'Ben', 'Cleo'], ['Ben', 'Zoe', 'Ana'])` → `2`\n\nChecking every arrival with `guests.includes(name)` works, but it's O(n · m) for n guests and m arrivals. Make it **O(n + m)**: build an object of the guests once, then check each arrival in O(1). Careful with names like `toString`.",
+        "es": "Escribe `countArrived(guests, arrivals)`. `guests` es la lista de nombres invitados y `arrivals` es la lista de personas que llegaron a la puerta, en orden. Devuelve cuántas llegadas están en la lista de invitados. Si un nombre invitado llega dos veces, cuéntalo dos veces.\n\nEjemplo: `countArrived(['Ana', 'Ben', 'Cleo'], ['Ben', 'Zoe', 'Ana'])` → `2`\n\nRevisar cada llegada con `guests.includes(name)` funciona, pero es O(n · m) para n invitados y m llegadas. Hazla **O(n + m)**: construye un objeto con los invitados una vez, y luego revisa cada llegada en O(1). Cuidado con nombres como `toString`."
+      },
+      "difficulty": "medium",
+      "category": "interview",
+      "functionName": "countArrived",
+      "starterCode": {
+        "javascript": "function countArrived(guests, arrivals) {\n  // Your code here\n}"
+      },
+      "solution": {
+        "javascript": "function countArrived(guests, arrivals) {\n  const invited = {}\n  for (let i = 0; i < guests.length; i++) {\n    invited[guests[i]] = true\n  }\n  let count = 0\n  for (let i = 0; i < arrivals.length; i++) {\n    if (invited.hasOwnProperty(arrivals[i])) count++\n  }\n  return count\n}"
+      },
+      "tests": [
+        {
+          "args": [
+            ["Ana", "Ben", "Cleo"],
+            ["Ben", "Zoe", "Ana"]
+          ],
+          "expected": 2
+        },
+        {
+          "args": [[], ["Ana"]],
+          "expected": 0
+        },
+        {
+          "args": [["Ana"], []],
+          "expected": 0
+        },
+        {
+          "args": [
+            ["Ana", "Ben"],
+            ["Ana", "Ana"]
+          ],
+          "expected": 2
+        },
+        {
+          "args": [["Ana"], ["toString", "constructor"]],
+          "expected": 0
+        },
+        {
+          "args": [
+            ["Ana", "Ben", "Cleo", "Dev", "Eli"],
+            ["Eli", "Dev", "Cleo", "Ben", "Ana", "Fay"]
+          ],
+          "expected": 5
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(n + m)",
+        "space": "O(n)"
+      }
+    }
+  ]
+}
