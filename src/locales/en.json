@@ -183,7 +183,10 @@
       "log": "O(log n): grows very slowly. Doubling n adds only one more step.",
       "linear": "O(n): a straight line. Twice the input means twice the work.",
       "quadratic": "O(n²): shoots up. At n = 1,000 it's already 1,000,000 operations.",
-      "summary": "From best to worst: O(1), O(log n), O(n), O(n²)."
+      "summary": "From best to worst: O(1), O(log n), O(n), O(n²).",
+      "nLogN": "O(n log n): a bit steeper than O(n), and far below O(n²). Good sorting algorithms land here.",
+      "sortTitle": "Where sort fits: O(n log n)",
+      "sortSummary": "sort is O(n log n): slower than one pass over the array, much faster than comparing every pair."
     },
     "arrayReindex": {
       "title": "Array operations and re-indexing",
@@ -439,6 +442,14 @@
         "start": "doubled starts as an empty array. It's new memory the function creates.",
         "push": "{{value}} × 2 = {{doubled}}: one more box in doubled.",
         "end": "{{n}} numbers in, {{n}} new boxes of memory. The extra memory grows with n: O(n) space."
+      },
+      "hasAnswer": {
+        "title": "hasAnswer: look for a value, answer by answer",
+        "input": "find '{{answer}}'",
+        "start": "Did anyone answer '{{answer}}'? Object.keys gives us the {{count}} names to loop over.",
+        "noMatch": "{{name}} answered '{{value}}', not '{{answer}}'. Keep going.",
+        "match": "{{name}} answered '{{answer}}'. Found it! Return true after {{ops}} checks.",
+        "notFound": "The loop ended: nobody answered '{{answer}}'. Return false after {{ops}} checks."
       }
     },
     "timingChart": {
@@ -458,6 +469,79 @@
       "insert": "splice(1, 0, 'Zoe') puts Zoe at index 1. Ben, Cleo, Dev and Eli all move up one index.",
       "remove": "splice(2, 1) removes Ben. Cleo, Dev and Eli all move down one index.",
       "notHalf": "In the middle, about half the items move, but it's still O(n): Big O is the worst case (inserting at index 0 moves them all), and ½n drops its constant anyway."
+    },
+    "touched_one": "touches {{count}} box",
+    "touched_other": "touches {{count}} boxes",
+    "arrayVsObject": {
+      "title": "Two free data structures: an array and an object",
+      "array": "Array: in order, by index",
+      "object": "Object: no order, by key",
+      "start": "The same party stored two ways. The array keeps the guests in order; the object labels each answer with the guest's name.",
+      "access": "Reading with an index or a key jumps straight to one box. Both are O(1).",
+      "addEnd": "Adding to the end of the array, or adding a new key to the object, touches one box. Both are O(1).",
+      "addStart": "Adding to the start is different. The array has to re-index every guest: O(n). The object has no start, so it still touches one box.",
+      "search": "Searching for something that isn't there means checking every box, in both: O(n).",
+      "summary": "Arrays give you order. Objects give you fast keys but no order. Every data structure is a trade-off like this one."
+    },
+    "objectLookup": {
+      "access": {
+        "title": "Reading a key: one jump",
+        "start": "The answers object: 5 guests, 5 keys. No indexes, and no first or last key.",
+        "read": "rsvps['Dev'] goes straight to Dev's card. It doesn't look at Ana, Ben or Cleo first: 1 box.",
+        "dot": "rsvps.Eli is the same lookup written with a dot. Eli was added last, but that doesn't make it slower.",
+        "missing": "'Zoe' isn't a key. JavaScript goes straight to where Zoe's card would be, finds nothing and returns undefined: still 1 step.",
+        "huge": "A party of a million guests: rsvps['Zoe'] still jumps straight to Zoe. 1 box, whatever the size.",
+        "summary": "Reading a key is O(1), constant time, just like reading an array by its index."
+      },
+      "write": {
+        "title": "Adding, changing and deleting keys",
+        "start": "The answers object: 5 guests, 5 keys.",
+        "add": "rsvps['Fay'] = 'yes' adds a new key. No other card moves or changes: O(1).",
+        "update": "Ben changed his mind. Updating is a lookup plus a new value: O(1).",
+        "remove": "delete rsvps['Cleo'] removes one key. Nobody has an index, so nobody is re-indexed: O(1).",
+        "summary": "Adding, changing and deleting each touched one card. Compare that with shift and unshift on an array."
+      },
+      "hasKey": {
+        "title": "Is this key there? Is this value there?",
+        "start": "Two questions: is a guest on the list (a key), and did anyone answer 'late' (a value)?",
+        "has": "hasOwnProperty('Dev') jumps to where Dev's key would be. It's there: true. 1 box, O(1).",
+        "hasNot": "hasOwnProperty('Zoe') jumps to where Zoe's key would be. Nothing's there: false. Still 1 step.",
+        "value": "Values have no shortcut. To know if anyone said 'late', every answer has to be read: O(n).",
+        "summary": "Checking for a key is O(1). Searching for a value is O(n)."
+      }
+    },
+    "objectToArray": {
+      "title": "Object.keys builds a new array",
+      "newArray": "New array",
+      "start": "Object.keys(rsvps) starts with an empty array.",
+      "firstKey": "It visits the first key, '{{key}}', and copies it into the new array: 1 step.",
+      "nextKey": "Next key: '{{key}}'. That's {{count}} steps so far.",
+      "keysDone": "Every key was visited once: {{n}} keys, {{n}} steps and {{n}} new boxes of memory.",
+      "values": "Object.values takes the same walk, copying the answers instead of the names.",
+      "entries": "Object.entries copies both, as [key, value] pairs. A bit more work per key, but still one visit per key.",
+      "summary": "Double the keys and you double the work and the memory: O(n) time and O(n) space."
+    },
+    "arrayMethodCost": {
+      "newArray": "New array",
+      "copies": {
+        "title": "concat, slice and splice: how many boxes?",
+        "start": "Six guests. Each method below copies or moves some of them. Count the boxes it touches.",
+        "concat": "concat copies every item of both arrays into a new one: 6 + 3 = 9 boxes. That's O(n + m), which we simply call O(n).",
+        "slice": "slice(1, 4) copies the items from index 1 up to (but not including) index 4: 3 boxes. The cost is the size of the copy.",
+        "sliceAll": "slice() with no arguments copies the whole array: all 6 boxes. In the worst case, O(n).",
+        "spliceMiddle": "splice(2, 0, 'Zoe') inserts Zoe at index 2. Every guest after her moves up one index: 5 boxes.",
+        "spliceStart": "At index 0, splice moves everyone: 7 boxes. Big O takes this worst case: O(n).",
+        "summary": "All three grow with the size of the array: O(n)."
+      },
+      "loops": {
+        "title": "forEach, map, filter and reduce: hidden loops",
+        "start": "Five guests. Each of these methods runs your function once for every guest.",
+        "forEach": "forEach visits every guest once to print the name: 5 boxes. It returns nothing.",
+        "map": "map visits every guest and builds a new array of the same length: 5 visits, 5 new boxes.",
+        "filter": "filter visits every guest and keeps the ones that pass the test (3-letter names): 5 visits, 4 kept.",
+        "reduce": "reduce visits every guest and combines them into one value, the total length of their names: {{value}}.",
+        "summary": "One line each, but each one is a loop over the whole array: O(n)."
+      }
     }
   },
   "runnable": {

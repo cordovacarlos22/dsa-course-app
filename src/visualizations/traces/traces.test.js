@@ -107,6 +107,15 @@ describe('trace counters', () => {
     }
   })
 
+  it('hasAnswer stops at the first match, and checks every guest when nobody matches', () => {
+    const trace = traces['trace-has-answer']
+    const [maybe, late] = trace.inputs.map(
+      (input) => Array.from(trace.run(input)).at(-1).ops,
+    )
+    expect(maybe).toBe(3) // Cleo, the third guest
+    expect(late).toBe(Object.keys(trace.inputs[1].rsvps).length)
+  })
+
   it('counts more operations for more guests', () => {
     const trace = traces['trace-count-short-names']
     const totals = trace.inputs.map(

@@ -46,7 +46,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Big O (`big-o`)
 
-**Status:** ✅ 17 lessons, 51 steps (EN + ES, 51 checkpoints) · ✅ quiz, 33 questions (EN + ES) · 🟡 3 of 4 interview problems · ⬜ slides
+**Status:** ✅ 17 lessons, 52 steps (EN + ES, 52 checkpoints) · ✅ quiz, 33 questions (EN + ES) · 🟡 3 of 4 interview problems · ⬜ slides
 **Goal:** measure and compare the efficiency of code, in time and space.
 **Sources:** Carlos's two Big O files (course 1 "Section 2 - Big o notes.docx" and course 2 "Intro to Big O.docx", text and images; see AGENTS.md).
 **Style:** one lesson per lecture of both courses, at their depth (450–900 words each), with the courses' own examples written as indexed loops; every step has an animation, and the party **guest list** is the story of the animations.
@@ -67,7 +67,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
   13. Different terms for inputs ✅ (C1: `two-inputs`, `trace-welcome-and-goodbye`)
   14. Space complexity ✅ (C2: `memory-boxes`, `trace-count-guests`, `trace-double-array`)
   15. Logarithms and O(log n) ✅ (C1 + C2: `halving-count`, `binary-search-halving`, `big-o-growth-chart`)
-  16. Big O of arrays ✅ (C1: `array-reindex`, `array-splice`, `search-cases`)
+  16. Big O of arrays ✅ (C1 + C2 "When are arrays slow?": `constant-jump`, `array-reindex`, `array-splice`, `search-cases`)
   17. Wrap-up ✅ (C1 wrap-up + cheat sheet, C2 recap: `big-o-growth-chart`, `search-cases`, `dominant-term`)
 - **Quiz:** the topics of course 1's quiz and course 2's three quizzes (simplifying, time complexity of functions, space complexity), plus timing and counting, Ω/Θ/O, logarithms and array operations. Our own questions and code.
 - **Build it:** none.
@@ -75,13 +75,19 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Big O of Arrays & Objects (`arrays-and-objects`)
 
-**Status:** ⬜
+**Status:** ✅ 4 lessons, 14 steps (EN + ES, 14 checkpoints) · ✅ quiz, 15 questions (EN + ES) · ✅ 3 interview problems · ⬜ slides
 **Goal:** know the cost of the built-in tools you use every day.
+**Sources:** course 2's Section 3 ("analyzing performance of arrays and objects": 4 lectures, 2 quizzes, 13 slides). Its "When are arrays slow?" lecture went into Big O lesson 16, since it repeated most of it.
+**Style:** theory first (see AGENTS.md); the party continues with the `guests` array and the `rsvps` object.
 
-- **Lessons:** Objects: what's fast and what isn't · Object methods (keys, values, entries, hasOwnProperty) · Array methods and their Big O (slice, concat, sort, map, filter, forEach…). The basics of push / pop / shift / unshift / splice are already in Big O lesson 16.
-- **Quiz:** Big O of object vs. array operations, why `shift` is O(n), the cost of `sort`.
+- **Lessons** (sources and animations in parentheses):
+  1. The data structures you get for free ✅ (C2 intro: `array-vs-object`, `search-cases`, `big-o-growth-chart`)
+  2. Big O of objects ✅ (C2 objects lecture: `object-access`, `object-insert-remove`, `trace-has-answer`)
+  3. Big O of object methods ✅ (C2 objects lecture: `object-to-array`, `object-has-key`, `nested-grid`)
+  4. Big O of array methods ✅ (C2 array methods lecture: `array-reindex`, `array-copy-methods`, `sort-growth-chart`, `array-loop-methods`, `array-vs-object`)
+- **Quiz:** object operations, search vs. access, `Object.keys`/`values`/`entries` and `hasOwnProperty`, push/pop vs. shift/unshift, `shift` in a loop, concat/slice/splice, `sort` (and sorting numbers), the hidden loops in `map`/`filter`, the cost of a callback, and "pick the faster version".
 - **Build it:** none.
-- **Interview problems:** Word Frequency (counting with an object) · Last Item Wins (use only O(1) operations) · Pick the Faster Version (two solutions: choose and explain)
+- **Interview problems:** ✅ Word Frequency (easy) · ✅ Last Answer Wins (easy) · ✅ Guests Who Arrived (medium: O(n + m) with an object instead of O(n · m); replaces "Pick the Faster Version", whose idea moved into the quiz)
 
 ## Classes & Pointers (`classes-and-pointers`)
 

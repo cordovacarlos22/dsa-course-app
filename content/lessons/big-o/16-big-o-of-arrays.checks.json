@@ -3,6 +3,40 @@
     {
       "type": "choice",
       "question": {
+        "en": "A teammate says reading `scores[9000]` from an array of 10,000 scores is slow, because JavaScript has to count from index 0 up to 9,000. What's the Big O of that read?",
+        "es": "Un compañero dice que leer `scores[9000]` de un array de 10,000 puntajes es lento, porque JavaScript tiene que contar desde el índice 0 hasta el 9,000. ¿Cuál es el Big O de esa lectura?"
+      },
+      "options": [
+        {
+          "en": "O(n): it counts up to the index",
+          "es": "O(n): cuenta hasta llegar al índice"
+        },
+        {
+          "en": "O(1): the index takes it straight there",
+          "es": "O(1): el índice lo lleva directo ahí"
+        },
+        {
+          "en": "O(log n): it halves the array until it gets there",
+          "es": "O(log n): parte el array a la mitad hasta llegar"
+        },
+        {
+          "en": "O(9000): it depends on the index",
+          "es": "O(9000): depende del índice"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Does the array need to look at the items before index 9,000?",
+        "es": "¿El array necesita mirar los elementos que están antes del índice 9,000?"
+      },
+      "explanation": {
+        "en": "An index works like a direct address: the array jumps straight to it, without visiting the items before it. Reading by index is O(1) for the first item, the last item and everything in between.",
+        "es": "Un índice funciona como una dirección directa: el array salta directo a él, sin visitar los elementos de antes. Leer por índice es O(1) para el primer elemento, el último y todos los de en medio."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
         "en": "Which of these array operations is O(1)?",
         "es": "¿Cuál de estas operaciones de array es O(1)?"
       },

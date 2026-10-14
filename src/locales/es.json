@@ -183,7 +183,10 @@
       "log": "O(log n): crece muy lento. Duplicar n agrega solo un paso más.",
       "linear": "O(n): una línea recta. El doble de entrada es el doble de trabajo.",
       "quadratic": "O(n²): se dispara. Con n = 1,000 ya son 1,000,000 de operaciones.",
-      "summary": "De mejor a peor: O(1), O(log n), O(n), O(n²)."
+      "summary": "De mejor a peor: O(1), O(log n), O(n), O(n²).",
+      "nLogN": "O(n log n): un poco más empinada que O(n), y muy por debajo de O(n²). Los buenos algoritmos de ordenamiento caen aquí.",
+      "sortTitle": "Dónde cae sort: O(n log n)",
+      "sortSummary": "sort es O(n log n): más lento que una pasada por el array, mucho más rápido que comparar cada par."
     },
     "arrayReindex": {
       "title": "Operaciones de array y reindexado",
@@ -439,6 +442,14 @@
         "start": "doubled empieza como un array vacío. Es memoria nueva que crea la función.",
         "push": "{{value}} × 2 = {{doubled}}: una caja más en doubled.",
         "end": "Entran {{n}} números, salen {{n}} cajas nuevas de memoria. La memoria extra crece con n: espacio O(n)."
+      },
+      "hasAnswer": {
+        "title": "hasAnswer: busca un valor, respuesta por respuesta",
+        "input": "buscar '{{answer}}'",
+        "start": "¿Alguien respondió '{{answer}}'? Object.keys nos da los {{count}} nombres para recorrer.",
+        "noMatch": "{{name}} respondió '{{value}}', no '{{answer}}'. Sigue.",
+        "match": "{{name}} respondió '{{answer}}'. ¡Lo encontramos! Devuelve true después de {{ops}} revisiones.",
+        "notFound": "El bucle terminó: nadie respondió '{{answer}}'. Devuelve false después de {{ops}} revisiones."
       }
     },
     "timingChart": {
@@ -458,6 +469,79 @@
       "insert": "splice(1, 0, 'Zoe') pone a Zoe en el índice 1. Ben, Cleo, Dev y Eli suben un índice.",
       "remove": "splice(2, 1) quita a Ben. Cleo, Dev y Eli bajan un índice.",
       "notHalf": "En el medio se mueve más o menos la mitad de los elementos, pero sigue siendo O(n): Big O es el peor caso (insertar en el índice 0 los mueve todos), y además ½n pierde su constante."
+    },
+    "touched_one": "toca {{count}} caja",
+    "touched_other": "toca {{count}} cajas",
+    "arrayVsObject": {
+      "title": "Dos estructuras de datos gratis: un array y un objeto",
+      "array": "Array: en orden, por índice",
+      "object": "Objeto: sin orden, por clave",
+      "start": "La misma fiesta guardada de dos formas. El array guarda a los invitados en orden; el objeto etiqueta cada respuesta con el nombre del invitado.",
+      "access": "Leer con un índice o una clave salta directo a una caja. Los dos son O(1).",
+      "addEnd": "Agregar al final del array, o agregar una clave nueva al objeto, toca una caja. Los dos son O(1).",
+      "addStart": "Agregar al principio es distinto. El array tiene que reindexar a cada invitado: O(n). El objeto no tiene principio, así que sigue tocando una caja.",
+      "search": "Buscar algo que no está obliga a revisar cada caja, en los dos: O(n).",
+      "summary": "Los arrays te dan orden. Los objetos te dan claves rápidas, pero sin orden. Toda estructura de datos es un intercambio como este."
+    },
+    "objectLookup": {
+      "access": {
+        "title": "Leer una clave: un salto",
+        "start": "El objeto de respuestas: 5 invitados, 5 claves. Sin índices, y sin primera ni última clave.",
+        "read": "rsvps['Dev'] va directo a la tarjeta de Dev. No mira antes a Ana, Ben ni Cleo: 1 caja.",
+        "dot": "rsvps.Eli es la misma búsqueda escrita con un punto. Eli se agregó al final, pero eso no lo hace más lento.",
+        "missing": "'Zoe' no es una clave. JavaScript va directo a donde estaría la tarjeta de Zoe, no encuentra nada y devuelve undefined: sigue siendo 1 paso.",
+        "huge": "Una fiesta de un millón de invitados: rsvps['Zoe'] sigue saltando directo a Zoe. 1 caja, sin importar el tamaño.",
+        "summary": "Leer una clave es O(1), tiempo constante, igual que leer un array por su índice."
+      },
+      "write": {
+        "title": "Agregar, cambiar y borrar claves",
+        "start": "El objeto de respuestas: 5 invitados, 5 claves.",
+        "add": "rsvps['Fay'] = 'yes' agrega una clave nueva. Ninguna otra tarjeta se mueve ni cambia: O(1).",
+        "update": "Ben cambió de opinión. Actualizar es una búsqueda más un valor nuevo: O(1).",
+        "remove": "delete rsvps['Cleo'] quita una clave. Nadie tiene índice, así que nadie se reindexa: O(1).",
+        "summary": "Agregar, cambiar y borrar tocaron una tarjeta cada uno. Compáralo con shift y unshift en un array."
+      },
+      "hasKey": {
+        "title": "¿Está esta clave? ¿Está este valor?",
+        "start": "Dos preguntas: ¿un invitado está en la lista (una clave)? y ¿alguien respondió 'late' (un valor)?",
+        "has": "hasOwnProperty('Dev') salta a donde estaría la clave de Dev. Ahí está: true. 1 caja, O(1).",
+        "hasNot": "hasOwnProperty('Zoe') salta a donde estaría la clave de Zoe. No hay nada: false. Sigue siendo 1 paso.",
+        "value": "Los valores no tienen atajo. Para saber si alguien dijo 'late', hay que leer cada respuesta: O(n).",
+        "summary": "Revisar si existe una clave es O(1). Buscar un valor es O(n)."
+      }
+    },
+    "objectToArray": {
+      "title": "Object.keys construye un array nuevo",
+      "newArray": "Array nuevo",
+      "start": "Object.keys(rsvps) empieza con un array vacío.",
+      "firstKey": "Visita la primera clave, '{{key}}', y la copia al array nuevo: 1 paso.",
+      "nextKey": "Siguiente clave: '{{key}}'. Van {{count}} pasos.",
+      "keysDone": "Cada clave se visitó una vez: {{n}} claves, {{n}} pasos y {{n}} cajas nuevas de memoria.",
+      "values": "Object.values hace el mismo recorrido, pero copia las respuestas en vez de los nombres.",
+      "entries": "Object.entries copia las dos cosas, en pares [clave, valor]. Un poco más de trabajo por clave, pero sigue siendo una visita por clave.",
+      "summary": "Duplica las claves y duplicas el trabajo y la memoria: tiempo O(n) y espacio O(n)."
+    },
+    "arrayMethodCost": {
+      "newArray": "Array nuevo",
+      "copies": {
+        "title": "concat, slice y splice: ¿cuántas cajas?",
+        "start": "Seis invitados. Cada método de abajo copia o mueve a algunos. Cuenta las cajas que toca.",
+        "concat": "concat copia cada elemento de los dos arrays a uno nuevo: 6 + 3 = 9 cajas. Eso es O(n + m), que simplemente llamamos O(n).",
+        "slice": "slice(1, 4) copia los elementos desde el índice 1 hasta el 4 (sin incluirlo): 3 cajas. El costo es el tamaño de la copia.",
+        "sliceAll": "slice() sin argumentos copia todo el array: las 6 cajas. En el peor caso, O(n).",
+        "spliceMiddle": "splice(2, 0, 'Zoe') inserta a Zoe en el índice 2. Cada invitado después de ella sube un índice: 5 cajas.",
+        "spliceStart": "En el índice 0, splice mueve a todos: 7 cajas. Big O toma este peor caso: O(n).",
+        "summary": "Los tres crecen con el tamaño del array: O(n)."
+      },
+      "loops": {
+        "title": "forEach, map, filter y reduce: bucles escondidos",
+        "start": "Cinco invitados. Cada uno de estos métodos ejecuta tu función una vez por cada invitado.",
+        "forEach": "forEach visita a cada invitado una vez para imprimir su nombre: 5 cajas. No devuelve nada.",
+        "map": "map visita a cada invitado y construye un array nuevo del mismo tamaño: 5 visitas, 5 cajas nuevas.",
+        "filter": "filter visita a cada invitado y se queda con los que pasan la prueba (nombres de 3 letras): 5 visitas, se quedan 4.",
+        "reduce": "reduce visita a cada invitado y los combina en un solo valor, la suma de las letras de sus nombres: {{value}}.",
+        "summary": "Una línea cada uno, pero cada uno es un bucle sobre todo el array: O(n)."
+      }
     }
   },
   "runnable": {

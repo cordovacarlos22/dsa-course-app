@@ -22,6 +22,7 @@ import { partySummary } from './partySummary'
 import { sumLoop, sumFormula } from './sumUpTo'
 import { printNumbers, printPairs } from './printNumbers'
 import { doubleArray } from './doubleArray'
+import { hasAnswer } from './hasAnswer'
 
 export const traces = {
   'trace-is-invited': isInvited,
@@ -38,4 +39,5 @@ export const traces = {
   'trace-print-numbers': printNumbers,
   'trace-print-pairs': printPairs,
   'trace-double-array': doubleArray,
+  'trace-has-answer': hasAnswer,
 }

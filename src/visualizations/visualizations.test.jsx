@@ -61,6 +61,54 @@ describe('code trace input picker', () => {
   })
 })
 
+describe('arrays and objects animations', () => {
+  async function renderAtStep(name, nextClicks) {
+    await i18n.changeLanguage('en')
+    const user = userEvent.setup()
+    const Animation = visualizations[name]
+    render(<Animation />)
+    for (let i = 0; i < nextClicks; i++) {
+      await user.click(screen.getByRole('button', { name: /next/i }))
+    }
+  }
+
+  it('re-indexes the array but not the object when adding at the start', async () => {
+    await renderAtStep('array-vs-object', 3)
+    expect(screen.getByText("guests.unshift('Zoe')")).toBeInTheDocument()
+    expect(screen.getByText('touches 6 boxes')).toBeInTheDocument()
+    expect(screen.getByText("rsvps['Zoe'] = 'no'")).toBeInTheDocument()
+    expect(screen.getByText('touches 1 box')).toBeInTheDocument()
+  })
+
+  it('reads a key in one step, even in a huge object', async () => {
+    await renderAtStep('object-access', 4)
+    expect(screen.getByText(/a million guests/)).toBeInTheDocument()
+    expect(screen.getByText('touches 1 box')).toBeInTheDocument()
+  })
+
+  it('builds the keys array one key at a time', async () => {
+    await renderAtStep('object-to-array', 5)
+    expect(
+      screen.getByText("Next key: 'Eli'. That's 5 steps so far."),
+    ).toBeInTheDocument()
+    expect(screen.getByText('touches 5 boxes')).toBeInTheDocument()
+  })
+
+  it('places O(n log n) between O(n) and O(n²)', async () => {
+    await renderAtStep('sort-growth-chart', 3)
+    expect(
+      screen.getByRole('img', { name: 'O(n), O(n log n), O(n²)' }),
+    ).toBeInTheDocument()
+  })
+
+  it('keeps the original growth chart without O(n log n)', async () => {
+    await renderAtStep('big-o-growth-chart', 4)
+    expect(
+      screen.getByRole('img', { name: 'O(1), O(log n), O(n), O(n²)' }),
+    ).toBeInTheDocument()
+  })
+})
+
 describe('buildBinarySearchSteps', () => {
   it('finds the target in log₂(n) checks', () => {
     const steps = buildBinarySearchSteps([2, 4, 6, 8, 10, 12, 14, 16], 14)

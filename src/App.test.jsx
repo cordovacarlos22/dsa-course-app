@@ -151,17 +151,23 @@ describe('course home', () => {
 
   it('links modules that have content and marks the rest as coming soon', () => {
     renderAsReturningStudent('/learn')
-    expect(screen.getByRole('link', { name: /Big O/ })).toHaveAttribute(
+    const bigO = screen.getByRole('link', { name: /Big O 17 lessons/ })
+    expect(bigO).toHaveAttribute('href', '/learn/big-o')
+    expect(bigO).toHaveTextContent('17 lessons · 33 questions · 3 exercises')
+    const arraysAndObjects = screen.getByRole('link', {
+      name: /Big O of Arrays & Objects/,
+    })
+    expect(arraysAndObjects).toHaveAttribute(
       'href',
-      '/learn/big-o',
+      '/learn/arrays-and-objects',
     )
-    expect(screen.getByRole('link', { name: /Big O/ })).toHaveTextContent(
-      '17 lessons · 33 questions · 3 exercises',
+    expect(arraysAndObjects).toHaveTextContent(
+      '4 lessons · 15 questions · 3 exercises',
     )
     expect(
       screen.queryByRole('link', { name: /Linked Lists/ }),
     ).not.toBeInTheDocument()
-    expect(screen.getAllByText('Coming soon')).toHaveLength(21)
+    expect(screen.getAllByText('Coming soon')).toHaveLength(20)
   })
 })
 

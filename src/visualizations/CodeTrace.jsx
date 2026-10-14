@@ -7,9 +7,12 @@ import GuestRow from './GuestRow'
 // next to it the student sees the input as boxes, the variables, a counter of
 // the operations so far, and what the code printed. See ./traces/index.js.
 
-// The size of an input: a number (n), or how many guests / numbers it has.
+// The size of an input: a number (n), or how many guests / numbers /
+// answers it has.
 function sizeOf(input) {
-  return input.n ?? (input.guests ?? input.numbers).length
+  if (input.n !== undefined) return input.n
+  if (input.rsvps) return Object.keys(input.rsvps).length
+  return (input.guests ?? input.numbers).length
 }
 
 // The boxes drawn under the code: the guest list by default. A trace can
@@ -51,6 +54,7 @@ function CodeTrace({ trace }) {
             {t(`viz.trace.${trace.key}.input`, {
               n: sizeOf(option).toLocaleString('en-US'),
               name: option.name,
+              answer: option.answer,
             })}
           </button>
         ))}

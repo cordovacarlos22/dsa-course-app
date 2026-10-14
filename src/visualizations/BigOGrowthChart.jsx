@@ -2,7 +2,8 @@ import { useTranslation } from 'react-i18next'
 import StepPlayer from '../components/StepPlayer'
 
 // Draws O(1), O(log n), O(n) and O(n²) on the same chart, one per step,
-// so students can see how differently they grow.
+// so students can see how differently they grow. Other lessons pick their
+// own curves (e.g. sort-growth-chart adds O(n log n), see ./index.js).
 
 const WIDTH = 340
 const HEIGHT = 200
@@ -32,6 +33,12 @@ const CURVES = [
     captionKey: 'linear',
   },
   {
+    label: 'O(n log n)',
+    color: '#9333ea',
+    operations: (n) => n * Math.log2(n),
+    captionKey: 'nLogN',
+  },
+  {
     label: 'O(n²)',
     color: '#dc2626',
     operations: (n) => n * n,
@@ -59,7 +66,9 @@ function curvePoints(curve) {
   return points.join(' ')
 }
 
-function Chart({ visibleCount }) {
+const DEFAULT_CURVES = ['constant', 'log', 'linear', 'quadratic']
+
+function Chart({ curves, visibleCount }) {
   const { t } = useTranslation()
   const bottom = HEIGHT - PADDING
 
@@ -68,7 +77,8 @@ function Chart({ visibleCount }) {
       viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
       className="w-full max-w-md"
       role="img"
-      aria-label={CURVES.slice(0, visibleCount)
+      aria-label={curves
+        .slice(0, visibleCount)
         .map((curve) => curve.label)
         .join(', ')}
     >
@@ -106,7 +116,7 @@ function Chart({ visibleCount }) {
         {t('viz.bigOGrowth.axisOps')}
       </text>
 
-      {CURVES.slice(0, visibleCount).map((curve) => {
+      {curves.slice(0, visibleCount).map((curve) => {
         const points = curvePoints(curve)
         const lastPoint = points.split(' ').at(-1).split(',')
         return (
@@ -133,23 +143,33 @@ function Chart({ visibleCount }) {
   )
 }
 
-function BigOGrowthChart() {
+// - curveKeys: which curves to draw (captionKeys of CURVES); they always
+//   appear from the slowest-growing to the fastest
+// - titleKey, summaryKey: their text, under viz.bigOGrowth
+function BigOGrowthChart({
+  curveKeys = DEFAULT_CURVES,
+  titleKey = 'title',
+  summaryKey = 'summary',
+}) {
   const { t } = useTranslation()
+  const curves = CURVES.filter((curve) => curveKeys.includes(curve.captionKey))
 
   // One step per curve, plus a summary step showing all of them.
   const steps = [
-    ...CURVES.map((curve, index) => ({
+    ...curves.map((curve, index) => ({
       visibleCount: index + 1,
       caption: t(`viz.bigOGrowth.${curve.captionKey}`),
     })),
-    { visibleCount: CURVES.length, caption: t('viz.bigOGrowth.summary') },
+    { visibleCount: curves.length, caption: t(`viz.bigOGrowth.${summaryKey}`) },
   ]
 
   return (
     <StepPlayer
-      title={t('viz.bigOGrowth.title')}
+      title={t(`viz.bigOGrowth.${titleKey}`)}
       steps={steps}
-      renderStep={(step) => <Chart visibleCount={step.visibleCount} />}
+      renderStep={(step) => (
+        <Chart curves={curves} visibleCount={step.visibleCount} />
+      )}
     />
   )
 }
