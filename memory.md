@@ -9,7 +9,8 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-12: **agent skills** (security + design) and `DESIGN.md` / `PRODUCT.md` on `chore/agent-skills` (PR #20).
 - 2026-10-12: **fixes from the tools' first runs** on `fix/tool-findings` (built on PR #20).
 - 2026-10-13: **Ponytail** recorded and limited to code on `docs/ponytail` (built on `fix/tool-findings`).
-- 2026-10-13: **Stage 8 roadmap** (accounts, a Duolingo-style lock, XP, 2-step), in 5 PRs. PR 1, the **landing preview**, is on `feat/landing-preview` (built on `docs/ponytail`).
+- 2026-10-13: **Stage 8 roadmap** (accounts, a Duolingo-style lock, XP, 2-step), in 5 PRs. PR 1, the **landing preview**, is merged (#23). PRs 2–5 wait for Carlos's account setup.
+- 2026-10-13: **Section 3 of both courses, merged, with theory first** (4 PRs). PR 1, **Big O of Arrays & Objects** (plus a deeper Big O lesson 16), is on `content/arrays-and-objects`. Next: Classes & Pointers, then the theory pass on Introduction and Big O.
 
 ## Decisions
 
@@ -38,6 +39,9 @@ Agents: read this at the start of every session and update it at the end (see `A
   - **Not copied into the repo:** a second copy would add its rules twice.
   - **The clash:** its "smallest version" rules clash with two project rules: lesson depth (never cut content) and the beginner code style in lessons, checkpoints and practice. So `AGENTS.md` limits Ponytail to app code.
   - **Updates:** marketplace auto-update stays off; an update gets the same diff review as the vendored skills.
+- 2026-10-13: **Theory first (replaces "Show, then explain" for new lessons).** Carlos: "we're doing a lot of visuals but in reality we still need the theory". He chose this order for every step: the theory (2–3 paragraphs, key terms in bold, why it matters), then the animation, then "What just happened", runnable code and a "Common mistake". Lessons grow to about 900–1,400 words. Extra theory beyond the sources is welcome if it's correct and ours. **Order:** new modules first, so he can review the style, then Introduction and Big O get the same pass (2 PRs).
+- 2026-10-13: **Section 3 of both courses, merged** (Carlos: "the two courses need to be combined into one… up to you"). Course 2's Section 3 (arrays and objects) and course 1's Section 3 (classes and pointers) are different topics, so they stay two modules (3 and 4). Course 2's "When are arrays slow?" lecture repeated most of Big O lesson 16, so it went **into lesson 16** (Carlos: "some of the information on Section 3 might be useful for Section 2"), and the arrays & objects module covers the rest: objects, object methods and array methods. "Pick the Faster Version" became the coded problem **Guests Who Arrived** (its idea is also a quiz question).
+- 2026-10-13: **Classes & Pointers uses course 1 only for now.** Course 2 teaches class syntax later (instance vs static methods, in its data structures introduction). That lesson, and the `Point` class with a static `distance`, wait for Carlos to send its transcript.
 - 2026-10-11 (later): **Big O follows both courses closely.** Carlos: "still not enough … missing a lot of the content from the 2 files … even if we are going to be super close to the original 2 courses". One lesson per lecture (17), the courses' own examples plus the guest-list animations, every point of both files (text, slides and quizzes) covered; sentences stay ours. **Sources for Big O are his two `.docx` files** in the "DSA + LEETCODE…" Desktop folder, not `guiones/`; he'll add files for the other modules later.
 
 - 2026-10-11: **Codecademy-style learning (Carlos).** Students must prove they understood before moving on: lessons are split into **steps** (each `##` heading), every step ends with a **checkpoint** (quick question or small code task checked by tests), and **Next stays locked until it passes**. Stuck → hint, then the solution after 3 failed tries (recorded as "viewed solution"). Coding steps use a **3-pane workspace** (Learn | Editor | Output). Being built in `feat/step-checkpoints`.
@@ -133,6 +137,11 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-12, `chore/agent-skills`: the four reviewed skills, `DESIGN.md`, `PRODUCT.md`, and the "Agent skills" section in `AGENTS.md`. First runs: the security review (guidance mode) found no vulnerabilities, and the Vercel UI review found 5 UI problems plus smaller ones.
 - 2026-10-12, `fix/tool-findings`: everything those runs found, fixed and checked in headless Chrome (focus, wrapping, dialog, tabs, tap areas, reduced motion, 320–1280 px), plus the security headers (tested with a local server that applies `vercel.json`: zero CSP violations), the read-only CI token and Vitest 4. 244 tests. The 35 iCloud duplicate files were moved to the Trash.
 - 2026-10-13, `feat/landing-preview`: the "Try a step right now" section (real animation, real question, confetti and XP) and the auto-playing animation reel. `StepPlayer` can now play on its own, and its buttons got hover states. 249 tests. Checked in headless Chrome under `vercel.json`'s headers: 0 CSP violations, 320–1280 px, reduced motion, Spanish.
+- 2026-10-13, `content/arrays-and-objects`:
+  - **Big O lesson 16** rewritten theory first, with course 2's arrays lecture folded in (601 → 1,571 words, 4 steps).
+  - **Big O of Arrays & Objects:** 4 lessons, 14 steps (EN + ES, 5,251 English words; lesson 4 runs long, 1,764), and a practice file with 15 quiz questions and 3 interview problems.
+  - **New animations:** `array-vs-object`, `object-access`, `object-insert-remove`, `object-has-key`, `object-to-array`, `array-copy-methods`, `array-loop-methods`, `sort-growth-chart` (the growth chart can now pick its curves and has O(n log n)), and the trace `trace-has-answer`.
+  - **Checked:** in Chrome under `vercel.json`'s headers (54 steps, 16 snippets run, 0 CSP violations, 320–1280 px, Spanish, reduced motion), and no 8-word run matches the course notes or slides.
 - 2026-10-13, `docs/ponytail`: Ponytail reviewed (no network calls; the installed files match the reviewed commit). `AGENTS.md` limits it to app code, and `.claude/skills/README.md` says what it runs and how to update or turn it off.
 
 ## Next
@@ -143,26 +152,30 @@ Agents: read this at the start of every session and update it at the end (see `A
 - **Ponytail status line:** in Carlos's first new session, Ponytail asks the agent to offer a `[PONYTAIL]` badge for the status line. It's a change to his global `~/.claude/settings.json`, so only with his yes. To check that it's on, type `/ponytail`: it answers with the level.
 
 - Big O module still needs: the interview problem "Count the Operations" and its slides (later stage).
-- Next content (per `docs/curriculum.md`): **Big O of Arrays & Objects**, then **Classes & Pointers** lessons.
+- **Content, PR 2 (`content/classes-and-pointers`):** 2 lessons from course 1's Section 3 (classes with the Cookie class, pointers and garbage collection), theory first, plus Spanish for the 12 existing quiz questions and a `Counter` Build it.
+- **Content, PRs 3–4:** the theory pass on Introduction 1–3 and Big O 1–8, then Big O 9–15 and 17. The landing preview reads Big O lesson 1's checkpoint 2, so keep that step (or update `TryItPreview.jsx`).
+- Carlos: send course 2's "data structures introduction" transcript (class syntax, static methods) when you get there.
 - Stage 7 (quiz + exercise pages) so students can take the quizzes and solve the exercises.
 - Carlos: iCloud keeps creating `name 2.ext` copies because the project lives in the iCloud-synced Desktop. Consider moving it to a folder iCloud doesn't sync (e.g. `~/Developer`). The 35 copies from 2026-10-11/12 are in the Trash.
 
 ## Course sections imported
 
-| Section               | File                                         | Questions | Exercises                                                          | Spanish | Date       |
-| --------------------- | -------------------------------------------- | --------- | ------------------------------------------------------------------ | ------- | ---------- |
-| 1: Introduction       | `content/practice/introduction.json`         | 10        | none                                                               | done    | 2026-10-11 |
-| 2: Big O              | `content/practice/big-o.json`                | 33        | find-max (easy), contains-duplicate (easy), binary-search (medium) | done    | 2026-10-11 |
-| 3: Classes & Pointers | `content/practice/classes-and-pointers.json` | 12        | cookie-class (easy, class)                                         | missing | 2026-10-11 |
+| Section                      | File                                         | Questions | Exercises                                                                   | Spanish | Date       |
+| ---------------------------- | -------------------------------------------- | --------- | --------------------------------------------------------------------------- | ------- | ---------- |
+| 1: Introduction              | `content/practice/introduction.json`         | 10        | none                                                                        | done    | 2026-10-11 |
+| 2: Big O                     | `content/practice/big-o.json`                | 33        | find-max (easy), contains-duplicate (easy), binary-search (medium)          | done    | 2026-10-11 |
+| 3: Classes & Pointers        | `content/practice/classes-and-pointers.json` | 12        | cookie-class (easy, class)                                                  | missing | 2026-10-11 |
+| 3: Big O of Arrays & Objects | `content/practice/arrays-and-objects.json`   | 15        | word-frequency (easy), last-answer-wins (easy), guests-who-arrived (medium) | done    | 2026-10-13 |
 
 Modules 04–17 have empty folders; they appear in `course.json` as "coming soon".
 
 ### Lessons written
 
-| Module          | Lessons                                                             | Languages | Date       |
-| --------------- | ------------------------------------------------------------------- | --------- | ---------- |
-| 01 Introduction | `01-welcome`, `02-how-to-get-the-most-out-of-it`, `03-running-code` | EN + ES   | 2026-10-11 |
-| 02 Big O        | 17 lessons, one per lecture (`01-why-big-o` … `17-wrap-up`)         | EN + ES   | 2026-10-11 |
+| Module                       | Lessons                                                                                                                                                     | Languages | Date       |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
+| 01 Introduction              | `01-welcome`, `02-how-to-get-the-most-out-of-it`, `03-running-code`                                                                                         | EN + ES   | 2026-10-11 |
+| 02 Big O                     | 17 lessons, one per lecture (`01-why-big-o` … `17-wrap-up`)                                                                                                 | EN + ES   | 2026-10-11 |
+| 03 Big O of Arrays & Objects | `01-built-in-data-structures`, `02-big-o-of-objects`, `03-object-methods`, `04-big-o-of-array-methods` (theory first); Big O `16-big-o-of-arrays` rewritten | EN + ES   | 2026-10-13 |
 
 ## Open questions
 

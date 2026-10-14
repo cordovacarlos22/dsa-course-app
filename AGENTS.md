@@ -158,20 +158,33 @@ When Carlos says _"write the lessons for module N"_:
    - `~/Desktop/DSA + LEETCODE for Coding Interviews — Clear, Step-by-Step Animated Walkthroughs!/course 1 /Section 2 - Big o /Section 2 -  Big o  notes.docx`
    - `~/Desktop/DSA + LEETCODE for Coding Interviews — Clear, Step-by-Step Animated Walkthroughs!/course 2/section 2 - big o /Intro to Big O.docx`
 
+   For **Big O of Arrays & Objects** (plus Big O lesson 16) and **Classes & Pointers**, they are each course's Section 3, in the same folder:
+   - `…/course 2/section 3 - /Section 3  - analyzing performance of arrays and objects .docx` (its quiz screenshots are inside the file)
+   - `…/course 1 /SECTION 3 - CLASSES AND POINTERS/Section 3 clases and pointers.docx` and `RESOURCES/cookie.js`
+   - the slides PDF `03-pdf-slides-big-o-of-arrays-and-objects.pdf` in the course 1 Section 3 folder (a topic reference only). The `.docx` contains a link to the original slides: never copy it into the repo.
+
    Read the text with `textutil -convert txt -stdout "<file>"` and extract the images with `unzip "<file>" 'word/media/*' -d <scratch dir>`. For **other modules**, Carlos adds his files to the same "DSA + LEETCODE…" folder: ask him for the paths. Don't use `recursos originales/…/guiones/` for a module he has given files for.
 
 2. **One lesson per lecture.** Follow both courses' lectures in order, merging the ones they share. Cover every point, example and number from the sources, writing the explanations in Carlos's voice (see the closeness rules above).
 3. Save it as `content/lessons/<module-slug>/<NN-lesson-slug>.en.md` with front-matter (`title`, `order`, `minutes`).
-4. **Show, then explain.** Many students prefer pictures, but they still need the full explanation. Every step has **a ` ```viz ` animation and a real explanation**: a 1–2 sentence lead-in, the animation, then a full explanation (paragraphs, a list or a table) and a ` ```js-run ` wherever the course runs code. A lesson is usually 450–900 words.
+4. **Theory first, then the picture** (Carlos, 2026-10-13: "we're doing a lot of visuals but in reality we still need the theory"). Every step follows this order:
+   1. **The theory:** 2–3 paragraphs that explain the idea before the animation: what it is, the key terms in **bold**, and why it matters.
+   2. **The animation** (` ```viz `).
+   3. **What just happened:** a bold label, then a walkthrough of what the animation showed.
+   4. **Runnable code** (` ```js-run `) wherever there's code to try.
+   5. **Common mistake:** a bold label and one pitfall, when the topic has one.
+
+   A lesson is about 900–1,400 words (a long lecture can run longer). Extra theory beyond the sources is welcome (definitions, the why, pitfalls) when it's correct and in our words. Use plain Markdown: bold labels, lists and tables, no new components. A choice checkpoint's question renders inline, so describe code in words there instead of a code block.
    - **Teach at the depth of the source notes.** Cover every point the course files make for the module, in our own words (the courses' own examples are welcome). Never cut content just to make a lesson shorter (Carlos, 2026-10-11).
    - **The courses' examples plus one story per module.** Walk through the examples the courses use, and use one story for the animations (Big O: the party guest list), so students don't learn a new story every lesson.
-   - **Beginner code style:** loops are written `for (let i = 0; i < guests.length; i++) { … guests[i] … }`. No `for...of` or `.forEach` in lessons, checkpoints or practice code (`content:validate` rejects them). Avoid `Set`, `map` and other advanced tools until the module that teaches them.
-   - **Steps:** every `## ` heading starts a step (the goal line before the first `##` belongs to step 1). Aim for 3–6 short steps. Each lesson has: a one-line goal, the explanation, at least one runnable snippet, an animation when the topic is visual, and the Big O summary inside the last step (no separate "recap" or "check yourself" sections: the checkpoints replace them).
+   - **Beginner code style:** loops are written `for (let i = 0; i < guests.length; i++) { … guests[i] … }`. No `for...of` or `.forEach` in lessons, checkpoints or practice code (`content:validate` rejects them in ` ```js-run ` blocks). Avoid `Set`, `map` and other advanced tools until the module that teaches them. When a lesson needs to show `forEach` (Big O of Arrays & Objects teaches its cost), put it in a plain ` ```js ` block next to the runnable indexed loop it stands for.
+   - **Steps:** every `## ` heading starts a step (the goal line before the first `##` belongs to step 1). Aim for 3–6 steps. Each lesson has: a one-line goal, the explanation, at least one runnable snippet, an animation when the topic is visual, and the Big O summary inside the last step (no separate "recap" or "check yourself" sections: the checkpoints replace them).
    - **Checkpoints:** `content/lessons/<module-slug>/<NN-lesson-slug>.checks.json` holds `{ "steps": [ … ] }`, **one checkpoint per step, in order**. The student can't press Next until the step's checkpoint passes. Mix both kinds:
      - `{ "type": "choice", "question", "options" (2–4), "answer" (index), "hint", "explanation" }`
      - `{ "type": "code", "task", "hint", "starterCode", "solution", "kind": "function", "functionName", "tests": [{ "args", "expected" }] }` (or `"kind": "class"`, `"className"` and step tests, like exercises).
    - Text fields are `{ "en", "es" }` and may use inline Markdown (`code`, **bold**). Code isn't translated. The starter code must compile and must **fail** the tests; the solution must pass them. A wrong try shows the hint; after 3 the student can reveal the answer.
    - Example: `content/lessons/big-o/01-why-big-o.checks.json`.
+
 5. Lesson syntax (Markdown + two special blocks):
 
    ````md
