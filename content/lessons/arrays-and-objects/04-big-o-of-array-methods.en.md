@@ -173,6 +173,6 @@ array-vs-object
 
 So choose by the job. If you look things up by name and don't care about order, use an object. If order matters, use an array, and work at the end whenever you can.
 
-And this is the **limitation of arrays**: inserting at the beginning isn't as easy as it looks. There are data structures that are much better at it. **Linked lists**, which you'll build soon, keep their items in order just like arrays, but can add and remove at the start in O(1). You'll see how they pull that off when you get there.
+And this is the **limitation of arrays**: inserting at the beginning isn't as easy as it looks. There are data structures that are much better at it. **Linked lists**, which you'll build later in the course, keep their items in order just like arrays, but can add and remove at the start in O(1). You'll see how they pull that off when you get there.
 
 **Common mistake:** picking a data structure out of habit. Ask what you'll do with the data most often, then pick the structure that makes that operation cheap.

@@ -15,7 +15,7 @@ Data structures and algorithms (DSA) are the toolbox every programmer reaches fo
 - you're switching careers into tech and need strong fundamentals, fast,
 - or you have a coding interview coming up and want to walk in confident.
 
-All you need is basic JavaScript: variables, functions, loops and arrays. We'll cover classes together in Module 3.
+All you need is basic JavaScript: variables, functions, loops and arrays. We'll cover classes together in the Classes & Pointers module, right before you build your first data structure.
 
 ## How a lesson works
 
@@ -41,15 +41,15 @@ After the lessons, each module has a **quiz** to check what you learned and **ti
 
 Here's the map, in order:
 
-| Section                 | What you'll learn                                                                                                                    |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| **Foundations**         | Big O (how to measure efficient code), the Big O of arrays and objects, classes and pointers                                         |
-| **Problem solving**     | A 5-step method for any problem, common patterns (frequency counter, two pointers, sliding window, divide and conquer) and recursion |
-| **Searching & sorting** | Linear and binary search, then six sorts: bubble, selection, insertion, merge, quick and radix                                       |
-| **Data structures**     | Linked lists, doubly linked lists, stacks and queues, binary search trees, tree traversal, heaps, hash tables and graphs             |
-| **Graph algorithms**    | Visiting every node of a graph, and Dijkstra's shortest path                                                                         |
-| **Dynamic programming** | Solving big problems by reusing the answers to smaller ones                                                                          |
-| **Interview practice**  | The array problems interviews ask for most                                                                                           |
+| Section                 | What you'll learn                                                                                                                                   |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Foundations**         | Big O (how to measure efficient code) and the Big O of arrays and objects                                                                           |
+| **Problem solving**     | A 5-step method for any problem, common patterns (frequency counter, two pointers, sliding window, divide and conquer) and recursion                |
+| **Searching & sorting** | Linear and binary search, then six sorts: bubble, selection, insertion, merge, quick and radix                                                      |
+| **Data structures**     | Classes and pointers, then linked lists, doubly linked lists, stacks and queues, binary search trees, tree traversal, heaps, hash tables and graphs |
+| **Graph algorithms**    | Visiting every node of a graph, and Dijkstra's shortest path                                                                                        |
+| **Dynamic programming** | Solving big problems by reusing the answers to smaller ones                                                                                         |
+| **Interview practice**  | The array problems interviews ask for most                                                                                                          |
 
 It's a lot, and some topics look scary from far away. That's why every one of them is broken into small steps, with an animation whenever a picture helps more than words.
 
@@ -69,6 +69,6 @@ In short:
 
 - Lessons = short steps with explanations, animations, runnable code and a check at the end of each step.
 - Each module ends with a quiz and timed exercises.
-- We start with the foundations (Big O, classes and pointers) and a method for solving problems, because everything else builds on them.
+- We start with the foundations (Big O) and a method for solving problems, because everything else builds on them. Classes and pointers come right before the data structures that use them.
 
 At the end of the module, the **Module 1 quiz** on the module page checks everything together.

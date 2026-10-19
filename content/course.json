@@ -36,17 +36,8 @@
       }
     },
     {
-      "slug": "classes-and-pointers",
-      "order": 4,
-      "title": {
-        "en": "Classes & Pointers",
-        "es": "Clases y punteros"
-      },
-      "sourceFolder": "recursos originales/modulo-03-clases-punteros"
-    },
-    {
       "slug": "problem-solving-approach",
-      "order": 5,
+      "order": 4,
       "title": {
         "en": "A Problem-Solving Approach",
         "es": "Un método para resolver problemas"
@@ -54,7 +45,7 @@
     },
     {
       "slug": "problem-solving-patterns",
-      "order": 6,
+      "order": 5,
       "title": {
         "en": "Problem-Solving Patterns",
         "es": "Patrones para resolver problemas"
@@ -62,7 +53,7 @@
     },
     {
       "slug": "recursion",
-      "order": 7,
+      "order": 6,
       "title": {
         "en": "Recursion",
         "es": "Recursión"
@@ -71,7 +62,7 @@
     },
     {
       "slug": "searching",
-      "order": 8,
+      "order": 7,
       "title": {
         "en": "Searching Algorithms",
         "es": "Algoritmos de búsqueda"
@@ -79,7 +70,7 @@
     },
     {
       "slug": "basic-sorts",
-      "order": 9,
+      "order": 8,
       "title": {
         "en": "Basic Sorts",
         "es": "Ordenamientos básicos"
@@ -88,7 +79,7 @@
     },
     {
       "slug": "merge-sort",
-      "order": 10,
+      "order": 9,
       "title": {
         "en": "Merge Sort",
         "es": "Merge Sort"
@@ -97,7 +88,7 @@
     },
     {
       "slug": "quick-sort",
-      "order": 11,
+      "order": 10,
       "title": {
         "en": "Quick Sort",
         "es": "Quick Sort"
@@ -106,11 +97,20 @@
     },
     {
       "slug": "radix-sort",
-      "order": 12,
+      "order": 11,
       "title": {
         "en": "Radix Sort",
         "es": "Radix Sort"
       }
+    },
+    {
+      "slug": "classes-and-pointers",
+      "order": 12,
+      "title": {
+        "en": "Classes & Pointers",
+        "es": "Clases y punteros"
+      },
+      "sourceFolder": "recursos originales/modulo-03-clases-punteros"
     },
     {
       "slug": "linked-lists",
@@ -225,12 +225,7 @@
         "en": "Foundations",
         "es": "Fundamentos"
       },
-      "modules": [
-        "introduction",
-        "big-o",
-        "arrays-and-objects",
-        "classes-and-pointers"
-      ]
+      "modules": ["introduction", "big-o", "arrays-and-objects"]
     },
     {
       "slug": "problem-solving",
@@ -265,6 +260,7 @@
         "es": "Estructuras de datos"
       },
       "modules": [
+        "classes-and-pointers",
         "linked-lists",
         "doubly-linked-lists",
         "stacks-and-queues",

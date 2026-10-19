@@ -173,6 +173,6 @@ array-vs-object
 
 Así que elige según el trabajo. Si buscas cosas por nombre y no te importa el orden, usa un objeto. Si el orden importa, usa un array, y trabaja al final siempre que puedas.
 
-Y esta es la **limitación de los arrays**: insertar al principio no es tan fácil como parece. Hay estructuras de datos mucho mejores para eso. Las **listas enlazadas**, que vas a construir pronto, guardan sus elementos en orden igual que los arrays, pero pueden agregar y quitar al principio en O(1). Vas a ver cómo lo logran cuando llegues ahí.
+Y esta es la **limitación de los arrays**: insertar al principio no es tan fácil como parece. Hay estructuras de datos mucho mejores para eso. Las **listas enlazadas**, que vas a construir más adelante en el curso, guardan sus elementos en orden igual que los arrays, pero pueden agregar y quitar al principio en O(1). Vas a ver cómo lo logran cuando llegues ahí.
 
 **Error común:** elegir una estructura de datos por costumbre. Pregúntate qué vas a hacer con los datos más seguido, y elige la estructura que vuelva barata esa operación.
