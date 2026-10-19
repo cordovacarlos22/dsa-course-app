@@ -30,8 +30,8 @@
         "es": "Mira el último párrafo de este paso: \"Todo lo que necesitas es…\""
       },
       "explanation": {
-        "en": "Basic JavaScript is enough. Classes are taught in Module 3, and everything else is built up step by step.",
-        "es": "Con JavaScript básico es suficiente. Las clases se enseñan en el Módulo 3 y todo lo demás se construye paso a paso."
+        "en": "Basic JavaScript is enough. Classes are taught right before the data structures, and everything else is built up step by step.",
+        "es": "Con JavaScript básico es suficiente. Las clases se enseñan justo antes de las estructuras de datos y todo lo demás se construye paso a paso."
       }
     },
     {

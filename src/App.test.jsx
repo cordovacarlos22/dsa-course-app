@@ -149,6 +149,17 @@ describe('course home', () => {
     expect(modules[23]).toHaveTextContent('Array Interview Problems')
   })
 
+  it('teaches classes and pointers right before the first data structure', () => {
+    renderAsReturningStudent('/learn')
+    const dataStructures = screen
+      .getByRole('heading', { level: 2, name: /Data Structures/ })
+      .closest('section')
+    const modules = within(dataStructures).getAllByRole('listitem')
+    expect(modules[0]).toHaveTextContent('Module 12')
+    expect(modules[0]).toHaveTextContent('Classes & Pointers')
+    expect(modules[1]).toHaveTextContent('Linked Lists')
+  })
+
   it('links modules that have content and marks the rest as coming soon', () => {
     renderAsReturningStudent('/learn')
     const bigO = screen.getByRole('link', { name: /Big O 17 lessons/ })

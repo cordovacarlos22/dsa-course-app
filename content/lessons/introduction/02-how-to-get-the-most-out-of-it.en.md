@@ -4,11 +4,11 @@ order: 2
 minutes: 6
 ---
 
-> **Goal:** understand why the course starts with Big O and with classes and pointers, and build a study routine that works.
+> **Goal:** understand why the course starts with Big O, why classes and pointers come before the data structures, and build a study routine that works.
 
 ## "Can I skip straight to the code?"
 
-You can. If you only want to write code, jump to the Linked Lists module. But the next two modules are short, and they make everything after them easier. Here's why.
+You can. If you only want to write code, jump to the Data Structures section. But two short topics make everything in it easier: Big O, which comes next, and classes and pointers, which open that section. Here's why.
 
 ### Why Big O comes first
 
@@ -22,9 +22,9 @@ There are three reasons to learn it first:
 2. **It helps you choose.** Picking the right data structure for a job means comparing their Big O.
 3. **Interviews always ask about it.** In a coding interview, you'll almost certainly be asked for the Big O of your solution.
 
-## Why classes and pointers come next
+## Why classes and pointers matter
 
-Every data structure in this course is built as a **class**. A linked list, for example, is a `LinkedList` class with methods like `push` and `pop`. So you need the basics of classes before we start.
+Every data structure in this course is built as a **class**. A linked list, for example, is a `LinkedList` class with methods like `push` and `pop`. So you need the basics of classes before you build one, and that's why the Data Structures section opens with a short Classes & Pointers module.
 
 **Pointers** are the other key idea, and they trip up a lot of people. Here's a common mistake: looking at a linked list diagram and calling the first box "head" and the last box "tail". In fact, `head` and `tail` are **not** the boxes (the nodes). They are **variables that point to** nodes.
 
@@ -46,7 +46,7 @@ console.log('tail points to the node with', tail.value)
 console.log('the node after head has', head.next.value)
 ```
 
-Notice that `head` never moved: it still points to the first node. Only `tail` moved, because `tail` is a pointer, and pointers can be moved to a different node. You'll learn exactly how this works in Module 3.
+Notice that `head` never moved: it still points to the first node. Only `tail` moved, because `tail` is a pointer, and pointers can be moved to a different node. You'll learn exactly how this works in the Classes & Pointers module.
 
 ## Your study routine
 

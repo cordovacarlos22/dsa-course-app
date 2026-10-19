@@ -4,11 +4,11 @@ order: 2
 minutes: 6
 ---
 
-> **Meta:** entender por qué el curso empieza con Big O y con clases y punteros, y armar una rutina de estudio que funcione.
+> **Meta:** entender por qué el curso empieza con Big O, por qué las clases y los punteros van antes de las estructuras de datos, y armar una rutina de estudio que funcione.
 
 ## "¿Puedo saltar directo al código?"
 
-Puedes. Si solo quieres escribir código, ve directo al módulo de Listas Enlazadas. Pero los dos módulos siguientes son cortos y hacen que todo lo demás sea más fácil. Te explico por qué.
+Puedes. Si solo quieres escribir código, ve directo a la sección de Estructuras de datos. Pero dos temas cortos hacen que todo lo que hay ahí sea más fácil: Big O, que viene ahora, y las clases y los punteros, que abren esa sección. Te explico por qué.
 
 ### Por qué Big O va primero
 
@@ -22,9 +22,9 @@ Hay tres razones para aprenderlo primero:
 2. **Te ayuda a elegir.** Escoger la estructura de datos correcta para un trabajo significa comparar su Big O.
 3. **En las entrevistas siempre lo preguntan.** En una entrevista técnica, casi seguro te van a pedir el Big O de tu solución.
 
-## Por qué siguen las clases y los punteros
+## Por qué importan las clases y los punteros
 
-Cada estructura de datos de este curso se construye como una **clase**. Una lista enlazada, por ejemplo, es una clase `LinkedList` con métodos como `push` y `pop`. Por eso necesitas lo básico de las clases antes de empezar.
+Cada estructura de datos de este curso se construye como una **clase**. Una lista enlazada, por ejemplo, es una clase `LinkedList` con métodos como `push` y `pop`. Por eso necesitas lo básico de las clases antes de construir una, y por eso la sección de Estructuras de datos empieza con un módulo corto de Clases y punteros.
 
 Los **punteros** son la otra idea clave, y confunden a mucha gente. Un error común: mirar el diagrama de una lista enlazada y llamar "head" a la primera caja y "tail" a la última. En realidad, `head` y `tail` **no** son las cajas (los nodos). Son **variables que apuntan a** nodos.
 
@@ -46,7 +46,7 @@ console.log('tail apunta al nodo con', tail.value)
 console.log('el nodo después de head tiene', head.next.value)
 ```
 
-Fíjate que `head` nunca se movió: sigue apuntando al primer nodo. Solo se movió `tail`, porque `tail` es un puntero, y los punteros se pueden mover a otro nodo. Vas a aprender exactamente cómo funciona esto en el Módulo 3.
+Fíjate que `head` nunca se movió: sigue apuntando al primer nodo. Solo se movió `tail`, porque `tail` es un puntero, y los punteros se pueden mover a otro nodo. Vas a aprender exactamente cómo funciona esto en el módulo de Clases y punteros.
 
 ## Tu rutina de estudio
 
