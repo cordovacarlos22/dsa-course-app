@@ -5,7 +5,7 @@ This is the plan for the whole course: what each module teaches and what student
 ## Principles
 
 1. **Our own material.** The course combines the topic order of two popular DSA courses that Carlos took. Their lessons, slides, exercises, starter files, solutions, quizzes and wording are **examples of structure only and are never copied, edited or reused**. Every lesson, slide, explanation, example, problem statement, test and solution in this app is written from scratch.
-2. **Algorithms first.** Students learn to measure code (Big O), then a method and patterns for solving problems, then searching and sorting, and only then build data structures, graph algorithms and dynamic programming.
+2. **Algorithms first.** Students learn to measure code (Big O), then a method and patterns for solving problems, then searching and sorting, and only then build data structures (starting with classes and pointers, the tools every data structure uses), graph algorithms and dynamic programming.
 3. **One module = one topic**, always in the same rhythm:
    1. **Lessons:** short explanations, step-by-step animations and runnable code.
    2. **Quiz:** checks understanding, with an explanation for every answer.
@@ -19,15 +19,15 @@ This is the plan for the whole course: what each module teaches and what student
 
 ## Sections and modules
 
-| Section                | Modules                                                                                                                                      |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1. Foundations         | Introduction · Big O · Big O of Arrays & Objects · Classes & Pointers                                                                        |
-| 2. Problem Solving     | A Problem-Solving Approach · Problem-Solving Patterns · Recursion                                                                            |
-| 3. Searching & Sorting | Searching Algorithms · Basic Sorts · Merge Sort · Quick Sort · Radix Sort                                                                    |
-| 4. Data Structures     | Linked Lists · Doubly Linked Lists · Stacks & Queues · Binary Search Trees · Tree Traversal · Heaps & Priority Queues · Hash Tables · Graphs |
-| 5. Graph Algorithms    | Graph Traversal · Dijkstra's Shortest Path                                                                                                   |
-| 6. Dynamic Programming | Dynamic Programming                                                                                                                          |
-| 7. Interview Practice  | Array Interview Problems                                                                                                                     |
+| Section                | Modules                                                                                                                                                           |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1. Foundations         | Introduction · Big O · Big O of Arrays & Objects                                                                                                                  |
+| 2. Problem Solving     | A Problem-Solving Approach · Problem-Solving Patterns · Recursion                                                                                                 |
+| 3. Searching & Sorting | Searching Algorithms · Basic Sorts · Merge Sort · Quick Sort · Radix Sort                                                                                         |
+| 4. Data Structures     | Classes & Pointers · Linked Lists · Doubly Linked Lists · Stacks & Queues · Binary Search Trees · Tree Traversal · Heaps & Priority Queues · Hash Tables · Graphs |
+| 5. Graph Algorithms    | Graph Traversal · Dijkstra's Shortest Path                                                                                                                        |
+| 6. Dynamic Programming | Dynamic Programming                                                                                                                                               |
+| 7. Interview Practice  | Array Interview Problems                                                                                                                                          |
 
 Planned practice: about **155 exercises** (70 build it, 86 interview problems), 24 quizzes and 24 slide decks. Module slugs are English names without numbers; the order lives in `content/course.json`.
 
@@ -89,16 +89,6 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 - **Build it:** none.
 - **Interview problems:** ✅ Word Frequency (easy) · ✅ Last Answer Wins (easy) · ✅ Guests Who Arrived (medium: O(n + m) with an object instead of O(n · m); replaces "Pick the Faster Version", whose idea moved into the quiz)
 
-## Classes & Pointers (`classes-and-pointers`)
-
-**Status:** ⬜ lessons · ✅ quiz (EN) · ✅ 1 build it · ⬜ slides
-**Goal:** write classes and understand references, the two tools behind every data structure.
-
-- **Lessons:** Classes: the blueprint for every data structure · Instance methods vs. static (class) methods · Pointers: values vs. references
-- **Quiz:** `constructor`, `new`, `this`, getters/setters, static methods, copying values vs. sharing references, garbage collection.
-- **Build it:** ✅ The Cookie Class · A `Counter` class (increment, decrement, reset) · A `Point` class with a static `distance` method
-- **Interview problems:** none.
-
 ---
 
 # Section 2 · Problem Solving
@@ -107,6 +97,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 **Status:** ⬜
 **Goal:** have a repeatable method for any problem, even one you've never seen.
+**Sources:** course 2's Section 4 (7 lectures and the first 25 pages of its slides; no quiz).
 
 - **Lessons:**
   1. Why you need a method
@@ -210,16 +201,29 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 # Section 4 · Data Structures
 
+## Classes & Pointers (`classes-and-pointers`)
+
+**Status:** ⬜ lessons · ✅ quiz (EN) · ✅ 1 build it · ⬜ slides
+**Goal:** write classes and understand references, the two tools behind every data structure.
+**Place:** it opens the Data Structures section, right before Linked Lists (Carlos, 2026-10-19), because both courses teach classes right before their first data structure.
+
+- **Lessons:** Classes: the blueprint for every data structure · Instance methods vs. static (class) methods · Pointers: values vs. references
+- **Quiz:** `constructor`, `new`, `this`, getters/setters, static methods, copying values vs. sharing references, garbage collection.
+- **Build it:** ✅ The Cookie Class · A `Counter` class (increment, decrement, reset) · A `Point` class with a static `distance` method
+- **Interview problems:** none.
+
 ## Linked Lists (`linked-lists`)
 
 **Status:** ⬜
 **Goal:** build a singly linked list from scratch and solve classic pointer problems.
+**Sources:** course 1's Section 4 (14 lectures, 3 quiz questions, exercise files and a Big O table). Course 2's own linked list section joins later, when Carlos sends it.
+**Style:** theory first. Every method lesson (constructor to reverse) follows the 5 steps from A Problem-Solving Approach: understand, examples (empty, one, many), break it down, write the code, look back. The party continues as a **conga line** of guests: each one holds on to the next, `head` is the front and `tail` is the back.
 
-- **Lessons:** What is a linked list? · Linked lists vs. arrays in Big O · Nodes and pointers under the hood · The constructor · push · pop · unshift · shift · get · set · insert · remove · reverse
-- **Animations:** `linked-list-push`, `linked-list-pop`, `linked-list-unshift`, `linked-list-shift`, `linked-list-insert`, `linked-list-remove`, `linked-list-reverse`
+- **Lessons** (one per lecture; the two pop lectures make one lesson): What is a linked list? · Linked lists vs. arrays in Big O · Nodes and pointers under the hood · The constructor · push · pop · unshift · shift · get · set · insert · remove · reverse
+- **Animations:** `array-vs-linked-list`, `linked-list-anatomy`, `linked-list-big-o`, `linked-list-nested`, `linked-list-constructor`, `linked-list-push`, `linked-list-pop`, `linked-list-unshift`, `linked-list-shift`, `linked-list-get`, `linked-list-set`, `linked-list-insert`, `linked-list-remove`, `linked-list-reverse`, plus the traces `trace-ll-pop` and `trace-ll-reverse`
 - **Quiz:** Big O of each operation vs. arrays, why pop is O(n), what `head`/`tail`/`length` hold.
 - **Build it (class `LinkedList`):** constructor · push · pop · unshift · shift · get · set · insert · remove · reverse
-- **Interview problems:** Middle Node · Has Cycle · K-th Node From the End · Remove Duplicates · Binary List to Number · Partition Around a Value · Reverse a Sublist · Swap Pairs · Rotate the List
+- **Interview problems** (with course 1's Section 5, the linked list LeetCode exercises): Middle Node · Has Cycle · K-th Node From the End · Remove Duplicates · Binary List to Number · Partition Around a Value · Reverse a Sublist · Swap Pairs · Rotate the List
 
 ## Doubly Linked Lists (`doubly-linked-lists`)
 
