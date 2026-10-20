@@ -264,5 +264,32 @@
     "yourAnswer": "Your answer",
     "rightAnswer": "Right answer",
     "tryAgain": "Try again"
+  },
+  "exercise": {
+    "category": {
+      "build": "Build it",
+      "interview": "Interview problem"
+    },
+    "difficulty": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard"
+    },
+    "solved": "Solved",
+    "bestTime": "best {{time}}",
+    "solvedIn": "Solved in {{time}}!",
+    "complexity": "The expected Big O: {{time}} time, {{space}} space. Does yours match?",
+    "next": "Next exercise",
+    "cheer": "Nice work!",
+    "hint": "Read the description again and look at the failing tests. Aim for {{time}} time and {{space}} space.",
+    "timer": {
+      "label": "Timer",
+      "stopwatch": "Stopwatch",
+      "countdown": "Countdown",
+      "off": "No timer",
+      "elapsed": "Time spent",
+      "remaining": "Time left",
+      "timeUp": "Time's up! Keep going if you like."
+    }
   }
 }

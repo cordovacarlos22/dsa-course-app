@@ -19,7 +19,8 @@ export function getCourse() {
 
 // Each module from the outline, plus the summary of its content:
 // - lessons: [{ slug, order, minutes, titles: { en, es } }], in order
-// - practice: { questions, build, interview } (how many of each), or null
+// - practice: { questions, build, interview } (how many of each) and
+//   exercises: [{ slug, title, difficulty, category }], or null
 // A module with no lessons and no practice is still "coming soon".
 export function getModules() {
   return course.modules.map((module) => {

@@ -39,19 +39,25 @@ function readLessons(moduleDir) {
   return Object.values(bySlug).sort((a, b) => a.order - b.order)
 }
 
-function countPractice(practice) {
+// How many questions and exercises a module has, plus each exercise's title,
+// so the module page can list them without the full practice file.
+function summarizePractice(practice) {
   let build = 0
   let interview = 0
+  const exercises = []
   for (let i = 0; i < practice.exercises.length; i++) {
-    if (practice.exercises[i].category === 'build') build++
+    const { slug, title, difficulty, category } = practice.exercises[i]
+    if (category === 'build') build++
     else interview++
+    exercises.push({ slug, title, difficulty, category })
   }
-  return { questions: practice.questions.length, build, interview }
+  return { questions: practice.questions.length, build, interview, exercises }
 }
 
 // { [moduleSlug]: { lessons: [{ slug, order, minutes, titles }], practice } }
-// `practice` is { questions, build, interview }, or null for a module
-// without a practice file.
+// `practice` is { questions, build, interview, exercises }, or null for a
+// module without a practice file. `exercises` lists each exercise's slug,
+// title, difficulty and category.
 export function buildCatalog(contentDir) {
   const catalog = {}
   const lessonsDir = join(contentDir, 'lessons')
@@ -66,7 +72,7 @@ export function buildCatalog(contentDir) {
     if (!file.endsWith('.json') || isIcloudCopy(file)) continue
     const practice = JSON.parse(readFileSync(join(practiceDir, file), 'utf8'))
     catalog[practice.slug] ??= { lessons: [], practice: null }
-    catalog[practice.slug].practice = countPractice(practice)
+    catalog[practice.slug].practice = summarizePractice(practice)
   }
   return catalog
 }

@@ -11,6 +11,8 @@ import NotFoundPage from './pages/NotFoundPage'
 const LessonPage = lazy(() => import('./pages/LessonPage'))
 // The quiz brings the module's full practice file, so it loads on demand too.
 const QuizPage = lazy(() => import('./pages/QuizPage'))
+// Exercises reuse the lessons' coding workspace, and load on demand too.
+const ExercisePage = lazy(() => import('./pages/ExercisePage'))
 // For reviewing animations; not linked from the menu.
 const AnimationGalleryPage = lazy(() => import('./pages/AnimationGalleryPage'))
 
@@ -23,6 +25,10 @@ function App() {
         <Route path="learn" element={<CourseHomePage />} />
         <Route path="learn/:moduleSlug" element={<ModulePage />} />
         <Route path="learn/:moduleSlug/quiz" element={<QuizPage />} />
+        <Route
+          path="learn/:moduleSlug/exercises/:exerciseSlug"
+          element={<ExercisePage />}
+        />
         <Route path="learn/:moduleSlug/:lessonSlug" element={<LessonPage />} />
         <Route path="dev/animations" element={<AnimationGalleryPage />} />
         <Route path="*" element={<NotFoundPage />} />

@@ -59,6 +59,12 @@ describe('getModules', () => {
         questions: practice.questions.length,
         build: exercises.filter((e) => e.category === 'build').length,
         interview: exercises.filter((e) => e.category === 'interview').length,
+        exercises: exercises.map(({ slug, title, difficulty, category }) => ({
+          slug,
+          title,
+          difficulty,
+          category,
+        })),
       })
     }
   })
