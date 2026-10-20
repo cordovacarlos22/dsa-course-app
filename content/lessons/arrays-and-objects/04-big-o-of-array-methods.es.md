@@ -126,7 +126,7 @@ array-loop-methods
 Este es `forEach` junto al bucle normal que reemplaza. Hacen exactamente el mismo trabajo:
 
 ```js
-guests.forEach((name) => console.log('Bienvenido, ' + name))
+guests.forEach((name) => console.log('Hola, ' + name))
 ```
 
 ```js-run
@@ -134,7 +134,7 @@ const guests = ['Ana', 'Ben', 'Cleo', 'Dev', 'Eli']
 
 // Lo que forEach hace por ti: un bucle sobre cada invitado
 for (let i = 0; i < guests.length; i++) {
-  console.log('Bienvenido, ' + guests[i])
+  console.log('Hola, ' + guests[i])
 }
 
 console.log(guests.map((name) => name.toUpperCase()))

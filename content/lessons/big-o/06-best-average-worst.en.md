@@ -1,23 +1,47 @@
 ---
 title: Best, average and worst case
 order: 6
-minutes: 6
+minutes: 9
 ---
 
 > **Goal:** know what Ω, Θ and O describe, and why Big O always means the worst case.
 
 ## Where is the item?
 
-When you work with this notation, three Greek letters show up again and again: **omega (Ω)**, **theta (Θ)** and **omicron (O)**. Omicron is better known as **O**, as in Big O, and it's the one you'll see most.
+When you work with this notation, three Greek letters show up again and again: **omega (Ω)**, **theta (Θ)** and **omicron (O)**. You already know omicron by its everyday name, **O**: the O in Big O. It's the one you'll see most.
 
-To see why there are three, picture an array of numbers and a loop that walks through it until it finds the number you want:
+Why three? Because the same code can do very different amounts of work depending on its input. Picture an array of numbers, 1 to 7, and a loop that walks through it until it finds the number you want. The code never changes, but **where** the number sits decides how long the walk is:
+
+- Looking for 1 takes the fewest iterations: it's the first item. That's the **best case**: the input that makes the code do the least work.
+- Looking for 7 makes the loop go through every item. That's the **worst case**: the input that makes the code do the most work.
+- Something around the middle, like 4, is the **average case**: what you can expect most of the time.
+
+Each case has its own letter:
+
+| Case    | Letter    | Also called | In simple terms                                      |
+| ------- | --------- | ----------- | ---------------------------------------------------- |
+| Best    | Ω (omega) | lower bound | the fastest the code can run, in the best situation  |
+| Average | Θ (theta) | tight bound | what you can generally expect                        |
+| Worst   | O (big O) | upper bound | the slowest the code can run, in the worst situation |
+
+A **bound** is a limit. The lower bound says "it can't go faster than this"; the upper bound says "it can't go slower than this". Here's the same idea with our guest list:
+
+```viz
+search-cases
+```
+
+**What just happened:** `isInvited` read the list from the start every time. When the name was first, it was found in 1 check: the best case, Ω. When the name was in the middle, it took about half the list: the average case, Θ. When the name wasn't on the list at all, every guest was checked: the worst case, O.
+
+Now with the numbers 1 to 7. Each call counts how many steps the loop takes:
 
 ```js-run
 const numbers = [1, 2, 3, 4, 5, 6, 7]
 
 function stepsToFind(target) {
   for (let i = 0; i < numbers.length; i++) {
-    if (numbers[i] === target) return i + 1
+    if (numbers[i] === target) {
+      return i + 1
+    }
   }
   return numbers.length
 }
@@ -27,27 +51,21 @@ console.log('Find 4:', stepsToFind(4), 'steps') // average case
 console.log('Find 7:', stepsToFind(7), 'steps') // worst case
 ```
 
-Looking for 1 takes the fewest iterations: it's the first item. That's the **best case**. Looking for 7 makes the loop go through every item: the **worst case**. Something around the middle, like 4, is the **average case**. Here's the same idea with our guest list:
-
-```viz
-search-cases
-```
-
-| Case    | Letter    | Also called | In simple terms                                      |
-| ------- | --------- | ----------- | ---------------------------------------------------- |
-| Best    | Ω (omega) | lower bound | the fastest the code can run, in the best situation  |
-| Average | Θ (theta) | tight bound | what you can generally expect                        |
-| Worst   | O (big O) | upper bound | the slowest the code can run, in the worst situation |
+**Common mistake:** thinking "best case" means "the best algorithm". The three cases describe **one** piece of code with different inputs. To compare two algorithms, you compare the same case of each, usually the worst.
 
 ## Big O is the worst case
+
+So **Big O is always the worst case**. You'll often hear questions like "Fine, and what's the Big O in the best case?" Technically, there's no such thing: the best case is **omega** and the average case is **theta**. When we measure Big O, we're always measuring the worst case.
+
+Why focus on the worst case? Because it's a **promise**: whatever the input, the code will never be slower than this. A search that's usually quick but sometimes reads a million items **will** read a million items one day, for a real user. Planning for the worst case means no surprises. It's also the easiest case to agree on. The average case depends on which inputs are likely, and that changes from app to app. The worst case only depends on the code.
+
+Watch the worst case happen:
 
 ```viz
 trace-is-invited
 ```
 
-So **Big O is always the worst case**. It's very common to hear people say "OK, that's your worst-case Big O, but what's your best-case Big O?" Technically, there's no such thing: the best case is **omega** and the average case is **theta**. When we measure Big O, we're always measuring the worst case.
-
-Pick **find 'Zoe'** above: she isn't on the list, so every guest gets checked. That's the worst case for `isInvited`, and it's n checks, so `isInvited` is **O(n)**.
+**What just happened:** pick **find 'Zoe'**. 'Zoe' isn't on the list, so every guest got checked before the function could return `false`. That's the worst case for `isInvited`, and it's n checks for n guests, so `isInvited` is **O(n)**.
 
 Here are all three cases for `isInvited`, written in this notation:
 
@@ -55,6 +73,31 @@ Here are all three cases for `isInvited`, written in this notation:
 - **Average case, Θ(n):** on average the name is somewhere in the middle, so about n / 2 checks. Drop the ½ and it grows like n.
 - **Worst case, O(n):** the name isn't there, so all n guests are checked.
 
-Why focus on the worst case? Because it's a **promise**: whatever the input, the code will never be slower than this. A search that's usually quick but sometimes reads a million items **will** read a million items one day, for a real user. Planning for the worst case means no surprises.
+You can check the average yourself. This looks for every guest on the list, one at a time, and averages the checks:
+
+```js-run
+const guests = ['Ana', 'Ben', 'Cleo', 'Dev', 'Eli', 'Fay']
+
+function checksToFind(name) {
+  for (let i = 0; i < guests.length; i++) {
+    if (guests[i] === name) {
+      return i + 1
+    }
+  }
+  return guests.length
+}
+
+let totalChecks = 0
+for (let i = 0; i < guests.length; i++) {
+  totalChecks = totalChecks + checksToFind(guests[i])
+}
+console.log('Best case:', checksToFind('Ana'), 'check')
+console.log('Average for a name on the list:', totalChecks / guests.length, 'checks') // about n / 2
+console.log('Worst case:', checksToFind('Zoe'), 'checks')
+```
+
+With 6 guests, the average is 3.5 checks: about half the list. Double the guests and the average doubles too, which is why the average case is still Θ(n).
 
 That doesn't mean the other cases are useless. When you analyze code, think about all three: the best case, what usually happens, and the worst case. But when someone asks for "the Big O", give them the worst case.
+
+**Common mistake:** answering "O(1)" because the name you tried was first on the list. That's the best case, Ω(1). The Big O of `isInvited` is O(n), because some inputs make it read every name.

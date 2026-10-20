@@ -26,8 +26,8 @@
       ],
       "answer": 1,
       "hint": {
-        "en": "Look at the last paragraph of this step: \"All you need is…\"",
-        "es": "Mira el último párrafo de este paso: \"Todo lo que necesitas es…\""
+        "en": "Look for the sentence that starts with \"All you need is…\"",
+        "es": "Busca la oración que empieza con \"Solo necesitas…\""
       },
       "explanation": {
         "en": "Basic JavaScript is enough. Classes are taught right before the data structures, and everything else is built up step by step.",
@@ -38,7 +38,7 @@
       "type": "code",
       "task": {
         "en": "Your first coding check! Write `greet(name)` so it **returns** (not prints) the text `Hi <name>!`. For example, `greet('Ada')` returns `'Hi Ada!'`. Press **Check** when you're ready.",
-        "es": "¡Tu primera comprobación de código! Escribe `greet(name)` para que **devuelva** (no que imprima) el texto `Hi <name>!`. Por ejemplo, `greet('Ada')` devuelve `'Hi Ada!'`. Presiona **Comprobar** cuando estés listo."
+        "es": "¡Tu primera comprobación de código! Escribe `greet(name)` para que **devuelva** (no que imprima) el texto `Hi <name>!`. Por ejemplo, `greet('Ada')` devuelve `'Hi Ada!'`. Presiona **Comprobar** cuando quieras."
       },
       "hint": {
         "en": "Join the pieces with `+`: `return 'Hi ' + name + '!'`. Watch the space after `Hi`.",
