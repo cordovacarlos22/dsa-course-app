@@ -204,13 +204,18 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Classes & Pointers (`classes-and-pointers`)
 
-**Status:** ⬜ lessons · ✅ quiz (EN) · ✅ 1 build it · ⬜ slides
+**Status:** ✅ 2 lessons, 7 steps (EN + ES, 7 checkpoints) · ✅ quiz, 16 questions (EN + ES) · ✅ 2 build it · ⬜ slides
 **Goal:** write classes and understand references, the two tools behind every data structure.
 **Place:** it opens the Data Structures section, right before Linked Lists (Carlos, 2026-10-19), because both courses teach classes right before their first data structure.
+**Sources:** course 1's Section 3 (2 lectures and `cookie.js`). Course 2's class lecture (instance vs. static methods) joins when Carlos sends it.
+**Style:** theory first; cookies with flavors for classes, and guest cards (`{ value: 'Ana' }`) for pointers.
 
-- **Lessons:** Classes: the blueprint for every data structure · Instance methods vs. static (class) methods · Pointers: values vs. references
-- **Quiz:** `constructor`, `new`, `this`, getters/setters, static methods, copying values vs. sharing references, garbage collection.
-- **Build it:** ✅ The Cookie Class · A `Counter` class (increment, decrement, reset) · A `Point` class with a static `distance` method
+- **Lessons** (sources and animations in parentheses):
+  1. Classes: the blueprint for every data structure ✅ (C1 classes lecture: `cookie-cutter`, `cookie-new`, `cookie-methods`, `list-class-preview`)
+  2. Pointers: values vs. references ✅ (C1 pointers lecture: `value-copy`, `reference-copy`, `pointer-move`)
+  3. Instance methods vs. static (class) methods ⬜ (waits for course 2's lecture)
+- **Quiz:** classes vs. instances, naming, `constructor`, what `new` does (and forgetting it), `this`, getters/setters, why data structures are classes, copying values vs. sharing references, `===` on objects, moving pointers, garbage collection (and removed list nodes). Static methods come with lesson 3.
+- **Build it:** ✅ The Cookie Class · ✅ The Door Counter (`Counter`: increment, decrement, reset) · A `Point` class with a static `distance` method (with course 2's lecture)
 - **Interview problems:** none.
 
 ## Linked Lists (`linked-lists`)

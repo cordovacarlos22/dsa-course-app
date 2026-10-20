@@ -11,7 +11,8 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-13: **Ponytail** recorded and limited to code on `docs/ponytail` (built on `fix/tool-findings`).
 - 2026-10-13: **Stage 8 roadmap** (accounts, a Duolingo-style lock, XP, 2-step), in 5 PRs. PR 1, the **landing preview**, is merged (#23). PRs 2–5 wait for Carlos's account setup.
 - 2026-10-13: **Section 3 of both courses, merged, with theory first** (4 PRs). PR 1, **Big O of Arrays & Objects** (plus a deeper Big O lesson 16), is merged (#24).
-- 2026-10-19: **Section 4 of both courses, merged** (6 PRs, then the theory pass). PR 1, the **course order** (Classes & Pointers moves right before Linked Lists), is PR #25. PR 2, **A Problem-Solving Approach** (7 lessons), is on `content/problem-solving-approach`, built on #25. Next: Classes & Pointers, then Linked Lists in 3 PRs.
+- 2026-10-19: **Section 4 of both courses, merged** (6 PRs, then the theory pass). PR 1, the **course order** (Classes & Pointers moves right before Linked Lists), is PR #25. PR 2, **A Problem-Solving Approach** (7 lessons), is on `content/problem-solving-approach`, built on #25. PR #26 is merged too.
+- 2026-10-20: **Classes & Pointers** (2 lessons) is on `content/classes-and-pointers`. Next, in this order: lazy captions and quizzes, the quiz page, the exercise pages, then Linked Lists in 3 PRs.
 
 ## Decisions
 
@@ -45,7 +46,11 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-13: **Classes & Pointers uses course 1 only for now.** Course 2 teaches class syntax later (instance vs static methods, in its data structures introduction). That lesson, and the `Point` class with a static `distance`, wait for Carlos to send its transcript.
 - 2026-10-19: **Classes & Pointers moves right before Linked Lists** (Carlos chose "Right before Linked Lists"). It now opens the Data Structures section as module 12, and Foundations is Introduction, Big O and Big O of Arrays & Objects. Reason: both courses teach classes right before their first data structure (course 1 goes classes → linked lists; course 2 teaches class syntax just before its linked lists). The Introduction lessons were updated to match.
 - 2026-10-19: **Section 4 of both courses, merged** (Carlos: "combine section 4 of both courses or maybe restructure course lectures"). They're different topics again, so they make two modules: **A Problem-Solving Approach** (course 2) and **Linked Lists** (course 1). They meet inside the lessons: **every linked list method lesson follows the 5 steps** (Carlos chose "Use the 5 steps in every list method"): understand, examples (empty, one, many), break it down, write the code, look back. The Linked Lists story is the guests' **conga line**. Its interview problems wait for course 1's Section 5, and course 2's own linked list section joins when Carlos sends it. The slides PDF's pages 26–51 (patterns) wait for course 2's Section 5.
-- 2026-10-19: **Linked lists start with one node or empty** (from a side-agent note, before any linked list code). `new LinkedList('Ana')` starts with one node, as in course 1; `new LinkedList()` starts empty, as course 2 likely does. Reason: folding in course 2's linked list section later won't mean rewriting every exercise, and tests can make an empty list without a helper. Carlos can still change it before the linked list PRs.
+- 2026-10-19: **Linked lists start with one node or empty** (from a side-agent note, before any linked list code). `new LinkedList('Ana')` starts with one node, as in course 1; `new LinkedList()` starts empty, as course 2 likely does. Reason: folding in course 2's linked list section later won't mean rewriting every exercise, and tests can make an empty list without a helper. Carlos (2026-10-20): "Up to you", so it stays.
+- 2026-10-20: **Lesson 7 of A Problem-Solving Approach stays at 890 words** (Carlos: "Up to you"). Its source is a 30-second recap, and the lesson already adds the interview advice from the other lectures and a worked problem.
+- 2026-10-20: **Quiz and exercise pages (stage 7) come before Linked Lists** (Carlos chose "Before Linked Lists", after a side-agent note). Five modules have practice files (65 questions, 13 exercises), but the module page only shows counts, and the Introduction lessons promise a quiz on the module page. The exercise page reuses the lesson's `CodeWorkspace` and `checkJavaScript`.
+- 2026-10-20: **Captions and quizzes will load only when needed** (from a side-agent note). The main download carries every module's animation captions (about 30 kB per language) and every quiz (about 120 kB); each module adds 12–20 kB. A `perf/lazy-module-content` PR comes before the quiz page.
+- 2026-10-20: **Classes & Pointers uses our own values.** Cookies have flavors (`'chocolate'`, `'vanilla'`, `'oatmeal'`) instead of course 1's colors, and pointers use the guest count and guest cards (`{ value: 'Ana' }`) instead of course 1's numbers. The Cookie Build it now uses `getFlavor`/`setFlavor`.
 - 2026-10-11 (later): **Big O follows both courses closely.** Carlos: "still not enough … missing a lot of the content from the 2 files … even if we are going to be super close to the original 2 courses". One lesson per lecture (17), the courses' own examples plus the guest-list animations, every point of both files (text, slides and quizzes) covered; sentences stay ours. **Sources for Big O are his two `.docx` files** in the "DSA + LEETCODE…" Desktop folder, not `guiones/`; he'll add files for the other modules later.
 
 - 2026-10-11: **Codecademy-style learning (Carlos).** Students must prove they understood before moving on: lessons are split into **steps** (each `##` heading), every step ends with a **checkpoint** (quick question or small code task checked by tests), and **Next stays locked until it passes**. Stuck → hint, then the solution after 3 failed tries (recorded as "viewed solution"). Coding steps use a **3-pane workspace** (Learn | Editor | Output). Being built in `feat/step-checkpoints`.
@@ -152,6 +157,12 @@ Agents: read this at the start of every session and update it at the end (see `A
   - **Practice:** a quiz with 14 questions and 3 interview problems.
   - **New animations:** `five-steps` (plus one version per step), `example-ladder`, `steps-to-code`, `solution-layers`, `char-code-ranges`, and the trace `trace-char-count`.
   - **Checked:** in Chrome under `vercel.json`'s headers (63 step views, 39 animations, 36 snippets, 0 CSP violations, 320–1280 px, Spanish, reduced motion). No 8-word run matches the course notes or slides, after rewording the slides' question lists.
+- 2026-10-20, `content/classes-and-pointers`:
+  - **2 lessons, 7 steps** (EN + ES), from course 1's Section 3, with our own values.
+  - **Practice:** 16 quiz questions (12 rewritten in Spanish with our values, 4 new) and 2 Build its (The Cookie Class, The Door Counter).
+  - **New animations:** `cookie-cutter`, `cookie-new`, `cookie-methods`, `list-class-preview`, `value-copy`, `reference-copy` and `pointer-move`.
+  - **Fix:** a choice option that mixed text and `code` couldn't wrap on phones (each piece was its own flex item), so options are now wrapped in one span.
+  - **Checked:** in Chrome under `vercel.json`'s headers (21 step views, 18 snippets, 0 CSP violations, 320–1280 px), and no 8-word run matches the course notes or `cookie.js`.
 - 2026-10-13, `docs/ponytail`: Ponytail reviewed (no network calls; the installed files match the reviewed commit). `AGENTS.md` limits it to app code, and `.claude/skills/README.md` says what it runs and how to update or turn it off.
 
 ## Next
@@ -164,12 +175,12 @@ Agents: read this at the start of every session and update it at the end (see `A
 - Big O module still needs: the interview problem "Count the Operations" and its slides (later stage).
 - **Content, in this order** (plan of 2026-10-19):
   1. ✅ `content/problem-solving-approach`: 7 lessons from course 2's Section 4, a quiz and 3 interview problems.
-  2. `content/classes-and-pointers`: 2 lessons from course 1's Section 3 (classes with the Cookie class, pointers and garbage collection), theory first, plus Spanish for the 12 existing quiz questions and a `Counter` Build it.
-  3. `content/linked-lists-1`, `-2`, `-3`: course 1's Section 4 in 13 lessons (lessons 1–4, then push/pop/unshift/shift, then get/set/insert/remove/reverse), with the list diagram, Build its and the quiz.
-  4. The theory pass on Introduction 1–3 and Big O 1–8, then Big O 9–15 and 17. The landing preview reads Big O lesson 1's checkpoint 2, so keep that step (or update `TryItPreview.jsx`).
+  2. ✅ `content/classes-and-pointers`: 2 lessons from course 1's Section 3, the quiz in Spanish with our own values (16 questions), and a `Counter` Build it.
+  3. `perf/lazy-module-content`, then `feat/quiz-page` and `feat/exercise-pages` (stage 7).
+  4. `content/linked-lists-1`, `-2`, `-3`: course 1's Section 4 in 13 lessons (lessons 1–4, then push/pop/unshift/shift, then get/set/insert/remove/reverse), with the list diagram, Build its and the quiz.
+  5. The theory pass on Introduction 1–3 and Big O 1–8, then Big O 9–15 and 17. The landing preview reads Big O lesson 1's checkpoint 2, so keep that step (or update `TryItPreview.jsx`).
 - Carlos: send course 1's Section 5 (linked list LeetCode exercises) and course 2's Section 5 (patterns) when you're ready.
 - Carlos: send course 2's "data structures introduction" transcript (class syntax, static methods) when you get there.
-- Stage 7 (quiz + exercise pages) so students can take the quizzes and solve the exercises.
 - Carlos: iCloud keeps creating `name 2.ext` copies because the project lives in the iCloud-synced Desktop. Consider moving it to a folder iCloud doesn't sync (e.g. `~/Developer`). The 35 copies from 2026-10-11/12 are in the Trash.
 
 ## Course sections imported
@@ -178,7 +189,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 | ----------------------------- | ------------------------------------------------ | --------- | --------------------------------------------------------------------------- | ------- | ---------- |
 | 1: Introduction               | `content/practice/introduction.json`             | 10        | none                                                                        | done    | 2026-10-11 |
 | 2: Big O                      | `content/practice/big-o.json`                    | 33        | find-max (easy), contains-duplicate (easy), binary-search (medium)          | done    | 2026-10-11 |
-| 3: Classes & Pointers         | `content/practice/classes-and-pointers.json`     | 12        | cookie-class (easy, class)                                                  | missing | 2026-10-11 |
+| 3: Classes & Pointers         | `content/practice/classes-and-pointers.json`     | 16        | cookie-class (easy, class), counter-class (easy, class)                     | done    | 2026-10-20 |
 | 3: Big O of Arrays & Objects  | `content/practice/arrays-and-objects.json`       | 15        | word-frequency (easy), last-answer-wins (easy), guests-who-arrived (medium) | done    | 2026-10-13 |
 | 4: A Problem-Solving Approach | `content/practice/problem-solving-approach.json` | 14        | count-the-vowels (easy), character-counter (easy), title-case (easy)        | done    | 2026-10-19 |
 
@@ -192,6 +203,7 @@ Modules 04–17 have empty folders; they appear in `course.json` as "coming soon
 | 02 Big O                      | 17 lessons, one per lecture (`01-why-big-o` … `17-wrap-up`)                                                                                                 | EN + ES   | 2026-10-11 |
 | 03 Big O of Arrays & Objects  | `01-built-in-data-structures`, `02-big-o-of-objects`, `03-object-methods`, `04-big-o-of-array-methods` (theory first); Big O `16-big-o-of-arrays` rewritten | EN + ES   | 2026-10-13 |
 | 04 A Problem-Solving Approach | `01-why-a-method` … `07-the-method-in-an-interview` (one per lecture, theory first)                                                                         | EN + ES   | 2026-10-19 |
+| 12 Classes & Pointers         | `01-classes`, `02-pointers` (theory first)                                                                                                                  | EN + ES   | 2026-10-20 |
 
 ## Open questions
 
