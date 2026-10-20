@@ -114,5 +114,27 @@ export const visualizations = {
   'linked-list-constructor-plan': withProps(LinkedListScenes, {
     scene: 'constructorPlan',
   }),
+  'linked-list-push': withProps(LinkedListScenes, { scene: 'push' }),
+  'linked-list-push-examples': withProps(LinkedListScenes, {
+    scene: 'pushExamples',
+  }),
+  'linked-list-push-plan': withProps(LinkedListScenes, { scene: 'pushPlan' }),
+  'linked-list-pop': withProps(LinkedListScenes, { scene: 'pop' }),
+  'linked-list-pop-examples': withProps(LinkedListScenes, {
+    scene: 'popExamples',
+  }),
+  'linked-list-pop-plan': withProps(LinkedListScenes, { scene: 'popPlan' }),
+  'linked-list-unshift': withProps(LinkedListScenes, { scene: 'unshift' }),
+  'linked-list-unshift-examples': withProps(LinkedListScenes, {
+    scene: 'unshiftExamples',
+  }),
+  'linked-list-unshift-plan': withProps(LinkedListScenes, {
+    scene: 'unshiftPlan',
+  }),
+  'linked-list-shift': withProps(LinkedListScenes, { scene: 'shift' }),
+  'linked-list-shift-examples': withProps(LinkedListScenes, {
+    scene: 'shiftExamples',
+  }),
+  'linked-list-shift-plan': withProps(LinkedListScenes, { scene: 'shiftPlan' }),
   ...traceComponents,
 }

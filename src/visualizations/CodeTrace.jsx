@@ -58,6 +58,7 @@ function CodeTrace({ trace }) {
           >
             {t(`viz.trace.${trace.key}.input`, {
               n: sizeOf(option).toLocaleString('en-US'),
+              count: sizeOf(option),
               name: option.name,
               answer: option.answer,
               text: option.text,

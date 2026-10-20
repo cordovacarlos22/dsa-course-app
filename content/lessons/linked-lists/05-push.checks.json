@@ -1,0 +1,259 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What does our linked list's `push` return?",
+        "es": "¿Qué regresa el `push` de nuestra lista enlazada?"
+      },
+      "options": [
+        {
+          "en": "The new length, like an array's `push`",
+          "es": "La nueva longitud, como el `push` de un array"
+        },
+        {
+          "en": "The new node",
+          "es": "El nodo nuevo"
+        },
+        {
+          "en": "The list itself (`this`)",
+          "es": "La lista misma (`this`)"
+        },
+        {
+          "en": "Nothing (`undefined`)",
+          "es": "Nada (`undefined`)"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Look at the last line of the plan.",
+        "es": "Fíjate en la última línea del plan."
+      },
+      "explanation": {
+        "en": "Our `push` ends with `return this`: the list it was called on. That's different from an array's `push`, which returns the new length.",
+        "es": "Nuestro `push` termina con `return this`: la lista sobre la que se llamó. Es distinto del `push` de un array, que regresa la nueva longitud."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "You `push('Ana')` onto an **empty** list. Where should `head` and `tail` point afterwards?",
+        "es": "Haces `push('Ana')` en una lista **vacía**. ¿A dónde deben apuntar `head` y `tail` después?"
+      },
+      "options": [
+        {
+          "en": "`head` stays `null`, `tail` points to Ana's node",
+          "es": "`head` sigue en `null`, `tail` apunta al nodo de Ana"
+        },
+        {
+          "en": "Both point to Ana's node",
+          "es": "Los dos apuntan al nodo de Ana"
+        },
+        {
+          "en": "`head` points to Ana's node, `tail` stays `null`",
+          "es": "`head` apunta al nodo de Ana, `tail` sigue en `null`"
+        },
+        {
+          "en": "Both stay `null` until a second guest arrives",
+          "es": "Los dos siguen en `null` hasta que llegue un segundo invitado"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "With one guest in line, who is first and who is last?",
+        "es": "Con un solo invitado en la fila, ¿quién es el primero y quién el último?"
+      },
+      "explanation": {
+        "en": "Ana is the first and the last guest at once, so `head` and `tail` both point to Ana's node. There's no last node to link from, which is why the empty list needs its own branch.",
+        "es": "Ana ocupa el primer y el último lugar a la vez, así que `head` y `tail` apuntan al nodo de Ana. No hay un último nodo desde el cual enlazar, y por eso la lista vacía necesita su propia rama."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "In the not-empty case, why must `this.tail.next = newNode` come **before** `this.tail = newNode`?",
+        "es": "En el caso que no está vacío, ¿por qué `this.tail.next = newNode` tiene que ir **antes** de `this.tail = newNode`?"
+      },
+      "options": [
+        {
+          "en": "Because JavaScript runs `next` assignments first anyway",
+          "es": "Porque JavaScript de todos modos corre primero las asignaciones de `next`"
+        },
+        {
+          "en": "It doesn't matter: either order works",
+          "es": "No importa: cualquier orden funciona"
+        },
+        {
+          "en": "Because `length` has to change in between",
+          "es": "Porque `length` tiene que cambiar en medio"
+        },
+        {
+          "en": "`tail` is the only quick way to the old last node: once it moves, that node can't be linked",
+          "es": "`tail` es la única forma rápida de llegar al antiguo último nodo: cuando se mueve, ese nodo ya no se puede enlazar"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "Try the other order on paper: what does `this.tail.next` point to after `tail` has moved?",
+        "es": "Prueba el otro orden en papel: ¿a qué apunta `this.tail.next` después de que `tail` se movió?"
+      },
+      "explanation": {
+        "en": "If `tail` moves first, `this.tail.next = newNode` makes the new node point to itself, and the old last node still points to `null`. Use `tail` to link, then move it.",
+        "es": "Si `tail` se mueve primero, `this.tail.next = newNode` hace que el nodo nuevo se apunte a sí mismo, y el antiguo último nodo sigue apuntando a `null`. Usa `tail` para enlazar, y luego muévelo."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `push(value)` in the `LinkedList` class, following the plan in the comments. It adds a node at the end (when the list is empty, the new node becomes both `head` and `tail`), adds 1 to `length` and returns the list.",
+        "es": "Escribe `push(value)` en la clase `LinkedList`, siguiendo el plan de los comentarios. Agrega un nodo al final (en una lista vacía, `head` y `tail` apuntan a él), le suma 1 a `length` y regresa la lista."
+      },
+      "hint": {
+        "en": "Start with `const newNode = new Node(value)`. Then `if (!this.head)` points `head` and `tail` at it; the `else` does `this.tail.next = newNode` and `this.tail = newNode`. End with `this.length++` and `return this`.",
+        "es": "Empieza con `const newNode = new Node(value)`. Luego `if (!this.head)` hace que `head` y `tail` apunten a él; el `else` hace `this.tail.next = newNode` y `this.tail = newNode`. Termina con `this.length++` y `return this`."
+      },
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    // 1. make a new node with the value\n    // 2. if the list is empty: head and tail both point to the new node\n    // 3. otherwise: the last node's next points to the new node,\n    //    then tail moves to the new node\n    // 4. add 1 to length\n    // 5. return the list (this)\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "kind": "class",
+      "className": "LinkedList",
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "push",
+              "args": ["Ana"]
+            },
+            {
+              "read": "head.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "length",
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "toArray",
+              "expected": ["Ana", "Ben"]
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ben"
+            },
+            {
+              "read": "length",
+              "expected": 2
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "read": "head.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "tail.value",
+              "expected": "Cleo"
+            },
+            {
+              "read": "tail.next",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 3
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"],
+              "expected": {
+                "head": {
+                  "value": "Ana",
+                  "next": {
+                    "value": "Ben",
+                    "next": null
+                  }
+                },
+                "tail": {
+                  "value": "Ben",
+                  "next": null
+                },
+                "length": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Because `push` returns `this`, what does `new LinkedList('Ana').push('Ben').push('Cleo').length` give?",
+        "es": "Como `push` regresa `this`, ¿qué da `new LinkedList('Ana').push('Ben').push('Cleo').length`?"
+      },
+      "options": [
+        {
+          "en": "`3`",
+          "es": "`3`"
+        },
+        {
+          "en": "`1`",
+          "es": "`1`"
+        },
+        {
+          "en": "`undefined`",
+          "es": "`undefined`"
+        },
+        {
+          "en": "An error: you can't call `push` on what `push` returns",
+          "es": "Un error: no puedes llamar `push` sobre lo que regresa `push`"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "Each `push` hands back the same list, so the next `push` is called on it.",
+        "es": "Cada `push` regresa la misma lista, así que el siguiente `push` se llama sobre ella."
+      },
+      "explanation": {
+        "en": "Each call returns the list, so the calls chain: Ana, then Ben, then Cleo, all in one list. Its `length` is 3.",
+        "es": "Cada llamada regresa la lista, así que las llamadas se encadenan: Ana, luego Ben, luego Cleo, todos en una lista. Su `length` es 3."
+      }
+    }
+  ]
+}

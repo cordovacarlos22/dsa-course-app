@@ -349,6 +349,194 @@
         "en": "`=` with an object copies the arrow, not the object. Right after the constructor, one node has two pointers on it. Later, `push` moves `tail` without moving `head`.",
         "es": "`=` con un objeto copia la flecha, no el objeto. Justo después del constructor, un nodo tiene dos punteros encima. Después, `push` mueve `tail` sin mover `head`."
       }
+    },
+    {
+      "id": "ll-push-empty",
+      "topic": "push",
+      "prompt": {
+        "en": "What must `push` do differently when the list is empty?",
+        "es": "¿Qué tiene que hacer distinto `push` cuando la lista está vacía?"
+      },
+      "options": [
+        {
+          "en": "Nothing: it always links after the tail",
+          "es": "Nada: siempre enlaza después del tail"
+        },
+        {
+          "en": "Return `undefined`",
+          "es": "Regresar `undefined`"
+        },
+        {
+          "en": "Point both `head` and `tail` at the new node",
+          "es": "Hacer que `head` y `tail` apunten al nodo nuevo"
+        },
+        {
+          "en": "Walk the list to find the end",
+          "es": "Recorrer la lista para encontrar el final"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "An empty list has no last node, so `this.tail.next` would crash. The new node is the first and the last guest at once, so `head` and `tail` both point to it.",
+        "es": "Una lista vacía no tiene último nodo, así que `this.tail.next` truena. El nodo nuevo es el primer y el último invitado a la vez, así que `head` y `tail` apuntan a él."
+      }
+    },
+    {
+      "id": "ll-push-chaining",
+      "topic": "push",
+      "prompt": {
+        "en": "What does this code print?",
+        "es": "¿Qué imprime este código?"
+      },
+      "code": "const line = new LinkedList('Ana')\nconsole.log(line.push('Ben').push('Cleo').length)",
+      "options": [
+        {
+          "en": "`1`",
+          "es": "`1`"
+        },
+        {
+          "en": "`3`",
+          "es": "`3`"
+        },
+        {
+          "en": "`undefined`",
+          "es": "`undefined`"
+        },
+        {
+          "en": "An error",
+          "es": "Un error"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "Our `push` returns `this`, the list, so each call can be chained onto the last one. Ana, Ben and Cleo end up in one list of length 3.",
+        "es": "Nuestro `push` regresa `this`, la lista, así que cada llamada se puede encadenar a la anterior. Ana, Ben y Cleo terminan en una lista de longitud 3."
+      }
+    },
+    {
+      "id": "ll-pop-one-node",
+      "topic": "pop",
+      "prompt": {
+        "en": "`pop()` removes the only node in a list. What else must happen?",
+        "es": "`pop()` quita el único nodo de una lista. ¿Qué más tiene que pasar?"
+      },
+      "options": [
+        {
+          "en": "`head` and `tail` must both become `null`",
+          "es": "`head` y `tail` tienen que volverse `null`"
+        },
+        {
+          "en": "Only `tail` must become `null`",
+          "es": "Solo `tail` tiene que volverse `null`"
+        },
+        {
+          "en": "`length` must stay at 1",
+          "es": "`length` tiene que quedarse en 1"
+        },
+        {
+          "en": "Nothing: the walk already handled it",
+          "es": "Nada: la caminata ya lo resolvió"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "With one node, the loop never runs and `tail = pre` changes nothing, so `head` and `tail` still point to the removed node. After `length` drops to 0, both are set to `null`.",
+        "es": "Con un nodo, el bucle nunca corre y `tail = pre` no cambia nada, así que `head` y `tail` siguen apuntando al nodo que se quitó. Cuando `length` baja a 0, los dos se ponen en `null`."
+      }
+    },
+    {
+      "id": "ll-pop-empty",
+      "topic": "pop",
+      "prompt": {
+        "en": "What does our `pop()` return on an empty list?",
+        "es": "¿Qué regresa nuestro `pop()` en una lista vacía?"
+      },
+      "options": [
+        {
+          "en": "`null`",
+          "es": "`null`"
+        },
+        {
+          "en": "An error",
+          "es": "Un error"
+        },
+        {
+          "en": "`undefined`",
+          "es": "`undefined`"
+        },
+        {
+          "en": "The list itself",
+          "es": "La lista misma"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "There's nothing to remove, so `pop` checks `!this.head` first and returns `undefined`, just like `[].pop()` on an array.",
+        "es": "No hay nada que quitar, así que `pop` revisa `!this.head` primero y regresa `undefined`, igual que `[].pop()` en un array."
+      }
+    },
+    {
+      "id": "ll-unshift-order",
+      "topic": "unshift",
+      "prompt": {
+        "en": "This `unshift` has its two main lines in the wrong order. What happens on a list with guests?",
+        "es": "Este `unshift` tiene sus dos líneas principales en el orden equivocado. ¿Qué pasa en una lista con invitados?"
+      },
+      "code": "unshift(value) {\n  const newNode = new Node(value)\n  if (!this.head) {\n    this.head = newNode\n    this.tail = newNode\n  } else {\n    this.head = newNode\n    newNode.next = this.head\n  }\n  this.length++\n  return this\n}",
+      "options": [
+        {
+          "en": "It works the same",
+          "es": "Funciona igual"
+        },
+        {
+          "en": "The new node ends up at the back",
+          "es": "El nodo nuevo termina al final"
+        },
+        {
+          "en": "`length` goes up by 2",
+          "es": "`length` sube 2"
+        },
+        {
+          "en": "The new node points to itself, and the rest of the line is lost",
+          "es": "El nodo nuevo se apunta a sí mismo, y el resto de la fila se pierde"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "After `this.head = newNode`, `this.head` is the new node, so `newNode.next = this.head` points it at itself. Nothing points to the old first node anymore. Link first, then move `head`.",
+        "es": "Después de `this.head = newNode`, `this.head` es el nodo nuevo, así que `newNode.next = this.head` lo apunta a sí mismo. Ya nada apunta al antiguo primer nodo. Primero enlaza, luego mueve `head`."
+      }
+    },
+    {
+      "id": "ll-shift-cut",
+      "topic": "shift",
+      "prompt": {
+        "en": "Why does `shift` set `temp.next = null` before it returns `temp`?",
+        "es": "¿Por qué `shift` hace `temp.next = null` antes de regresar `temp`?"
+      },
+      "options": [
+        {
+          "en": "So the returned node doesn't carry the rest of the line with it",
+          "es": "Para que el nodo que regresa no se lleve el resto de la fila"
+        },
+        {
+          "en": "To move `head` to the next node",
+          "es": "Para mover `head` al siguiente nodo"
+        },
+        {
+          "en": "To make `shift` O(1)",
+          "es": "Para que `shift` sea O(1)"
+        },
+        {
+          "en": "Because `length` reads `temp.next`",
+          "es": "Porque `length` lee `temp.next`"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "After `head` moves, the removed node still points to the second guest. Cutting that arrow means the node you hand back is just one guest, not a doorway into the list.",
+        "es": "Después de que `head` se mueve, el nodo que se quitó todavía apunta al segundo invitado. Cortar esa flecha hace que el nodo que regresas sea solo un invitado, no una puerta hacia la lista."
+      }
     }
   ],
   "exercises": [
@@ -478,6 +666,673 @@
                 "value": 42,
                 "next": null
               }
+            }
+          ]
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(1)",
+        "space": "O(1)"
+      }
+    },
+    {
+      "slug": "linked-list-push",
+      "kind": "class",
+      "title": {
+        "en": "Join at the Back",
+        "es": "Fórmate al final"
+      },
+      "description": {
+        "en": "A guest joins the back of the conga line. Write `push(value)` for `LinkedList`:\n\n- Add a new `Node` holding `value` after the last node, and move `tail` to it.\n- If the list is empty, the new node becomes both `head` and `tail`.\n- Add 1 to `length` and return the list (`this`).\n\nThe starter code already has `Node`, the constructor and a `toArray()` helper that returns the values in order.\n\nExample:\n\n```js\nconst line = new LinkedList()\nline.push('Ana').push('Ben')\nline.toArray() // ['Ana', 'Ben']\nline.tail.value // 'Ben'\n```",
+        "es": "Un invitado se forma al final de la fila de conga. Escribe `push(value)` para `LinkedList`:\n\n- Agrega un `Node` nuevo con `value` después del último nodo, y mueve `tail` a él.\n- En una lista vacía, `head` y `tail` apuntan al nodo nuevo.\n- Súmale 1 a `length` y regresa la lista (`this`).\n\nEl código inicial ya tiene `Node`, el constructor y un ayudante `toArray()` que regresa los valores en orden.\n\nEjemplo:\n\n```js\nconst line = new LinkedList()\nline.push('Ana').push('Ben')\nline.toArray() // ['Ana', 'Ben']\nline.tail.value // 'Ben'\n```"
+      },
+      "difficulty": "easy",
+      "category": "build",
+      "className": "LinkedList",
+      "starterCode": {
+        "javascript": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    // 1. make a new node with the value\n    // 2. if the list is empty: head and tail both point to the new node\n    // 3. otherwise: the last node's next points to the new node,\n    //    then tail moves to the new node\n    // 4. add 1 to length\n    // 5. return the list (this)\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}"
+      },
+      "solution": {
+        "javascript": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}"
+      },
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "push",
+              "args": ["Ana"]
+            },
+            {
+              "read": "head.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "length",
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "toArray",
+              "expected": ["Ana", "Ben"]
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ben"
+            },
+            {
+              "read": "length",
+              "expected": 2
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "read": "head.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "tail.value",
+              "expected": "Cleo"
+            },
+            {
+              "read": "tail.next",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 3
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"],
+              "expected": {
+                "head": {
+                  "value": "Ana",
+                  "next": {
+                    "value": "Ben",
+                    "next": null
+                  }
+                },
+                "tail": {
+                  "value": "Ben",
+                  "next": null
+                },
+                "length": 2
+              }
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "push",
+              "args": [0]
+            },
+            {
+              "call": "push",
+              "args": [1]
+            },
+            {
+              "call": "toArray",
+              "expected": [0, 1]
+            },
+            {
+              "read": "head.value",
+              "expected": 0
+            },
+            {
+              "read": "length",
+              "expected": 2
+            }
+          ]
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(1)",
+        "space": "O(1)"
+      }
+    },
+    {
+      "slug": "linked-list-pop",
+      "kind": "class",
+      "title": {
+        "en": "Leave from the Back",
+        "es": "Sal por el final"
+      },
+      "description": {
+        "en": "The guest at the back of the line leaves. Write `pop()` for `LinkedList`:\n\n- Remove the last node and return it. `tail` moves back to the node before it, whose `next` becomes `null`.\n- On an empty list, return `undefined`.\n- When you pop the only node, `head` and `tail` both become `null`.\n- Subtract 1 from `length`.\n\nThe starter code already has `Node`, the constructor, `push` and a `toArray()` helper that returns the values in order.\n\nExample:\n\n```js\nconst line = new LinkedList('Ana').push('Ben')\nline.pop().value // 'Ben'\nline.pop().value // 'Ana'\nline.pop() // undefined\n```",
+        "es": "El invitado del final de la fila se va. Escribe `pop()` para `LinkedList`:\n\n- Quita el último nodo y regrésalo. `tail` regresa al nodo de antes, cuyo `next` se vuelve `null`.\n- En una lista vacía, regresa `undefined`.\n- Cuando le haces pop al único nodo, `head` y `tail` se vuelven `null`.\n- Réstale 1 a `length`.\n\nEl código inicial ya tiene `Node`, el constructor, `push` y un ayudante `toArray()` que regresa los valores en orden.\n\nEjemplo:\n\n```js\nconst line = new LinkedList('Ana').push('Ben')\nline.pop().value // 'Ben'\nline.pop().value // 'Ana'\nline.pop() // undefined\n```"
+      },
+      "difficulty": "easy",
+      "category": "build",
+      "className": "LinkedList",
+      "starterCode": {
+        "javascript": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  pop() {\n    // 1. if the list is empty, return undefined\n    // 2. temp and pre both start at head\n    // 3. walk: while temp has a next, pre = temp, then temp moves on\n    // 4. tail moves to pre, and the new tail's next becomes null\n    // 5. subtract 1 from length\n    // 6. if length is now 0, head and tail become null\n    // 7. return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}"
+      },
+      "solution": {
+        "javascript": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  pop() {\n    if (!this.head) {\n      return undefined\n    }\n    let temp = this.head\n    let pre = this.head\n    while (temp.next !== null) {\n      pre = temp\n      temp = temp.next\n    }\n    this.tail = pre\n    this.tail.next = null\n    this.length--\n    if (this.length === 0) {\n      this.head = null\n      this.tail = null\n    }\n    return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}"
+      },
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "pop",
+              "expected": null
+            },
+            {
+              "read": "head",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "pop",
+              "expected": {
+                "value": "Ana",
+                "next": null
+              }
+            },
+            {
+              "read": "head",
+              "expected": null
+            },
+            {
+              "read": "tail",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "pop",
+              "expected": {
+                "value": "Cleo",
+                "next": null
+              }
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ben"
+            },
+            {
+              "read": "tail.next",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 2
+            },
+            {
+              "call": "toArray",
+              "expected": ["Ana", "Ben"]
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "pop"
+            },
+            {
+              "call": "pop",
+              "expected": {
+                "value": "Ana",
+                "next": null
+              }
+            },
+            {
+              "call": "pop",
+              "expected": null
+            },
+            {
+              "read": "tail",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "push",
+              "args": ["Dev"]
+            },
+            {
+              "call": "pop"
+            },
+            {
+              "call": "pop",
+              "expected": {
+                "value": "Cleo",
+                "next": null
+              }
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ben"
+            },
+            {
+              "call": "toArray",
+              "expected": ["Ana", "Ben"]
+            }
+          ]
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(n)",
+        "space": "O(1)"
+      }
+    },
+    {
+      "slug": "linked-list-unshift",
+      "kind": "class",
+      "title": {
+        "en": "Join at the Front",
+        "es": "Fórmate al inicio"
+      },
+      "description": {
+        "en": "A guest goes straight to the front of the line. Write `unshift(value)` for `LinkedList`:\n\n- Add a new `Node` holding `value` before the first node, and move `head` to it.\n- If the list is empty, the new node becomes both `head` and `tail`.\n- Add 1 to `length` and return the list (`this`).\n\nThe starter code already has `Node`, the constructor, `push` and a `toArray()` helper that returns the values in order.\n\nExample:\n\n```js\nconst line = new LinkedList('Ana')\nline.unshift('Zoe')\nline.toArray() // ['Zoe', 'Ana']\nline.tail.value // 'Ana'\n```",
+        "es": "Un invitado se va directo al inicio de la fila. Escribe `unshift(value)` para `LinkedList`:\n\n- Agrega un `Node` nuevo con `value` antes del primer nodo, y mueve `head` a él.\n- En una lista vacía, `head` y `tail` apuntan al nodo nuevo.\n- Súmale 1 a `length` y regresa la lista (`this`).\n\nEl código inicial ya tiene `Node`, el constructor, `push` y un ayudante `toArray()` que regresa los valores en orden.\n\nEjemplo:\n\n```js\nconst line = new LinkedList('Ana')\nline.unshift('Zoe')\nline.toArray() // ['Zoe', 'Ana']\nline.tail.value // 'Ana'\n```"
+      },
+      "difficulty": "easy",
+      "category": "build",
+      "className": "LinkedList",
+      "starterCode": {
+        "javascript": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  unshift(value) {\n    // 1. make a new node with the value\n    // 2. if the list is empty: head and tail both point to the new node\n    // 3. otherwise: the new node's next points to the first node,\n    //    then head moves to the new node\n    // 4. add 1 to length\n    // 5. return the list (this)\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}"
+      },
+      "solution": {
+        "javascript": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  unshift(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      newNode.next = this.head\n      this.head = newNode\n    }\n    this.length++\n    return this\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}"
+      },
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "unshift",
+              "args": ["Zoe"]
+            },
+            {
+              "read": "head.value",
+              "expected": "Zoe"
+            },
+            {
+              "read": "tail.value",
+              "expected": "Zoe"
+            },
+            {
+              "read": "length",
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "unshift",
+              "args": ["Zoe"]
+            },
+            {
+              "call": "toArray",
+              "expected": ["Zoe", "Ana"]
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "length",
+              "expected": 2
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "unshift",
+              "args": ["Zoe"],
+              "expected": {
+                "head": {
+                  "value": "Zoe",
+                  "next": {
+                    "value": "Ana",
+                    "next": {
+                      "value": "Ben",
+                      "next": null
+                    }
+                  }
+                },
+                "tail": {
+                  "value": "Ben",
+                  "next": null
+                },
+                "length": 3
+              }
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "unshift",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "unshift",
+              "args": ["Ben"]
+            },
+            {
+              "call": "unshift",
+              "args": ["Ana"]
+            },
+            {
+              "call": "toArray",
+              "expected": ["Ana", "Ben", "Cleo"]
+            },
+            {
+              "read": "tail.next",
+              "expected": null
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "unshift",
+              "args": ["Ben"]
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "unshift",
+              "args": ["Ana"]
+            },
+            {
+              "call": "toArray",
+              "expected": ["Ana", "Ben", "Cleo"]
+            },
+            {
+              "read": "tail.value",
+              "expected": "Cleo"
+            },
+            {
+              "read": "length",
+              "expected": 3
+            }
+          ]
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(1)",
+        "space": "O(1)"
+      }
+    },
+    {
+      "slug": "linked-list-shift",
+      "kind": "class",
+      "title": {
+        "en": "Leave from the Front",
+        "es": "Sal por el inicio"
+      },
+      "description": {
+        "en": "The guest at the front of the line is served and leaves. Write `shift()` for `LinkedList`:\n\n- Remove the first node and return it, cut off from the line (its `next` is `null`). `head` moves to the next node.\n- On an empty list, return `undefined`.\n- When the list becomes empty, `tail` becomes `null` too.\n- Subtract 1 from `length`.\n\nThe starter code already has `Node`, the constructor, `push` and a `toArray()` helper that returns the values in order.\n\nExample:\n\n```js\nconst line = new LinkedList('Ana').push('Ben')\nline.shift() // { value: 'Ana', next: null }\nline.head.value // 'Ben'\n```",
+        "es": "Al invitado del inicio de la fila lo atienden y se va. Escribe `shift()` para `LinkedList`:\n\n- Quita el primer nodo y regrésalo, suelto de la fila (su `next` es `null`). `head` se mueve al siguiente nodo.\n- En una lista vacía, regresa `undefined`.\n- Cuando la lista queda vacía, `tail` también se vuelve `null`.\n- Réstale 1 a `length`.\n\nEl código inicial ya tiene `Node`, el constructor, `push` y un ayudante `toArray()` que regresa los valores en orden.\n\nEjemplo:\n\n```js\nconst line = new LinkedList('Ana').push('Ben')\nline.shift() // { value: 'Ana', next: null }\nline.head.value // 'Ben'\n```"
+      },
+      "difficulty": "easy",
+      "category": "build",
+      "className": "LinkedList",
+      "starterCode": {
+        "javascript": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  shift() {\n    // 1. if the list is empty, return undefined\n    // 2. temp points to the first node\n    // 3. head moves to the next node\n    // 4. temp's next becomes null, to cut it off\n    // 5. subtract 1 from length\n    // 6. if length is now 0, tail becomes null too\n    // 7. return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}"
+      },
+      "solution": {
+        "javascript": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  shift() {\n    if (!this.head) {\n      return undefined\n    }\n    let temp = this.head\n    this.head = this.head.next\n    temp.next = null\n    this.length--\n    if (this.length === 0) {\n      this.tail = null\n    }\n    return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}"
+      },
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "shift",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "shift",
+              "expected": {
+                "value": "Ana",
+                "next": null
+              }
+            },
+            {
+              "read": "head",
+              "expected": null
+            },
+            {
+              "read": "tail",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "shift",
+              "expected": {
+                "value": "Ana",
+                "next": null
+              }
+            },
+            {
+              "read": "head.value",
+              "expected": "Ben"
+            },
+            {
+              "read": "tail.value",
+              "expected": "Cleo"
+            },
+            {
+              "read": "length",
+              "expected": 2
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "shift"
+            },
+            {
+              "call": "shift",
+              "expected": {
+                "value": "Ben",
+                "next": null
+              }
+            },
+            {
+              "call": "shift",
+              "expected": null
+            },
+            {
+              "read": "tail",
+              "expected": null
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "shift"
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "toArray",
+              "expected": ["Ben", "Cleo"]
+            },
+            {
+              "call": "shift",
+              "expected": {
+                "value": "Ben",
+                "next": null
+              }
+            },
+            {
+              "read": "head.value",
+              "expected": "Cleo"
+            },
+            {
+              "read": "tail.value",
+              "expected": "Cleo"
             }
           ]
         }

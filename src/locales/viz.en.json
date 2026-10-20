@@ -312,6 +312,74 @@
       "pointHead": "this.head = newNode: head points to the new node.",
       "pointTail": "this.tail = this.head: tail points to the same node as head. One node, two pointers.",
       "done": "this.length = 1. A list with one node: head and tail are both on {{value}}."
+    },
+    "linkedListPush": {
+      "title": "push, line by line",
+      "input_one": "{{count}} guest",
+      "input_other": "{{count}} guests",
+      "newNode": "new Node('{{value}}') makes the new node, and newNode points to it. It isn't in the line yet.",
+      "empty": "!this.head is true: head is null, and null is falsy. The line is empty.",
+      "emptyHead": "this.head = newNode: the new node is the first guest...",
+      "emptyTail": "this.tail = newNode: ...and the last one. head and tail share it.",
+      "notEmpty": "!this.head is false: head is on {{head}}, so we skip to the else.",
+      "link": "this.tail.next = newNode: tail is on {{tail}}, so {{tail}}'s next now points to {{value}}.",
+      "moveTail": "this.tail = newNode: tail moves to {{value}}, the new last guest.",
+      "length": "this.length++: length is {{length}} now.",
+      "return": "return this gives back the whole list. No walking at all: push is O(1)."
+    },
+    "linkedListUnshift": {
+      "title": "unshift, line by line",
+      "input_one": "{{count}} guest",
+      "input_other": "{{count}} guests",
+      "newNode": "new Node('{{value}}') makes the new node, and newNode points to it. It isn't in the line yet.",
+      "empty": "!this.head is true: head is null, and null is falsy. The line is empty.",
+      "emptyHead": "this.head = newNode: the new node is the first guest...",
+      "emptyTail": "this.tail = newNode: ...and the last one. head and tail share it.",
+      "notEmpty": "!this.head is false: head is on {{head}}, so we skip to the else.",
+      "link": "newNode.next = this.head: {{value}} now points to {{head}}, the first guest. Link first, so nobody gets lost.",
+      "moveHead": "this.head = newNode: head moves to {{value}}, the new first guest.",
+      "length": "this.length++: length is {{length}} now.",
+      "return": "return this gives back the whole list. Two moves and no walking: unshift is O(1)."
+    },
+    "linkedListPop": {
+      "title": "pop, line by line",
+      "input_one": "{{count}} guest",
+      "input_other": "{{count}} guests",
+      "empty": "!this.head is true: the line is empty, so there's nothing to pop.",
+      "returnUndefined": "return undefined. The list doesn't change.",
+      "notEmpty": "!this.head is false: head is on {{name}}, so there's a guest to pop.",
+      "start": "temp and pre both start at head, on {{name}}.",
+      "movePre": "temp.next is {{next}}, not null, so the loop runs. pre = temp: pre moves to {{name}}.",
+      "moveTemp": "temp = temp.next: temp moves ahead to {{name}}. pre stays one node behind.",
+      "loopEnds": "temp.next is null: temp is on {{name}}, the last node, and pre is on {{pre}}, the one before. The loop stops.",
+      "loopSkipped": "temp.next is already null: {{name}} is the only node, so the loop doesn't run at all.",
+      "moveTail": "this.tail = pre: tail moves back to {{name}}.",
+      "tailSame": "this.tail = pre: tail was already on {{name}}, so nothing changes.",
+      "cut": "this.tail.next = null: the new tail stops pointing to {{name}}. {{name}} is out of the line.",
+      "cutNothing": "this.tail.next = null: it was already null, so nothing changes. But head and tail still point to {{name}}!",
+      "length": "this.length--: length is {{length}} now.",
+      "nowEmpty": "length is 0, so the line is empty: head and tail have to let go of the node.",
+      "headNull": "this.head = null.",
+      "tailNull": "this.tail = null. Now the empty line really looks empty.",
+      "notZero": "length is {{length}}, not 0, so the line still has guests. Skip the if.",
+      "return": "return temp: {{name}}'s node, the guest who left. Nodes visited: {{count}}. The walk grows with the line, so pop is O(n)."
+    },
+    "linkedListShift": {
+      "title": "shift, line by line",
+      "input_one": "{{count}} guest",
+      "input_other": "{{count}} guests",
+      "empty": "!this.head is true: the line is empty, so there's nothing to shift.",
+      "returnUndefined": "return undefined. The list doesn't change.",
+      "notEmpty": "!this.head is false: head is on {{name}}, so there's a guest to shift.",
+      "temp": "let temp = this.head: temp points to {{name}}'s node, so we can return it at the end.",
+      "moveHead": "this.head = this.head.next: head moves to {{next}}. {{name}} is out of the line, but still points to {{next}}.",
+      "headNull": "this.head = this.head.next: {{name}} had no next, so head is null now.",
+      "cut": "temp.next = null: {{name}}'s node lets go of the line, so the node we return comes alone.",
+      "cutNothing": "temp.next = null: it was already null, so nothing changes. But tail still points to {{name}}!",
+      "length": "this.length--: length is {{length}} now.",
+      "tailNull": "length is 0, so this.tail = null. Now head and tail are both null.",
+      "notZero": "length is {{length}}, not 0, so tail stays where it is.",
+      "return": "return temp: {{name}}'s node. One move of head and no walking: shift is O(1)."
     }
   },
   "timingChart": {
@@ -753,7 +821,130 @@
       "planMakeNode": "2a. a value was given: make a new node with it",
       "planHead": "2b. point head at the new node",
       "planTail": "2c. point tail at the same node",
-      "planLength": "2d. the length is 1"
+      "planLength": "2d. the length is 1",
+      "push1": "1. make a new node with the value",
+      "push2": "2. if the list is empty: head and tail both point to the new node",
+      "push3": "3a. otherwise: the last node's next points to the new node",
+      "push4": "3b. tail moves to the new node",
+      "push5": "4. add 1 to length, 5. return the list",
+      "pop1": "1. if the list is empty, return undefined",
+      "pop2": "2. temp and pre both start at head",
+      "pop3": "3. walk: while temp has a next, pre = temp, then temp moves on",
+      "pop4": "4. tail moves to pre, and the new tail's next becomes null",
+      "pop5": "5. subtract 1 from length",
+      "pop6": "6. if length is now 0, head and tail become null",
+      "pop7": "7. return temp",
+      "unshift1": "1. make a new node with the value",
+      "unshift2": "2. if the list is empty: head and tail both point to the new node",
+      "unshift3": "3a. otherwise: the new node's next points to the first node",
+      "unshift4": "3b. head moves to the new node",
+      "unshift5": "4. add 1 to length, 5. return the list",
+      "shift1": "1. if the list is empty, return undefined",
+      "shift2": "2. temp points to the first node",
+      "shift3": "3. head moves to the next node",
+      "shift4": "4. temp's next becomes null, to cut it off",
+      "shift5": "5. subtract 1 from length",
+      "shift6": "6. if length is now 0, tail becomes null too",
+      "shift7": "7. return temp"
+    },
+    "returns": "Returns:",
+    "push": {
+      "title": "push: add a guest at the back",
+      "start": "A line of three guests: head on Ana, tail on Cleo, length 3.",
+      "call": "push('Dev') adds a node for Dev after the tail. tail moves to Dev, and length goes up to 4.",
+      "returns": "push returns this, the whole list, so you can keep using it right away."
+    },
+    "pushExamples": {
+      "title": "Examples for push: empty, one guest, many guests",
+      "emptyBefore": "Example 1: an empty line. head and tail are both null.",
+      "emptyAfter": "There's no last node to link from, so head and tail both point to Ana's new node. length is 1.",
+      "oneBefore": "Example 2: one guest. head and tail are both on Ana.",
+      "oneAfter": "Ana's next points to Ben, and tail moves to Ben. head stays on Ana.",
+      "manyBefore": "Example 3: three guests, with tail on Cleo.",
+      "manyAfter": "The same two moves: Cleo's next points to Dev, then tail moves to Dev. Nobody else is touched."
+    },
+    "pushPlan": {
+      "title": "push's plan, as comments",
+      "makeNode": "Step 1: make a new node for Dev. newNode points to it, but nothing in the line does yet.",
+      "notEmpty": "Step 2: is the line empty? No, head is on Ana, so this step doesn't apply.",
+      "link": "Step 3a: the last node, Cleo, points its next at the new node.",
+      "moveTail": "Step 3b: tail moves to the new node. Dev is the last guest now.",
+      "length": "Steps 4 and 5: length goes up to 4, and push returns the list.",
+      "emptyCase": "On an empty line, step 2 does the whole job: head and tail both point to the new node."
+    },
+    "pop": {
+      "title": "pop: remove the guest at the back",
+      "start": "A line of four guests: head on Ana, tail on Dev.",
+      "call": "pop() cuts Dev's node off the end. tail moves back to Cleo, and length goes down to 3.",
+      "returns": "pop returns the node it removed, so you know who left."
+    },
+    "popExamples": {
+      "title": "Examples for pop: empty, one guest, many guests",
+      "emptyBefore": "Example 1: an empty line. There's nobody to pop.",
+      "emptyAfter": "pop() returns undefined, and the line stays empty.",
+      "oneBefore": "Example 2: one guest. head and tail are both on Ana.",
+      "oneAfter": "Popping the only guest empties the line: head and tail both go back to null, and length is 0.",
+      "manyBefore": "Example 3: three guests, with tail on Cleo.",
+      "manyAfter": "Cleo's node is cut off and returned. tail moves back to Ben, the guest before."
+    },
+    "popPlan": {
+      "title": "pop's plan, as comments",
+      "notEmpty": "Step 1: is the line empty? No, so there's someone to pop.",
+      "start": "Step 2: temp and pre both start at head, on Ana.",
+      "walk": "Step 3: walk until temp has no next. temp ends on Cleo, the last guest, and pre on Ben, the one before.",
+      "moveTail": "Step 4: tail moves to pre, Ben, and Ben's next becomes null. Cleo is out of the line.",
+      "length": "Step 5: length goes down to 2.",
+      "oneLeft": "Step 6 matters with one guest: after popping Ana, length is 0, so head and tail must become null too.",
+      "returnTemp": "Step 7: return temp, Cleo's node: the guest who left."
+    },
+    "unshift": {
+      "title": "unshift: add a guest at the front",
+      "start": "A line of three guests: head on Ana, tail on Cleo.",
+      "call": "unshift('Zoe') adds a node for Zoe before Ana. head moves to Zoe, and length goes up to 4.",
+      "returns": "unshift returns this, the whole list, just like push."
+    },
+    "unshiftExamples": {
+      "title": "Examples for unshift: empty, one guest, many guests",
+      "emptyBefore": "Example 1: an empty line. head and tail are both null.",
+      "emptyAfter": "With nobody in line, Zoe is first and last: head and tail both point to Zoe's node.",
+      "oneBefore": "Example 2: one guest, Ana.",
+      "oneAfter": "Zoe's next points to Ana, and head moves to Zoe. tail stays on Ana.",
+      "manyBefore": "Example 3: three guests, with head on Ana.",
+      "manyAfter": "The same two moves: Zoe points to Ana, then head moves to Zoe. Nobody else moves."
+    },
+    "unshiftPlan": {
+      "title": "unshift's plan, as comments",
+      "makeNode": "Step 1: make a new node for Zoe. Nothing in the line points to it yet.",
+      "notEmpty": "Step 2: is the line empty? No, head is on Ana, so this step doesn't apply.",
+      "link": "Step 3a: the new node's next points to Ana, the node head is on.",
+      "moveHead": "Step 3b: head moves to the new node. Zoe is first now.",
+      "length": "Steps 4 and 5: length goes up to 4, and unshift returns the list.",
+      "emptyCase": "On an empty line, step 2 does the whole job: head and tail both point to the new node."
+    },
+    "shift": {
+      "title": "shift: remove the guest at the front",
+      "start": "A line of three guests: head on Ana, tail on Cleo.",
+      "call": "shift() takes Ana's node off the front. head moves to Ben, and length goes down to 2.",
+      "returns": "shift returns the node it removed, cut off from the rest of the line."
+    },
+    "shiftExamples": {
+      "title": "Examples for shift: empty, one guest, many guests",
+      "emptyBefore": "Example 1: an empty line. There's nobody to shift.",
+      "emptyAfter": "shift() returns undefined, and the line stays empty.",
+      "oneBefore": "Example 2: one guest, Ana.",
+      "oneAfter": "Shifting the only guest empties the line: head becomes null, and tail has to become null too.",
+      "manyBefore": "Example 3: three guests, with head on Ana.",
+      "manyAfter": "Ana's node comes off the front and is returned. head moves to Ben, and tail stays on Cleo."
+    },
+    "shiftPlan": {
+      "title": "shift's plan, as comments",
+      "notEmpty": "Step 1: is the line empty? No, so there's someone to shift.",
+      "temp": "Step 2: temp points to the first node, Ana's, so we can still return it at the end.",
+      "moveHead": "Step 3: head moves to the next node, Ben. Ana's node is out of the line, but it still points to Ben.",
+      "cut": "Step 4: Ana's next becomes null. Now the node we return doesn't drag anybody along.",
+      "length": "Step 5: length goes down to 2.",
+      "oneLeft": "Step 6 matters with one guest: once Ana leaves, length is 0, so tail must become null too.",
+      "returnTemp": "Step 7: return temp, Ana's node."
     }
   },
   "arrayVsLinkedList": {
