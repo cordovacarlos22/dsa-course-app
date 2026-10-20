@@ -220,7 +220,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Linked Lists (`linked-lists`)
 
-**Status:** 🟡 8 of 13 lessons, 35 steps (EN + ES, 35 checkpoints) · 🟡 quiz, 17 questions (EN + ES) · 🟡 5 of 10 build it · ⬜ slides
+**Status:** ✅ 13 lessons, 60 steps (EN + ES, 60 checkpoints) · ✅ quiz, 23 questions (EN + ES) · ✅ 10 build it · ⬜ interview problems (with course 1's Section 5) · ⬜ slides
 **Goal:** build a singly linked list from scratch and solve classic pointer problems.
 **Sources:** course 1's Section 4 (14 lectures, 3 quiz questions, exercise files and a Big O table). Course 2's own linked list section joins later, when Carlos sends it.
 **Style:** theory first. Every method lesson (constructor to reverse) follows the 5 steps from A Problem-Solving Approach: understand, examples (empty, one, many), break it down, write the code, look back. The party continues as a **conga line** of guests: each one holds on to the next, `head` is the front and `tail` is the back. Our list can start empty (`new LinkedList()`) or with one guest (`new LinkedList('Ana')`).
@@ -234,14 +234,13 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
   6. pop ✅ (C1 pop intro + pop code: `linked-list-pop`, `linked-list-pop-examples`, `linked-list-pop-plan`, `trace-ll-pop`)
   7. unshift ✅ (C1 unshift: `linked-list-unshift`, `linked-list-unshift-examples`, `linked-list-unshift-plan`, `trace-ll-unshift`)
   8. shift ✅ (C1 shift: `linked-list-shift`, `linked-list-shift-examples`, `linked-list-shift-plan`, `trace-ll-shift`)
-  9. get ⬜ (the PR after, with set, insert, remove and reverse)
-  10. set ⬜
-  11. insert ⬜
-  12. remove ⬜
-  13. reverse ⬜ (`trace-ll-reverse`)
-- **Animations still to come:** the same set for get, set, insert, remove and reverse (what it does, examples, the plan, and a `trace-ll-<method>`). They all draw the list with `LinkedListDiagram`.
-- **Quiz:** Big O of each operation vs. arrays, why pop is O(n), what `head`/`tail`/`length` hold, nodes as nested objects, the walk, the constructor (the empty start, and `0` as a value), push on an empty list and `return this`, pop's one-node case and empty return, unshift's order, and why shift cuts the returned node loose.
-- **Build it (class `LinkedList`):** ✅ constructor (Start the Conga Line) · ✅ push (Join at the Back) · ✅ pop (Leave from the Back) · ✅ unshift (Join at the Front) · ✅ shift (Leave from the Front) · get · set · insert · remove · reverse
+  9. get ✅ (C1 get: `linked-list-get`, `linked-list-get-examples`, `linked-list-get-plan`, `trace-ll-get`)
+  10. set ✅ (C1 set: `linked-list-set`, `linked-list-set-examples`, `linked-list-set-plan`, `trace-ll-set`)
+  11. insert ✅ (C1 insert: `linked-list-insert`, `linked-list-insert-examples`, `linked-list-insert-plan`, `trace-ll-insert`)
+  12. remove ✅ (C1 remove: `linked-list-remove`, `linked-list-remove-examples`, `linked-list-remove-plan`, `trace-ll-remove`)
+  13. reverse ✅ (C1 reverse: `linked-list-reverse`, `linked-list-reverse-examples`, `linked-list-reverse-plan`, `trace-ll-reverse`; the diagram draws the nodes where they stand, so the gap shows)
+- **Quiz:** Big O of each operation vs. arrays, why pop is O(n), what `head`/`tail`/`length` hold, nodes as nested objects, the walk, the constructor (the empty start, and `0` as a value), push on an empty list and `return this`, pop's one-node case and empty return, unshift's order, why shift cuts the returned node loose, get's last index, set reusing get, insert at `length` and its double-counting bug, remove's `before.next`, and why reverse saves `next` first.
+- **Build it (class `LinkedList`):** ✅ constructor (Start the Conga Line) · ✅ push (Join at the Back) · ✅ pop (Leave from the Back) · ✅ unshift (Join at the Front) · ✅ shift (Leave from the Front) · ✅ get (Who Is Third in Line?) · ✅ set (Fix the Name Tag) · ✅ insert (Squeeze Into the Line) · ✅ remove (Leave From the Middle) · ✅ reverse (Turn the Line Around)
 - **Interview problems** (with course 1's Section 5, the linked list LeetCode exercises): Middle Node · Has Cycle · K-th Node From the End · Remove Duplicates · Binary List to Number · Partition Around a Value · Reverse a Sublist · Swap Pairs · Rotate the List
 
 ## Doubly Linked Lists (`doubly-linked-lists`)

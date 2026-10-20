@@ -14,7 +14,8 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-19: **Section 4 of both courses, merged** (6 PRs, then the theory pass). PR 1, the **course order** (Classes & Pointers moves right before Linked Lists), is PR #25. PR 2, **A Problem-Solving Approach** (7 lessons), is on `content/problem-solving-approach`, built on #25. PR #26 is merged too.
 - 2026-10-20: **Classes & Pointers** (2 lessons) is on `content/classes-and-pointers`. Next, in this order: lazy captions and quizzes, the quiz page, the exercise pages, then Linked Lists in 3 PRs.
 - 2026-10-20: **Linked Lists, PR 1 of 3** (lessons 1–4: what a linked list is, Big O vs arrays, under the hood, the constructor) is on `content/linked-lists-1`, built on `feat/exercise-pages` because #29 and #30 weren't merged yet. Merge order: #29, #30, then this one. Next: `content/linked-lists-2` (push, pop, unshift, shift).
-- 2026-10-20: #29, #30 and #31 are merged. **Linked Lists, PR 2 of 3** (lessons 5–8: push, pop, unshift, shift) is on `content/linked-lists-2`. Next: `content/linked-lists-3` (get, set, insert, remove, reverse).
+- 2026-10-20: #29, #30 and #31 are merged. **Linked Lists, PR 2 of 3** (lessons 5–8: push, pop, unshift, shift) is #32, on `content/linked-lists-2`.
+- 2026-10-20: **Linked Lists, PR 3 of 3** (lessons 9–13: get, set, insert, remove, reverse) is on `content/linked-lists-3`, built on #32, so #32 merges first. With it, the module's lessons, quiz and Build its are complete. Next: the theory pass on Introduction and Big O.
 
 ## Decisions
 
@@ -64,6 +65,10 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-20: **Every method lesson has the same four animations:** what it does (with its return value), its examples (empty, one, many), its plan as comments, and a line-by-line trace with three inputs (many guests, one, none). The scenes are data in `src/visualizations/linkedListMethodScenes.js`. The method traces (`traces/linkedListMethods.js`) run each method on a small list model and draw that model, so the picture can't drift from the code, and `traces.test.js` runs the same method inside a real `LinkedList`.
 - 2026-10-20: **Method checkpoints and Build its share one starter shape:** `Node`, the constructor, the methods already taught, the target method as a stub holding its plan comments, and our own `toArray()` helper (the walk from lesson 3), so tests can check the order with `call: "toArray"`. Tests can't say `undefined` in JSON, so "returns undefined" is checked with `expected: null` (the harness turns `undefined` into `null`).
 - 2026-10-20: **Guests have no pronouns, in English or Spanish.** Names don't tell anyone's gender, so lessons and captions say "Ana's node", not "her node", and Spanish avoids agreement that assigns a gender ("Ana sigue en el último lugar", not "la última invitada"). Three older lines in Big O lesson 1 and Big O of Arrays & Objects lesson 2 still say "invitada": fix them in the theory pass.
+- 2026-10-20: **Our insert returns `true` for every success** (and `false` for a bad index), instead of `return this.unshift(value)` / `return this.push(value)` at the ends, which would return the list there and `true` in the middle. One yes-or-no question, one kind of answer. remove can return what shift and pop return, because they already return the removed node.
+- 2026-10-20: **Our reverse starts `next` as `null` and returns `this`.** A version that starts with `let next = temp.next` crashes on an empty list, and the lecture says reverse returns the list. The lesson explains both.
+- 2026-10-20: **Reverse is drawn where the nodes stand.** `LinkedListDiagram` got a `nextOf` mode (each gap shows ←, → or nothing), because halfway through a reverse the arrows point both ways and there's a gap, which the usual "follow from head" picture can't show. It uses compact nodes so the extra `null` on the left still fits.
+- 2026-10-20: **The Linked Lists quiz has 23 questions** (above the usual 10–16), because the module has 13 lessons; each method lesson adds one or two questions about its edge cases.
 - 2026-10-11 (later): **Big O follows both courses closely.** Carlos: "still not enough … missing a lot of the content from the 2 files … even if we are going to be super close to the original 2 courses". One lesson per lecture (17), the courses' own examples plus the guest-list animations, every point of both files (text, slides and quizzes) covered; sentences stay ours. **Sources for Big O are his two `.docx` files** in the "DSA + LEETCODE…" Desktop folder, not `guiones/`; he'll add files for the other modules later.
 
 - 2026-10-11: **Codecademy-style learning (Carlos).** Students must prove they understood before moving on: lessons are split into **steps** (each `##` heading), every step ends with a **checkpoint** (quick question or small code task checked by tests), and **Next stays locked until it passes**. Stuck → hint, then the solution after 3 failed tries (recorded as "viewed solution"). Coding steps use a **3-pane workspace** (Learn | Editor | Output). Being built in `feat/step-checkpoints`.
@@ -200,6 +205,11 @@ Agents: read this at the start of every session and update it at the end (see `A
   - **Practice:** 6 more quiz questions (17 in all) and 4 Build its: Join at the Back, Leave from the Back, Join at the Front, Leave from the Front.
   - **New animations:** `linked-list-<method>`, `-examples` and `-plan` for push, pop, unshift and shift, and the traces `trace-ll-push`, `trace-ll-pop`, `trace-ll-unshift` and `trace-ll-shift`. Scenes can show what a call returns, and trace input pickers say "1 guest".
   - **Checked:** in Chrome under `vercel.json`'s headers (60 step views, 48 animations, 39 snippets, 0 CSP violations, 320–1280 px, Spanish, reduced motion), the quiz played and all 5 Build its solved with the real checker in three setups, and no 8-word run of our text matches the course notes (only the classic method code matches the course's `.js` files).
+- 2026-10-20, `content/linked-lists-3` (Linked Lists, PR 3 of 3):
+  - **5 method lessons, 25 steps** (EN + ES), from course 1's get, set, insert, remove and reverse lectures, each in the 5 steps. They cover the lectures' points: get's range check and `for` walk, set reusing get (`if (temp)`), insert and remove handing the ends to unshift/push and shift/pop, `get(index - 1)` for the node before, `temp = before.next` instead of a second get, and reverse's head/tail swap with `prev`/`temp`/`next` crossing the gap. The last step closes the module with a table of every method's Big O.
+  - **Practice:** 6 more quiz questions (23 in all) and the last 5 Build its (all 10 done).
+  - **New animations:** `linked-list-<method>`, `-examples` and `-plan` for get, set, insert, remove and reverse, and the traces `trace-ll-get`, `-set`, `-insert`, `-remove` and `-reverse` (traces that call other methods list them in `uses`, so the test puts them in the same class).
+  - **Checked:** in Chrome under `vercel.json`'s headers, all 13 lessons (180 step views, 156 animations, 108 snippets, 0 CSP violations, 320–1280 px, Spanish, reduced motion), the quiz (69 answers) and the 5 new Build its in three setups. No 8-word run of our text matches the course notes; only code does.
 - 2026-10-13, `docs/ponytail`: Ponytail reviewed (no network calls; the installed files match the reviewed commit). `AGENTS.md` limits it to app code, and `.claude/skills/README.md` says what it runs and how to update or turn it off.
 
 ## Next
@@ -214,7 +224,7 @@ Agents: read this at the start of every session and update it at the end (see `A
   1. ✅ `content/problem-solving-approach`: 7 lessons from course 2's Section 4, a quiz and 3 interview problems.
   2. ✅ `content/classes-and-pointers`: 2 lessons from course 1's Section 3, the quiz in Spanish with our own values (16 questions), and a `Counter` Build it.
   3. ✅ `perf/lazy-module-content`, then `feat/quiz-page` and `feat/exercise-pages` (stage 7). The quiz page should load the full practice file itself (an eager glob in a module only the quiz and exercise pages import).
-  4. `content/linked-lists-1` ✅ (lessons 1–4, the list diagram, 11 questions, the constructor Build it), `-2` ✅ (push, pop, unshift, shift, 17 questions, 5 Build its), then `-3` (get, set, insert, remove, reverse, with `trace-ll-reverse`, all 10 Build its and the quiz at 12–16 questions or more). Each method lesson uses the 5 steps; the starter code has `Node`, the methods already written and our own `toArray()` helper.
+  4. ✅ Linked Lists: `content/linked-lists-1`, `-2` (push, pop, unshift, shift) and `-3` (get, set, insert, remove, reverse). The module is complete except its interview problems, which wait for course 1's Section 5.
   5. The theory pass on Introduction 1–3 and Big O 1–8, then Big O 9–15 and 17. The landing preview reads Big O lesson 1's checkpoint 2, so keep that step (or update `TryItPreview.jsx`).
 - Carlos: send course 1's Section 5 (linked list LeetCode exercises) and course 2's Section 5 (patterns) when you're ready.
 - Carlos: send course 2's "data structures introduction" transcript (class syntax, static methods) when you get there.
@@ -229,7 +239,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 | 3: Classes & Pointers         | `content/practice/classes-and-pointers.json`     | 16        | cookie-class (easy, class), counter-class (easy, class)                     | done    | 2026-10-20 |
 | 3: Big O of Arrays & Objects  | `content/practice/arrays-and-objects.json`       | 15        | word-frequency (easy), last-answer-wins (easy), guests-who-arrived (medium) | done    | 2026-10-13 |
 | 4: A Problem-Solving Approach | `content/practice/problem-solving-approach.json` | 14        | count-the-vowels (easy), character-counter (easy), title-case (easy)        | done    | 2026-10-19 |
-| 4: Linked Lists (lessons 1–8) | `content/practice/linked-lists.json`             | 17        | linked-list-constructor, -push, -pop, -unshift, -shift (easy, class)        | done    | 2026-10-20 |
+| 4: Linked Lists               | `content/practice/linked-lists.json`             | 23        | all 10 Build its, constructor to reverse (class)                            | done    | 2026-10-20 |
 
 Modules 04–17 have empty folders; they appear in `course.json` as "coming soon".
 
@@ -242,7 +252,7 @@ Modules 04–17 have empty folders; they appear in `course.json` as "coming soon
 | 03 Big O of Arrays & Objects  | `01-built-in-data-structures`, `02-big-o-of-objects`, `03-object-methods`, `04-big-o-of-array-methods` (theory first); Big O `16-big-o-of-arrays` rewritten | EN + ES   | 2026-10-13 |
 | 04 A Problem-Solving Approach | `01-why-a-method` … `07-the-method-in-an-interview` (one per lecture, theory first)                                                                         | EN + ES   | 2026-10-19 |
 | 12 Classes & Pointers         | `01-classes`, `02-pointers` (theory first)                                                                                                                  | EN + ES   | 2026-10-20 |
-| 13 Linked Lists               | `01-what-is-a-linked-list` … `04-the-constructor`, `05-push`, `06-pop`, `07-unshift`, `08-shift` (theory first, methods in 5 steps; 5 to come)              | EN + ES   | 2026-10-20 |
+| 13 Linked Lists               | `01-what-is-a-linked-list` … `04-the-constructor`, then one lesson per method, `05-push` … `13-reverse` (theory first, methods in 5 steps)                  | EN + ES   | 2026-10-20 |
 
 ## Open questions
 
