@@ -723,6 +723,81 @@
       "inside": "{{char}} tiene el código {{code}}. Está dentro de un bloque verde: es una letra o un dígito.",
       "outside": "{{char}} tiene el código {{code}}. Está fuera de todos los bloques verdes: no es letra ni dígito.",
       "summary": "Tres revisiones de rango responden la pregunta, sin expresiones regulares. Cuidado con los bordes: '[' es 91, uno después de 'Z', y '`' es 96, uno antes de 'a'."
+    },
+    "cookieCutter": {
+      "classLabel": "La clase (el molde)",
+      "instancesLabel": "Las instancias (las galletas)",
+      "instances": {
+        "title": "Una clase, muchas galletas",
+        "start": "class Cookie es el molde para galletas: una forma que puedes usar una y otra vez. Por sí sola, todavía no es una galleta.",
+        "first": "new Cookie('chocolate') hace la primera galleta, una instancia llamada cookieOne, con su propio sabor.",
+        "second": "El mismo molde hace una segunda instancia, cookieTwo. La misma forma, otro sabor.",
+        "summary": "Una clase, dos instancias. Cada galleta guarda sus propios datos, y puedes hacer todas las que necesites."
+      },
+      "new": {
+        "title": "Lo que hace new, en cuatro pasos pequeños",
+        "start": "new Cookie('chocolate') parece una sola acción, pero JavaScript hace cuatro cosas.",
+        "empty": "1. Crea un objeto nuevo y vacío.",
+        "this": "2. Hace que this apunte a ese objeto, para que el constructor sepa qué galleta está construyendo.",
+        "run": "3. Ejecuta el constructor. this.flavor = 'chocolate' escribe el sabor en el objeto nuevo.",
+        "returned": "4. Regresa el objeto terminado, y ahora cookieOne apunta a él.",
+        "parts": [
+          "Crear un objeto vacío",
+          "Hacer que this apunte a él",
+          "Ejecutar el constructor",
+          "Regresar el objeto"
+        ]
+      },
+      "methods": {
+        "title": "Getters y setters: cada galleta responde por sí misma",
+        "start": "Dos instancias de la misma clase: cookieOne es de chocolate y cookieTwo es de vainilla.",
+        "getOne": "cookieOne.getFlavor() corre con this apuntando a cookieOne, así que regresa 'chocolate'.",
+        "getTwo": "El mismo método, llamado en cookieTwo: ahora this es cookieTwo, así que regresa 'vanilla'.",
+        "set": "cookieOne.setFlavor('oatmeal') cambia solo a cookieOne. A cookieTwo no le pasa nada.",
+        "getAgain": "Al leerlo otra vez se ve el cambio: cookieOne.getFlavor() ahora es 'oatmeal'.",
+        "summary": "Los getters leen los datos de una instancia y los setters los cambian. Los dos trabajan con this: la galleta en la que los llamaste."
+      }
+    },
+    "listClassPreview": {
+      "title": "Un adelanto: la clase LinkedList en acción",
+      "create": "new LinkedList('Ana') crea una lista con un invitado. El constructor prepara todo.",
+      "push": "push('Ben') agrega un invitado al final.",
+      "unshift": "unshift('Zoe') agrega una invitada al principio.",
+      "insert": "insert(1, 'Cleo') pone a una invitada en el índice 1, entre Zoe y Ana.",
+      "remove": "remove(1) saca a quien está en el índice 1: Cleo se va.",
+      "pop": "pop() quita al último invitado, Ben.",
+      "shift": "shift() quita a la primera invitada, Zoe.",
+      "summary": "Cada método hizo un trabajo específico con la lista. En el módulo de Listas enlazadas vas a escribir cada uno tú mismo."
+    },
+    "pointerArrows": {
+      "variables": "Variables",
+      "objects": "Objetos",
+      "pointedBy": "← {{names}}",
+      "nobody": "nada apunta aquí",
+      "valueCopy": {
+        "title": "Copiar un número copia el valor",
+        "start": "guestCount guarda el número 5 en sí.",
+        "copy": "let seats = guestCount copia el 5 en seats. Ahora hay dos 5 separados.",
+        "change": "guestCount = 8 cambia solo a guestCount. seats sigue guardando su propio 5.",
+        "summary": "seats sigue siendo 5. Los números, los strings y los booleanos se copian, así que cambiar una variable nunca cambia a la otra."
+      },
+      "referenceCopy": {
+        "title": "Copiar un objeto copia la flecha",
+        "start": "card no guarda el objeto en sí: guarda una flecha al objeto A, { value: 'Ana' }.",
+        "copy": "let sameCard = card copia la flecha, no el objeto. Ahora las dos variables apuntan al mismo objeto A.",
+        "change": "card.value = 'Ben' sigue la flecha de card y cambia el objeto A.",
+        "read": "sameCard sigue su flecha hasta el mismo objeto, así que sameCard.value también es 'Ben'.",
+        "summary": "card === sameCard es true: son el mismo objeto. Sigue habiendo un solo objeto A."
+      },
+      "pointerMove": {
+        "title": "Mover punteros, y la recolección de basura",
+        "start": "first apunta al objeto A, { value: 'Ana' }.",
+        "second": "let second = first: second también apunta al objeto A.",
+        "third": "let third = { value: 'Cleo' } crea un objeto nuevo, B, y third apunta a él.",
+        "moveSecond": "second = third mueve la flecha de second al objeto B. Al objeto A todavía le queda first.",
+        "moveFirst": "first = third aleja la última flecha de A. Ya nada apunta al objeto A, así que nada puede llegar a él.",
+        "collected": "El recolector de basura de JavaScript encuentra los objetos a los que nada apunta y libera su memoria. El objeto A desapareció."
+      }
     }
   },
   "runnable": {

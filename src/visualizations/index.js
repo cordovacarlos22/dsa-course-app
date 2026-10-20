@@ -10,15 +10,18 @@ import BinarySearchHalving from './BinarySearchHalving'
 import CharCodeRanges from './CharCodeRanges'
 import CodeTrace from './CodeTrace'
 import ConstantJump from './ConstantJump'
+import CookieCutter from './CookieCutter'
 import DominantTerm from './DominantTerm'
 import ExampleLadder from './ExampleLadder'
 import FiveSteps from './FiveSteps'
 import HalvingCount from './HalvingCount'
 import LinearBoxes from './LinearBoxes'
+import ListClassPreview from './ListClassPreview'
 import MemoryBoxes from './MemoryBoxes'
 import NestedGrid from './NestedGrid'
 import ObjectLookup from './ObjectLookup'
 import ObjectToArray from './ObjectToArray'
+import PointerArrows from './PointerArrows'
 import SameShape from './SameShape'
 import SearchCases from './SearchCases'
 import SolutionLayers from './SolutionLayers'
@@ -78,5 +81,12 @@ export const visualizations = {
   'steps-to-code': StepsToCode,
   'solution-layers': SolutionLayers,
   'char-code-ranges': CharCodeRanges,
+  'cookie-cutter': withProps(CookieCutter, { scene: 'instances' }),
+  'cookie-new': withProps(CookieCutter, { scene: 'new' }),
+  'cookie-methods': withProps(CookieCutter, { scene: 'methods' }),
+  'list-class-preview': ListClassPreview,
+  'value-copy': withProps(PointerArrows, { scene: 'valueCopy' }),
+  'reference-copy': withProps(PointerArrows, { scene: 'referenceCopy' }),
+  'pointer-move': withProps(PointerArrows, { scene: 'pointerMove' }),
   ...traceComponents,
 }
