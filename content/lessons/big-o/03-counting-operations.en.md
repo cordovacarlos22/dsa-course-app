@@ -8,7 +8,7 @@ minutes: 10
 
 ## Count the formula
 
-If seconds change from machine to machine, what doesn't? The **number of simple operations** the computer has to do. A **simple operation** is one small step: an addition, a subtraction, a multiplication, a division, a comparison like `i <= n`, or giving a variable a value (an **assignment**). Five operations are five operations on a fast laptop or an old phone. A faster computer does each one sooner, but it can't skip any.
+If seconds change from machine to machine, what doesn't? How many **simple operations** the code needs. A **simple operation** is one small step: an addition, a subtraction, a multiplication, a division, a comparison like `i <= n`, or giving a variable a value (an **assignment**). Five operations are five operations on a fast laptop or an old phone. A faster computer does each one sooner, but it can't skip any.
 
 That's the idea behind Big O: instead of timing code, we count how many operations it needs, and, more importantly, how that count changes when the input grows. Counting doesn't need a stopwatch, doesn't change between runs, and works on code you haven't even run yet.
 
@@ -80,7 +80,7 @@ console.log(countOperations(1000)) // 5002
 
 ## Fuzzy counting
 
-Here's the good news: **the exact number doesn't matter**. Whether it's 5n + 2, 3n or 2n, what matters is the **general trend**: as n grows, the number of operations grows **roughly in proportion to n**. Double n and you double the work. Multiply n by 1,000 and the work grows about 1,000 times. That's the big picture, and the big picture is what Big O cares about.
+Here's the good news: **the exact number doesn't matter**. Whether it's 5n + 2, 3n or 2n, what matters is the **general trend**: the operation count rises **roughly in proportion to n** as n gets bigger. Double n and you double the work. Multiply n by 1,000 and the work grows about 1,000 times. That's the big picture, and the big picture is what Big O cares about.
 
 Why can we ignore the details? Because with a big n, they stop mattering. With n = 1,000,000, the "+ 2" in 5n + 2 is two operations out of five million. And whether each number costs 5 operations or 3, the loop is still the one whose work grows with n, while the formula's doesn't grow at all. That difference is what decides which solution survives a huge input.
 

@@ -1,5 +1,5 @@
 ---
-title: How to get the most out of this course
+title: Getting the most out of this course
 order: 2
 minutes: 8
 ---
@@ -10,7 +10,7 @@ minutes: 8
 
 Some people only want to write code and skip anything that sounds like theory. You can: the Data Structures section is right there in the course map. But two short topics make everything in it easier: **Big O**, which comes next, and **classes and pointers**, which open that section. This step is about the first one.
 
-**Big O** is a way of measuring how **efficient** your code is. Not in seconds, which change from computer to computer, but in how the amount of work grows as the input grows. Here's a situation where that matters. You're building an app, and the most important thing it does is **remove the last item** from a list, thousands of times per second. You could store the list as a **singly linked list**, where each item only knows the item after it, or as a **doubly linked list**, where each item knows the one before it too. Which one should you pick?
+**Big O** is how programmers describe the **efficiency** of code. Not in seconds, which change from computer to computer, but in how the amount of work grows as the input grows. Here's a situation where that matters. You're building an app, and the most important thing it does is **remove the last item** from a list, thousands of times per second. You could store the list as a **singly linked list**, where each item only knows the item after it, or as a **doubly linked list**, where each item knows the one before it too. Which one should you pick?
 
 The doubly linked list is _much_ faster at this exact job. The animation below shows why the singly linked list struggles. You don't need to understand every line yet; you'll build this in the Linked Lists module.
 

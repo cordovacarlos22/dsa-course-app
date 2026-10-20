@@ -78,7 +78,7 @@ Before we can answer, we have to agree on what "better" means. It could mean:
 - **More readable:** someone else can understand and change it.
 - **Shorter:** some people love code with as few characters as possible.
 
-All of these are valid, and the right answer depends on the situation. But most developers agree that **speed and memory** usually come first, and unfortunately they often come at the cost of readability. Writing code that's fast, light **and** still easy to read is the balancing act of good programming, and it will come up again and again in this course.
+All of these are valid, and the right answer depends on the situation. But most developers agree that **speed and memory** usually come first, and sadly, chasing them often makes code harder to read. Writing code that's fast, light **and** still easy to read is the balancing act of good programming, and it will come up again and again in this course.
 
 "Faster for big inputs" is the one that separates our two solutions. With small numbers, both finish instantly. The difference only shows up as n grows, and that's what this chart is about:
 

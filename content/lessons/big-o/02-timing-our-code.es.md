@@ -78,7 +78,7 @@ Antes de responder, tenemos que ponernos de acuerdo en qué significa "mejor". P
 - **Más legible:** otra persona lo puede entender y cambiar.
 - **Más corto:** a algunas personas les encanta el código con la menor cantidad de caracteres posible.
 
-Todas son válidas, y la respuesta correcta depende de la situación. Pero la mayoría de los desarrolladores está de acuerdo en que **la velocidad y la memoria** suelen ir primero, y por desgracia muchas veces se ganan a costa de la legibilidad. Escribir código rápido, ligero **y** fácil de leer es el acto de equilibrio de la buena programación, y va a salir una y otra vez en este curso.
+Todas son válidas, y la respuesta correcta depende de la situación. Pero la mayoría de los desarrolladores está de acuerdo en que **la velocidad y la memoria** suelen ir primero, y por desgracia, perseguirlas muchas veces hace el código más difícil de leer. Escribir código rápido, ligero **y** fácil de leer es el acto de equilibrio de la buena programación, y va a salir una y otra vez en este curso.
 
 "Más rápido con entradas grandes" es lo que separa a nuestras dos soluciones. Con números pequeños, las dos terminan al instante. La diferencia solo aparece cuando n crece, y de eso trata esta gráfica:
 

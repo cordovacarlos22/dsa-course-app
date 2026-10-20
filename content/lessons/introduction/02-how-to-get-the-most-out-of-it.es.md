@@ -10,7 +10,7 @@ minutes: 8
 
 Hay quien solo quiere escribir código y saltarse todo lo que suene a teoría. Se puede: la sección de Estructuras de datos está ahí mismo en el mapa del curso. Pero dos temas cortos hacen que todo lo que hay ahí sea más fácil: **Big O**, que viene ahora, y las **clases y los punteros**, que abren esa sección. Este paso trata del primero.
 
-**Big O** es una forma de medir qué tan **eficiente** es tu código. No en segundos, que cambian de computadora a computadora, sino en cómo crece la cantidad de trabajo cuando crece la entrada. Aquí tienes una situación donde eso importa. Estás construyendo una app, y lo más importante que hace es **quitar el último elemento** de una lista, miles de veces por segundo. Podrías guardar la lista como una **lista enlazada simple**, donde cada elemento solo conoce al que va después, o como una **lista doblemente enlazada**, donde cada elemento también conoce al de antes. ¿Cuál eliges?
+**Big O** es como los programadores describen la **eficiencia** del código. No en segundos, que cambian de computadora a computadora, sino en cómo crece la cantidad de trabajo cuando crece la entrada. Aquí tienes una situación donde eso importa. Estás construyendo una app, y lo más importante que hace es **quitar el último elemento** de una lista, miles de veces por segundo. Podrías guardar la lista como una **lista enlazada simple**, donde cada elemento solo conoce al que va después, o como una **lista doblemente enlazada**, donde cada elemento también conoce al de antes. ¿Cuál eliges?
 
 La lista doblemente enlazada es _mucho_ más rápida en esa tarea. La animación de abajo muestra por qué a la lista enlazada simple le cuesta. No necesitas entender cada línea todavía; la vas a construir en el módulo de Listas enlazadas.
 

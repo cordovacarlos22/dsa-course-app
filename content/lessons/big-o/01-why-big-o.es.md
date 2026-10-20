@@ -132,7 +132,7 @@ Una pregunta justa: si mi código funciona, ¿por qué me importa cuál versión
 
 Pero en otras situaciones el rendimiento importa mucho, y sí existe una mejor solución:
 
-- **Muchos datos.** En una empresa que maneja cientos de millones de registros, una versión de una función puede ahorrar una **hora** cada vez que se ejecuta.
+- **Muchos datos.** En una empresa que maneja cientos de millones de registros, una versión de una función puede terminar una **hora** antes que otra, en cada corrida.
 - **Intercambios.** Casi nunca es "esta siempre es genial y esa siempre es terrible". Una idea puede ser buenísima con entradas enormes y otra más constante pero más lenta al principio. Big O te da las palabras para hablar de eso.
 - **Encontrar código lento.** Cuando tu código funciona pero la página va lenta o el navegador se congela, Big O te ayuda a detectar las partes ineficientes.
 - **Entrevistas.** Vas a escuchar "¿Cuál es el Big O de tu solución?" o "Aquí hay tres funciones. ¿Cuál es el Big O de cada una?"

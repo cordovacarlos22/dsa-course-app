@@ -8,7 +8,7 @@ minutes: 10
 
 ## Cuenta la fórmula
 
-Si los segundos cambian de una máquina a otra, ¿qué no cambia? El **número de operaciones simples** que tiene que hacer la computadora. Una **operación simple** es un paso pequeño: una suma, una resta, una multiplicación, una división, una comparación como `i <= n`, o darle un valor a una variable (una **asignación**). Cinco operaciones son cinco operaciones en una laptop rápida o en un teléfono viejo. Una computadora más rápida hace cada una antes, pero no se puede saltar ninguna.
+Si los segundos cambian de una máquina a otra, ¿qué no cambia? Cuántas **operaciones simples** necesita el código. Una **operación simple** es un paso pequeño: una suma, una resta, una multiplicación, una división, una comparación como `i <= n`, o darle un valor a una variable (una **asignación**). Cinco operaciones son cinco operaciones en una laptop rápida o en un teléfono viejo. Una computadora más rápida hace cada una antes, pero no se puede saltar ninguna.
 
 Esa es la idea detrás de Big O: en lugar de medir el tiempo del código, contamos cuántas operaciones necesita y, más importante, cómo cambia esa cuenta cuando crece la entrada. Contar no necesita cronómetro, no cambia entre una corrida y otra, y funciona con código que ni siquiera has ejecutado.
 

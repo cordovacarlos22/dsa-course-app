@@ -132,7 +132,7 @@ A fair question: if my code works, why do I care which version is best? Sometime
 
 But in other situations performance matters a lot, and there really is a best solution:
 
-- **Big data.** At a company handling hundreds of millions of records, one version of a function might save an **hour** every time it runs.
+- **Big data.** At a company handling hundreds of millions of records, one version of a function might finish a full **hour** sooner than another, on every single run.
 - **Trade-offs.** It's rarely "this one is always great, that one is always terrible". One approach might be great with huge inputs, another more consistent but slower up front. Big O gives you the words to discuss that.
 - **Finding slow code.** When your code works but the page is slow or the browser freezes, Big O helps you spot the parts that are inefficient.
 - **Interviews.** You'll hear "What's the Big O of your solution?" or "Here are three functions. What's the Big O of each one?"

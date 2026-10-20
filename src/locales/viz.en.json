@@ -504,7 +504,7 @@
       "title": "Adding, changing and deleting keys",
       "start": "The answers object: 5 guests, 5 keys.",
       "add": "rsvps['Fay'] = 'yes' adds a new key. No other card moves or changes: O(1).",
-      "update": "Ben changed his mind. Updating is a lookup plus a new value: O(1).",
+      "update": "Ben's answer changed. Updating is a lookup plus a new value: O(1).",
       "remove": "delete rsvps['Cleo'] removes one key. Nobody has an index, so nobody is re-indexed: O(1).",
       "summary": "Adding, changing and deleting each touched one card. Compare that with shift and unshift on an array."
     },
@@ -536,7 +536,7 @@
       "concat": "concat copies every item of both arrays into a new one: 6 + 3 = 9 boxes. That's O(n + m), which we simply call O(n).",
       "slice": "slice(1, 4) copies the items from index 1 up to (but not including) index 4: 3 boxes. The cost is the size of the copy.",
       "sliceAll": "slice() with no arguments copies the whole array: all 6 boxes. In the worst case, O(n).",
-      "spliceMiddle": "splice(2, 0, 'Zoe') inserts Zoe at index 2. Every guest after her moves up one index: 5 boxes.",
+      "spliceMiddle": "splice(2, 0, 'Zoe') inserts Zoe at index 2. Every guest after Zoe moves up one index: 5 boxes.",
       "spliceStart": "At index 0, splice moves everyone: 7 boxes. Big O takes this worst case: O(n).",
       "summary": "All three grow with the size of the array: O(n)."
     },
