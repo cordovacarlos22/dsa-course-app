@@ -77,7 +77,12 @@ function ChoiceCheckpoint({
                   disabled={verdict === 'correct'}
                   className="accent-brand"
                 />
-                <InlineMarkdown>{localize(option, language)}</InlineMarkdown>
+                {/* One span, so text and `code` wrap together. Without it,
+                    each piece becomes its own flex item and the line can't
+                    wrap on a phone. */}
+                <span className="min-w-0">
+                  <InlineMarkdown>{localize(option, language)}</InlineMarkdown>
+                </span>
               </label>
             )
           })}
