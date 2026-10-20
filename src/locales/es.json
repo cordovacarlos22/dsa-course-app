@@ -264,5 +264,32 @@
     "yourAnswer": "Tu respuesta",
     "rightAnswer": "Respuesta correcta",
     "tryAgain": "Intentar de nuevo"
+  },
+  "exercise": {
+    "category": {
+      "build": "Constrúyelo",
+      "interview": "Problema de entrevista"
+    },
+    "difficulty": {
+      "easy": "Fácil",
+      "medium": "Media",
+      "hard": "Difícil"
+    },
+    "solved": "Resuelto",
+    "bestTime": "mejor tiempo {{time}}",
+    "solvedIn": "¡Resuelto en {{time}}!",
+    "complexity": "El Big O esperado: tiempo {{time}}, espacio {{space}}. ¿El tuyo coincide?",
+    "next": "Siguiente ejercicio",
+    "cheer": "¡Buen trabajo!",
+    "hint": "Vuelve a leer la descripción y mira las pruebas que fallan. Apunta a tiempo {{time}} y espacio {{space}}.",
+    "timer": {
+      "label": "Temporizador",
+      "stopwatch": "Cronómetro",
+      "countdown": "Cuenta regresiva",
+      "off": "Sin temporizador",
+      "elapsed": "Tiempo usado",
+      "remaining": "Tiempo restante",
+      "timeUp": "¡Se acabó el tiempo! Sigue si quieres."
+    }
   }
 }

@@ -5,6 +5,7 @@ import { useLanguage } from '../hooks/useLanguage'
 import { getModule, lessonTitle, localize } from '../lib/course'
 import { isModuleComplete, loadProgress } from '../lib/progress'
 import { loadQuizScore } from '../lib/quizScores'
+import { loadExerciseResult } from '../lib/exercises'
 import NotFoundPage from './NotFoundPage'
 
 // One module: its lessons, then its quiz + exercises (pages in stage 7).
@@ -113,13 +114,19 @@ function ModulePage() {
           </h2>
           <ul className="mt-4 grid gap-4 sm:grid-cols-3">
             <QuizItem moduleSlug={module.slug} questions={practice.questions} />
-            <PracticeItem
+            <ExercisesItem
               title={t('module.buildIt')}
-              detail={t('course.exercises', { count: practice.build })}
+              moduleSlug={module.slug}
+              exercises={practice.exercises.filter(
+                (exercise) => exercise.category === 'build',
+              )}
             />
-            <PracticeItem
+            <ExercisesItem
               title={t('module.interviewProblems')}
-              detail={t('course.exercises', { count: practice.interview })}
+              moduleSlug={module.slug}
+              exercises={practice.exercises.filter(
+                (exercise) => exercise.category === 'interview',
+              )}
             />
           </ul>
         </>
@@ -153,17 +160,51 @@ function QuizItem({ moduleSlug, questions }) {
   )
 }
 
-// Exercise pages arrive in the next step of stage 7, so these aren't links
-// yet.
-function PracticeItem({ title, detail }) {
+// A group of exercises (Build it or Interview problems), each one a link,
+// with a ✓ once the student solved it.
+function ExercisesItem({ title, moduleSlug, exercises }) {
   const { t } = useTranslation()
+  const { language } = useLanguage()
   return (
     <li className="rounded-2xl border border-slate-200 bg-white p-5">
       <h3 className="font-bold">{title}</h3>
-      <p className="mt-1 text-sm text-slate-600">{detail}</p>
-      <p className="mt-3 text-xs font-semibold text-slate-400 uppercase">
-        {t('module.availableSoon')}
+      <p className="mt-1 text-sm text-slate-600">
+        {t('course.exercises', { count: exercises.length })}
       </p>
+      {exercises.length > 0 && (
+        <ul className="mt-3 space-y-1.5">
+          {exercises.map((exercise) => {
+            const isSolved = loadExerciseResult(
+              moduleSlug,
+              exercise.slug,
+            ).solved
+            return (
+              <li key={exercise.slug}>
+                <Link
+                  to={`/learn/${moduleSlug}/exercises/${exercise.slug}`}
+                  className="flex items-baseline gap-2 text-sm font-semibold text-brand hover:underline"
+                >
+                  <span
+                    aria-hidden="true"
+                    className={isSolved ? 'text-green-700' : 'text-slate-300'}
+                  >
+                    {isSolved ? '✓' : '○'}
+                  </span>
+                  <span>
+                    {localize(exercise.title, language)}
+                    {isSolved && (
+                      <span className="sr-only"> ({t('exercise.solved')})</span>
+                    )}
+                  </span>
+                  <span className="ml-auto text-xs font-normal text-slate-500">
+                    {t(`exercise.difficulty.${exercise.difficulty}`)}
+                  </span>
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      )}
     </li>
   )
 }

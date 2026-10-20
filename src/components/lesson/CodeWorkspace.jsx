@@ -129,8 +129,11 @@ function CodeWorkspace({
               {step.title}
             </h2>
           )}
-          <LessonMarkdown markdown={step.body} />
-          <div className="mt-6 rounded-xl border-2 border-brand/30 bg-brand/5 p-4">
+          {step.body && <LessonMarkdown markdown={step.body} />}
+          {/* A practice exercise has no lesson text above its task. */}
+          <div
+            className={`${step.title || step.body ? 'mt-6' : ''} rounded-xl border-2 border-brand/30 bg-brand/5 p-4`}
+          >
             <h3 className="text-xs font-semibold tracking-wide text-brand uppercase">
               {t('workspace.task')}
             </h3>
