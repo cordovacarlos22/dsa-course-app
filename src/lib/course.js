@@ -1,17 +1,10 @@
-// Reads the course content that lives in the repo (content/ folder).
-// It's bundled with the app, so there's nothing to fetch.
+// The course outline (content/course.json) and a summary of each module's
+// content: its lessons' titles and minutes, and how many quiz questions and
+// exercises it has. The summary is built with the app by
+// scripts/content-catalog.js, so the course home doesn't have to download
+// every lesson and quiz. The full lessons live in ./lessons.js.
 import course from '../../content/course.json'
-import { getLessons } from './lessons'
-
-// Every content/practice/<module-slug>.json file (the module's quiz + exercises).
-const practiceFiles = import.meta.glob('../../content/practice/*.json', {
-  eager: true,
-  import: 'default',
-})
-
-const practiceBySlug = Object.fromEntries(
-  Object.values(practiceFiles).map((practice) => [practice.slug, practice]),
-)
+import catalog from 'virtual:content-catalog'
 
 // Picks the text in the student's language. Content is written in English
 // first, so we fall back to English when a translation is missing.
@@ -24,12 +17,13 @@ export function getCourse() {
   return course
 }
 
-// Each module from the outline, plus its lessons and its quiz/exercises when
-// they exist. A module with neither is still "coming soon".
+// Each module from the outline, plus the summary of its content:
+// - lessons: [{ slug, order, minutes, titles: { en, es } }], in order
+// - practice: { questions, build, interview } (how many of each), or null
+// A module with no lessons and no practice is still "coming soon".
 export function getModules() {
   return course.modules.map((module) => {
-    const lessons = getLessons(module.slug)
-    const practice = practiceBySlug[module.slug] ?? null
+    const { lessons = [], practice = null } = catalog[module.slug] ?? {}
     return {
       ...module,
       lessons,
@@ -37,6 +31,12 @@ export function getModules() {
       isAvailable: lessons.length > 0 || practice !== null,
     }
   })
+}
+
+// A lesson's title in the student's language, or English if it isn't
+// translated yet.
+export function lessonTitle(lesson, language) {
+  return lesson.titles[language] ?? lesson.titles.en
 }
 
 export function getModule(slug) {

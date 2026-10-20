@@ -2,8 +2,7 @@ import { Link, useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useLanguage } from '../hooks/useLanguage'
-import { getModule, localize } from '../lib/course'
-import { getLessonVersion } from '../lib/lessons'
+import { getModule, lessonTitle, localize } from '../lib/course'
 import { isModuleComplete, loadProgress } from '../lib/progress'
 import NotFoundPage from './NotFoundPage'
 
@@ -79,7 +78,7 @@ function ModulePage() {
                         {status === 'completed' ? '✓' : lesson.order}
                       </span>
                       <span className="font-semibold">
-                        {getLessonVersion(lesson, language).title}
+                        {lessonTitle(lesson, language)}
                       </span>
                       <span className="ml-auto flex items-center gap-3 text-sm text-slate-500">
                         {status && (
@@ -114,32 +113,21 @@ function ModulePage() {
           <ul className="mt-4 grid gap-4 sm:grid-cols-3">
             <PracticeItem
               title={t('module.quiz')}
-              detail={t('course.questions', {
-                count: practice.questions.length,
-              })}
+              detail={t('course.questions', { count: practice.questions })}
             />
             <PracticeItem
               title={t('module.buildIt')}
-              detail={t('course.exercises', {
-                count: countByCategory(practice, 'build'),
-              })}
+              detail={t('course.exercises', { count: practice.build })}
             />
             <PracticeItem
               title={t('module.interviewProblems')}
-              detail={t('course.exercises', {
-                count: countByCategory(practice, 'interview'),
-              })}
+              detail={t('course.exercises', { count: practice.interview })}
             />
           </ul>
         </>
       )}
     </div>
   )
-}
-
-function countByCategory(practice, category) {
-  return practice.exercises.filter((exercise) => exercise.category === category)
-    .length
 }
 
 // Quiz and exercise pages arrive in stage 7, so these aren't links yet.

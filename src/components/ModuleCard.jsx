@@ -34,8 +34,10 @@ function ModuleCard({ module }) {
     summary.push(t('lesson.lessons', { count: lessons.length }))
   }
   if (practice) {
-    summary.push(t('course.questions', { count: practice.questions.length }))
-    summary.push(t('course.exercises', { count: practice.exercises.length }))
+    summary.push(t('course.questions', { count: practice.questions }))
+    summary.push(
+      t('course.exercises', { count: practice.build + practice.interview }),
+    )
   }
 
   return (

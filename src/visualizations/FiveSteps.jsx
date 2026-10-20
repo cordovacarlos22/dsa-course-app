@@ -5,7 +5,7 @@ import StepPlayer from '../components/StepPlayer'
 // numbered steps. Two kinds of scenes (see ./index.js):
 // - no focus: the map, one step at a time
 // - focus: one step, with its checklist revealed item by item
-// Every text lives in src/locales/*.json under viz.fiveSteps.
+// Every text lives in src/locales/viz.<language>.json under fiveSteps.
 
 const STEP_KEYS = ['understand', 'examples', 'breakDown', 'solve', 'lookBack']
 
