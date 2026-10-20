@@ -3,6 +3,7 @@ import StepPlayer from '../components/StepPlayer'
 import GuestRow from './GuestRow'
 import LinkedListDiagram from './LinkedListDiagram'
 import { BOX_STATE_STYLES, DEFAULT_BOX_STYLE } from './boxStyles'
+import { INDEX_SCENES } from './linkedListIndexScenes'
 import { METHOD_SCENES } from './linkedListMethodScenes'
 
 // The Linked Lists module's animations: the guests' conga line, one scene per
@@ -16,8 +17,10 @@ import { METHOD_SCENES } from './linkedListMethodScenes'
 // - array: an array of guests to compare with ({ items, states })
 // - methods: the "who makes a node?" table (nodeClass scene)
 // - returned: what the method call gives back, as code ('this', 'undefined')
-// The method lessons' scenes (push, pop, unshift, shift) live in
-// ./linkedListMethodScenes.js.
+// - returnedNode: the call returns a node still in the line ("Cleo's node")
+// The method lessons' scenes live in ./linkedListMethodScenes.js (push, pop,
+// unshift, shift) and ./linkedListIndexScenes.js (get, set, insert, remove,
+// reverse).
 // Captions live in src/locales/viz.<language>.json under linkedList.<scene>.
 
 const LINE = ['Ana', 'Ben', 'Cleo', 'Dev']
@@ -423,12 +426,18 @@ function Frame({ frame }) {
       {frame.array && (
         <GuestRow items={frame.array.items} states={frame.array.states} />
       )}
-      {frame.returned && (
+      {(frame.returned || frame.returnedNode) && (
         <p className="font-mono text-sm">
           <span className="font-sans text-slate-500">
             {t('viz.linkedList.returns')}{' '}
           </span>
-          <span className="font-bold">{frame.returned}</span>
+          <span
+            className={`font-bold ${frame.returnedNode ? 'font-sans' : ''}`}
+          >
+            {frame.returnedNode
+              ? t('viz.linkedList.nodeOf', { name: frame.returnedNode })
+              : frame.returned}
+          </span>
         </p>
       )}
       {frame.visited !== undefined && (
@@ -442,7 +451,8 @@ function Frame({ frame }) {
 
 function LinkedListScenes({ scene }) {
   const { t } = useTranslation()
-  const steps = (SCENES[scene] ?? METHOD_SCENES[scene]).map((frame) => ({
+  const frames = SCENES[scene] ?? METHOD_SCENES[scene] ?? INDEX_SCENES[scene]
+  const steps = frames.map((frame) => ({
     ...frame,
     caption: t(`viz.linkedList.${scene}.${frame.captionKey}`, frame.params),
   }))

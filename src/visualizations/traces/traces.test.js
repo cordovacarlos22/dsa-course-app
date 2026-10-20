@@ -2,8 +2,9 @@ import { describe, it, expect } from 'vitest'
 import { traces } from './index'
 
 // A method trace shows one LinkedList method, so it runs inside a class
-// with Node and a constructor that starts empty.
+// with Node, a constructor that starts empty and the methods it uses.
 function loadLinkedList(trace, fakeConsole) {
+  const methods = [...(trace.uses ?? []).map((name) => traces[name].code)]
   return new Function(
     'console',
     `class Node {
@@ -18,6 +19,7 @@ class LinkedList {
     this.tail = null
     this.length = 0
   }
+${methods.join('\n')}
 ${trace.code}
 }
 return LinkedList`,

@@ -380,6 +380,83 @@
       "tailNull": "length is 0, so this.tail = null. Now head and tail are both null.",
       "notZero": "length is {{length}}, not 0, so tail stays where it is.",
       "return": "return temp: {{name}}'s node. One move of head and no walking: shift is O(1)."
+    },
+    "linkedListGet": {
+      "title": "get, line by line",
+      "input": "{{label}}",
+      "outOfRange": "Index {{index}} is out of range: valid indexes go from 0 to {{last}}.",
+      "returnUndefined": "return undefined, without walking at all.",
+      "inRange": "Index {{index}} is in range: it's at least 0 and below the length, {{length}}.",
+      "start": "temp starts at head, on {{name}}: index 0.",
+      "move": "temp = temp.next: temp is on {{name}}, index {{at}}.",
+      "return": "return temp: {{name}}'s node, index {{index}}. Nodes visited: {{count}}. Finding by index is O(n)."
+    },
+    "linkedListSet": {
+      "title": "set, line by line",
+      "input": "{{label}}",
+      "gotUndefined": "this.get({{index}}) returns undefined: there's no index {{index}}.",
+      "notNode": "temp is undefined, which is falsy, so the if is skipped.",
+      "returnFalse": "return false: nothing changed.",
+      "gotNode": "this.get({{index}}) walks to index {{index}} and returns {{name}}'s node.",
+      "isNode": "temp is a node, which is truthy, so the if runs.",
+      "change": "temp.value = value: {{old}} becomes {{value}}. Same node, new value.",
+      "returnTrue": "return true: the value changed. The walk inside get makes set O(n)."
+    },
+    "linkedListInsert": {
+      "title": "insert, line by line",
+      "input": "{{label}}",
+      "outOfRange": "Index {{index}} is out of range: insert accepts 0 to {{length}}.",
+      "returnFalse": "return false: nothing was added.",
+      "inRange": "Index {{index}} is in range: from 0 to {{length}}.",
+      "isZero": "Index 0 is the front of the line.",
+      "unshift": "this.unshift(value) adds {{value}} at the front, in O(1).",
+      "returnTrue": "return true: {{value}} is in the line.",
+      "isEnd": "Index {{index}} equals the length: the back of the line.",
+      "push": "this.push(value) adds {{value}} at the back, in O(1).",
+      "middle": "Index {{index}} isn't 0 or the length, {{length}}: it goes in the middle.",
+      "newNode": "new Node(value) makes a node for {{value}}.",
+      "before": "this.get({{before}}) walks to {{name}}, the node right before index {{index}}.",
+      "linkNew": "newNode.next = temp.next: {{value}} points to {{next}}, so nobody gets lost.",
+      "linkBefore": "temp.next = newNode: {{name}} points to {{value}}. {{value}} is in, at index {{index}}.",
+      "length": "this.length++: length is {{length}} now."
+    },
+    "linkedListRemove": {
+      "title": "remove, line by line",
+      "input": "{{label}}",
+      "outOfRange": "Index {{index}} is out of range: valid indexes go from 0 to {{last}}.",
+      "returnUndefined": "return undefined: nothing was removed.",
+      "inRange": "Index {{index}} is in range: from 0 to {{last}}.",
+      "isZero": "Index 0 is the front of the line.",
+      "shift": "return this.shift(): {{name}}'s node comes off the front and is returned.",
+      "isLast": "Index {{index}} is the last one.",
+      "pop": "return this.pop(): {{name}}'s node comes off the back and is returned.",
+      "middle": "Index {{index}} is in the middle: not 0, and not the last index, {{last}}.",
+      "before": "this.get({{before}}) walks to {{name}}, the node before the one that leaves.",
+      "temp": "temp = before.next: {{name}}, the node that leaves. No second walk.",
+      "skip": "before.next = temp.next: {{before}} now points past {{name}}, straight to {{next}}.",
+      "cut": "temp.next = null: {{name}}'s node lets go of {{next}}.",
+      "length": "this.length--: length is {{length}} now.",
+      "return": "return temp: {{name}}'s node, on its own. The walk makes remove O(n)."
+    },
+    "linkedListReverse": {
+      "title": "reverse, line by line",
+      "input_one": "{{count}} guest",
+      "input_other": "{{count}} guests",
+      "temp": "temp = this.head: temp remembers the old first node, {{name}}.",
+      "tempEmpty": "temp = this.head: the line is empty, so temp is null.",
+      "head": "this.head = this.tail: head moves to {{name}}, the old last node.",
+      "headEmpty": "this.head = this.tail: both are null, so nothing changes.",
+      "tail": "this.tail = temp: tail moves to {{name}}, the old first node. head and tail have swapped.",
+      "tailEmpty": "this.tail = temp: still null.",
+      "vars": "prev and next start as null. prev will trail behind temp, and next will run ahead of it.",
+      "remember": "next = temp.next: before flipping {{name}}'s arrow, next holds on to {{next}}, the rest of the line.",
+      "rememberLast": "next = temp.next: {{name}} is the last node, so next is null.",
+      "flipFirst": "temp.next = prev: {{name}} now points to null. It's the end of the reversed line.",
+      "flip": "temp.next = prev: {{name}}'s arrow flips to point back at {{prev}}.",
+      "step": "prev = temp and temp = next: prev moves to {{prev}}, and temp crosses the gap to {{temp}}.",
+      "stepLast": "prev = temp and temp = next: prev is on {{prev}}, and temp is null. Every arrow has been flipped.",
+      "return": "return this. Each node was visited once, so it's O(n) time, with just 3 extra pointers: O(1) space.",
+      "returnEmpty": "The loop never ran: an empty line reversed is still empty. return this."
     }
   },
   "timingChart": {
@@ -845,7 +922,34 @@
       "shift4": "4. temp's next becomes null, to cut it off",
       "shift5": "5. subtract 1 from length",
       "shift6": "6. if length is now 0, tail becomes null too",
-      "shift7": "7. return temp"
+      "shift7": "7. return temp",
+      "get1": "1. if index < 0 or index >= length, return undefined",
+      "get2": "2. temp starts at head (index 0)",
+      "get3": "3. move temp forward, index times: now at index {{index}}",
+      "get4": "4. return temp",
+      "set1": "1. temp = this.get(index): the node, or undefined",
+      "set2": "2. if temp is a node: change its value, return true",
+      "set3": "3. otherwise, return false",
+      "insert1": "1. if index < 0 or index > length, return false",
+      "insert2": "2. index 0? unshift. index === length? push. Then return true",
+      "insert3": "3. make a new node",
+      "insert4": "4. temp = the node before the spot: this.get(index - 1)",
+      "insert5": "5. the new node's next points to temp's next",
+      "insert6": "6. temp's next points to the new node",
+      "insert7": "7. add 1 to length, return true",
+      "remove1": "1. if index < 0 or index >= length, return undefined",
+      "remove2": "2. index 0? shift. Last index? pop. Return what they return",
+      "remove3": "3. before = the node before the spot: this.get(index - 1)",
+      "remove4": "4. temp = before.next: the node that leaves",
+      "remove5": "5. before's next skips over temp",
+      "remove6": "6. temp's next becomes null, to cut it off",
+      "remove7": "7. subtract 1 from length, return temp",
+      "reverse1": "1. swap head and tail (temp remembers the old head)",
+      "reverse2": "2. prev starts as null, and so does next",
+      "reverse3": "3. for each node: next = temp.next, to remember the rest",
+      "reverse4": "4. temp.next = prev: flip the arrow",
+      "reverse5": "5. prev = temp, then temp = next: both move one node on",
+      "reverse6": "6. after the last node, return the list"
     },
     "returns": "Returns:",
     "push": {
@@ -945,6 +1049,116 @@
       "length": "Step 5: length goes down to 2.",
       "oneLeft": "Step 6 matters with one guest: once Ana leaves, length is 0, so tail must become null too.",
       "returnTemp": "Step 7: return temp, Ana's node."
+    },
+    "nodeOf": "{{name}}'s node",
+    "get": {
+      "title": "get: find the node at an index",
+      "start": "A line of four guests. Indexes count from head: Ana is 0, Ben 1, Cleo 2 and Dev 3.",
+      "call": "get(2) starts at head and moves forward 2 times, counting: Ana (0), Ben (1), Cleo (2).",
+      "returns": "It returns Cleo's node, still in the line. The list doesn't change."
+    },
+    "getExamples": {
+      "title": "Examples for get: empty, one guest, the last guest, out of range",
+      "empty": "An empty line has no index 0, so get(0) returns undefined.",
+      "one": "With one guest, 0 is the only valid index: get(0) returns Ana's node right away, with no moves.",
+      "last": "get(3) on four guests walks the whole line to Dev, the last index: length - 1.",
+      "negative": "Index -1 doesn't exist: get returns undefined without walking.",
+      "tooBig": "Index 4 doesn't exist either: the last index is 3 (length - 1). get returns undefined."
+    },
+    "getPlan": {
+      "title": "get's plan, as comments",
+      "check": "Step 1: is 2 in range? It isn't below 0, and it's below the length, 4. Yes.",
+      "start": "Step 2: temp starts at head: index 0.",
+      "move": "Step 3: one move forward, and temp is on index 1.",
+      "arrive": "Another move: index 2. Index 2 takes 2 moves.",
+      "return": "Step 4: return temp, Cleo's node."
+    },
+    "set": {
+      "title": "set: change the value at an index",
+      "start": "A line of four guests. Ben's name tag should really say Benny.",
+      "call": "set(1, 'Benny') finds the node at index 1 and changes its value. No node is added or removed.",
+      "returns": "set returns true: the change worked."
+    },
+    "setExamples": {
+      "title": "Examples for set: in range, out of range, empty",
+      "inRange": "set(3, 'Devon') finds index 3 and changes Dev to Devon. It returns true.",
+      "outOfRange": "set(9, 'Zoe'): there's no index 9, so nothing changes. It returns false.",
+      "empty": "On an empty line, no index is valid, so set returns false."
+    },
+    "setPlan": {
+      "title": "set's plan, as comments",
+      "get": "Step 1: let get do the finding. this.get(1) gives back Ben's node.",
+      "change": "Step 2: temp is a node, so its value changes to 'Benny', and set returns true.",
+      "missing": "Step 3: with index 9, get gives back undefined, so set returns false."
+    },
+    "insert": {
+      "title": "insert: add a guest at an index",
+      "start": "A line of four guests.",
+      "call": "insert(2, 'Eve') puts a new node for Eve at index 2, between Ben and Cleo. Cleo and Dev move up to indexes 3 and 4.",
+      "returns": "insert returns true: the new guest is in."
+    },
+    "insertExamples": {
+      "title": "Examples for insert: front, back, middle, out of range",
+      "front": "Index 0 is the front of the line: that's exactly what unshift does.",
+      "back": "Index 4, the length, is the spot right after the last guest: that's exactly what push does.",
+      "middle": "Index 2 is in the middle: walk to the node before it and link Eve in.",
+      "outOfRange": "Index 7 is past the end, with a gap no node could fill: insert returns false and changes nothing."
+    },
+    "insertPlan": {
+      "title": "insert's plan, as comments",
+      "check": "Step 1: is 2 between 0 and the length, 4? Yes.",
+      "notEnds": "Step 2: 2 isn't 0 and isn't 4, so neither unshift nor push fits.",
+      "makeNode": "Step 3: make a new node for Eve.",
+      "before": "Step 4: get(1) walks to Ben, the node right before index 2.",
+      "linkNew": "Step 5: Eve's next points to Cleo, the node Ben points to. Link the new node first, so Cleo isn't lost.",
+      "linkBefore": "Step 6: Ben's next points to Eve. Eve is in the line, at index 2.",
+      "length": "Step 7: length goes up to 5, and insert returns true."
+    },
+    "remove": {
+      "title": "remove: take out the guest at an index",
+      "start": "A line of four guests.",
+      "call": "remove(2) takes Cleo's node out of the middle. Ben now points straight to Dev, and length goes down to 3.",
+      "returns": "remove returns the node it took out, cut off from the line."
+    },
+    "removeExamples": {
+      "title": "Examples for remove: front, back, middle, out of range",
+      "front": "Index 0 is the front of the line: that's shift.",
+      "back": "Index 3, the last one (length - 1), is the back: that's pop.",
+      "middle": "Index 2 is in the middle: point the node before it past it.",
+      "outOfRange": "Index 4 doesn't exist: remove returns undefined."
+    },
+    "removePlan": {
+      "title": "remove's plan, as comments",
+      "check": "Step 1: is 2 in range, from 0 to 3? Yes.",
+      "notEnds": "Step 2: 2 isn't 0 and isn't the last index, 3, so neither shift nor pop fits.",
+      "before": "Step 3: get(1) walks to Ben, the node before index 2.",
+      "temp": "Step 4: temp = Ben's next, Cleo: the node that leaves. No second walk needed.",
+      "skip": "Step 5: Ben's next skips Cleo and points to Dev. Cleo is out of the line, but still points to Dev.",
+      "cut": "Step 6: Cleo's next becomes null, so the node we return comes alone.",
+      "length": "Step 7: length goes down to 3, and remove returns Cleo's node."
+    },
+    "reverse": {
+      "title": "reverse: turn the line around",
+      "start": "A line of four guests: head on Ana, tail on Dev, and every arrow pointing right.",
+      "call": "reverse() swaps head and tail and flips every arrow. Now head is on Dev, and every arrow points left.",
+      "returns": "Read from head, the line is Dev, Cleo, Ben, Ana. reverse returns the list."
+    },
+    "reverseExamples": {
+      "title": "Examples for reverse: empty, one guest, two, many",
+      "empty": "An empty line reversed is still empty.",
+      "one": "One guest reversed is the same line: head and tail are both on Ana.",
+      "twoBefore": "Two guests: Ana, then Ben.",
+      "twoAfter": "Reversed: Ben, then Ana. head and tail swap, and Ben now points to Ana.",
+      "many": "Four guests: Dev, Cleo, Ben, Ana. Every node points to the one that used to come before it."
+    },
+    "reversePlan": {
+      "title": "reverse's plan, as comments",
+      "swap": "Step 1: swap head and tail. temp keeps the old head, Ana, so the loop can start there.",
+      "start": "Step 2: prev starts as null, behind Ana. next will hold on to the rest of the line.",
+      "remember": "Step 3: next = Ana's next, Ben. Now the rest of the line has a pointer on it.",
+      "flip": "Step 4: Ana's next flips to prev, null. There's a gap between Ana and Ben now, but next still holds Ben.",
+      "step": "Step 5: prev moves to Ana, and temp crosses the gap to Ben. Steps 3 to 5 repeat for every node.",
+      "repeat": "After 4 rounds, every arrow points left, temp is null, and prev is on Dev, the new first node."
     }
   },
   "arrayVsLinkedList": {

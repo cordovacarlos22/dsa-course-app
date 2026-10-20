@@ -10,7 +10,7 @@
 import { chainOf } from './linkedListWalk'
 
 // A list model: head, tail and length, like a real LinkedList.
-function listOf(values) {
+export function listOf(values) {
   const head = chainOf(values)
   let tail = head
   while (tail !== null && tail.next !== null) tail = tail.next
@@ -20,7 +20,7 @@ function listOf(values) {
 // Draws the model. `extra` are pointers like temp and newNode (label →
 // node or null). Nodes that can't be reached from head but that something
 // still points to are drawn as "not in the line".
-function diagramOf(list, extra = {}, states = {}) {
+export function diagramOf(list, extra = {}, states = {}) {
   const nodes = []
   const inLine = new Set()
   for (let node = list.head; node !== null; node = node.next) {
@@ -47,7 +47,7 @@ function diagramOf(list, extra = {}, states = {}) {
 }
 
 // What the method left behind, as plain data the test can compare.
-function resultOf(list, returned) {
+export function resultOf(list, returned) {
   const copy = (value) =>
     value === undefined ? undefined : JSON.parse(JSON.stringify(value))
   return {
@@ -59,7 +59,7 @@ function resultOf(list, returned) {
 }
 
 // For the test: a real LinkedList holding `values`, then the method call.
-function realList(LinkedList, values) {
+export function realList(LinkedList, values) {
   const list = new LinkedList()
   const model = listOf(values)
   list.head = model.head

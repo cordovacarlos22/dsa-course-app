@@ -1,0 +1,255 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "After `reverse()`, what has changed in the list?",
+        "es": "Después de `reverse()`, ¿qué cambió en la lista?"
+      },
+      "options": [
+        {
+          "en": "`head` and `tail` swapped, and every `next` points to the node that used to come before it",
+          "es": "`head` y `tail` se intercambiaron, y cada `next` apunta al nodo que antes iba delante"
+        },
+        {
+          "en": "The values moved: Ana's node now holds `'Dev'`",
+          "es": "Los valores se movieron: el nodo de Ana ahora tiene `'Dev'`"
+        },
+        {
+          "en": "A new reversed list was made, and the old one is untouched",
+          "es": "Se creó una lista nueva volteada, y la vieja quedó igual"
+        },
+        {
+          "en": "Only `head` and `tail` swapped",
+          "es": "Solo se intercambiaron `head` y `tail`"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "reverse works in place, on the arrows.",
+        "es": "reverse trabaja en su lugar, sobre las flechas."
+      },
+      "explanation": {
+        "en": "reverse keeps the same nodes and values. It swaps `head` and `tail` and flips every `next` arrow, so read from the new head the line runs backwards.",
+        "es": "reverse mantiene los mismos nodos y valores. Intercambia `head` y `tail` y voltea cada flecha `next`, así que leída desde el nuevo head, la fila va al revés."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "What should `reverse()` do on a list with **one** guest?",
+        "es": "¿Qué debe hacer `reverse()` en una lista con **un** invitado?"
+      },
+      "options": [
+        {
+          "en": "Return `undefined`",
+          "es": "Regresar `undefined`"
+        },
+        {
+          "en": "Empty the list",
+          "es": "Vaciar la lista"
+        },
+        {
+          "en": "Leave it the same: `head` and `tail` both stay on that guest",
+          "es": "Dejarla igual: `head` y `tail` se quedan en ese invitado"
+        },
+        {
+          "en": "Crash, because there's no second node",
+          "es": "Tronar, porque no hay un segundo nodo"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "What does a line of one look like backwards?",
+        "es": "¿Cómo se ve al revés una fila de uno?"
+      },
+      "explanation": {
+        "en": "One guest reversed is the same line. The swap puts `head` and `tail` back on the same node, and its `next` stays `null`.",
+        "es": "Un invitado volteado es la misma fila. El intercambio deja `head` y `tail` en el mismo nodo, y su `next` sigue en `null`."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Why does reverse save `next = temp.next` **before** `temp.next = prev`?",
+        "es": "¿Por qué reverse guarda `next = temp.next` **antes** de `temp.next = prev`?"
+      },
+      "options": [
+        {
+          "en": "To count the nodes",
+          "es": "Para contar los nodos"
+        },
+        {
+          "en": "Because flipping `temp`'s arrow lets go of the rest of the line, and `next` keeps hold of it",
+          "es": "Porque voltear la flecha de `temp` suelta el resto de la fila, y `next` lo sigue sosteniendo"
+        },
+        {
+          "en": "To swap `head` and `tail`",
+          "es": "Para intercambiar `head` y `tail`"
+        },
+        {
+          "en": "It doesn't matter when `next` is saved",
+          "es": "No importa cuándo se guarda `next`"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "After the flip, where does `temp.next` point?",
+        "es": "Después de voltearla, ¿a dónde apunta `temp.next`?"
+      },
+      "explanation": {
+        "en": "After `temp.next = prev`, nothing points forward to the rest of the line: there's a gap. Saving `next` first is what lets `temp` cross that gap.",
+        "es": "Después de `temp.next = prev`, nada apunta hacia adelante al resto de la fila: hay un hueco. Guardar `next` primero es lo que deja que `temp` cruce ese hueco."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `reverse()` in the `LinkedList` class, following the plan. Swap `head` and `tail`, flip every `next` arrow with `prev`, `temp` and `next`, and return the list. It must work on an empty list too.",
+        "es": "Escribe `reverse()` en la clase `LinkedList`, siguiendo el plan. Intercambia `head` y `tail`, voltea cada flecha `next` con `prev`, `temp` y `next`, y regresa la lista. También tiene que funcionar con una lista vacía."
+      },
+      "hint": {
+        "en": "`let temp = this.head`, `this.head = this.tail`, `this.tail = temp`, `let prev = null`, `let next = null`. Then `for (let i = 0; i < this.length; i++) { next = temp.next; temp.next = prev; prev = temp; temp = next }`, and `return this`.",
+        "es": "`let temp = this.head`, `this.head = this.tail`, `this.tail = temp`, `let prev = null`, `let next = null`. Luego `for (let i = 0; i < this.length; i++) { next = temp.next; temp.next = prev; prev = temp; temp = next }`, y `return this`."
+      },
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  reverse() {\n    // 1. swap head and tail (temp remembers the old head)\n    // 2. prev starts as null, and so does next\n    // 3. for each node: next = temp.next, to remember the rest\n    // 4.   temp.next = prev: flip the arrow\n    // 5.   prev = temp, then temp = next: both move one node on\n    // 6. return the list\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  reverse() {\n    let temp = this.head\n    this.head = this.tail\n    this.tail = temp\n    let prev = null\n    let next = null\n    for (let i = 0; i < this.length; i++) {\n      next = temp.next\n      temp.next = prev\n      prev = temp\n      temp = next\n    }\n    return this\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "kind": "class",
+      "className": "LinkedList",
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "reverse"
+            },
+            {
+              "call": "toArray",
+              "expected": ["Cleo", "Ben", "Ana"]
+            },
+            {
+              "read": "head.value",
+              "expected": "Cleo"
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "tail.next",
+              "expected": null
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "reverse"
+            },
+            {
+              "read": "head",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "reverse"
+            },
+            {
+              "read": "head.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ana"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "reverse",
+              "expected": {
+                "head": {
+                  "value": "Ben",
+                  "next": {
+                    "value": "Ana",
+                    "next": null
+                  }
+                },
+                "tail": {
+                  "value": "Ana",
+                  "next": null
+                },
+                "length": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "What are reverse's time and space complexity?",
+        "es": "¿Cuál es la complejidad en tiempo y espacio de reverse?"
+      },
+      "options": [
+        {
+          "en": "O(n²) time, O(1) space",
+          "es": "O(n²) en tiempo, O(1) en espacio"
+        },
+        {
+          "en": "O(n) time, O(n) space",
+          "es": "O(n) en tiempo, O(n) en espacio"
+        },
+        {
+          "en": "O(1) time, O(1) space",
+          "es": "O(1) en tiempo, O(1) en espacio"
+        },
+        {
+          "en": "O(n) time, O(1) space",
+          "es": "O(n) en tiempo, O(1) en espacio"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "How many times is each node visited, and how many new nodes are made?",
+        "es": "¿Cuántas veces se visita cada nodo, y cuántos nodos nuevos se crean?"
+      },
+      "explanation": {
+        "en": "Each node is visited once: O(n) time. It only uses three extra pointers and makes no new nodes: O(1) space. A reversed copy would need O(n) space.",
+        "es": "Cada nodo se visita una vez: O(n) en tiempo. Solo usa tres punteros extra y no crea nodos nuevos: O(1) en espacio. Una copia volteada necesitaría O(n) en espacio."
+      }
+    }
+  ]
+}

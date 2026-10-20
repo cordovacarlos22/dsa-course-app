@@ -380,6 +380,83 @@
       "tailNull": "length es 0, así que this.tail = null. Ahora head y tail son null.",
       "notZero": "length es {{length}}, no 0, así que tail se queda donde está.",
       "return": "return temp: el nodo de {{name}}. Un movimiento de head y sin caminar: shift es O(1)."
+    },
+    "linkedListGet": {
+      "title": "get, línea por línea",
+      "input": "{{label}}",
+      "outOfRange": "El índice {{index}} está fuera de rango: los índices válidos van de 0 a {{last}}.",
+      "returnUndefined": "return undefined, sin caminar nada.",
+      "inRange": "El índice {{index}} está en rango: es al menos 0 y menor que la longitud, {{length}}.",
+      "start": "temp empieza en head, en {{name}}: índice 0.",
+      "move": "temp = temp.next: temp está en {{name}}, índice {{at}}.",
+      "return": "return temp: el nodo de {{name}}, índice {{index}}. Nodos visitados: {{count}}. Buscar por índice es O(n)."
+    },
+    "linkedListSet": {
+      "title": "set, línea por línea",
+      "input": "{{label}}",
+      "gotUndefined": "this.get({{index}}) regresa undefined: no hay índice {{index}}.",
+      "notNode": "temp es undefined, que es falsy, así que el if se salta.",
+      "returnFalse": "return false: nada cambió.",
+      "gotNode": "this.get({{index}}) camina hasta el índice {{index}} y regresa el nodo de {{name}}.",
+      "isNode": "temp es un nodo, que es truthy, así que el if corre.",
+      "change": "temp.value = value: {{old}} se vuelve {{value}}. El mismo nodo, con un valor nuevo.",
+      "returnTrue": "return true: el valor cambió. La caminata dentro de get hace que set sea O(n)."
+    },
+    "linkedListInsert": {
+      "title": "insert, línea por línea",
+      "input": "{{label}}",
+      "outOfRange": "El índice {{index}} está fuera de rango: insert acepta de 0 a {{length}}.",
+      "returnFalse": "return false: no se agregó nada.",
+      "inRange": "El índice {{index}} está en rango: de 0 a {{length}}.",
+      "isZero": "El índice 0 es el inicio de la fila.",
+      "unshift": "this.unshift(value) agrega a {{value}} al inicio, en O(1).",
+      "returnTrue": "return true: {{value}} ya está en la fila.",
+      "isEnd": "El índice {{index}} es igual a la longitud: el final de la fila.",
+      "push": "this.push(value) agrega a {{value}} al final, en O(1).",
+      "middle": "El índice {{index}} no es 0 ni la longitud, {{length}}: va en la mitad.",
+      "newNode": "new Node(value) crea un nodo para {{value}}.",
+      "before": "this.get({{before}}) camina hasta {{name}}, el nodo justo antes del índice {{index}}.",
+      "linkNew": "newNode.next = temp.next: {{value}} apunta a {{next}}, para no perder a nadie.",
+      "linkBefore": "temp.next = newNode: {{name}} apunta a {{value}}. {{value}} ya está en la fila, en el índice {{index}}.",
+      "length": "this.length++: ahora length es {{length}}."
+    },
+    "linkedListRemove": {
+      "title": "remove, línea por línea",
+      "input": "{{label}}",
+      "outOfRange": "El índice {{index}} está fuera de rango: los índices válidos van de 0 a {{last}}.",
+      "returnUndefined": "return undefined: no se quitó nada.",
+      "inRange": "El índice {{index}} está en rango: de 0 a {{last}}.",
+      "isZero": "El índice 0 es el inicio de la fila.",
+      "shift": "return this.shift(): el nodo de {{name}} sale del inicio y se regresa.",
+      "isLast": "El índice {{index}} es el último.",
+      "pop": "return this.pop(): el nodo de {{name}} sale del final y se regresa.",
+      "middle": "El índice {{index}} está en la mitad: no es 0, ni el último índice, {{last}}.",
+      "before": "this.get({{before}}) camina hasta {{name}}, el nodo antes del que se va.",
+      "temp": "temp = before.next: {{name}}, el nodo que se va. Sin segunda caminata.",
+      "skip": "before.next = temp.next: {{before}} ahora se salta a {{name}} y apunta directo a {{next}}.",
+      "cut": "temp.next = null: el nodo de {{name}} suelta a {{next}}.",
+      "length": "this.length--: ahora length es {{length}}.",
+      "return": "return temp: el nodo de {{name}}, solo. La caminata hace que remove sea O(n)."
+    },
+    "linkedListReverse": {
+      "title": "reverse, línea por línea",
+      "input_one": "{{count}} invitado",
+      "input_other": "{{count}} invitados",
+      "temp": "temp = this.head: temp recuerda el primer nodo viejo, {{name}}.",
+      "tempEmpty": "temp = this.head: la fila está vacía, así que temp es null.",
+      "head": "this.head = this.tail: head se mueve a {{name}}, el último nodo viejo.",
+      "headEmpty": "this.head = this.tail: los dos son null, así que nada cambia.",
+      "tail": "this.tail = temp: tail se mueve a {{name}}, el primer nodo viejo. head y tail se intercambiaron.",
+      "tailEmpty": "this.tail = temp: sigue en null.",
+      "vars": "prev y next empiezan en null. prev va a ir detrás de temp, y next delante de él.",
+      "remember": "next = temp.next: antes de voltear la flecha de {{name}}, next se queda con {{next}}, el resto de la fila.",
+      "rememberLast": "next = temp.next: {{name}} es el último nodo, así que next es null.",
+      "flipFirst": "temp.next = prev: ahora {{name}} apunta a null. Es el final de la fila volteada.",
+      "flip": "temp.next = prev: la flecha de {{name}} se voltea para apuntar hacia {{prev}}.",
+      "step": "prev = temp y temp = next: prev se mueve a {{prev}}, y temp cruza el hueco hasta {{temp}}.",
+      "stepLast": "prev = temp y temp = next: prev está en {{prev}}, y temp es null. Ya se voltearon todas las flechas.",
+      "return": "return this. Cada nodo se visitó una vez, así que es O(n) en tiempo, con solo 3 punteros extra: O(1) en espacio.",
+      "returnEmpty": "El bucle nunca corrió: una fila vacía volteada sigue vacía. return this."
     }
   },
   "timingChart": {
@@ -845,7 +922,34 @@
       "shift4": "4. el next de temp se vuelve null, para soltarlo",
       "shift5": "5. réstale 1 a length",
       "shift6": "6. si length ahora es 0, tail también se vuelve null",
-      "shift7": "7. regresa temp"
+      "shift7": "7. regresa temp",
+      "get1": "1. si index < 0 o index >= length, regresa undefined",
+      "get2": "2. temp empieza en head (índice 0)",
+      "get3": "3. avanza temp, index veces: ahora en el índice {{index}}",
+      "get4": "4. regresa temp",
+      "set1": "1. temp = this.get(index): el nodo, o undefined",
+      "set2": "2. si temp es un nodo: cambia su valor, regresa true",
+      "set3": "3. si no, regresa false",
+      "insert1": "1. si index < 0 o index > length, regresa false",
+      "insert2": "2. ¿index 0? unshift. ¿index === length? push. Luego regresa true",
+      "insert3": "3. crea un nodo nuevo",
+      "insert4": "4. temp = el nodo antes del lugar: this.get(index - 1)",
+      "insert5": "5. el next del nodo nuevo apunta al next de temp",
+      "insert6": "6. el next de temp apunta al nodo nuevo",
+      "insert7": "7. súmale 1 a length, regresa true",
+      "remove1": "1. si index < 0 o index >= length, regresa undefined",
+      "remove2": "2. ¿index 0? shift. ¿Último índice? pop. Regresa lo que regresen",
+      "remove3": "3. before = el nodo antes del lugar: this.get(index - 1)",
+      "remove4": "4. temp = before.next: el nodo que se va",
+      "remove5": "5. el next de before se salta a temp",
+      "remove6": "6. el next de temp se vuelve null, para soltarlo",
+      "remove7": "7. réstale 1 a length, regresa temp",
+      "reverse1": "1. intercambia head y tail (temp recuerda el head viejo)",
+      "reverse2": "2. prev empieza en null, y next también",
+      "reverse3": "3. por cada nodo: next = temp.next, para recordar el resto",
+      "reverse4": "4. temp.next = prev: voltea la flecha",
+      "reverse5": "5. prev = temp y luego temp = next: los dos avanzan un nodo",
+      "reverse6": "6. después del último nodo, regresa la lista"
     },
     "returns": "Regresa:",
     "push": {
@@ -945,6 +1049,116 @@
       "length": "Paso 5: length baja a 2.",
       "oneLeft": "El paso 6 importa con un invitado: cuando Ana se va, length es 0, así que tail también tiene que volverse null.",
       "returnTemp": "Paso 7: regresa temp, el nodo de Ana."
+    },
+    "nodeOf": "el nodo de {{name}}",
+    "get": {
+      "title": "get: encontrar el nodo en un índice",
+      "start": "Una fila de cuatro invitados. Los índices se cuentan desde head: Ana es 0, Ben 1, Cleo 2 y Dev 3.",
+      "call": "get(2) empieza en head y avanza 2 veces, contando: Ana (0), Ben (1), Cleo (2).",
+      "returns": "Regresa el nodo de Cleo, que sigue en la fila. La lista no cambia."
+    },
+    "getExamples": {
+      "title": "Ejemplos para get: vacía, un invitado, el último invitado, fuera de rango",
+      "empty": "Una fila vacía no tiene índice 0, así que get(0) regresa undefined.",
+      "one": "Con un invitado, 0 es el único índice válido: get(0) regresa el nodo de Ana de inmediato, sin moverse.",
+      "last": "get(3) con cuatro invitados recorre toda la fila hasta Dev, el último índice: length - 1.",
+      "negative": "El índice -1 no existe: get regresa undefined sin caminar.",
+      "tooBig": "El índice 4 tampoco existe: el último índice es 3 (length - 1). get regresa undefined."
+    },
+    "getPlan": {
+      "title": "El plan de get, como comentarios",
+      "check": "Paso 1: ¿2 está en rango? No es menor que 0, y es menor que la longitud, 4. Sí.",
+      "start": "Paso 2: temp empieza en head: índice 0.",
+      "move": "Paso 3: un movimiento hacia adelante, y temp está en el índice 1.",
+      "arrive": "Otro movimiento: índice 2. El índice 2 toma 2 movimientos.",
+      "return": "Paso 4: regresa temp, el nodo de Cleo."
+    },
+    "set": {
+      "title": "set: cambiar el valor en un índice",
+      "start": "Una fila de cuatro invitados. El gafete de Ben en realidad debería decir Benny.",
+      "call": "set(1, 'Benny') encuentra el nodo en el índice 1 y cambia su valor. No se agrega ni se quita ningún nodo.",
+      "returns": "set regresa true: el cambio funcionó."
+    },
+    "setExamples": {
+      "title": "Ejemplos para set: en rango, fuera de rango, vacía",
+      "inRange": "set(3, 'Devon') encuentra el índice 3 y cambia a Dev por Devon. Regresa true.",
+      "outOfRange": "set(9, 'Zoe'): no hay índice 9, así que nada cambia. Regresa false.",
+      "empty": "En una fila vacía ningún índice es válido, así que set regresa false."
+    },
+    "setPlan": {
+      "title": "El plan de set, como comentarios",
+      "get": "Paso 1: deja que get haga la búsqueda. this.get(1) regresa el nodo de Ben.",
+      "change": "Paso 2: temp es un nodo, así que su valor cambia a 'Benny', y set regresa true.",
+      "missing": "Paso 3: con el índice 9, get regresa undefined, así que set regresa false."
+    },
+    "insert": {
+      "title": "insert: agregar un invitado en un índice",
+      "start": "Una fila de cuatro invitados.",
+      "call": "insert(2, 'Eve') pone un nodo nuevo para Eve en el índice 2, entre Ben y Cleo. Cleo y Dev pasan a los índices 3 y 4.",
+      "returns": "insert regresa true: el invitado nuevo ya está en la fila."
+    },
+    "insertExamples": {
+      "title": "Ejemplos para insert: inicio, final, mitad, fuera de rango",
+      "front": "El índice 0 es el inicio de la fila: eso es justo lo que hace unshift.",
+      "back": "El índice 4, la longitud, es el lugar justo después del último invitado: eso es justo lo que hace push.",
+      "middle": "El índice 2 está en la mitad: camina hasta el nodo de antes y enlaza a Eve.",
+      "outOfRange": "El índice 7 está más allá del final, con un hueco que ningún nodo podría llenar: insert regresa false y no cambia nada."
+    },
+    "insertPlan": {
+      "title": "El plan de insert, como comentarios",
+      "check": "Paso 1: ¿2 está entre 0 y la longitud, 4? Sí.",
+      "notEnds": "Paso 2: 2 no es 0 ni 4, así que no sirven ni unshift ni push.",
+      "makeNode": "Paso 3: crea un nodo nuevo para Eve.",
+      "before": "Paso 4: get(1) camina hasta Ben, el nodo justo antes del índice 2.",
+      "linkNew": "Paso 5: el next de Eve apunta a Cleo, el nodo al que apunta Ben. Primero enlaza el nodo nuevo, para no perder a Cleo.",
+      "linkBefore": "Paso 6: el next de Ben apunta a Eve. Eve ya está en la fila, en el índice 2.",
+      "length": "Paso 7: length sube a 5, e insert regresa true."
+    },
+    "remove": {
+      "title": "remove: sacar al invitado de un índice",
+      "start": "Una fila de cuatro invitados.",
+      "call": "remove(2) saca el nodo de Cleo de la mitad. Ahora Ben apunta directo a Dev, y length baja a 3.",
+      "returns": "remove regresa el nodo que sacó, ya suelto de la fila."
+    },
+    "removeExamples": {
+      "title": "Ejemplos para remove: inicio, final, mitad, fuera de rango",
+      "front": "El índice 0 es el inicio de la fila: eso es shift.",
+      "back": "El índice 3, el último (length - 1), es el final: eso es pop.",
+      "middle": "El índice 2 está en la mitad: haz que el nodo de antes se lo salte.",
+      "outOfRange": "El índice 4 no existe: remove regresa undefined."
+    },
+    "removePlan": {
+      "title": "El plan de remove, como comentarios",
+      "check": "Paso 1: ¿2 está en rango, de 0 a 3? Sí.",
+      "notEnds": "Paso 2: 2 no es 0 ni el último índice, 3, así que no sirven ni shift ni pop.",
+      "before": "Paso 3: get(1) camina hasta Ben, el nodo antes del índice 2.",
+      "temp": "Paso 4: temp = el next de Ben, Cleo: el nodo que se va. No hace falta una segunda caminata.",
+      "skip": "Paso 5: el next de Ben se salta a Cleo y apunta a Dev. Cleo queda fuera de la fila, pero todavía apunta a Dev.",
+      "cut": "Paso 6: el next de Cleo se vuelve null, así que el nodo que regresamos sale solo.",
+      "length": "Paso 7: length baja a 3, y remove regresa el nodo de Cleo."
+    },
+    "reverse": {
+      "title": "reverse: voltear la fila",
+      "start": "Una fila de cuatro invitados: head en Ana, tail en Dev, y todas las flechas apuntando a la derecha.",
+      "call": "reverse() intercambia head y tail y voltea cada flecha. Ahora head está en Dev, y todas las flechas apuntan a la izquierda.",
+      "returns": "Leída desde head, la fila es Dev, Cleo, Ben, Ana. reverse regresa la lista."
+    },
+    "reverseExamples": {
+      "title": "Ejemplos para reverse: vacía, un invitado, dos, muchos",
+      "empty": "Una fila vacía volteada sigue vacía.",
+      "one": "Un invitado volteado es la misma fila: head y tail están en Ana.",
+      "twoBefore": "Dos invitados: Ana, luego Ben.",
+      "twoAfter": "Volteada: Ben, luego Ana. head y tail se intercambian, y ahora Ben apunta a Ana.",
+      "many": "Cuatro invitados: Dev, Cleo, Ben, Ana. Cada nodo apunta al que antes iba delante de él."
+    },
+    "reversePlan": {
+      "title": "El plan de reverse, como comentarios",
+      "swap": "Paso 1: intercambia head y tail. temp guarda el head viejo, Ana, para que el bucle pueda empezar ahí.",
+      "start": "Paso 2: prev empieza en null, detrás de Ana. next va a sostener el resto de la fila.",
+      "remember": "Paso 3: next = el next de Ana, Ben. Ahora el resto de la fila tiene un puntero encima.",
+      "flip": "Paso 4: el next de Ana se voltea hacia prev, null. Ahora hay un hueco entre Ana y Ben, pero next todavía sostiene a Ben.",
+      "step": "Paso 5: prev se mueve a Ana, y temp cruza el hueco hasta Ben. Los pasos 3 a 5 se repiten con cada nodo.",
+      "repeat": "Después de 4 vueltas, todas las flechas apuntan a la izquierda, temp es null, y prev está en Dev, el nuevo primer nodo."
     }
   },
   "arrayVsLinkedList": {

@@ -1,0 +1,262 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "A line has 4 guests. Which indexes can `insert` accept?",
+        "es": "Una fila tiene 4 invitados. ¿Qué índices puede aceptar `insert`?"
+      },
+      "options": [
+        {
+          "en": "0 to 3",
+          "es": "0 a 3"
+        },
+        {
+          "en": "0 to 4",
+          "es": "0 a 4"
+        },
+        {
+          "en": "1 to 4",
+          "es": "1 a 4"
+        },
+        {
+          "en": "Any index, even 10",
+          "es": "Cualquier índice, incluso 10"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "insert can also add right after the last guest.",
+        "es": "insert también puede agregar justo después del último invitado."
+      },
+      "explanation": {
+        "en": "insert accepts 0 to `length`, so 0 to 4 here. Index 4 is the spot right after the last guest: inserting there is the same as push.",
+        "es": "insert acepta de 0 a `length`, así que aquí de 0 a 4. El índice 4 es el lugar justo después del último invitado: insertar ahí es lo mismo que push."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "What does `insert(line.length, 'Eve')` do?",
+        "es": "¿Qué hace `insert(line.length, 'Eve')`?"
+      },
+      "options": [
+        {
+          "en": "Returns `false`: that index doesn't exist",
+          "es": "Regresa `false`: ese índice no existe"
+        },
+        {
+          "en": "Adds Eve at the front, like `unshift`",
+          "es": "Agrega a Eve al inicio, como `unshift`"
+        },
+        {
+          "en": "Adds Eve at the back, like `push`",
+          "es": "Agrega a Eve al final, como `push`"
+        },
+        {
+          "en": "Replaces the last guest with Eve",
+          "es": "Reemplaza al último invitado con Eve"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Which spot is right after the last guest?",
+        "es": "¿Qué lugar está justo después del último invitado?"
+      },
+      "explanation": {
+        "en": "Index `length` is the spot right after the tail, so insert hands the job to `push`: Eve joins at the back, and insert returns `true`.",
+        "es": "El índice `length` es el lugar justo después del tail, así que insert le pasa el trabajo a `push`: Eve se forma al final, e insert regresa `true`."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "In the middle case, why does insert do `newNode.next = temp.next` **before** `temp.next = newNode`?",
+        "es": "En el caso de en medio, ¿por qué insert hace `newNode.next = temp.next` **antes** de `temp.next = newNode`?"
+      },
+      "options": [
+        {
+          "en": "Because `length` has to change first",
+          "es": "Porque `length` tiene que cambiar primero"
+        },
+        {
+          "en": "It doesn't matter: either order works",
+          "es": "No importa: cualquier orden funciona"
+        },
+        {
+          "en": "Because `get` needs it",
+          "es": "Porque `get` lo necesita"
+        },
+        {
+          "en": "So the rest of the line is linked to the new node before `temp` lets go of it",
+          "es": "Para que el resto de la fila quede enlazado al nodo nuevo antes de que `temp` lo suelte"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "After `temp.next = newNode`, what points to the old `temp.next`?",
+        "es": "Después de `temp.next = newNode`, ¿qué apunta al viejo `temp.next`?"
+      },
+      "explanation": {
+        "en": "`temp.next` is the only pointer to the rest of the line. Copy it into the new node first; once `temp.next` points to the new node, that pointer is gone.",
+        "es": "`temp.next` es el único puntero al resto de la fila. Cópialo primero al nodo nuevo; cuando `temp.next` apunta al nodo nuevo, ese puntero ya no existe."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `insert(index, value)` in the `LinkedList` class, following the plan. Return `false` for an index below 0 or above `length`. Use `unshift` for index 0 and `push` for index `length`, and link a new node in the middle otherwise. Return `true` whenever the guest is in.",
+        "es": "Escribe `insert(index, value)` en la clase `LinkedList`, siguiendo el plan. Regresa `false` para un índice menor que 0 o mayor que `length`. Usa `unshift` para el índice 0 y `push` para el índice `length`, y si no, enlaza un nodo nuevo en medio. Regresa `true` siempre que el invitado quede en la fila."
+      },
+      "hint": {
+        "en": "After the range check: `if (index === 0) { this.unshift(value); return true }` and the same with `push` for `index === this.length`. In the middle: `const temp = this.get(index - 1)`, then `newNode.next = temp.next`, `temp.next = newNode`, `this.length++`.",
+        "es": "Después de revisar el rango: `if (index === 0) { this.unshift(value); return true }` y lo mismo con `push` para `index === this.length`. En medio: `const temp = this.get(index - 1)`, luego `newNode.next = temp.next`, `temp.next = newNode`, `this.length++`."
+      },
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  unshift(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      newNode.next = this.head\n      this.head = newNode\n    }\n    this.length++\n    return this\n  }\n\n  get(index) {\n    if (index < 0 || index >= this.length) {\n      return undefined\n    }\n    let temp = this.head\n    for (let i = 0; i < index; i++) {\n      temp = temp.next\n    }\n    return temp\n  }\n\n  insert(index, value) {\n    // 1. if index < 0 or index > length, return false\n    // 2. index 0? unshift. index === length? push. Then return true\n    // 3. make a new node\n    // 4. temp = the node before the spot: this.get(index - 1)\n    // 5. the new node's next points to temp's next\n    // 6. temp's next points to the new node\n    // 7. add 1 to length, return true\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  unshift(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      newNode.next = this.head\n      this.head = newNode\n    }\n    this.length++\n    return this\n  }\n\n  get(index) {\n    if (index < 0 || index >= this.length) {\n      return undefined\n    }\n    let temp = this.head\n    for (let i = 0; i < index; i++) {\n      temp = temp.next\n    }\n    return temp\n  }\n\n  insert(index, value) {\n    if (index < 0 || index > this.length) {\n      return false\n    }\n    if (index === 0) {\n      this.unshift(value)\n      return true\n    }\n    if (index === this.length) {\n      this.push(value)\n      return true\n    }\n    const newNode = new Node(value)\n    const temp = this.get(index - 1)\n    newNode.next = temp.next\n    temp.next = newNode\n    this.length++\n    return true\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "kind": "class",
+      "className": "LinkedList",
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "insert",
+              "args": [1, "Ben"],
+              "expected": true
+            },
+            {
+              "call": "toArray",
+              "expected": ["Ana", "Ben", "Cleo"]
+            },
+            {
+              "read": "length",
+              "expected": 3
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "insert",
+              "args": [0, "Zoe"],
+              "expected": true
+            },
+            {
+              "call": "toArray",
+              "expected": ["Zoe", "Ana"]
+            },
+            {
+              "read": "head.value",
+              "expected": "Zoe"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "insert",
+              "args": [1, "Ben"],
+              "expected": true
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ben"
+            },
+            {
+              "read": "length",
+              "expected": 2
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "insert",
+              "args": [5, "Eve"],
+              "expected": false
+            },
+            {
+              "call": "insert",
+              "args": [-1, "Eve"],
+              "expected": false
+            },
+            {
+              "read": "length",
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "insert",
+              "args": [0, "Ana"],
+              "expected": true
+            },
+            {
+              "read": "head.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ana"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Why does our `insert` return `true` after `this.unshift(value)`, instead of `return this.unshift(value)`?",
+        "es": "¿Por qué nuestro `insert` regresa `true` después de `this.unshift(value)`, en vez de `return this.unshift(value)`?"
+      },
+      "options": [
+        {
+          "en": "So every success returns `true` and every failure `false`, instead of sometimes returning the list",
+          "es": "Para que cada éxito regrese `true` y cada falla `false`, en vez de a veces regresar la lista"
+        },
+        {
+          "en": "Because `return this.unshift(value)` is O(n)",
+          "es": "Porque `return this.unshift(value)` es O(n)"
+        },
+        {
+          "en": "Because `unshift` returns nothing",
+          "es": "Porque `unshift` no regresa nada"
+        },
+        {
+          "en": "To make insert faster at the front",
+          "es": "Para que insert sea más rápido al inicio"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "What does `unshift` return?",
+        "es": "¿Qué regresa `unshift`?"
+      },
+      "explanation": {
+        "en": "`unshift` and `push` return the list, so `return this.unshift(value)` would make insert answer with the list at the ends and `true` in the middle. Returning `true` keeps one kind of answer for one question.",
+        "es": "`unshift` y `push` regresan la lista, así que `return this.unshift(value)` haría que insert respondiera con la lista en los extremos y con `true` en medio. Regresar `true` mantiene un solo tipo de respuesta para una sola pregunta."
+      }
+    }
+  ]
+}

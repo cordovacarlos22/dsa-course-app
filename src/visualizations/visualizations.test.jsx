@@ -254,6 +254,21 @@ describe('linked list animations', () => {
     ).toBeInTheDocument()
   })
 
+  it('draws reverse in place, gap and all', async () => {
+    await renderAtStep('linked-list-reverse-plan', 3)
+    // Ana's arrow is flipped to null, and next still holds Ben.
+    expect(
+      screen.getByRole('img', {
+        name: 'Ana → null, Ben → Cleo, Cleo → Dev, Dev → null. head: Dev, tail: Ana, temp: Ana, prev: null, next: Ben. length: 4',
+      }),
+    ).toBeInTheDocument()
+  })
+
+  it('names the node get returns', async () => {
+    await renderAtStep('linked-list-get', 2)
+    expect(screen.getByText("Cleo's node")).toBeInTheDocument()
+  })
+
   it('lights up the rows where linked lists beat arrays', async () => {
     await renderAtStep('linked-list-big-o', 3)
     const shift = screen.getByRole('row', {
