@@ -159,7 +159,9 @@
     "completeText": "Terminaste todas las lecciones de {{module}}. Ahora siguen el cuestionario y los ejercicios.",
     "completedBadge": "Módulo completado",
     "buildIt": "Constrúyelo",
-    "interviewProblems": "Problemas de entrevista"
+    "interviewProblems": "Problemas de entrevista",
+    "takeQuiz": "Hacer el cuestionario",
+    "bestScore": "Mejor: {{score}} de {{total}}"
   },
   "notFound": {
     "title": "Página no encontrada",
@@ -243,5 +245,24 @@
     "somePassed": "Pasaron {{passed}} de {{total}} pruebas",
     "console": "Consola",
     "loadingEditor": "Cargando el editor…"
+  },
+  "quiz": {
+    "title": "Cuestionario de {{module}}",
+    "questionOf": "Pregunta {{current}} de {{total}}",
+    "progress": "Avance del cuestionario",
+    "correct": "¡Correcto!",
+    "wrong": "No exactamente. La respuesta correcta está en verde.",
+    "next": "Siguiente pregunta",
+    "seeScore": "Ver tu resultado",
+    "complete": "¡Cuestionario terminado!",
+    "score": "{{score}} de {{total}}",
+    "perfect": "Puntuación perfecta: ¡todas las respuestas correctas!",
+    "great": "¡Muy buen trabajo! Repasa abajo las que fallaste.",
+    "keepGoing": "Buen comienzo. Lee las explicaciones de abajo y vuelve a intentarlo.",
+    "best": "Tu mejor resultado: {{score}} de {{total}}",
+    "review": "Preguntas para repasar",
+    "yourAnswer": "Tu respuesta",
+    "rightAnswer": "Respuesta correcta",
+    "tryAgain": "Intentar de nuevo"
   }
 }

@@ -159,7 +159,9 @@
     "completeText": "You finished every lesson in {{module}}. The quiz and exercises come next.",
     "completedBadge": "Module complete",
     "buildIt": "Build it",
-    "interviewProblems": "Interview problems"
+    "interviewProblems": "Interview problems",
+    "takeQuiz": "Take the quiz",
+    "bestScore": "Best: {{score}} of {{total}}"
   },
   "notFound": {
     "title": "Page not found",
@@ -243,5 +245,24 @@
     "somePassed": "{{passed}} of {{total}} tests passed",
     "console": "Console",
     "loadingEditor": "Loading the editor…"
+  },
+  "quiz": {
+    "title": "{{module}} quiz",
+    "questionOf": "Question {{current}} of {{total}}",
+    "progress": "Quiz progress",
+    "correct": "Correct!",
+    "wrong": "Not quite. The right answer is in green.",
+    "next": "Next question",
+    "seeScore": "See your score",
+    "complete": "Quiz complete!",
+    "score": "{{score}} of {{total}}",
+    "perfect": "Perfect score: every answer right!",
+    "great": "Great work! Look over the ones you missed below.",
+    "keepGoing": "Good start. Read the explanations below, then try again.",
+    "best": "Your best: {{score}} of {{total}}",
+    "review": "Questions to review",
+    "yourAnswer": "Your answer",
+    "rightAnswer": "Right answer",
+    "tryAgain": "Try again"
   }
 }

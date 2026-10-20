@@ -112,7 +112,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 4. ✅ App shell + i18n: router, layout, react-i18next, first-visit language picker, landing, course home (branch `feat/app-shell`)
 5. ✅ Lesson system: lesson files + validation, Markdown renderer, StepPlayer, 3 animations, runnable snippets (Web Worker), first lesson (branch `feat/lesson-system`)
 6. Original lessons for modules 01–03 (EN), reviewed by Carlos ← next
-7. Quiz + exercise pages (CodeMirror, runner, timer)
+7. Quiz + exercise pages (CodeMirror, runner, timer) ← in progress: the quiz page is on `feat/quiz-page`, the exercise pages come next
 8. Supabase: sign-in (Google, Apple, GitHub, email code), the free-lessons lock, schema + RLS, profile, progress, then XP points, daily streaks and badges, and optional 2-step (Carlos, 2026-10-12/13; five PRs, see Decisions)
 9. Deploy pipeline: preview / deploy (blue/green) / rollback, Playwright smoke test
 10. AI tutor v1: `tutor` Edge Function (streaming, quota), lesson chat, hints
@@ -168,6 +168,13 @@ Agents: read this at the start of every session and update it at the end (see `A
   - **New animations:** `cookie-cutter`, `cookie-new`, `cookie-methods`, `list-class-preview`, `value-copy`, `reference-copy` and `pointer-move`.
   - **Fix:** a choice option that mixed text and `code` couldn't wrap on phones (each piece was its own flex item), so options are now wrapped in one span.
   - **Checked:** in Chrome under `vercel.json`'s headers (21 step views, 18 snippets, 0 CSP violations, 320–1280 px), and no 8-word run matches the course notes or `cookie.js`.
+- 2026-10-20, `feat/quiz-page` (stage 7a):
+  - **The page:** `/learn/:module/quiz` plays a module's quiz one question at a time. One answer per question; Check shows right or wrong with the explanation, and the right option turns green.
+  - **The score card:** the score, a message (perfect / great / keep going), the best score, "Try again", and the questions to review with your answer, the right one and the explanation. A perfect score celebrates like a finished module; any other finish like a finished lesson.
+  - **Saved:** the best score, in localStorage (`quiz:<module>`, `src/lib/quizScores.js`). The module page's Quiz card is now a link that shows it.
+  - **Loading:** the full quiz files come from `src/lib/practice.js`, which only the quiz page imports (a 101 kB `practice` chunk).
+  - **Fix:** inline code like `rsvps.hasOwnProperty('Dev')` can now break mid-word on a 320 px phone instead of pushing the page sideways.
+  - **Checked:** in Chrome under `vercel.json`'s headers, all 5 quizzes played at 1280 (en), 375 (es) and 320 px (en, reduced motion): 264 answers, 0 CSP violations, no sideways scroll.
 - 2026-10-13, `docs/ponytail`: Ponytail reviewed (no network calls; the installed files match the reviewed commit). `AGENTS.md` limits it to app code, and `.claude/skills/README.md` says what it runs and how to update or turn it off.
 
 ## Next
