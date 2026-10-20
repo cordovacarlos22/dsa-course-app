@@ -146,7 +146,9 @@
       "memoryBoxes_one": "new box of memory",
       "memoryBoxes_other": "new boxes of memory",
       "characters_one": "character read",
-      "characters_other": "characters read"
+      "characters_other": "characters read",
+      "nodes_one": "node visited",
+      "nodes_other": "nodes visited"
     },
     "isInvited": {
       "title": "isInvited: stop as soon as you find the name",
@@ -284,6 +286,32 @@
       "firstTime": "{{char}} isn't a key yet: result[{{char}}] is undefined, and undefined > 0 is false. Set it to 1.",
       "again": "{{char}} is already a key, so add 1. It's at {{count}} now.",
       "done": "All {{ops}} characters read, in one pass: O(n). The object has {{keys}} keys."
+    },
+    "linkedListWalk": {
+      "title": "Walking the line with temp",
+      "input": "{{n}} guests",
+      "start": "temp starts where head points: {{name}}. We move temp, never head.",
+      "startEmpty": "The line is empty. head is null, so temp starts as null too.",
+      "greet": "temp isn't null, so the loop runs: say hi to {{name}}.",
+      "move": "temp = temp.next moves temp one node forward, to {{name}}.",
+      "moveToNull": "temp = temp.next: {{name}} was the last guest, so temp is null now.",
+      "stop": "temp is null, so the loop stops. Nodes visited: {{count}}. Walking the list is O(n)."
+    },
+    "linkedListConstructor": {
+      "title": "The LinkedList constructor, line by line",
+      "input": "{{label}}",
+      "head": "Start empty: this.head = null.",
+      "tail": "this.tail = null: there's no last node yet either.",
+      "length": "this.length = 0. This is already a valid, empty list.",
+      "noValue": "value is undefined: nothing was passed in. The if is skipped, and the list stays empty.",
+      "emptyDone": "Done: an empty list. head and tail are null and length is 0. push can add guests later.",
+      "hasValue": "value is {{value}}, not undefined, so we make the first node.",
+      "zero": "value is 0. That's not undefined, so 0 gets a node like any other value.",
+      "nodeValue": "new Node({{value}}) runs the Node constructor: this.value = {{value}}.",
+      "nodeNext": "this.next = null: the new node doesn't point anywhere yet. newNode points to it.",
+      "pointHead": "this.head = newNode: head points to the new node.",
+      "pointTail": "this.tail = this.head: tail points to the same node as head. One node, two pointers.",
+      "done": "this.length = 1. A list with one node: head and tail are both on {{value}}."
     }
   },
   "timingChart": {
@@ -621,6 +649,159 @@
       "moveSecond": "second = third moves second's arrow to object B. Object A still has first.",
       "moveFirst": "first = third moves the last arrow away from A. Nothing points to object A any more, so nothing can reach it.",
       "collected": "JavaScript's garbage collector finds objects nothing points to and frees their memory. Object A is gone."
+    }
+  },
+  "linkedList": {
+    "detached": "Not in the line",
+    "visited_one": "{{count}} node visited",
+    "visited_other": "{{count}} nodes visited",
+    "anatomy": {
+      "title": "The parts of a linked list",
+      "line": "Four guests in a conga line. Each one holds on to the next guest in line, and that's really all a linked list is.",
+      "node": "Each box is a node. A node holds one value, like 'Ben', plus a pointer to the node after it.",
+      "next": "That pointer is called next. Ana's next points to Ben: that's the link in \"linked list\".",
+      "head": "head points to the first node. Every trip through the list starts here.",
+      "tail": "tail points to the last node, so the end of the line is always one step away.",
+      "null": "Dev is last, so Dev's next is null: nothing comes after. A list that ends in null is called null-terminated.",
+      "summary": "To reach any guest, start at head and follow next, one node at a time, until you hit null."
+    },
+    "costEnd": {
+      "title": "The back of the line: push is O(1), pop is O(n)",
+      "start": "A line of four guests. head is on Ana and tail is on Dev.",
+      "newNode": "push('Eve') starts with a new node for Eve. Nothing points to it yet.",
+      "link": "tail already points to Dev, so tail.next = newNode links Dev to Eve in one move.",
+      "moveTail": "tail = newNode moves tail onto Eve. Two moves, whether the line has 4 guests or 4,000: push is O(1).",
+      "popProblem": "Now pop() Eve. tail has to move back to Dev, and the only thing pointing at Dev is Cleo's next. We can't walk backwards from Eve.",
+      "walkStart": "So we start at head, with a pointer called temp. temp is on {{name}}. Is its next the tail? No.",
+      "walk": "temp moves to {{name}}. Its next still isn't the tail, so keep walking.",
+      "walkFound": "temp is on {{name}}, and its next is the tail. That's the new last guest.",
+      "moveTailBack": "tail = temp moves tail back to Dev.",
+      "cut": "tail.next = null cuts Eve off. Nothing points to Eve's node now.",
+      "summary": "pop had to walk the whole line to find the guest before the tail. The longer the line, the longer the walk: pop is O(n)."
+    },
+    "costFront": {
+      "title": "The front of the line: unshift and shift are O(1)",
+      "start": "The same line: head on Ana, tail on Dev.",
+      "newNode": "unshift('Zoe') starts with a new node for Zoe.",
+      "link": "head already points to Ana, so newNode.next = head points Zoe at Ana. No walking.",
+      "moveHead": "head = newNode moves head onto Zoe. Two moves, however long the line is: unshift is O(1).",
+      "shift": "shift() is one move: head = head.next puts head back on Ana. Nothing points to Zoe now, so the garbage collector takes Zoe's node.",
+      "summary": "At the front, head hands us the node we need right away. Adding and removing there never walks: both are O(1)."
+    },
+    "costMiddle": {
+      "title": "The middle of the line: insert and remove are O(n)",
+      "start": "Let's insert Eve at index 3, between Cleo and Dev. There are no indexes to jump to, so we count while we walk.",
+      "walkStart": "temp starts at head: {{name}} is index 0.",
+      "walk": "temp moves to {{name}}: index 1.",
+      "walkFound": "temp moves to {{name}}: index 2, the node right before index 3. Stop here.",
+      "link": "newNode.next = temp.next points Eve at Dev, the node Cleo points to. Link the new node first, so Dev isn't lost.",
+      "insert": "temp.next = newNode points Cleo at Eve. Eve is in, at index 3. Linking took 2 moves, but the walk took 3 steps.",
+      "removeWalk": "Now remove index 3 again. Same walk: temp stops on Cleo, at index 2.",
+      "remove": "temp.next = temp.next.next points Cleo past Eve, straight to Dev. Nothing points to Eve, so Eve is gone.",
+      "summary": "Moving the pointers is O(1), but the walk to the right spot grows with the line. Insert and remove are O(n)."
+    },
+    "costLookup": {
+      "title": "Finding a guest: O(n), by value or by index",
+      "start": "Find Cleo. A linked list can only start at head and look at one node at a time.",
+      "check": "Is {{name}} Cleo? No. Move to the next node.",
+      "foundValue": "Is {{name}} Cleo? Yes, after visiting 3 nodes. Finding by value is O(n).",
+      "byIndex": "Finding index 2 is no faster: count 0, 1, 2 while walking from head. Cleo again, after visiting 3 nodes.",
+      "array": "An array jumps straight to guests[2], whatever its length. That's O(1), and a linked list can't do it.",
+      "summary": "In a linked list, finding a guest by value or by index means walking: O(n) either way."
+    },
+    "nodeClass": {
+      "title": "Four methods, one job in common",
+      "makesNode": "makes a node",
+      "job": {
+        "create": "starts the list with a guest",
+        "push": "adds a guest at the end",
+        "unshift": "adds a guest at the front",
+        "insert": "adds a guest at an index"
+      },
+      "create": "The constructor gets a value and makes a node for it.",
+      "push": "push gets a value and makes a node, then adds it at the end.",
+      "unshift": "unshift gets a value and makes a node, then adds it at the front.",
+      "insert": "insert gets a value and makes a node, then puts it at an index.",
+      "nodeClass": "Four methods make the same thing. Instead of writing that code four times, we write it once, in its own class: Node.",
+      "newNode": "Now any method makes a node in one line: new Node('Ana') gives { value: 'Ana', next: null }."
+    },
+    "constructorExamples": {
+      "title": "Examples for the constructor",
+      "one": "One value: one node. head and tail both point to it, and length is 1.",
+      "empty": "No value: an empty list. head and tail point to null, and length is 0.",
+      "zero": "0 is a real value, so it gets a node too. Only a missing value means \"empty\".",
+      "many": "Many guests? The constructor makes one node at most. push adds the rest, in the next lesson."
+    },
+    "constructorPlan": {
+      "title": "The plan, as comments",
+      "empty": "Step 1: start empty. head and tail point to null, and length is 0.",
+      "makeNode": "Step 2a: if we got a value, make a new node with it. newNode points to it.",
+      "head": "Step 2b: point head at the new node.",
+      "tail": "Step 2c: point tail at the same node. head and tail now share one node.",
+      "length": "Step 2d: the length is 1. The list is ready."
+    },
+    "comments": {
+      "popProblem": "pop: tail has to move back to Dev",
+      "insertAt3": "insert 'Eve' at index 3",
+      "index": "index {{index}}",
+      "removeAt3": "remove index 3: walk to index 2 again",
+      "findCleo": "find 'Cleo'",
+      "no": "no",
+      "yes": "yes",
+      "findIndex2": "find index 2: count while walking",
+      "planEmpty": "1. start empty: head and tail are null, length is 0",
+      "planMakeNode": "2a. a value was given: make a new node with it",
+      "planHead": "2b. point head at the new node",
+      "planTail": "2c. point tail at the same node",
+      "planLength": "2d. the length is 1"
+    }
+  },
+  "arrayVsLinkedList": {
+    "title": "From an array to a linked list",
+    "memory": "Memory",
+    "array": "An array of four guests. Every guest has an index, from 0 to 3.",
+    "arrayMemory": "In memory, an array's items sit side by side, in one block. That's how guests[2] jumps straight there: the start of the block, plus 2.",
+    "noIndexes": "A linked list drops the indexes. There's no guests[2] any more.",
+    "listMemory": "Its nodes don't sit side by side either: they can be anywhere in memory. Each node remembers where the next one is.",
+    "chain": "So we draw it as a chain. head points to the first node, every node points to the one after it, and the final node points to null."
+  },
+  "linkedListBigO": {
+    "title": "Linked lists vs arrays, side by side",
+    "operation": "Operation",
+    "linkedList": "Linked list",
+    "array": "Array",
+    "rows": {
+      "push": "push (add at the end)",
+      "pop": "pop (remove from the end)",
+      "unshift": "unshift (add at the front)",
+      "shift": "shift (remove from the front)",
+      "insert": "insert (at an index)",
+      "remove": "remove (at an index)",
+      "byIndex": "find by index",
+      "byValue": "find by value"
+    },
+    "all": "Every operation from this lesson, for both data structures.",
+    "ties": "Half the rows are a tie: push, insert, remove and finding by value cost the same in both.",
+    "arrays": "Arrays win two rows: pop and finding by index are O(1) for an array, O(n) for a linked list.",
+    "lists": "Linked lists win two rows: adding and removing at the front are O(1), while an array re-indexes every item.",
+    "summary": "Neither one wins every row. Pick the one that's fast at what you'll do most."
+  },
+  "linkedListNested": {
+    "node": {
+      "title": "A closer look at one node",
+      "node": "Let's take one node out of the line: Dev's node. We draw it as a box with an arrow.",
+      "value": "Part one is the value: 'Dev'. But the value alone isn't the node.",
+      "next": "Part two is next, the pointer. Dev is the last guest, so next is null.",
+      "whole": "The node is the whole thing, value and next together: one object, { value: 'Dev', next: null }."
+    },
+    "nested": {
+      "title": "The list is objects inside objects",
+      "dev": "Start with the last guest: Dev's node, with next set to null.",
+      "cleo": "Cleo's next is set to Dev's node. In code, Dev's whole object now sits inside Cleo's next: that's the arrow.",
+      "ben": "Ben's next is set to Cleo's node, so Cleo and Dev are both inside Ben now.",
+      "ana": "Ana's node holds all the others. head points to it: the outermost object.",
+      "tail": "tail points to the innermost object, Dev's node. We pointed it there by setting it equal to Cleo's next.",
+      "summary": "The boxes and arrows and the nested objects are the same list, drawn two ways."
     }
   }
 }
