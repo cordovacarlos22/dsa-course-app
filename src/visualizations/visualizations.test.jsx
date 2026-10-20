@@ -233,6 +233,27 @@ describe('linked list animations', () => {
     ).toBeInTheDocument()
   })
 
+  it('shows what pop returns and empties a one-guest line', async () => {
+    const user = await renderAtStep('linked-list-pop-examples', 3)
+    expect(screen.getByText("{ value: 'Ana', next: null }")).toBeInTheDocument()
+    expect(
+      screen.getByRole('img', {
+        name: 'null. head: null, tail: null. Not in the line: Ana → null. length: 0',
+      }),
+    ).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /next/i }))
+    expect(screen.queryByText('Returns:')).not.toBeInTheDocument()
+  })
+
+  it('walks temp and pre together in the pop trace', async () => {
+    await renderAtStep('trace-ll-pop', 7)
+    expect(
+      screen.getByRole('img', {
+        name: 'Ana → Ben → Cleo → Dev → null. head: Ana, tail: Dev, temp: Dev, pre: Cleo. length: 4',
+      }),
+    ).toBeInTheDocument()
+  })
+
   it('lights up the rows where linked lists beat arrays', async () => {
     await renderAtStep('linked-list-big-o', 3)
     const shift = screen.getByRole('row', {

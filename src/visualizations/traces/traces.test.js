@@ -1,12 +1,39 @@
 import { describe, it, expect } from 'vitest'
 import { traces } from './index'
 
+// A method trace shows one LinkedList method, so it runs inside a class
+// with Node and a constructor that starts empty.
+function loadLinkedList(trace, fakeConsole) {
+  return new Function(
+    'console',
+    `class Node {
+  constructor(value) {
+    this.value = value
+    this.next = null
+  }
+}
+class LinkedList {
+  constructor() {
+    this.head = null
+    this.tail = null
+    this.length = 0
+  }
+${trace.code}
+}
+return LinkedList`,
+  )(fakeConsole)
+}
+
 // Runs the code students see, for real, and returns what it returned and
 // printed. If a trace's steps ever disagree with its code, these tests fail.
 function runShownCode(trace, input) {
-  const [functionName, args] = trace.call(input)
   const printed = []
   const fakeConsole = { log: (...values) => printed.push(values.join(' ')) }
+  if (trace.method) {
+    const LinkedList = loadLinkedList(trace, fakeConsole)
+    return { returned: trace.play(LinkedList, structuredClone(input)), printed }
+  }
+  const [functionName, args] = trace.call(input)
   const fn = new Function('console', `${trace.code}\nreturn ${functionName}`)(
     fakeConsole,
   )

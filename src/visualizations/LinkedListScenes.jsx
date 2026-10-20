@@ -3,6 +3,7 @@ import StepPlayer from '../components/StepPlayer'
 import GuestRow from './GuestRow'
 import LinkedListDiagram from './LinkedListDiagram'
 import { BOX_STATE_STYLES, DEFAULT_BOX_STYLE } from './boxStyles'
+import { METHOD_SCENES } from './linkedListMethodScenes'
 
 // The Linked Lists module's animations: the guests' conga line, one scene per
 // lesson step. Each frame of a scene can show:
@@ -14,6 +15,9 @@ import { BOX_STATE_STYLES, DEFAULT_BOX_STYLE } from './boxStyles'
 // - visited: how many nodes a walk has visited so far
 // - array: an array of guests to compare with ({ items, states })
 // - methods: the "who makes a node?" table (nodeClass scene)
+// - returned: what the method call gives back, as code ('this', 'undefined')
+// The method lessons' scenes (push, pop, unshift, shift) live in
+// ./linkedListMethodScenes.js.
 // Captions live in src/locales/viz.<language>.json under linkedList.<scene>.
 
 const LINE = ['Ana', 'Ben', 'Cleo', 'Dev']
@@ -419,6 +423,14 @@ function Frame({ frame }) {
       {frame.array && (
         <GuestRow items={frame.array.items} states={frame.array.states} />
       )}
+      {frame.returned && (
+        <p className="font-mono text-sm">
+          <span className="font-sans text-slate-500">
+            {t('viz.linkedList.returns')}{' '}
+          </span>
+          <span className="font-bold">{frame.returned}</span>
+        </p>
+      )}
       {frame.visited !== undefined && (
         <p className="text-sm font-semibold text-brand">
           {t('viz.linkedList.visited', { count: frame.visited })}
@@ -430,7 +442,7 @@ function Frame({ frame }) {
 
 function LinkedListScenes({ scene }) {
   const { t } = useTranslation()
-  const steps = SCENES[scene].map((frame) => ({
+  const steps = (SCENES[scene] ?? METHOD_SCENES[scene]).map((frame) => ({
     ...frame,
     caption: t(`viz.linkedList.${scene}.${frame.captionKey}`, frame.params),
   }))

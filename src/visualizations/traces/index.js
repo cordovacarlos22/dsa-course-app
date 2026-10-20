@@ -11,6 +11,8 @@
 //   states, output, result }. Lines are numbered from 1. A linked list
 //   trace yields `list` (props for LinkedListDiagram) instead of boxes.
 // - construct: true when the code is a class: the test calls it with `new`
+// - method: true when the code is one LinkedList method: the test puts it
+//   in a class and checks play(LinkedList, input) instead of call()
 //
 // traces.test.js runs every `code` for real and checks that the trace ends
 // with the same result, so the animation can't disagree with its code.
@@ -28,6 +30,12 @@ import { hasAnswer } from './hasAnswer'
 import { charCount } from './charCount'
 import { linkedListWalk } from './linkedListWalk'
 import { linkedListConstructor } from './linkedListConstructor'
+import {
+  linkedListPop,
+  linkedListPush,
+  linkedListShift,
+  linkedListUnshift,
+} from './linkedListMethods'
 
 export const traces = {
   'trace-is-invited': isInvited,
@@ -48,4 +56,8 @@ export const traces = {
   'trace-char-count': charCount,
   'trace-ll-walk': linkedListWalk,
   'trace-ll-constructor': linkedListConstructor,
+  'trace-ll-push': linkedListPush,
+  'trace-ll-pop': linkedListPop,
+  'trace-ll-unshift': linkedListUnshift,
+  'trace-ll-shift': linkedListShift,
 }

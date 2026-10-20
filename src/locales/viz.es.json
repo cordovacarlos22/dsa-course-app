@@ -312,6 +312,74 @@
       "pointHead": "this.head = newNode: head apunta al nodo nuevo.",
       "pointTail": "this.tail = this.head: tail apunta al mismo nodo que head. Un nodo, dos punteros.",
       "done": "this.length = 1. Una lista con un nodo: head y tail están los dos en {{value}}."
+    },
+    "linkedListPush": {
+      "title": "push, línea por línea",
+      "input_one": "{{count}} invitado",
+      "input_other": "{{count}} invitados",
+      "newNode": "new Node('{{value}}') crea el nodo nuevo, y newNode apunta a él. Todavía no está en la fila.",
+      "empty": "!this.head es true: head es null, y null es falsy. La fila está vacía.",
+      "emptyHead": "this.head = newNode: el nodo nuevo es el primer invitado...",
+      "emptyTail": "this.tail = newNode: ...y también el último. head y tail lo comparten.",
+      "notEmpty": "!this.head es false: head está en {{head}}, así que pasamos al else.",
+      "link": "this.tail.next = newNode: tail está en {{tail}}, así que el next de {{tail}} ahora apunta a {{value}}.",
+      "moveTail": "this.tail = newNode: tail se mueve a {{value}}, el nuevo último invitado.",
+      "length": "this.length++: ahora length es {{length}}.",
+      "return": "return this regresa la lista completa. Sin caminar nada: push es O(1)."
+    },
+    "linkedListUnshift": {
+      "title": "unshift, línea por línea",
+      "input_one": "{{count}} invitado",
+      "input_other": "{{count}} invitados",
+      "newNode": "new Node('{{value}}') crea el nodo nuevo, y newNode apunta a él. Todavía no está en la fila.",
+      "empty": "!this.head es true: head es null, y null es falsy. La fila está vacía.",
+      "emptyHead": "this.head = newNode: el nodo nuevo es el primer invitado...",
+      "emptyTail": "this.tail = newNode: ...y también el último. head y tail lo comparten.",
+      "notEmpty": "!this.head es false: head está en {{head}}, así que pasamos al else.",
+      "link": "newNode.next = this.head: {{value}} ahora apunta a {{head}}, el primer invitado. Primero enlaza, para no perder a nadie.",
+      "moveHead": "this.head = newNode: head se mueve a {{value}}, el nuevo primer invitado.",
+      "length": "this.length++: ahora length es {{length}}.",
+      "return": "return this regresa la lista completa. Dos movimientos y sin caminar: unshift es O(1)."
+    },
+    "linkedListPop": {
+      "title": "pop, línea por línea",
+      "input_one": "{{count}} invitado",
+      "input_other": "{{count}} invitados",
+      "empty": "!this.head es true: la fila está vacía, así que no hay nada a qué hacerle pop.",
+      "returnUndefined": "return undefined. La lista no cambia.",
+      "notEmpty": "!this.head es false: head está en {{name}}, así que hay un invitado a quien hacerle pop.",
+      "start": "temp y pre empiezan en head, en {{name}}.",
+      "movePre": "temp.next es {{next}}, no null, así que el bucle corre. pre = temp: pre se mueve a {{name}}.",
+      "moveTemp": "temp = temp.next: temp avanza a {{name}}. pre se queda un nodo atrás.",
+      "loopEnds": "temp.next es null: temp está en {{name}}, el último nodo, y pre está en {{pre}}, el de antes. El bucle se detiene.",
+      "loopSkipped": "temp.next ya es null: {{name}} es el único nodo, así que el bucle no corre ni una vez.",
+      "moveTail": "this.tail = pre: tail regresa a {{name}}.",
+      "tailSame": "this.tail = pre: tail ya estaba en {{name}}, así que nada cambia.",
+      "cut": "this.tail.next = null: el nuevo tail deja de apuntar a {{name}}. {{name}} queda fuera de la fila.",
+      "cutNothing": "this.tail.next = null: ya era null, así que nada cambia. ¡Pero head y tail todavía apuntan a {{name}}!",
+      "length": "this.length--: ahora length es {{length}}.",
+      "nowEmpty": "length es 0, así que la fila está vacía: head y tail tienen que soltar el nodo.",
+      "headNull": "this.head = null.",
+      "tailNull": "this.tail = null. Ahora la fila vacía de verdad se ve vacía.",
+      "notZero": "length es {{length}}, no 0, así que la fila todavía tiene invitados. Se salta el if.",
+      "return": "return temp: el nodo de {{name}}, el invitado que se fue. Nodos visitados: {{count}}. La caminata crece con la fila, así que pop es O(n)."
+    },
+    "linkedListShift": {
+      "title": "shift, línea por línea",
+      "input_one": "{{count}} invitado",
+      "input_other": "{{count}} invitados",
+      "empty": "!this.head es true: la fila está vacía, así que no hay nada a qué hacerle shift.",
+      "returnUndefined": "return undefined. La lista no cambia.",
+      "notEmpty": "!this.head es false: head está en {{name}}, así que hay un invitado a quien hacerle shift.",
+      "temp": "let temp = this.head: temp apunta al nodo de {{name}}, para poder regresarlo al final.",
+      "moveHead": "this.head = this.head.next: head se mueve a {{next}}. {{name}} queda fuera de la fila, pero todavía apunta a {{next}}.",
+      "headNull": "this.head = this.head.next: {{name}} no tenía next, así que ahora head es null.",
+      "cut": "temp.next = null: el nodo de {{name}} suelta la fila, así que el nodo que regresamos sale solo.",
+      "cutNothing": "temp.next = null: ya era null, así que nada cambia. ¡Pero tail todavía apunta a {{name}}!",
+      "length": "this.length--: ahora length es {{length}}.",
+      "tailNull": "length es 0, así que this.tail = null. Ahora head y tail son null.",
+      "notZero": "length es {{length}}, no 0, así que tail se queda donde está.",
+      "return": "return temp: el nodo de {{name}}. Un movimiento de head y sin caminar: shift es O(1)."
     }
   },
   "timingChart": {
@@ -391,7 +459,7 @@
       "concat": "concat copia cada elemento de los dos arrays a uno nuevo: 6 + 3 = 9 cajas. Eso es O(n + m), que simplemente llamamos O(n).",
       "slice": "slice(1, 4) copia los elementos desde el índice 1 hasta el 4 (sin incluirlo): 3 cajas. El costo es el tamaño de la copia.",
       "sliceAll": "slice() sin argumentos copia todo el array: las 6 cajas. En el peor caso, O(n).",
-      "spliceMiddle": "splice(2, 0, 'Zoe') inserta a Zoe en el índice 2. Cada invitado después de ella sube un índice: 5 cajas.",
+      "spliceMiddle": "splice(2, 0, 'Zoe') inserta a Zoe en el índice 2. Cada invitado después de Zoe sube un índice: 5 cajas.",
       "spliceStart": "En el índice 0, splice mueve a todos: 7 cajas. Big O toma este peor caso: O(n).",
       "summary": "Los tres crecen con el tamaño del array: O(n)."
     },
@@ -614,11 +682,11 @@
     "title": "Un adelanto: la clase LinkedList en acción",
     "create": "new LinkedList('Ana') crea una lista con un invitado. El constructor prepara todo.",
     "push": "push('Ben') agrega un invitado al final.",
-    "unshift": "unshift('Zoe') agrega una invitada al principio.",
-    "insert": "insert(1, 'Cleo') pone a una invitada en el índice 1, entre Zoe y Ana.",
+    "unshift": "unshift('Zoe') agrega un invitado al principio.",
+    "insert": "insert(1, 'Cleo') pone a un invitado en el índice 1, entre Zoe y Ana.",
     "remove": "remove(1) saca a quien está en el índice 1: Cleo se va.",
     "pop": "pop() quita al último invitado, Ben.",
-    "shift": "shift() quita a la primera invitada, Zoe.",
+    "shift": "shift() quita al primer invitado, Zoe.",
     "summary": "Cada método hizo un trabajo específico con la lista. En el módulo de Listas enlazadas vas a escribir cada uno tú mismo."
   },
   "pointerArrows": {
@@ -753,7 +821,130 @@
       "planMakeNode": "2a. se dio un valor: crea un nodo nuevo con él",
       "planHead": "2b. haz que head apunte al nodo nuevo",
       "planTail": "2c. haz que tail apunte al mismo nodo",
-      "planLength": "2d. length es 1"
+      "planLength": "2d. length es 1",
+      "push1": "1. crea un nodo nuevo con el valor",
+      "push2": "2. si la lista está vacía: head y tail apuntan al nodo nuevo",
+      "push3": "3a. si no: el next del último nodo apunta al nodo nuevo",
+      "push4": "3b. tail se mueve al nodo nuevo",
+      "push5": "4. súmale 1 a length, 5. regresa la lista",
+      "pop1": "1. si la lista está vacía, regresa undefined",
+      "pop2": "2. temp y pre empiezan en head",
+      "pop3": "3. camina: mientras temp tenga next, pre = temp y luego temp avanza",
+      "pop4": "4. tail se mueve a pre, y el next del nuevo tail se vuelve null",
+      "pop5": "5. réstale 1 a length",
+      "pop6": "6. si length ahora es 0, head y tail se vuelven null",
+      "pop7": "7. regresa temp",
+      "unshift1": "1. crea un nodo nuevo con el valor",
+      "unshift2": "2. si la lista está vacía: head y tail apuntan al nodo nuevo",
+      "unshift3": "3a. si no: el next del nodo nuevo apunta al primer nodo",
+      "unshift4": "3b. head se mueve al nodo nuevo",
+      "unshift5": "4. súmale 1 a length, 5. regresa la lista",
+      "shift1": "1. si la lista está vacía, regresa undefined",
+      "shift2": "2. temp apunta al primer nodo",
+      "shift3": "3. head se mueve al siguiente nodo",
+      "shift4": "4. el next de temp se vuelve null, para soltarlo",
+      "shift5": "5. réstale 1 a length",
+      "shift6": "6. si length ahora es 0, tail también se vuelve null",
+      "shift7": "7. regresa temp"
+    },
+    "returns": "Regresa:",
+    "push": {
+      "title": "push: agregar un invitado al final",
+      "start": "Una fila de tres invitados: head en Ana, tail en Cleo, length 3.",
+      "call": "push('Dev') agrega un nodo para Dev después del tail. tail se mueve a Dev, y length sube a 4.",
+      "returns": "push regresa this, la lista completa, para que la sigas usando de inmediato."
+    },
+    "pushExamples": {
+      "title": "Ejemplos para push: vacía, un invitado, muchos invitados",
+      "emptyBefore": "Ejemplo 1: una fila vacía. head y tail son null.",
+      "emptyAfter": "No hay último nodo desde el cual enlazar, así que head y tail apuntan al nodo nuevo de Ana. length es 1.",
+      "oneBefore": "Ejemplo 2: un invitado. head y tail están en Ana.",
+      "oneAfter": "El next de Ana apunta a Ben, y tail se mueve a Ben. head se queda en Ana.",
+      "manyBefore": "Ejemplo 3: tres invitados, con tail en Cleo.",
+      "manyAfter": "Los mismos dos movimientos: el next de Cleo apunta a Dev, y luego tail se mueve a Dev. Nadie más se toca."
+    },
+    "pushPlan": {
+      "title": "El plan de push, como comentarios",
+      "makeNode": "Paso 1: crea un nodo nuevo para Dev. newNode apunta a él, pero nada de la fila lo apunta todavía.",
+      "notEmpty": "Paso 2: ¿la fila está vacía? No, head está en Ana, así que este paso no aplica.",
+      "link": "Paso 3a: el último nodo, Cleo, apunta su next al nodo nuevo.",
+      "moveTail": "Paso 3b: tail se mueve al nodo nuevo. Ahora Dev es el último invitado.",
+      "length": "Pasos 4 y 5: length sube a 4, y push regresa la lista.",
+      "emptyCase": "En una fila vacía, el paso 2 hace todo el trabajo: head y tail apuntan al nodo nuevo."
+    },
+    "pop": {
+      "title": "pop: quitar al invitado del final",
+      "start": "Una fila de cuatro invitados: head en Ana, tail en Dev.",
+      "call": "pop() suelta el nodo de Dev del final. tail regresa a Cleo, y length baja a 3.",
+      "returns": "pop regresa el nodo que quitó, para que sepas quién se fue."
+    },
+    "popExamples": {
+      "title": "Ejemplos para pop: vacía, un invitado, muchos invitados",
+      "emptyBefore": "Ejemplo 1: una fila vacía. No hay nadie a quien hacerle pop.",
+      "emptyAfter": "pop() regresa undefined, y la fila se queda vacía.",
+      "oneBefore": "Ejemplo 2: un invitado. head y tail están en Ana.",
+      "oneAfter": "Hacerle pop al único invitado vacía la fila: head y tail regresan a null, y length es 0.",
+      "manyBefore": "Ejemplo 3: tres invitados, con tail en Cleo.",
+      "manyAfter": "El nodo de Cleo se suelta y se regresa. tail regresa a Ben, el invitado de antes."
+    },
+    "popPlan": {
+      "title": "El plan de pop, como comentarios",
+      "notEmpty": "Paso 1: ¿la fila está vacía? No, así que hay alguien a quien hacerle pop.",
+      "start": "Paso 2: temp y pre empiezan en head, en Ana.",
+      "walk": "Paso 3: camina hasta que temp no tenga next. temp termina en Cleo, el último invitado, y pre en Ben, el de antes.",
+      "moveTail": "Paso 4: tail se mueve a pre, Ben, y el next de Ben se vuelve null. Cleo queda fuera de la fila.",
+      "length": "Paso 5: length baja a 2.",
+      "oneLeft": "El paso 6 importa con un invitado: después de hacerle pop a Ana, length es 0, así que head y tail también tienen que volverse null.",
+      "returnTemp": "Paso 7: regresa temp, el nodo de Cleo: el invitado que se fue."
+    },
+    "unshift": {
+      "title": "unshift: agregar un invitado al inicio",
+      "start": "Una fila de tres invitados: head en Ana, tail en Cleo.",
+      "call": "unshift('Zoe') agrega un nodo para Zoe antes de Ana. head se mueve a Zoe, y length sube a 4.",
+      "returns": "unshift regresa this, la lista completa, igual que push."
+    },
+    "unshiftExamples": {
+      "title": "Ejemplos para unshift: vacía, un invitado, muchos invitados",
+      "emptyBefore": "Ejemplo 1: una fila vacía. head y tail son null.",
+      "emptyAfter": "Sin nadie en la fila, Zoe ocupa el primer y el último lugar: head y tail apuntan al nodo de Zoe.",
+      "oneBefore": "Ejemplo 2: un invitado, Ana.",
+      "oneAfter": "El next de Zoe apunta a Ana, y head se mueve a Zoe. tail se queda en Ana.",
+      "manyBefore": "Ejemplo 3: tres invitados, con head en Ana.",
+      "manyAfter": "Los mismos dos movimientos: Zoe apunta a Ana, y luego head se mueve a Zoe. Nadie más se mueve."
+    },
+    "unshiftPlan": {
+      "title": "El plan de unshift, como comentarios",
+      "makeNode": "Paso 1: crea un nodo nuevo para Zoe. Nada de la fila lo apunta todavía.",
+      "notEmpty": "Paso 2: ¿la fila está vacía? No, head está en Ana, así que este paso no aplica.",
+      "link": "Paso 3a: el next del nodo nuevo apunta a Ana, el nodo donde está head.",
+      "moveHead": "Paso 3b: head se mueve al nodo nuevo. Ahora Zoe va al frente.",
+      "length": "Pasos 4 y 5: length sube a 4, y unshift regresa la lista.",
+      "emptyCase": "En una fila vacía, el paso 2 hace todo el trabajo: head y tail apuntan al nodo nuevo."
+    },
+    "shift": {
+      "title": "shift: quitar al invitado del inicio",
+      "start": "Una fila de tres invitados: head en Ana, tail en Cleo.",
+      "call": "shift() saca el nodo de Ana del inicio. head se mueve a Ben, y length baja a 2.",
+      "returns": "shift regresa el nodo que quitó, ya separado del resto de la fila."
+    },
+    "shiftExamples": {
+      "title": "Ejemplos para shift: vacía, un invitado, muchos invitados",
+      "emptyBefore": "Ejemplo 1: una fila vacía. No hay nadie a quien hacerle shift.",
+      "emptyAfter": "shift() regresa undefined, y la fila se queda vacía.",
+      "oneBefore": "Ejemplo 2: un invitado, Ana.",
+      "oneAfter": "Hacerle shift al único invitado vacía la fila: head se vuelve null, y tail también tiene que volverse null.",
+      "manyBefore": "Ejemplo 3: tres invitados, con head en Ana.",
+      "manyAfter": "El nodo de Ana sale del inicio y se regresa. head se mueve a Ben, y tail se queda en Cleo."
+    },
+    "shiftPlan": {
+      "title": "El plan de shift, como comentarios",
+      "notEmpty": "Paso 1: ¿la fila está vacía? No, así que hay alguien a quien hacerle shift.",
+      "temp": "Paso 2: temp apunta al primer nodo, el de Ana, para poder regresarlo al final.",
+      "moveHead": "Paso 3: head se mueve al siguiente nodo, Ben. El nodo de Ana queda fuera de la fila, pero todavía apunta a Ben.",
+      "cut": "Paso 4: el next de Ana se vuelve null. Ahora el nodo que regresamos no arrastra a nadie más.",
+      "length": "Paso 5: length baja a 2.",
+      "oneLeft": "El paso 6 importa con un invitado: cuando Ana se va, length es 0, así que tail también tiene que volverse null.",
+      "returnTemp": "Paso 7: regresa temp, el nodo de Ana."
     }
   },
   "arrayVsLinkedList": {
