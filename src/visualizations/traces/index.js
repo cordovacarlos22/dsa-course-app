@@ -1,7 +1,7 @@
 // Code traces: a piece of code played line by line by <CodeTrace>.
 //
 // Each trace has:
-// - key: its captions live in src/locales/*.json under viz.trace.<key>
+// - key: its captions live in src/locales/viz.<language>.json under trace.<key>
 // - code: the code students see (never translated)
 // - counter: what the operations counter counts (viz.trace.counters.<counter>),
 //   or null for no counter

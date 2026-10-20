@@ -65,7 +65,7 @@ src/
   lib/               # clients and helpers (e.g. supabase.js)
   runners/           # code runners (Web Worker), one per programming language
   visualizations/    # step-by-step lesson animations, played by StepPlayer
-  locales/           # UI text: en.json, es.json
+  locales/           # UI text: en.json, es.json; animation captions: viz.en.json, viz.es.json
   test/              # test setup
 .github/workflows/   # CI/CD pipelines
 ```
@@ -211,8 +211,8 @@ When Carlos says _"write the lessons for module N"_:
    - `order` must match the `NN` at the start of the file name. No comments in the front matter.
    - ` ```js-run `: editable code the student runs in the browser (Web Worker, 2 s limit). Use `console.log` to show results.
    - ` ```viz `: the block contains an animation name from `src/visualizations/names.js`. Open **`/dev/animations`** in the app to see them all. Big O pictures: `big-o-growth-chart`, `stopwatch-race`, `search-cases`, `linear-boxes`, `same-shape`, `nested-grid`, `dominant-term`, `constant-jump`, `two-inputs`, `memory-boxes`, `halving-count`, `array-reindex`, `binary-search-halving`. Code traces: `trace-is-invited`, `trace-is-invited-all`, `trace-count-short-names`, `trace-welcome-all`, `trace-welcome-and-goodbye`, `trace-greet-everyone`, `trace-party-summary`.
-   - New **code trace**: add a file to `src/visualizations/traces/` (the code + a generator that yields one step per highlighted line), register it in `traces/index.js` and `names.js`, and add its captions under `viz.trace.<key>`. `traces.test.js` runs the code for real and checks the trace ends with the same result.
-   - New animation: build it with `StepPlayer` in `src/visualizations/`, add its name to `names.js` **and** register it in `index.js`, and put its captions in `src/locales/*.json` under `viz`.
+   - New **code trace**: add a file to `src/visualizations/traces/` (the code + a generator that yields one step per highlighted line), register it in `traces/index.js` and `names.js`, and add its captions under `trace.<key>` in `src/locales/viz.en.json` and `viz.es.json`. `traces.test.js` runs the code for real and checks the trace ends with the same result.
+   - New animation: build it with `StepPlayer` in `src/visualizations/`, add its name to `names.js` **and** register it in `index.js`, and put its captions in `src/locales/viz.en.json` and `viz.es.json` (they load with the animations, not with the first page; components still read them as `t('viz.…')`).
 
 6. Run `npm run content:validate` (checks file names, front matter, animation names, that every `js-run` block compiles, the beginner loop style, and that each `.checks.json` has one checkpoint per step in every language with passing solutions and failing starter code), then open a PR for Carlos to review.
 

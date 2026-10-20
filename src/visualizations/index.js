@@ -1,6 +1,8 @@
 // Maps each animation name (used in a lesson's ```viz block) to its component.
 // The list of names lives in ./names.js so the content validator can use it.
 import { createElement } from 'react'
+// Registers the captions, so every animation below can use t('viz.…').
+import './captions'
 import ArrayMethodCost from './ArrayMethodCost'
 import ArrayReindex from './ArrayReindex'
 import ArraySplice from './ArraySplice'
