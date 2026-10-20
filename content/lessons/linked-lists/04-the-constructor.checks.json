@@ -1,0 +1,252 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "Why does our linked list code have a separate `Node` class?",
+        "es": "¿Por qué nuestro código de lista enlazada tiene una clase `Node` aparte?"
+      },
+      "options": [
+        {
+          "en": "The constructor, `push`, `unshift` and `insert` all make nodes, so that code lives in one place",
+          "es": "El constructor, `push`, `unshift` e `insert` crean nodos, así que ese código vive en un solo lugar"
+        },
+        {
+          "en": "JavaScript needs two classes to make a list",
+          "es": "JavaScript necesita dos clases para hacer una lista"
+        },
+        {
+          "en": "A `Node` class makes the list faster than an array",
+          "es": "Una clase `Node` hace la lista más rápida que un array"
+        },
+        {
+          "en": "Every node has to be a copy of the list",
+          "es": "Cada nodo tiene que ser una copia de la lista"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "Think about what four of the list's methods have in common.",
+        "es": "Piensa en qué tienen en común cuatro de los métodos de la lista."
+      },
+      "explanation": {
+        "en": "Four methods receive a value and turn it into a node. Writing that once, in `Node`, means each of them makes a node with `new Node(value)`, and every node comes out the same.",
+        "es": "Cuatro métodos reciben un valor y lo convierten en un nodo. Escribir eso una sola vez, en `Node`, hace que cada uno cree un nodo con `new Node(value)`, y que todos los nodos salgan iguales."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "In our class, what should `new LinkedList()` give, with no value?",
+        "es": "En nuestra clase, ¿qué debe dar `new LinkedList()`, sin valor?"
+      },
+      "options": [
+        {
+          "en": "One node holding `undefined`, with `length` 1",
+          "es": "Un nodo con `undefined`, con `length` 1"
+        },
+        {
+          "en": "An error",
+          "es": "Un error"
+        },
+        {
+          "en": "`head` is `null` but `length` is 1",
+          "es": "`head` es `null` pero `length` es 1"
+        },
+        {
+          "en": "An empty list: `head` and `tail` are `null`, and `length` is 0",
+          "es": "Una lista vacía: `head` y `tail` son `null`, y `length` es 0"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "A missing value means there's no guest yet.",
+        "es": "Un valor que falta significa que todavía no hay invitado."
+      },
+      "explanation": {
+        "en": "With no value there's nothing to put in a node, so the list starts empty: both ends point to `null` and the length is 0. `push` can add guests later.",
+        "es": "Sin valor no hay nada que poner en un nodo, así que la lista empieza vacía: los dos extremos apuntan a `null` y length es 0. `push` puede agregar invitados después."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write the `Node` class from the plan: its constructor stores `value` and starts `next` at `null`.",
+        "es": "Escribe la clase `Node` del plan: su constructor guarda `value` y empieza `next` en `null`."
+      },
+      "hint": {
+        "en": "Two lines, one per comment: `this.value = value` and `this.next = null`.",
+        "es": "Dos líneas, una por comentario: `this.value = value` y `this.next = null`."
+      },
+      "starterCode": "class Node {\n  constructor(value) {\n    // 1. store the value\n    // 2. next starts as null\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}",
+      "kind": "class",
+      "className": "Node",
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "read": "value",
+              "expected": "Ana"
+            },
+            {
+              "read": "next",
+              "expected": null
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": [0]
+            },
+            {
+              "read": "value",
+              "expected": 0
+            },
+            {
+              "read": "next",
+              "expected": null
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ben"]
+            },
+            {
+              "read": "value",
+              "expected": "Ben"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write the `LinkedList` constructor. Start empty (`head` and `tail` are `null`, `length` is 0). If a value was given, make a `Node` with it and point `head` and `tail` at that node, with `length` 1. Careful: `0` is a value!",
+        "es": "Escribe el constructor de `LinkedList`. Empieza vacía (`head` y `tail` son `null`, `length` es 0). Si se dio un valor, crea un `Node` con él y haz que `head` y `tail` apunten a ese nodo, con `length` 1. Cuidado: ¡`0` es un valor!"
+      },
+      "hint": {
+        "en": "Check for a missing value with `if (value !== undefined)`, not `if (value)`. Inside: `const newNode = new Node(value)`, then `this.head = newNode`, `this.tail = this.head` and `this.length = 1`.",
+        "es": "Revisa si falta el valor con `if (value !== undefined)`, no con `if (value)`. Adentro: `const newNode = new Node(value)`, luego `this.head = newNode`, `this.tail = this.head` y `this.length = 1`."
+      },
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    // 1. start empty\n    // 2. if a value was given, make the first node\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n}",
+      "kind": "class",
+      "className": "LinkedList",
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "read": "head.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "length",
+              "expected": 1
+            },
+            {
+              "read": "head.next",
+              "expected": null
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "read": "head",
+              "expected": null
+            },
+            {
+              "read": "tail",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": [0]
+            },
+            {
+              "read": "head.value",
+              "expected": 0
+            },
+            {
+              "read": "length",
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ben"]
+            },
+            {
+              "read": "tail",
+              "expected": {
+                "value": "Ben",
+                "next": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "After `const line = new LinkedList('Ana')`, what is `line.head === line.tail`?",
+        "es": "Después de `const line = new LinkedList('Ana')`, ¿qué es `line.head === line.tail`?"
+      },
+      "options": [
+        {
+          "en": "`false`: `tail` is a copy of `head`",
+          "es": "`false`: `tail` es una copia de `head`"
+        },
+        {
+          "en": "`true`: both point to the same node",
+          "es": "`true`: los dos apuntan al mismo nodo"
+        },
+        {
+          "en": "`false`: they're two nodes with the same value",
+          "es": "`false`: son dos nodos con el mismo valor"
+        },
+        {
+          "en": "An error: nodes can't be compared",
+          "es": "Un error: los nodos no se pueden comparar"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "`this.tail = this.head` copies the arrow, not the node.",
+        "es": "`this.tail = this.head` copia la flecha, no el nodo."
+      },
+      "explanation": {
+        "en": "There's only one node. `this.tail = this.head` points `tail` where `head` already points, and `===` on objects checks for the same object, so it's `true`.",
+        "es": "Solo hay un nodo. `this.tail = this.head` hace que `tail` apunte a donde ya apunta `head`, y `===` con objetos revisa si es el mismo objeto, así que da `true`."
+      }
+    }
+  ]
+}

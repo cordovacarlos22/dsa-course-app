@@ -83,7 +83,7 @@ describe('landing page', () => {
       within(curriculum).getByRole('link', { name: '2. Big O' }),
     ).toHaveAttribute('href', '/learn/big-o')
     expect(
-      within(curriculum).queryByRole('link', { name: /Linked Lists/ }),
+      within(curriculum).queryByRole('link', { name: /Doubly Linked Lists/ }),
     ).not.toBeInTheDocument()
   })
 

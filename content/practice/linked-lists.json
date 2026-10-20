@@ -1,0 +1,491 @@
+{
+  "slug": "linked-lists",
+  "order": 13,
+  "title": {
+    "en": "Linked Lists",
+    "es": "Listas enlazadas"
+  },
+  "sourceFolder": "course 1 /section 4 ",
+  "questions": [
+    {
+      "id": "ll-vs-array-basics",
+      "topic": "Linked lists vs arrays",
+      "prompt": {
+        "en": "Which statement about linked lists is true?",
+        "es": "¿Qué afirmación sobre las listas enlazadas es cierta?"
+      },
+      "options": [
+        {
+          "en": "Their items have indexes, like an array",
+          "es": "Sus elementos tienen índices, como un array"
+        },
+        {
+          "en": "Their nodes must sit side by side in memory",
+          "es": "Sus nodos tienen que estar uno junto al otro en memoria"
+        },
+        {
+          "en": "Their nodes can be anywhere in memory, linked by pointers",
+          "es": "Sus nodos pueden estar en cualquier parte de la memoria, unidos por punteros"
+        },
+        {
+          "en": "They can only hold numbers",
+          "es": "Solo pueden guardar números"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "A linked list has no indexes and no single block of memory. Each node points to the next one, so the nodes can live anywhere.",
+        "es": "Una lista enlazada no tiene índices ni un solo bloque de memoria. Cada nodo apunta al siguiente, así que los nodos pueden estar en cualquier parte."
+      }
+    },
+    {
+      "id": "ll-null-terminated",
+      "topic": "Anatomy",
+      "prompt": {
+        "en": "In the linked lists of this module, what does the last node's `next` hold?",
+        "es": "En las listas enlazadas de este módulo, ¿qué guarda el `next` del último nodo?"
+      },
+      "options": [
+        {
+          "en": "`null`",
+          "es": "`null`"
+        },
+        {
+          "en": "The first node, so the list loops",
+          "es": "El primer nodo, para que la lista dé la vuelta"
+        },
+        {
+          "en": "The length of the list",
+          "es": "La longitud de la lista"
+        },
+        {
+          "en": "`undefined`",
+          "es": "`undefined`"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "The last node has nobody after it, so its `next` is `null`. That's why these lists are called null-terminated, and why a walk stops when it reaches `null`.",
+        "es": "Después del último nodo no hay nadie, así que su `next` es `null`. Por eso a estas listas se les llama terminadas en null, y por eso un recorrido se detiene al llegar a `null`."
+      }
+    },
+    {
+      "id": "ll-head-tail",
+      "topic": "Anatomy",
+      "prompt": {
+        "en": "What do `head` and `tail` hold in a linked list?",
+        "es": "¿Qué guardan `head` y `tail` en una lista enlazada?"
+      },
+      "options": [
+        {
+          "en": "The first and last values, as strings",
+          "es": "El primer y el último valor, como strings"
+        },
+        {
+          "en": "Copies of the first and last nodes",
+          "es": "Copias del primer y el último nodo"
+        },
+        {
+          "en": "The indexes 0 and length - 1",
+          "es": "Los índices 0 y length - 1"
+        },
+        {
+          "en": "Pointers to the first node and to the last node",
+          "es": "Punteros al primer nodo y al último nodo"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "`head` and `tail` are pointers (references) to nodes, not copies and not values. `head` is where every walk starts; `tail` reaches the end in one step.",
+        "es": "`head` y `tail` son punteros (referencias) a nodos, no copias ni valores. `head` es donde empieza todo recorrido; `tail` llega al final en un paso."
+      }
+    },
+    {
+      "id": "ll-pop-cost",
+      "topic": "Big O",
+      "prompt": {
+        "en": "Why is removing the last node (`pop`) O(n) in a singly linked list?",
+        "es": "¿Por qué quitar el último nodo (`pop`) es O(n) en una lista enlazada simple?"
+      },
+      "options": [
+        {
+          "en": "Because every node has to be re-indexed",
+          "es": "Porque hay que reindexar cada nodo"
+        },
+        {
+          "en": "Because `tail` must move to the node before it, and the only way to reach that node is walking from `head`",
+          "es": "Porque `tail` tiene que moverse al nodo anterior, y la única forma de llegar a ese nodo es caminar desde `head`"
+        },
+        {
+          "en": "Because the removed node has to be copied first",
+          "es": "Porque primero hay que copiar el nodo que se quita"
+        },
+        {
+          "en": "It isn't: `pop` is O(1), like `push`",
+          "es": "No lo es: `pop` es O(1), igual que `push`"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "Nodes only point forward. To move `tail` back one node, `pop` walks from `head` until it finds the node whose `next` is the tail, and that walk grows with n.",
+        "es": "Los nodos solo apuntan hacia adelante. Para regresar `tail` un nodo, `pop` camina desde `head` hasta encontrar el nodo cuyo `next` es el tail, y esa caminata crece con n."
+      }
+    },
+    {
+      "id": "ll-shift-cost",
+      "topic": "Big O",
+      "prompt": {
+        "en": "What's the Big O of removing the first node (`shift`) from a linked list with n nodes?",
+        "es": "¿Cuál es el Big O de quitar el primer nodo (`shift`) de una lista enlazada con n nodos?"
+      },
+      "options": [
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(log n)",
+          "es": "O(log n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "`shift` is one pointer move: `head = head.next`. No walking and no re-indexing, so it's O(1) whatever the length. On an array, `shift` is O(n).",
+        "es": "`shift` es un solo movimiento de puntero: `head = head.next`. Sin caminar y sin reindexar, así que es O(1) sin importar la longitud. En un array, `shift` es O(n)."
+      }
+    },
+    {
+      "id": "ll-find-by-index",
+      "topic": "Big O",
+      "prompt": {
+        "en": "You need the guest at index 500 of a linked list with 1,000 nodes. What's the Big O of finding it?",
+        "es": "Necesitas al invitado en el índice 500 de una lista enlazada con 1,000 nodos. ¿Cuál es el Big O de encontrarlo?"
+      },
+      "options": [
+        {
+          "en": "O(1), like an array",
+          "es": "O(1), como un array"
+        },
+        {
+          "en": "O(log n), by splitting the list in halves",
+          "es": "O(log n), partiendo la lista a la mitad"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        },
+        {
+          "en": "O(n): walk from `head` and count until index 500",
+          "es": "O(n): caminar desde `head` y contar hasta el índice 500"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "There's no index to jump to, so you follow `next` from `head`, counting as you go. The walk grows with n: O(n). An array finds index 500 in O(1).",
+        "es": "No hay índice al cual saltar, así que sigues `next` desde `head`, contando en el camino. La caminata crece con n: O(n). Un array encuentra el índice 500 en O(1)."
+      }
+    },
+    {
+      "id": "ll-pick-structure",
+      "topic": "Linked lists vs arrays",
+      "prompt": {
+        "en": "Your program mostly reads items by position, like \"the 57th score\". Which structure fits best?",
+        "es": "Tu programa casi siempre lee elementos por posición, como \"el puntaje número 57\". ¿Qué estructura conviene más?"
+      },
+      "options": [
+        {
+          "en": "An array: reading by index is O(1)",
+          "es": "Un array: leer por índice es O(1)"
+        },
+        {
+          "en": "A linked list: reading by index is O(1)",
+          "es": "Una lista enlazada: leer por índice es O(1)"
+        },
+        {
+          "en": "A linked list: it has no indexes to slow it down",
+          "es": "Una lista enlazada: no tiene índices que la hagan lenta"
+        },
+        {
+          "en": "Both are the same for this job",
+          "es": "Las dos son iguales para este trabajo"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Pick by the job you do most. Reading by position is O(1) on an array and O(n) on a linked list, so an array wins here.",
+        "es": "Elige según el trabajo que más haces. Leer por posición es O(1) en un array y O(n) en una lista enlazada, así que aquí gana el array."
+      }
+    },
+    {
+      "id": "ll-nested-objects",
+      "topic": "Under the hood",
+      "prompt": {
+        "en": "What does this code print?",
+        "es": "¿Qué imprime este código?"
+      },
+      "code": "const head = {\n  value: 'Ana',\n  next: { value: 'Ben', next: { value: 'Cleo', next: null } },\n}\nconsole.log(head.next.next.value)",
+      "options": [
+        {
+          "en": "`'Ana'`",
+          "es": "`'Ana'`"
+        },
+        {
+          "en": "`null`",
+          "es": "`null`"
+        },
+        {
+          "en": "`'Cleo'`",
+          "es": "`'Cleo'`"
+        },
+        {
+          "en": "`undefined`",
+          "es": "`undefined`"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "`head` is Ana's node, `head.next` is Ben's and `head.next.next` is Cleo's, so the value is `'Cleo'`. Each `.next` follows one arrow into the nested objects.",
+        "es": "`head` es el nodo de Ana, `head.next` el de Ben y `head.next.next` el de Cleo, así que el valor es `'Cleo'`. Cada `.next` sigue una flecha hacia los objetos anidados."
+      }
+    },
+    {
+      "id": "ll-walk-temp",
+      "topic": "Under the hood",
+      "prompt": {
+        "en": "When you walk a linked list, why do you move a `temp` pointer instead of moving `head`?",
+        "es": "Cuando recorres una lista enlazada, ¿por qué mueves un puntero `temp` en vez de mover `head`?"
+      },
+      "options": [
+        {
+          "en": "Because `head` can't be changed in JavaScript",
+          "es": "Porque `head` no se puede cambiar en JavaScript"
+        },
+        {
+          "en": "Because `temp` is faster than `head`",
+          "es": "Porque `temp` es más rápido que `head`"
+        },
+        {
+          "en": "Because `head` is the only pointer to the front: moving it would lose the nodes behind it",
+          "es": "Porque `head` es el único puntero al inicio: moverlo haría que se perdieran los nodos que deja atrás"
+        },
+        {
+          "en": "Because a walk has to go backwards",
+          "es": "Porque un recorrido tiene que ir hacia atrás"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "If `head` moved forward, nothing would point to the nodes it passed, and the garbage collector would take them. `temp` walks; `head` stays put.",
+        "es": "Si `head` avanzara, nada apuntaría a los nodos que pasó, y el recolector de basura se los llevaría. `temp` camina; `head` se queda en su lugar."
+      }
+    },
+    {
+      "id": "ll-constructor-zero",
+      "topic": "The constructor",
+      "prompt": {
+        "en": "This constructor gives an empty list for `new LinkedList(0)`. Why?",
+        "es": "Este constructor da una lista vacía con `new LinkedList(0)`. ¿Por qué?"
+      },
+      "code": "constructor(value) {\n  this.head = null\n  this.tail = null\n  this.length = 0\n  if (!value) {\n    return\n  }\n  const newNode = new Node(value)\n  this.head = newNode\n  this.tail = this.head\n  this.length = 1\n}",
+      "options": [
+        {
+          "en": "`!0` is `true`, so 0 is treated as a missing value; check `value === undefined` instead",
+          "es": "`!0` es `true`, así que 0 se trata como un valor que falta; revisa `value === undefined` en su lugar"
+        },
+        {
+          "en": "Nodes can't hold the number 0",
+          "es": "Los nodos no pueden guardar el número 0"
+        },
+        {
+          "en": "`length` must start at 1",
+          "es": "`length` tiene que empezar en 1"
+        },
+        {
+          "en": "`this.tail = this.head` copies the node",
+          "es": "`this.tail = this.head` copia el nodo"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "`if (!value)` is true for 0, `''` and `false`, not only for a missing value. Only a value that wasn't passed is `undefined`, so `value === undefined` is the right test.",
+        "es": "`if (!value)` es verdadero para 0, `''` y `false`, no solo para un valor que falta. Solo un valor que no se pasó es `undefined`, así que `value === undefined` es la prueba correcta."
+      }
+    },
+    {
+      "id": "ll-tail-equals-head",
+      "topic": "The constructor",
+      "prompt": {
+        "en": "In the constructor, what does `this.tail = this.head` do?",
+        "es": "En el constructor, ¿qué hace `this.tail = this.head`?"
+      },
+      "options": [
+        {
+          "en": "It makes a second node with the same value",
+          "es": "Crea un segundo nodo con el mismo valor"
+        },
+        {
+          "en": "It makes `tail` follow `head` forever",
+          "es": "Hace que `tail` siga a `head` para siempre"
+        },
+        {
+          "en": "It copies `head`'s value into `tail`",
+          "es": "Copia el valor de `head` en `tail`"
+        },
+        {
+          "en": "It points `tail` at the same node `head` points to",
+          "es": "Hace que `tail` apunte al mismo nodo al que apunta `head`"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "`=` with an object copies the arrow, not the object. Right after the constructor, one node has two pointers on it. Later, `push` moves `tail` without moving `head`.",
+        "es": "`=` con un objeto copia la flecha, no el objeto. Justo después del constructor, un nodo tiene dos punteros encima. Después, `push` mueve `tail` sin mover `head`."
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "slug": "linked-list-constructor",
+      "kind": "class",
+      "title": {
+        "en": "Start the Conga Line",
+        "es": "Empieza la fila de conga"
+      },
+      "description": {
+        "en": "The conga line needs its first guest. Write two classes:\n\n- `Node`: its constructor stores `value` and starts `next` at `null`.\n- `LinkedList`: its constructor starts the list empty (`head` and `tail` are `null`, `length` is `0`). If a value was passed, it makes a `Node` with it, points `head` and `tail` at that one node and sets `length` to `1`.\n\nA value of `0` or `''` still counts as a value: only a missing value means an empty list.\n\nExample:\n\n```js\nconst line = new LinkedList('Ana')\nline.head.value // 'Ana'\nline.head === line.tail // true\n\nconst empty = new LinkedList()\nempty.head // null\nempty.length // 0\n```",
+        "es": "La fila de conga necesita a su primer invitado. Escribe dos clases:\n\n- `Node`: su constructor guarda `value` y empieza `next` en `null`.\n- `LinkedList`: su constructor empieza la lista vacía (`head` y `tail` son `null`, `length` es `0`). Si se pasó un valor, crea un `Node` con él, hace que `head` y `tail` apunten a ese único nodo y pone `length` en `1`.\n\nUn valor de `0` o `''` sigue contando como valor: solo un valor que falta significa una lista vacía.\n\nEjemplo:\n\n```js\nconst line = new LinkedList('Ana')\nline.head.value // 'Ana'\nline.head === line.tail // true\n\nconst empty = new LinkedList()\nempty.head // null\nempty.length // 0\n```"
+      },
+      "difficulty": "easy",
+      "category": "build",
+      "className": "LinkedList",
+      "starterCode": {
+        "javascript": "class Node {\n  constructor(value) {\n    // Your code here\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    // Your code here\n  }\n}"
+      },
+      "solution": {
+        "javascript": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n}"
+      },
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "read": "head.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "head.next",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "tail.next",
+              "expected": null
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "read": "head",
+              "expected": null
+            },
+            {
+              "read": "tail",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": [0]
+            },
+            {
+              "read": "head.value",
+              "expected": 0
+            },
+            {
+              "read": "tail.value",
+              "expected": 0
+            },
+            {
+              "read": "length",
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": [""]
+            },
+            {
+              "read": "head.value",
+              "expected": ""
+            },
+            {
+              "read": "length",
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": [42]
+            },
+            {
+              "read": "head",
+              "expected": {
+                "value": 42,
+                "next": null
+              }
+            },
+            {
+              "read": "tail",
+              "expected": {
+                "value": 42,
+                "next": null
+              }
+            }
+          ]
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(1)",
+        "space": "O(1)"
+      }
+    }
+  ]
+}

@@ -180,10 +180,17 @@ describe('course home', () => {
     })
     expect(approach).toHaveAttribute('href', '/learn/problem-solving-approach')
     expect(approach).toHaveTextContent('7 lessons · 14 questions · 3 exercises')
+    const linkedLists = screen.getByRole('link', {
+      name: /Module 13 Linked Lists/,
+    })
+    expect(linkedLists).toHaveAttribute('href', '/learn/linked-lists')
+    expect(linkedLists).toHaveTextContent(
+      '4 lessons · 11 questions · 1 exercise',
+    )
     expect(
-      screen.queryByRole('link', { name: /Linked Lists/ }),
+      screen.queryByRole('link', { name: /Doubly Linked Lists/ }),
     ).not.toBeInTheDocument()
-    expect(screen.getAllByText('Coming soon')).toHaveLength(19)
+    expect(screen.getAllByText('Coming soon')).toHaveLength(18)
   })
 })
 
@@ -207,7 +214,7 @@ describe('module page', () => {
   })
 
   it('says a module without content is not ready yet', () => {
-    renderAsReturningStudent('/learn/linked-lists')
+    renderAsReturningStudent('/learn/doubly-linked-lists')
     expect(
       screen.getByText("This module isn't ready yet. Check back soon!"),
     ).toBeInTheDocument()

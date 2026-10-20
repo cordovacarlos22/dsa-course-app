@@ -1,0 +1,144 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which two things does an array have that a linked list doesn't?",
+        "es": "¿Qué dos cosas tiene un array que una lista enlazada no tiene?"
+      },
+      "options": [
+        {
+          "en": "A length and a first item",
+          "es": "Una longitud y un primer elemento"
+        },
+        {
+          "en": "Indexes, and items stored side by side in memory",
+          "es": "Índices, y elementos guardados uno junto al otro en memoria"
+        },
+        {
+          "en": "Values and pointers",
+          "es": "Valores y punteros"
+        },
+        {
+          "en": "Methods and properties",
+          "es": "Métodos y propiedades"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Think about `guests[2]`, and about how the computer finds it so fast.",
+        "es": "Piensa en `guests[2]`, y en cómo la computadora lo encuentra tan rápido."
+      },
+      "explanation": {
+        "en": "An array numbers its items and keeps them in one unbroken block, so it can jump to any index. A linked list has no indexes, and its nodes can be anywhere in memory, held together by pointers.",
+        "es": "Un array numera sus elementos y los guarda en un solo bloque sin huecos, así que puede saltar a cualquier índice. Una lista enlazada no tiene índices, y sus nodos pueden estar en cualquier parte de la memoria, unidos por punteros."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `secondValue(head)`. `head` is the first node of a list like `{ value: 'Ana', next: { value: 'Ben', next: null } }`, or `null` for an empty list. Return the **second** node's `value`, or `null` if the list has fewer than 2 nodes.",
+        "es": "Escribe `secondValue(head)`. `head` es el primer nodo de una lista como `{ value: 'Ana', next: { value: 'Ben', next: null } }`, o `null` si la lista está vacía. Regresa el `value` del **segundo** nodo, o `null` si la lista tiene menos de 2 nodos."
+      },
+      "hint": {
+        "en": "The second node is `head.next`. Before reading `head.next.value`, check that `head` isn't `null` and that `head.next` isn't `null`.",
+        "es": "El segundo nodo es `head.next`. Antes de leer `head.next.value`, revisa que `head` no sea `null` y que `head.next` no sea `null`."
+      },
+      "starterCode": "function secondValue(head) {\n  // follow one link from head\n  return null\n}",
+      "solution": "function secondValue(head) {\n  if (head === null || head.next === null) {\n    return null\n  }\n  return head.next.value\n}",
+      "kind": "function",
+      "functionName": "secondValue",
+      "tests": [
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": {
+                "value": "Ben",
+                "next": {
+                  "value": "Cleo",
+                  "next": null
+                }
+              }
+            }
+          ],
+          "expected": "Ben"
+        },
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": {
+                "value": "Ben",
+                "next": null
+              }
+            }
+          ],
+          "expected": "Ben"
+        },
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": null
+            }
+          ],
+          "expected": null
+        },
+        {
+          "args": [null],
+          "expected": null
+        },
+        {
+          "args": [
+            {
+              "value": 4,
+              "next": {
+                "value": 8,
+                "next": {
+                  "value": 15,
+                  "next": null
+                }
+              }
+            }
+          ],
+          "expected": 8
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which `LinkedList` method adds a guest to the **front** of the line?",
+        "es": "¿Qué método de `LinkedList` agrega un invitado al **inicio** de la fila?"
+      },
+      "options": [
+        {
+          "en": "`push`",
+          "es": "`push`"
+        },
+        {
+          "en": "`pop`",
+          "es": "`pop`"
+        },
+        {
+          "en": "`unshift`",
+          "es": "`unshift`"
+        },
+        {
+          "en": "`shift`",
+          "es": "`shift`"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Two methods work at the front: one adds, one removes.",
+        "es": "Dos métodos trabajan al inicio: uno agrega y otro quita."
+      },
+      "explanation": {
+        "en": "`unshift` adds at the front and `shift` removes from the front, just like the array methods with the same names. `push` and `pop` work at the back.",
+        "es": "`unshift` agrega al inicio y `shift` quita del inicio, igual que los métodos de array con los mismos nombres. `push` y `pop` trabajan al final."
+      }
+    }
+  ]
+}

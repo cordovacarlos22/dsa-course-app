@@ -1,0 +1,241 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "A linked list holds n guests. What's the Big O of `pop()`, and why?",
+        "es": "Una lista enlazada tiene n invitados. ¿Cuál es el Big O de `pop()`, y por qué?"
+      },
+      "options": [
+        {
+          "en": "O(1), because `tail` already points to the last node",
+          "es": "O(1), porque `tail` ya apunta al último nodo"
+        },
+        {
+          "en": "O(log n), because it skips half the list each step",
+          "es": "O(log n), porque se salta la mitad de la lista en cada paso"
+        },
+        {
+          "en": "O(n²), because it compares every node with every other node",
+          "es": "O(n²), porque compara cada nodo con todos los demás"
+        },
+        {
+          "en": "O(n), because it walks from `head` to find the node before the tail",
+          "es": "O(n), porque camina desde `head` para encontrar el nodo antes del tail"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "After the last guest leaves, `tail` has to move to the guest before. Can you get there from the tail?",
+        "es": "Cuando el último invitado se va, `tail` tiene que moverse al invitado anterior. ¿Puedes llegar ahí desde el tail?"
+      },
+      "explanation": {
+        "en": "Pointers only go forward, so nothing leads back from the tail. `pop` walks from `head` until it finds the node whose `next` is the tail. A longer line means a longer walk: O(n).",
+        "es": "Los punteros solo van hacia adelante, así que nada regresa desde el tail. `pop` camina desde `head` hasta encontrar el nodo cuyo `next` es el tail. Una fila más larga significa una caminata más larga: O(n)."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `addToFront(head, value)`. Make a new node `{ value, next }` that points to the old first node, and return it: it's the new head. `head` may be `null` (an empty list).",
+        "es": "Escribe `addToFront(head, value)`. Crea un nodo nuevo `{ value, next }` que apunte al antiguo primer nodo, y regrésalo: es el nuevo head. `head` puede ser `null` (una lista vacía)."
+      },
+      "hint": {
+        "en": "Set `newNode.next = head`, then `return newNode`. With an empty list, `head` is `null`, so the new node's `next` is `null`: that's right.",
+        "es": "Haz `newNode.next = head` y luego `return newNode`. Con una lista vacía, `head` es `null`, así que el `next` del nodo nuevo es `null`: eso está bien."
+      },
+      "starterCode": "function addToFront(head, value) {\n  const newNode = { value: value, next: null }\n  // point the new node at the old head, then return the new head\n  return head\n}",
+      "solution": "function addToFront(head, value) {\n  const newNode = { value: value, next: null }\n  newNode.next = head\n  return newNode\n}",
+      "kind": "function",
+      "functionName": "addToFront",
+      "tests": [
+        {
+          "args": [null, "Ana"],
+          "expected": {
+            "value": "Ana",
+            "next": null
+          }
+        },
+        {
+          "args": [
+            {
+              "value": "Ben",
+              "next": null
+            },
+            "Ana"
+          ],
+          "expected": {
+            "value": "Ana",
+            "next": {
+              "value": "Ben",
+              "next": null
+            }
+          }
+        },
+        {
+          "args": [
+            {
+              "value": "Ben",
+              "next": {
+                "value": "Cleo",
+                "next": null
+              }
+            },
+            "Zoe"
+          ],
+          "expected": {
+            "value": "Zoe",
+            "next": {
+              "value": "Ben",
+              "next": {
+                "value": "Cleo",
+                "next": null
+              }
+            }
+          }
+        },
+        {
+          "args": [
+            {
+              "value": 2,
+              "next": {
+                "value": 3,
+                "next": null
+              }
+            },
+            1
+          ],
+          "expected": {
+            "value": 1,
+            "next": {
+              "value": 2,
+              "next": {
+                "value": 3,
+                "next": null
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `indexOf(head, value)`. Walk the list from `head`, counting indexes from 0, and return the index of the first node whose `value` matches. Return `-1` if no node matches (or the list is empty).",
+        "es": "Escribe `indexOf(head, value)`. Recorre la lista desde `head`, contando índices desde 0, y regresa el índice del primer nodo cuyo `value` coincida. Regresa `-1` si ningún nodo coincide (o si la lista está vacía)."
+      },
+      "hint": {
+        "en": "Use `while (temp !== null)`. Inside, return `index` when `temp.value === value`; otherwise move `temp = temp.next` and add 1 to `index`.",
+        "es": "Usa `while (temp !== null)`. Adentro, regresa `index` cuando `temp.value === value`; si no, mueve `temp = temp.next` y súmale 1 a `index`."
+      },
+      "starterCode": "function indexOf(head, value) {\n  let temp = head\n  let index = 0\n  // walk until temp is null, and return index when the value matches\n  return -1\n}",
+      "solution": "function indexOf(head, value) {\n  let temp = head\n  let index = 0\n  while (temp !== null) {\n    if (temp.value === value) {\n      return index\n    }\n    temp = temp.next\n    index++\n  }\n  return -1\n}",
+      "kind": "function",
+      "functionName": "indexOf",
+      "tests": [
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": {
+                "value": "Ben",
+                "next": {
+                  "value": "Cleo",
+                  "next": null
+                }
+              }
+            },
+            "Cleo"
+          ],
+          "expected": 2
+        },
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": {
+                "value": "Ben",
+                "next": {
+                  "value": "Cleo",
+                  "next": null
+                }
+              }
+            },
+            "Ana"
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": {
+                "value": "Ben",
+                "next": {
+                  "value": "Cleo",
+                  "next": null
+                }
+              }
+            },
+            "Zoe"
+          ],
+          "expected": -1
+        },
+        {
+          "args": [null, "Ana"],
+          "expected": -1
+        },
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": {
+                "value": "Ben",
+                "next": {
+                  "value": "Ana",
+                  "next": null
+                }
+              }
+            },
+            "Ana"
+          ],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "At a ticket counter, new guests join at the back and the guest at the front is served and leaves. Which structure does **both** jobs in O(1)?",
+        "es": "En una taquilla, los invitados nuevos se forman al final y al invitado del inicio lo atienden y se va. ¿Qué estructura hace **los dos** trabajos en O(1)?"
+      },
+      "options": [
+        {
+          "en": "A linked list with `head` and `tail`: `push` and `shift` are both O(1)",
+          "es": "Una lista enlazada con `head` y `tail`: `push` y `shift` son O(1)"
+        },
+        {
+          "en": "An array, because `push` is O(1)",
+          "es": "Un array, porque `push` es O(1)"
+        },
+        {
+          "en": "An array, because finding by index is O(1)",
+          "es": "Un array, porque buscar por índice es O(1)"
+        },
+        {
+          "en": "Neither: removing from the front is always O(n)",
+          "es": "Ninguna: quitar del inicio siempre es O(n)"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "Joining at the back is `push`; leaving from the front is `shift`. Check both rows of the table.",
+        "es": "Formarse al final es `push`; salir por el inicio es `shift`. Revisa los dos renglones de la tabla."
+      },
+      "explanation": {
+        "en": "A linked list does `push` in O(1) thanks to `tail`, and `shift` in O(1) by moving `head`. An array also does `push` in O(1), but every `shift` re-indexes the whole line: O(n).",
+        "es": "Una lista enlazada hace `push` en O(1) gracias a `tail`, y `shift` en O(1) moviendo `head`. Un array también hace `push` en O(1), pero cada `shift` reindexa toda la fila: O(n)."
+      }
+    }
+  ]
+}
