@@ -11,7 +11,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-13: **Ponytail** recorded and limited to code on `docs/ponytail` (built on `fix/tool-findings`).
 - 2026-10-13: **Stage 8 roadmap** (accounts, a Duolingo-style lock, XP, 2-step), in 5 PRs. PR 1, the **landing preview**, is merged (#23). PRs 2–5 wait for Carlos's account setup.
 - 2026-10-13: **Section 3 of both courses, merged, with theory first** (4 PRs). PR 1, **Big O of Arrays & Objects** (plus a deeper Big O lesson 16), is merged (#24).
-- 2026-10-19: **Section 4 of both courses, merged** (6 PRs, then the theory pass). PR 1, the **course order** (Classes & Pointers moves right before Linked Lists), is on `content/course-order`. Next: A Problem-Solving Approach, Classes & Pointers, then Linked Lists in 3 PRs.
+- 2026-10-19: **Section 4 of both courses, merged** (6 PRs, then the theory pass). PR 1, the **course order** (Classes & Pointers moves right before Linked Lists), is PR #25. PR 2, **A Problem-Solving Approach** (7 lessons), is on `content/problem-solving-approach`, built on #25. Next: Classes & Pointers, then Linked Lists in 3 PRs.
 
 ## Decisions
 
@@ -45,6 +45,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-13: **Classes & Pointers uses course 1 only for now.** Course 2 teaches class syntax later (instance vs static methods, in its data structures introduction). That lesson, and the `Point` class with a static `distance`, wait for Carlos to send its transcript.
 - 2026-10-19: **Classes & Pointers moves right before Linked Lists** (Carlos chose "Right before Linked Lists"). It now opens the Data Structures section as module 12, and Foundations is Introduction, Big O and Big O of Arrays & Objects. Reason: both courses teach classes right before their first data structure (course 1 goes classes → linked lists; course 2 teaches class syntax just before its linked lists). The Introduction lessons were updated to match.
 - 2026-10-19: **Section 4 of both courses, merged** (Carlos: "combine section 4 of both courses or maybe restructure course lectures"). They're different topics again, so they make two modules: **A Problem-Solving Approach** (course 2) and **Linked Lists** (course 1). They meet inside the lessons: **every linked list method lesson follows the 5 steps** (Carlos chose "Use the 5 steps in every list method"): understand, examples (empty, one, many), break it down, write the code, look back. The Linked Lists story is the guests' **conga line**. Its interview problems wait for course 1's Section 5, and course 2's own linked list section joins when Carlos sends it. The slides PDF's pages 26–51 (patterns) wait for course 2's Section 5.
+- 2026-10-19: **Linked lists start with one node or empty** (from a side-agent note, before any linked list code). `new LinkedList('Ana')` starts with one node, as in course 1; `new LinkedList()` starts empty, as course 2 likely does. Reason: folding in course 2's linked list section later won't mean rewriting every exercise, and tests can make an empty list without a helper. Carlos can still change it before the linked list PRs.
 - 2026-10-11 (later): **Big O follows both courses closely.** Carlos: "still not enough … missing a lot of the content from the 2 files … even if we are going to be super close to the original 2 courses". One lesson per lecture (17), the courses' own examples plus the guest-list animations, every point of both files (text, slides and quizzes) covered; sentences stay ours. **Sources for Big O are his two `.docx` files** in the "DSA + LEETCODE…" Desktop folder, not `guiones/`; he'll add files for the other modules later.
 
 - 2026-10-11: **Codecademy-style learning (Carlos).** Students must prove they understood before moving on: lessons are split into **steps** (each `##` heading), every step ends with a **checkpoint** (quick question or small code task checked by tests), and **Next stays locked until it passes**. Stuck → hint, then the solution after 3 failed tries (recorded as "viewed solution"). Coding steps use a **3-pane workspace** (Learn | Editor | Output). Being built in `feat/step-checkpoints`.
@@ -145,6 +146,12 @@ Agents: read this at the start of every session and update it at the end (see `A
   - **Big O of Arrays & Objects:** 4 lessons, 14 steps (EN + ES, 5,251 English words; lesson 4 runs long, 1,764), and a practice file with 15 quiz questions and 3 interview problems.
   - **New animations:** `array-vs-object`, `object-access`, `object-insert-remove`, `object-has-key`, `object-to-array`, `array-copy-methods`, `array-loop-methods`, `sort-growth-chart` (the growth chart can now pick its curves and has O(n log n)), and the trace `trace-has-answer`.
   - **Checked:** in Chrome under `vercel.json`'s headers (54 steps, 16 snippets run, 0 CSP violations, 320–1280 px, Spanish, reduced motion), and no 8-word run matches the course notes or slides.
+- 2026-10-19, `content/course-order` (PR #25): Classes & Pointers moved to module 12, the Introduction lessons updated, and the Section 4 sources and 5-step rule added to `AGENTS.md`.
+- 2026-10-19, `content/problem-solving-approach`:
+  - **7 lessons, 21 steps** (EN + ES, 7,200 English words), one per lecture of course 2's Section 4, on `add` and `charCount`.
+  - **Practice:** a quiz with 14 questions and 3 interview problems.
+  - **New animations:** `five-steps` (plus one version per step), `example-ladder`, `steps-to-code`, `solution-layers`, `char-code-ranges`, and the trace `trace-char-count`.
+  - **Checked:** in Chrome under `vercel.json`'s headers (63 step views, 39 animations, 36 snippets, 0 CSP violations, 320–1280 px, Spanish, reduced motion). No 8-word run matches the course notes or slides, after rewording the slides' question lists.
 - 2026-10-13, `docs/ponytail`: Ponytail reviewed (no network calls; the installed files match the reviewed commit). `AGENTS.md` limits it to app code, and `.claude/skills/README.md` says what it runs and how to update or turn it off.
 
 ## Next
@@ -156,7 +163,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 - Big O module still needs: the interview problem "Count the Operations" and its slides (later stage).
 - **Content, in this order** (plan of 2026-10-19):
-  1. `content/problem-solving-approach`: 7 lessons from course 2's Section 4, a quiz and 3 interview problems.
+  1. ✅ `content/problem-solving-approach`: 7 lessons from course 2's Section 4, a quiz and 3 interview problems.
   2. `content/classes-and-pointers`: 2 lessons from course 1's Section 3 (classes with the Cookie class, pointers and garbage collection), theory first, plus Spanish for the 12 existing quiz questions and a `Counter` Build it.
   3. `content/linked-lists-1`, `-2`, `-3`: course 1's Section 4 in 13 lessons (lessons 1–4, then push/pop/unshift/shift, then get/set/insert/remove/reverse), with the list diagram, Build its and the quiz.
   4. The theory pass on Introduction 1–3 and Big O 1–8, then Big O 9–15 and 17. The landing preview reads Big O lesson 1's checkpoint 2, so keep that step (or update `TryItPreview.jsx`).
@@ -167,22 +174,24 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Course sections imported
 
-| Section                      | File                                         | Questions | Exercises                                                                   | Spanish | Date       |
-| ---------------------------- | -------------------------------------------- | --------- | --------------------------------------------------------------------------- | ------- | ---------- |
-| 1: Introduction              | `content/practice/introduction.json`         | 10        | none                                                                        | done    | 2026-10-11 |
-| 2: Big O                     | `content/practice/big-o.json`                | 33        | find-max (easy), contains-duplicate (easy), binary-search (medium)          | done    | 2026-10-11 |
-| 3: Classes & Pointers        | `content/practice/classes-and-pointers.json` | 12        | cookie-class (easy, class)                                                  | missing | 2026-10-11 |
-| 3: Big O of Arrays & Objects | `content/practice/arrays-and-objects.json`   | 15        | word-frequency (easy), last-answer-wins (easy), guests-who-arrived (medium) | done    | 2026-10-13 |
+| Section                       | File                                             | Questions | Exercises                                                                   | Spanish | Date       |
+| ----------------------------- | ------------------------------------------------ | --------- | --------------------------------------------------------------------------- | ------- | ---------- |
+| 1: Introduction               | `content/practice/introduction.json`             | 10        | none                                                                        | done    | 2026-10-11 |
+| 2: Big O                      | `content/practice/big-o.json`                    | 33        | find-max (easy), contains-duplicate (easy), binary-search (medium)          | done    | 2026-10-11 |
+| 3: Classes & Pointers         | `content/practice/classes-and-pointers.json`     | 12        | cookie-class (easy, class)                                                  | missing | 2026-10-11 |
+| 3: Big O of Arrays & Objects  | `content/practice/arrays-and-objects.json`       | 15        | word-frequency (easy), last-answer-wins (easy), guests-who-arrived (medium) | done    | 2026-10-13 |
+| 4: A Problem-Solving Approach | `content/practice/problem-solving-approach.json` | 14        | count-the-vowels (easy), character-counter (easy), title-case (easy)        | done    | 2026-10-19 |
 
 Modules 04–17 have empty folders; they appear in `course.json` as "coming soon".
 
 ### Lessons written
 
-| Module                       | Lessons                                                                                                                                                     | Languages | Date       |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
-| 01 Introduction              | `01-welcome`, `02-how-to-get-the-most-out-of-it`, `03-running-code`                                                                                         | EN + ES   | 2026-10-11 |
-| 02 Big O                     | 17 lessons, one per lecture (`01-why-big-o` … `17-wrap-up`)                                                                                                 | EN + ES   | 2026-10-11 |
-| 03 Big O of Arrays & Objects | `01-built-in-data-structures`, `02-big-o-of-objects`, `03-object-methods`, `04-big-o-of-array-methods` (theory first); Big O `16-big-o-of-arrays` rewritten | EN + ES   | 2026-10-13 |
+| Module                        | Lessons                                                                                                                                                     | Languages | Date       |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------- |
+| 01 Introduction               | `01-welcome`, `02-how-to-get-the-most-out-of-it`, `03-running-code`                                                                                         | EN + ES   | 2026-10-11 |
+| 02 Big O                      | 17 lessons, one per lecture (`01-why-big-o` … `17-wrap-up`)                                                                                                 | EN + ES   | 2026-10-11 |
+| 03 Big O of Arrays & Objects  | `01-built-in-data-structures`, `02-big-o-of-objects`, `03-object-methods`, `04-big-o-of-array-methods` (theory first); Big O `16-big-o-of-arrays` rewritten | EN + ES   | 2026-10-13 |
+| 04 A Problem-Solving Approach | `01-why-a-method` … `07-the-method-in-an-interview` (one per lecture, theory first)                                                                         | EN + ES   | 2026-10-19 |
 
 ## Open questions
 
