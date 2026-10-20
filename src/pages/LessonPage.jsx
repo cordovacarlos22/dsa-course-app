@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useLanguage } from '../hooks/useLanguage'
 import { celebrate } from '../lib/celebrate'
-import { getModule, localize } from '../lib/course'
-import { getLessonSteps, getLessonVersion } from '../lib/lessons'
+import { getModule, lessonTitle, localize } from '../lib/course'
+import { getLesson, getLessonSteps, getLessonVersion } from '../lib/lessons'
 import {
   countFirstTry,
   failedAttempts,
@@ -51,7 +51,9 @@ function LessonPlayer({ module, lessonIndex }) {
   const { t } = useTranslation()
   const { language } = useLanguage()
   const [searchParams, setSearchParams] = useSearchParams()
-  const lesson = module.lessons[lessonIndex]
+  // module.lessons is the short summary (titles, minutes); the full lesson,
+  // with its text and checkpoints, comes from lib/lessons.
+  const lesson = getLesson(module.slug, module.lessons[lessonIndex].slug)
   const nextLesson = module.lessons[lessonIndex + 1]
   useDocumentTitle(getLessonVersion(lesson, language).title)
   const steps = getLessonSteps(lesson, language)
@@ -107,7 +109,9 @@ function LessonPlayer({ module, lessonIndex }) {
     const finishesLesson =
       !progress.completed &&
       markStepPassed(progress, stepIndex, steps.length).completed
-    const otherLessons = module.lessons.filter((other) => other !== lesson)
+    const otherLessons = module.lessons.filter(
+      (other) => other.slug !== lesson.slug,
+    )
     const finishesModule =
       finishesLesson && isModuleComplete(module.slug, otherLessons)
     celebrate(finishesModule ? 'module' : finishesLesson ? 'lesson' : 'step')
@@ -262,7 +266,7 @@ function LessonPlayer({ module, lessonIndex }) {
             className={`rounded-xl bg-brand px-5 py-2 font-bold text-white ${nudge}`}
           >
             {nextLesson
-              ? `${t('lesson.next')}: ${getLessonVersion(nextLesson, language).title} →`
+              ? `${t('lesson.next')}: ${lessonTitle(nextLesson, language)} →`
               : t('lesson.backToModule', { module: moduleTitle })}
           </Link>
         ) : (

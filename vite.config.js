@@ -1,21 +1,29 @@
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import contentCatalog from './scripts/content-catalog.js'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    contentCatalog(fileURLToPath(new URL('./content', import.meta.url))),
+  ],
   build: {
     // The code editor (CodeMirror, ~515 kB) is its own chunk, loaded only
     // when a coding step opens, so it doesn't slow down the first page.
     chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
-        // Course content (lessons, checkpoints, quizzes) goes in its own file:
-        // editing a lesson then only changes that file, so students don't
-        // re-download the app code.
+        // Lessons and quizzes go in their own files: editing a lesson then
+        // only changes that file, so students don't re-download the app
+        // code. They load with the pages that show them (the first page only
+        // needs the summary from scripts/content-catalog.js).
         manualChunks(id) {
-          if (id.includes('/content/')) return 'content'
+          if (/\/content\/lessons\/.*\.md/.test(id)) return 'lessons'
+          if (id.includes('/content/practice/')) return 'practice'
         },
       },
     },
