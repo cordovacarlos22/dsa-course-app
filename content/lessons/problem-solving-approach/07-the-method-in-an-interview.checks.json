@@ -1,0 +1,109 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which two steps are both mainly about understanding the problem?",
+        "es": "¿Qué dos pasos tratan principalmente de entender el problema?"
+      },
+      "options": [
+        {
+          "en": "Solve or simplify, and look back",
+          "es": "Resolver o simplificar, y revisar"
+        },
+        {
+          "en": "Break it down, and solve or simplify",
+          "es": "Dividirlo en pasos, y resolver o simplificar"
+        },
+        {
+          "en": "Understand the problem, and explore concrete examples",
+          "es": "Entender el problema, y explorar ejemplos concretos"
+        },
+        {
+          "en": "Explore examples, and look back",
+          "es": "Explorar ejemplos, y revisar"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "They're the first two, and the ones nervous people skip.",
+        "es": "Son los dos primeros, y los que se salta la gente nerviosa."
+      },
+      "explanation": {
+        "en": "Steps 1 and 2 are both about what goes in, what comes out and what happens with strange input. Never skip them in an interview.",
+        "es": "Los pasos 1 y 2 tratan de qué entra, qué sale y qué pasa con las entradas raras. Nunca te los saltes en una entrevista."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "In an interview, you're stuck on one part with 10 minutes left. What's the best move?",
+        "es": "En una entrevista, estás atascado en una parte y quedan 10 minutos. ¿Qué es lo mejor que puedes hacer?"
+      },
+      "options": [
+        {
+          "en": "Stay quiet and keep thinking until you've solved it",
+          "es": "Quedarte callado y seguir pensando hasta resolverlo"
+        },
+        {
+          "en": "Say what you're stuck on, write the rest, and ask a precise question about the hard part",
+          "es": "Decir en qué estás atascado, escribir el resto y hacer una pregunta precisa sobre la parte difícil"
+        },
+        {
+          "en": "Erase everything and try a completely new approach",
+          "es": "Borrarlo todo e intentar un enfoque completamente nuevo"
+        },
+        {
+          "en": "Tell the interviewer the problem is too hard",
+          "es": "Decirle al entrevistador que el problema es demasiado difícil"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "The interviewer can only help with what they can hear.",
+        "es": "El entrevistador solo puede ayudarte con lo que escucha."
+      },
+      "explanation": {
+        "en": "Writing what you can (simplify) and asking a precise question shows your process, and a precise question is the one most likely to get a useful hint.",
+        "es": "Escribir lo que puedes (simplificar) y hacer una pregunta precisa muestra tu proceso, y una pregunta precisa es la que más probablemente consigue una pista útil."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Follow the plan and write `longestWord(sentence)`: return the longest word. If two words are equally long, the first one wins. An empty string returns `''`.",
+        "es": "Sigue el plan y escribe `longestWord(sentence)`: regresa la palabra más larga. Si dos palabras miden lo mismo, gana la primera. Un string vacío regresa `''`."
+      },
+      "hint": {
+        "en": "`sentence.split(' ')` gives the words. Replace the longest only when a word is strictly longer (`>`, not `>=`).",
+        "es": "`sentence.split(' ')` te da las palabras. Reemplaza la más larga solo cuando una palabra sea estrictamente más larga (`>`, no `>=`)."
+      },
+      "starterCode": "function longestWord(sentence) {\n  // split the sentence into words\n  // remember the longest word so far\n  // loop over the words: a longer word replaces it\n  // return the longest word\n}",
+      "solution": "function longestWord(sentence) {\n  const words = sentence.split(' ')\n  let longest = words[0]\n  for (let i = 1; i < words.length; i++) {\n    if (words[i].length > longest.length) longest = words[i]\n  }\n  return longest\n}",
+      "kind": "function",
+      "functionName": "longestWord",
+      "tests": [
+        {
+          "args": ["Hi Ana"],
+          "expected": "Ana"
+        },
+        {
+          "args": ["party at eight"],
+          "expected": "party"
+        },
+        {
+          "args": [""],
+          "expected": ""
+        },
+        {
+          "args": ["one"],
+          "expected": "one"
+        },
+        {
+          "args": ["a bb cc"],
+          "expected": "bb"
+        }
+      ]
+    }
+  ]
+}

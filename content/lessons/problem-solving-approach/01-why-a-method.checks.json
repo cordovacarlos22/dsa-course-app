@@ -1,0 +1,106 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What is an algorithm?",
+        "es": "¿Qué es un algoritmo?"
+      },
+      "options": [
+        {
+          "en": "A program that uses artificial intelligence",
+          "es": "Un programa que usa inteligencia artificial"
+        },
+        {
+          "en": "Any code that runs in O(1)",
+          "es": "Cualquier código que corre en O(1)"
+        },
+        {
+          "en": "A list of steps that gets a job done",
+          "es": "Una lista de pasos que hace un trabajo"
+        },
+        {
+          "en": "Code that only large companies write",
+          "es": "Código que solo escriben las empresas grandes"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "The definition is much simpler than the word sounds.",
+        "es": "La definición es mucho más simple de lo que suena la palabra."
+      },
+      "explanation": {
+        "en": "An algorithm is simply a list of steps that gets a job done. `isInvited`, a three-line loop, is one.",
+        "es": "Un algoritmo es solo una lista de pasos que hace un trabajo. `isInvited`, un bucle de tres líneas, es uno."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "According to this lesson, what are the two ways to get better at solving new problems?",
+        "es": "Según esta lección, ¿cuáles son las dos formas de mejorar para resolver problemas nuevos?"
+      },
+      "options": [
+        {
+          "en": "Have a plan for solving problems, and master the common patterns",
+          "es": "Tener un plan para resolver problemas, y dominar los patrones comunes"
+        },
+        {
+          "en": "Memorize as many solutions as possible, and type faster",
+          "es": "Memorizar la mayor cantidad de soluciones posible, y escribir más rápido"
+        },
+        {
+          "en": "Learn more programming languages, and use better tools",
+          "es": "Aprender más lenguajes de programación, y usar mejores herramientas"
+        },
+        {
+          "en": "Only practice problems you've already seen",
+          "es": "Practicar solo problemas que ya has visto"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "One is this module, and the other is the next module.",
+        "es": "Una es este módulo, y la otra es el siguiente módulo."
+      },
+      "explanation": {
+        "en": "A plan (this module's 5 steps) keeps you moving on any problem, and patterns (the next module) are recipes for whole families of problems.",
+        "es": "Un plan (los 5 pasos de este módulo) te mantiene avanzando con cualquier problema, y los patrones (el siguiente módulo) son recetas para familias completas de problemas."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which step comes right after exploring concrete examples?",
+        "es": "¿Qué paso va justo después de explorar ejemplos concretos?"
+      },
+      "options": [
+        {
+          "en": "Understand the problem",
+          "es": "Entender el problema"
+        },
+        {
+          "en": "Look back and refactor",
+          "es": "Revisar y refactorizar"
+        },
+        {
+          "en": "Solve it, or simplify it",
+          "es": "Resolverlo, o simplificarlo"
+        },
+        {
+          "en": "Break it down",
+          "es": "Dividirlo en pasos"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "You plan before you write the real code.",
+        "es": "Planeas antes de escribir el código de verdad."
+      },
+      "explanation": {
+        "en": "The order is: understand, explore examples, break it down, solve or simplify, look back. The plan comes before the code.",
+        "es": "El orden es: entender, explorar ejemplos, dividirlo en pasos, resolver o simplificar, revisar. El plan va antes del código."
+      }
+    }
+  ]
+}

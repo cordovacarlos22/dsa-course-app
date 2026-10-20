@@ -1,0 +1,139 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "You're stuck on one part of a problem. What does \"solve a simpler problem\" mean?",
+        "es": "Estás atascado en una parte de un problema. ¿Qué quiere decir \"resolver un problema más simple\"?"
+      },
+      "options": [
+        {
+          "en": "Switch to an easier problem you already know",
+          "es": "Cambiarte a un problema más fácil que ya conoces"
+        },
+        {
+          "en": "Wait until the interviewer gives you the answer",
+          "es": "Esperar a que el entrevistador te dé la respuesta"
+        },
+        {
+          "en": "Delete what you have and start over",
+          "es": "Borrar lo que tienes y empezar de nuevo"
+        },
+        {
+          "en": "Set aside the hard part, solve everything else, then add the hard part back",
+          "es": "Dejar a un lado la parte difícil, resolver todo lo demás y luego agregar de nuevo la parte difícil"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "You keep the real problem. You only postpone one piece.",
+        "es": "Te quedas con el problema real. Solo pospones una pieza."
+      },
+      "explanation": {
+        "en": "Simplifying means ignoring the core difficulty for now, not changing the problem. Then you bring the difficulty back in.",
+        "es": "Simplificar quiere decir ignorar la dificultad principal por ahora, no cambiar el problema. Luego vuelves a agregar la dificultad."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write the simple `charCount(str)`: count every character exactly as it is. Don't lowercase and don't skip anything yet.",
+        "es": "Escribe el `charCount(str)` simple: cuenta cada carácter tal como es. Todavía no pases a minúsculas ni te saltes nada."
+      },
+      "hint": {
+        "en": "Loop over the string. If `result[char] > 0`, add 1; otherwise set it to 1.",
+        "es": "Recorre el string. Si `result[char] > 0`, súmale 1; si no, ponlo en 1."
+      },
+      "starterCode": "function charCount(str) {\n  const result = {}\n  // Loop over the string and count each character\n  return result\n}",
+      "solution": "function charCount(str) {\n  const result = {}\n  for (let i = 0; i < str.length; i++) {\n    const char = str[i]\n    if (result[char] > 0) {\n      result[char]++\n    } else {\n      result[char] = 1\n    }\n  }\n  return result\n}",
+      "kind": "function",
+      "functionName": "charCount",
+      "tests": [
+        {
+          "args": ["banana"],
+          "expected": {
+            "b": 1,
+            "a": 3,
+            "n": 2
+          }
+        },
+        {
+          "args": ["aaa"],
+          "expected": {
+            "a": 3
+          }
+        },
+        {
+          "args": [""],
+          "expected": {}
+        },
+        {
+          "args": ["ab ba"],
+          "expected": {
+            "a": 2,
+            "b": 2,
+            " ": 1
+          }
+        },
+        {
+          "args": ["Aa"],
+          "expected": {
+            "A": 1,
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Now add the hard parts back: change `charCount(str)` so it counts only letters and digits, in lowercase. The `isAlphaNumeric` helper is already in the editor.",
+        "es": "Ahora agrega de nuevo las partes difíciles: cambia `charCount(str)` para que cuente solo letras y dígitos, en minúsculas. La función de ayuda `isAlphaNumeric` ya está en el editor."
+      },
+      "hint": {
+        "en": "Lowercase each character as you read it, then wrap the counting in `if (isAlphaNumeric(char))`.",
+        "es": "Pasa cada carácter a minúscula al leerlo, y luego envuelve la cuenta en `if (isAlphaNumeric(char))`."
+      },
+      "starterCode": "function isAlphaNumeric(char) {\n  const allowed = 'abcdefghijklmnopqrstuvwxyz0123456789'\n  return allowed.includes(char)\n}\n\nfunction charCount(str) {\n  const result = {}\n  for (let i = 0; i < str.length; i++) {\n    const char = str[i]\n    if (result[char] > 0) {\n      result[char]++\n    } else {\n      result[char] = 1\n    }\n  }\n  return result\n}",
+      "solution": "function isAlphaNumeric(char) {\n  const allowed = 'abcdefghijklmnopqrstuvwxyz0123456789'\n  return allowed.includes(char)\n}\n\nfunction charCount(str) {\n  const result = {}\n  for (let i = 0; i < str.length; i++) {\n    const char = str[i].toLowerCase()\n    if (isAlphaNumeric(char)) {\n      if (result[char] > 0) {\n        result[char]++\n      } else {\n        result[char] = 1\n      }\n    }\n  }\n  return result\n}",
+      "kind": "function",
+      "functionName": "charCount",
+      "tests": [
+        {
+          "args": ["Hi Ana!"],
+          "expected": {
+            "h": 1,
+            "i": 1,
+            "a": 2,
+            "n": 1
+          }
+        },
+        {
+          "args": ["Party at 8!"],
+          "expected": {
+            "p": 1,
+            "a": 2,
+            "r": 1,
+            "t": 2,
+            "y": 1,
+            "8": 1
+          }
+        },
+        {
+          "args": [""],
+          "expected": {}
+        },
+        {
+          "args": ["!!!"],
+          "expected": {}
+        },
+        {
+          "args": ["AAa"],
+          "expected": {
+            "a": 3
+          }
+        }
+      ]
+    }
+  ]
+}
