@@ -146,7 +146,9 @@
       "memoryBoxes_one": "caja nueva de memoria",
       "memoryBoxes_other": "cajas nuevas de memoria",
       "characters_one": "carácter leído",
-      "characters_other": "caracteres leídos"
+      "characters_other": "caracteres leídos",
+      "nodes_one": "nodo visitado",
+      "nodes_other": "nodos visitados"
     },
     "isInvited": {
       "title": "isInvited: detente en cuanto encuentres el nombre",
@@ -284,6 +286,32 @@
       "firstTime": "{{char}} todavía no es clave: result[{{char}}] es undefined, y undefined > 0 es false. Ponlo en 1.",
       "again": "{{char}} ya es clave, así que súmale 1. Ahora va en {{count}}.",
       "done": "Se leyeron los {{ops}} caracteres, en una sola pasada: O(n). El objeto tiene {{keys}} claves."
+    },
+    "linkedListWalk": {
+      "title": "Recorriendo la fila con temp",
+      "input": "{{n}} invitados",
+      "start": "temp empieza donde apunta head: {{name}}. Movemos temp, nunca head.",
+      "startEmpty": "La fila está vacía. head es null, así que temp también empieza en null.",
+      "greet": "temp no es null, así que el bucle corre: saluda a {{name}}.",
+      "move": "temp = temp.next avanza temp un nodo, a {{name}}.",
+      "moveToNull": "temp = temp.next: {{name}} era el último invitado, así que ahora temp es null.",
+      "stop": "temp es null, así que el bucle se detiene. Nodos visitados: {{count}}. Recorrer la lista es O(n)."
+    },
+    "linkedListConstructor": {
+      "title": "El constructor de LinkedList, línea por línea",
+      "input": "{{label}}",
+      "head": "Empieza vacía: this.head = null.",
+      "tail": "this.tail = null: tampoco hay último nodo todavía.",
+      "length": "this.length = 0. Esto ya es una lista válida, vacía.",
+      "noValue": "value es undefined: no se pasó nada. El if se salta, y la lista se queda vacía.",
+      "emptyDone": "Listo: una lista vacía. head y tail son null y length es 0. push puede agregar invitados después.",
+      "hasValue": "value es {{value}}, no undefined, así que creamos el primer nodo.",
+      "zero": "value es 0. Eso no es undefined, así que 0 recibe un nodo como cualquier otro valor.",
+      "nodeValue": "new Node({{value}}) corre el constructor de Node: this.value = {{value}}.",
+      "nodeNext": "this.next = null: el nodo nuevo todavía no apunta a nada. newNode apunta a él.",
+      "pointHead": "this.head = newNode: head apunta al nodo nuevo.",
+      "pointTail": "this.tail = this.head: tail apunta al mismo nodo que head. Un nodo, dos punteros.",
+      "done": "this.length = 1. Una lista con un nodo: head y tail están los dos en {{value}}."
     }
   },
   "timingChart": {
@@ -621,6 +649,159 @@
       "moveSecond": "second = third mueve la flecha de second al objeto B. Al objeto A todavía le queda first.",
       "moveFirst": "first = third aleja la última flecha de A. Ya nada apunta al objeto A, así que nada puede llegar a él.",
       "collected": "El recolector de basura de JavaScript encuentra los objetos a los que nada apunta y libera su memoria. El objeto A desapareció."
+    }
+  },
+  "linkedList": {
+    "detached": "Fuera de la fila",
+    "visited_one": "{{count}} nodo visitado",
+    "visited_other": "{{count}} nodos visitados",
+    "anatomy": {
+      "title": "Las partes de una lista enlazada",
+      "line": "Cuatro invitados en una fila de conga. Cada uno se agarra del siguiente invitado de la fila, y en el fondo eso es todo lo que es una lista enlazada.",
+      "node": "Cada caja es un nodo. Un nodo guarda un valor, como 'Ben', más un puntero al nodo que va después.",
+      "next": "Ese puntero se llama next. El next de Ana apunta a Ben: ese es el enlace de \"lista enlazada\".",
+      "head": "head apunta al primer nodo. Todo recorrido por la lista empieza aquí.",
+      "tail": "tail apunta al último nodo, así que el final de la fila siempre está a un paso.",
+      "null": "Dev es el último, así que el next de Dev es null: después no viene nadie. A una lista que termina en null se le llama terminada en null.",
+      "summary": "Para llegar a cualquier invitado, empieza en head y sigue next, un nodo a la vez, hasta llegar a null."
+    },
+    "costEnd": {
+      "title": "El final de la fila: push es O(1), pop es O(n)",
+      "start": "Una fila de cuatro invitados. head está en Ana y tail está en Dev.",
+      "newNode": "push('Eve') empieza con un nodo nuevo para Eve. Todavía nada apunta a él.",
+      "link": "tail ya apunta a Dev, así que tail.next = newNode enlaza a Dev con Eve en un solo movimiento.",
+      "moveTail": "tail = newNode mueve tail a Eve. Dos movimientos, tenga la fila 4 invitados o 4,000: push es O(1).",
+      "popProblem": "Ahora haz pop() de Eve. tail tiene que regresar a Dev, y lo único que apunta a Dev es el next de Cleo. No podemos caminar hacia atrás desde Eve.",
+      "walkStart": "Así que empezamos en head, con un puntero llamado temp. temp está en {{name}}. ¿Su next es el tail? No.",
+      "walk": "temp avanza a {{name}}. Su next todavía no es el tail, así que seguimos caminando.",
+      "walkFound": "temp está en {{name}}, y su next es el tail. Ese es el nuevo último invitado.",
+      "moveTailBack": "tail = temp regresa tail a Dev.",
+      "cut": "tail.next = null deja fuera a Eve. Ahora nada apunta al nodo de Eve.",
+      "summary": "pop tuvo que recorrer toda la fila para encontrar al invitado antes del tail. Entre más larga la fila, más larga la caminata: pop es O(n)."
+    },
+    "costFront": {
+      "title": "El inicio de la fila: unshift y shift son O(1)",
+      "start": "La misma fila: head en Ana, tail en Dev.",
+      "newNode": "unshift('Zoe') empieza con un nodo nuevo para Zoe.",
+      "link": "head ya apunta a Ana, así que newNode.next = head hace que Zoe apunte a Ana. Sin caminar.",
+      "moveHead": "head = newNode mueve head a Zoe. Dos movimientos, sin importar lo larga que sea la fila: unshift es O(1).",
+      "shift": "shift() es un solo movimiento: head = head.next regresa head a Ana. Ahora nada apunta a Zoe, así que el recolector de basura se lleva su nodo.",
+      "summary": "Al inicio, head nos da de inmediato el nodo que necesitamos. Agregar y quitar ahí nunca camina: los dos son O(1)."
+    },
+    "costMiddle": {
+      "title": "La mitad de la fila: insert y remove son O(n)",
+      "start": "Insertemos a Eve en el índice 3, entre Cleo y Dev. No hay índices a los cuales saltar, así que contamos mientras caminamos.",
+      "walkStart": "temp empieza en head: {{name}} es el índice 0.",
+      "walk": "temp avanza a {{name}}: índice 1.",
+      "walkFound": "temp avanza a {{name}}: índice 2, el nodo justo antes del índice 3. Aquí nos detenemos.",
+      "link": "newNode.next = temp.next hace que Eve apunte a Dev, el nodo al que apunta Cleo. Primero enlaza el nodo nuevo, para no perder a Dev.",
+      "insert": "temp.next = newNode hace que Cleo apunte a Eve. Eve ya está en el índice 3. Enlazar tomó 2 movimientos, pero la caminata tomó 3 pasos.",
+      "removeWalk": "Ahora quita otra vez el índice 3. La misma caminata: temp se detiene en Cleo, en el índice 2.",
+      "remove": "temp.next = temp.next.next hace que Cleo se salte a Eve y apunte directo a Dev. Nada apunta a Eve, así que Eve ya no está.",
+      "summary": "Mover los punteros es O(1), pero la caminata hasta el lugar correcto crece con la fila. insert y remove son O(n)."
+    },
+    "costLookup": {
+      "title": "Buscar a un invitado: O(n), por valor o por índice",
+      "start": "Busca a Cleo. Una lista enlazada solo puede empezar en head y revisar un nodo a la vez.",
+      "check": "¿{{name}} es Cleo? No. Pasa al siguiente nodo.",
+      "foundValue": "¿{{name}} es Cleo? Sí, después de visitar 3 nodos. Buscar por valor es O(n).",
+      "byIndex": "Buscar el índice 2 no es más rápido: cuenta 0, 1, 2 mientras caminas desde head. Otra vez Cleo, después de visitar 3 nodos.",
+      "array": "Un array salta directo a guests[2], sin importar su tamaño. Eso es O(1), y una lista enlazada no puede hacerlo.",
+      "summary": "En una lista enlazada, buscar a un invitado por valor o por índice significa caminar: O(n) en los dos casos."
+    },
+    "nodeClass": {
+      "title": "Cuatro métodos, un trabajo en común",
+      "makesNode": "crea un nodo",
+      "job": {
+        "create": "empieza la lista con un invitado",
+        "push": "agrega un invitado al final",
+        "unshift": "agrega un invitado al inicio",
+        "insert": "agrega un invitado en un índice"
+      },
+      "create": "El constructor recibe un valor y crea un nodo con él.",
+      "push": "push recibe un valor y crea un nodo, y luego lo agrega al final.",
+      "unshift": "unshift recibe un valor y crea un nodo, y luego lo agrega al inicio.",
+      "insert": "insert recibe un valor y crea un nodo, y luego lo pone en un índice.",
+      "nodeClass": "Cuatro métodos crean lo mismo. En vez de escribir ese código cuatro veces, lo escribimos una sola vez, en su propia clase: Node.",
+      "newNode": "Ahora cualquier método crea un nodo en una línea: new Node('Ana') da { value: 'Ana', next: null }."
+    },
+    "constructorExamples": {
+      "title": "Ejemplos para el constructor",
+      "one": "Un valor: un nodo. head y tail apuntan a él, y length es 1.",
+      "empty": "Sin valor: una lista vacía. head y tail apuntan a null, y length es 0.",
+      "zero": "0 es un valor real, así que también recibe un nodo. Solo un valor que falta significa \"vacía\".",
+      "many": "¿Muchos invitados? El constructor crea un nodo como máximo. push agrega el resto, en la próxima lección."
+    },
+    "constructorPlan": {
+      "title": "El plan, como comentarios",
+      "empty": "Paso 1: empieza vacía. head y tail apuntan a null, y length es 0.",
+      "makeNode": "Paso 2a: si recibimos un valor, crea un nodo nuevo con él. newNode apunta a ese nodo.",
+      "head": "Paso 2b: haz que head apunte al nodo nuevo.",
+      "tail": "Paso 2c: haz que tail apunte al mismo nodo. Ahora head y tail comparten un nodo.",
+      "length": "Paso 2d: length es 1. Ya tenemos la lista."
+    },
+    "comments": {
+      "popProblem": "pop: tail tiene que regresar a Dev",
+      "insertAt3": "insertar a 'Eve' en el índice 3",
+      "index": "índice {{index}}",
+      "removeAt3": "quitar el índice 3: caminar otra vez hasta el índice 2",
+      "findCleo": "buscar a 'Cleo'",
+      "no": "no",
+      "yes": "sí",
+      "findIndex2": "buscar el índice 2: contar mientras caminas",
+      "planEmpty": "1. empieza vacía: head y tail son null, length es 0",
+      "planMakeNode": "2a. se dio un valor: crea un nodo nuevo con él",
+      "planHead": "2b. haz que head apunte al nodo nuevo",
+      "planTail": "2c. haz que tail apunte al mismo nodo",
+      "planLength": "2d. length es 1"
+    }
+  },
+  "arrayVsLinkedList": {
+    "title": "De un array a una lista enlazada",
+    "memory": "Memoria",
+    "array": "Un array de cuatro invitados. Cada invitado tiene un índice, del 0 al 3.",
+    "arrayMemory": "En memoria, los elementos de un array están uno junto al otro, en un solo bloque. Por eso guests[2] salta directo ahí: el inicio del bloque, más 2.",
+    "noIndexes": "Una lista enlazada no tiene índices. Ya no existe guests[2].",
+    "listMemory": "Sus nodos tampoco están uno junto al otro: pueden estar en cualquier parte de la memoria. Cada nodo recuerda dónde está el siguiente.",
+    "chain": "Por eso la dibujamos como una cadena. head apunta al primer nodo, cada nodo apunta al siguiente, y el último apunta a null."
+  },
+  "linkedListBigO": {
+    "title": "Listas enlazadas vs arrays, lado a lado",
+    "operation": "Operación",
+    "linkedList": "Lista enlazada",
+    "array": "Array",
+    "rows": {
+      "push": "push (agregar al final)",
+      "pop": "pop (quitar del final)",
+      "unshift": "unshift (agregar al inicio)",
+      "shift": "shift (quitar del inicio)",
+      "insert": "insert (en un índice)",
+      "remove": "remove (en un índice)",
+      "byIndex": "buscar por índice",
+      "byValue": "buscar por valor"
+    },
+    "all": "Todas las operaciones de esta lección, para las dos estructuras de datos.",
+    "ties": "La mitad de los renglones son empate: push, insert, remove y buscar por valor cuestan lo mismo en las dos.",
+    "arrays": "Los arrays ganan dos renglones: pop y buscar por índice son O(1) en un array y O(n) en una lista enlazada.",
+    "lists": "Las listas enlazadas ganan dos renglones: agregar y quitar al inicio son O(1), mientras que un array tiene que reindexar cada elemento.",
+    "summary": "Ninguna gana todos los renglones. Elige la que es rápida en lo que más vas a hacer."
+  },
+  "linkedListNested": {
+    "node": {
+      "title": "Un nodo, de cerca",
+      "node": "Saquemos un nodo de la fila: el nodo de Dev. Lo dibujamos como una caja con una flecha.",
+      "value": "La primera parte es el valor: 'Dev'. Pero el valor solo no es el nodo.",
+      "next": "La segunda parte es next, el puntero. Dev es el último invitado, así que next es null.",
+      "whole": "El nodo es todo junto, value y next: un solo objeto, { value: 'Dev', next: null }."
+    },
+    "nested": {
+      "title": "La lista es objetos dentro de objetos",
+      "dev": "Empieza con el último invitado: el nodo de Dev, con next en null.",
+      "cleo": "El next de Cleo es el nodo de Dev. En código, todo el objeto de Dev queda dentro del next de Cleo: esa es la flecha.",
+      "ben": "El next de Ben es el nodo de Cleo, así que ahora Cleo y Dev están dentro de Ben.",
+      "ana": "El nodo de Ana contiene a todos los demás. head apunta a él: el objeto de afuera.",
+      "tail": "tail apunta al objeto de más adentro, el nodo de Dev. Lo apuntamos ahí igualándolo al next de Cleo.",
+      "summary": "Las cajas con flechas y los objetos anidados son la misma lista, dibujada de dos formas."
     }
   }
 }

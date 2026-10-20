@@ -33,7 +33,7 @@ describe('getModules', () => {
     const modules = getModules()
     expect(modules).toHaveLength(24)
     expect(getModule('big-o').practice.questions).toBeGreaterThan(0)
-    expect(getModule('linked-lists').practice).toBeNull()
+    expect(getModule('doubly-linked-lists').practice).toBeNull()
   })
 
   // The summary is built by scripts/content-catalog.js. If it ever drifted

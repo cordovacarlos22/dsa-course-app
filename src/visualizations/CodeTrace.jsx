@@ -2,17 +2,21 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import StepPlayer from '../components/StepPlayer'
 import GuestRow from './GuestRow'
+import LinkedListDiagram from './LinkedListDiagram'
 
 // Plays a piece of code line by line: the current line is highlighted, and
 // next to it the student sees the input as boxes, the variables, a counter of
 // the operations so far, and what the code printed. See ./traces/index.js.
 
 // The size of an input: a number (n), or how many guests / numbers /
-// answers / characters it has.
+// answers / characters / list values it has. Inputs named by a `label`
+// (like a constructor call) have no size.
 function sizeOf(input) {
   if (input.n !== undefined) return input.n
+  if (input.values) return input.values.length
   if (input.rsvps) return Object.keys(input.rsvps).length
   if (input.text !== undefined) return input.text.length
+  if (input.label !== undefined) return 0
   return (input.guests ?? input.numbers).length
 }
 
@@ -57,6 +61,7 @@ function CodeTrace({ trace }) {
               name: option.name,
               answer: option.answer,
               text: option.text,
+              label: option.label,
             })}
           </button>
         ))}
@@ -85,33 +90,38 @@ function TraceStep({ trace, input, step }) {
   return (
     <div className="grid gap-3 @2xl:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
       <pre className="overflow-x-auto rounded-xl bg-slate-900 py-3 text-[13px] leading-6 text-slate-100">
-        {lines.map((line, index) => {
-          const number = index + 1
-          const isCurrent = number === step.line
-          const cost = step.costs?.[number]
-          return (
-            <div
-              key={number}
-              aria-current={isCurrent ? 'step' : undefined}
-              className={`flex gap-3 px-3 transition-colors duration-300 ${
-                isCurrent ? 'bg-accent/25' : ''
-              }`}
-            >
-              <span className="w-4 shrink-0 text-right text-slate-500 select-none">
-                {number}
-              </span>
-              <code className="flex-1 whitespace-pre">{line}</code>
-              {cost && (
-                <span className="shrink-0 rounded bg-sky-400/20 px-1.5 text-xs font-bold text-sky-200">
-                  {cost}
+        {/* inline-block + min-w-full: the current line stays highlighted all
+            the way across, even when a long line makes the code scroll. */}
+        <div className="inline-block min-w-full">
+          {lines.map((line, index) => {
+            const number = index + 1
+            const isCurrent = number === step.line
+            const cost = step.costs?.[number]
+            return (
+              <div
+                key={number}
+                aria-current={isCurrent ? 'step' : undefined}
+                className={`flex gap-3 px-3 transition-colors duration-300 ${
+                  isCurrent ? 'bg-accent/25' : ''
+                }`}
+              >
+                <span className="w-4 shrink-0 text-right text-slate-500 select-none">
+                  {number}
                 </span>
-              )}
-            </div>
-          )
-        })}
+                <code className="flex-1 whitespace-pre">{line}</code>
+                {cost && (
+                  <span className="shrink-0 rounded bg-sky-400/20 px-1.5 text-xs font-bold text-sky-200">
+                    {cost}
+                  </span>
+                )}
+              </div>
+            )
+          })}
+        </div>
       </pre>
 
       <div className="space-y-3">
+        {step.list && <LinkedListDiagram {...step.list} />}
         {itemsOf(trace, input) && (
           <GuestRow
             items={itemsOf(trace, input)}

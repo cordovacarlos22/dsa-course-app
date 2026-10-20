@@ -13,6 +13,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-13: **Section 3 of both courses, merged, with theory first** (4 PRs). PR 1, **Big O of Arrays & Objects** (plus a deeper Big O lesson 16), is merged (#24).
 - 2026-10-19: **Section 4 of both courses, merged** (6 PRs, then the theory pass). PR 1, the **course order** (Classes & Pointers moves right before Linked Lists), is PR #25. PR 2, **A Problem-Solving Approach** (7 lessons), is on `content/problem-solving-approach`, built on #25. PR #26 is merged too.
 - 2026-10-20: **Classes & Pointers** (2 lessons) is on `content/classes-and-pointers`. Next, in this order: lazy captions and quizzes, the quiz page, the exercise pages, then Linked Lists in 3 PRs.
+- 2026-10-20: **Linked Lists, PR 1 of 3** (lessons 1–4: what a linked list is, Big O vs arrays, under the hood, the constructor) is on `content/linked-lists-1`, built on `feat/exercise-pages` because #29 and #30 weren't merged yet. Merge order: #29, #30, then this one. Next: `content/linked-lists-2` (push, pop, unshift, shift).
 
 ## Decisions
 
@@ -56,6 +57,9 @@ Agents: read this at the start of every session and update it at the end (see `A
   - **Result:** the course home and module pages download 353 kB (was 976 kB), and the landing page 615 kB (was about 1.1 MB).
   - **Later:** the lesson page still loads every module's lessons (a 334 kB chunk). Loading one module's lessons at a time would need an async lesson page.
 - 2026-10-20: **Classes & Pointers uses our own values.** Cookies have flavors (`'chocolate'`, `'vanilla'`, `'oatmeal'`) instead of course 1's colors, and pointers use the guest count and guest cards (`{ value: 'Ana' }`) instead of course 1's numbers. The Cookie Build it now uses `getFlavor`/`setFlavor`.
+- 2026-10-20: **One diagram for every linked list.** `LinkedListDiagram` draws the conga line (nodes with a `next` slot, arrows, `null`, `head`/`tail` above and other pointers below, a "Not in the line" row for detached nodes), shrinks so four guests and `null` fit on one line at 320 px, and gives screen readers the chain as text ("Ana → Ben → null. head: Ana, tail: Ben"). `CodeTrace` draws it when a step has `list`, and a trace of a class (`construct: true`) is tested with `new`. Lesson 2's animations are named `linked-list-cost-end`, `-front`, `-middle` and `-lookup` (plus the `linked-list-big-o` table), so names like `linked-list-push` stay free for the method lessons.
+- 2026-10-20: **The constructor checks `value !== undefined`, starts empty, then adds the first node.** Reason: `if (!value)` would make `new LinkedList(0)` empty (0 and `''` are values; the lesson, the quiz and the Build it test it), and starting from the empty list means the empty case isn't a side path: it's where every list begins, which the next methods build on. "Look back" keeps `this.tail = this.head` and shows `this.tail = newNode` is the same node.
+- 2026-10-20: **Comments inside animation code are translated** (`linkedList.comments` in the captions), like the comments in lessons, because the constructor's plan is all comments and Spanish students would have read it in English. Code itself stays in English.
 - 2026-10-11 (later): **Big O follows both courses closely.** Carlos: "still not enough … missing a lot of the content from the 2 files … even if we are going to be super close to the original 2 courses". One lesson per lecture (17), the courses' own examples plus the guest-list animations, every point of both files (text, slides and quizzes) covered; sentences stay ours. **Sources for Big O are his two `.docx` files** in the "DSA + LEETCODE…" Desktop folder, not `guiones/`; he'll add files for the other modules later.
 
 - 2026-10-11: **Codecademy-style learning (Carlos).** Students must prove they understood before moving on: lessons are split into **steps** (each `##` heading), every step ends with a **checkpoint** (quick question or small code task checked by tests), and **Next stays locked until it passes**. Stuck → hint, then the solution after 3 failed tries (recorded as "viewed solution"). Coding steps use a **3-pane workspace** (Learn | Editor | Output). Being built in `feat/step-checkpoints`.
@@ -182,6 +186,11 @@ Agents: read this at the start of every session and update it at the end (see `A
   - **Saved:** `exercise:<module>/<slug>` (`{ solved, bestTimeMs, viewedSolution }`).
   - **Module page:** the Build it and Interview problems cards list each exercise as a link, with its difficulty and a ✓ once solved. The build-time summary now includes each exercise's title, difficulty and category.
   - **Checked:** in Chrome under `vercel.json`'s headers, all 11 exercises solved with the real checker at 1280 (en), 375 (es) and 320 px (en, reduced motion), with 0 CSP violations and no sideways scroll.
+- 2026-10-20, `content/linked-lists-1` (Linked Lists, PR 1 of 3):
+  - **4 lessons, 15 steps** (EN + ES, 5,641 English words with code), from course 1's Section 4 (its first 4 lectures, the Big O table and its 3 quiz questions' ideas). Lesson 4 follows the 5 steps.
+  - **Practice:** `linked-lists.json` with 11 quiz questions and the first Build it, Start the Conga Line (`Node` + the constructor).
+  - **New animations:** `array-vs-linked-list` (memory slots), `linked-list-anatomy`, the four `linked-list-cost-*` scenes, `linked-list-big-o`, `linked-list-node`, `linked-list-nested`, `linked-list-node-class`, `linked-list-constructor-examples`, `linked-list-constructor-plan`, and the traces `trace-ll-walk` and `trace-ll-constructor`. A long line in a code trace now keeps its highlight when the code scrolls sideways.
+  - **Checked:** in Chrome under `vercel.json`'s headers (45 step views, 48 animations, 33 snippets, 0 CSP violations, 320–1280 px, Spanish, reduced motion), the quiz played and the Build it solved with the real checker in all three setups, and no 8-word run of our text matches the course notes (only the classic constructor code matches the course's `.js` files).
 - 2026-10-13, `docs/ponytail`: Ponytail reviewed (no network calls; the installed files match the reviewed commit). `AGENTS.md` limits it to app code, and `.claude/skills/README.md` says what it runs and how to update or turn it off.
 
 ## Next
@@ -196,7 +205,7 @@ Agents: read this at the start of every session and update it at the end (see `A
   1. ✅ `content/problem-solving-approach`: 7 lessons from course 2's Section 4, a quiz and 3 interview problems.
   2. ✅ `content/classes-and-pointers`: 2 lessons from course 1's Section 3, the quiz in Spanish with our own values (16 questions), and a `Counter` Build it.
   3. ✅ `perf/lazy-module-content`, then `feat/quiz-page` and `feat/exercise-pages` (stage 7). The quiz page should load the full practice file itself (an eager glob in a module only the quiz and exercise pages import).
-  4. `content/linked-lists-1`, `-2`, `-3`: course 1's Section 4 in 13 lessons (lessons 1–4, then push/pop/unshift/shift, then get/set/insert/remove/reverse), with the list diagram, Build its and the quiz.
+  4. `content/linked-lists-1` ✅ (lessons 1–4, the list diagram, 11 questions, the constructor Build it), then `-2` (push, pop, unshift, shift, with `trace-ll-pop`) and `-3` (get, set, insert, remove, reverse, with `trace-ll-reverse`, all 10 Build its and the quiz at 12–16 questions or more). Each method lesson uses the 5 steps; the starter code has `Node`, the methods already written and our own `toArray()` helper.
   5. The theory pass on Introduction 1–3 and Big O 1–8, then Big O 9–15 and 17. The landing preview reads Big O lesson 1's checkpoint 2, so keep that step (or update `TryItPreview.jsx`).
 - Carlos: send course 1's Section 5 (linked list LeetCode exercises) and course 2's Section 5 (patterns) when you're ready.
 - Carlos: send course 2's "data structures introduction" transcript (class syntax, static methods) when you get there.
@@ -211,6 +220,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 | 3: Classes & Pointers         | `content/practice/classes-and-pointers.json`     | 16        | cookie-class (easy, class), counter-class (easy, class)                     | done    | 2026-10-20 |
 | 3: Big O of Arrays & Objects  | `content/practice/arrays-and-objects.json`       | 15        | word-frequency (easy), last-answer-wins (easy), guests-who-arrived (medium) | done    | 2026-10-13 |
 | 4: A Problem-Solving Approach | `content/practice/problem-solving-approach.json` | 14        | count-the-vowels (easy), character-counter (easy), title-case (easy)        | done    | 2026-10-19 |
+| 4: Linked Lists (lessons 1–4) | `content/practice/linked-lists.json`             | 11        | linked-list-constructor (easy, class)                                       | done    | 2026-10-20 |
 
 Modules 04–17 have empty folders; they appear in `course.json` as "coming soon".
 
@@ -223,6 +233,7 @@ Modules 04–17 have empty folders; they appear in `course.json` as "coming soon
 | 03 Big O of Arrays & Objects  | `01-built-in-data-structures`, `02-big-o-of-objects`, `03-object-methods`, `04-big-o-of-array-methods` (theory first); Big O `16-big-o-of-arrays` rewritten | EN + ES   | 2026-10-13 |
 | 04 A Problem-Solving Approach | `01-why-a-method` … `07-the-method-in-an-interview` (one per lecture, theory first)                                                                         | EN + ES   | 2026-10-19 |
 | 12 Classes & Pointers         | `01-classes`, `02-pointers` (theory first)                                                                                                                  | EN + ES   | 2026-10-20 |
+| 13 Linked Lists               | `01-what-is-a-linked-list`, `02-linked-lists-vs-arrays`, `03-under-the-hood`, `04-the-constructor` (theory first; 9 method lessons to come)                 | EN + ES   | 2026-10-20 |
 
 ## Open questions
 

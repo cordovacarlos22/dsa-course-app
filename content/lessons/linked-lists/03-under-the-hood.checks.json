@@ -1,0 +1,135 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "In our linked lists, what is a node?",
+        "es": "En nuestras listas enlazadas, ¿qué es un nodo?"
+      },
+      "options": [
+        {
+          "en": "Just its value, like `'Dev'`",
+          "es": "Solo su valor, como `'Dev'`"
+        },
+        {
+          "en": "An index and a value",
+          "es": "Un índice y un valor"
+        },
+        {
+          "en": "An object that holds a `value` and a `next` pointer",
+          "es": "Un objeto que guarda un `value` y un puntero `next`"
+        },
+        {
+          "en": "A copy of the next node",
+          "es": "Una copia del siguiente nodo"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "The box and the arrow in the drawings are two parts of the same thing.",
+        "es": "La caja y la flecha de los dibujos son dos partes de lo mismo."
+      },
+      "explanation": {
+        "en": "A node is the whole object, `{ value, next }`: the data plus the pointer to the following node. The value alone isn't part of any list.",
+        "es": "Un nodo es todo el objeto, `{ value, next }`: el dato más el puntero al siguiente nodo. El valor solo no forma parte de ninguna lista."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "`head` points to `{ value: 'Ana', next: { value: 'Ben', next: null } }`. What is `head.next.next`?",
+        "es": "`head` apunta a `{ value: 'Ana', next: { value: 'Ben', next: null } }`. ¿Qué es `head.next.next`?"
+      },
+      "options": [
+        {
+          "en": "`'Ben'`",
+          "es": "`'Ben'`"
+        },
+        {
+          "en": "`null`",
+          "es": "`null`"
+        },
+        {
+          "en": "`undefined`",
+          "es": "`undefined`"
+        },
+        {
+          "en": "Ben's node",
+          "es": "El nodo de Ben"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Follow one arrow at a time: `head.next` is Ben's node. What is Ben's `next`?",
+        "es": "Sigue una flecha a la vez: `head.next` es el nodo de Ben. ¿Qué es el `next` de Ben?"
+      },
+      "explanation": {
+        "en": "`head.next` is Ben's node, the inner object. Ben is last, so Ben's `next` is `null`. That `null` is the end of the list.",
+        "es": "`head.next` es el nodo de Ben, el objeto de adentro. Ben es el último, así que el `next` de Ben es `null`. Ese `null` es el final de la lista."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `toArray(head)`. Walk the list from `head` to `null` and return an array with every node's `value`, in order. An empty list (`head` is `null`) gives `[]`.",
+        "es": "Escribe `toArray(head)`. Recorre la lista desde `head` hasta `null` y regresa un array con el `value` de cada nodo, en orden. Una lista vacía (`head` es `null`) da `[]`."
+      },
+      "hint": {
+        "en": "Inside `while (temp !== null)`, do `values.push(temp.value)`, then move forward with `temp = temp.next`.",
+        "es": "Dentro de `while (temp !== null)`, haz `values.push(temp.value)` y luego avanza con `temp = temp.next`."
+      },
+      "starterCode": "function toArray(head) {\n  const values = []\n  let temp = head\n  // walk the list and push each value into values\n  return values\n}",
+      "solution": "function toArray(head) {\n  const values = []\n  let temp = head\n  while (temp !== null) {\n    values.push(temp.value)\n    temp = temp.next\n  }\n  return values\n}",
+      "kind": "function",
+      "functionName": "toArray",
+      "tests": [
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": {
+                "value": "Ben",
+                "next": {
+                  "value": "Cleo",
+                  "next": null
+                }
+              }
+            }
+          ],
+          "expected": ["Ana", "Ben", "Cleo"]
+        },
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": null
+            }
+          ],
+          "expected": ["Ana"]
+        },
+        {
+          "args": [null],
+          "expected": []
+        },
+        {
+          "args": [
+            {
+              "value": 1,
+              "next": {
+                "value": 2,
+                "next": {
+                  "value": 3,
+                  "next": {
+                    "value": 4,
+                    "next": null
+                  }
+                }
+              }
+            }
+          ],
+          "expected": [1, 2, 3, 4]
+        }
+      ]
+    }
+  ]
+}

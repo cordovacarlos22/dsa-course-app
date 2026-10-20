@@ -189,6 +189,62 @@ describe('classes and pointers animations', () => {
   })
 })
 
+describe('linked list animations', () => {
+  async function renderAtStep(name, nextClicks) {
+    await i18n.changeLanguage('en')
+    const user = userEvent.setup()
+    const Animation = visualizations[name]
+    render(<Animation />)
+    for (let i = 0; i < nextClicks; i++) {
+      await user.click(screen.getByRole('button', { name: /next/i }))
+    }
+    return user
+  }
+
+  it('describes the list for screen readers: the chain, then the pointers', async () => {
+    await renderAtStep('linked-list-anatomy', 6)
+    expect(
+      screen.getByRole('img', {
+        name: 'Ana → Ben → Cleo → Dev → null. head: Ana, tail: Dev',
+      }),
+    ).toBeInTheDocument()
+  })
+
+  it('pops the last guest out of the line after walking to the one before', async () => {
+    await renderAtStep('linked-list-cost-end', 10)
+    expect(screen.getByText('4 nodes visited')).toBeInTheDocument()
+    expect(
+      screen.getByRole('img', {
+        name: 'Ana → Ben → Cleo → Dev → null. head: Ana, tail: Dev, temp: Dev. Not in the line: Eve → null',
+      }),
+    ).toBeInTheDocument()
+  })
+
+  it('shows an empty list when the constructor gets no value', async () => {
+    const user = await renderAtStep('trace-ll-constructor', 0)
+    await user.click(screen.getByRole('button', { name: 'new LinkedList()' }))
+    for (let i = 0; i < 4; i++) {
+      await user.click(screen.getByRole('button', { name: /next/i }))
+    }
+    expect(
+      screen.getByRole('img', {
+        name: 'null. head: null, tail: null. length: 0',
+      }),
+    ).toBeInTheDocument()
+  })
+
+  it('lights up the rows where linked lists beat arrays', async () => {
+    await renderAtStep('linked-list-big-o', 3)
+    const shift = screen.getByRole('row', {
+      name: /shift \(remove from the front\)/,
+    })
+    expect(shift).not.toHaveClass('opacity-50')
+    expect(
+      screen.getByRole('row', { name: /pop \(remove from the end\)/ }),
+    ).toHaveClass('opacity-50')
+  })
+})
+
 describe('buildBinarySearchSteps', () => {
   it('finds the target in log₂(n) checks', () => {
     const steps = buildBinarySearchSteps([2, 4, 6, 8, 10, 12, 14, 16], 14)

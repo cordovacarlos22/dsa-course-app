@@ -10,7 +10,9 @@ function runShownCode(trace, input) {
   const fn = new Function('console', `${trace.code}\nreturn ${functionName}`)(
     fakeConsole,
   )
-  return { returned: fn(...structuredClone(args)), printed }
+  const copies = structuredClone(args)
+  const returned = trace.construct ? new fn(...copies) : fn(...copies)
+  return { returned, printed }
 }
 
 describe.each(Object.entries(traces))('%s', (name, trace) => {
@@ -122,6 +124,25 @@ describe('trace counters', () => {
     )
     expect(maybe).toBe(3) // Cleo, the third guest
     expect(late).toBe(Object.keys(trace.inputs[1].rsvps).length)
+  })
+
+  it('visits every node once when walking a linked list (O(n))', () => {
+    const trace = traces['trace-ll-walk']
+    for (const input of trace.inputs) {
+      const last = Array.from(trace.run(input)).at(-1)
+      expect(last.ops).toBe(input.values.length)
+      expect(last.list.pointers.temp).toBe(null)
+    }
+  })
+
+  it('starts the linked list empty when the constructor gets no value', () => {
+    const trace = traces['trace-ll-constructor']
+    const [named, missing, zero] = trace.inputs.map(
+      (input) => Array.from(trace.run(input)).at(-1).result,
+    )
+    expect(named.length).toBe(1)
+    expect(missing).toEqual({ head: null, tail: null, length: 0 })
+    expect(zero.head.value).toBe(0)
   })
 
   it('counts more operations for more guests', () => {

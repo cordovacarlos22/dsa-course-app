@@ -159,7 +159,7 @@ describe('quiz page', () => {
   })
 
   it('shows "page not found" for a module without a quiz', async () => {
-    await renderAt('/learn/linked-lists/quiz')
+    await renderAt('/learn/doubly-linked-lists/quiz')
     expect(
       await screen.findByRole('heading', { name: 'Page not found' }),
     ).toBeInTheDocument()

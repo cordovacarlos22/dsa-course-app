@@ -6,6 +6,7 @@ import './captions'
 import ArrayMethodCost from './ArrayMethodCost'
 import ArrayReindex from './ArrayReindex'
 import ArraySplice from './ArraySplice'
+import ArrayVsLinkedList from './ArrayVsLinkedList'
 import ArrayVsObject from './ArrayVsObject'
 import BigOGrowthChart from './BigOGrowthChart'
 import BinarySearchHalving from './BinarySearchHalving'
@@ -18,6 +19,9 @@ import ExampleLadder from './ExampleLadder'
 import FiveSteps from './FiveSteps'
 import HalvingCount from './HalvingCount'
 import LinearBoxes from './LinearBoxes'
+import LinkedListBigO from './LinkedListBigO'
+import LinkedListNested from './LinkedListNested'
+import LinkedListScenes from './LinkedListScenes'
 import ListClassPreview from './ListClassPreview'
 import MemoryBoxes from './MemoryBoxes'
 import NestedGrid from './NestedGrid'
@@ -90,5 +94,25 @@ export const visualizations = {
   'value-copy': withProps(PointerArrows, { scene: 'valueCopy' }),
   'reference-copy': withProps(PointerArrows, { scene: 'referenceCopy' }),
   'pointer-move': withProps(PointerArrows, { scene: 'pointerMove' }),
+  'array-vs-linked-list': ArrayVsLinkedList,
+  'linked-list-anatomy': withProps(LinkedListScenes, { scene: 'anatomy' }),
+  'linked-list-cost-end': withProps(LinkedListScenes, { scene: 'costEnd' }),
+  'linked-list-cost-front': withProps(LinkedListScenes, { scene: 'costFront' }),
+  'linked-list-cost-middle': withProps(LinkedListScenes, {
+    scene: 'costMiddle',
+  }),
+  'linked-list-cost-lookup': withProps(LinkedListScenes, {
+    scene: 'costLookup',
+  }),
+  'linked-list-big-o': LinkedListBigO,
+  'linked-list-node': withProps(LinkedListNested, { scene: 'node' }),
+  'linked-list-nested': withProps(LinkedListNested, { scene: 'nested' }),
+  'linked-list-node-class': withProps(LinkedListScenes, { scene: 'nodeClass' }),
+  'linked-list-constructor-examples': withProps(LinkedListScenes, {
+    scene: 'constructorExamples',
+  }),
+  'linked-list-constructor-plan': withProps(LinkedListScenes, {
+    scene: 'constructorPlan',
+  }),
   ...traceComponents,
 }
