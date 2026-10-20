@@ -8,10 +8,11 @@ import GuestRow from './GuestRow'
 // the operations so far, and what the code printed. See ./traces/index.js.
 
 // The size of an input: a number (n), or how many guests / numbers /
-// answers it has.
+// answers / characters it has.
 function sizeOf(input) {
   if (input.n !== undefined) return input.n
   if (input.rsvps) return Object.keys(input.rsvps).length
+  if (input.text !== undefined) return input.text.length
   return (input.guests ?? input.numbers).length
 }
 
@@ -55,6 +56,7 @@ function CodeTrace({ trace }) {
               n: sizeOf(option).toLocaleString('en-US'),
               name: option.name,
               answer: option.answer,
+              text: option.text,
             })}
           </button>
         ))}

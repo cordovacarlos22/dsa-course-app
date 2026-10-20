@@ -7,9 +7,12 @@ import ArraySplice from './ArraySplice'
 import ArrayVsObject from './ArrayVsObject'
 import BigOGrowthChart from './BigOGrowthChart'
 import BinarySearchHalving from './BinarySearchHalving'
+import CharCodeRanges from './CharCodeRanges'
 import CodeTrace from './CodeTrace'
 import ConstantJump from './ConstantJump'
 import DominantTerm from './DominantTerm'
+import ExampleLadder from './ExampleLadder'
+import FiveSteps from './FiveSteps'
 import HalvingCount from './HalvingCount'
 import LinearBoxes from './LinearBoxes'
 import MemoryBoxes from './MemoryBoxes'
@@ -18,6 +21,8 @@ import ObjectLookup from './ObjectLookup'
 import ObjectToArray from './ObjectToArray'
 import SameShape from './SameShape'
 import SearchCases from './SearchCases'
+import SolutionLayers from './SolutionLayers'
+import StepsToCode from './StepsToCode'
 import StopwatchRace from './StopwatchRace'
 import TimingChart from './TimingChart'
 import TwoInputs from './TwoInputs'
@@ -63,5 +68,15 @@ export const visualizations = {
     titleKey: 'sortTitle',
     summaryKey: 'sortSummary',
   }),
+  'five-steps': FiveSteps,
+  'five-steps-understand': withProps(FiveSteps, { focus: 'understand' }),
+  'five-steps-examples': withProps(FiveSteps, { focus: 'examples' }),
+  'five-steps-break-down': withProps(FiveSteps, { focus: 'breakDown' }),
+  'five-steps-solve': withProps(FiveSteps, { focus: 'solve' }),
+  'five-steps-look-back': withProps(FiveSteps, { focus: 'lookBack' }),
+  'example-ladder': ExampleLadder,
+  'steps-to-code': StepsToCode,
+  'solution-layers': SolutionLayers,
+  'char-code-ranges': CharCodeRanges,
   ...traceComponents,
 }

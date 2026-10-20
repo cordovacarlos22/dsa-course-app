@@ -320,7 +320,9 @@
         "lines_one": "línea impresa",
         "lines_other": "líneas impresas",
         "memoryBoxes_one": "caja nueva de memoria",
-        "memoryBoxes_other": "cajas nuevas de memoria"
+        "memoryBoxes_other": "cajas nuevas de memoria",
+        "characters_one": "carácter leído",
+        "characters_other": "caracteres leídos"
       },
       "isInvited": {
         "title": "isInvited: detente en cuanto encuentres el nombre",
@@ -450,6 +452,14 @@
         "noMatch": "{{name}} respondió '{{value}}', no '{{answer}}'. Sigue.",
         "match": "{{name}} respondió '{{answer}}'. ¡Lo encontramos! Devuelve true después de {{ops}} revisiones.",
         "notFound": "El bucle terminó: nadie respondió '{{answer}}'. Devuelve false después de {{ops}} revisiones."
+      },
+      "charCount": {
+        "title": "charCount, la versión simple, carácter por carácter",
+        "input": "'{{text}}'",
+        "start": "charCount('{{text}}'): un objeto vacío por llenar y {{count}} caracteres por leer.",
+        "firstTime": "{{char}} todavía no es clave: result[{{char}}] es undefined, y undefined > 0 es false. Ponlo en 1.",
+        "again": "{{char}} ya es clave, así que súmale 1. Ahora va en {{count}}.",
+        "done": "Se leyeron los {{ops}} caracteres, en una sola pasada: O(n). El objeto tiene {{keys}} claves."
       }
     },
     "timingChart": {
@@ -542,6 +552,177 @@
         "reduce": "reduce visita a cada invitado y los combina en un solo valor, la suma de las letras de sus nombres: {{value}}.",
         "summary": "Una línea cada uno, pero cada uno es un bucle sobre todo el array: O(n)."
       }
+    },
+    "fiveSteps": {
+      "names": {
+        "understand": "Entender el problema",
+        "examples": "Explorar ejemplos",
+        "breakDown": "Dividirlo en pasos",
+        "solve": "Resolver o simplificar",
+        "lookBack": "Revisar y refactorizar"
+      },
+      "map": {
+        "title": "Los 5 pasos para cualquier problema",
+        "start": "Un problema que nunca has visto, y ni idea de por dónde empezar. Este es un plan que puedes seguir cada vez.",
+        "understand": "Paso 1: entender el problema. Antes de escribir código, asegúrate de saber qué entra, qué sale y qué falta.",
+        "examples": "Paso 2: explorar ejemplos. Escribe algunas entradas con la salida que esperas, de las fáciles a las raras.",
+        "breakDown": "Paso 3: dividirlo en pasos. Escribe los pasos como comentarios cortos, para tener un rumbo.",
+        "solve": "Paso 4: resolverlo, o resolver primero una versión más simple y agregar la parte difícil después.",
+        "lookBack": "Paso 5: revisar y refactorizar. Ya funciona; ahora hazlo más claro, más rápido o las dos cosas.",
+        "summary": "Entender, explorar, dividir, resolver, revisar. Vas a usar estos 5 pasos durante todo el curso."
+      },
+      "understand": {
+        "title": "Paso 1: entender el problema",
+        "start": "Antes de escribir código, hazte cinco preguntas: en voz alta en una entrevista, o a ti mismo en casa.",
+        "items": [
+          "¿Puedo explicarlo con mis propias palabras?",
+          "¿Qué entra?",
+          "¿Qué sale?",
+          "¿Con eso me alcanza para la respuesta?",
+          "¿Cómo voy a llamar a las cosas?"
+        ],
+        "notes": [
+          "Explicarlo con tus palabras demuestra que lo entendiste, y atrapa errores antes de que se vuelvan código.",
+          "Las entradas: qué entra, de qué tipo es, qué tan grande puede ser y cuántas son.",
+          "Las salidas: qué regresa, y con qué forma: ¿un número, un string, un objeto?",
+          "A veces falta algo, como un segundo número. Quizá solo lo notes más adelante, y está bien.",
+          "Buenos nombres desde ahora (add, num1, num2, sum) hacen que cada paso siguiente sea más fácil de explicar."
+        ],
+        "summary": "Cinco preguntas, un minuto o dos. Son la forma más barata de no resolver el problema equivocado."
+      },
+      "examples": {
+        "title": "Paso 2: explorar ejemplos",
+        "start": "Los ejemplos convierten un problema escrito en palabras en entradas y salidas que puedes revisar.",
+        "items": [
+          "Empieza con ejemplos simples",
+          "Sigue con ejemplos más complejos",
+          "Prueba una entrada vacía",
+          "Prueba una entrada inválida"
+        ],
+        "notes": [
+          "Primero los ejemplos simples: las entradas más fáciles, con salidas de las que estás seguro.",
+          "Luego los difíciles: espacios, mayúsculas, dígitos. Cada uno suele traer una pregunta.",
+          "Entradas vacías, como '' o []: ¿qué debería regresar?",
+          "Entradas inválidas, como un número donde va un string: ¿regresar algo, o detenerse con un error?"
+        ],
+        "summary": "Escribe tus ejemplos. Cuando tu código esté listo, son las primeras pruebas que vas a correr."
+      },
+      "breakDown": {
+        "title": "Paso 3: dividirlo en pasos",
+        "start": "Antes del código de verdad, escribe los pasos que vas a seguir, con palabras sencillas.",
+        "items": [
+          "Escribe los pasos principales como comentarios",
+          "Piensa en la lógica antes que en la sintaxis",
+          "Descubre las partes que todavía no sabes hacer"
+        ],
+        "notes": [
+          "No cada línea, y no código de verdad: solo los pasos principales, como comentarios cortos.",
+          "Decidir primero qué hacer te ahorra pelear con la sintaxis y con la lógica al mismo tiempo.",
+          "Escribir el plan muestra los pasos de los que no estás seguro, para que preguntes por ellos a tiempo."
+        ],
+        "summary": "Un plan escrito es algo que puedes mostrar, revisar y retomar, aunque se acabe el tiempo."
+      },
+      "solve": {
+        "title": "Paso 4: resolver o simplificar",
+        "start": "¿Puedes resolverlo todo? Excelente. Si no, resuelve primero un problema más simple.",
+        "items": [
+          "Encuentra la parte difícil",
+          "Déjala a un lado por ahora",
+          "Resuelve todo lo demás",
+          "Agrega de nuevo la parte difícil"
+        ],
+        "notes": [
+          "Encuentra la parte en la que te atascas, como revisar si un carácter es una letra.",
+          "Ignórala un momento. Simplifica el problema, no lo cambies.",
+          "Escribe una solución que funcione para todo lo demás. Ahora tienes código real para mostrar y ejecutar.",
+          "Regresa la parte difícil. Muchas veces la versión simple ya te enseñó cómo hacerla."
+        ],
+        "summary": "Algo de avance es mejor que nada, y el problema más simple suele ser el camino hacia el difícil."
+      },
+      "lookBack": {
+        "title": "Paso 5: revisar y refactorizar",
+        "start": "Ya funciona. Antes de parar, hazle estas preguntas a tu solución.",
+        "items": [
+          "¿De verdad funciona?",
+          "¿Hay otro camino para llegar?",
+          "¿Es fácil de leer?",
+          "¿Dónde más podría servir?",
+          "¿Puede ser más rápido, o usar menos memoria?",
+          "¿Qué más podría quedar más limpio?",
+          "¿Cómo lo resolvieron otras personas?"
+        ],
+        "notes": [
+          "Comprueba el resultado: vuelve a correr tus ejemplos del paso 2.",
+          "Casi nunca hay una sola solución. Ahora que lo resolviste una vez, quizá veas fácilmente una segunda forma.",
+          "¿Es fácil de leer? ¿Lo entendería alguien de tu equipo en un pizarrón?",
+          "¿Se parece a un problema que ya resolviste, o a uno que vas a ver más adelante?",
+          "El rendimiento: su Big O en tiempo y en espacio. Los bucles anidados son lo primero que hay que mirar.",
+          "El estilo: nombres claros, let y const, las convenciones del lenguaje y de tu equipo.",
+          "Las soluciones de otras personas, incluso en otro lenguaje, son una gran forma de aprender trucos nuevos."
+        ],
+        "summary": "Revisar es donde más aprendes. Cada problema que revisas hace más fácil el siguiente."
+      }
+    },
+    "exampleLadder": {
+      "title": "Ejemplos para charCount, de fáciles a raros",
+      "start": "El problema: contar cuántas veces aparece cada carácter en un string. Escribamos ejemplos antes de cualquier código.",
+      "kinds": {
+        "simple": "Simple",
+        "complex": "Más complejo",
+        "empty": "Vacío",
+        "invalid": "Inválido"
+      },
+      "row0": "'aaa' es fácil: un carácter, tres veces. La salida es un objeto: { a: 3 }.",
+      "row1": "'banana' sigue siendo fácil, y muestra la forma de la respuesta: una clave por carácter, con su cuenta.",
+      "row2": "'Hi Ana!' trae preguntas. ¿Contamos el espacio? ¿El '!'? ¿'H' y 'h' son la misma letra?",
+      "row3": "'Party at 8!' agrega un dígito. ¿Hay que contar el '8'?",
+      "row4": "Un string vacío: ¿regresamos un objeto vacío, o algo más?",
+      "row5": "Un número en vez de un string: ¿regresamos algo, o nos detenemos con un error?",
+      "decided": "Nuestras respuestas: contar solo letras y dígitos, en minúsculas, y aceptar solo strings. Cada respuesta salió de un ejemplo.",
+      "questions": {
+        "spaces": "¿Contar el espacio?",
+        "case": "¿'H' y 'h' juntas?",
+        "punctuation": "¿Contar '!'?",
+        "digits": "¿Contar '8'?",
+        "empty": "¿Regresar {}?",
+        "invalid": "¿Error o {}?"
+      },
+      "onlyStrings": "No es un string: solo aceptamos strings"
+    },
+    "stepsToCode": {
+      "title": "De un plan en comentarios al código",
+      "start": "Primero, el plan: seis comentarios y nada de código. Esto es lo que escribirías antes que todo lo demás.",
+      "comments": {
+        "makeObject": "crear un objeto para regresar",
+        "loop": "recorrer el string, un carácter a la vez",
+        "addOne": "una letra o dígito que ya es clave: sumarle 1",
+        "setOne": "una letra o dígito que todavía no es clave: ponerlo en 1",
+        "skip": "cualquier otra cosa (un espacio, '!'): no hacer nada",
+        "returnIt": "regresar el objeto"
+      },
+      "makeObject": "Primero lo fácil: un objeto vacío, result, para llenarlo y regresarlo.",
+      "loop": "El bucle sobre el string. Pasamos cada carácter a minúscula al leerlo, para que 'H' y 'h' cuenten juntas.",
+      "addOne": "Un carácter que ya es clave suma 1. isAlphaNumeric todavía no existe: le pusimos nombre al paso y seguimos.",
+      "setOne": "Una letra o dígito nuevo empieza en 1.",
+      "skip": "Espacios y puntuación: no hay nada que hacer, así que solo falta cerrar el if y el bucle.",
+      "returnIt": "Regresa el objeto. Ahora cada comentario tiene su código.",
+      "summary": "Los comentarios eran el plan, y el plan se volvió el código. Solo falta escribir isAlphaNumeric."
+    },
+    "solutionLayers": {
+      "title": "Resuelve un problema más simple y luego agrega las partes difíciles",
+      "simple": "Capa 1: el charCount simple. Ignora mayúsculas y minúsculas, y no revisa qué tipo de carácter lee.",
+      "simpleOutput": "Con 'Hi Ana!' funciona, pero 'H' y 'A' se cuentan aparte de 'h' y 'a', y también cuenta el espacio y el '!'.",
+      "lowercase": "Capa 2: un solo cambio. Cada carácter pasa a minúscula al leerlo.",
+      "lowercaseOutput": "Ahora 'a' tiene 2. Solo el espacio y el '!' siguen mal.",
+      "check": "Capa 3: regresa la parte difícil. Solo se cuentan letras y dígitos.",
+      "checkOutput": "La respuesta correcta. No se tiró nada de la capa 1: cada capa solo agregó código."
+    },
+    "charCodeRanges": {
+      "title": "Códigos de caracteres: ¿es una letra o un dígito?",
+      "start": "Cada carácter tiene un número. Los dígitos, las mayúsculas y las minúsculas llenan cada uno un bloque de números.",
+      "inside": "{{char}} tiene el código {{code}}. Está dentro de un bloque verde: es una letra o un dígito.",
+      "outside": "{{char}} tiene el código {{code}}. Está fuera de todos los bloques verdes: no es letra ni dígito.",
+      "summary": "Tres revisiones de rango responden la pregunta, sin expresiones regulares. Cuidado con los bordes: '[' es 91, uno después de 'Z', y '`' es 96, uno antes de 'a'."
     }
   },
   "runnable": {
