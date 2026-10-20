@@ -1,0 +1,261 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What does `shift()` do to a list with guests in it?",
+        "es": "¿Qué le hace `shift()` a una lista con invitados?"
+      },
+      "options": [
+        {
+          "en": "Adds a guest at the front",
+          "es": "Agrega un invitado al inicio"
+        },
+        {
+          "en": "Removes the last guest and returns it",
+          "es": "Quita al último invitado y lo regresa"
+        },
+        {
+          "en": "Removes the first guest and returns that node",
+          "es": "Quita al primer invitado y regresa ese nodo"
+        },
+        {
+          "en": "Moves every guest one place forward",
+          "es": "Recorre a cada invitado un lugar hacia adelante"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "`unshift` adds at the front. `shift` is its opposite.",
+        "es": "`unshift` agrega al inicio. `shift` es lo contrario."
+      },
+      "explanation": {
+        "en": "`shift` removes the first node and returns it: `head` moves to the second guest and `length` goes down by 1. Nobody else moves.",
+        "es": "`shift` quita el primer nodo y lo regresa: `head` se mueve al segundo invitado y `length` baja 1. Nadie más se mueve."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "You `shift()` a list with **one** guest. After `this.head = this.head.next`, what still needs fixing?",
+        "es": "Haces `shift()` en una lista con **un** invitado. Después de `this.head = this.head.next`, ¿qué falta arreglar?"
+      },
+      "options": [
+        {
+          "en": "`tail`: it still points to the guest who left",
+          "es": "`tail`: todavía apunta al invitado que se fue"
+        },
+        {
+          "en": "`head`: it still points to the guest who left",
+          "es": "`head`: todavía apunta al invitado que se fue"
+        },
+        {
+          "en": "Nothing: the list is already empty",
+          "es": "Nada: la lista ya está vacía"
+        },
+        {
+          "en": "`length`: it has to go back to 1",
+          "es": "`length`: tiene que regresar a 1"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "The only node's `next` was `null`. Where did `head` end up?",
+        "es": "El `next` del único nodo era `null`. ¿Dónde quedó `head`?"
+      },
+      "explanation": {
+        "en": "`head` became `null` on its own, because the only node's `next` was `null`. `tail` wasn't touched, so once `length` is 0, `tail` has to be set to `null` too.",
+        "es": "`head` se volvió `null` solo, porque el `next` del único nodo era `null`. A `tail` nadie lo tocó, así que cuando `length` es 0, también hay que poner `tail` en `null`."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Why does `shift` set `temp.next = null` before returning `temp`?",
+        "es": "¿Por qué `shift` hace `temp.next = null` antes de regresar `temp`?"
+      },
+      "options": [
+        {
+          "en": "To move `head` forward",
+          "es": "Para mover `head` hacia adelante"
+        },
+        {
+          "en": "So the returned node doesn't still point into the line",
+          "es": "Para que el nodo que regresa ya no apunte a la fila"
+        },
+        {
+          "en": "To make `length` go down",
+          "es": "Para que `length` baje"
+        },
+        {
+          "en": "Because a node with a `next` can't be returned",
+          "es": "Porque un nodo con `next` no se puede regresar"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "After `head` moves, what is the old first node's `next` still pointing to?",
+        "es": "Después de que `head` se mueve, ¿a qué sigue apuntando el `next` del antiguo primer nodo?"
+      },
+      "explanation": {
+        "en": "The removed node still points to the second guest. Returning it like that would hand over the rest of the line too. `temp.next = null` cuts that last arrow.",
+        "es": "El nodo que se quitó todavía apunta al segundo invitado. Regresarlo así entregaría también el resto de la fila. `temp.next = null` corta esa última flecha."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `shift()` in the `LinkedList` class, following the plan in the comments. It removes the first node and returns it (cut off, with `next` set to `null`), returns `undefined` on an empty list, and sets `tail` to `null` when the list becomes empty.",
+        "es": "Escribe `shift()` en la clase `LinkedList`, siguiendo el plan de los comentarios. Quita el primer nodo y lo regresa (suelto, con `next` en `null`), regresa `undefined` en una lista vacía, y pone `tail` en `null` cuando la lista queda vacía."
+      },
+      "hint": {
+        "en": "`let temp = this.head`, then `this.head = this.head.next`, `temp.next = null` and `this.length--`. After the decrement, if `this.length === 0`, set `this.tail = null`. Return `temp`.",
+        "es": "`let temp = this.head`, luego `this.head = this.head.next`, `temp.next = null` y `this.length--`. Después de restar, si `this.length === 0`, haz `this.tail = null`. Regresa `temp`."
+      },
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  shift() {\n    // 1. if the list is empty, return undefined\n    // 2. temp points to the first node\n    // 3. head moves to the next node\n    // 4. temp's next becomes null, to cut it off\n    // 5. subtract 1 from length\n    // 6. if length is now 0, tail becomes null too\n    // 7. return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  shift() {\n    if (!this.head) {\n      return undefined\n    }\n    let temp = this.head\n    this.head = this.head.next\n    temp.next = null\n    this.length--\n    if (this.length === 0) {\n      this.tail = null\n    }\n    return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "kind": "class",
+      "className": "LinkedList",
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "shift",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "shift",
+              "expected": {
+                "value": "Ana",
+                "next": null
+              }
+            },
+            {
+              "read": "head",
+              "expected": null
+            },
+            {
+              "read": "tail",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "shift",
+              "expected": {
+                "value": "Ana",
+                "next": null
+              }
+            },
+            {
+              "read": "head.value",
+              "expected": "Ben"
+            },
+            {
+              "read": "tail.value",
+              "expected": "Cleo"
+            },
+            {
+              "read": "length",
+              "expected": 2
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "shift"
+            },
+            {
+              "call": "shift",
+              "expected": {
+                "value": "Ben",
+                "next": null
+              }
+            },
+            {
+              "call": "shift",
+              "expected": null
+            },
+            {
+              "read": "tail",
+              "expected": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "A ticket counter: guests join at the back and are served from the front. Which two methods of our linked list do that, both in O(1)?",
+        "es": "Una taquilla: los invitados se forman al final y los atienden por el inicio. ¿Qué dos métodos de nuestra lista enlazada hacen eso, los dos en O(1)?"
+      },
+      "options": [
+        {
+          "en": "`push` and `pop`",
+          "es": "`push` y `pop`"
+        },
+        {
+          "en": "`unshift` and `pop`",
+          "es": "`unshift` y `pop`"
+        },
+        {
+          "en": "`unshift` and `shift`",
+          "es": "`unshift` y `shift`"
+        },
+        {
+          "en": "`push` and `shift`",
+          "es": "`push` y `shift`"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "Joining at the back is one method; leaving from the front is another.",
+        "es": "Formarse al final es un método; salir por el inicio es otro."
+      },
+      "explanation": {
+        "en": "`push` adds at the back and `shift` removes from the front, and both are O(1) in a linked list. That pair is a queue. (`pop` would be O(n).)",
+        "es": "`push` agrega al final y `shift` quita del inicio, y los dos son O(1) en una lista enlazada. Esa pareja es una cola. (`pop` sería O(n).)"
+      }
+    }
+  ]
+}

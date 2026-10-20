@@ -1,0 +1,262 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "You call `unshift('Zoe')` on a list of three guests. What changes?",
+        "es": "Llamas `unshift('Zoe')` en una lista de tres invitados. ¿Qué cambia?"
+      },
+      "options": [
+        {
+          "en": "`tail` moves to Zoe's node",
+          "es": "`tail` se mueve al nodo de Zoe"
+        },
+        {
+          "en": "`head` moves to Zoe's new node, `length` goes up by 1, and `tail` stays put",
+          "es": "`head` se mueve al nodo nuevo de Zoe, `length` sube 1, y `tail` se queda donde está"
+        },
+        {
+          "en": "Every guest moves back one index",
+          "es": "Cada invitado se recorre un índice"
+        },
+        {
+          "en": "Zoe replaces the first guest",
+          "es": "Zoe reemplaza al primer invitado"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "unshift works at the front of the line.",
+        "es": "unshift trabaja al inicio de la fila."
+      },
+      "explanation": {
+        "en": "Zoe's node goes in front, so `head` moves to it and the length grows by 1. Nothing else moves: there are no indexes to update, and `tail` is still on the last guest.",
+        "es": "El nodo de Zoe va al frente, así que `head` se mueve a él y la longitud crece 1. Nada más se mueve: no hay índices que actualizar, y `tail` sigue en el último invitado."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "You `unshift('Zoe')` onto a list with **one** guest, Ana. Where is `tail` afterwards?",
+        "es": "Haces `unshift('Zoe')` en una lista con **un** invitado, Ana. ¿Dónde queda `tail` después?"
+      },
+      "options": [
+        {
+          "en": "Still on Ana's node",
+          "es": "Sigue en el nodo de Ana"
+        },
+        {
+          "en": "On Zoe's node",
+          "es": "En el nodo de Zoe"
+        },
+        {
+          "en": "On `null`",
+          "es": "En `null`"
+        },
+        {
+          "en": "On the same node as `head`",
+          "es": "En el mismo nodo que `head`"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "Who is last in the line after Zoe joins at the front?",
+        "es": "¿Quién es el último de la fila después de que Zoe se forma al inicio?"
+      },
+      "explanation": {
+        "en": "Zoe joins at the front, so Ana is still the last guest and `tail` stays on Ana's node. Only an empty list needs `tail` set by unshift.",
+        "es": "Zoe se forma al inicio, así que Ana sigue en el último lugar y `tail` se queda en el nodo de Ana. Solo una lista vacía necesita que unshift ponga `tail`."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "What goes wrong if `unshift` runs `this.head = newNode` **before** `newNode.next = this.head`?",
+        "es": "¿Qué sale mal si `unshift` corre `this.head = newNode` **antes** de `newNode.next = this.head`?"
+      },
+      "options": [
+        {
+          "en": "Nothing: the order doesn't matter",
+          "es": "Nada: el orden no importa"
+        },
+        {
+          "en": "The length becomes wrong",
+          "es": "La longitud queda mal"
+        },
+        {
+          "en": "The new node points to itself, and the rest of the line is lost",
+          "es": "El nodo nuevo se apunta a sí mismo, y el resto de la fila se pierde"
+        },
+        {
+          "en": "`tail` moves to the new node",
+          "es": "`tail` se mueve al nodo nuevo"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "After `this.head = newNode`, what does `this.head` point to?",
+        "es": "Después de `this.head = newNode`, ¿a qué apunta `this.head`?"
+      },
+      "explanation": {
+        "en": "Once `head` is on the new node, `newNode.next = this.head` points the new node at itself, and nothing points to the old first node anymore. Link first, then move `head`.",
+        "es": "Cuando `head` ya está en el nodo nuevo, `newNode.next = this.head` hace que el nodo nuevo se apunte a sí mismo, y ya nada apunta al antiguo primer nodo. Primero enlaza, luego mueve `head`."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `unshift(value)` in the `LinkedList` class, following the plan in the comments. It adds a node at the front (when the list is empty, the new node becomes both `head` and `tail`), adds 1 to `length` and returns the list.",
+        "es": "Escribe `unshift(value)` en la clase `LinkedList`, siguiendo el plan de los comentarios. Agrega un nodo al inicio (en una lista vacía, `head` y `tail` apuntan a él), le suma 1 a `length` y regresa la lista."
+      },
+      "hint": {
+        "en": "Same shape as `push`. In the `else`, first `newNode.next = this.head`, then `this.head = newNode`. End with `this.length++` and `return this`.",
+        "es": "La misma forma que `push`. En el `else`, primero `newNode.next = this.head` y luego `this.head = newNode`. Termina con `this.length++` y `return this`."
+      },
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  unshift(value) {\n    // 1. make a new node with the value\n    // 2. if the list is empty: head and tail both point to the new node\n    // 3. otherwise: the new node's next points to the first node,\n    //    then head moves to the new node\n    // 4. add 1 to length\n    // 5. return the list (this)\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  unshift(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      newNode.next = this.head\n      this.head = newNode\n    }\n    this.length++\n    return this\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "kind": "class",
+      "className": "LinkedList",
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "unshift",
+              "args": ["Zoe"]
+            },
+            {
+              "read": "head.value",
+              "expected": "Zoe"
+            },
+            {
+              "read": "tail.value",
+              "expected": "Zoe"
+            },
+            {
+              "read": "length",
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "unshift",
+              "args": ["Zoe"]
+            },
+            {
+              "call": "toArray",
+              "expected": ["Zoe", "Ana"]
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ana"
+            },
+            {
+              "read": "length",
+              "expected": 2
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "unshift",
+              "args": ["Zoe"],
+              "expected": {
+                "head": {
+                  "value": "Zoe",
+                  "next": {
+                    "value": "Ana",
+                    "next": {
+                      "value": "Ben",
+                      "next": null
+                    }
+                  }
+                },
+                "tail": {
+                  "value": "Ben",
+                  "next": null
+                },
+                "length": 3
+              }
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "unshift",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "unshift",
+              "args": ["Ben"]
+            },
+            {
+              "call": "unshift",
+              "args": ["Ana"]
+            },
+            {
+              "call": "toArray",
+              "expected": ["Ana", "Ben", "Cleo"]
+            },
+            {
+              "read": "tail.next",
+              "expected": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "You add 10,000 guests, one at a time, at the **front**. Which structure does each add in O(1)?",
+        "es": "Agregas 10,000 invitados, uno por uno, al **inicio**. ¿Qué estructura hace cada agregado en O(1)?"
+      },
+      "options": [
+        {
+          "en": "An array with `unshift`",
+          "es": "Un array con `unshift`"
+        },
+        {
+          "en": "Both: adding is always O(1)",
+          "es": "Las dos: agregar siempre es O(1)"
+        },
+        {
+          "en": "Neither: the front is always O(n)",
+          "es": "Ninguna: el inicio siempre es O(n)"
+        },
+        {
+          "en": "A linked list with `unshift`",
+          "es": "Una lista enlazada con `unshift`"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "Which one has to move every item that's already in line?",
+        "es": "¿Cuál tiene que mover cada elemento que ya está en la fila?"
+      },
+      "explanation": {
+        "en": "A linked list's unshift makes two pointer moves, however long the line is: O(1). An array's unshift moves every item over one index: O(n) each time.",
+        "es": "El unshift de una lista enlazada hace dos movimientos de punteros, sin importar lo larga que sea la fila: O(1). El unshift de un array recorre cada elemento un índice: O(n) cada vez."
+      }
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What does our `pop()` return when the list has guests?",
+        "es": "¿Qué regresa nuestro `pop()` cuando la lista tiene invitados?"
+      },
+      "options": [
+        {
+          "en": "The removed node",
+          "es": "El nodo que quitó"
+        },
+        {
+          "en": "The removed value, like an array's `pop`",
+          "es": "El valor que quitó, como el `pop` de un array"
+        },
+        {
+          "en": "The new length",
+          "es": "La nueva longitud"
+        },
+        {
+          "en": "The list itself (`this`)",
+          "es": "La lista misma (`this`)"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "The plan ends with `return temp`. What is `temp` pointing to?",
+        "es": "El plan termina con `return temp`. ¿A qué apunta `temp`?"
+      },
+      "explanation": {
+        "en": "`temp` ends on the last node, the one that was cut off, and pop returns it. Its value is one step away: `line.pop().value`. On an empty list, pop returns `undefined`.",
+        "es": "`temp` termina en el último nodo, el que se soltó, y pop lo regresa. Su valor está a un paso: `line.pop().value`. En una lista vacía, pop regresa `undefined`."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "You `pop()` a list that has **one** guest. Which result is right?",
+        "es": "Haces `pop()` en una lista con **un** invitado. ¿Qué resultado es correcto?"
+      },
+      "options": [
+        {
+          "en": "`length` is 0, but `head` and `tail` still point to the guest",
+          "es": "`length` es 0, pero `head` y `tail` todavía apuntan al invitado"
+        },
+        {
+          "en": "`head` and `tail` are `null`, `length` is 0, and the guest's node is returned",
+          "es": "`head` y `tail` son `null`, `length` es 0, y se regresa el nodo del invitado"
+        },
+        {
+          "en": "It returns `undefined`, because a list needs two nodes to pop",
+          "es": "Regresa `undefined`, porque una lista necesita dos nodos para hacer pop"
+        },
+        {
+          "en": "`tail` is `null`, but `head` still points to the guest",
+          "es": "`tail` es `null`, pero `head` todavía apunta al invitado"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "After the only guest leaves, what should an empty list look like?",
+        "es": "Cuando el único invitado se va, ¿cómo debe verse una lista vacía?"
+      },
+      "explanation": {
+        "en": "Popping the only guest empties the line, so the list must look exactly like a new empty list: `head` and `tail` on `null` and `length` 0. The node that left is returned.",
+        "es": "Hacerle pop al único invitado vacía la fila, así que la lista debe verse igual que una lista vacía nueva: `head` y `tail` en `null` y `length` en 0. Se regresa el nodo que se fue."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "After the walk in `pop` (`while (temp.next !== null)`), where are `temp` and `pre`?",
+        "es": "Después de la caminata de `pop` (`while (temp.next !== null)`), ¿dónde están `temp` y `pre`?"
+      },
+      "options": [
+        {
+          "en": "Both on the last node",
+          "es": "Los dos en el último nodo"
+        },
+        {
+          "en": "`temp` on `null`, `pre` on the last node",
+          "es": "`temp` en `null`, `pre` en el último nodo"
+        },
+        {
+          "en": "`temp` on the last node, `pre` on the node before it",
+          "es": "`temp` en el último nodo, `pre` en el nodo de antes"
+        },
+        {
+          "en": "Both back on `head`",
+          "es": "Los dos de vuelta en `head`"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "`pre` always stays one node behind `temp`. When does the loop stop?",
+        "es": "`pre` siempre se queda un nodo detrás de `temp`. ¿Cuándo se detiene el bucle?"
+      },
+      "explanation": {
+        "en": "The loop stops when `temp` has no next, so `temp` is on the last node. `pre` trails one node behind, on the node before it: exactly where `tail` has to move.",
+        "es": "El bucle se detiene cuando `temp` ya no tiene next, así que `temp` está en el último nodo. `pre` va un nodo atrás, en el nodo de antes: justo donde tiene que moverse `tail`."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `pop()` in the `LinkedList` class, following the plan in the comments. It removes the last node and returns it, returns `undefined` on an empty list, and leaves an empty list behind when it pops the only guest.",
+        "es": "Escribe `pop()` en la clase `LinkedList`, siguiendo el plan de los comentarios. Quita el último nodo y lo regresa, regresa `undefined` en una lista vacía, y deja una lista vacía cuando le hace pop al único invitado."
+      },
+      "hint": {
+        "en": "Walk with `while (temp.next !== null) { pre = temp; temp = temp.next }`. Then `this.tail = pre`, `this.tail.next = null` and `this.length--`. After the decrement, if `this.length === 0`, set `head` and `tail` to `null`.",
+        "es": "Camina con `while (temp.next !== null) { pre = temp; temp = temp.next }`. Luego `this.tail = pre`, `this.tail.next = null` y `this.length--`. Después de restar, si `this.length === 0`, pon `head` y `tail` en `null`."
+      },
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  pop() {\n    // 1. if the list is empty, return undefined\n    // 2. temp and pre both start at head\n    // 3. walk: while temp has a next, pre = temp, then temp moves on\n    // 4. tail moves to pre, and the new tail's next becomes null\n    // 5. subtract 1 from length\n    // 6. if length is now 0, head and tail become null\n    // 7. return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  pop() {\n    if (!this.head) {\n      return undefined\n    }\n    let temp = this.head\n    let pre = this.head\n    while (temp.next !== null) {\n      pre = temp\n      temp = temp.next\n    }\n    this.tail = pre\n    this.tail.next = null\n    this.length--\n    if (this.length === 0) {\n      this.head = null\n      this.tail = null\n    }\n    return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "kind": "class",
+      "className": "LinkedList",
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "pop",
+              "expected": null
+            },
+            {
+              "read": "head",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "pop",
+              "expected": {
+                "value": "Ana",
+                "next": null
+              }
+            },
+            {
+              "read": "head",
+              "expected": null
+            },
+            {
+              "read": "tail",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "pop",
+              "expected": {
+                "value": "Cleo",
+                "next": null
+              }
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ben"
+            },
+            {
+              "read": "tail.next",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 2
+            },
+            {
+              "call": "toArray",
+              "expected": ["Ana", "Ben"]
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "pop"
+            },
+            {
+              "call": "pop",
+              "expected": {
+                "value": "Ana",
+                "next": null
+              }
+            },
+            {
+              "call": "pop",
+              "expected": null
+            },
+            {
+              "read": "tail",
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Which change would make `pop` O(1)?",
+        "es": "¿Qué cambio haría que `pop` fuera O(1)?"
+      },
+      "options": [
+        {
+          "en": "Using a `for` loop instead of a `while` loop",
+          "es": "Usar un bucle `for` en vez de un `while`"
+        },
+        {
+          "en": "Checking `length` before walking",
+          "es": "Revisar `length` antes de caminar"
+        },
+        {
+          "en": "Returning the value instead of the node",
+          "es": "Regresar el valor en vez del nodo"
+        },
+        {
+          "en": "Giving every node a pointer to the node before it, too",
+          "es": "Darle a cada nodo también un puntero al nodo de antes"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "What does pop walk the line to find?",
+        "es": "¿Qué busca pop al recorrer la fila?"
+      },
+      "explanation": {
+        "en": "pop walks to find the node before the tail. If every node also pointed backwards (`prev`), that node would be `tail.prev`, one step away. That's a doubly linked list, the next module.",
+        "es": "pop camina para encontrar el nodo antes del tail. Si cada nodo también apuntara hacia atrás (`prev`), ese nodo sería `tail.prev`, a un paso. Eso es una lista doblemente enlazada, el siguiente módulo."
+      }
+    }
+  ]
+}
