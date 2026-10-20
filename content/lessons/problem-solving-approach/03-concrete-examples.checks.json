@@ -1,0 +1,109 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What are the two jobs of concrete examples?",
+        "es": "¿Cuáles son los dos trabajos de los ejemplos concretos?"
+      },
+      "options": [
+        {
+          "en": "They make the code shorter and faster",
+          "es": "Hacen el código más corto y más rápido"
+        },
+        {
+          "en": "They replace the plan and the refactor",
+          "es": "Reemplazan el plan y la refactorización"
+        },
+        {
+          "en": "They decide the Big O and the names",
+          "es": "Deciden el Big O y los nombres"
+        },
+        {
+          "en": "They help you understand the problem, and later check your solution",
+          "es": "Te ayudan a entender el problema, y después a revisar tu solución"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "Think about before the code, and after it.",
+        "es": "Piensa en antes del código, y después de él."
+      },
+      "explanation": {
+        "en": "Each example you can't answer is a question to ask, and once the code exists, the examples are the first tests you run.",
+        "es": "Cada ejemplo que no puedes responder es una pregunta que hacer, y cuando el código ya existe, los ejemplos son las primeras pruebas que corres."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Before coding `charCount`, which example is most likely to change your code?",
+        "es": "Antes de programar `charCount`, ¿qué ejemplo es más probable que cambie tu código?"
+      },
+      "options": [
+        {
+          "en": "`'aaa'`",
+          "es": "`'aaa'`"
+        },
+        {
+          "en": "`'Hi Ana!'`",
+          "es": "`'Hi Ana!'`"
+        },
+        {
+          "en": "`'bbb'`",
+          "es": "`'bbb'`"
+        },
+        {
+          "en": "`'banana'`",
+          "es": "`'banana'`"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Which one makes you ask questions?",
+        "es": "¿Cuál te hace hacer preguntas?"
+      },
+      "explanation": {
+        "en": "`'Hi Ana!'` has a space, a `!` and both `'A'` and `'a'`. Each one is a question about the rules, and the answers change the code.",
+        "es": "`'Hi Ana!'` tiene un espacio, un `!` y tanto `'A'` como `'a'`. Cada uno es una pregunta sobre las reglas, y las respuestas cambian el código."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `safeLength(value)`: return the length of `value` if it's a string, and `0` for anything else (a number, `null`, an array…).",
+        "es": "Escribe `safeLength(value)`: regresa el largo de `value` si es un string, y `0` para cualquier otra cosa (un número, `null`, un array…)."
+      },
+      "hint": {
+        "en": "`typeof value === 'string'` tells you whether it's a string. Arrays have a length too, so don't check for `length`.",
+        "es": "`typeof value === 'string'` te dice si es un string. Los arrays también tienen length, así que no revises `length`."
+      },
+      "starterCode": "function safeLength(value) {\n  return value.length\n}",
+      "solution": "function safeLength(value) {\n  if (typeof value !== 'string') return 0\n  return value.length\n}",
+      "kind": "function",
+      "functionName": "safeLength",
+      "tests": [
+        {
+          "args": ["party"],
+          "expected": 5
+        },
+        {
+          "args": [""],
+          "expected": 0
+        },
+        {
+          "args": [42],
+          "expected": 0
+        },
+        {
+          "args": [null],
+          "expected": 0
+        },
+        {
+          "args": [["a", "b"]],
+          "expected": 0
+        }
+      ]
+    }
+  ]
+}

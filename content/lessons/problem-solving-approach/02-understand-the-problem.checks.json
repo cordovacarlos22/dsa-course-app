@@ -1,0 +1,109 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "Why should you restate a problem in your own words?",
+        "es": "¿Por qué deberías decir un problema con tus propias palabras?"
+      },
+      "options": [
+        {
+          "en": "Interviewers give points for talking a lot",
+          "es": "Los entrevistadores dan puntos por hablar mucho"
+        },
+        {
+          "en": "It proves you understood it and catches misunderstandings before they become code",
+          "es": "Demuestra que lo entendiste y atrapa malentendidos antes de que se vuelvan código"
+        },
+        {
+          "en": "It makes the code run faster",
+          "es": "Hace que el código corra más rápido"
+        },
+        {
+          "en": "It replaces the need for examples",
+          "es": "Hace que ya no necesites ejemplos"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "If you can't say it differently, do you really understand it?",
+        "es": "Si no puedes decirlo de otra forma, ¿de verdad lo entiendes?"
+      },
+      "explanation": {
+        "en": "Saying it in your own words is a quick test of understanding. If something is unclear, you find out before writing any code.",
+        "es": "Decirlo con tus palabras es una prueba rápida de que lo entendiste. Si algo no está claro, lo descubres antes de escribir código."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Why can asking \"how big can the numbers be?\" change your solution to \"add two numbers\"?",
+        "es": "¿Por qué preguntar \"¿qué tan grandes pueden ser los números?\" puede cambiar tu solución a \"sumar dos números\"?"
+      },
+      "options": [
+        {
+          "en": "Big numbers make the loop slower",
+          "es": "Los números grandes hacen más lento el bucle"
+        },
+        {
+          "en": "It can't: + works the same for every number",
+          "es": "No puede: + funciona igual para cualquier número"
+        },
+        {
+          "en": "JavaScript numbers lose precision past a limit, or become Infinity, so huge numbers need another approach",
+          "es": "Los números de JavaScript pierden precisión después de un límite, o se vuelven Infinity, así que los números enormes necesitan otro enfoque"
+        },
+        {
+          "en": "Big numbers have to be written with commas",
+          "es": "Los números grandes se tienen que escribir con comas"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Remember what `9007199254740992 + 1` and `1e308 + 1e308` printed.",
+        "es": "Recuerda lo que imprimieron `9007199254740992 + 1` y `1e308 + 1e308`."
+      },
+      "explanation": {
+        "en": "Past `Number.MAX_SAFE_INTEGER` JavaScript starts rounding, and past about 1.8 × 10³⁰⁸ it returns Infinity. Huge numbers would need, for example, strings added digit by digit.",
+        "es": "Después de `Number.MAX_SAFE_INTEGER` JavaScript empieza a redondear, y después de unos 1.8 × 10³⁰⁸ regresa Infinity. Los números enormes necesitarían, por ejemplo, strings sumados dígito por dígito."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "We asked, and decided: a missing second number counts as `0`. Change `add(num1, num2)` so that `add(5)` returns `5` instead of `NaN`.",
+        "es": "Preguntamos, y decidimos: un segundo número que falta cuenta como `0`. Cambia `add(num1, num2)` para que `add(5)` regrese `5` en vez de `NaN`."
+      },
+      "hint": {
+        "en": "When an argument isn't passed, it's `undefined`. Check for that before adding.",
+        "es": "Cuando no se pasa un argumento, vale `undefined`. Revisa eso antes de sumar."
+      },
+      "starterCode": "function add(num1, num2) {\n  // A missing num2 should count as 0\n  return num1 + num2\n}",
+      "solution": "function add(num1, num2) {\n  if (num2 === undefined) num2 = 0\n  return num1 + num2\n}",
+      "kind": "function",
+      "functionName": "add",
+      "tests": [
+        {
+          "args": [2, 3],
+          "expected": 5
+        },
+        {
+          "args": [5],
+          "expected": 5
+        },
+        {
+          "args": [-1, 1],
+          "expected": 0
+        },
+        {
+          "args": [0.5, 0.25],
+          "expected": 0.75
+        },
+        {
+          "args": [0],
+          "expected": 0
+        }
+      ]
+    }
+  ]
+}

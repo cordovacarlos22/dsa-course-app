@@ -109,6 +109,48 @@ describe('arrays and objects animations', () => {
   })
 })
 
+describe('problem-solving approach animations', () => {
+  async function renderAtStep(name, nextClicks) {
+    await i18n.changeLanguage('en')
+    const user = userEvent.setup()
+    const Animation = visualizations[name]
+    render(<Animation />)
+    for (let i = 0; i < nextClicks; i++) {
+      await user.click(screen.getByRole('button', { name: /next/i }))
+    }
+  }
+
+  it('reveals the five questions of step 1, one at a time', async () => {
+    await renderAtStep('five-steps-understand', 5)
+    expect(screen.getByRole('listitem', { current: 'step' })).toHaveTextContent(
+      'Understand the problem',
+    )
+    expect(screen.getByText('What will I call things?')).toBeInTheDocument()
+  })
+
+  it('turns the hard examples into decisions', async () => {
+    await renderAtStep('example-ladder', 7)
+    expect(
+      screen.getByText('Not a string: we only accept strings'),
+    ).toBeInTheDocument()
+    expect(screen.queryByText('Count the space?')).not.toBeInTheDocument()
+  })
+
+  it('says the character right after Z is not a letter', async () => {
+    await renderAtStep('char-code-ranges', 6)
+    expect(
+      screen.getByText("'['.charCodeAt(0) → 91 → false"),
+    ).toBeInTheDocument()
+  })
+
+  it('counts only letters and digits once every layer is back', async () => {
+    await renderAtStep('solution-layers', 5)
+    expect(screen.getByText('h')).toBeInTheDocument()
+    expect(screen.queryByText('␣')).not.toBeInTheDocument()
+    expect(screen.queryByText('!')).not.toBeInTheDocument()
+  })
+})
+
 describe('buildBinarySearchSteps', () => {
   it('finds the target in log₂(n) checks', () => {
     const steps = buildBinarySearchSteps([2, 4, 6, 8, 10, 12, 14, 16], 14)

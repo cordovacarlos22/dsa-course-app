@@ -1,0 +1,109 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What's the main reason to write the steps as comments before the code?",
+        "es": "¿Cuál es la razón principal para escribir los pasos como comentarios antes del código?"
+      },
+      "options": [
+        {
+          "en": "You think about the logic before the syntax, and see what you don't know yet",
+          "es": "Piensas en la lógica antes que en la sintaxis, y ves lo que todavía no sabes"
+        },
+        {
+          "en": "Comments make the code run faster",
+          "es": "Los comentarios hacen que el código corra más rápido"
+        },
+        {
+          "en": "The interviewer can't read code without comments",
+          "es": "El entrevistador no puede leer código sin comentarios"
+        },
+        {
+          "en": "It's required by JavaScript",
+          "es": "JavaScript lo exige"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "Writing code means deciding two things at once.",
+        "es": "Escribir código quiere decir decidir dos cosas a la vez."
+      },
+      "explanation": {
+        "en": "A plan separates what to do from how to write it in JavaScript, and the step you can't put into words shows you where you're stuck.",
+        "es": "Un plan separa qué hacer de cómo escribirlo en JavaScript, y el paso que no puedes poner en palabras te muestra dónde estás atascado."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "In the plan for `charCount`, where does most of the logic go?",
+        "es": "En el plan de `charCount`, ¿dónde va casi toda la lógica?"
+      },
+      "options": [
+        {
+          "en": "In the return statement",
+          "es": "En el return"
+        },
+        {
+          "en": "In the object we create at the start",
+          "es": "En el objeto que creamos al principio"
+        },
+        {
+          "en": "Inside the loop over the string",
+          "es": "Dentro del bucle sobre el string"
+        },
+        {
+          "en": "Before the function",
+          "es": "Antes de la función"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Making the object and returning it are the easy parts.",
+        "es": "Crear el objeto y regresarlo son las partes fáciles."
+      },
+      "explanation": {
+        "en": "Creating the object and returning it are one line each. Deciding what to do with each character happens inside the loop.",
+        "es": "Crear el objeto y regresarlo es una línea cada uno. Decidir qué hacer con cada carácter pasa dentro del bucle."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "The function below has a plan but no code. Turn each comment into code: `countSpaces(str)` returns how many spaces (`' '`) the string has.",
+        "es": "La función tiene un plan pero nada de código. Convierte cada comentario en código: `countSpaces(str)` regresa cuántos espacios (`' '`) tiene el string."
+      },
+      "hint": {
+        "en": "Follow the comments in order: a counter, a loop, an `if`, a return.",
+        "es": "Sigue los comentarios en orden: un contador, un bucle, un `if`, un return."
+      },
+      "starterCode": "function countSpaces(str) {\n  // start a counter at 0\n  // loop over the string, one character at a time\n  //   if the character is a space, add 1 to the counter\n  // return the counter\n}",
+      "solution": "function countSpaces(str) {\n  // start a counter at 0\n  let count = 0\n  // loop over the string, one character at a time\n  for (let i = 0; i < str.length; i++) {\n    //   if the character is a space, add 1 to the counter\n    if (str[i] === ' ') count++\n  }\n  // return the counter\n  return count\n}",
+      "kind": "function",
+      "functionName": "countSpaces",
+      "tests": [
+        {
+          "args": ["Hi Ana"],
+          "expected": 1
+        },
+        {
+          "args": ["party at eight"],
+          "expected": 2
+        },
+        {
+          "args": [""],
+          "expected": 0
+        },
+        {
+          "args": ["party"],
+          "expected": 0
+        },
+        {
+          "args": ["  "],
+          "expected": 2
+        }
+      ]
+    }
+  ]
+}

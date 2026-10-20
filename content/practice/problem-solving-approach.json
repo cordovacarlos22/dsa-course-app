@@ -1,0 +1,617 @@
+{
+  "slug": "problem-solving-approach",
+  "order": 4,
+  "title": {
+    "en": "A Problem-Solving Approach",
+    "es": "Un método para resolver problemas"
+  },
+  "sourceFolder": "course 2/section 4 - problem solving aproach",
+  "questions": [
+    {
+      "id": "restate-first",
+      "topic": "Understand the problem",
+      "prompt": {
+        "en": "An interviewer says: \"Write a function that returns the sum of two numbers.\" What's the best first move?",
+        "es": "Un entrevistador dice: \"Escribe una función que regrese la suma de dos números.\" ¿Qué es lo mejor que puedes hacer primero?"
+      },
+      "options": [
+        {
+          "en": "Explain it back in your own words and ask what kind of numbers, and how many",
+          "es": "Explicarlo con tus palabras y preguntar qué tipo de números son, y cuántos"
+        },
+        {
+          "en": "Start typing `function add(a, b)` right away",
+          "es": "Empezar a escribir `function add(a, b)` de inmediato"
+        },
+        {
+          "en": "Write `return a + b` and move on",
+          "es": "Escribir `return a + b` y seguir"
+        },
+        {
+          "en": "Ask the interviewer for the solution",
+          "es": "Pedirle la solución al entrevistador"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Step 1 comes before any code. Explaining it back catches misunderstandings, and questions about the inputs (decimals? huge numbers? two or ten?) can change the solution.",
+        "es": "El paso 1 va antes de cualquier código. Decirlo con tus palabras atrapa malentendidos, y las preguntas sobre las entradas (¿decimales? ¿números enormes? ¿dos o diez?) pueden cambiar la solución."
+      }
+    },
+    {
+      "id": "missing-input",
+      "topic": "Understand the problem",
+      "prompt": {
+        "en": "Someone calls `add(5)` with only one number. Which of the five \"understand\" questions is this case about?",
+        "es": "Alguien llama `add(5)` con un solo número. ¿De cuál de las cinco preguntas de \"entender\" trata este caso?"
+      },
+      "options": [
+        {
+          "en": "Can I explain it back in my own words?",
+          "es": "¿Puedo explicarlo con mis propias palabras?"
+        },
+        {
+          "en": "What will I call things?",
+          "es": "¿Cómo voy a llamar a las cosas?"
+        },
+        {
+          "en": "How did other people solve it?",
+          "es": "¿Cómo lo resolvieron otras personas?"
+        },
+        {
+          "en": "Is that enough to get the answer?",
+          "es": "¿Con eso me alcanza para la respuesta?"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "With one number there isn't enough information to add. Someone has to decide: count it as 0, return `undefined`, or throw an error.",
+        "es": "Con un solo número no hay suficiente información para sumar. Alguien tiene que decidir: contarlo como 0, regresar `undefined`, o lanzar un error."
+      }
+    },
+    {
+      "id": "safe-integer",
+      "topic": "Understand the problem",
+      "prompt": {
+        "en": "What does this print?",
+        "es": "¿Qué imprime esto?"
+      },
+      "code": "console.log(9007199254740992 + 1)",
+      "options": [
+        {
+          "en": "`9007199254740993`",
+          "es": "`9007199254740993`"
+        },
+        {
+          "en": "`Infinity`",
+          "es": "`Infinity`"
+        },
+        {
+          "en": "`9007199254740992`",
+          "es": "`9007199254740992`"
+        },
+        {
+          "en": "An error",
+          "es": "Un error"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "The number is already past `Number.MAX_SAFE_INTEGER`, so JavaScript can't store the exact result and rounds it: the `+ 1` is lost. Huge inputs need another approach, which is why you ask how big the numbers can be.",
+        "es": "El número ya pasó `Number.MAX_SAFE_INTEGER`, así que JavaScript no puede guardar el resultado exacto y lo redondea: el `+ 1` se pierde. Las entradas enormes necesitan otro enfoque, y por eso preguntas qué tan grandes pueden ser los números."
+      }
+    },
+    {
+      "id": "examples-order",
+      "topic": "Explore examples",
+      "prompt": {
+        "en": "In which order should you explore examples?",
+        "es": "¿En qué orden deberías explorar los ejemplos?"
+      },
+      "options": [
+        {
+          "en": "Invalid, then empty, then simple, then complex",
+          "es": "Inválidos, luego vacíos, luego simples, luego complejos"
+        },
+        {
+          "en": "Simple, then more complex, then empty, then invalid",
+          "es": "Simples, luego más complejos, luego vacíos, luego inválidos"
+        },
+        {
+          "en": "Only complex ones: simple ones are a waste of time",
+          "es": "Solo complejos: los simples son una pérdida de tiempo"
+        },
+        {
+          "en": "Any order, as long as there are at least ten",
+          "es": "En cualquier orden, mientras sean por lo menos diez"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "Start with the cases you're sure about, then move into the strange ones. Each harder example tends to raise a question about the rules.",
+        "es": "Empieza con los casos de los que estás seguro, y luego avanza hacia los raros. Cada ejemplo más difícil suele traer una pregunta sobre las reglas."
+      }
+    },
+    {
+      "id": "tests-are-examples",
+      "topic": "Explore examples",
+      "prompt": {
+        "en": "How are concrete examples related to unit tests?",
+        "es": "¿Qué relación hay entre los ejemplos concretos y las pruebas unitarias?"
+      },
+      "options": [
+        {
+          "en": "They aren't related: tests are only for big companies",
+          "es": "No tienen relación: las pruebas son solo para empresas grandes"
+        },
+        {
+          "en": "Unit tests replace the need for examples",
+          "es": "Las pruebas unitarias hacen que ya no necesites ejemplos"
+        },
+        {
+          "en": "Examples are only for interviews, tests are only for apps",
+          "es": "Los ejemplos son solo para entrevistas, y las pruebas solo para apps"
+        },
+        {
+          "en": "A unit test is an example written as code: an input and the output it must produce",
+          "es": "Una prueba unitaria es un ejemplo escrito como código: una entrada y la salida que debe producir"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Both pair an input with the expected output. The examples you write in step 2 are the first tests you run once the code exists, just like the checks in this course.",
+        "es": "Los dos juntan una entrada con la salida esperada. Los ejemplos que escribes en el paso 2 son las primeras pruebas que corres cuando el código ya existe, igual que las comprobaciones de este curso."
+      }
+    },
+    {
+      "id": "array-looks-valid",
+      "topic": "Explore examples",
+      "prompt": {
+        "en": "`size` was written for strings. What does `size(['a', 'b', 'c'])` return, and why is that a problem?",
+        "es": "`size` se escribió para strings. ¿Qué regresa `size(['a', 'b', 'c'])`, y por qué es un problema?"
+      },
+      "code": "function size(str) {\n  return str.length\n}\n\nsize(['a', 'b', 'c'])",
+      "options": [
+        {
+          "en": "An error, because arrays have no length",
+          "es": "Un error, porque los arrays no tienen length"
+        },
+        {
+          "en": "`3`: an array has a length too, so an invalid input passes as if it were a string",
+          "es": "`3`: un array también tiene length, así que una entrada inválida pasa como si fuera un string"
+        },
+        {
+          "en": "`0`, because the input isn't a string",
+          "es": "`0`, porque la entrada no es un string"
+        },
+        {
+          "en": "`undefined`, because arrays can't be passed to functions",
+          "es": "`undefined`, porque los arrays no se pueden pasar a funciones"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "Arrays have a `length` and can be read by index, so the function quietly treats one like a string. Invalid inputs that look valid are why you decide what to accept, for example with `typeof str === 'string'`.",
+        "es": "Los arrays tienen `length` y se pueden leer por índice, así que la función trata uno como si fuera un string sin avisar. Las entradas inválidas que parecen válidas son la razón por la que decides qué aceptar, por ejemplo con `typeof str === 'string'`."
+      }
+    },
+    {
+      "id": "plan-shape",
+      "topic": "Break it down",
+      "prompt": {
+        "en": "In step 3, what should your plan look like?",
+        "es": "En el paso 3, ¿cómo debería verse tu plan?"
+      },
+      "options": [
+        {
+          "en": "A few short comments with the main steps, written before the real code",
+          "es": "Unos cuantos comentarios cortos con los pasos principales, escritos antes del código de verdad"
+        },
+        {
+          "en": "Every line of the solution, written in English",
+          "es": "Cada línea de la solución, escrita en español"
+        },
+        {
+          "en": "The final code, with no comments",
+          "es": "El código final, sin comentarios"
+        },
+        {
+          "en": "A list of the Big O of every line",
+          "es": "Una lista con el Big O de cada línea"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "The plan is short on purpose: the main parts of the solution, in plain words. If it's as long as the code, it stops saving you time.",
+        "es": "El plan es corto a propósito: las partes principales de la solución, con palabras sencillas. Si es tan largo como el código, deja de ahorrarte tiempo."
+      }
+    },
+    {
+      "id": "out-of-time",
+      "topic": "Break it down",
+      "prompt": {
+        "en": "You run out of time halfway through the code. Why does the plan you wrote still help?",
+        "es": "Se te acaba el tiempo a la mitad del código. ¿Por qué todavía te ayuda el plan que escribiste?"
+      },
+      "options": [
+        {
+          "en": "It makes the unfinished code run",
+          "es": "Hace que el código sin terminar funcione"
+        },
+        {
+          "en": "It doesn't: only finished code counts",
+          "es": "No ayuda: solo cuenta el código terminado"
+        },
+        {
+          "en": "The interviewer can see every step you were about to take",
+          "es": "El entrevistador puede ver cada paso que ibas a dar"
+        },
+        {
+          "en": "It gives you extra time",
+          "es": "Te da tiempo extra"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "Interviewers judge your process, not only the last line. With the plan written down, \"didn't finish\" can still look like \"clearly knew how to solve it\".",
+        "es": "Los entrevistadores juzgan tu proceso, no solo la última línea. Con el plan escrito, \"no terminó\" todavía puede verse como \"claramente sabía cómo resolverlo\"."
+      }
+    },
+    {
+      "id": "simplify-move",
+      "topic": "Solve or simplify",
+      "prompt": {
+        "en": "You can't remember how to check whether a character is a letter. What's the \"simplify\" move?",
+        "es": "No recuerdas cómo revisar si un carácter es una letra. ¿Qué es \"simplificar\" en este caso?"
+      },
+      "options": [
+        {
+          "en": "Stop and wait until you remember",
+          "es": "Detenerte y esperar hasta que te acuerdes"
+        },
+        {
+          "en": "Change the problem so it doesn't need the check",
+          "es": "Cambiar el problema para que no necesite esa revisión"
+        },
+        {
+          "en": "Start over with a different approach",
+          "es": "Empezar de nuevo con otro enfoque"
+        },
+        {
+          "en": "Write the rest of the solution without the check, say so, and add it back later",
+          "es": "Escribir el resto de la solución sin la revisión, decirlo, y agregarla después"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Simplifying means setting aside only the hard piece, not changing the problem. You keep making progress, and the hard part often becomes clearer once the rest runs.",
+        "es": "Simplificar quiere decir dejar a un lado solo la pieza difícil, no cambiar el problema. Sigues avanzando, y la parte difícil muchas veces se aclara cuando el resto ya funciona."
+      }
+    },
+    {
+      "id": "nan-count",
+      "topic": "Solve or simplify",
+      "prompt": {
+        "en": "What does this print?",
+        "es": "¿Qué imprime esto?"
+      },
+      "code": "const counts = {}\ncounts.z++\nconsole.log(counts.z)",
+      "options": [
+        {
+          "en": "`1`",
+          "es": "`1`"
+        },
+        {
+          "en": "`NaN`",
+          "es": "`NaN`"
+        },
+        {
+          "en": "`0`",
+          "es": "`0`"
+        },
+        {
+          "en": "`undefined`",
+          "es": "`undefined`"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "`counts.z` doesn't exist yet, so it's `undefined`, and `undefined + 1` is `NaN`. That's why a count starts with a check (`> 0`) or with `(counts.z || 0) + 1`.",
+        "es": "`counts.z` todavía no existe, así que vale `undefined`, y `undefined + 1` es `NaN`. Por eso una cuenta empieza con una revisión (`> 0`) o con `(counts.z || 0) + 1`."
+      }
+    },
+    {
+      "id": "faster-check-big-o",
+      "topic": "Look back and refactor",
+      "prompt": {
+        "en": "Inside `charCount`'s loop, you replace a regular expression with three character-code comparisons. What happens to `charCount`'s Big O?",
+        "es": "Dentro del bucle de `charCount`, cambias una expresión regular por tres comparaciones de códigos de caracteres. ¿Qué le pasa al Big O de `charCount`?"
+      },
+      "options": [
+        {
+          "en": "It becomes O(1)",
+          "es": "Se vuelve O(1)"
+        },
+        {
+          "en": "It becomes O(log n)",
+          "es": "Se vuelve O(log n)"
+        },
+        {
+          "en": "It stays O(n): only the constant gets smaller",
+          "es": "Se queda en O(n): solo se hace más chica la constante"
+        },
+        {
+          "en": "It becomes O(n²)",
+          "es": "Se vuelve O(n²)"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "Both checks do a constant amount of work per character, and the loop still reads every character once. A faster check is a real improvement, but to the constant, not the Big O.",
+        "es": "Las dos revisiones hacen una cantidad constante de trabajo por carácter, y el bucle sigue leyendo cada carácter una vez. Una revisión más rápida es una mejora real, pero en la constante, no en el Big O."
+      }
+    },
+    {
+      "id": "char-count-space",
+      "topic": "Look back and refactor",
+      "prompt": {
+        "en": "`charCount` counts only lowercase letters and digits. What's its space complexity for a string of length n?",
+        "es": "`charCount` cuenta solo letras minúsculas y dígitos. ¿Cuál es su complejidad de espacio para un string de largo n?"
+      },
+      "options": [
+        {
+          "en": "O(1): the object can never hold more than 36 keys",
+          "es": "O(1): el objeto nunca puede tener más de 36 claves"
+        },
+        {
+          "en": "O(n): one key per character",
+          "es": "O(n): una clave por carácter"
+        },
+        {
+          "en": "O(n²): one key per pair of characters",
+          "es": "O(n²): una clave por cada par de caracteres"
+        },
+        {
+          "en": "O(log n): the object halves each time",
+          "es": "O(log n): el objeto se reduce a la mitad cada vez"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Repeated characters share a key, and there are only 26 letters and 10 digits. However long the string is, the object stays at 36 keys or fewer: O(1) space.",
+        "es": "Los caracteres repetidos comparten clave, y solo hay 26 letras y 10 dígitos. Sin importar qué tan largo sea el string, el objeto se queda en 36 claves o menos: espacio O(1)."
+      }
+    },
+    {
+      "id": "ask-the-interviewer",
+      "topic": "The method in an interview",
+      "prompt": {
+        "en": "You've finished and your code works. Which question is great to ask the interviewer?",
+        "es": "Ya terminaste y tu código funciona. ¿Qué pregunta es muy buena para hacerle al entrevistador?"
+      },
+      "options": [
+        {
+          "en": "\"Did I pass?\"",
+          "es": "\"¿Pasé?\""
+        },
+        {
+          "en": "\"Can we skip the Big O?\"",
+          "es": "\"¿Nos podemos saltar el Big O?\""
+        },
+        {
+          "en": "\"Is this the last problem?\"",
+          "es": "\"¿Este es el último problema?\""
+        },
+        {
+          "en": "\"What other solutions have you seen for this problem?\"",
+          "es": "\"¿Qué otras soluciones has visto para este problema?\""
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "It's the last look-back question. Interviewers often have seen many different solutions to the same problem, and it shows you want to learn.",
+        "es": "Es la última pregunta de revisar. Los entrevistadores muchas veces han visto muchas soluciones distintas al mismo problema, y demuestra que quieres aprender."
+      }
+    },
+    {
+      "id": "think-out-loud",
+      "topic": "The method in an interview",
+      "prompt": {
+        "en": "Why should you think out loud in an interview?",
+        "es": "¿Por qué deberías pensar en voz alta en una entrevista?"
+      },
+      "options": [
+        {
+          "en": "Interviewers grade you on how much you talk",
+          "es": "Los entrevistadores te califican por cuánto hablas"
+        },
+        {
+          "en": "The interviewer can follow your process, and can only help with what they hear",
+          "es": "El entrevistador puede seguir tu proceso, y solo puede ayudarte con lo que escucha"
+        },
+        {
+          "en": "It makes the code shorter",
+          "es": "Hace el código más corto"
+        },
+        {
+          "en": "It lets you skip writing examples",
+          "es": "Te deja saltarte los ejemplos"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "Interviewers judge your process. Talking through each step lets them follow it, and when you're stuck, a precise question out loud is how you get a useful hint.",
+        "es": "Los entrevistadores juzgan tu proceso. Explicar cada paso en voz alta les deja seguirlo, y cuando te atascas, una pregunta precisa en voz alta es como consigues una pista útil."
+      }
+    }
+  ],
+  "exercises": [
+    {
+      "slug": "count-the-vowels",
+      "title": {
+        "en": "Count the Vowels",
+        "es": "Cuenta las vocales"
+      },
+      "description": {
+        "en": "Write `countVowels(str)`, which returns how many vowels (`a`, `e`, `i`, `o`, `u`) the string has. Capital vowels count too.\n\nExample: `countVowels('Hi Ana')` → `3`\n\nUse the 5 steps: restate it, write a few examples (including an empty string), plan with comments, solve, and look back at the Big O.",
+        "es": "Escribe `countVowels(str)`, que regresa cuántas vocales (`a`, `e`, `i`, `o`, `u`) tiene el string. Las vocales mayúsculas también cuentan.\n\nEjemplo: `countVowels('Hi Ana')` → `3`\n\nUsa los 5 pasos: dilo con tus palabras, escribe algunos ejemplos (incluido un string vacío), planea con comentarios, resuelve y revisa el Big O."
+      },
+      "difficulty": "easy",
+      "category": "interview",
+      "functionName": "countVowels",
+      "starterCode": {
+        "javascript": "function countVowels(str) {\n  // Your code here\n  return 0\n}"
+      },
+      "solution": {
+        "javascript": "function countVowels(str) {\n  const vowels = 'aeiou'\n  let count = 0\n  for (let i = 0; i < str.length; i++) {\n    if (vowels.includes(str[i].toLowerCase())) count++\n  }\n  return count\n}"
+      },
+      "tests": [
+        {
+          "args": ["Hi Ana"],
+          "expected": 3
+        },
+        {
+          "args": [""],
+          "expected": 0
+        },
+        {
+          "args": ["rhythm"],
+          "expected": 0
+        },
+        {
+          "args": ["AEIOU"],
+          "expected": 5
+        },
+        {
+          "args": ["Party at 8!"],
+          "expected": 2
+        },
+        {
+          "args": ["banana"],
+          "expected": 3
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(n)",
+        "space": "O(1)"
+      }
+    },
+    {
+      "slug": "character-counter",
+      "title": {
+        "en": "Character Counter",
+        "es": "Contador de caracteres"
+      },
+      "description": {
+        "en": "Write `charCount(str)`, which returns an object with how many times each letter and digit appears. Count letters in lowercase (`'G'` and `'g'` are the same key) and skip everything else: spaces, punctuation and symbols.\n\nExample: `charCount('Go, go!')` → `{ g: 2, o: 2 }`\n\nAn empty string, or one with no letters or digits, returns `{}`.\n\nUse the 5 steps: restate it, write a few examples (including an empty string), plan with comments, solve, and look back at the Big O.",
+        "es": "Escribe `charCount(str)`, que regresa un objeto con cuántas veces aparece cada letra y cada dígito. Cuenta las letras en minúsculas (`'G'` y `'g'` son la misma clave) y sáltate todo lo demás: espacios, puntuación y símbolos.\n\nEjemplo: `charCount('Go, go!')` → `{ g: 2, o: 2 }`\n\nUn string vacío, o uno sin letras ni dígitos, regresa `{}`.\n\nUsa los 5 pasos: dilo con tus palabras, escribe algunos ejemplos (incluido un string vacío), planea con comentarios, resuelve y revisa el Big O."
+      },
+      "difficulty": "easy",
+      "category": "interview",
+      "functionName": "charCount",
+      "starterCode": {
+        "javascript": "function charCount(str) {\n  const result = {}\n  // Your code here\n  return result\n}"
+      },
+      "solution": {
+        "javascript": "function isAlphaNumeric(char) {\n  const code = char.charCodeAt(0)\n  if (code >= 48 && code <= 57) return true\n  if (code >= 65 && code <= 90) return true\n  if (code >= 97 && code <= 122) return true\n  return false\n}\n\nfunction charCount(str) {\n  const result = {}\n  for (let i = 0; i < str.length; i++) {\n    if (isAlphaNumeric(str[i])) {\n      const char = str[i].toLowerCase()\n      result[char] = (result[char] || 0) + 1\n    }\n  }\n  return result\n}"
+      },
+      "tests": [
+        {
+          "args": ["Go, go, GO!"],
+          "expected": {
+            "g": 3,
+            "o": 3
+          }
+        },
+        {
+          "args": [""],
+          "expected": {}
+        },
+        {
+          "args": ["abc 123"],
+          "expected": {
+            "a": 1,
+            "b": 1,
+            "c": 1,
+            "1": 1,
+            "2": 1,
+            "3": 1
+          }
+        },
+        {
+          "args": ["..."],
+          "expected": {}
+        },
+        {
+          "args": ["Zz"],
+          "expected": {
+            "z": 2
+          }
+        },
+        {
+          "args": ["Hi 2 U"],
+          "expected": {
+            "h": 1,
+            "i": 1,
+            "2": 1,
+            "u": 1
+          }
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(n)",
+        "space": "O(1)"
+      }
+    },
+    {
+      "slug": "title-case",
+      "title": {
+        "en": "Title Case",
+        "es": "Mayúscula inicial"
+      },
+      "description": {
+        "en": "Write `titleCase(sentence)`. `sentence` has words separated by single spaces. Return it with the first letter of every word in uppercase and the rest of each word in lowercase.\n\nExample: `titleCase('welcome to the party')` → `'Welcome To The Party'`\n\n`'aNA'` becomes `'Ana'`, and an empty string stays `''`.\n\nUse the 5 steps: restate it, write a few examples (including an empty string), plan with comments, solve, and look back at the Big O.",
+        "es": "Escribe `titleCase(sentence)`. `sentence` tiene palabras separadas por un solo espacio. Regrésala con la primera letra de cada palabra en mayúscula y el resto de cada palabra en minúsculas.\n\nEjemplo: `titleCase('welcome to the party')` → `'Welcome To The Party'`\n\n`'aNA'` se vuelve `'Ana'`, y un string vacío se queda como `''`.\n\nUsa los 5 pasos: dilo con tus palabras, escribe algunos ejemplos (incluido un string vacío), planea con comentarios, resuelve y revisa el Big O."
+      },
+      "difficulty": "easy",
+      "category": "interview",
+      "functionName": "titleCase",
+      "starterCode": {
+        "javascript": "function titleCase(sentence) {\n  // Your code here\n  return sentence\n}"
+      },
+      "solution": {
+        "javascript": "function titleCase(sentence) {\n  const words = sentence.split(' ')\n  for (let i = 0; i < words.length; i++) {\n    const word = words[i]\n    if (word.length > 0) {\n      words[i] = word[0].toUpperCase() + word.slice(1).toLowerCase()\n    }\n  }\n  return words.join(' ')\n}"
+      },
+      "tests": [
+        {
+          "args": ["welcome to the party"],
+          "expected": "Welcome To The Party"
+        },
+        {
+          "args": [""],
+          "expected": ""
+        },
+        {
+          "args": ["aNA"],
+          "expected": "Ana"
+        },
+        {
+          "args": ["a b c"],
+          "expected": "A B C"
+        },
+        {
+          "args": ["dsa IN javascript"],
+          "expected": "Dsa In Javascript"
+        },
+        {
+          "args": ["Already Done"],
+          "expected": "Already Done"
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(n)",
+        "space": "O(n)"
+      }
+    }
+  ]
+}

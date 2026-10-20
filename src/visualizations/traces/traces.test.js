@@ -36,6 +36,14 @@ describe.each(Object.entries(traces))('%s', (name, trace) => {
 })
 
 describe('trace counters', () => {
+  it('reads every character once for charCount (O(n))', () => {
+    const trace = traces['trace-char-count']
+    for (const input of trace.inputs) {
+      const last = Array.from(trace.run(input)).at(-1)
+      expect(last.ops).toBe(input.text.length)
+    }
+  })
+
   it('counts one message per guest for welcomeAll (O(n))', () => {
     for (const input of traces['trace-welcome-all'].inputs) {
       const last = Array.from(traces['trace-welcome-all'].run(input)).at(-1)

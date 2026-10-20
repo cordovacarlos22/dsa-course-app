@@ -16,9 +16,14 @@ function ObjectCards({ entries, states = {} }) {
           }`}
         >
           <span className="text-sm font-bold">{key}</span>
-          {/* Values are strings ('yes'); a gap in a huge object has none. */}
+          {/* Values are strings ('yes') or counts (3); a gap in a huge
+              object has none. */}
           <span className="font-mono text-xs">
-            {typeof value === 'string' ? `'${value}'` : '…'}
+            {typeof value === 'string'
+              ? `'${value}'`
+              : typeof value === 'number'
+                ? value
+                : '…'}
           </span>
         </li>
       ))}

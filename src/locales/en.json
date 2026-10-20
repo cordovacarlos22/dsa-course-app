@@ -320,7 +320,9 @@
         "lines_one": "line printed",
         "lines_other": "lines printed",
         "memoryBoxes_one": "new box of memory",
-        "memoryBoxes_other": "new boxes of memory"
+        "memoryBoxes_other": "new boxes of memory",
+        "characters_one": "character read",
+        "characters_other": "characters read"
       },
       "isInvited": {
         "title": "isInvited: stop as soon as you find the name",
@@ -450,6 +452,14 @@
         "noMatch": "{{name}} answered '{{value}}', not '{{answer}}'. Keep going.",
         "match": "{{name}} answered '{{answer}}'. Found it! Return true after {{ops}} checks.",
         "notFound": "The loop ended: nobody answered '{{answer}}'. Return false after {{ops}} checks."
+      },
+      "charCount": {
+        "title": "charCount, the simple version, character by character",
+        "input": "'{{text}}'",
+        "start": "charCount('{{text}}'): an empty object to fill and {{count}} characters to read.",
+        "firstTime": "{{char}} isn't a key yet: result[{{char}}] is undefined, and undefined > 0 is false. Set it to 1.",
+        "again": "{{char}} is already a key, so add 1. It's at {{count}} now.",
+        "done": "All {{ops}} characters read, in one pass: O(n). The object has {{keys}} keys."
       }
     },
     "timingChart": {
@@ -542,6 +552,177 @@
         "reduce": "reduce visits every guest and combines them into one value, the total length of their names: {{value}}.",
         "summary": "One line each, but each one is a loop over the whole array: O(n)."
       }
+    },
+    "fiveSteps": {
+      "names": {
+        "understand": "Understand the problem",
+        "examples": "Explore examples",
+        "breakDown": "Break it down",
+        "solve": "Solve or simplify",
+        "lookBack": "Look back and refactor"
+      },
+      "map": {
+        "title": "The 5 steps for any problem",
+        "start": "A problem you've never seen, and no idea where to start. Here's a plan you can follow every time.",
+        "understand": "Step 1: understand the problem. Before any code, make sure you know what goes in, what comes out and what's missing.",
+        "examples": "Step 2: explore examples. Write a few inputs with the output you expect, from easy ones to strange ones.",
+        "breakDown": "Step 3: break it down. Write the steps as short comments, so you have a direction.",
+        "solve": "Step 4: solve it, or solve a simpler version first and add the hard part back later.",
+        "lookBack": "Step 5: look back and refactor. It works, so now make it clearer, faster, or both.",
+        "summary": "Understand, explore, break it down, solve, look back. You'll use these 5 steps for the rest of the course."
+      },
+      "understand": {
+        "title": "Step 1: understand the problem",
+        "start": "Before writing code, ask five questions: out loud in an interview, or to yourself at home.",
+        "items": [
+          "Can I explain it back in my own words?",
+          "What goes in?",
+          "What comes out?",
+          "Is that enough to get the answer?",
+          "What will I call things?"
+        ],
+        "notes": [
+          "Explaining it back in your own words proves you understood it, and catches mistakes before they become code.",
+          "Inputs: what goes in, what type it is, how big it can get and how many there are.",
+          "Outputs: what comes back, and in what shape: a number, a string, an object?",
+          "Sometimes something is missing, like a second number. You may only notice later, and that's fine.",
+          "Good names now (add, num1, num2, sum) make every next step easier to talk about."
+        ],
+        "summary": "Five questions, a minute or two. They're the cheapest way to avoid solving the wrong problem."
+      },
+      "examples": {
+        "title": "Step 2: explore examples",
+        "start": "Examples turn a problem written in words into inputs and outputs you can check.",
+        "items": [
+          "Start with simple examples",
+          "Move on to more complex examples",
+          "Try an empty input",
+          "Try an invalid input"
+        ],
+        "notes": [
+          "Simple examples first: the easiest inputs, with outputs you're sure about.",
+          "Then harder ones: spaces, capital letters, digits. Each one tends to raise a question.",
+          "Empty inputs, like '' or []: what should come back?",
+          "Invalid inputs, like a number where a string should be: return something, or stop with an error?"
+        ],
+        "summary": "Write your examples down. When your code is done, they're the first tests you run."
+      },
+      "breakDown": {
+        "title": "Step 3: break it down",
+        "start": "Before the real code, write the steps you'll take, in plain words.",
+        "items": [
+          "Write the main steps as comments",
+          "Think about the logic before the syntax",
+          "Spot the parts you don't know yet"
+        ],
+        "notes": [
+          "Not every line, and not real code: just the main steps, as short comments.",
+          "Deciding what to do first means you don't fight the syntax and the logic at the same time.",
+          "Writing the plan shows the steps you're unsure about, so you can ask about them early."
+        ],
+        "summary": "A plan written down is something you can show, check and come back to, even if time runs out."
+      },
+      "solve": {
+        "title": "Step 4: solve or simplify",
+        "start": "Can you solve all of it? Great. If not, solve a simpler problem first.",
+        "items": [
+          "Find the hard part",
+          "Set it aside for now",
+          "Solve everything else",
+          "Add the hard part back"
+        ],
+        "notes": [
+          "Find the one part that's tripping you up, like checking whether a character is a letter.",
+          "Ignore it for a moment. Simplify the problem, don't change it.",
+          "Write a working solution for everything else. Now you have real code to show and to run.",
+          "Bring the hard part back. Often the simple version has shown you how to do it."
+        ],
+        "summary": "Some progress beats none, and the simpler problem is often the road into the harder one."
+      },
+      "lookBack": {
+        "title": "Step 5: look back and refactor",
+        "start": "It works. Before you stop, ask these questions about your solution.",
+        "items": [
+          "Does it really work?",
+          "Is there another way to get there?",
+          "Is it easy to read?",
+          "Where else could this help?",
+          "Can it be faster, or use less memory?",
+          "What else could be cleaner?",
+          "How did other people solve it?"
+        ],
+        "notes": [
+          "Check the result: run your examples from step 2 again.",
+          "There's rarely only one solution. Now that you've solved it once, a second way may be easy to see.",
+          "Is it easy to read? Would a teammate understand it on a whiteboard?",
+          "Does it look like a problem you've solved before, or one you'll meet later?",
+          "Performance: its Big O in time and space. Nested loops are the first thing to look at.",
+          "Style: clear names, let and const, the conventions of the language and your team.",
+          "Other people's solutions, even in another language, are a great way to learn new tricks."
+        ],
+        "summary": "Looking back is where you learn the most. Every problem you review makes the next one easier."
+      }
+    },
+    "exampleLadder": {
+      "title": "Examples for charCount, from easy to strange",
+      "start": "The problem: count how many times each character appears in a string. Let's write examples before any code.",
+      "kinds": {
+        "simple": "Simple",
+        "complex": "More complex",
+        "empty": "Empty",
+        "invalid": "Invalid"
+      },
+      "row0": "'aaa' is easy: one character, three times. The output is an object: { a: 3 }.",
+      "row1": "'banana' is still easy, and shows the shape of the answer: one key per character, with its count.",
+      "row2": "'Hi Ana!' raises questions. Do we count the space? The '!'? Are 'H' and 'h' the same letter?",
+      "row3": "'Party at 8!' adds a digit. Should '8' be counted?",
+      "row4": "An empty string: return an empty object, or something else?",
+      "row5": "A number instead of a string: return something, or stop with an error?",
+      "decided": "Our answers: count letters and digits only, in lowercase, and accept only strings. Each answer came from an example.",
+      "questions": {
+        "spaces": "Count the space?",
+        "case": "'H' and 'h' together?",
+        "punctuation": "Count '!'?",
+        "digits": "Count '8'?",
+        "empty": "Return {}?",
+        "invalid": "Error or {}?"
+      },
+      "onlyStrings": "Not a string: we only accept strings"
+    },
+    "stepsToCode": {
+      "title": "From a plan in comments to code",
+      "start": "First, the plan: six comments and no code. This is what you'd write before anything else.",
+      "comments": {
+        "makeObject": "make an object to return",
+        "loop": "loop over the string, one character at a time",
+        "addOne": "a letter or digit that's already a key: add 1",
+        "setOne": "a letter or digit that's not a key yet: set it to 1",
+        "skip": "anything else (a space, '!'): do nothing",
+        "returnIt": "return the object"
+      },
+      "makeObject": "The easy part first: an empty object, result, to fill and return.",
+      "loop": "The loop over the string. We lowercase each character as we read it, so 'H' and 'h' count together.",
+      "addOne": "A character that's already a key gets 1 more. isAlphaNumeric doesn't exist yet: we gave the step a name and kept going.",
+      "setOne": "A new letter or digit starts at 1.",
+      "skip": "Spaces and punctuation: nothing to do, so all that's left is to close the if and the loop.",
+      "returnIt": "Return the object. Every comment now has its code.",
+      "summary": "The comments were the plan, and the plan became the code. Only isAlphaNumeric is left to write."
+    },
+    "solutionLayers": {
+      "title": "Solve a simpler problem, then add the hard parts back",
+      "simple": "Layer 1: the simple charCount. It ignores case and doesn't check what kind of character it reads.",
+      "simpleOutput": "On 'Hi Ana!' it runs, but 'H' and 'A' are counted apart from 'h' and 'a', and the space and '!' are counted too.",
+      "lowercase": "Layer 2: one change. Each character is lowercased as we read it.",
+      "lowercaseOutput": "Now 'a' has 2. Only the space and '!' are still wrong.",
+      "check": "Layer 3: the hard part comes back. Only letters and digits get counted.",
+      "checkOutput": "The right answer. Nothing from layer 1 was thrown away: each layer only added code."
+    },
+    "charCodeRanges": {
+      "title": "Character codes: is it a letter or a digit?",
+      "start": "Every character has a number. The digits, the capital letters and the lowercase letters each fill one block of numbers.",
+      "inside": "{{char}} has code {{code}}. It's inside a green block: a letter or a digit.",
+      "outside": "{{char}} has code {{code}}. It's outside every green block: not a letter or a digit.",
+      "summary": "Three range checks answer the question, with no regular expression. Watch the edges: '[' is 91, one past 'Z', and '`' is 96, one before 'a'."
     }
   },
   "runnable": {

@@ -1,0 +1,152 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What does it mean to refactor code?",
+        "es": "¿Qué quiere decir refactorizar código?"
+      },
+      "options": [
+        {
+          "en": "Make it as short as possible",
+          "es": "Hacerlo lo más corto posible"
+        },
+        {
+          "en": "Change how it's written without changing what it does",
+          "es": "Cambiar cómo está escrito sin cambiar lo que hace"
+        },
+        {
+          "en": "Add new features to it",
+          "es": "Agregarle funcionalidades nuevas"
+        },
+        {
+          "en": "Rewrite it in another language",
+          "es": "Reescribirlo en otro lenguaje"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "After a refactor, the examples should still pass.",
+        "es": "Después de refactorizar, los ejemplos deben seguir pasando."
+      },
+      "explanation": {
+        "en": "Refactoring improves the code (clearer, faster) while it keeps returning exactly the same results. That's why you re-run the examples.",
+        "es": "Refactorizar mejora el código (más claro, más rápido) mientras sigue regresando exactamente los mismos resultados. Por eso vuelves a correr los ejemplos."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `addOne(counts, key)`: add 1 to `counts[key]`, starting from 0 if the key doesn't exist yet, and return `counts`. One line is enough.",
+        "es": "Escribe `addOne(counts, key)`: súmale 1 a `counts[key]`, empezando desde 0 si la clave todavía no existe, y regresa `counts`. Una línea basta."
+      },
+      "hint": {
+        "en": "`counts[key]++` on a missing key gives `NaN`. Try `(counts[key] || 0) + 1`.",
+        "es": "`counts[key]++` en una clave que no existe da `NaN`. Prueba `(counts[key] || 0) + 1`."
+      },
+      "starterCode": "function addOne(counts, key) {\n  counts[key]++\n  return counts\n}",
+      "solution": "function addOne(counts, key) {\n  counts[key] = (counts[key] || 0) + 1\n  return counts\n}",
+      "kind": "function",
+      "functionName": "addOne",
+      "tests": [
+        {
+          "args": [{}, "a"],
+          "expected": {
+            "a": 1
+          }
+        },
+        {
+          "args": [
+            {
+              "a": 1
+            },
+            "a"
+          ],
+          "expected": {
+            "a": 2
+          }
+        },
+        {
+          "args": [
+            {
+              "a": 1
+            },
+            "b"
+          ],
+          "expected": {
+            "a": 1,
+            "b": 1
+          }
+        },
+        {
+          "args": [
+            {
+              "x": 5
+            },
+            "x"
+          ],
+          "expected": {
+            "x": 6
+          }
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `isAlphaNumeric(char)` with character codes (no regular expression and no list of characters): return `true` for a digit or a letter, capital or lowercase, and `false` for anything else.",
+        "es": "Escribe `isAlphaNumeric(char)` con códigos de caracteres (sin expresiones regulares y sin lista de caracteres): regresa `true` para un dígito o una letra, mayúscula o minúscula, y `false` para cualquier otra cosa."
+      },
+      "hint": {
+        "en": "Digits are 48–57, A–Z are 65–90 and a–z are 97–122. Use `>=` and `<=` so the edges count.",
+        "es": "Los dígitos son 48–57, A–Z son 65–90 y a–z son 97–122. Usa `>=` y `<=` para que cuenten los bordes."
+      },
+      "starterCode": "function isAlphaNumeric(char) {\n  const code = char.charCodeAt(0)\n  // 0–9 are 48–57, A–Z are 65–90, a–z are 97–122\n  return false\n}",
+      "solution": "function isAlphaNumeric(char) {\n  const code = char.charCodeAt(0)\n  if (code >= 48 && code <= 57) return true\n  if (code >= 65 && code <= 90) return true\n  if (code >= 97 && code <= 122) return true\n  return false\n}",
+      "kind": "function",
+      "functionName": "isAlphaNumeric",
+      "tests": [
+        {
+          "args": ["a"],
+          "expected": true
+        },
+        {
+          "args": ["z"],
+          "expected": true
+        },
+        {
+          "args": ["A"],
+          "expected": true
+        },
+        {
+          "args": ["Z"],
+          "expected": true
+        },
+        {
+          "args": ["0"],
+          "expected": true
+        },
+        {
+          "args": ["9"],
+          "expected": true
+        },
+        {
+          "args": [" "],
+          "expected": false
+        },
+        {
+          "args": ["["],
+          "expected": false
+        },
+        {
+          "args": ["`"],
+          "expected": false
+        },
+        {
+          "args": ["@"],
+          "expected": false
+        }
+      ]
+    }
+  ]
+}

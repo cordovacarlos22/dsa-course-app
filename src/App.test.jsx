@@ -175,10 +175,15 @@ describe('course home', () => {
     expect(arraysAndObjects).toHaveTextContent(
       '4 lessons · 15 questions · 3 exercises',
     )
+    const approach = screen.getByRole('link', {
+      name: /A Problem-Solving Approach/,
+    })
+    expect(approach).toHaveAttribute('href', '/learn/problem-solving-approach')
+    expect(approach).toHaveTextContent('7 lessons · 14 questions · 3 exercises')
     expect(
       screen.queryByRole('link', { name: /Linked Lists/ }),
     ).not.toBeInTheDocument()
-    expect(screen.getAllByText('Coming soon')).toHaveLength(20)
+    expect(screen.getAllByText('Coming soon')).toHaveLength(19)
   })
 })
 
