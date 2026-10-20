@@ -16,7 +16,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-20: **Linked Lists, PR 1 of 3** (lessons 1–4: what a linked list is, Big O vs arrays, under the hood, the constructor) is on `content/linked-lists-1`, built on `feat/exercise-pages` because #29 and #30 weren't merged yet. Merge order: #29, #30, then this one. Next: `content/linked-lists-2` (push, pop, unshift, shift).
 - 2026-10-20: #29, #30 and #31 are merged. **Linked Lists, PR 2 of 3** (lessons 5–8: push, pop, unshift, shift) is #32, on `content/linked-lists-2`.
 - 2026-10-20: **Linked Lists, PR 3 of 3** (lessons 9–13: get, set, insert, remove, reverse) is on `content/linked-lists-3`, built on #32, so #32 merges first. With it, the module's lessons, quiz and Build its are complete. Next: the theory pass on Introduction and Big O.
-- 2026-10-20: **Theory pass, PR 1 of 2** (Introduction 1–3 and Big O 1–8) is on `content/theory-pass-1`, built on #33 (merge order: #32, #33, then this one). Next: `content/theory-pass-2` (Big O 9–15 and 17).
+- 2026-10-20: **Theory pass, PR 1 of 2** (Introduction 1–3 and Big O 1–8) is on `content/theory-pass-1`. #32 and #33 are merged, so the Linked Lists module is on `main`. Next: `content/theory-pass-2` (Big O 9–15 and 17).
 
 ## Decisions
 
