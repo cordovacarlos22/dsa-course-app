@@ -13,6 +13,7 @@
 // - construct: true when the code is a class: the test calls it with `new`
 // - method: true when the code is one LinkedList method: the test puts it
 //   in a class and checks play(LinkedList, input) instead of call()
+// - uses: the other method traces whose code that method calls (set uses get)
 //
 // traces.test.js runs every `code` for real and checks that the trace ends
 // with the same result, so the animation can't disagree with its code.
@@ -36,6 +37,13 @@ import {
   linkedListShift,
   linkedListUnshift,
 } from './linkedListMethods'
+import {
+  linkedListGet,
+  linkedListInsert,
+  linkedListRemove,
+  linkedListReverse,
+  linkedListSet,
+} from './linkedListIndexMethods'
 
 export const traces = {
   'trace-is-invited': isInvited,
@@ -60,4 +68,9 @@ export const traces = {
   'trace-ll-pop': linkedListPop,
   'trace-ll-unshift': linkedListUnshift,
   'trace-ll-shift': linkedListShift,
+  'trace-ll-get': linkedListGet,
+  'trace-ll-set': linkedListSet,
+  'trace-ll-insert': linkedListInsert,
+  'trace-ll-remove': linkedListRemove,
+  'trace-ll-reverse': linkedListReverse,
 }

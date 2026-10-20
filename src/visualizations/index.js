@@ -136,5 +136,36 @@ export const visualizations = {
     scene: 'shiftExamples',
   }),
   'linked-list-shift-plan': withProps(LinkedListScenes, { scene: 'shiftPlan' }),
+  'linked-list-get': withProps(LinkedListScenes, { scene: 'get' }),
+  'linked-list-get-examples': withProps(LinkedListScenes, {
+    scene: 'getExamples',
+  }),
+  'linked-list-get-plan': withProps(LinkedListScenes, { scene: 'getPlan' }),
+  'linked-list-set': withProps(LinkedListScenes, { scene: 'set' }),
+  'linked-list-set-examples': withProps(LinkedListScenes, {
+    scene: 'setExamples',
+  }),
+  'linked-list-set-plan': withProps(LinkedListScenes, { scene: 'setPlan' }),
+  'linked-list-insert': withProps(LinkedListScenes, { scene: 'insert' }),
+  'linked-list-insert-examples': withProps(LinkedListScenes, {
+    scene: 'insertExamples',
+  }),
+  'linked-list-insert-plan': withProps(LinkedListScenes, {
+    scene: 'insertPlan',
+  }),
+  'linked-list-remove': withProps(LinkedListScenes, { scene: 'remove' }),
+  'linked-list-remove-examples': withProps(LinkedListScenes, {
+    scene: 'removeExamples',
+  }),
+  'linked-list-remove-plan': withProps(LinkedListScenes, {
+    scene: 'removePlan',
+  }),
+  'linked-list-reverse': withProps(LinkedListScenes, { scene: 'reverse' }),
+  'linked-list-reverse-examples': withProps(LinkedListScenes, {
+    scene: 'reverseExamples',
+  }),
+  'linked-list-reverse-plan': withProps(LinkedListScenes, {
+    scene: 'reversePlan',
+  }),
   ...traceComponents,
 }

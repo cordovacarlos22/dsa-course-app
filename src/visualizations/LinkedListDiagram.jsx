@@ -17,6 +17,12 @@ import { BOX_STATE_STYLES, DEFAULT_BOX_STYLE } from './boxStyles'
 //   their own: [{ value, next: a value or null, state }]
 // - length: shown under the list when it's a number
 // - nullState: a state for the `null` at the end, to point at it
+// - nextOf: draws the nodes where they stand instead of following the chain
+//   from head: { [value]: the value its next points to, or null }. Each gap
+//   then shows ← or →, or nothing when neither node points at the other.
+//   Reverse needs it: halfway through, some arrows point back and the line
+//   has a gap. Pointers to null sit on the right-hand null, except the ones
+//   in `leftNull` (like prev), which sit on the left-hand one.
 const TOP_POINTERS = ['head', 'tail']
 
 function labelsFor(pointers, target, onTop) {
@@ -28,18 +34,28 @@ function labelsFor(pointers, target, onTop) {
     .map(([label]) => label)
 }
 
-function NodeBox({ value, state }) {
+// `compact` keeps the small size on wide screens too: the line drawn where
+// the nodes stand (reverse) has an extra null on the left to fit.
+function NodeBox({ value, state, compact = false }) {
   return (
     <span
-      className={`flex h-9 items-stretch rounded-lg border-2 text-xs font-bold transition-colors duration-500 @sm:h-10 @sm:text-sm ${
-        BOX_STATE_STYLES[state] ?? DEFAULT_BOX_STYLE
-      }`}
+      className={`flex h-9 items-stretch rounded-lg border-2 text-xs font-bold transition-colors duration-500 ${
+        compact ? '' : '@sm:h-10 @sm:text-sm'
+      } ${BOX_STATE_STYLES[state] ?? DEFAULT_BOX_STYLE}`}
     >
-      <span className="flex min-w-7 items-center justify-center px-1 @sm:min-w-8 @sm:px-1.5">
+      <span
+        className={`flex min-w-7 items-center justify-center px-1 ${
+          compact ? '' : '@sm:min-w-8 @sm:px-1.5'
+        }`}
+      >
         {String(value)}
       </span>
       {/* The "next" slot: the arrow to the next node leaves from here. */}
-      <span className="flex w-2 items-center justify-center border-l-2 border-current/20 @sm:w-3">
+      <span
+        className={`flex w-2 items-center justify-center border-l-2 border-current/20 ${
+          compact ? '' : '@sm:w-3'
+        }`}
+      >
         <span className="size-1.5 rounded-full bg-current opacity-60" />
       </span>
     </span>
@@ -87,9 +103,12 @@ function NullMarker({ state }) {
 }
 
 // What a screen reader hears instead of the drawing, e.g.
-// "Ana → Ben → null. head: Ana, tail: Ben".
-function describeList({ nodes, pointers, detached, length, t }) {
-  const chain = [...nodes.map(String), 'null'].join(' → ')
+// "Ana → Ben → null. head: Ana, tail: Ben". With nextOf, each node's next
+// is read out instead: "Ana → null, Ben → Ana".
+function describeList({ nodes, pointers, detached, length, nextOf, t }) {
+  const chain = nextOf
+    ? nodes.map((value) => `${value} → ${nextOf[value] ?? 'null'}`).join(', ')
+    : [...nodes.map(String), 'null'].join(' → ')
   const parts = [chain]
   const named = Object.entries(pointers).map(
     ([label, value]) => `${label}: ${value === null ? 'null' : value}`,
@@ -105,6 +124,69 @@ function describeList({ nodes, pointers, detached, length, t }) {
   return parts.join('. ')
 }
 
+// The arrow between two neighbors in a line drawn where the nodes stand.
+function gapBetween(nextOf, left, right) {
+  if (nextOf[left] === right) return '→'
+  if (nextOf[right] === left) return '←'
+  return ''
+}
+
+// The pointers that point to null, split between the two null markers.
+function nullPointers(pointers, leftNull, onLeft) {
+  const picked = {}
+  for (const [label, value] of Object.entries(pointers)) {
+    if (value === null && leftNull.includes(label) === onLeft) {
+      picked[label] = null
+    }
+  }
+  return picked
+}
+
+function FixedRow({ nodes, nextOf, states, pointers, leftNull }) {
+  const first = nodes[0]
+  const last = nodes[nodes.length - 1]
+  const leftPointers = nullPointers(pointers, leftNull, true)
+  const rightPointers = nullPointers(pointers, leftNull, false)
+  const showLeft =
+    (nodes.length > 1 && nextOf[first] === null) ||
+    Object.keys(leftPointers).length > 0
+  const showRight =
+    nextOf[last] === null || Object.keys(rightPointers).length > 0
+  return (
+    <div aria-hidden="true" className="flex flex-wrap items-center gap-y-1">
+      {showLeft && (
+        <span className="flex items-center">
+          <Stop pointers={leftPointers} target={null}>
+            <NullMarker />
+          </Stop>
+          <span className="w-3 text-center text-xs text-slate-500">
+            {nodes.length > 1 && nextOf[first] === null ? '←' : ''}
+          </span>
+        </span>
+      )}
+      {nodes.map((value, index) => (
+        <span key={value} className="flex items-center">
+          <Stop pointers={pointers} target={value}>
+            <NodeBox value={value} state={states[value]} compact />
+          </Stop>
+          <span className="w-3 text-center text-xs text-slate-500">
+            {index < nodes.length - 1
+              ? gapBetween(nextOf, value, nodes[index + 1])
+              : nextOf[value] === null
+                ? '→'
+                : ''}
+          </span>
+        </span>
+      ))}
+      {showRight && (
+        <Stop pointers={rightPointers} target={null}>
+          <NullMarker />
+        </Stop>
+      )}
+    </div>
+  )
+}
+
 function LinkedListDiagram({
   nodes,
   states = {},
@@ -112,27 +194,46 @@ function LinkedListDiagram({
   detached = [],
   length = null,
   nullState = null,
+  nextOf = null,
+  leftNull = [],
 }) {
   const { t } = useTranslation()
   return (
     <div
       role="img"
-      aria-label={describeList({ nodes, pointers, detached, length, t })}
+      aria-label={describeList({
+        nodes,
+        pointers,
+        detached,
+        length,
+        nextOf,
+        t,
+      })}
       className="space-y-2"
     >
-      <div aria-hidden="true" className="flex flex-wrap items-center gap-y-1">
-        {nodes.map((value) => (
-          <span key={value} className="flex items-center">
-            <Stop pointers={pointers} target={value}>
-              <NodeBox value={value} state={states[value]} />
-            </Stop>
-            <Arrow />
-          </span>
-        ))}
-        <Stop pointers={pointers} target={null}>
-          <NullMarker state={nullState} />
-        </Stop>
-      </div>
+      {nextOf ? (
+        <FixedRow
+          nodes={nodes}
+          nextOf={nextOf}
+          states={states}
+          pointers={pointers}
+          leftNull={leftNull}
+        />
+      ) : (
+        <div aria-hidden="true" className="flex flex-wrap items-center gap-y-1">
+          {nodes.map((value) => (
+            <span key={value} className="flex items-center">
+              <Stop pointers={pointers} target={value}>
+                <NodeBox value={value} state={states[value]} />
+              </Stop>
+              <Arrow />
+            </span>
+          ))}
+          <Stop pointers={pointers} target={null}>
+            <NullMarker state={nullState} />
+          </Stop>
+        </div>
+      )}
 
       {detached.length > 0 && (
         <div
