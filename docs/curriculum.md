@@ -37,7 +37,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Introduction (`introduction`)
 
-**Status:** ✅ 3 lessons (EN + ES, 11 checkpoints) · ✅ quiz (EN + ES) · ⬜ slides
+**Status:** ✅ 3 lessons, theory first (EN + ES, 11 checkpoints) · ✅ quiz (EN + ES) · ⬜ slides
 **Goal:** know what the course covers, how to study, and how to run code in the app.
 
 - **Lessons:** Welcome to the course · Getting the most out of this course · Running code in this course
@@ -46,7 +46,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Big O (`big-o`)
 
-**Status:** ✅ 17 lessons, 52 steps (EN + ES, 52 checkpoints) · ✅ quiz, 33 questions (EN + ES) · 🟡 3 of 4 interview problems · ⬜ slides
+**Status:** ✅ 17 lessons, 52 steps (EN + ES, 52 checkpoints; 1–8 and 16 theory first, 9–15 and 17 next) · ✅ quiz, 33 questions (EN + ES) · 🟡 3 of 4 interview problems · ⬜ slides
 **Goal:** measure and compare the efficiency of code, in time and space.
 **Sources:** Carlos's two Big O files (course 1 "Section 2 - Big o notes.docx" and course 2 "Intro to Big O.docx", text and images; see AGENTS.md).
 **Style:** one lesson per lecture of both courses, at their depth (450–900 words each), with the courses' own examples written as indexed loops; every step has an animation, and the party **guest list** is the story of the animations.
