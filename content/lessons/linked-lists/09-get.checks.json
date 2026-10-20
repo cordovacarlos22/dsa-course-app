@@ -1,0 +1,246 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What does `line.get(2)` return when the line has four guests?",
+        "es": "¿Qué regresa `line.get(2)` cuando la fila tiene cuatro invitados?"
+      },
+      "options": [
+        {
+          "en": "The value at index 2",
+          "es": "El valor en el índice 2"
+        },
+        {
+          "en": "The node at index 2, still in the line",
+          "es": "El nodo en el índice 2, que sigue en la fila"
+        },
+        {
+          "en": "The node at index 2, removed from the line",
+          "es": "El nodo en el índice 2, quitado de la fila"
+        },
+        {
+          "en": "`true`, because index 2 exists",
+          "es": "`true`, porque el índice 2 existe"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "get only looks. What does it hand back?",
+        "es": "get solo mira. ¿Qué regresa?"
+      },
+      "explanation": {
+        "en": "`get` walks to index 2 and returns that node without changing the list. Its value is `line.get(2).value`.",
+        "es": "`get` camina hasta el índice 2 y regresa ese nodo sin cambiar la lista. Su valor es `line.get(2).value`."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "A line has 4 guests. Which call returns `undefined`?",
+        "es": "Una fila tiene 4 invitados. ¿Qué llamada regresa `undefined`?"
+      },
+      "options": [
+        {
+          "en": "`get(0)`",
+          "es": "`get(0)`"
+        },
+        {
+          "en": "`get(3)`",
+          "es": "`get(3)`"
+        },
+        {
+          "en": "`get(4)`",
+          "es": "`get(4)`"
+        },
+        {
+          "en": "`get(1)`",
+          "es": "`get(1)`"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "The valid indexes go from 0 to `length - 1`.",
+        "es": "Los índices válidos van de 0 a `length - 1`."
+      },
+      "explanation": {
+        "en": "With 4 guests the last index is 3, so index 4 doesn't exist and `get(4)` returns `undefined`. Indexes 0, 1 and 3 all have a node.",
+        "es": "Con 4 invitados el último índice es 3, así que el índice 4 no existe y `get(4)` regresa `undefined`. Los índices 0, 1 y 3 tienen nodo."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "How many times does the loop move `temp` forward in `get(3)`?",
+        "es": "¿Cuántas veces mueve el bucle a `temp` hacia adelante en `get(3)`?"
+      },
+      "options": [
+        {
+          "en": "4 times",
+          "es": "4 veces"
+        },
+        {
+          "en": "2 times",
+          "es": "2 veces"
+        },
+        {
+          "en": "It depends on the length",
+          "es": "Depende de la longitud"
+        },
+        {
+          "en": "3 times",
+          "es": "3 veces"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "`temp` starts on index 0. How many moves reach index 3?",
+        "es": "`temp` empieza en el índice 0. ¿Cuántos movimientos llegan al índice 3?"
+      },
+      "explanation": {
+        "en": "`temp` starts on index 0, and each move adds 1: 0 → 1 → 2 → 3. Three moves for index 3, which is what `for (let i = 0; i < index; i++)` does.",
+        "es": "`temp` empieza en el índice 0, y cada movimiento suma 1: 0 → 1 → 2 → 3. Tres movimientos para el índice 3, que es lo que hace `for (let i = 0; i < index; i++)`."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `get(index)` in the `LinkedList` class, following the plan. It returns the node at `index`, or `undefined` when `index` is below 0 or not below `length`.",
+        "es": "Escribe `get(index)` en la clase `LinkedList`, siguiendo el plan. Regresa el nodo en `index`, o `undefined` cuando `index` es menor que 0 o no es menor que `length`."
+      },
+      "hint": {
+        "en": "Start with `if (index < 0 || index >= this.length) { return undefined }`. Then `let temp = this.head` and move it with `for (let i = 0; i < index; i++) { temp = temp.next }`. Return `temp`.",
+        "es": "Empieza con `if (index < 0 || index >= this.length) { return undefined }`. Luego `let temp = this.head` y muévelo con `for (let i = 0; i < index; i++) { temp = temp.next }`. Regresa `temp`."
+      },
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  get(index) {\n    // 1. if index < 0 or index >= length, return undefined\n    // 2. temp starts at head (index 0)\n    // 3. move temp forward, index times\n    // 4. return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  get(index) {\n    if (index < 0 || index >= this.length) {\n      return undefined\n    }\n    let temp = this.head\n    for (let i = 0; i < index; i++) {\n      temp = temp.next\n    }\n    return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "kind": "class",
+      "className": "LinkedList",
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "get",
+              "args": [2],
+              "expected": {
+                "value": "Cleo",
+                "next": null
+              }
+            },
+            {
+              "call": "get",
+              "args": [0],
+              "expected": {
+                "value": "Ana",
+                "next": {
+                  "value": "Ben",
+                  "next": {
+                    "value": "Cleo",
+                    "next": null
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "get",
+              "args": [-1],
+              "expected": null
+            },
+            {
+              "call": "get",
+              "args": [3],
+              "expected": null
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "get",
+              "args": [0],
+              "expected": null
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "get",
+              "args": [0],
+              "expected": {
+                "value": "Ana",
+                "next": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Why does our `get` return the node instead of just its value?",
+        "es": "¿Por qué nuestro `get` regresa el nodo y no solo su valor?"
+      },
+      "options": [
+        {
+          "en": "So `set`, `insert` and `remove` can use it to change the node or link around it",
+          "es": "Para que `set`, `insert` y `remove` lo usen para cambiar el nodo o enlazar alrededor de él"
+        },
+        {
+          "en": "Because returning a value is O(n) and a node is O(1)",
+          "es": "Porque regresar un valor es O(n) y un nodo es O(1)"
+        },
+        {
+          "en": "Because JavaScript methods can't return strings",
+          "es": "Porque los métodos de JavaScript no pueden regresar strings"
+        },
+        {
+          "en": "To remove the node from the list",
+          "es": "Para quitar el nodo de la lista"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "Think about the next three methods in this module.",
+        "es": "Piensa en los siguientes tres métodos de este módulo."
+      },
+      "explanation": {
+        "en": "`set` changes the node's value, and `insert` and `remove` change the arrows around it. They all need the node itself, so `get` hands it back, and the value is still one `.value` away.",
+        "es": "`set` cambia el valor del nodo, e `insert` y `remove` cambian las flechas alrededor de él. Todos necesitan el nodo, así que `get` lo regresa, y el valor sigue a un `.value` de distancia."
+      }
+    }
+  ]
+}

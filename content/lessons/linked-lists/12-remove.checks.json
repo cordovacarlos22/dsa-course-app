@@ -1,0 +1,290 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "What does `remove(2)` return when the line has four guests?",
+        "es": "¿Qué regresa `remove(2)` cuando la fila tiene cuatro invitados?"
+      },
+      "options": [
+        {
+          "en": "`true`",
+          "es": "`true`"
+        },
+        {
+          "en": "The value at index 2",
+          "es": "El valor en el índice 2"
+        },
+        {
+          "en": "The removed node, cut loose from the line",
+          "es": "El nodo que quitó, suelto de la fila"
+        },
+        {
+          "en": "The list itself",
+          "es": "La lista misma"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "remove works like pop and shift: it tells you who left.",
+        "es": "remove funciona como pop y shift: te dice quién se fue."
+      },
+      "explanation": {
+        "en": "remove returns the node it took out, with its `next` set to `null`, or `undefined` when there was no node at that index.",
+        "es": "remove regresa el nodo que sacó, con su `next` en `null`, o `undefined` cuando no había nodo en ese índice."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "A line has 4 guests. Which call does `remove` hand over to `pop`?",
+        "es": "Una fila tiene 4 invitados. ¿Qué llamada le pasa `remove` a `pop`?"
+      },
+      "options": [
+        {
+          "en": "`remove(4)`",
+          "es": "`remove(4)`"
+        },
+        {
+          "en": "`remove(3)`",
+          "es": "`remove(3)`"
+        },
+        {
+          "en": "`remove(0)`",
+          "es": "`remove(0)`"
+        },
+        {
+          "en": "`remove(2)`",
+          "es": "`remove(2)`"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "pop removes the last guest. What's the last index?",
+        "es": "pop quita al último invitado. ¿Cuál es el último índice?"
+      },
+      "explanation": {
+        "en": "The last index is `length - 1`, which is 3 here, so `remove(3)` returns `this.pop()`. `remove(4)` is out of range and returns `undefined`.",
+        "es": "El último índice es `length - 1`, que aquí es 3, así que `remove(3)` regresa `this.pop()`. `remove(4)` está fuera de rango y regresa `undefined`."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Why does `remove` use `const temp = before.next` instead of `const temp = this.get(index)`?",
+        "es": "¿Por qué `remove` usa `const temp = before.next` en vez de `const temp = this.get(index)`?"
+      },
+      "options": [
+        {
+          "en": "`this.get(index)` would return a different node",
+          "es": "`this.get(index)` regresaría otro nodo"
+        },
+        {
+          "en": "`get` can't be called twice in one method",
+          "es": "`get` no se puede llamar dos veces en un método"
+        },
+        {
+          "en": "`before.next` is cut off from the line already",
+          "es": "`before.next` ya está suelto de la fila"
+        },
+        {
+          "en": "It's the same node, one step away, without walking from `head` a second time",
+          "es": "Es el mismo nodo, a un paso, sin caminar desde `head` una segunda vez"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "Where is `before` standing?",
+        "es": "¿Dónde está parado `before`?"
+      },
+      "explanation": {
+        "en": "`before` is right before the node that leaves, so that node is `before.next`: one step, O(1). `this.get(index)` would find the same node by walking the line again: O(n).",
+        "es": "`before` está justo antes del nodo que se va, así que ese nodo es `before.next`: un paso, O(1). `this.get(index)` encontraría el mismo nodo recorriendo la fila otra vez: O(n)."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `remove(index)` in the `LinkedList` class, following the plan. Return `undefined` for an index that doesn't exist. Use `shift` for index 0 and `pop` for the last index. In the middle, unlink the node, cut its `next`, update `length` and return it.",
+        "es": "Escribe `remove(index)` en la clase `LinkedList`, siguiendo el plan. Regresa `undefined` para un índice que no existe. Usa `shift` para el índice 0 y `pop` para el último índice. En medio, desenlaza el nodo, corta su `next`, actualiza `length` y regrésalo."
+      },
+      "hint": {
+        "en": "The range check is `index < 0 || index >= this.length`. The last index is `this.length - 1`. In the middle: `const before = this.get(index - 1)`, `const temp = before.next`, `before.next = temp.next`, `temp.next = null`, `this.length--`, `return temp`.",
+        "es": "La revisión del rango es `index < 0 || index >= this.length`. El último índice es `this.length - 1`. En medio: `const before = this.get(index - 1)`, `const temp = before.next`, `before.next = temp.next`, `temp.next = null`, `this.length--`, `return temp`."
+      },
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  pop() {\n    if (!this.head) {\n      return undefined\n    }\n    let temp = this.head\n    let pre = this.head\n    while (temp.next !== null) {\n      pre = temp\n      temp = temp.next\n    }\n    this.tail = pre\n    this.tail.next = null\n    this.length--\n    if (this.length === 0) {\n      this.head = null\n      this.tail = null\n    }\n    return temp\n  }\n\n  shift() {\n    if (!this.head) {\n      return undefined\n    }\n    let temp = this.head\n    this.head = this.head.next\n    temp.next = null\n    this.length--\n    if (this.length === 0) {\n      this.tail = null\n    }\n    return temp\n  }\n\n  get(index) {\n    if (index < 0 || index >= this.length) {\n      return undefined\n    }\n    let temp = this.head\n    for (let i = 0; i < index; i++) {\n      temp = temp.next\n    }\n    return temp\n  }\n\n  remove(index) {\n    // 1. if index < 0 or index >= length, return undefined\n    // 2. index 0? return this.shift(). Last index? return this.pop()\n    // 3. before = the node before the spot: this.get(index - 1)\n    // 4. temp = before.next: the node that leaves\n    // 5. before's next skips over temp\n    // 6. temp's next becomes null, to cut it off\n    // 7. subtract 1 from length, return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  pop() {\n    if (!this.head) {\n      return undefined\n    }\n    let temp = this.head\n    let pre = this.head\n    while (temp.next !== null) {\n      pre = temp\n      temp = temp.next\n    }\n    this.tail = pre\n    this.tail.next = null\n    this.length--\n    if (this.length === 0) {\n      this.head = null\n      this.tail = null\n    }\n    return temp\n  }\n\n  shift() {\n    if (!this.head) {\n      return undefined\n    }\n    let temp = this.head\n    this.head = this.head.next\n    temp.next = null\n    this.length--\n    if (this.length === 0) {\n      this.tail = null\n    }\n    return temp\n  }\n\n  get(index) {\n    if (index < 0 || index >= this.length) {\n      return undefined\n    }\n    let temp = this.head\n    for (let i = 0; i < index; i++) {\n      temp = temp.next\n    }\n    return temp\n  }\n\n  remove(index) {\n    if (index < 0 || index >= this.length) {\n      return undefined\n    }\n    if (index === 0) {\n      return this.shift()\n    }\n    if (index === this.length - 1) {\n      return this.pop()\n    }\n    const before = this.get(index - 1)\n    const temp = before.next\n    before.next = temp.next\n    temp.next = null\n    this.length--\n    return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "kind": "class",
+      "className": "LinkedList",
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "push",
+              "args": ["Dev"]
+            },
+            {
+              "call": "remove",
+              "args": [2],
+              "expected": {
+                "value": "Cleo",
+                "next": null
+              }
+            },
+            {
+              "call": "toArray",
+              "expected": ["Ana", "Ben", "Dev"]
+            },
+            {
+              "read": "length",
+              "expected": 3
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "remove",
+              "args": [0],
+              "expected": {
+                "value": "Ana",
+                "next": null
+              }
+            },
+            {
+              "read": "head.value",
+              "expected": "Ben"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "push",
+              "args": ["Ben"]
+            },
+            {
+              "call": "push",
+              "args": ["Cleo"]
+            },
+            {
+              "call": "remove",
+              "args": [2],
+              "expected": {
+                "value": "Cleo",
+                "next": null
+              }
+            },
+            {
+              "read": "tail.value",
+              "expected": "Ben"
+            },
+            {
+              "read": "tail.next",
+              "expected": null
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "remove",
+              "args": [1],
+              "expected": null
+            },
+            {
+              "call": "remove",
+              "args": [-1],
+              "expected": null
+            },
+            {
+              "read": "length",
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "remove",
+              "args": [0],
+              "expected": {
+                "value": "Ana",
+                "next": null
+              }
+            },
+            {
+              "read": "head",
+              "expected": null
+            },
+            {
+              "read": "tail",
+              "expected": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "In a singly linked list, which spot is the most expensive one to `remove` from?",
+        "es": "En una lista enlazada simple, ¿de qué lugar es más caro hacer `remove`?"
+      },
+      "options": [
+        {
+          "en": "The front, index 0",
+          "es": "El inicio, índice 0"
+        },
+        {
+          "en": "The second guest, index 1",
+          "es": "El segundo invitado, índice 1"
+        },
+        {
+          "en": "The last guest, because `pop` walks the whole line",
+          "es": "El último invitado, porque `pop` recorre toda la fila"
+        },
+        {
+          "en": "They all cost the same",
+          "es": "Todos cuestan lo mismo"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Which of the methods remove calls has to walk the whole line?",
+        "es": "¿Cuál de los métodos que llama remove tiene que recorrer toda la fila?"
+      },
+      "explanation": {
+        "en": "The front is O(1) with shift. Any other index walks to the node before it. The last guest goes through pop, which walks the whole line: the worst case, O(n).",
+        "es": "El inicio es O(1) con shift. Cualquier otro índice camina hasta el nodo de antes. El último invitado pasa por pop, que recorre toda la fila: el peor caso, O(n)."
+      }
+    }
+  ]
+}
