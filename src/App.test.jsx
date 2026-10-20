@@ -193,11 +193,14 @@ describe('module page', () => {
     expect(
       screen.getByRole('heading', { level: 1, name: 'Classes & Pointers' }),
     ).toBeInTheDocument()
-    expect(screen.getByText('12 questions')).toBeInTheDocument()
+    expect(screen.getByText('16 questions')).toBeInTheDocument()
+    expect(
+      screen.getByRole('link', { name: /Classes: the blueprint/ }),
+    ).toBeInTheDocument()
     // Practice is split into "Build it" and "Interview problems".
     expect(
       screen.getByRole('heading', { name: 'Build it' }).closest('li'),
-    ).toHaveTextContent('1 exercise')
+    ).toHaveTextContent('2 exercises')
     expect(
       screen.getByRole('heading', { name: 'Interview problems' }).closest('li'),
     ).toHaveTextContent('0 exercises')

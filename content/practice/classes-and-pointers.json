@@ -2,315 +2,514 @@
   "slug": "classes-and-pointers",
   "order": 12,
   "title": {
-    "en": "Classes & Pointers"
+    "en": "Classes & Pointers",
+    "es": "Clases y punteros"
   },
-  "sourceFolder": "recursos originales/modulo-03-clases-punteros",
+  "sourceFolder": "course 1 /SECTION 3 - CLASSES AND POINTERS",
   "questions": [
     {
       "id": "cookie-cutter",
       "topic": "Classes",
       "prompt": {
-        "en": "In the cookie-cutter analogy for classes, what are the cookie cutter and the cookies?"
+        "en": "In the cookie-cutter analogy for classes, what are the cookie cutter and the cookies?",
+        "es": "En la analogía del molde para galletas, ¿qué son el molde y las galletas?"
       },
       "options": [
         {
-          "en": "The cookie cutter is an instance; the cookies are classes"
+          "en": "The cookie cutter is an instance; the cookies are classes",
+          "es": "El molde es una instancia; las galletas son clases"
         },
         {
-          "en": "The cookie cutter is the class; each cookie is an instance created from it"
+          "en": "The cookie cutter is the class; each cookie is an instance created from it",
+          "es": "El molde es la clase; cada galleta es una instancia creada a partir de ella"
         },
         {
-          "en": "The cookie cutter is a method; the cookies are properties"
+          "en": "The cookie cutter is a method; the cookies are properties",
+          "es": "El molde es un método; las galletas son propiedades"
         },
         {
-          "en": "The cookie cutter is `this`; the cookies are constructors"
+          "en": "The cookie cutter is `this`; the cookies are constructors",
+          "es": "El molde es `this`; las galletas son constructores"
         }
       ],
       "correctIndex": 1,
       "explanation": {
-        "en": "A class is the template (the cutter). Every time you use `new`, you stamp out a new instance (a cookie) with its own data."
+        "en": "A class is the template (the cutter). Every time you use `new`, you stamp out a new instance (a cookie) with its own data.",
+        "es": "Una clase es la plantilla (el molde). Cada vez que usas `new`, haces una instancia nueva (una galleta) con sus propios datos."
       }
     },
     {
       "id": "class-naming",
       "topic": "Classes",
       "prompt": {
-        "en": "By convention, how do you name a class in JavaScript?"
+        "en": "By convention, how do you name a class in JavaScript?",
+        "es": "Por convención, ¿cómo se nombra una clase en JavaScript?"
       },
       "options": [
         {
-          "en": "all lowercase: `cookie`"
+          "en": "All lowercase: `cookie`",
+          "es": "Todo en minúsculas: `cookie`"
         },
         {
-          "en": "ALL CAPS: `COOKIE`"
+          "en": "All caps: `COOKIE`",
+          "es": "Todo en mayúsculas: `COOKIE`"
         },
         {
-          "en": "With a capital first letter: `Cookie`"
+          "en": "With a capital first letter: `Cookie`",
+          "es": "Con la primera letra en mayúscula: `Cookie`"
         },
         {
-          "en": "With a `class_` prefix: `class_cookie`"
+          "en": "With a `class_` prefix: `class_cookie`",
+          "es": "Con el prefijo `class_`: `class_cookie`"
         }
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "Class names are capitalized (`Cookie`, `LinkedList`). That makes it easy to tell a class apart from regular variables and functions."
+        "en": "Class names start with a capital letter (`Cookie`, `LinkedList`). That makes it easy to tell a class apart from regular variables and functions.",
+        "es": "Los nombres de las clases empiezan con mayúscula (`Cookie`, `LinkedList`). Así es fácil distinguir una clase de las variables y funciones normales."
       }
     },
     {
       "id": "constructor-role",
       "topic": "Classes",
       "prompt": {
-        "en": "What is the job of a class's `constructor`?"
+        "en": "What is the job of a class's `constructor`?",
+        "es": "¿Cuál es el trabajo del `constructor` de una clase?"
       },
       "options": [
         {
-          "en": "It deletes an instance when you no longer need it"
+          "en": "It deletes an instance when you no longer need it",
+          "es": "Borra una instancia cuando ya no la necesitas"
         },
         {
-          "en": "It turns the class into a string"
+          "en": "It turns the class into a string",
+          "es": "Convierte la clase en un string"
         },
         {
-          "en": "It runs every time any method is called"
+          "en": "It runs every time any method is called",
+          "es": "Corre cada vez que se llama a cualquier método"
         },
         {
-          "en": "It runs when `new` creates an instance and sets that instance's starting properties"
+          "en": "It runs when `new` creates an instance, and sets up that instance's starting properties",
+          "es": "Corre cuando `new` crea una instancia, y prepara las propiedades iniciales de esa instancia"
         }
       ],
       "correctIndex": 3,
       "explanation": {
-        "en": "The constructor is what \"creates the cookies\": `new Cookie('green')` runs it once, and it stores `color` on the new instance."
+        "en": "The constructor sets each new instance up: `new Cookie('chocolate')` runs it once, and it stores `flavor` on the new cookie.",
+        "es": "El constructor prepara cada instancia nueva: `new Cookie('chocolate')` lo ejecuta una vez, y guarda `flavor` en la galleta nueva."
       }
     },
     {
       "id": "new-keyword",
       "topic": "Classes",
       "prompt": {
-        "en": "What does the `new` keyword do on this line?"
+        "en": "What does the `new` keyword do on this line?",
+        "es": "¿Qué hace la palabra clave `new` en esta línea?"
       },
-      "code": "let cookieOne = new Cookie('green')",
+      "code": "const cookieOne = new Cookie('chocolate')",
       "options": [
         {
-          "en": "It creates a new instance of `Cookie` by calling the constructor with 'green'"
+          "en": "It creates a new instance of `Cookie` by calling the constructor with `'chocolate'`",
+          "es": "Crea una instancia nueva de `Cookie` llamando al constructor con `'chocolate'`"
         },
         {
-          "en": "It changes the `Cookie` class so every cookie is green"
+          "en": "It changes the `Cookie` class so every cookie is chocolate",
+          "es": "Cambia la clase `Cookie` para que todas las galletas sean de chocolate"
         },
         {
-          "en": "It copies an existing cookie called `cookieOne`"
+          "en": "It copies an existing cookie called `cookieOne`",
+          "es": "Copia una galleta que ya existe llamada `cookieOne`"
         },
         {
-          "en": "It declares a new class called `cookieOne`"
+          "en": "It declares a new class called `cookieOne`",
+          "es": "Declara una clase nueva llamada `cookieOne`"
         }
       ],
       "correctIndex": 0,
       "explanation": {
-        "en": "`new` calls the constructor and returns a brand-new instance. `cookieOne` points to that green cookie; the class itself doesn't change."
+        "en": "`new` calls the constructor and returns a brand-new instance. `cookieOne` points to that chocolate cookie; the class itself doesn't change.",
+        "es": "`new` llama al constructor y regresa una instancia nueva. `cookieOne` apunta a esa galleta de chocolate; la clase en sí no cambia."
       }
     },
     {
       "id": "this-keyword",
       "topic": "Classes",
       "prompt": {
-        "en": "Inside `getColor`, what does `this` refer to when you run `cookieTwo.getColor()`?"
+        "en": "Inside `getFlavor`, what does `this` refer to when you run `cookieTwo.getFlavor()`?",
+        "es": "Dentro de `getFlavor`, ¿a qué se refiere `this` cuando ejecutas `cookieTwo.getFlavor()`?"
       },
-      "code": "class Cookie {\n  constructor(color) {\n    this.color = color\n  }\n  getColor() {\n    return this.color\n  }\n}\n\nlet cookieOne = new Cookie('green')\nlet cookieTwo = new Cookie('blue')",
+      "code": "class Cookie {\n  constructor(flavor) {\n    this.flavor = flavor\n  }\n  getFlavor() {\n    return this.flavor\n  }\n}\n\nconst cookieOne = new Cookie('chocolate')\nconst cookieTwo = new Cookie('vanilla')",
       "options": [
         {
-          "en": "The `Cookie` class"
+          "en": "The `Cookie` class",
+          "es": "La clase `Cookie`"
         },
         {
-          "en": "`cookieOne`, because it was created first"
+          "en": "`cookieOne`, because it was created first",
+          "es": "`cookieOne`, porque se creó primero"
         },
         {
-          "en": "`cookieTwo`, the instance the method was called on"
+          "en": "`cookieTwo`, the instance the method was called on",
+          "es": "`cookieTwo`, la instancia en la que se llamó el método"
         },
         {
-          "en": "Every cookie at once"
+          "en": "Every cookie at once",
+          "es": "Todas las galletas a la vez"
         }
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "`this` is the specific instance the method is called on. `cookieTwo.getColor()` reads `cookieTwo`'s color, so it returns 'blue'."
+        "en": "`this` is the specific instance the method was called on. `cookieTwo.getFlavor()` reads `cookieTwo`'s flavor, so it returns `'vanilla'`.",
+        "es": "`this` es la instancia específica en la que se llamó el método. `cookieTwo.getFlavor()` lee el sabor de `cookieTwo`, así que regresa `'vanilla'`."
       }
     },
     {
       "id": "getters-setters-output",
       "topic": "Classes",
       "prompt": {
-        "en": "After running this code, what do `cookieOne.getColor()` and `cookieTwo.getColor()` return?"
+        "en": "After running this code, what do `cookieOne.getFlavor()` and `cookieTwo.getFlavor()` return?",
+        "es": "Después de ejecutar este código, ¿qué regresan `cookieOne.getFlavor()` y `cookieTwo.getFlavor()`?"
       },
-      "code": "let cookieOne = new Cookie('green')\nlet cookieTwo = new Cookie('blue')\n\ncookieOne.setColor('yellow')",
+      "code": "const cookieOne = new Cookie('chocolate')\nconst cookieTwo = new Cookie('vanilla')\n\ncookieOne.setFlavor('oatmeal')",
       "options": [
         {
-          "en": "'green' and 'blue'"
+          "en": "`'chocolate'` and `'vanilla'`",
+          "es": "`'chocolate'` y `'vanilla'`"
         },
         {
-          "en": "'yellow' and 'yellow'"
+          "en": "`'oatmeal'` and `'oatmeal'`",
+          "es": "`'oatmeal'` y `'oatmeal'`"
         },
         {
-          "en": "'green' and 'yellow'"
+          "en": "`'chocolate'` and `'oatmeal'`",
+          "es": "`'chocolate'` y `'oatmeal'`"
         },
         {
-          "en": "'yellow' and 'blue'"
+          "en": "`'oatmeal'` and `'vanilla'`",
+          "es": "`'oatmeal'` y `'vanilla'`"
         }
       ],
       "correctIndex": 3,
       "explanation": {
-        "en": "`setColor` changes only the instance it's called on. `cookieOne` becomes yellow; `cookieTwo` is a separate instance and stays blue."
+        "en": "`setFlavor` changes only the instance it's called on. `cookieOne` becomes oatmeal; `cookieTwo` is a separate instance and stays vanilla.",
+        "es": "`setFlavor` cambia solo la instancia en la que se llama. `cookieOne` se vuelve de avena; `cookieTwo` es otra instancia y sigue siendo de vainilla."
       }
     },
     {
       "id": "getter-vs-setter",
       "topic": "Classes",
       "prompt": {
-        "en": "Which statement about getters and setters is correct?"
+        "en": "Which statement about getters and setters is correct?",
+        "es": "¿Qué afirmación sobre los getters y setters es correcta?"
       },
       "options": [
         {
-          "en": "A getter returns a value from the instance; a setter changes a value on the instance"
+          "en": "A getter returns a value from the instance; a setter changes a value on the instance",
+          "es": "Un getter regresa un valor de la instancia; un setter cambia un valor de la instancia"
         },
         {
-          "en": "A getter creates instances; a setter deletes them"
+          "en": "A getter creates instances; a setter deletes them",
+          "es": "Un getter crea instancias; un setter las borra"
         },
         {
-          "en": "Getters and setters can only be used inside the constructor"
+          "en": "Getters and setters can only be used inside the constructor",
+          "es": "Los getters y setters solo se pueden usar dentro del constructor"
         },
         {
-          "en": "A setter must always return the new value"
+          "en": "A setter must always return the new value",
+          "es": "Un setter siempre debe regresar el valor nuevo"
         }
       ],
       "correctIndex": 0,
       "explanation": {
-        "en": "`getColor` reads (gets) `this.color`; `setColor` writes (sets) it. Most methods you'll write for data structures fall into one of these two groups."
+        "en": "`getFlavor` reads (gets) `this.flavor`; `setFlavor` writes (sets) it. Most methods you'll write for data structures fall into one of these two groups.",
+        "es": "`getFlavor` lee (get) `this.flavor`; `setFlavor` lo escribe (set). La mayoría de los métodos que vas a escribir para estructuras de datos caen en uno de estos dos grupos."
       }
     },
     {
       "id": "why-classes",
       "topic": "Classes",
       "prompt": {
-        "en": "Why does this course build every data structure (like a linked list) as a class?"
+        "en": "Why does this course build every data structure (like a linked list) as a class?",
+        "es": "¿Por qué este curso construye cada estructura de datos (como una lista enlazada) como una clase?"
       },
       "options": [
         {
-          "en": "Because JavaScript doesn't allow functions outside a class"
+          "en": "Because JavaScript doesn't allow functions outside a class",
+          "es": "Porque JavaScript no permite funciones fuera de una clase"
         },
         {
-          "en": "Because a class keeps the data (head, tail, length) together with the methods that work on it (push, pop, shift…)"
+          "en": "Because a class keeps the data (head, tail, length) together with the methods that work on it (push, pop, shift…)",
+          "es": "Porque una clase mantiene los datos (head, tail, length) junto con los métodos que trabajan con ellos (push, pop, shift…)"
         },
         {
-          "en": "Because classes make code run in O(1)"
+          "en": "Because classes make code run in O(1)",
+          "es": "Porque las clases hacen que el código corra en O(1)"
         },
         {
-          "en": "Because classes use less memory than arrays"
+          "en": "Because classes use less memory than arrays",
+          "es": "Porque las clases usan menos memoria que los arrays"
         }
       ],
       "correctIndex": 1,
       "explanation": {
-        "en": "A `LinkedList` class bundles its data with methods like `push`, `pop`, `unshift`, `insert` and `remove`, and you can create as many independent lists as you need with `new`."
+        "en": "A `LinkedList` class bundles its data with methods like `push`, `pop`, `unshift`, `insert` and `remove`, and you can create as many independent lists as you need with `new`.",
+        "es": "Una clase `LinkedList` junta sus datos con métodos como `push`, `pop`, `unshift`, `insert` y `remove`, y puedes crear todas las listas independientes que necesites con `new`."
+      }
+    },
+    {
+      "id": "new-steps",
+      "topic": "Classes",
+      "prompt": {
+        "en": "Which of these is **not** one of the things `new Cookie('chocolate')` does?",
+        "es": "¿Cuál de estas cosas **no** hace `new Cookie('chocolate')`?"
+      },
+      "options": [
+        {
+          "en": "Make a brand-new, empty object",
+          "es": "Crear un objeto nuevo y vacío"
+        },
+        {
+          "en": "Point `this` at that object",
+          "es": "Hacer que `this` apunte a ese objeto"
+        },
+        {
+          "en": "Run the constructor",
+          "es": "Ejecutar el constructor"
+        },
+        {
+          "en": "Copy every method of the class into the new object",
+          "es": "Copiar cada método de la clase en el objeto nuevo"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "`new` makes an empty object, points `this` at it, runs the constructor and returns the object. The methods stay in the class, shared by every instance: they aren't copied into each cookie.",
+        "es": "`new` crea un objeto vacío, hace que `this` apunte a él, ejecuta el constructor y regresa el objeto. Los métodos se quedan en la clase, compartidos por todas las instancias: no se copian en cada galleta."
+      }
+    },
+    {
+      "id": "forgot-new",
+      "topic": "Classes",
+      "prompt": {
+        "en": "What happens when this code runs?",
+        "es": "¿Qué pasa cuando se ejecuta este código?"
+      },
+      "code": "class Cookie {\n  constructor(flavor) {\n    this.flavor = flavor\n  }\n}\n\nconst cookieOne = Cookie('chocolate')",
+      "options": [
+        {
+          "en": "JavaScript throws a `TypeError`: a class can't be called without `new`",
+          "es": "JavaScript lanza un `TypeError`: una clase no se puede llamar sin `new`"
+        },
+        {
+          "en": "`cookieOne` becomes a chocolate cookie, exactly as with `new`",
+          "es": "`cookieOne` se vuelve una galleta de chocolate, igual que con `new`"
+        },
+        {
+          "en": "`cookieOne` is the string `'chocolate'`",
+          "es": "`cookieOne` es el string `'chocolate'`"
+        },
+        {
+          "en": "The `Cookie` class is deleted",
+          "es": "La clase `Cookie` se borra"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "A class can only be used with `new`. Calling it like a plain function stops the program with a `TypeError`, which is the hint to add `new`.",
+        "es": "Una clase solo se puede usar con `new`. Llamarla como una función normal detiene el programa con un `TypeError`, que es la pista para agregar `new`."
       }
     },
     {
       "id": "primitive-copy",
       "topic": "Pointers",
       "prompt": {
-        "en": "What is the value of `num2` after this code runs?"
+        "en": "What is the value of `seats` after this code runs?",
+        "es": "¿Cuánto vale `seats` después de ejecutar este código?"
       },
-      "code": "let num1 = 5\nlet num2 = num1\nnum1 = 10",
+      "code": "let guestCount = 5\nlet seats = guestCount\nguestCount = 8",
       "options": [
         {
-          "en": "10"
+          "en": "`8`",
+          "es": "`8`"
         },
         {
-          "en": "undefined"
+          "en": "`undefined`",
+          "es": "`undefined`"
         },
         {
-          "en": "5"
+          "en": "`5`",
+          "es": "`5`"
         },
         {
-          "en": "15"
+          "en": "`13`",
+          "es": "`13`"
         }
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "Numbers are copied. `num2 = num1` copies the 5 at that moment; changing `num1` later doesn't affect `num2`. No pointer is involved."
+        "en": "Numbers are copied. `seats = guestCount` copies the 5 at that moment, and changing `guestCount` later doesn't affect `seats`. No pointer is involved.",
+        "es": "Los números se copian. `seats = guestCount` copia el 5 en ese momento, y cambiar `guestCount` después no afecta a `seats`. No hay ningún puntero."
       }
     },
     {
       "id": "object-reference",
       "topic": "Pointers",
       "prompt": {
-        "en": "What is `obj2.value` after this code runs?"
+        "en": "What is `sameCard.value` after this code runs?",
+        "es": "¿Cuánto vale `sameCard.value` después de ejecutar este código?"
       },
-      "code": "let obj1 = { value: 11 }\nlet obj2 = obj1\nobj1.value = 22",
+      "code": "let card = { value: 'Ana' }\nlet sameCard = card\ncard.value = 'Ben'",
       "options": [
         {
-          "en": "11, because obj2 is a copy"
+          "en": "`'Ana'`, because `sameCard` is a copy",
+          "es": "`'Ana'`, porque `sameCard` es una copia"
         },
         {
-          "en": "undefined"
+          "en": "`undefined`",
+          "es": "`undefined`"
         },
         {
-          "en": "33"
+          "en": "`'Cleo'`",
+          "es": "`'Cleo'`"
         },
         {
-          "en": "22, because obj1 and obj2 point to the same object in memory"
+          "en": "`'Ben'`, because `card` and `sameCard` point to the same object in memory",
+          "es": "`'Ben'`, porque `card` y `sameCard` apuntan al mismo objeto en memoria"
         }
       ],
       "correctIndex": 3,
       "explanation": {
-        "en": "`obj2 = obj1` doesn't copy the object; it makes `obj2` point to the same object. Changing the value through `obj1` is visible through `obj2`."
+        "en": "`sameCard = card` doesn't copy the object; it makes `sameCard` point to the same object. A change made through `card` shows through `sameCard`.",
+        "es": "`sameCard = card` no copia el objeto; hace que `sameCard` apunte al mismo objeto. Un cambio hecho a través de `card` se ve a través de `sameCard`."
+      }
+    },
+    {
+      "id": "objects-equal",
+      "topic": "Pointers",
+      "prompt": {
+        "en": "What does the last line print?",
+        "es": "¿Qué imprime la última línea?"
+      },
+      "code": "const a = { value: 'Ana' }\nconst b = { value: 'Ana' }\nconst c = a\n\nconsole.log(a === b, a === c)",
+      "options": [
+        {
+          "en": "`true true`",
+          "es": "`true true`"
+        },
+        {
+          "en": "`false false`",
+          "es": "`false false`"
+        },
+        {
+          "en": "`false true`",
+          "es": "`false true`"
+        },
+        {
+          "en": "`true false`",
+          "es": "`true false`"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "`a` and `b` are two different objects that happen to look the same, so `a === b` is `false`. `c` is a second arrow to `a`'s object, so `a === c` is `true`.",
+        "es": "`a` y `b` son dos objetos distintos que se ven iguales, así que `a === b` es `false`. `c` es una segunda flecha al objeto de `a`, así que `a === c` es `true`."
       }
     },
     {
       "id": "move-pointer",
       "topic": "Pointers",
       "prompt": {
-        "en": "After this code runs, what are `obj1.value` and `obj2.value`?"
+        "en": "After this code runs, what are `first.value` and `second.value`?",
+        "es": "Después de ejecutar este código, ¿cuánto valen `first.value` y `second.value`?"
       },
-      "code": "let obj1 = { value: 11 }\nlet obj2 = obj1\nlet obj3 = { value: 33 }\nobj2 = obj3",
+      "code": "let first = { value: 'Ana' }\nlet second = first\nlet third = { value: 'Cleo' }\nsecond = third",
       "options": [
         {
-          "en": "obj1.value is 11 and obj2.value is 33"
+          "en": "`first.value` is `'Ana'` and `second.value` is `'Cleo'`",
+          "es": "`first.value` es `'Ana'` y `second.value` es `'Cleo'`"
         },
         {
-          "en": "Both are 33"
+          "en": "Both are `'Cleo'`",
+          "es": "Los dos son `'Cleo'`"
         },
         {
-          "en": "Both are 11"
+          "en": "Both are `'Ana'`",
+          "es": "Los dos son `'Ana'`"
         },
         {
-          "en": "obj1.value is 33 and obj2.value is 11"
+          "en": "`first.value` is `'Cleo'` and `second.value` is `'Ana'`",
+          "es": "`first.value` es `'Cleo'` y `second.value` es `'Ana'`"
         }
       ],
       "correctIndex": 0,
       "explanation": {
-        "en": "Reassigning `obj2` only moves that one pointer to a different object. `obj1` still points to `{ value: 11 }`."
+        "en": "Reassigning `second` moves only that one pointer to a different object. `first` still points to `{ value: 'Ana' }`.",
+        "es": "Reasignar `second` mueve solo ese puntero a otro objeto. `first` sigue apuntando a `{ value: 'Ana' }`."
       }
     },
     {
       "id": "garbage-collection",
       "topic": "Pointers",
       "prompt": {
-        "en": "After this code, nothing points to `{ value: 11 }` anymore. What happens to that object?"
+        "en": "After this code, nothing points to `{ value: 'Ana' }` anymore. What happens to that object?",
+        "es": "Después de este código, ya nada apunta a `{ value: 'Ana' }`. ¿Qué le pasa a ese objeto?"
       },
-      "code": "let obj1 = { value: 11 }\nlet obj3 = { value: 33 }\nobj1 = obj3",
+      "code": "let first = { value: 'Ana' }\nlet third = { value: 'Cleo' }\nfirst = third",
       "options": [
         {
-          "en": "obj3 now contains both objects"
+          "en": "`third` now contains both objects",
+          "es": "Ahora `third` contiene los dos objetos"
         },
         {
-          "en": "It can't be reached, so JavaScript eventually removes it with garbage collection"
+          "en": "It can't be reached, so JavaScript eventually removes it with garbage collection",
+          "es": "Ya no se puede llegar a él, así que JavaScript acaba quitándolo con la recolección de basura"
         },
         {
-          "en": "It throws an error on the next line"
+          "en": "It throws an error on the next line",
+          "es": "Lanza un error en la siguiente línea"
         },
         {
-          "en": "It's merged into obj3, so obj3.value becomes 44"
+          "en": "It's merged into `third`, so `third.value` becomes `'AnaCleo'`",
+          "es": "Se une a `third`, así que `third.value` se vuelve `'AnaCleo'`"
         }
       ],
       "correctIndex": 1,
       "explanation": {
-        "en": "You can only reach an object through a variable that points to it. An object nothing points to just takes up memory, so JavaScript's garbage collector cleans it up."
+        "en": "You can only reach an object through something that points to it. An object nothing points to just takes up memory, so JavaScript's garbage collector cleans it up.",
+        "es": "Solo puedes llegar a un objeto a través de algo que apunte a él. Un objeto al que nada apunta solo ocupa memoria, así que el recolector de basura de JavaScript lo limpia."
+      }
+    },
+    {
+      "id": "remove-node",
+      "topic": "Pointers",
+      "prompt": {
+        "en": "In a linked list, you remove a node by moving the arrows that pointed to it. Why don't you need to delete the node yourself?",
+        "es": "En una lista enlazada, quitas un nodo moviendo las flechas que apuntaban a él. ¿Por qué no necesitas borrar el nodo tú mismo?"
+      },
+      "options": [
+        {
+          "en": "JavaScript deletes every object after one second",
+          "es": "JavaScript borra cada objeto después de un segundo"
+        },
+        {
+          "en": "Nothing points to it anymore, so the garbage collector frees it",
+          "es": "Ya nada le apunta, así que el recolector de basura lo libera"
+        },
+        {
+          "en": "Removed nodes stay in the list forever",
+          "es": "Los nodos quitados se quedan en la lista para siempre"
+        },
+        {
+          "en": "Moving the arrows copies the node somewhere else",
+          "es": "Mover las flechas copia el nodo a otro lado"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "Once no arrow leads to the node, nothing can reach it, and the garbage collector frees its memory. Moving the arrows is a single assignment, which is why it's O(1).",
+        "es": "Cuando ninguna flecha lleva al nodo, nada puede llegar a él, y el recolector de basura libera su memoria. Mover las flechas es una sola asignación, y por eso es O(1)."
       }
     }
   ],
@@ -319,74 +518,76 @@
       "slug": "cookie-class",
       "kind": "class",
       "title": {
-        "en": "The Cookie Class"
+        "en": "The Cookie Class",
+        "es": "La clase Cookie"
       },
       "description": {
-        "en": "Write a class `Cookie`:\n\n- `constructor(color)` stores the color on the instance as `this.color`.\n- `getColor()` returns the cookie's color.\n- `setColor(color)` changes the cookie's color.\n\nExample:\n\n```js\nconst cookieOne = new Cookie('green')\ncookieOne.getColor() // 'green'\ncookieOne.setColor('yellow')\ncookieOne.getColor() // 'yellow'\n```\n\nEach cookie must keep its own color: changing one cookie never changes another."
+        "en": "Write a class `Cookie`:\n\n- `constructor(flavor)` stores the flavor on the instance as `this.flavor`.\n- `getFlavor()` returns the cookie's flavor.\n- `setFlavor(flavor)` changes the cookie's flavor.\n\nExample:\n\n```js\nconst cookieOne = new Cookie('chocolate')\ncookieOne.getFlavor() // 'chocolate'\ncookieOne.setFlavor('oatmeal')\ncookieOne.getFlavor() // 'oatmeal'\n```\n\nEach cookie must keep its own flavor: changing one cookie never changes another.",
+        "es": "Escribe una clase `Cookie`:\n\n- `constructor(flavor)` guarda el sabor en la instancia como `this.flavor`.\n- `getFlavor()` regresa el sabor de la galleta.\n- `setFlavor(flavor)` cambia el sabor de la galleta.\n\nEjemplo:\n\n```js\nconst cookieOne = new Cookie('chocolate')\ncookieOne.getFlavor() // 'chocolate'\ncookieOne.setFlavor('oatmeal')\ncookieOne.getFlavor() // 'oatmeal'\n```\n\nCada galleta debe guardar su propio sabor: cambiar una galleta nunca cambia otra."
       },
       "difficulty": "easy",
       "category": "build",
       "className": "Cookie",
       "starterCode": {
-        "javascript": "class Cookie {\n  constructor(color) {\n    // Your code here\n  }\n\n  getColor() {\n    // Your code here\n  }\n\n  setColor(color) {\n    // Your code here\n  }\n}"
+        "javascript": "class Cookie {\n  constructor(flavor) {\n    // Your code here\n  }\n\n  getFlavor() {\n    // Your code here\n  }\n\n  setFlavor(flavor) {\n    // Your code here\n  }\n}"
       },
       "solution": {
-        "javascript": "class Cookie {\n  constructor(color) {\n    this.color = color\n  }\n\n  getColor() {\n    return this.color\n  }\n\n  setColor(color) {\n    this.color = color\n  }\n}"
+        "javascript": "class Cookie {\n  constructor(flavor) {\n    this.flavor = flavor\n  }\n\n  getFlavor() {\n    return this.flavor\n  }\n\n  setFlavor(flavor) {\n    this.flavor = flavor\n  }\n}"
       },
       "tests": [
         {
           "steps": [
             {
-              "create": ["green"]
+              "create": ["chocolate"]
             },
             {
-              "call": "getColor",
-              "expected": "green"
+              "call": "getFlavor",
+              "expected": "chocolate"
             }
           ]
         },
         {
           "steps": [
             {
-              "create": ["blue"]
+              "create": ["vanilla"]
             },
             {
-              "read": "color",
-              "expected": "blue"
+              "read": "flavor",
+              "expected": "vanilla"
             }
           ]
         },
         {
           "steps": [
             {
-              "create": ["green"]
+              "create": ["chocolate"]
             },
             {
-              "call": "setColor",
-              "args": ["yellow"]
+              "call": "setFlavor",
+              "args": ["oatmeal"]
             },
             {
-              "call": "getColor",
-              "expected": "yellow"
+              "call": "getFlavor",
+              "expected": "oatmeal"
             }
           ]
         },
         {
           "steps": [
             {
-              "create": ["red"]
+              "create": ["lemon"]
             },
             {
-              "call": "setColor",
-              "args": ["pink"]
+              "call": "setFlavor",
+              "args": ["mint"]
             },
             {
-              "call": "setColor",
-              "args": ["brown"]
+              "call": "setFlavor",
+              "args": ["ginger"]
             },
             {
-              "read": "color",
-              "expected": "brown"
+              "read": "flavor",
+              "expected": "ginger"
             }
           ]
         },
@@ -396,16 +597,142 @@
               "create": [""]
             },
             {
-              "call": "getColor",
+              "call": "getFlavor",
               "expected": ""
             },
             {
-              "call": "setColor",
+              "call": "setFlavor",
               "args": ["chocolate"]
             },
             {
-              "call": "getColor",
+              "call": "getFlavor",
               "expected": "chocolate"
+            }
+          ]
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(1)",
+        "space": "O(1)"
+      }
+    },
+    {
+      "slug": "counter-class",
+      "kind": "class",
+      "title": {
+        "en": "The Door Counter",
+        "es": "El contador de la puerta"
+      },
+      "description": {
+        "en": "Someone at the party door clicks a counter every time a guest comes in or leaves. Write a class `Counter`:\n\n- `constructor()` starts `this.count` at `0`.\n- `increment()` adds 1 to the count and returns the new count.\n- `decrement()` subtracts 1 and returns the new count (it may go below 0).\n- `reset()` sets the count back to 0 and returns it.\n\nExample:\n\n```js\nconst door = new Counter()\ndoor.increment() // 1\ndoor.increment() // 2\ndoor.decrement() // 1\ndoor.reset() // 0\n```",
+        "es": "Alguien en la puerta de la fiesta presiona un contador cada vez que un invitado entra o sale. Escribe una clase `Counter`:\n\n- `constructor()` empieza `this.count` en `0`.\n- `increment()` le suma 1 a la cuenta y regresa la cuenta nueva.\n- `decrement()` le resta 1 y regresa la cuenta nueva (puede quedar abajo de 0).\n- `reset()` regresa la cuenta a 0 y la regresa.\n\nEjemplo:\n\n```js\nconst door = new Counter()\ndoor.increment() // 1\ndoor.increment() // 2\ndoor.decrement() // 1\ndoor.reset() // 0\n```"
+      },
+      "difficulty": "easy",
+      "category": "build",
+      "className": "Counter",
+      "starterCode": {
+        "javascript": "class Counter {\n  constructor() {\n    // Your code here\n  }\n\n  increment() {\n    // Your code here\n  }\n\n  decrement() {\n    // Your code here\n  }\n\n  reset() {\n    // Your code here\n  }\n}"
+      },
+      "solution": {
+        "javascript": "class Counter {\n  constructor() {\n    this.count = 0\n  }\n\n  increment() {\n    this.count = this.count + 1\n    return this.count\n  }\n\n  decrement() {\n    this.count = this.count - 1\n    return this.count\n  }\n\n  reset() {\n    this.count = 0\n    return this.count\n  }\n}"
+      },
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "read": "count",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "increment",
+              "expected": 1
+            },
+            {
+              "call": "increment",
+              "expected": 2
+            },
+            {
+              "read": "count",
+              "expected": 2
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "increment",
+              "expected": 1
+            },
+            {
+              "call": "decrement",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "decrement",
+              "expected": -1
+            },
+            {
+              "call": "decrement",
+              "expected": -2
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "increment"
+            },
+            {
+              "call": "increment"
+            },
+            {
+              "call": "increment"
+            },
+            {
+              "call": "reset",
+              "expected": 0
+            },
+            {
+              "read": "count",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": []
+            },
+            {
+              "call": "reset",
+              "expected": 0
+            },
+            {
+              "call": "increment",
+              "expected": 1
             }
           ]
         }

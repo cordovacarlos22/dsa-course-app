@@ -1,0 +1,137 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "After `let total = 10`, then `let copy = total`, then `total = 20`, what is `copy`?",
+        "es": "Después de `let total = 10`, luego `let copy = total` y luego `total = 20`, ¿cuánto vale `copy`?"
+      },
+      "options": [
+        {
+          "en": "`20`",
+          "es": "`20`"
+        },
+        {
+          "en": "`30`",
+          "es": "`30`"
+        },
+        {
+          "en": "`undefined`",
+          "es": "`undefined`"
+        },
+        {
+          "en": "`10`",
+          "es": "`10`"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "Numbers are copied at the moment of the assignment.",
+        "es": "Los números se copian en el momento de la asignación."
+      },
+      "explanation": {
+        "en": "`copy = total` copied the number 10. Changing `total` later doesn't touch `copy`: a number is a primitive, so there's no arrow between them.",
+        "es": "`copy = total` copió el número 10. Cambiar `total` después no toca a `copy`: un número es un primitivo, así que no hay ninguna flecha entre ellos."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "What does `{ value: 'Ana' } === { value: 'Ana' }` give?",
+        "es": "¿Qué da `{ value: 'Ana' } === { value: 'Ana' }`?"
+      },
+      "options": [
+        {
+          "en": "`true`, because they have the same contents",
+          "es": "`true`, porque tienen el mismo contenido"
+        },
+        {
+          "en": "`false`, because they're two different objects",
+          "es": "`false`, porque son dos objetos distintos"
+        },
+        {
+          "en": "`true`, because `'Ana'` equals `'Ana'`",
+          "es": "`true`, porque `'Ana'` es igual a `'Ana'`"
+        },
+        {
+          "en": "An error: objects can't be compared",
+          "es": "Un error: los objetos no se pueden comparar"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "With objects, `===` checks the arrows, not the contents.",
+        "es": "Con objetos, `===` revisa las flechas, no el contenido."
+      },
+      "explanation": {
+        "en": "Each `{ … }` creates a new object. `===` asks whether both sides point to the same object, and here they don't, so it's `false`.",
+        "es": "Cada `{ … }` crea un objeto nuevo. `===` pregunta si los dos lados apuntan al mismo objeto, y aquí no, así que da `false`."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write `lastValue(head)`. `head` is the first node of a chain like `{ value: 'Ana', next: { value: 'Ben', next: null } }`. Move a pointer from node to node until there's no `next`, and return the last node's `value`.",
+        "es": "Escribe `lastValue(head)`. `head` es el primer nodo de una cadena como `{ value: 'Ana', next: { value: 'Ben', next: null } }`. Mueve un puntero de nodo en nodo hasta que no haya `next`, y regresa el `value` del último nodo."
+      },
+      "hint": {
+        "en": "Start with `let current = head`. While `current.next !== null`, move it: `current = current.next`.",
+        "es": "Empieza con `let current = head`. Mientras `current.next !== null`, muévelo: `current = current.next`."
+      },
+      "starterCode": "function lastValue(head) {\n  let current = head\n  // move current forward until there's no next node\n  return current.value\n}",
+      "solution": "function lastValue(head) {\n  let current = head\n  while (current.next !== null) {\n    current = current.next\n  }\n  return current.value\n}",
+      "kind": "function",
+      "functionName": "lastValue",
+      "tests": [
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": null
+            }
+          ],
+          "expected": "Ana"
+        },
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": {
+                "value": "Ben",
+                "next": null
+              }
+            }
+          ],
+          "expected": "Ben"
+        },
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": {
+                "value": "Ben",
+                "next": {
+                  "value": "Cleo",
+                  "next": null
+                }
+              }
+            }
+          ],
+          "expected": "Cleo"
+        },
+        {
+          "args": [
+            {
+              "value": 1,
+              "next": {
+                "value": 2,
+                "next": null
+              }
+            }
+          ],
+          "expected": 2
+        }
+      ]
+    }
+  ]
+}
