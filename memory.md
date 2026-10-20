@@ -48,7 +48,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-19: **Section 4 of both courses, merged** (Carlos: "combine section 4 of both courses or maybe restructure course lectures"). They're different topics again, so they make two modules: **A Problem-Solving Approach** (course 2) and **Linked Lists** (course 1). They meet inside the lessons: **every linked list method lesson follows the 5 steps** (Carlos chose "Use the 5 steps in every list method"): understand, examples (empty, one, many), break it down, write the code, look back. The Linked Lists story is the guests' **conga line**. Its interview problems wait for course 1's Section 5, and course 2's own linked list section joins when Carlos sends it. The slides PDF's pages 26–51 (patterns) wait for course 2's Section 5.
 - 2026-10-19: **Linked lists start with one node or empty** (from a side-agent note, before any linked list code). `new LinkedList('Ana')` starts with one node, as in course 1; `new LinkedList()` starts empty, as course 2 likely does. Reason: folding in course 2's linked list section later won't mean rewriting every exercise, and tests can make an empty list without a helper. Carlos (2026-10-20): "Up to you", so it stays.
 - 2026-10-20: **Lesson 7 of A Problem-Solving Approach stays at 890 words** (Carlos: "Up to you"). Its source is a 30-second recap, and the lesson already adds the interview advice from the other lectures and a worked problem.
-- 2026-10-20: **Quiz and exercise pages (stage 7) come before Linked Lists** (Carlos chose "Before Linked Lists", after a side-agent note). Five modules have practice files (65 questions, 13 exercises), but the module page only shows counts, and the Introduction lessons promise a quiz on the module page. The exercise page reuses the lesson's `CodeWorkspace` and `checkJavaScript`.
+- 2026-10-20: **Quiz and exercise pages (stage 7) come before Linked Lists** (Carlos chose "Before Linked Lists", after a side-agent note). Five modules have practice files (88 questions, 11 exercises), but the module page only shows counts, and the Introduction lessons promise a quiz on the module page. The exercise page reuses the lesson's `CodeWorkspace` and `checkJavaScript`.
 - 2026-10-20: **The first page no longer downloads every lesson and quiz** (from a side-agent note; `perf/lazy-module-content`). The note saw captions and quizzes in the main chunk, and the check found worse: the whole `content` chunk (every lesson, checkpoint and quiz, 546 kB) was preloaded on every page, so a visitor downloaded about 976 kB before the landing page showed.
   - **Summary at build time:** a Vite plugin, `scripts/content-catalog.js`, builds `virtual:content-catalog` with each module's lesson titles, minutes and practice counts. `src/lib/course.js` reads only that.
   - **Full lessons:** they come from `src/lib/lessons.js`, which only the lesson page imports.
@@ -112,7 +112,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 4. ✅ App shell + i18n: router, layout, react-i18next, first-visit language picker, landing, course home (branch `feat/app-shell`)
 5. ✅ Lesson system: lesson files + validation, Markdown renderer, StepPlayer, 3 animations, runnable snippets (Web Worker), first lesson (branch `feat/lesson-system`)
 6. Original lessons for modules 01–03 (EN), reviewed by Carlos ← next
-7. Quiz + exercise pages (CodeMirror, runner, timer) ← in progress: the quiz page is on `feat/quiz-page`, the exercise pages come next
+7. ✅ Quiz + exercise pages (CodeMirror, runner, timer): `feat/quiz-page` and `feat/exercise-pages` (2026-10-20)
 8. Supabase: sign-in (Google, Apple, GitHub, email code), the free-lessons lock, schema + RLS, profile, progress, then XP points, daily streaks and badges, and optional 2-step (Carlos, 2026-10-12/13; five PRs, see Decisions)
 9. Deploy pipeline: preview / deploy (blue/green) / rollback, Playwright smoke test
 10. AI tutor v1: `tutor` Edge Function (streaming, quota), lesson chat, hints
@@ -175,6 +175,13 @@ Agents: read this at the start of every session and update it at the end (see `A
   - **Loading:** the full quiz files come from `src/lib/practice.js`, which only the quiz page imports (a 101 kB `practice` chunk).
   - **Fix:** inline code like `rsvps.hasOwnProperty('Dev')` can now break mid-word on a 320 px phone instead of pushing the page sideways.
   - **Checked:** in Chrome under `vercel.json`'s headers, all 5 quizzes played at 1280 (en), 375 (es) and 320 px (en, reduced motion): 264 answers, 0 CSP violations, no sideways scroll.
+- 2026-10-20, `feat/exercise-pages` (stage 7b):
+  - **The page:** `/learn/:module/exercises/:exercise` opens a Build it or Interview problem in the lessons' coding workspace (`CodeWorkspace`, Run and Check, the hint after a failed try, Show solution after 3). An adapter, `exerciseAsStep` in `src/lib/exercises.js`, turns the exercise into a coding step. Exercises have no hint of their own, so the hint repeats the target Big O.
+  - **The timer:** a stopwatch (the default), a countdown (15 / 25 / 40 min by difficulty; it only says when the time is up) or no timer, remembered as `timerMode`. The time taken is always measured.
+  - **On a pass:** "Solved in m:ss", the expected Big O, a link to the next exercise, and a celebration.
+  - **Saved:** `exercise:<module>/<slug>` (`{ solved, bestTimeMs, viewedSolution }`).
+  - **Module page:** the Build it and Interview problems cards list each exercise as a link, with its difficulty and a ✓ once solved. The build-time summary now includes each exercise's title, difficulty and category.
+  - **Checked:** in Chrome under `vercel.json`'s headers, all 11 exercises solved with the real checker at 1280 (en), 375 (es) and 320 px (en, reduced motion), with 0 CSP violations and no sideways scroll.
 - 2026-10-13, `docs/ponytail`: Ponytail reviewed (no network calls; the installed files match the reviewed commit). `AGENTS.md` limits it to app code, and `.claude/skills/README.md` says what it runs and how to update or turn it off.
 
 ## Next
