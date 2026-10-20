@@ -723,6 +723,81 @@
       "inside": "{{char}} has code {{code}}. It's inside a green block: a letter or a digit.",
       "outside": "{{char}} has code {{code}}. It's outside every green block: not a letter or a digit.",
       "summary": "Three range checks answer the question, with no regular expression. Watch the edges: '[' is 91, one past 'Z', and '`' is 96, one before 'a'."
+    },
+    "cookieCutter": {
+      "classLabel": "The class (the cutter)",
+      "instancesLabel": "The instances (the cookies)",
+      "instances": {
+        "title": "One class, many cookies",
+        "start": "class Cookie is the cookie cutter: a shape you can use again and again. On its own, it isn't a cookie yet.",
+        "first": "new Cookie('chocolate') stamps out the first cookie, an instance named cookieOne, with its own flavor.",
+        "second": "The same cutter makes a second instance, cookieTwo. Same shape, different flavor.",
+        "summary": "One class, two instances. Each cookie keeps its own data, and you can stamp out as many as you need."
+      },
+      "new": {
+        "title": "What new does, in four small steps",
+        "start": "new Cookie('chocolate') looks like one action, but JavaScript does four things.",
+        "empty": "1. It makes a brand-new, empty object.",
+        "this": "2. It points this at that object, so the constructor knows which cookie it's building.",
+        "run": "3. It runs the constructor. this.flavor = 'chocolate' writes the flavor onto the new object.",
+        "returned": "4. It returns the finished object, and cookieOne now points to it.",
+        "parts": [
+          "Make an empty object",
+          "Point this at it",
+          "Run the constructor",
+          "Return the object"
+        ]
+      },
+      "methods": {
+        "title": "Getters and setters: each cookie answers for itself",
+        "start": "Two instances of the same class: cookieOne is chocolate and cookieTwo is vanilla.",
+        "getOne": "cookieOne.getFlavor() runs with this pointing at cookieOne, so it returns 'chocolate'.",
+        "getTwo": "Same method, called on cookieTwo: this is cookieTwo now, so it returns 'vanilla'.",
+        "set": "cookieOne.setFlavor('oatmeal') changes only cookieOne. cookieTwo isn't touched.",
+        "getAgain": "Reading it again shows the change: cookieOne.getFlavor() is now 'oatmeal'.",
+        "summary": "Getters read an instance's data and setters change it. Both work on this: whichever cookie you called them on."
+      }
+    },
+    "listClassPreview": {
+      "title": "A preview: the LinkedList class at work",
+      "create": "new LinkedList('Ana') creates a list with one guest. The constructor sets everything up.",
+      "push": "push('Ben') adds a guest at the end.",
+      "unshift": "unshift('Zoe') adds a guest at the start.",
+      "insert": "insert(1, 'Cleo') puts a guest at index 1, between Zoe and Ana.",
+      "remove": "remove(1) takes out the guest at index 1: Cleo leaves.",
+      "pop": "pop() removes the last guest, Ben.",
+      "shift": "shift() removes the first guest, Zoe.",
+      "summary": "Each method did one specific job on the list. In the Linked Lists module you'll write every one of them yourself."
+    },
+    "pointerArrows": {
+      "variables": "Variables",
+      "objects": "Objects",
+      "pointedBy": "← {{names}}",
+      "nobody": "nothing points here",
+      "valueCopy": {
+        "title": "Copying a number copies the value",
+        "start": "guestCount holds the number 5 itself.",
+        "copy": "let seats = guestCount copies the 5 into seats. Now there are two separate 5s.",
+        "change": "guestCount = 8 changes only guestCount. seats still holds its own 5.",
+        "summary": "seats is still 5. Numbers, strings and booleans are copied, so changing one variable never changes the other."
+      },
+      "referenceCopy": {
+        "title": "Copying an object copies the arrow",
+        "start": "card doesn't hold the object itself: it holds an arrow to object A, { value: 'Ana' }.",
+        "copy": "let sameCard = card copies the arrow, not the object. Both variables now point to the same object A.",
+        "change": "card.value = 'Ben' follows card's arrow and changes object A.",
+        "read": "sameCard follows its arrow to the same object, so sameCard.value is 'Ben' too.",
+        "summary": "card === sameCard is true: they're the same object. There's still only one object A."
+      },
+      "pointerMove": {
+        "title": "Moving pointers, and garbage collection",
+        "start": "first points to object A, { value: 'Ana' }.",
+        "second": "let second = first: second points to object A too.",
+        "third": "let third = { value: 'Cleo' } makes a new object B, and third points to it.",
+        "moveSecond": "second = third moves second's arrow to object B. Object A still has first.",
+        "moveFirst": "first = third moves the last arrow away from A. Nothing points to object A any more, so nothing can reach it.",
+        "collected": "JavaScript's garbage collector finds objects nothing points to and frees their memory. Object A is gone."
+      }
     }
   },
   "runnable": {

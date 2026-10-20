@@ -151,6 +151,44 @@ describe('problem-solving approach animations', () => {
   })
 })
 
+describe('classes and pointers animations', () => {
+  async function renderAtStep(name, nextClicks) {
+    await i18n.changeLanguage('en')
+    const user = userEvent.setup()
+    const Animation = visualizations[name]
+    render(<Animation />)
+    for (let i = 0; i < nextClicks; i++) {
+      await user.click(screen.getByRole('button', { name: /next/i }))
+    }
+  }
+
+  it('changes one cookie without touching the other', async () => {
+    await renderAtStep('cookie-methods', 3)
+    expect(screen.getByText("'oatmeal'")).toBeInTheDocument()
+    expect(screen.getByText("'vanilla'")).toBeInTheDocument()
+    expect(screen.queryByText("'chocolate'")).not.toBeInTheDocument()
+  })
+
+  it('shows two variables pointing to the same object', async () => {
+    await renderAtStep('reference-copy', 2)
+    expect(screen.getByText("{ value: 'Ben' }")).toBeInTheDocument()
+    expect(screen.getByText('← card, sameCard')).toBeInTheDocument()
+  })
+
+  it('marks an object nothing points to, then removes it', async () => {
+    await renderAtStep('pointer-move', 4)
+    expect(screen.getByText('nothing points here')).toBeInTheDocument()
+    await userEvent.setup().click(screen.getByRole('button', { name: /next/i }))
+    expect(screen.queryByText("{ value: 'Ana' }")).not.toBeInTheDocument()
+    expect(screen.getByText('← first, second, third')).toBeInTheDocument()
+  })
+
+  it('keeps a copied number when the original changes', async () => {
+    await renderAtStep('value-copy', 3)
+    expect(screen.getByText('seats // 5')).toBeInTheDocument()
+  })
+})
+
 describe('buildBinarySearchSteps', () => {
   it('finds the target in log₂(n) checks', () => {
     const steps = buildBinarySearchSteps([2, 4, 6, 8, 10, 12, 14, 16], 14)

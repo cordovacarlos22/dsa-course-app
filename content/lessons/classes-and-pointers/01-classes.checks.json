@@ -1,0 +1,203 @@
+{
+  "steps": [
+    {
+      "type": "choice",
+      "question": {
+        "en": "After `const cookieOne = new Cookie('chocolate')`, what is `cookieOne`?",
+        "es": "Después de `const cookieOne = new Cookie('chocolate')`, ¿qué es `cookieOne`?"
+      },
+      "options": [
+        {
+          "en": "The `Cookie` class itself",
+          "es": "La clase `Cookie` misma"
+        },
+        {
+          "en": "The constructor",
+          "es": "El constructor"
+        },
+        {
+          "en": "An instance of the `Cookie` class",
+          "es": "Una instancia de la clase `Cookie`"
+        },
+        {
+          "en": "A method of the class",
+          "es": "Un método de la clase"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "The class is the cutter. What does the cutter make?",
+        "es": "La clase es el molde. ¿Qué hace el molde?"
+      },
+      "explanation": {
+        "en": "`Cookie` is the class (the cutter), and `new` stamped out one instance of it (a cookie). `cookieOne` points to that instance.",
+        "es": "`Cookie` es la clase (el molde), y `new` hizo una instancia de ella (una galleta). `cookieOne` apunta a esa instancia."
+      }
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Write a class `Guest`. Its constructor receives a `name`, stores it as `this.name`, and starts every guest with `this.rsvp` set to `'no'`.",
+        "es": "Escribe una clase `Guest`. Su constructor recibe un `name`, lo guarda como `this.name`, y hace que cada invitado empiece con `this.rsvp` en `'no'`."
+      },
+      "hint": {
+        "en": "Inside the constructor, write to `this`: one line for the name, one for the RSVP.",
+        "es": "Dentro del constructor, escribe en `this`: una línea para el nombre y otra para el RSVP."
+      },
+      "starterCode": "class Guest {\n  constructor(name) {\n    // store the name, and start rsvp at 'no'\n  }\n}",
+      "solution": "class Guest {\n  constructor(name) {\n    this.name = name\n    this.rsvp = 'no'\n  }\n}",
+      "kind": "class",
+      "className": "Guest",
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "read": "name",
+              "expected": "Ana"
+            },
+            {
+              "read": "rsvp",
+              "expected": "no"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ben"]
+            },
+            {
+              "read": "name",
+              "expected": "Ben"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Cleo"]
+            },
+            {
+              "read": "rsvp",
+              "expected": "no"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "task": {
+        "en": "Add two methods to `Guest`: a getter `getRsvp()` that returns the guest's RSVP, and a setter `setRsvp(answer)` that changes it.",
+        "es": "Agrégale dos métodos a `Guest`: un getter `getRsvp()` que regrese el RSVP del invitado, y un setter `setRsvp(answer)` que lo cambie."
+      },
+      "hint": {
+        "en": "The getter returns `this.rsvp`. The setter assigns `answer` to `this.rsvp`.",
+        "es": "El getter regresa `this.rsvp`. El setter le asigna `answer` a `this.rsvp`."
+      },
+      "starterCode": "class Guest {\n  constructor(name) {\n    this.name = name\n    this.rsvp = 'no'\n  }\n\n  getRsvp() {\n    // return the RSVP\n  }\n\n  setRsvp(answer) {\n    // change the RSVP\n  }\n}",
+      "solution": "class Guest {\n  constructor(name) {\n    this.name = name\n    this.rsvp = 'no'\n  }\n\n  getRsvp() {\n    return this.rsvp\n  }\n\n  setRsvp(answer) {\n    this.rsvp = answer\n  }\n}",
+      "kind": "class",
+      "className": "Guest",
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "getRsvp",
+              "expected": "no"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ana"]
+            },
+            {
+              "call": "setRsvp",
+              "args": ["yes"]
+            },
+            {
+              "call": "getRsvp",
+              "expected": "yes"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Ben"]
+            },
+            {
+              "call": "setRsvp",
+              "args": ["maybe"]
+            },
+            {
+              "read": "rsvp",
+              "expected": "maybe"
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": ["Cleo"]
+            },
+            {
+              "call": "setRsvp",
+              "args": ["yes"]
+            },
+            {
+              "call": "setRsvp",
+              "args": ["no"]
+            },
+            {
+              "call": "getRsvp",
+              "expected": "no"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "You create two lists from the same class, `a` and `b`, and call `a.push('Ana')`. What happens to `b`?",
+        "es": "Creas dos listas con la misma clase, `a` y `b`, y llamas `a.push('Ana')`. ¿Qué le pasa a `b`?"
+      },
+      "options": [
+        {
+          "en": "`b` also gets `'Ana'`, because they share a class",
+          "es": "`b` también recibe a `'Ana'`, porque comparten clase"
+        },
+        {
+          "en": "Nothing: each instance has its own data, and `push` worked on `a`",
+          "es": "Nada: cada instancia tiene sus propios datos, y `push` trabajó con `a`"
+        },
+        {
+          "en": "JavaScript throws an error, because two lists can't exist at once",
+          "es": "JavaScript lanza un error, porque no pueden existir dos listas a la vez"
+        },
+        {
+          "en": "`b` is emptied",
+          "es": "`b` se vacía"
+        }
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "Think of `cookieOne.setFlavor(...)` and `cookieTwo`.",
+        "es": "Piensa en `cookieOne.setFlavor(...)` y `cookieTwo`."
+      },
+      "explanation": {
+        "en": "The class is shared, but the data isn't. `a.push` runs with `this` pointing at `a`, so only `a` changes, just like `setFlavor` on one cookie.",
+        "es": "La clase se comparte, pero los datos no. `a.push` corre con `this` apuntando a `a`, así que solo cambia `a`, igual que `setFlavor` en una galleta."
+      }
+    }
+  ]
+}
