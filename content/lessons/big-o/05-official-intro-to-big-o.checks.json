@@ -8,8 +8,8 @@
       },
       "options": [
         {
-          "en": "How the runtime of an algorithm grows as its input grows",
-          "es": "Cómo crece el tiempo de ejecución de un algoritmo cuando crece su entrada"
+          "en": "How an algorithm's running time changes as its input gets bigger",
+          "es": "Cómo cambia el tiempo de ejecución de un algoritmo cuando su entrada se hace más grande"
         },
         {
           "en": "The exact number of seconds a function takes",
@@ -60,8 +60,8 @@
       ],
       "answer": 1,
       "hint": {
-        "en": "The definition says: eventually less than a constant times f(n).",
-        "es": "La definición dice: tarde o temprano menor que una constante por f(n)."
+        "en": "The definition says: once n is big enough, never more than a constant times f(n).",
+        "es": "La definición dice: cuando n ya es lo bastante grande, nunca mayor que una constante por f(n)."
       },
       "explanation": {
         "en": "For n ≥ 2, 5n + 2 ≤ 6n. A constant times n is a straight line, so it's O(n).",
