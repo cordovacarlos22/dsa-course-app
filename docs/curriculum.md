@@ -220,7 +220,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Linked Lists (`linked-lists`)
 
-**Status:** 🟡 4 of 13 lessons, 15 steps (EN + ES, 15 checkpoints) · 🟡 quiz, 11 questions (EN + ES) · 🟡 1 of 10 build it · ⬜ slides
+**Status:** 🟡 8 of 13 lessons, 35 steps (EN + ES, 35 checkpoints) · 🟡 quiz, 17 questions (EN + ES) · 🟡 5 of 10 build it · ⬜ slides
 **Goal:** build a singly linked list from scratch and solve classic pointer problems.
 **Sources:** course 1's Section 4 (14 lectures, 3 quiz questions, exercise files and a Big O table). Course 2's own linked list section joins later, when Carlos sends it.
 **Style:** theory first. Every method lesson (constructor to reverse) follows the 5 steps from A Problem-Solving Approach: understand, examples (empty, one, many), break it down, write the code, look back. The party continues as a **conga line** of guests: each one holds on to the next, `head` is the front and `tail` is the back. Our list can start empty (`new LinkedList()`) or with one guest (`new LinkedList('Ana')`).
@@ -230,18 +230,18 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
   2. Linked lists vs. arrays in Big O ✅ (C1 Big O lecture, the Big O table and the quiz: `linked-list-cost-end`, `linked-list-cost-front`, `linked-list-cost-middle`, `linked-list-cost-lookup`, `linked-list-big-o`)
   3. Under the hood: nodes are objects ✅ (C1 under the hood: `linked-list-node`, `linked-list-nested`, `trace-ll-walk`)
   4. The constructor ✅ (C1 constructor, in 5 steps: `linked-list-node-class`, `linked-list-constructor-examples`, `linked-list-constructor-plan`, `trace-ll-constructor`, `five-steps-look-back`)
-  5. push ⬜ (next PR, with pop, unshift and shift)
-  6. pop ⬜ (`trace-ll-pop`)
-  7. unshift ⬜
-  8. shift ⬜
+  5. push ✅ (C1 push, in 5 steps: `linked-list-push`, `linked-list-push-examples`, `linked-list-push-plan`, `trace-ll-push`)
+  6. pop ✅ (C1 pop intro + pop code: `linked-list-pop`, `linked-list-pop-examples`, `linked-list-pop-plan`, `trace-ll-pop`)
+  7. unshift ✅ (C1 unshift: `linked-list-unshift`, `linked-list-unshift-examples`, `linked-list-unshift-plan`, `trace-ll-unshift`)
+  8. shift ✅ (C1 shift: `linked-list-shift`, `linked-list-shift-examples`, `linked-list-shift-plan`, `trace-ll-shift`)
   9. get ⬜ (the PR after, with set, insert, remove and reverse)
   10. set ⬜
   11. insert ⬜
   12. remove ⬜
   13. reverse ⬜ (`trace-ll-reverse`)
-- **Animations still to come:** `linked-list-push`, `linked-list-pop`, `linked-list-unshift`, `linked-list-shift`, `linked-list-get`, `linked-list-set`, `linked-list-insert`, `linked-list-remove`, `linked-list-reverse`, plus the traces `trace-ll-pop` and `trace-ll-reverse`. They all draw the list with `LinkedListDiagram`.
-- **Quiz:** Big O of each operation vs. arrays, why pop is O(n), what `head`/`tail`/`length` hold, nodes as nested objects, the walk, and the constructor (the empty start, and `0` as a value).
-- **Build it (class `LinkedList`):** ✅ constructor (Start the Conga Line) · push · pop · unshift · shift · get · set · insert · remove · reverse
+- **Animations still to come:** the same set for get, set, insert, remove and reverse (what it does, examples, the plan, and a `trace-ll-<method>`). They all draw the list with `LinkedListDiagram`.
+- **Quiz:** Big O of each operation vs. arrays, why pop is O(n), what `head`/`tail`/`length` hold, nodes as nested objects, the walk, the constructor (the empty start, and `0` as a value), push on an empty list and `return this`, pop's one-node case and empty return, unshift's order, and why shift cuts the returned node loose.
+- **Build it (class `LinkedList`):** ✅ constructor (Start the Conga Line) · ✅ push (Join at the Back) · ✅ pop (Leave from the Back) · ✅ unshift (Join at the Front) · ✅ shift (Leave from the Front) · get · set · insert · remove · reverse
 - **Interview problems** (with course 1's Section 5, the linked list LeetCode exercises): Middle Node · Has Cycle · K-th Node From the End · Remove Duplicates · Binary List to Number · Partition Around a Value · Reverse a Sublist · Swap Pairs · Rotate the List
 
 ## Doubly Linked Lists (`doubly-linked-lists`)
