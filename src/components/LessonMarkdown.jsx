@@ -52,11 +52,31 @@ function CodeBlock({ node, children, ...props }) {
   return <pre {...props}>{children}</pre>
 }
 
+// A wide table (like a 5-column cheat sheet) can't shrink to a 320 px phone,
+// so it scrolls sideways inside its own box instead of the whole page. The
+// box takes focus so keyboard users can scroll it with the arrow keys too.
+function ScrollableTable({ children }) {
+  const { t } = useTranslation()
+  return (
+    <div
+      className="overflow-x-auto"
+      role="region"
+      aria-label={t('lesson.table')}
+      tabIndex={0}
+    >
+      <table>{children}</table>
+    </div>
+  )
+}
+
 // Renders a lesson's Markdown with the course's special blocks.
 function LessonMarkdown({ markdown }) {
   return (
     <div className="prose prose-slate max-w-none prose-headings:font-extrabold prose-a:text-brand prose-code:before:content-none prose-code:after:content-none">
-      <Markdown remarkPlugins={[remarkGfm]} components={{ pre: CodeBlock }}>
+      <Markdown
+        remarkPlugins={[remarkGfm]}
+        components={{ pre: CodeBlock, table: ScrollableTable }}
+      >
         {markdown}
       </Markdown>
     </div>

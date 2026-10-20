@@ -65,8 +65,8 @@
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "A doubly linked list is much more efficient at removing the last item. The course explains why later, using Big O to compare the two.",
-        "es": "Una lista doblemente enlazada es mucho más eficiente para quitar el último elemento. El curso explica por qué más adelante, usando Big O para comparar las dos."
+        "en": "Removing the last item is far cheaper in a doubly linked list, because it can step back from the tail. The course explains why later, using Big O to compare the two.",
+        "es": "Quitar el último elemento es mucho más barato en una lista doblemente enlazada, porque puede dar un paso atrás desde el tail. El curso explica por qué más adelante, usando Big O para comparar las dos."
       }
     },
     {
