@@ -9,6 +9,8 @@ import NotFoundPage from './pages/NotFoundPage'
 // Lessons need the Markdown libraries, which are big. Loading this page only
 // when a student opens a lesson keeps the first page load small.
 const LessonPage = lazy(() => import('./pages/LessonPage'))
+// The quiz brings the module's full practice file, so it loads on demand too.
+const QuizPage = lazy(() => import('./pages/QuizPage'))
 // For reviewing animations; not linked from the menu.
 const AnimationGalleryPage = lazy(() => import('./pages/AnimationGalleryPage'))
 
@@ -20,6 +22,7 @@ function App() {
         <Route index element={<LandingPage />} />
         <Route path="learn" element={<CourseHomePage />} />
         <Route path="learn/:moduleSlug" element={<ModulePage />} />
+        <Route path="learn/:moduleSlug/quiz" element={<QuizPage />} />
         <Route path="learn/:moduleSlug/:lessonSlug" element={<LessonPage />} />
         <Route path="dev/animations" element={<AnimationGalleryPage />} />
         <Route path="*" element={<NotFoundPage />} />

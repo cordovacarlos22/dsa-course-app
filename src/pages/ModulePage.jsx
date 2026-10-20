@@ -4,6 +4,7 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useLanguage } from '../hooks/useLanguage'
 import { getModule, lessonTitle, localize } from '../lib/course'
 import { isModuleComplete, loadProgress } from '../lib/progress'
+import { loadQuizScore } from '../lib/quizScores'
 import NotFoundPage from './NotFoundPage'
 
 // One module: its lessons, then its quiz + exercises (pages in stage 7).
@@ -111,10 +112,7 @@ function ModulePage() {
             {t('module.practiceTitle')}
           </h2>
           <ul className="mt-4 grid gap-4 sm:grid-cols-3">
-            <PracticeItem
-              title={t('module.quiz')}
-              detail={t('course.questions', { count: practice.questions })}
-            />
+            <QuizItem moduleSlug={module.slug} questions={practice.questions} />
             <PracticeItem
               title={t('module.buildIt')}
               detail={t('course.exercises', { count: practice.build })}
@@ -130,7 +128,33 @@ function ModulePage() {
   )
 }
 
-// Quiz and exercise pages arrive in stage 7, so these aren't links yet.
+// The quiz card links to the quiz, with the best score once there is one.
+function QuizItem({ moduleSlug, questions }) {
+  const { t } = useTranslation()
+  const score = loadQuizScore(moduleSlug)
+  return (
+    <li>
+      <Link
+        to={`/learn/${moduleSlug}/quiz`}
+        className="block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-brand hover:shadow-md"
+      >
+        <h3 className="font-bold">{t('module.quiz')}</h3>
+        <p className="mt-1 text-sm text-slate-600">
+          {t('course.questions', { count: questions })}
+        </p>
+        <p className="mt-3 text-xs font-semibold text-brand uppercase">
+          {score
+            ? t('module.bestScore', { score: score.best, total: score.total })
+            : t('module.takeQuiz')}{' '}
+          →
+        </p>
+      </Link>
+    </li>
+  )
+}
+
+// Exercise pages arrive in the next step of stage 7, so these aren't links
+// yet.
 function PracticeItem({ title, detail }) {
   const { t } = useTranslation()
   return (
