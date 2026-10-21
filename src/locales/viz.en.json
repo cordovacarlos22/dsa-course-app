@@ -279,10 +279,10 @@
       "match": "{{name}} answered '{{answer}}'. Found it! Return true after {{ops}} checks.",
       "notFound": "The loop ended: nobody answered '{{answer}}'. Return false after {{ops}} checks."
     },
-    "charCount": {
-      "title": "charCount, the simple version, character by character",
+    "countCharacters": {
+      "title": "countCharacters, the simple version, character by character",
       "input": "'{{text}}'",
-      "start": "charCount('{{text}}'): an empty object to fill and {{count}} characters to read.",
+      "start": "countCharacters('{{text}}'): an empty object to fill and {{count}} characters to read.",
       "firstTime": "{{char}} isn't a key yet: result[{{char}}] is undefined, and undefined > 0 is false. Set it to 1.",
       "again": "{{char}} is already a key, so add 1. It's at {{count}} now.",
       "done": "All {{ops}} characters read, in one pass: O(n). The object has {{keys}} keys."
@@ -583,7 +583,7 @@
         "Inputs: what goes in, what type it is, how big it can get and how many there are.",
         "Outputs: what comes back, and in what shape: a number, a string, an object?",
         "Sometimes something is missing, like a second number. You may only notice later, and that's fine.",
-        "Good names now (add, num1, num2, sum) make every next step easier to talk about."
+        "Good names now (addNumbers, first, second, result) make every next step easier to talk about."
       ],
       "summary": "Five questions, a minute or two. They're the cheapest way to avoid solving the wrong problem."
     },
@@ -661,7 +661,7 @@
     }
   },
   "exampleLadder": {
-    "title": "Examples for charCount, from easy to strange",
+    "title": "Examples for countCharacters, from easy to strange",
     "start": "The problem: count how many times each character appears in a string. Let's write examples before any code.",
     "kinds": {
       "simple": "Simple",
@@ -699,15 +699,15 @@
     },
     "makeObject": "The easy part first: an empty object, result, to fill and return.",
     "loop": "The loop over the string. We lowercase each character as we read it, so 'H' and 'h' count together.",
-    "addOne": "A character that's already a key gets 1 more. isAlphaNumeric doesn't exist yet: we gave the step a name and kept going.",
+    "addOne": "A character that's already a key gets 1 more. isLetterOrDigit doesn't exist yet: we gave the step a name and kept going.",
     "setOne": "A new letter or digit starts at 1.",
     "skip": "Spaces and punctuation: nothing to do, so all that's left is to close the if and the loop.",
     "returnIt": "Return the object. Every comment now has its code.",
-    "summary": "The comments were the plan, and the plan became the code. Only isAlphaNumeric is left to write."
+    "summary": "The comments were the plan, and the plan became the code. Only isLetterOrDigit is left to write."
   },
   "solutionLayers": {
     "title": "Solve a simpler problem, then add the hard parts back",
-    "simple": "Layer 1: the simple charCount. It ignores case and doesn't check what kind of character it reads.",
+    "simple": "Layer 1: the simple countCharacters. It ignores case and doesn't check what kind of character it reads.",
     "simpleOutput": "On 'Hi Ana!' it runs, but 'H' and 'A' are counted apart from 'h' and 'a', and the space and '!' are counted too.",
     "lowercase": "Layer 2: one change. Each character is lowercased as we read it.",
     "lowercaseOutput": "Now 'a' has 2. Only the space and '!' are still wrong.",

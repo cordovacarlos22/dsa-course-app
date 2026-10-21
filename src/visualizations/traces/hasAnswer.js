@@ -31,9 +31,9 @@ export const hasAnswer = {
   inputs: INPUTS,
   items: answerBoxes,
   code: `function hasAnswer(rsvps, answer) {
-  const names = Object.keys(rsvps)
-  for (let i = 0; i < names.length; i++) {
-    if (rsvps[names[i]] === answer) return true
+  const guestNames = Object.keys(rsvps)
+  for (let i = 0; i < guestNames.length; i++) {
+    if (rsvps[guestNames[i]] === answer) return true
   }
   return false
 }`,
@@ -44,7 +44,7 @@ export const hasAnswer = {
     const vars = (i) => [
       ['answer', `'${answer}'`],
       ['i', i],
-      ['names[i]', i < names.length ? `'${names[i]}'` : '—'],
+      ['guestNames[i]', i < names.length ? `'${names[i]}'` : '—'],
     ]
     yield {
       line: 2,

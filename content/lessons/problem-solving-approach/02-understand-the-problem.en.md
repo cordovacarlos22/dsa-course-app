@@ -51,23 +51,23 @@ None of this means you should panic about every input. It means you should **ask
 
 ## Outputs, missing inputs and names
 
-Now the outputs. Should `add` return a number? If both inputs are decimals, should a decimal come back? If we add huge numbers as strings, should it return a string? Again: ask.
+Now the outputs. Should `addNumbers` return a number? If both inputs are decimals, should a decimal come back? If we add huge numbers as strings, should it return a string? Again: ask.
 
-The fourth question, **is that enough to get the answer?**, catches missing information. What if someone calls `add(5)` with only one number? There's nothing to add it to. Should the missing number count as 0? Should `add` return `undefined`, or stop with an error? There's no right answer until someone decides. Here's what a first version does on its own:
+The fourth question, **is that enough to get the answer?**, catches missing information. What if someone calls `addNumbers(5)` with only one number? There's nothing to add it to. Should the missing number count as 0? Should `addNumbers` return `undefined`, or stop with an error? There's no right answer until someone decides. Here's what a first version does on its own:
 
 ```js-run
-function add(num1, num2) {
-  return num1 + num2
+function addNumbers(first, second) {
+  return first + second
 }
 
-console.log(add(2, 3)) // 5
-console.log(add(5)) // NaN: 5 + undefined
-console.log(add('2', 3)) // '23': a string sneaks in and + joins them
+console.log(addNumbers(2, 3)) // 5
+console.log(addNumbers(5)) // NaN: 5 + undefined
+console.log(addNumbers('2', 3)) // '23': a string sneaks in and + joins them
 ```
 
-**What just happened:** `add(5)` returned `NaN` ("not a number"), because `num2` is `undefined` and `5 + undefined` isn't a number. And `add('2', 3)` returned the string `'23'`, because when one side of `+` is a string, JavaScript joins text instead of adding. The code runs, but not the way anyone wanted. Those are exactly the cases the questions are meant to catch.
+**What just happened:** `addNumbers(5)` returned `NaN` ("not a number"), because `second` is `undefined` and `5 + undefined` isn't a number. And `addNumbers('2', 3)` returned the string `'23'`, because when one side of `+` is a string, JavaScript joins text instead of adding. The code runs, but not the way anyone wanted. Those are exactly the cases the questions are meant to catch.
 
-Finally, **labels**: give the important pieces clear names before you write the code. Here that's easy: the function is `add`, the inputs are `num1` and `num2`, and the result is the `sum`. In bigger problems, good names are half the battle. They make the plan easier to write, the code easier to read and your explanation easier to follow.
+Finally, **labels**: give the important pieces clear names before you write the code. Here that's easy: the function is `addNumbers`, the inputs are `first` and `second`, and what comes back is the `result`. In bigger problems, good names are half the battle. They make the plan easier to write, the code easier to read and your explanation easier to follow.
 
 In an interview, the answer to many of these questions will be "don't worry about that" or "assume the input is valid". That's fine. You've still shown that you think about edge cases, and you've found out exactly what you need to handle.
 

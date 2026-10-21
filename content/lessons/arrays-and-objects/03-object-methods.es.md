@@ -82,11 +82,11 @@ Mira esta función. Por cada invitado, cuenta cuántos invitados hay en total:
 
 ```js
 function shareOfGuests(rsvps) {
-  const names = Object.keys(rsvps) // O(n), una vez
-  for (let i = 0; i < names.length; i++) {
+  const guestNames = Object.keys(rsvps) // O(n), una vez
+  for (let i = 0; i < guestNames.length; i++) {
     // Object.keys se ejecuta otra vez en CADA vuelta: O(n) cada vez
     const total = Object.keys(rsvps).length
-    console.log(names[i] + ' es 1 de ' + total)
+    console.log(guestNames[i] + ' es 1 de ' + total)
   }
 }
 ```
@@ -103,10 +103,10 @@ La solución es sencilla: haz el trabajo caro **una vez**, antes del bucle, y gu
 
 ```js-run
 function shareOfGuests(rsvps) {
-  const names = Object.keys(rsvps) // O(n), una vez
-  const total = names.length // O(1): names es un array
-  for (let i = 0; i < names.length; i++) {
-    console.log(names[i] + ' es 1 de ' + total)
+  const guestNames = Object.keys(rsvps) // O(n), una vez
+  const total = guestNames.length // O(1): guestNames es un array
+  for (let i = 0; i < guestNames.length; i++) {
+    console.log(guestNames[i] + ' es 1 de ' + total)
   }
 }
 

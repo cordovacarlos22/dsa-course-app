@@ -30,41 +30,41 @@ five-steps-look-back
 
 ## Clearer code
 
-Let's look back at our `charCount`. It works, but a few things could read better.
+Let's look back at our `countCharacters`. It works, but a few things could read better.
 
-**The count update.** Five lines for "add 1, or start at 1" is a lot. One line does the same job: `result[char] = (result[char] || 0) + 1`. The `||` operator gives you its right side when the left side is "falsy", and `undefined` is falsy. So a new key starts from `0` and becomes `1`, and a key that already has a count keeps it and gets 1 more.
+**The count update.** Five lines for "add 1, or start at 1" is a lot. One line does the same job: `result[character] = (result[character] || 0) + 1`. The `||` operator gives you its right side when the left side is "falsy", and `undefined` is falsy. So a new key starts from `0` and becomes `1`, and a key that already has a count keeps it and gets 1 more.
 
-**The helper.** The check already lives in its own function, `isAlphaNumeric`. That's a refactor in itself: the loop now reads almost like a sentence. "For each character, if it's a letter or a digit, count it."
+**The helper.** The check already lives in its own function, `isLetterOrDigit`. That's a refactor in itself: the loop now reads almost like a sentence. "For each character, if it's a letter or a digit, count it."
 
 **Modern syntax.** Use `const` for values that never change and `let` for the ones that do, and avoid the old `var`. You'll also see a different kind of loop, `for...of`, which gives you each character directly, without an index:
 
 ```js
-for (const char of str) {
-  // char is each character, one at a time
+for (const character of text) {
+  // character is each character, one at a time
 }
 ```
 
 It does the same work as our indexed loop (one pass, O(n)), so choosing between them is a question of style. In this course we keep writing `for (let i = 0; …)` loops, because you can always see exactly which position you're on.
 
 ```js-run
-function isAlphaNumeric(char) {
+function isLetterOrDigit(character) {
   const allowed = 'abcdefghijklmnopqrstuvwxyz0123456789'
-  return allowed.includes(char)
+  return allowed.includes(character)
 }
 
-function charCount(str) {
+function countCharacters(text) {
   const result = {}
-  for (let i = 0; i < str.length; i++) {
-    const char = str[i].toLowerCase()
-    if (isAlphaNumeric(char)) {
-      result[char] = (result[char] || 0) + 1
+  for (let i = 0; i < text.length; i++) {
+    const character = text[i].toLowerCase()
+    if (isLetterOrDigit(character)) {
+      result[character] = (result[character] || 0) + 1
     }
   }
   return result
 }
 
-console.log(charCount('Hi Ana!'))
-console.log(charCount('Party at 8!'))
+console.log(countCharacters('Hi Ana!'))
+console.log(countCharacters('Party at 8!'))
 ```
 
 **What just happened:** the results are the same as before, with fewer lines that are still easy to read. And we know they're the same because we re-ran the examples, which is question 1 on the list.
@@ -73,7 +73,7 @@ console.log(charCount('Party at 8!'))
 
 ## Faster code: character codes
 
-Now question 5: performance. Our `isAlphaNumeric` searches a list of 36 characters. A regular expression would be shorter to write, but how fast a regular expression runs depends on the pattern and on the JavaScript engine, and for a check this simple it can be slower than you'd expect. There's a simpler idea underneath every character: **its number**.
+Now question 5: performance. Our `isLetterOrDigit` searches a list of 36 characters. A regular expression would be shorter to write, but how fast a regular expression runs depends on the pattern and on the JavaScript engine, and for a check this simple it can be slower than you'd expect. There's a simpler idea underneath every character: **its number**.
 
 Computers store every character as a number, called its **character code**. `'a'.charCodeAt(0)` gives `97`, `'b'` is `98`, and so on. The useful part is that related characters sit together in blocks: the digits `'0'` to `'9'` are codes **48–57**, the capital letters `'A'` to `'Z'` are **65–90**, and the lowercase letters `'a'` to `'z'` are **97–122**. So "is this a letter or a digit?" becomes three comparisons between numbers, some of the simplest and fastest operations a computer can do.
 
@@ -86,16 +86,16 @@ char-code-ranges
 Here's the refactored helper, plus a way to compare it with a regular expression. Don't guess which one is faster: **measure it**, just like in the Big O module's timing lesson.
 
 ```js-run
-function isAlphaNumeric(char) {
-  const code = char.charCodeAt(0)
+function isLetterOrDigit(character) {
+  const code = character.charCodeAt(0)
   if (code >= 48 && code <= 57) return true // 0–9
   if (code >= 65 && code <= 90) return true // A–Z
   if (code >= 97 && code <= 122) return true // a–z
   return false
 }
 
-console.log(isAlphaNumeric('a'), isAlphaNumeric('Z'), isAlphaNumeric('7'))
-console.log(isAlphaNumeric(' '), isAlphaNumeric('!'), isAlphaNumeric('['))
+console.log(isLetterOrDigit('a'), isLetterOrDigit('Z'), isLetterOrDigit('7'))
+console.log(isLetterOrDigit(' '), isLetterOrDigit('!'), isLetterOrDigit('['))
 
 let text = ''
 for (let i = 0; i < 100000; i++) {
@@ -105,7 +105,7 @@ for (let i = 0; i < 100000; i++) {
 let start = performance.now()
 let found = 0
 for (let i = 0; i < text.length; i++) {
-  if (isAlphaNumeric(text[i])) found++
+  if (isLetterOrDigit(text[i])) found++
 }
 console.log('character codes:', (performance.now() - start).toFixed(1), 'ms')
 
@@ -117,8 +117,8 @@ for (let i = 0; i < text.length; i++) {
 console.log('regular expression:', (performance.now() - start).toFixed(1), 'ms')
 ```
 
-Your times will vary from run to run and from browser to browser. And notice what _doesn't_ change: both versions do a constant amount of work per character, so `charCount` is **O(n)** either way. A faster check shrinks the constant, not the Big O.
+Your times will vary from run to run and from browser to browser. And notice what _doesn't_ change: both versions do a constant amount of work per character, so `countCharacters` is **O(n)** either way. A faster check shrinks the constant, not the Big O.
 
-One more thing to think about: is it better to lowercase the whole string first, or to check each character first and lowercase only the letters and digits? It depends on the inputs. If they're full of spaces and symbols, checking first skips some work. And what about space? The object can never hold more than 36 keys (26 letters and 10 digits), however long the string is. So `charCount` is **O(n) time and O(1) space**.
+One more thing to think about: is it better to lowercase the whole string first, or to check each character first and lowercase only the letters and digits? It depends on the inputs. If they're full of spaces and symbols, checking first skips some work. And what about space? The object can never hold more than 36 keys (26 letters and 10 digits), however long the string is. So `countCharacters` is **O(n) time and O(1) space**.
 
-**Common mistake:** believing a faster helper changes the Big O. Here it changes the constant, which is a real improvement, but `charCount` was O(n) before and is still O(n).
+**Common mistake:** believing a faster helper changes the Big O. Here it changes the constant, which is a real improvement, but `countCharacters` was O(n) before and is still O(n).

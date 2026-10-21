@@ -22,14 +22,14 @@ five-steps-break-down
 
 **Common mistake:** writing pseudocode so detailed that it's really code written in English. Keep it to the main steps; the details belong in the code.
 
-## charCount, step by step
+## countCharacters, step by step
 
-Let's break down `charCount`. Remember the decisions from our examples: count only letters and digits, in lowercase, and return an object. Two steps are easy: we need an **object to fill**, and we **hand that object back when we're done**. Everything else happens in between, so most of the logic lives in a **loop over the string**.
+Let's break down `countCharacters`. Remember the decisions from our examples: count only letters and digits, in lowercase, and return an object. Two steps are easy: we need an **object to fill**, and we **hand that object back when we're done**. Everything else happens in between, so most of the logic lives in a **loop over the string**.
 
 What happens to each character? There are three cases. If it's a letter or a digit that's **already a key** in the object, add 1 to its count. If it's a letter or digit that's **not a key yet**, add it with a count of 1. If it's **anything else**, like a space or a `!`, do nothing. That's the whole plan:
 
 ```js
-function charCount(str) {
+function countCharacters(text) {
   // make an object to return
   // loop over the string, one character at a time
   //   a letter or digit that's already a key: add 1
@@ -45,12 +45,12 @@ There's still one choice to make: when to lowercase. We could lowercase the whol
 steps-to-code
 ```
 
-**What just happened:** each comment got its code, one at a time, until the plan had become a function. One step had a part we didn't know how to write yet: checking whether a character is a letter or a digit. Instead of stopping there, we gave that step a name, `isAlphaNumeric`, and kept going. We'll write it in the next two lessons.
+**What just happened:** each comment got its code, one at a time, until the plan had become a function. One step had a part we didn't know how to write yet: checking whether a character is a letter or a digit. Instead of stopping there, we gave that step a name, `isLetterOrDigit`, and kept going. We'll write it in the next two lessons.
 
 You don't have to write the whole function to make progress. Here's the plan with only the easy parts filled in. It already runs:
 
 ```js-run
-function charCount(str) {
+function countCharacters(text) {
   // make an object to return
   const result = {}
   // loop over the string, one character at a time
@@ -59,7 +59,7 @@ function charCount(str) {
   return result
 }
 
-console.log(charCount('banana')) // {} for now, but it runs!
+console.log(countCharacters('banana')) // {} for now, but it runs!
 ```
 
 **Common mistake:** leaving out the cases where you do nothing. "Anything else: skip it" is a real step, and forgetting it in the plan is how spaces end up being counted by accident.
@@ -72,7 +72,7 @@ Imagine you run out of time halfway through the loop. Without a plan, the interv
 
 The plan also protects you from yourself. If you start coding without one, it's easy to get stuck in a single approach, panic when it doesn't work, and erase everything. With a plan, you can step back, look at the steps and find where things went wrong, instead of starting over from nothing.
 
-Planning doesn't change your solution's Big O: the plan for `charCount` already tells you it's one loop over the string, so it will be O(n). Knowing that before you write a line is one more benefit of the plan.
+Planning doesn't change your solution's Big O: the plan for `countCharacters` already tells you it's one loop over the string, so it will be O(n). Knowing that before you write a line is one more benefit of the plan.
 
 Try it now: the function in this step's check has a plan but no code. Turn each comment into code.
 

@@ -28,7 +28,7 @@ import { sumLoop, sumFormula } from './sumOneTo'
 import { printNumbers, printSeats } from './printNumbers'
 import { doubleOrders } from './doubleOrders'
 import { hasAnswer } from './hasAnswer'
-import { charCount } from './charCount'
+import { countCharacters } from './countCharacters'
 import { linkedListWalk } from './linkedListWalk'
 import { linkedListConstructor } from './linkedListConstructor'
 import {
@@ -61,7 +61,7 @@ export const traces = {
   'trace-print-seats': printSeats,
   'trace-double-orders': doubleOrders,
   'trace-has-answer': hasAnswer,
-  'trace-char-count': charCount,
+  'trace-count-characters': countCharacters,
   'trace-ll-walk': linkedListWalk,
   'trace-ll-constructor': linkedListConstructor,
   'trace-ll-push': linkedListPush,

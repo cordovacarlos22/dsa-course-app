@@ -99,7 +99,7 @@ export const VISUALIZATION_NAMES = [
   'trace-print-seats',
   'trace-double-orders',
   'trace-has-answer',
-  'trace-char-count',
+  'trace-count-characters',
   'trace-ll-walk',
   'trace-ll-constructor',
   'trace-ll-push',

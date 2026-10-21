@@ -67,8 +67,8 @@ describe.each(Object.entries(traces))('%s', (name, trace) => {
 })
 
 describe('trace counters', () => {
-  it('reads every character once for charCount (O(n))', () => {
-    const trace = traces['trace-char-count']
+  it('reads every character once for countCharacters (O(n))', () => {
+    const trace = traces['trace-count-characters']
     for (const input of trace.inputs) {
       const last = Array.from(trace.run(input)).at(-1)
       expect(last.ops).toBe(input.text.length)

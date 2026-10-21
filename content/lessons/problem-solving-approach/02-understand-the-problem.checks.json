@@ -71,17 +71,17 @@
     {
       "type": "code",
       "task": {
-        "en": "We asked, and decided: a missing second number counts as `0`. Change `add(num1, num2)` so that `add(5)` returns `5` instead of `NaN`.",
-        "es": "Preguntamos, y decidimos: un segundo número que falta cuenta como `0`. Cambia `add(num1, num2)` para que `add(5)` regrese `5` en vez de `NaN`."
+        "en": "We asked, and decided: a missing second number counts as `0`. Change `addNumbers(first, second)` so that `addNumbers(5)` returns `5` instead of `NaN`.",
+        "es": "Preguntamos, y decidimos: un segundo número que falta cuenta como `0`. Cambia `addNumbers(first, second)` para que `addNumbers(5)` regrese `5` en vez de `NaN`."
       },
       "hint": {
         "en": "When an argument isn't passed, it's `undefined`. Check for that before adding.",
         "es": "Cuando no se pasa un argumento, vale `undefined`. Revisa eso antes de sumar."
       },
-      "starterCode": "function add(num1, num2) {\n  // A missing num2 should count as 0\n  return num1 + num2\n}",
-      "solution": "function add(num1, num2) {\n  if (num2 === undefined) num2 = 0\n  return num1 + num2\n}",
+      "starterCode": "function addNumbers(first, second) {\n  // A missing second should count as 0\n  return first + second\n}",
+      "solution": "function addNumbers(first, second) {\n  if (second === undefined) second = 0\n  return first + second\n}",
       "kind": "function",
-      "functionName": "add",
+      "functionName": "addNumbers",
       "tests": [
         {
           "args": [2, 3],

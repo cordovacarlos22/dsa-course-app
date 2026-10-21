@@ -1,4 +1,4 @@
-// The simple charCount from "Solve or simplify": no lowercase and no
+// The simple countCharacters from "Solve or simplify": no lowercase and no
 // letter-or-digit check yet. One pass over the string, so O(n). With
 // 'Hi Ana!' it shows what's still missing: 'H' and 'A' are counted apart
 // from 'h' and 'a', and the space and '!' are counted too.
@@ -34,24 +34,24 @@ function readUntil(i) {
   return states
 }
 
-export const charCount = {
-  key: 'charCount',
+export const countCharacters = {
+  key: 'countCharacters',
   counter: 'characters',
   inputs: INPUTS,
   items: characterBoxes,
-  code: `function charCount(str) {
+  code: `function countCharacters(text) {
   const result = {}
-  for (let i = 0; i < str.length; i++) {
-    const char = str[i]
-    if (result[char] > 0) {
-      result[char]++
+  for (let i = 0; i < text.length; i++) {
+    const character = text[i]
+    if (result[character] > 0) {
+      result[character]++
     } else {
-      result[char] = 1
+      result[character] = 1
     }
   }
   return result
 }`,
-  call: (input) => ['charCount', [input.text]],
+  call: (input) => ['countCharacters', [input.text]],
   *run({ text }) {
     const result = {}
     yield {
@@ -73,7 +73,7 @@ export const charCount = {
         ops: i + 1,
         vars: [
           ['i', i],
-          ['char', `'${char}'`],
+          ['character', `'${char}'`],
           ['result', formatCounts(result)],
         ],
         pointers: [{ index: i, label: 'i' }],

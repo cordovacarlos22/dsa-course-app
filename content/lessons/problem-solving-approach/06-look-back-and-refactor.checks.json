@@ -94,17 +94,17 @@
     {
       "type": "code",
       "task": {
-        "en": "Write `isAlphaNumeric(char)` with character codes (no regular expression and no list of characters): return `true` for a digit or a letter, capital or lowercase, and `false` for anything else.",
-        "es": "Escribe `isAlphaNumeric(char)` con códigos de caracteres (sin expresiones regulares y sin lista de caracteres): regresa `true` para un dígito o una letra, mayúscula o minúscula, y `false` para cualquier otra cosa."
+        "en": "Write `isLetterOrDigit(character)` with character codes (no regular expression and no list of characters): return `true` for a digit or a letter, capital or lowercase, and `false` for anything else.",
+        "es": "Escribe `isLetterOrDigit(character)` con códigos de caracteres (sin expresiones regulares y sin lista de caracteres): regresa `true` para un dígito o una letra, mayúscula o minúscula, y `false` para cualquier otra cosa."
       },
       "hint": {
         "en": "Digits are 48–57, A–Z are 65–90 and a–z are 97–122. Use `>=` and `<=` so the edges count.",
         "es": "Los dígitos son 48–57, A–Z son 65–90 y a–z son 97–122. Usa `>=` y `<=` para que cuenten los bordes."
       },
-      "starterCode": "function isAlphaNumeric(char) {\n  const code = char.charCodeAt(0)\n  // 0–9 are 48–57, A–Z are 65–90, a–z are 97–122\n  return false\n}",
-      "solution": "function isAlphaNumeric(char) {\n  const code = char.charCodeAt(0)\n  if (code >= 48 && code <= 57) return true\n  if (code >= 65 && code <= 90) return true\n  if (code >= 97 && code <= 122) return true\n  return false\n}",
+      "starterCode": "function isLetterOrDigit(character) {\n  const code = character.charCodeAt(0)\n  // 0–9 are 48–57, A–Z are 65–90, a–z are 97–122\n  return false\n}",
+      "solution": "function isLetterOrDigit(character) {\n  const code = character.charCodeAt(0)\n  if (code >= 48 && code <= 57) return true\n  if (code >= 65 && code <= 90) return true\n  if (code >= 97 && code <= 122) return true\n  return false\n}",
       "kind": "function",
-      "functionName": "isAlphaNumeric",
+      "functionName": "isLetterOrDigit",
       "tests": [
         {
           "args": ["a"],

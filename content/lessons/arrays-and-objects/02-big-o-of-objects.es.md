@@ -92,9 +92,9 @@ trace-has-answer
 
 ```js-run
 function hasAnswer(rsvps, answer) {
-  const names = Object.keys(rsvps)
-  for (let i = 0; i < names.length; i++) {
-    if (rsvps[names[i]] === answer) return true
+  const guestNames = Object.keys(rsvps)
+  for (let i = 0; i < guestNames.length; i++) {
+    if (rsvps[guestNames[i]] === answer) return true
   }
   return false
 }

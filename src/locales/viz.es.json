@@ -279,10 +279,10 @@
       "match": "{{name}} respondió '{{answer}}'. ¡Lo encontramos! Devuelve true después de {{ops}} revisiones.",
       "notFound": "El bucle terminó: nadie respondió '{{answer}}'. Devuelve false después de {{ops}} revisiones."
     },
-    "charCount": {
-      "title": "charCount, la versión simple, carácter por carácter",
+    "countCharacters": {
+      "title": "countCharacters, la versión simple, carácter por carácter",
       "input": "'{{text}}'",
-      "start": "charCount('{{text}}'): un objeto vacío por llenar y {{count}} caracteres por leer.",
+      "start": "countCharacters('{{text}}'): un objeto vacío por llenar y {{count}} caracteres por leer.",
       "firstTime": "{{char}} todavía no es clave: result[{{char}}] es undefined, y undefined > 0 es false. Ponlo en 1.",
       "again": "{{char}} ya es clave, así que súmale 1. Ahora va en {{count}}.",
       "done": "Se leyeron los {{ops}} caracteres, en una sola pasada: O(n). El objeto tiene {{keys}} claves."
@@ -583,7 +583,7 @@
         "Las entradas: qué entra, de qué tipo es, qué tan grande puede ser y cuántas son.",
         "Las salidas: qué regresa, y con qué forma: ¿un número, un string, un objeto?",
         "A veces falta algo, como un segundo número. Quizá solo lo notes más adelante, y está bien.",
-        "Buenos nombres desde ahora (add, num1, num2, sum) hacen que cada paso siguiente sea más fácil de explicar."
+        "Buenos nombres desde ahora (addNumbers, first, second, result) hacen que cada paso siguiente sea más fácil de explicar."
       ],
       "summary": "Cinco preguntas, un minuto o dos. Son la forma más barata de no resolver el problema equivocado."
     },
@@ -661,7 +661,7 @@
     }
   },
   "exampleLadder": {
-    "title": "Ejemplos para charCount, de fáciles a raros",
+    "title": "Ejemplos para countCharacters, de fáciles a raros",
     "start": "El problema: contar cuántas veces aparece cada carácter en un string. Escribamos ejemplos antes de cualquier código.",
     "kinds": {
       "simple": "Simple",
@@ -699,15 +699,15 @@
     },
     "makeObject": "Primero lo fácil: un objeto vacío, result, para llenarlo y regresarlo.",
     "loop": "El bucle sobre el string. Pasamos cada carácter a minúscula al leerlo, para que 'H' y 'h' cuenten juntas.",
-    "addOne": "Un carácter que ya es clave suma 1. isAlphaNumeric todavía no existe: le pusimos nombre al paso y seguimos.",
+    "addOne": "Un carácter que ya es clave suma 1. isLetterOrDigit todavía no existe: le pusimos nombre al paso y seguimos.",
     "setOne": "Una letra o dígito nuevo empieza en 1.",
     "skip": "Espacios y puntuación: no hay nada que hacer, así que solo falta cerrar el if y el bucle.",
     "returnIt": "Regresa el objeto. Ahora cada comentario tiene su código.",
-    "summary": "Los comentarios eran el plan, y el plan se volvió el código. Solo falta escribir isAlphaNumeric."
+    "summary": "Los comentarios eran el plan, y el plan se volvió el código. Solo falta escribir isLetterOrDigit."
   },
   "solutionLayers": {
     "title": "Resuelve un problema más simple y luego agrega las partes difíciles",
-    "simple": "Capa 1: el charCount simple. Ignora mayúsculas y minúsculas, y no revisa qué tipo de carácter lee.",
+    "simple": "Capa 1: el countCharacters simple. Ignora mayúsculas y minúsculas, y no revisa qué tipo de carácter lee.",
     "simpleOutput": "Con 'Hi Ana!' funciona, pero 'H' y 'A' se cuentan aparte de 'h' y 'a', y también cuenta el espacio y el '!'.",
     "lowercase": "Capa 2: un solo cambio. Cada carácter pasa a minúscula al leerlo.",
     "lowercaseOutput": "Ahora 'a' tiene 2. Solo el espacio y el '!' siguen mal.",

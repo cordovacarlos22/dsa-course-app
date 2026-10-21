@@ -22,14 +22,14 @@ five-steps-break-down
 
 **Error común:** escribir pseudocódigo tan detallado que en realidad es código escrito en español. Quédate con los pasos principales; los detalles van en el código.
 
-## charCount, paso a paso
+## countCharacters, paso a paso
 
-Dividamos `charCount` en pasos. Recuerda las decisiones de nuestros ejemplos: contar solo letras y dígitos, en minúsculas, y regresar un objeto. Dos pasos son fáciles: necesitamos un **objeto para llenar**, y lo **regresamos cuando terminemos**. Todo lo demás pasa en medio, así que casi toda la lógica vive en un **bucle sobre el string**.
+Dividamos `countCharacters` en pasos. Recuerda las decisiones de nuestros ejemplos: contar solo letras y dígitos, en minúsculas, y regresar un objeto. Dos pasos son fáciles: necesitamos un **objeto para llenar**, y lo **regresamos cuando terminemos**. Todo lo demás pasa en medio, así que casi toda la lógica vive en un **bucle sobre el string**.
 
 ¿Qué le pasa a cada carácter? Hay tres casos. Si es una letra o un dígito que **ya es clave** en el objeto, súmale 1 a su cuenta. Si es una letra o un dígito que **todavía no es clave**, agrégalo con una cuenta de 1. Si es **cualquier otra cosa**, como un espacio o un `!`, no hagas nada. Ese es todo el plan:
 
 ```js
-function charCount(str) {
+function countCharacters(text) {
   // crear un objeto para regresar
   // recorrer el string, un carácter a la vez
   //   una letra o dígito que ya es clave: sumarle 1
@@ -45,12 +45,12 @@ Todavía falta una decisión: cuándo pasar a minúsculas. Podríamos pasar todo
 steps-to-code
 ```
 
-**Qué acaba de pasar:** cada comentario recibió su código, uno a la vez, hasta que el plan se convirtió en una función. Un paso tenía una parte que todavía no sabíamos escribir: revisar si un carácter es una letra o un dígito. En vez de detenernos ahí, le pusimos nombre a ese paso, `isAlphaNumeric`, y seguimos. Lo vamos a escribir en las siguientes dos lecciones.
+**Qué acaba de pasar:** cada comentario recibió su código, uno a la vez, hasta que el plan se convirtió en una función. Un paso tenía una parte que todavía no sabíamos escribir: revisar si un carácter es una letra o un dígito. En vez de detenernos ahí, le pusimos nombre a ese paso, `isLetterOrDigit`, y seguimos. Lo vamos a escribir en las siguientes dos lecciones.
 
 No tienes que escribir toda la función para avanzar. Este es el plan con solo las partes fáciles completadas. Ya se puede ejecutar:
 
 ```js-run
-function charCount(str) {
+function countCharacters(text) {
   // crear un objeto para regresar
   const result = {}
   // recorrer el string, un carácter a la vez
@@ -59,7 +59,7 @@ function charCount(str) {
   return result
 }
 
-console.log(charCount('banana')) // {} por ahora, ¡pero corre!
+console.log(countCharacters('banana')) // {} por ahora, ¡pero corre!
 ```
 
 **Error común:** dejar fuera los casos en los que no haces nada. "Cualquier otra cosa: saltarla" es un paso real, y olvidarlo en el plan es como los espacios terminan contándose por accidente.
@@ -72,7 +72,7 @@ Imagina que se te acaba el tiempo a la mitad del bucle. Sin un plan, el entrevis
 
 El plan también te protege de ti mismo. Si empiezas a programar sin uno, es fácil quedarte atascado en un solo enfoque, entrar en pánico cuando no funciona y borrarlo todo. Con un plan, puedes dar un paso atrás, mirar los pasos y encontrar dónde se descompuso algo, en vez de empezar de cero.
 
-Planear no cambia el Big O de tu solución: el plan de `charCount` ya te dice que es un solo bucle sobre el string, así que va a ser O(n). Saberlo antes de escribir una sola línea es otra ventaja del plan.
+Planear no cambia el Big O de tu solución: el plan de `countCharacters` ya te dice que es un solo bucle sobre el string, así que va a ser O(n). Saberlo antes de escribir una sola línea es otra ventaja del plan.
 
 Pruébalo ahora: la función de la comprobación de este paso tiene un plan pero nada de código. Convierte cada comentario en código.
 

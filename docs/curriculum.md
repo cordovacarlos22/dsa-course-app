@@ -98,17 +98,17 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 **Status:** ✅ 7 lessons, 21 steps (EN + ES, 21 checkpoints) · ✅ quiz, 14 questions (EN + ES) · ✅ 3 interview problems · ⬜ slides
 **Goal:** have a repeatable method for any problem, even one you've never seen.
 **Sources:** course 2's Section 4 (7 lectures and the first 25 pages of its slides; no quiz).
-**Style:** theory first; the same two examples all the way through, `add(num1, num2)` and `charCount(str)`, and the `five-steps` map reused in every lesson.
+**Style:** theory first; the same two examples all the way through, `add(num1, num2)` and `countCharacters(str)`, and the `five-steps` map reused in every lesson.
 
 - **Lessons** (sources and animations in parentheses):
   1. Why you need a method ✅ (C2 intro: `trace-is-invited`, `five-steps`)
   2. Step 1: Understand the problem ✅ (C2 L21: `five-steps-understand`)
   3. Step 2: Explore concrete examples ✅ (C2 L22: `five-steps-examples`, `example-ladder`)
   4. Step 3: Break it down ✅ (C2 L23: `five-steps-break-down`, `steps-to-code`)
-  5. Step 4: Solve or simplify ✅ (C2 L24: `five-steps-solve`, `trace-char-count`, `solution-layers`)
+  5. Step 4: Solve or simplify ✅ (C2 L24: `five-steps-solve`, `trace-count-characters`, `solution-layers`)
   6. Step 5: Look back and refactor ✅ (C2 L25: `five-steps-look-back`, `char-code-ranges`)
   7. The method in an interview ✅ (C2 recap, plus the interview advice from every lecture: `five-steps`)
-- **Quiz:** what each step is for, what to ask about inputs and outputs, number limits in JavaScript, the four kinds of examples, invalid inputs that look valid, planning with comments, simplifying, `NaN` from a missing count, refactoring vs. Big O, `charCount`'s O(1) space, thinking out loud.
+- **Quiz:** what each step is for, what to ask about inputs and outputs, number limits in JavaScript, the four kinds of examples, invalid inputs that look valid, planning with comments, simplifying, `NaN` from a missing count, refactoring vs. Big O, `countCharacters`'s O(1) space, thinking out loud.
 - **Build it:** none.
 - **Interview problems:** ✅ Count the Vowels · ✅ Character Counter · ✅ Title Case (each description prompts the 5 steps)
 

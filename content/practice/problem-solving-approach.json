@@ -20,8 +20,8 @@
           "es": "Explicarlo con tus palabras y preguntar qué tipo de números son, y cuántos"
         },
         {
-          "en": "Start typing `function add(a, b)` right away",
-          "es": "Empezar a escribir `function add(a, b)` de inmediato"
+          "en": "Start typing `function addNumbers(first, second)` right away",
+          "es": "Empezar a escribir `function addNumbers(first, second)` de inmediato"
         },
         {
           "en": "Write `return a + b` and move on",
@@ -42,8 +42,8 @@
       "id": "missing-input",
       "topic": "Understand the problem",
       "prompt": {
-        "en": "Someone calls `add(5)` with only one number. Which of the five \"understand\" questions is this case about?",
-        "es": "Alguien llama `add(5)` con un solo número. ¿De cuál de las cinco preguntas de \"entender\" trata este caso?"
+        "en": "Someone calls `addNumbers(5)` with only one number. Which of the five \"understand\" questions is this case about?",
+        "es": "Alguien llama `addNumbers(5)` con un solo número. ¿De cuál de las cinco preguntas de \"entender\" trata este caso?"
       },
       "options": [
         {
@@ -170,7 +170,7 @@
         "en": "`size` was written for strings. What does `size(['a', 'b', 'c'])` return, and why is that a problem?",
         "es": "`size` se escribió para strings. ¿Qué regresa `size(['a', 'b', 'c'])`, y por qué es un problema?"
       },
-      "code": "function size(str) {\n  return str.length\n}\n\nsize(['a', 'b', 'c'])",
+      "code": "function size(text) {\n  return text.length\n}\n\nsize(['a', 'b', 'c'])",
       "options": [
         {
           "en": "An error, because arrays have no length",
@@ -191,8 +191,8 @@
       ],
       "correctIndex": 1,
       "explanation": {
-        "en": "Arrays have a `length` and can be read by index, so the function quietly treats one like a string. Invalid inputs that look valid are why you decide what to accept, for example with `typeof str === 'string'`.",
-        "es": "Los arrays tienen `length` y se pueden leer por índice, así que la función trata uno como si fuera un string sin avisar. Las entradas inválidas que parecen válidas son la razón por la que decides qué aceptar, por ejemplo con `typeof str === 'string'`."
+        "en": "Arrays have a `length` and can be read by index, so the function quietly treats one like a string. Invalid inputs that look valid are why you decide what to accept, for example with `typeof text === 'string'`.",
+        "es": "Los arrays tienen `length` y se pueden leer por índice, así que la función trata uno como si fuera un string sin avisar. Las entradas inválidas que parecen válidas son la razón por la que decides qué aceptar, por ejemplo con `typeof text === 'string'`."
       }
     },
     {
@@ -324,8 +324,8 @@
       "id": "faster-check-big-o",
       "topic": "Look back and refactor",
       "prompt": {
-        "en": "Inside `charCount`'s loop, you replace a regular expression with three character-code comparisons. What happens to `charCount`'s Big O?",
-        "es": "Dentro del bucle de `charCount`, cambias una expresión regular por tres comparaciones de códigos de caracteres. ¿Qué le pasa al Big O de `charCount`?"
+        "en": "Inside `countCharacters`'s loop, you replace a regular expression with three character-code comparisons. What happens to `countCharacters`'s Big O?",
+        "es": "Dentro del bucle de `countCharacters`, cambias una expresión regular por tres comparaciones de códigos de caracteres. ¿Qué le pasa al Big O de `countCharacters`?"
       },
       "options": [
         {
@@ -352,11 +352,11 @@
       }
     },
     {
-      "id": "char-count-space",
+      "id": "count-characters-space",
       "topic": "Look back and refactor",
       "prompt": {
-        "en": "`charCount` counts only lowercase letters and digits. What's its space complexity for a string of length n?",
-        "es": "`charCount` cuenta solo letras minúsculas y dígitos. ¿Cuál es su complejidad de espacio para un string de largo n?"
+        "en": "`countCharacters` counts only lowercase letters and digits. What's its space complexity for a string of length n?",
+        "es": "`countCharacters` cuenta solo letras minúsculas y dígitos. ¿Cuál es su complejidad de espacio para un string de largo n?"
       },
       "options": [
         {
@@ -453,17 +453,17 @@
         "es": "Cuenta las vocales"
       },
       "description": {
-        "en": "Write `countVowels(str)`, which returns how many vowels (`a`, `e`, `i`, `o`, `u`) the string has. Capital vowels count too.\n\nExample: `countVowels('Hi Ana')` → `3`\n\nUse the 5 steps: restate it, write a few examples (including an empty string), plan with comments, solve, and look back at the Big O.",
-        "es": "Escribe `countVowels(str)`, que regresa cuántas vocales (`a`, `e`, `i`, `o`, `u`) tiene el string. Las vocales mayúsculas también cuentan.\n\nEjemplo: `countVowels('Hi Ana')` → `3`\n\nUsa los 5 pasos: dilo con tus palabras, escribe algunos ejemplos (incluido un string vacío), planea con comentarios, resuelve y revisa el Big O."
+        "en": "Write `countVowels(text)`, which returns how many vowels (`a`, `e`, `i`, `o`, `u`) the string has. Capital vowels count too.\n\nExample: `countVowels('Hi Ana')` → `3`\n\nUse the 5 steps: restate it, write a few examples (including an empty string), plan with comments, solve, and look back at the Big O.",
+        "es": "Escribe `countVowels(text)`, que regresa cuántas vocales (`a`, `e`, `i`, `o`, `u`) tiene el string. Las vocales mayúsculas también cuentan.\n\nEjemplo: `countVowels('Hi Ana')` → `3`\n\nUsa los 5 pasos: dilo con tus palabras, escribe algunos ejemplos (incluido un string vacío), planea con comentarios, resuelve y revisa el Big O."
       },
       "difficulty": "easy",
       "category": "interview",
       "functionName": "countVowels",
       "starterCode": {
-        "javascript": "function countVowels(str) {\n  // Your code here\n  return 0\n}"
+        "javascript": "function countVowels(text) {\n  // Your code here\n  return 0\n}"
       },
       "solution": {
-        "javascript": "function countVowels(str) {\n  const vowels = 'aeiou'\n  let count = 0\n  for (let i = 0; i < str.length; i++) {\n    if (vowels.includes(str[i].toLowerCase())) count++\n  }\n  return count\n}"
+        "javascript": "function countVowels(text) {\n  const vowels = 'aeiou'\n  let count = 0\n  for (let i = 0; i < text.length; i++) {\n    if (vowels.includes(text[i].toLowerCase())) count++\n  }\n  return count\n}"
       },
       "tests": [
         {
@@ -503,17 +503,17 @@
         "es": "Contador de caracteres"
       },
       "description": {
-        "en": "Write `charCount(str)`, which returns an object with how many times each letter and digit appears. Count letters in lowercase (`'G'` and `'g'` are the same key) and skip everything else: spaces, punctuation and symbols.\n\nExample: `charCount('Go, go!')` → `{ g: 2, o: 2 }`\n\nAn empty string, or one with no letters or digits, returns `{}`.\n\nUse the 5 steps: restate it, write a few examples (including an empty string), plan with comments, solve, and look back at the Big O.",
-        "es": "Escribe `charCount(str)`, que regresa un objeto con cuántas veces aparece cada letra y cada dígito. Cuenta las letras en minúsculas (`'G'` y `'g'` son la misma clave) y sáltate todo lo demás: espacios, puntuación y símbolos.\n\nEjemplo: `charCount('Go, go!')` → `{ g: 2, o: 2 }`\n\nUn string vacío, o uno sin letras ni dígitos, regresa `{}`.\n\nUsa los 5 pasos: dilo con tus palabras, escribe algunos ejemplos (incluido un string vacío), planea con comentarios, resuelve y revisa el Big O."
+        "en": "Write `countCharacters(text)`, which returns an object with how many times each letter and digit appears. Count letters in lowercase (`'G'` and `'g'` are the same key) and skip everything else: spaces, punctuation and symbols.\n\nExample: `countCharacters('Go, go!')` → `{ g: 2, o: 2 }`\n\nAn empty string, or one with no letters or digits, returns `{}`.\n\nUse the 5 steps: restate it, write a few examples (including an empty string), plan with comments, solve, and look back at the Big O.",
+        "es": "Escribe `countCharacters(text)`, que regresa un objeto con cuántas veces aparece cada letra y cada dígito. Cuenta las letras en minúsculas (`'G'` y `'g'` son la misma clave) y sáltate todo lo demás: espacios, puntuación y símbolos.\n\nEjemplo: `countCharacters('Go, go!')` → `{ g: 2, o: 2 }`\n\nUn string vacío, o uno sin letras ni dígitos, regresa `{}`.\n\nUsa los 5 pasos: dilo con tus palabras, escribe algunos ejemplos (incluido un string vacío), planea con comentarios, resuelve y revisa el Big O."
       },
       "difficulty": "easy",
       "category": "interview",
-      "functionName": "charCount",
+      "functionName": "countCharacters",
       "starterCode": {
-        "javascript": "function charCount(str) {\n  const result = {}\n  // Your code here\n  return result\n}"
+        "javascript": "function countCharacters(text) {\n  const result = {}\n  // Your code here\n  return result\n}"
       },
       "solution": {
-        "javascript": "function isAlphaNumeric(char) {\n  const code = char.charCodeAt(0)\n  if (code >= 48 && code <= 57) return true\n  if (code >= 65 && code <= 90) return true\n  if (code >= 97 && code <= 122) return true\n  return false\n}\n\nfunction charCount(str) {\n  const result = {}\n  for (let i = 0; i < str.length; i++) {\n    if (isAlphaNumeric(str[i])) {\n      const char = str[i].toLowerCase()\n      result[char] = (result[char] || 0) + 1\n    }\n  }\n  return result\n}"
+        "javascript": "function isLetterOrDigit(character) {\n  const code = character.charCodeAt(0)\n  if (code >= 48 && code <= 57) return true\n  if (code >= 65 && code <= 90) return true\n  if (code >= 97 && code <= 122) return true\n  return false\n}\n\nfunction countCharacters(text) {\n  const result = {}\n  for (let i = 0; i < text.length; i++) {\n    if (isLetterOrDigit(text[i])) {\n      const character = text[i].toLowerCase()\n      result[character] = (result[character] || 0) + 1\n    }\n  }\n  return result\n}"
       },
       "tests": [
         {

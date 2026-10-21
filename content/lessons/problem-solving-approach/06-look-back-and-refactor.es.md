@@ -30,41 +30,41 @@ five-steps-look-back
 
 ## Código más claro
 
-Revisemos nuestro `charCount`. Funciona, pero algunas cosas podrían leerse mejor.
+Revisemos nuestro `countCharacters`. Funciona, pero algunas cosas podrían leerse mejor.
 
-**La actualización de la cuenta.** Cinco líneas para "súmale 1, o empieza en 1" es mucho. Una línea hace el mismo trabajo: `result[char] = (result[char] || 0) + 1`. El operador `||` te da su lado derecho cuando el lado izquierdo es "falsy", y `undefined` es falsy. Así que una clave nueva empieza desde `0` y se vuelve `1`, y una clave que ya tiene cuenta la conserva y recibe 1 más.
+**La actualización de la cuenta.** Cinco líneas para "súmale 1, o empieza en 1" es mucho. Una línea hace el mismo trabajo: `result[character] = (result[character] || 0) + 1`. El operador `||` te da su lado derecho cuando el lado izquierdo es "falsy", y `undefined` es falsy. Así que una clave nueva empieza desde `0` y se vuelve `1`, y una clave que ya tiene cuenta la conserva y recibe 1 más.
 
-**La función de ayuda.** La revisión ya vive en su propia función, `isAlphaNumeric`. Eso ya es una refactorización: ahora el bucle casi se lee como una oración. "Para cada carácter, si es una letra o un dígito, cuéntalo."
+**La función de ayuda.** La revisión ya vive en su propia función, `isLetterOrDigit`. Eso ya es una refactorización: ahora el bucle casi se lee como una oración. "Para cada carácter, si es una letra o un dígito, cuéntalo."
 
 **Sintaxis moderna.** Usa `const` para los valores que nunca cambian y `let` para los que sí, y evita el viejo `var`. También vas a ver otro tipo de bucle, `for...of`, que te da cada carácter directamente, sin índice:
 
 ```js
-for (const char of str) {
-  // char es cada carácter, uno a la vez
+for (const character of text) {
+  // character es cada carácter, uno a la vez
 }
 ```
 
 Hace el mismo trabajo que nuestro bucle con índice (una pasada, O(n)), así que elegir entre los dos es cuestión de estilo. En este curso seguimos escribiendo bucles `for (let i = 0; …)`, porque así siempre ves exactamente en qué posición estás.
 
 ```js-run
-function isAlphaNumeric(char) {
+function isLetterOrDigit(character) {
   const allowed = 'abcdefghijklmnopqrstuvwxyz0123456789'
-  return allowed.includes(char)
+  return allowed.includes(character)
 }
 
-function charCount(str) {
+function countCharacters(text) {
   const result = {}
-  for (let i = 0; i < str.length; i++) {
-    const char = str[i].toLowerCase()
-    if (isAlphaNumeric(char)) {
-      result[char] = (result[char] || 0) + 1
+  for (let i = 0; i < text.length; i++) {
+    const character = text[i].toLowerCase()
+    if (isLetterOrDigit(character)) {
+      result[character] = (result[character] || 0) + 1
     }
   }
   return result
 }
 
-console.log(charCount('Hi Ana!'))
-console.log(charCount('Party at 8!'))
+console.log(countCharacters('Hi Ana!'))
+console.log(countCharacters('Party at 8!'))
 ```
 
 **Qué acaba de pasar:** los resultados son los mismos que antes, con menos líneas que siguen siendo fáciles de leer. Y sabemos que son los mismos porque volvimos a correr los ejemplos, que es la pregunta 1 de la lista.
@@ -73,7 +73,7 @@ console.log(charCount('Party at 8!'))
 
 ## Código más rápido: códigos de caracteres
 
-Ahora la pregunta 5: el rendimiento. Nuestro `isAlphaNumeric` busca en una lista de 36 caracteres. Una expresión regular sería más corta de escribir, pero qué tan rápido corre depende del patrón y del motor de JavaScript, y para una revisión tan simple puede ser más lenta de lo que esperas. Debajo de cada carácter hay una idea más sencilla: **su número**.
+Ahora la pregunta 5: el rendimiento. Nuestro `isLetterOrDigit` busca en una lista de 36 caracteres. Una expresión regular sería más corta de escribir, pero qué tan rápido corre depende del patrón y del motor de JavaScript, y para una revisión tan simple puede ser más lenta de lo que esperas. Debajo de cada carácter hay una idea más sencilla: **su número**.
 
 Las computadoras guardan cada carácter como un número, llamado su **código de carácter**. `'a'.charCodeAt(0)` da `97`, `'b'` es `98`, y así. Lo útil es que los caracteres parecidos están juntos, en bloques: los dígitos del `'0'` al `'9'` son los códigos **48–57**, las mayúsculas de la `'A'` a la `'Z'` son **65–90**, y las minúsculas de la `'a'` a la `'z'` son **97–122**. Así que "¿es una letra o un dígito?" se vuelve tres comparaciones entre números, de las operaciones más simples y rápidas que puede hacer una computadora.
 
@@ -86,16 +86,16 @@ char-code-ranges
 Aquí está la función refactorizada, más una forma de compararla con una expresión regular. No adivines cuál es más rápida: **mídelo**, igual que en la lección de medir tiempos del módulo de Big O.
 
 ```js-run
-function isAlphaNumeric(char) {
-  const code = char.charCodeAt(0)
+function isLetterOrDigit(character) {
+  const code = character.charCodeAt(0)
   if (code >= 48 && code <= 57) return true // 0–9
   if (code >= 65 && code <= 90) return true // A–Z
   if (code >= 97 && code <= 122) return true // a–z
   return false
 }
 
-console.log(isAlphaNumeric('a'), isAlphaNumeric('Z'), isAlphaNumeric('7'))
-console.log(isAlphaNumeric(' '), isAlphaNumeric('!'), isAlphaNumeric('['))
+console.log(isLetterOrDigit('a'), isLetterOrDigit('Z'), isLetterOrDigit('7'))
+console.log(isLetterOrDigit(' '), isLetterOrDigit('!'), isLetterOrDigit('['))
 
 let text = ''
 for (let i = 0; i < 100000; i++) {
@@ -105,7 +105,7 @@ for (let i = 0; i < 100000; i++) {
 let start = performance.now()
 let found = 0
 for (let i = 0; i < text.length; i++) {
-  if (isAlphaNumeric(text[i])) found++
+  if (isLetterOrDigit(text[i])) found++
 }
 console.log('códigos de caracteres:', (performance.now() - start).toFixed(1), 'ms')
 
@@ -117,8 +117,8 @@ for (let i = 0; i < text.length; i++) {
 console.log('expresión regular:', (performance.now() - start).toFixed(1), 'ms')
 ```
 
-Tus tiempos van a variar de una ejecución a otra y de un navegador a otro. Y fíjate en lo que _no_ cambia: las dos versiones hacen una cantidad constante de trabajo por carácter, así que `charCount` es **O(n)** de cualquier forma. Una revisión más rápida reduce la constante, no el Big O.
+Tus tiempos van a variar de una ejecución a otra y de un navegador a otro. Y fíjate en lo que _no_ cambia: las dos versiones hacen una cantidad constante de trabajo por carácter, así que `countCharacters` es **O(n)** de cualquier forma. Una revisión más rápida reduce la constante, no el Big O.
 
-Una cosa más para pensar: ¿es mejor pasar todo el string a minúsculas primero, o revisar primero cada carácter y pasar a minúsculas solo las letras y dígitos? Depende de las entradas. Si están llenas de espacios y símbolos, revisar primero se ahorra trabajo. ¿Y el espacio en memoria? El objeto nunca puede tener más de 36 claves (26 letras y 10 dígitos), sin importar qué tan largo sea el string. Así que `charCount` es **O(n) en tiempo y O(1) en espacio**.
+Una cosa más para pensar: ¿es mejor pasar todo el string a minúsculas primero, o revisar primero cada carácter y pasar a minúsculas solo las letras y dígitos? Depende de las entradas. Si están llenas de espacios y símbolos, revisar primero se ahorra trabajo. ¿Y el espacio en memoria? El objeto nunca puede tener más de 36 claves (26 letras y 10 dígitos), sin importar qué tan largo sea el string. Así que `countCharacters` es **O(n) en tiempo y O(1) en espacio**.
 
-**Error común:** creer que una función de ayuda más rápida cambia el Big O. Aquí cambia la constante, lo cual es una mejora real, pero `charCount` era O(n) antes y sigue siendo O(n).
+**Error común:** creer que una función de ayuda más rápida cambia el Big O. Aquí cambia la constante, lo cual es una mejora real, pero `countCharacters` era O(n) antes y sigue siendo O(n).

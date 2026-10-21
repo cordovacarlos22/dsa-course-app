@@ -37,17 +37,17 @@
     {
       "type": "code",
       "task": {
-        "en": "Write the simple `charCount(str)`: count every character exactly as it is. Don't lowercase and don't skip anything yet.",
-        "es": "Escribe el `charCount(str)` simple: cuenta cada carácter tal como es. Todavía no pases a minúsculas ni te saltes nada."
+        "en": "Write the simple `countCharacters(text)`: count every character exactly as it is. Don't lowercase and don't skip anything yet.",
+        "es": "Escribe el `countCharacters(text)` simple: cuenta cada carácter tal como es. Todavía no pases a minúsculas ni te saltes nada."
       },
       "hint": {
-        "en": "Loop over the string. If `result[char] > 0`, add 1; otherwise set it to 1.",
-        "es": "Recorre el string. Si `result[char] > 0`, súmale 1; si no, ponlo en 1."
+        "en": "Loop over the string. If `result[character] > 0`, add 1; otherwise set it to 1.",
+        "es": "Recorre el string. Si `result[character] > 0`, súmale 1; si no, ponlo en 1."
       },
-      "starterCode": "function charCount(str) {\n  const result = {}\n  // Loop over the string and count each character\n  return result\n}",
-      "solution": "function charCount(str) {\n  const result = {}\n  for (let i = 0; i < str.length; i++) {\n    const char = str[i]\n    if (result[char] > 0) {\n      result[char]++\n    } else {\n      result[char] = 1\n    }\n  }\n  return result\n}",
+      "starterCode": "function countCharacters(text) {\n  const result = {}\n  // Loop over the string and count each character\n  return result\n}",
+      "solution": "function countCharacters(text) {\n  const result = {}\n  for (let i = 0; i < text.length; i++) {\n    const character = text[i]\n    if (result[character] > 0) {\n      result[character]++\n    } else {\n      result[character] = 1\n    }\n  }\n  return result\n}",
       "kind": "function",
-      "functionName": "charCount",
+      "functionName": "countCharacters",
       "tests": [
         {
           "args": ["banana"],
@@ -87,17 +87,17 @@
     {
       "type": "code",
       "task": {
-        "en": "Now add the hard parts back: change `charCount(str)` so it counts only letters and digits, in lowercase. The `isAlphaNumeric` helper is already in the editor.",
-        "es": "Ahora agrega de nuevo las partes difíciles: cambia `charCount(str)` para que cuente solo letras y dígitos, en minúsculas. La función de ayuda `isAlphaNumeric` ya está en el editor."
+        "en": "Now add the hard parts back: change `countCharacters(text)` so it counts only letters and digits, in lowercase. The `isLetterOrDigit` helper is already in the editor.",
+        "es": "Ahora agrega de nuevo las partes difíciles: cambia `countCharacters(text)` para que cuente solo letras y dígitos, en minúsculas. La función de ayuda `isLetterOrDigit` ya está en el editor."
       },
       "hint": {
-        "en": "Lowercase each character as you read it, then wrap the counting in `if (isAlphaNumeric(char))`.",
-        "es": "Pasa cada carácter a minúscula al leerlo, y luego envuelve la cuenta en `if (isAlphaNumeric(char))`."
+        "en": "Lowercase each character as you read it, then wrap the counting in `if (isLetterOrDigit(character))`.",
+        "es": "Pasa cada carácter a minúscula al leerlo, y luego envuelve la cuenta en `if (isLetterOrDigit(character))`."
       },
-      "starterCode": "function isAlphaNumeric(char) {\n  const allowed = 'abcdefghijklmnopqrstuvwxyz0123456789'\n  return allowed.includes(char)\n}\n\nfunction charCount(str) {\n  const result = {}\n  for (let i = 0; i < str.length; i++) {\n    const char = str[i]\n    if (result[char] > 0) {\n      result[char]++\n    } else {\n      result[char] = 1\n    }\n  }\n  return result\n}",
-      "solution": "function isAlphaNumeric(char) {\n  const allowed = 'abcdefghijklmnopqrstuvwxyz0123456789'\n  return allowed.includes(char)\n}\n\nfunction charCount(str) {\n  const result = {}\n  for (let i = 0; i < str.length; i++) {\n    const char = str[i].toLowerCase()\n    if (isAlphaNumeric(char)) {\n      if (result[char] > 0) {\n        result[char]++\n      } else {\n        result[char] = 1\n      }\n    }\n  }\n  return result\n}",
+      "starterCode": "function isLetterOrDigit(character) {\n  const allowed = 'abcdefghijklmnopqrstuvwxyz0123456789'\n  return allowed.includes(character)\n}\n\nfunction countCharacters(text) {\n  const result = {}\n  for (let i = 0; i < text.length; i++) {\n    const character = text[i]\n    if (result[character] > 0) {\n      result[character]++\n    } else {\n      result[character] = 1\n    }\n  }\n  return result\n}",
+      "solution": "function isLetterOrDigit(character) {\n  const allowed = 'abcdefghijklmnopqrstuvwxyz0123456789'\n  return allowed.includes(character)\n}\n\nfunction countCharacters(text) {\n  const result = {}\n  for (let i = 0; i < text.length; i++) {\n    const character = text[i].toLowerCase()\n    if (isLetterOrDigit(character)) {\n      if (result[character] > 0) {\n        result[character]++\n      } else {\n        result[character] = 1\n      }\n    }\n  }\n  return result\n}",
       "kind": "function",
-      "functionName": "charCount",
+      "functionName": "countCharacters",
       "tests": [
         {
           "args": ["Hi Ana!"],
