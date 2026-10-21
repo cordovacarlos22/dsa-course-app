@@ -30,7 +30,9 @@ describe('formatValue', () => {
     expect(formatValue(undefined)).toBe('undefined')
     expect(formatValue(null)).toBe('null')
     expect(formatValue({ value: 11 })).toBe('{"value":11}')
-    expect(formatValue(function logItems() {})).toBe('[Function logItems]')
+    expect(formatValue(function printNumbers() {})).toBe(
+      '[Function printNumbers]',
+    )
   })
 
   it('does not crash on circular objects', () => {
@@ -43,7 +45,7 @@ describe('formatValue', () => {
 describe('checkCode', () => {
   const checkpoint = {
     kind: 'function',
-    functionName: 'double',
+    functionName: 'timesTwo',
     tests: [
       { args: [2], expected: 4 },
       { args: [0], expected: 0 },
@@ -52,7 +54,7 @@ describe('checkCode', () => {
 
   it('grades the code and keeps what it printed', () => {
     const result = checkCode(
-      'console.log("hi"); function double(n) { return n * 2 }',
+      'console.log("hi"); function timesTwo(n) { return n * 2 }',
       checkpoint,
     )
     expect(result.passed).toBe(true)
@@ -61,7 +63,7 @@ describe('checkCode', () => {
   })
 
   it('reports code that does not load as an error', () => {
-    const result = checkCode('function double(n) { return n * }', checkpoint)
+    const result = checkCode('function timesTwo(n) { return n * }', checkpoint)
     expect(result.passed).toBe(false)
     expect(result.error).toMatch(/^SyntaxError/)
   })

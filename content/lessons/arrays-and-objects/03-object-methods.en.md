@@ -85,8 +85,8 @@ function shareOfGuests(rsvps) {
   const guestNames = Object.keys(rsvps) // O(n), once
   for (let i = 0; i < guestNames.length; i++) {
     // Object.keys runs again on EVERY pass: O(n) each time
-    const total = Object.keys(rsvps).length
-    console.log(guestNames[i] + ' is 1 of ' + total)
+    const guestCount = Object.keys(rsvps).length
+    console.log(guestNames[i] + ' is 1 of ' + guestCount)
   }
 }
 ```
@@ -104,9 +104,9 @@ The fix is simple: do the expensive work **once**, before the loop, and save the
 ```js-run
 function shareOfGuests(rsvps) {
   const guestNames = Object.keys(rsvps) // O(n), once
-  const total = guestNames.length // O(1): guestNames is an array
+  const guestCount = guestNames.length // O(1): guestNames is an array
   for (let i = 0; i < guestNames.length; i++) {
-    console.log(guestNames[i] + ' is 1 of ' + total)
+    console.log(guestNames[i] + ' is 1 of ' + guestCount)
   }
 }
 

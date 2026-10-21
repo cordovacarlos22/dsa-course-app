@@ -139,7 +139,7 @@ for (let i = 0; i < guests.length; i++) {
 
 console.log(guests.map((name) => name.toUpperCase()))
 console.log(guests.filter((name) => name.length === 3))
-console.log(guests.reduce((total, name) => total + name.length, 0))
+console.log(guests.reduce((letters, name) => letters + name.length, 0))
 ```
 
 In this course we keep writing most loops as `for (let i = 0; …)`, because it shows every step. But now you know that when you see `forEach`, `map`, `filter` or `reduce`, you're looking at a loop.

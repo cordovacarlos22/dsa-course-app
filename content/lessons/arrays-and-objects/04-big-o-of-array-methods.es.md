@@ -139,7 +139,7 @@ for (let i = 0; i < guests.length; i++) {
 
 console.log(guests.map((name) => name.toUpperCase()))
 console.log(guests.filter((name) => name.length === 3))
-console.log(guests.reduce((total, name) => total + name.length, 0))
+console.log(guests.reduce((letters, name) => letters + name.length, 0))
 ```
 
 En este curso seguimos escribiendo casi todos los bucles como `for (let i = 0; …)`, porque así se ve cada paso. Pero ahora sabes que cuando ves `forEach`, `map`, `filter` o `reduce`, estás viendo un bucle.

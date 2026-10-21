@@ -58,7 +58,7 @@ console.log('party at eight'.split(' ')) // ['party', 'at', 'eight']
 console.log(''.split(' ')) // ['']: one empty "word"
 ```
 
-5. **Look back:** it's one pass over the words, so O(n), where n is the length of the sentence. Does it read clearly? Does the tie rule from step 1 still hold?
+5. **Look back:** it's one pass over the words, so O(n), with n counting the characters in the sentence. Does it read clearly? Does the tie rule from step 1 still hold?
 
 That's the whole module. Next comes **Problem-Solving Patterns**: recipes for whole families of problems, like counting things with an object or walking an array with two pointers. Every pattern still starts with these same five steps.
 

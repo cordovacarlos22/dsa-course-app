@@ -20,8 +20,8 @@ That makes the code boxes the best place to experiment. Change a number, rename 
 
 ```js-run
 console.log('1. This line runs first')
-const total = 2 + 3
-console.log('2. Then this one: 2 + 3 =', total)
+const result = 2 + 3
+console.log('2. Then this one: 2 + 3 =', result)
 console.log('3. And this one runs last')
 ```
 
