@@ -47,9 +47,9 @@ You can watch the n part's share shrink in numbers too:
 const sizes = [10, 100, 1000, 10000]
 for (let k = 0; k < sizes.length; k++) {
   const n = sizes[k]
-  const total = n * n + n
-  const share = (100 * n) / total
-  console.log('n =', n, '| n² + n =', total, '| the n part is', share.toFixed(2) + '% of it')
+  const allSteps = n * n + n
+  const share = (100 * n) / allSteps
+  console.log('n =', n, '| n² + n =', allSteps, '| the n part is', share.toFixed(2) + '% of it')
 }
 ```
 

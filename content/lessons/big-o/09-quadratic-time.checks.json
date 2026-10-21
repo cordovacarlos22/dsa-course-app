@@ -3,8 +3,8 @@
     {
       "type": "choice",
       "question": {
-        "en": "How many lines does `printPairs(10)` print?",
-        "es": "¿Cuántas líneas imprime `printPairs(10)`?"
+        "en": "How many lines does `printSeats(10)` print?",
+        "es": "¿Cuántas líneas imprime `printSeats(10)`?"
       },
       "options": [
         {

@@ -14,7 +14,7 @@ Hemos estado hablando de Big O sin presentarlo oficialmente. Aquí está: **la n
 
 Ya vimos dos tendencias:
 
-- Con la versión de `sumUpTo` que usa la fórmula, el tamaño de n no cambia el tiempo para nada.
+- Con la versión de `sumOneTo` que usa la fórmula, el tamaño de n no cambia el tiempo para nada.
 - Con la versión del bucle, cuando n crece, el tiempo de ejecución crece con él en una relación más o menos de uno a uno.
 
 Aquí están otra vez, medidas con n cada vez más grande:
@@ -88,56 +88,56 @@ Una cosa más que recordar: Big O describe el **peor caso**, el límite superior
 
 Es hora de ponerle etiqueta a código real. Para cada función, hazte la pregunta del paso 1: cuando n crece, ¿el trabajo se queda plano, crece en línea o se dispara? No necesitas contar cada operación. Busca los bucles y pregúntate cuántas veces corre cada uno.
 
-1. **`sumUpToFormula(n)`** siempre hace 3 operaciones. La línea es plana: **O(1)**.
-2. **`sumUpTo(n)`** con un bucle hace unas 5n + 2 operaciones: **O(n)**.
-3. **`countUpAndDown(n)`** cuenta hacia arriba de 0 a n − 1 y luego de regreso hacia abajo, con dos bucles uno **después** del otro. Cada bucle crece con n, así que el total es unas 2n. Quizá quieras llamarla O(2n), pero Big O solo se queda con la forma general, así que es simplemente **O(n)**.
-4. **`printPairs(n)`** imprime cada pareja de números de 0 a n − 1 con un bucle **dentro** de otro bucle. Eso es muy distinto de dos bucles seguidos. Como los bucles están anidados, el de adentro corre todas sus n vueltas **por cada vuelta** del de afuera.
+1. **`sumOneToFormula(n)`** siempre hace 3 operaciones. La línea es plana: **O(1)**.
+2. **`sumOneTo(n)`** con un bucle hace unas 5n + 2 operaciones: **O(n)**.
+3. **`arriveAndLeave(n)`** cuenta a los invitados que llegan, de 0 a n − 1, y luego a los que se van, de regreso hasta 0, con dos bucles uno **después** del otro. Cada bucle crece con n, así que el total es unas 2n. Quizá quieras llamarla O(2n), pero Big O solo se queda con la forma general, así que es simplemente **O(n)**.
+4. **`printSeats(n)`** imprime cada asiento de un salón con n filas de n asientos (un número de fila y luego un número de asiento) con un bucle **dentro** de otro bucle. Eso es muy distinto de dos bucles seguidos. Como los bucles están anidados, el de adentro corre todas sus n vueltas **por cada vuelta** del de afuera.
 
-Mira los bucles anidados de `printPairs`:
+Mira los bucles anidados de `printSeats`:
 
 ```viz
-trace-print-pairs
+trace-print-seats
 ```
 
-**Qué acaba de pasar:** con i = 0, el bucle de adentro pasó por cada j: (0, 0), (0, 1), (0, 2)… Luego i pasó a 1, y el bucle de adentro empezó otra vez desde el principio. Con n = 3, son 3 vueltas del bucle de afuera × 3 vueltas del de adentro = 9 parejas. Elige n = 4 y obtienes 16.
+**Qué acaba de pasar:** con i = 0, el bucle de adentro pasó por cada j: (0, 0), (0, 1), (0, 2)… Luego i pasó a 1, y el bucle de adentro empezó otra vez desde el principio. Con n = 3, son 3 vueltas del bucle de afuera × 3 vueltas del de adentro = 9 asientos. Elige n = 4 y obtienes 16.
 
-Ejecuta `countUpAndDown` y cuenta sus líneas:
+Ejecuta `arriveAndLeave` y cuenta sus líneas:
 
 ```js-run
-function countUpAndDown(n) {
-  console.log('¡Subiendo!')
+function arriveAndLeave(n) {
+  console.log('¡Se abren las puertas!')
   for (let i = 0; i < n; i++) {
     console.log(i)
   }
-  console.log('¡Arriba! Ahora bajando...')
+  console.log('¡Ya llegaron todos! Hora de irse...')
   for (let j = n - 1; j >= 0; j--) {
     console.log(j)
   }
-  console.log('De regreso abajo.')
+  console.log('Se fue el último invitado.')
 }
 
-countUpAndDown(3)
+arriveAndLeave(3)
 ```
 
-Seis números para n = 3: dos bucles de n, así que unas 2n, y eso es **O(n)**. Ahora cuenta las parejas que visita `printPairs`:
+Seis números para n = 3: dos bucles de n, así que unas 2n, y eso es **O(n)**. Ahora cuenta los asientos que visita `printSeats`:
 
 ```js-run
-function printPairs(n) {
-  let pairs = 0
+function printSeats(n) {
+  let seats = 0
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
-      pairs = pairs + 1
+      seats = seats + 1
     }
   }
-  return pairs
+  return seats
 }
 
-console.log('n = 2:', printPairs(2), 'parejas') // 4
-console.log('n = 3:', printPairs(3), 'parejas') // 9
-console.log('n = 4:', printPairs(4), 'parejas') // 16
+console.log('n = 2:', printSeats(2), 'asientos') // 4
+console.log('n = 3:', printSeats(3), 'asientos') // 9
+console.log('n = 4:', printSeats(4), 'asientos') // 16
 ```
 
-2 → 4, 3 → 9, 4 → 16: el tiempo crece como n × n, así que es **O(n²)**. Eso crece mucho más rápido que O(n): prueba con n = 1,000 y obtienes un millón de parejas.
+2 → 4, 3 → 9, 4 → 16: el tiempo crece como n × n, así que es **O(n²)**. Eso crece mucho más rápido que O(n): prueba con n = 1,000 y obtienes un millón de asientos.
 
 Así que nuestras cuatro funciones son: constante, lineal, lineal y cuadrática. Si esto se siente como mucho, es normal. Las siguientes lecciones ven cada forma con calma, una por una.
 

@@ -14,7 +14,7 @@ We've been talking about Big O without officially naming it. Here it is: **Big O
 
 We've already seen two trends:
 
-- With the formula version of `sumUpTo`, the size of n doesn't change the time at all.
+- With the formula version of `sumOneTo`, the size of n doesn't change the time at all.
 - With the loop version, as n grows, the runtime grows with it in a roughly one-to-one pattern.
 
 Here they are again, timed for bigger and bigger n:
@@ -88,56 +88,56 @@ One more thing to remember: Big O describes the **worst case**, the upper limit 
 
 Time to put labels on real code. For each function, ask the question from step 1: as n grows, does the work stay flat, grow in a line, or shoot up? You don't need to count every operation. Look for the loops and ask how many times each one runs.
 
-1. **`sumUpToFormula(n)`** always does 3 operations. The line is flat: **O(1)**.
-2. **`sumUpTo(n)`** with a loop does about 5n + 2 operations: **O(n)**.
-3. **`countUpAndDown(n)`** counts up from 0 to n − 1, then back down, with two loops one **after** the other. Each loop grows with n, so the total is about 2n. You might want to call it O(2n), but Big O only keeps the overall shape, so it's simply **O(n)**.
-4. **`printPairs(n)`** prints every pair of numbers from 0 to n − 1 with a loop **inside** another loop. That's very different from two loops in a row. Because the loops are nested, the inner one runs all n of its turns **for every single turn** of the outer one.
+1. **`sumOneToFormula(n)`** always does 3 operations. The line is flat: **O(1)**.
+2. **`sumOneTo(n)`** with a loop does about 5n + 2 operations: **O(n)**.
+3. **`arriveAndLeave(n)`** counts the guests coming in, from 0 to n − 1, then counts them going home, back down to 0, with two loops one **after** the other. Each loop grows with n, so the total is about 2n. You might want to call it O(2n), but Big O only keeps the overall shape, so it's simply **O(n)**.
+4. **`printSeats(n)`** prints every seat in a room with n rows of n seats (a row number, then a seat number) with a loop **inside** another loop. That's very different from two loops in a row. Because the loops are nested, the inner one runs all n of its turns **for every single turn** of the outer one.
 
-Watch the nested loops of `printPairs`:
+Watch the nested loops of `printSeats`:
 
 ```viz
-trace-print-pairs
+trace-print-seats
 ```
 
-**What just happened:** for i = 0, the inner loop went through every j: (0, 0), (0, 1), (0, 2)… Then i moved to 1, and the inner loop started over from the beginning. With n = 3, that's 3 turns of the outer loop × 3 turns of the inner loop = 9 pairs. Pick n = 4 and you get 16.
+**What just happened:** for i = 0, the inner loop went through every j: (0, 0), (0, 1), (0, 2)… Then i moved to 1, and the inner loop started over from the beginning. With n = 3, that's 3 turns of the outer loop × 3 turns of the inner loop = 9 seats. Pick n = 4 and you get 16.
 
-Run `countUpAndDown` and count its lines:
+Run `arriveAndLeave` and count its lines:
 
 ```js-run
-function countUpAndDown(n) {
-  console.log('Going up!')
+function arriveAndLeave(n) {
+  console.log('Doors open!')
   for (let i = 0; i < n; i++) {
     console.log(i)
   }
-  console.log('At the top! Going down...')
+  console.log("Everyone's here! Time to head home...")
   for (let j = n - 1; j >= 0; j--) {
     console.log(j)
   }
-  console.log('Back down.')
+  console.log('The last guest is gone.')
 }
 
-countUpAndDown(3)
+arriveAndLeave(3)
 ```
 
-Six numbers for n = 3: two loops of n, so about 2n, and that's **O(n)**. Now count the pairs that `printPairs` visits:
+Six numbers for n = 3: two loops of n, so about 2n, and that's **O(n)**. Now count the seats that `printSeats` visits:
 
 ```js-run
-function printPairs(n) {
-  let pairs = 0
+function printSeats(n) {
+  let seats = 0
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
-      pairs = pairs + 1
+      seats = seats + 1
     }
   }
-  return pairs
+  return seats
 }
 
-console.log('n = 2:', printPairs(2), 'pairs') // 4
-console.log('n = 3:', printPairs(3), 'pairs') // 9
-console.log('n = 4:', printPairs(4), 'pairs') // 16
+console.log('n = 2:', printSeats(2), 'seats') // 4
+console.log('n = 3:', printSeats(3), 'seats') // 9
+console.log('n = 4:', printSeats(4), 'seats') // 16
 ```
 
-2 → 4, 3 → 9, 4 → 16: the runtime grows like n × n, so it's **O(n²)**. That grows much faster than O(n): try n = 1,000 and you get a million pairs.
+2 → 4, 3 → 9, 4 → 16: the runtime grows like n × n, so it's **O(n²)**. That grows much faster than O(n): try n = 1,000 and you get a million seats.
 
 So our four functions are: constant, linear, linear and quadratic. If this feels like a lot, that's normal. The next lessons take each shape slowly, one at a time.
 

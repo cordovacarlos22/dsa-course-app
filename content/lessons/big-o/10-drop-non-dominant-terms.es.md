@@ -47,9 +47,9 @@ También puedes ver cómo se encoge la parte de la n con números:
 const sizes = [10, 100, 1000, 10000]
 for (let k = 0; k < sizes.length; k++) {
   const n = sizes[k]
-  const total = n * n + n
-  const share = (100 * n) / total
-  console.log('n =', n, '| n² + n =', total, '| la parte n es el', share.toFixed(2) + '%')
+  const allSteps = n * n + n
+  const share = (100 * n) / allSteps
+  console.log('n =', n, '| n² + n =', allSteps, '| la parte n es el', share.toFixed(2) + '%')
 }
 ```
 

@@ -71,17 +71,17 @@
     {
       "type": "code",
       "task": {
-        "en": "Write `doubleArray(numbers)`: return a **new** array with every number times 2 (don't change the original). This one is O(n) space.",
-        "es": "Escribe `doubleArray(numbers)`: devuelve un array **nuevo** con cada número multiplicado por 2 (no cambies el original). Este es espacio O(n)."
+        "en": "Write `doubleOrders(orders)`: return a **new** array with every order times 2 (don't change the original). This one is O(n) space.",
+        "es": "Escribe `doubleOrders(orders)`: devuelve un array **nuevo** con cada pedido multiplicado por 2 (no cambies el original). Este es espacio O(n)."
       },
       "hint": {
-        "en": "Create `const doubled = []`, loop over the numbers and `doubled.push(numbers[i] * 2)`.",
-        "es": "Crea `const doubled = []`, recorre los números y haz `doubled.push(numbers[i] * 2)`."
+        "en": "Create `const doubled = []`, loop over the orders and `doubled.push(orders[i] * 2)`.",
+        "es": "Crea `const doubled = []`, recorre los pedidos y haz `doubled.push(orders[i] * 2)`."
       },
-      "starterCode": "function doubleArray(numbers) {\n  const doubled = []\n  // Fill doubled.\n  return doubled\n}\n\nconsole.log(doubleArray([1, 2, 3])) // [2, 4, 6]\n",
-      "solution": "function doubleArray(numbers) {\n  const doubled = []\n  for (let i = 0; i < numbers.length; i++) {\n    doubled.push(numbers[i] * 2)\n  }\n  return doubled\n}\n\nconsole.log(doubleArray([1, 2, 3])) // [2, 4, 6]\n",
+      "starterCode": "function doubleOrders(orders) {\n  const doubled = []\n  // Fill doubled.\n  return doubled\n}\n\nconsole.log(doubleOrders([1, 2, 3])) // [2, 4, 6]\n",
+      "solution": "function doubleOrders(orders) {\n  const doubled = []\n  for (let i = 0; i < orders.length; i++) {\n    doubled.push(orders[i] * 2)\n  }\n  return doubled\n}\n\nconsole.log(doubleOrders([1, 2, 3])) // [2, 4, 6]\n",
       "kind": "function",
-      "functionName": "doubleArray",
+      "functionName": "doubleOrders",
       "tests": [
         {
           "args": [[1, 2, 3]],

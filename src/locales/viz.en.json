@@ -232,17 +232,17 @@
       "end": "{{gifts}} gifts for {{n}} guests. Pick 20 guests: still 5. The loop never runs more than 5 times, so it's O(1)."
     },
     "sumLoop": {
-      "title": "sumUpTo: add the numbers one by one",
+      "title": "sumOneTo: add the numbers one by one",
       "input": "n = {{n}}",
-      "init": "let total = 0: 1 operation. It happens once, whatever n is.",
+      "init": "let runningSum = 0: 1 operation. It happens once, whatever n is.",
       "startLoop": "let i = 1: 1 more operation, also only once.",
       "compare": "Is i ({{i}}) <= n ({{n}})? A comparison: 1 operation. Yes, so the loop runs.",
-      "add": "total = total + {{i}}: an addition and an assignment, 2 operations. total is now {{total}}. Then i++ adds 2 more.",
+      "add": "runningSum = runningSum + {{i}}: an addition and an assignment, 2 operations. runningSum is now {{total}}. Then i++ adds 2 more.",
       "fastForward": "With n = {{n}} we skip to the end: every number costs the same 5 operations.",
       "end": "The sum of 1 to {{n}} is {{total}}, after {{ops}} operations: 5n + 2. The bigger n is, the more work."
     },
     "sumFormula": {
-      "title": "sumUpToFormula: one formula, no loop",
+      "title": "sumOneToFormula: one formula, no loop",
       "input": "n = {{n}}",
       "start": "The same question for n = {{n}}, answered with a formula instead of a loop.",
       "plusOne": "n + 1 = {{value}}: 1 operation (an addition).",
@@ -257,19 +257,19 @@
       "print": "i = {{i}}: print {{i}}.",
       "end": "We passed in {{n}} and it ran {{n}} times: {{n}} lines. That's O(n)."
     },
-    "printPairs": {
-      "title": "printPairs: a loop inside a loop",
+    "printSeats": {
+      "title": "printSeats: a loop inside a loop",
       "input": "n = {{n}}",
-      "start": "For every i, the inner loop goes through every j.",
-      "print": "Print the pair {{i}}, {{j}}.",
+      "start": "For every row i, the inner loop goes through every seat j.",
+      "print": "Row {{i}}, seat {{j}}: print it.",
       "end": "n = {{n}} gives {{n}} × {{n}} = {{lines}} lines. That's O(n²)."
     },
-    "doubleArray": {
-      "title": "doubleArray: a new array that grows",
-      "input": "{{n}} numbers",
+    "doubleOrders": {
+      "title": "doubleOrders: a new array that grows",
+      "input": "{{n}} orders",
       "start": "doubled starts as an empty array. It's new memory the function creates.",
       "push": "{{value}} × 2 = {{doubled}}: one more box in doubled.",
-      "end": "{{n}} numbers in, {{n}} new boxes of memory. The extra memory grows with n: O(n) space."
+      "end": "{{n}} orders in, {{n}} new boxes of memory. The extra memory grows with n: O(n) space."
     },
     "hasAnswer": {
       "title": "hasAnswer: look for a value, answer by answer",
@@ -463,7 +463,7 @@
     "title": "Timing both versions as n grows",
     "loopLegend": "with a loop",
     "formulaLegend": "with the formula",
-    "start": "We time sumUpTo for bigger and bigger n, from 200 million to 1 billion, and put each time on a chart.",
+    "start": "We time sumOneTo for bigger and bigger n, from 200 million to 1 billion, and put each time on a chart.",
     "firstPoint": "With n = 200 million, the loop takes about a quarter of a second.",
     "loopLine": "Each time n grows by 200 million, the time grows by about the same amount. The points line up: a straight line.",
     "formula": "The formula takes almost no time, whatever n is: a flat line along the bottom.",

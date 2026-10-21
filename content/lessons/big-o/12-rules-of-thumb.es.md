@@ -83,32 +83,32 @@ console.log('Bucles anidados:', steps, 'pasos') // 16
 
 **Error común:** no ver un bucle escondido dentro de un bucle. `for (let i = 0; i < guests.length; i++) { if (helpers.includes(guests[i])) … }` parece un solo bucle, pero `includes` también recorre. Cuenta cada bucle, incluidos los que un método corre por ti.
 
-## Al menos 5, como mucho 5
+## Un piso y un techo
 
-Cuántas veces corre un bucle no siempre es obvio. La regla 4 necesita el **largo** del bucle, y a veces ese largo tiene un tope o un mínimo fijo. Dos ayudantes incluidos aparecen mucho: `Math.max(a, b)` da el mayor de dos números, y `Math.min(a, b)` da el menor.
+Cuántas veces corre un bucle no siempre es obvio. La regla 4 necesita el **largo** del bucle, y a veces ese largo tiene un **piso** fijo (nunca corre menos veces que cierto número) o un **techo** fijo (nunca corre más). Dos ayudantes incluidos aparecen mucho aquí: `Math.max(a, b)` da el mayor de dos números, y `Math.min(a, b)` da el menor.
 
-- Un bucle hasta `Math.max(5, n)` corre **al menos** 5 veces. Con entradas chiquitas siempre corre 5 veces, pero solo nos importa qué pasa cuando n crece: con n = 10 millones, corre 10 millones de veces, y el 5 no importa. Así que es **O(n)**.
-- Un bucle hasta `Math.min(5, n)` corre **como mucho** 5 veces. Con n = 2 corre dos veces, pero en cuanto n pasa de 5, **siempre** corre 5 veces: n = 1,000 o n = un millón, siguen siendo 5. Un máximo fijo es una constante, así que es **O(1)**.
+- **Un piso:** el salón de fiestas siempre pone al menos 10 sillas, aunque lleguen 3 invitados. Un bucle hasta `Math.max(10, guestCount)` corre **al menos** 10 veces. Para una fiesta chica siempre corre 10 veces, pero solo nos importa qué pasa cuando la entrada crece: con 10 millones de invitados, corre 10 millones de veces, y el 10 no importa. Así que es **O(n)**.
+- **Un techo:** solo hay 3 premios, así que como mucho 3 invitados pueden ganar uno. Un bucle hasta `Math.min(3, guestCount)` corre **como mucho** 3 veces. Con 2 invitados corre dos veces, pero en cuanto hay más de 3 invitados, **siempre** corre 3 veces: 1,000 invitados o un millón, siguen siendo 3. Un máximo fijo es una constante, así que es **O(1)**.
 
 Compara las dos funciones:
 
 ```js-run
-function printAtLeast5(n) {
-  for (let i = 1; i <= Math.max(5, n); i++) {
-    console.log(i)
+function setChairs(guestCount) {
+  for (let chair = 1; chair <= Math.max(10, guestCount); chair++) {
+    console.log('Silla', chair)
   }
 }
 
-function printAtMost5(n) {
-  for (let i = 1; i <= Math.min(5, n); i++) {
-    console.log(i)
+function printPrizes(guestCount) {
+  for (let prize = 1; prize <= Math.min(3, guestCount); prize++) {
+    console.log('Premio', prize)
   }
 }
 
-printAtLeast5(3) // igual imprime del 1 al 5
-printAtLeast5(8) // imprime del 1 al 8
-printAtMost5(3) // imprime del 1 al 3
-printAtMost5(8) // se detiene en 5
+setChairs(3) // igual pone 10 sillas
+setChairs(12) // pone 12 sillas
+printPrizes(2) // solo 2 invitados, así que 2 premios
+printPrizes(50) // se detiene en 3 premios
 ```
 
 Esta es la misma idea con regalos para los primeros 5 invitados:
@@ -129,4 +129,4 @@ Practica con estos:
 | Un bucle sobre un array con un `if` adentro  | O(n)  |
 | Un bucle dentro de otro sobre el mismo array | O(n²) |
 
-**Error común:** confundir `Math.max` con `Math.min`. `max` deja que el bucle crezca con n (al menos 5), así que es O(n). `min` le pone tope al bucle (como mucho 5), así que es O(1). Pregúntate: "¿Este bucle se puede alargar cuando n crece?"
+**Error común:** confundir `Math.max` con `Math.min`. `max` pone un piso, así que el bucle sigue creciendo con n: O(n). `min` pone un techo, así que el bucle nunca puede pasar de ahí: O(1). Pregúntate: "¿Este bucle se puede alargar cuando n crece?"

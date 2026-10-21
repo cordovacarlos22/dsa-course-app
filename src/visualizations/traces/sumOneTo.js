@@ -12,26 +12,26 @@ export const sumLoop = {
   counter: 'operations',
   inputs: [{ n: 3 }, { n: 6 }, { n: 10 }],
   items: (input) => numbersUpTo(input.n),
-  code: `function sumUpTo(n) {
-  let total = 0
+  code: `function sumOneTo(n) {
+  let runningSum = 0
   for (let i = 1; i <= n; i++) {
-    total = total + i
+    runningSum = runningSum + i
   }
-  return total
+  return runningSum
 }`,
-  call: (input) => ['sumUpTo', [input.n]],
+  call: (input) => ['sumOneTo', [input.n]],
   *run({ n }) {
     let ops = 0
     let total = 0
     const vars = (i) => [
       ['n', n],
       ['i', i],
-      ['total', total],
+      ['runningSum', total],
     ]
     // Small inputs are traced line by line; bigger ones jump to the end so
     // the student can compare the totals.
     const detailed = n <= 6
-    ops++ // let total = 0
+    ops++ // let runningSum = 0
     yield { line: 2, captionKey: 'init', params: {}, ops, vars: vars('—') }
     ops++ // let i = 1
     if (detailed) {
@@ -52,7 +52,7 @@ export const sumLoop = {
           states,
         }
       }
-      ops += 2 // total + i, then save it in total
+      ops += 2 // runningSum + i, then save it in runningSum
       total = total + i
       if (detailed) {
         yield {
@@ -94,10 +94,10 @@ export const sumFormula = {
   counter: 'operations',
   inputs: [{ n: 3 }, { n: 100 }, { n: 1000000 }],
   items: () => null,
-  code: `function sumUpToFormula(n) {
+  code: `function sumOneToFormula(n) {
   return n * (n + 1) / 2
 }`,
-  call: (input) => ['sumUpToFormula', [input.n]],
+  call: (input) => ['sumOneToFormula', [input.n]],
   *run({ n }) {
     const format = (value) => value.toLocaleString('en-US')
     const plusOne = n + 1

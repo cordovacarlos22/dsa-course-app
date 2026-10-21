@@ -10,7 +10,7 @@ minutes: 11
 
 Para comparar soluciones necesitamos un problema con más de una buena respuesta. Este es el nuestro: **escribe una función que sume todos los números del 1 al n**, incluido n. Con n = 3, la respuesta es 1 + 2 + 3 = 6. Con n = 6, es 1 + 2 + 3 + 4 + 5 + 6 = 21.
 
-La primera idea de casi todos es un **acumulador**: una variable que empieza en 0 y va juntando la respuesta pedazo por pedazo. Crea un `total` en 0, recorre del 1 al n y suma cada número a `total` en el camino. Cuando termina el bucle, `total` tiene la suma. Es la solución que se nos ocurre primero porque hace exactamente lo que harías a mano.
+La primera idea de casi todos es un **acumulador**: una variable que empieza en 0 y va juntando la respuesta pedazo por pedazo. Crea un `runningSum` en 0, recorre del 1 al n y suma cada número a `runningSum` en el camino. Cuando termina el bucle, `runningSum` tiene la suma. Es la solución que se nos ocurre primero porque hace exactamente lo que harías a mano.
 
 Mírala correr, una línea a la vez:
 
@@ -18,25 +18,25 @@ Mírala correr, una línea a la vez:
 trace-sum-loop
 ```
 
-**Qué acaba de pasar:** `total` empezó en 0. En cada vuelta del bucle, `i` era el siguiente número, y `total = total + i` lo sumaba. Con n = 3, `total` pasó por 0 → 1 → 3 → 6. Luego `i` se volvió 4, la revisión `i <= n` falló, el bucle se detuvo y la función regresó 6. Fíjate cómo crece el trabajo: n = 3 tomó tres vueltas, y n = 10 tomaría diez.
+**Qué acaba de pasar:** `runningSum` empezó en 0. En cada vuelta del bucle, `i` era el siguiente número, y `runningSum = runningSum + i` lo sumaba. Con n = 3, `runningSum` pasó por 0 → 1 → 3 → 6. Luego `i` se volvió 4, la revisión `i <= n` falló, el bucle se detuvo y la función regresó 6. Fíjate cómo crece el trabajo: n = 3 tomó tres vueltas, y n = 10 tomaría diez.
 
 Este es el mismo código. Presiona **Ejecutar** para comprobar algunas respuestas:
 
 ```js-run
-function sumUpTo(n) {
-  let total = 0
+function sumOneTo(n) {
+  let runningSum = 0
   for (let i = 1; i <= n; i++) {
-    total = total + i
+    runningSum = runningSum + i
   }
-  return total
+  return runningSum
 }
 
-console.log(sumUpTo(3)) // 6
-console.log(sumUpTo(6)) // 21
-console.log(sumUpTo(100)) // 5050
+console.log(sumOneTo(3)) // 6
+console.log(sumOneTo(6)) // 21
+console.log(sumOneTo(100)) // 5050
 ```
 
-**Error común:** escribir el bucle como `i < n`. Se detiene un número antes, así que `sumUpTo(3)` suma 1 + 2 y regresa 3. El problema dice "hasta n, incluido", así que la revisión es `i <= n`.
+**Error común:** escribir el bucle como `i < n`. Se detiene un número antes, así que `sumOneTo(3)` suma 1 + 2 y regresa 3. El problema dice "hasta n, incluido", así que la revisión es `i <= n`.
 
 ## La versión con una fórmula
 
@@ -55,18 +55,18 @@ trace-sum-formula
 Ejecútala y compara con las respuestas del bucle:
 
 ```js-run
-function sumUpToFormula(n) {
+function sumOneToFormula(n) {
   return n * (n + 1) / 2
 }
 
-console.log(sumUpToFormula(3)) // 6
-console.log(sumUpToFormula(6)) // 21
-console.log(sumUpToFormula(100)) // 5050
+console.log(sumOneToFormula(3)) // 6
+console.log(sumOneToFormula(6)) // 21
+console.log(sumOneToFormula(100)) // 5050
 ```
 
 Es más corta, pero más corta no significa automáticamente mejor. Dos soluciones que funcionan: entonces, ¿cuál **es** mejor?
 
-**Error común:** quitar los paréntesis. `n * n + 1 / 2` no es la misma fórmula: JavaScript multiplica y divide antes de sumar, así que primero calcula `n * n` y `1 / 2`, y `sumUpToFormula(3)` regresaría 9.5. Los paréntesis en `n * (n + 1) / 2` hacen que la suma vaya primero.
+**Error común:** quitar los paréntesis. `n * n + 1 / 2` no es la misma fórmula: JavaScript multiplica y divide antes de sumar, así que primero calcula `n * n` y `1 / 2`, y `sumOneToFormula(3)` regresaría 9.5. Los paréntesis en `n * (n + 1) / 2` hacen que la suma vaya primero.
 
 ## ¿Qué significa "mejor"?
 
@@ -97,13 +97,13 @@ function f(x) {
 }
 
 // Las mismas matemáticas, con nombres que las explican:
-function sumUpToFormula(n) {
+function sumOneToFormula(n) {
   const pairs = n / 2
   const eachPairAddsUpTo = n + 1
   return pairs * eachPairAddsUpTo
 }
 
-console.log(f(100), sumUpToFormula(100))
+console.log(f(100), sumOneToFormula(100))
 ```
 
 Vamos a empezar con la velocidad, y volveremos a la memoria más adelante en este módulo.
@@ -125,26 +125,26 @@ stopwatch-race
 Ahora mide tú nuestras dos soluciones. Presiona **Ejecutar** varias veces:
 
 ```js-run
-function sumUpTo(n) {
-  let total = 0
+function sumOneTo(n) {
+  let runningSum = 0
   for (let i = 1; i <= n; i++) {
-    total = total + i
+    runningSum = runningSum + i
   }
-  return total
+  return runningSum
 }
 
-function sumUpToFormula(n) {
+function sumOneToFormula(n) {
   return n * (n + 1) / 2
 }
 
 const n = 100000000 // 100 millones
 
 let start = performance.now()
-sumUpTo(n)
+sumOneTo(n)
 console.log('Bucle:', (performance.now() - start).toFixed(2), 'ms')
 
 start = performance.now()
-sumUpToFormula(n)
+sumOneToFormula(n)
 console.log('Fórmula:', (performance.now() - start).toFixed(2), 'ms')
 ```
 

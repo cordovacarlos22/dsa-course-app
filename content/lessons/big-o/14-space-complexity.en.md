@@ -68,43 +68,43 @@ console.log(line)
 console.log('Length:', line.length) // 20 characters: 4 per turn, so O(n) space
 ```
 
-**Common mistake:** thinking a bigger number takes more space. `let total = 5` and `let total = 5000000` take the same memory. A number is one box, whatever is written in it. It's strings, arrays and objects that grow.
+**Common mistake:** thinking a bigger number takes more space. `let guestCount = 5` and `let guestCount = 5000000` take the same memory. A number is one box, whatever is written in it. It's strings, arrays and objects that grow.
 
-## Sum vs double an array
+## Totaling vs doubling the orders
 
-Let's analyze two functions. Both loop over an array of numbers, so both are O(n) **time**. But their space is very different, because one creates a single number and the other creates a whole new array.
+Let's analyze two functions. Both loop over an array of snack orders (how many snacks each guest asked for), so both are O(n) **time**. But their space is very different, because one creates a single number and the other creates a whole new array.
 
-**`sumArray`** creates one number, `total`, and the loop variable `i`. We keep adding into `total`, but that takes time, not new space: the space is already there. Whether the array has 10 items or a million, the function only ever has those two numbers. That's **O(1) space**.
+**`totalOrders`** creates one number, `runningSum`, and the loop variable `i`. We keep adding into `runningSum`, but that takes time, not new space: the space is already there. Whether the array has 10 items or a million, the function only ever has those two numbers. That's **O(1) space**.
 
-**`doubleArray`** creates a **new array** and pushes one item into it for every number in the input. Watch it grow:
+**`doubleOrders`** creates a **new array** and pushes one item into it for every order in the input. Watch it grow:
 
 ```viz
-trace-double-array
+trace-double-orders
 ```
 
-**What just happened:** `doubled` started as an empty array. For every number in the input, one more box appeared in it: 3 numbers in, 3 new items stored; 6 numbers in, 6 new items. With 50 numbers, it would be 50. The space grows in direct proportion to n, so it's **O(n) space**. (It's really n plus a couple of variables, but we simplify to O(n).)
+**What just happened:** `doubled` started as an empty array. For every order in the input, one more box appeared in it: 3 orders in, 3 new items stored; 6 orders in, 6 new items. With 50 orders, it would be 50. The space grows in direct proportion to n, so it's **O(n) space**. (It's really n plus a couple of variables, but we simplify to O(n).)
 
 Run both:
 
 ```js-run
-function sumArray(numbers) {
-  let total = 0
-  for (let i = 0; i < numbers.length; i++) {
-    total = total + numbers[i]
+function totalOrders(orders) {
+  let runningSum = 0
+  for (let i = 0; i < orders.length; i++) {
+    runningSum = runningSum + orders[i]
   }
-  return total
+  return runningSum
 }
 
-function doubleArray(numbers) {
+function doubleOrders(orders) {
   const doubled = []
-  for (let i = 0; i < numbers.length; i++) {
-    doubled.push(numbers[i] * 2)
+  for (let i = 0; i < orders.length; i++) {
+    doubled.push(orders[i] * 2)
   }
   return doubled
 }
 
-console.log(sumArray([1, 2, 3])) // 6
-console.log(doubleArray([1, 2, 3])) // [2, 4, 6]
+console.log(totalOrders([1, 2, 3])) // 6
+console.log(doubleOrders([1, 2, 3])) // [2, 4, 6]
 ```
 
 A function can be great at one and terrible at the other: think of a function that's O(n²) **time** but only uses a few variables, so it's O(1) **space**. When you analyze code, answer both questions: _"This is O(n) time and O(1) space."_

@@ -83,32 +83,32 @@ console.log('Nested loops:', steps, 'steps') // 16
 
 **Common mistake:** missing a hidden loop inside a loop. `for (let i = 0; i < guests.length; i++) { if (helpers.includes(guests[i])) … }` looks like one loop, but `includes` loops too. Count every loop, including the ones a method runs for you.
 
-## At least 5, at most 5
+## A floor and a ceiling
 
-How many times a loop runs isn't always obvious. Rule 4 needs the **length** of the loop, and sometimes that length is capped or padded by a fixed number. Two built-in helpers show up a lot: `Math.max(a, b)` gives the bigger of two numbers, and `Math.min(a, b)` gives the smaller one.
+How many times a loop runs isn't always obvious. Rule 4 needs the **length** of the loop, and sometimes that length has a fixed **floor** (it never runs fewer times than some number) or a fixed **ceiling** (it never runs more). Two built-in helpers show up a lot here: `Math.max(a, b)` gives the bigger of two numbers, and `Math.min(a, b)` gives the smaller one.
 
-- A loop up to `Math.max(5, n)` runs **at least** 5 times. For tiny inputs it always runs 5 times, but we only care about what happens as n grows: with n = 10 million, it runs 10 million times, and the 5 doesn't matter. So it's **O(n)**.
-- A loop up to `Math.min(5, n)` runs **at most** 5 times. With n = 2 it runs twice, but once n passes 5, it **always** runs 5 times: n = 1,000 or n = a million, still 5. A fixed maximum is a constant, so it's **O(1)**.
+- **A floor:** the party hall always sets out at least 10 chairs, even for 3 guests. A loop up to `Math.max(10, guestCount)` runs **at least** 10 times. For a small party it always runs 10 times, but we only care about what happens as the input grows: with 10 million guests, it runs 10 million times, and the 10 doesn't matter. So it's **O(n)**.
+- **A ceiling:** there are only 3 prizes, so at most 3 guests can win one. A loop up to `Math.min(3, guestCount)` runs **at most** 3 times. With 2 guests it runs twice, but once there are more than 3 guests, it **always** runs 3 times: 1,000 guests or a million, still 3. A fixed maximum is a constant, so it's **O(1)**.
 
 Compare the two functions:
 
 ```js-run
-function printAtLeast5(n) {
-  for (let i = 1; i <= Math.max(5, n); i++) {
-    console.log(i)
+function setChairs(guestCount) {
+  for (let chair = 1; chair <= Math.max(10, guestCount); chair++) {
+    console.log('Chair', chair)
   }
 }
 
-function printAtMost5(n) {
-  for (let i = 1; i <= Math.min(5, n); i++) {
-    console.log(i)
+function printPrizes(guestCount) {
+  for (let prize = 1; prize <= Math.min(3, guestCount); prize++) {
+    console.log('Prize', prize)
   }
 }
 
-printAtLeast5(3) // still prints 1 to 5
-printAtLeast5(8) // prints 1 to 8
-printAtMost5(3) // prints 1 to 3
-printAtMost5(8) // stops at 5
+setChairs(3) // still sets out 10 chairs
+setChairs(12) // sets out 12 chairs
+printPrizes(2) // only 2 guests, so 2 prizes
+printPrizes(50) // stops at 3 prizes
 ```
 
 Here's the same idea with gifts for the first 5 guests:
@@ -129,4 +129,4 @@ Practice with these:
 | A loop over an array with an `if` inside | O(n)  |
 | A loop inside a loop over the same array | O(n²) |
 
-**Common mistake:** mixing up `Math.max` and `Math.min`. `max` lets the loop grow with n (at least 5), so it's O(n). `min` caps the loop (at most 5), so it's O(1). Ask: "Can this loop get longer when n grows?"
+**Common mistake:** mixing up `Math.max` and `Math.min`. `max` sets a floor, so the loop still grows with n: O(n). `min` sets a ceiling, so the loop can never grow past it: O(1). Ask: "Can this loop get longer when n grows?"

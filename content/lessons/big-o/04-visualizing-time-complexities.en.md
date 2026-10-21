@@ -8,7 +8,7 @@ minutes: 9
 
 ## Plot the time
 
-One stopwatch measurement doesn't tell us much: it's a single number from a single run on a single computer. But what if we time both versions of `sumUpTo` for **bigger and bigger n** and put every result on a chart? Then we're no longer looking at one number. We're looking at a **trend**: how the time changes as the input grows.
+One stopwatch measurement doesn't tell us much: it's a single number from a single run on a single computer. But what if we time both versions of `sumOneTo` for **bigger and bigger n** and put every result on a chart? Then we're no longer looking at one number. We're looking at a **trend**: how the time changes as the input grows.
 
 Making a chart like this is simple. The horizontal axis is **n**, the size of the input. The vertical axis is the **time** the function took. For each value of n, start a timer, run the function, stop the timer, and put a dot at (n, time). Then connect the dots. The shape the dots make tells you more than any one of them.
 
@@ -59,15 +59,15 @@ stopwatch-race
 Run this a few times:
 
 ```js-run
-function sumUpTo(n) {
-  let total = 0
+function sumOneTo(n) {
+  let runningSum = 0
   for (let i = 1; i <= n; i++) {
-    total = total + i
+    runningSum = runningSum + i
   }
-  return total
+  return runningSum
 }
 
-function sumUpToFormula(n) {
+function sumOneToFormula(n) {
   return n * (n + 1) / 2
 }
 
@@ -75,10 +75,10 @@ const sizes = [1000, 10000, 100000, 1000000, 10000000]
 for (let k = 0; k < sizes.length; k++) {
   const n = sizes[k]
   let start = performance.now()
-  sumUpTo(n)
+  sumOneTo(n)
   const loopTime = performance.now() - start
   start = performance.now()
-  sumUpToFormula(n)
+  sumOneToFormula(n)
   const formulaTime = performance.now() - start
   console.log('n =', n, '| loop:', loopTime.toFixed(3), 'ms | formula:', formulaTime.toFixed(3), 'ms')
 }

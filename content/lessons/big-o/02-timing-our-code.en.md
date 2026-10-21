@@ -10,7 +10,7 @@ minutes: 11
 
 To compare solutions, we need a problem with more than one good answer. Here's ours: **write a function that adds up every number from 1 to n**, including n itself. With n = 3, the answer is 1 + 2 + 3 = 6. With n = 6, it's 1 + 2 + 3 + 4 + 5 + 6 = 21.
 
-The first idea most people have is an **accumulator**: a variable that starts at 0 and collects the answer a piece at a time. Make a `total` at 0, loop from 1 up to n, and add each number to `total` on the way. When the loop ends, `total` holds the sum. It's the solution that comes to mind first because it does exactly what you'd do by hand.
+The first idea most people have is an **accumulator**: a variable that starts at 0 and collects the answer a piece at a time. Make a `runningSum` at 0, loop from 1 up to n, and add each number to `runningSum` on the way. When the loop ends, `runningSum` holds the sum. It's the solution that comes to mind first because it does exactly what you'd do by hand.
 
 Watch it run, one line at a time:
 
@@ -18,25 +18,25 @@ Watch it run, one line at a time:
 trace-sum-loop
 ```
 
-**What just happened:** `total` started at 0. On each turn of the loop, `i` was the next number, and `total = total + i` added it in. With n = 3, `total` went 0 → 1 → 3 → 6. Then `i` became 4, the check `i <= n` failed, the loop stopped, and the function returned 6. Notice how the work grows: n = 3 took three turns, and n = 10 would take ten.
+**What just happened:** `runningSum` started at 0. On each turn of the loop, `i` was the next number, and `runningSum = runningSum + i` added it in. With n = 3, `runningSum` went 0 → 1 → 3 → 6. Then `i` became 4, the check `i <= n` failed, the loop stopped, and the function returned 6. Notice how the work grows: n = 3 took three turns, and n = 10 would take ten.
 
 Here's the same code. Press **Run** to check a few answers:
 
 ```js-run
-function sumUpTo(n) {
-  let total = 0
+function sumOneTo(n) {
+  let runningSum = 0
   for (let i = 1; i <= n; i++) {
-    total = total + i
+    runningSum = runningSum + i
   }
-  return total
+  return runningSum
 }
 
-console.log(sumUpTo(3)) // 6
-console.log(sumUpTo(6)) // 21
-console.log(sumUpTo(100)) // 5050
+console.log(sumOneTo(3)) // 6
+console.log(sumOneTo(6)) // 21
+console.log(sumOneTo(100)) // 5050
 ```
 
-**Common mistake:** writing the loop as `i < n`. It stops one number too early, so `sumUpTo(3)` adds 1 + 2 and returns 3. The problem says "up to and including n", so the check is `i <= n`.
+**Common mistake:** writing the loop as `i < n`. It stops one number too early, so `sumOneTo(3)` adds 1 + 2 and returns 3. The problem says "up to and including n", so the check is `i <= n`.
 
 ## The formula version
 
@@ -55,18 +55,18 @@ trace-sum-formula
 Run it and compare with the loop's answers:
 
 ```js-run
-function sumUpToFormula(n) {
+function sumOneToFormula(n) {
   return n * (n + 1) / 2
 }
 
-console.log(sumUpToFormula(3)) // 6
-console.log(sumUpToFormula(6)) // 21
-console.log(sumUpToFormula(100)) // 5050
+console.log(sumOneToFormula(3)) // 6
+console.log(sumOneToFormula(6)) // 21
+console.log(sumOneToFormula(100)) // 5050
 ```
 
 It's shorter, but shorter doesn't automatically mean better. Two working solutions, so which one **is** better?
 
-**Common mistake:** dropping the parentheses. `n * n + 1 / 2` isn't the same formula: JavaScript multiplies and divides before it adds, so it works out `n * n` and `1 / 2` first, and `sumUpToFormula(3)` would return 9.5. The parentheses in `n * (n + 1) / 2` make the addition happen first.
+**Common mistake:** dropping the parentheses. `n * n + 1 / 2` isn't the same formula: JavaScript multiplies and divides before it adds, so it works out `n * n` and `1 / 2` first, and `sumOneToFormula(3)` would return 9.5. The parentheses in `n * (n + 1) / 2` make the addition happen first.
 
 ## What does "better" mean?
 
@@ -97,13 +97,13 @@ function f(x) {
 }
 
 // The same math, with names that explain it:
-function sumUpToFormula(n) {
+function sumOneToFormula(n) {
   const pairs = n / 2
   const eachPairAddsUpTo = n + 1
   return pairs * eachPairAddsUpTo
 }
 
-console.log(f(100), sumUpToFormula(100))
+console.log(f(100), sumOneToFormula(100))
 ```
 
 We'll start with speed, and come back to memory later in this module.
@@ -125,26 +125,26 @@ stopwatch-race
 Now time our two solutions yourself. Press **Run** a few times:
 
 ```js-run
-function sumUpTo(n) {
-  let total = 0
+function sumOneTo(n) {
+  let runningSum = 0
   for (let i = 1; i <= n; i++) {
-    total = total + i
+    runningSum = runningSum + i
   }
-  return total
+  return runningSum
 }
 
-function sumUpToFormula(n) {
+function sumOneToFormula(n) {
   return n * (n + 1) / 2
 }
 
 const n = 100000000 // 100 million
 
 let start = performance.now()
-sumUpTo(n)
+sumOneTo(n)
 console.log('Loop:', (performance.now() - start).toFixed(2), 'ms')
 
 start = performance.now()
-sumUpToFormula(n)
+sumOneToFormula(n)
 console.log('Formula:', (performance.now() - start).toFixed(2), 'ms')
 ```
 

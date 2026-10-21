@@ -562,8 +562,8 @@
           "es": "`guests.includes('Zoe')`"
         },
         {
-          "en": "`let total = 0`",
-          "es": "`let total = 0`"
+          "en": "`let guestCount = 0`",
+          "es": "`let guestCount = 0`"
         }
       ],
       "correctIndex": 2,
@@ -735,7 +735,7 @@
         "en": "What is the time complexity of this function?",
         "es": "¿Cuál es la complejidad temporal de esta función?"
       },
-      "code": "function printAtLeast10(n) {\n  for (let i = 1; i <= Math.max(n, 10); i++) {\n    console.log(i)\n  }\n}",
+      "code": "function labelChairs(guestCount) {\n  for (let i = 1; i <= Math.max(guestCount, 10); i++) {\n    console.log('Chair', i)\n  }\n}",
       "options": [
         {
           "en": "O(1)",
@@ -767,7 +767,7 @@
         "en": "What is the time complexity of this function?",
         "es": "¿Cuál es la complejidad temporal de esta función?"
       },
-      "code": "function printAtMost10(n) {\n  for (let i = 1; i <= Math.min(n, 10); i++) {\n    console.log(i)\n  }\n}",
+      "code": "function announceWinners(guestCount) {\n  for (let i = 1; i <= Math.min(guestCount, 10); i++) {\n    console.log('Winner', i)\n  }\n}",
       "options": [
         {
           "en": "O(1)",
@@ -831,7 +831,7 @@
         "en": "What is the time complexity of this function?",
         "es": "¿Cuál es la complejidad temporal de esta función?"
       },
-      "code": "function runningTotals(numbers) {\n  const totals = []\n  for (let i = 0; i < numbers.length; i++) {\n    let total = 0\n    for (let j = 0; j <= i; j++) {\n      total = total + numbers[j]\n    }\n    totals.push(total)\n  }\n  return totals\n}",
+      "code": "function runningTotals(numbers) {\n  const totals = []\n  for (let i = 0; i < numbers.length; i++) {\n    let sumSoFar = 0\n    for (let j = 0; j <= i; j++) {\n      sumSoFar = sumSoFar + numbers[j]\n    }\n    totals.push(sumSoFar)\n  }\n  return totals\n}",
       "options": [
         {
           "en": "O(n)",
@@ -946,8 +946,8 @@
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "The new array has n items; total and j are just numbers. The nested loops cost time, not space: O(n) space.",
-        "es": "El array nuevo tiene n elementos; total y j solo son números. Los bucles anidados cuestan tiempo, no espacio: espacio O(n)."
+        "en": "The new array has n items; `sumSoFar` and `j` are just numbers. The nested loops cost time, not space: O(n) space.",
+        "es": "El array nuevo tiene n elementos; `sumSoFar` y `j` solo son números. Los bucles anidados cuestan tiempo, no espacio: espacio O(n)."
       }
     },
     {
@@ -1163,7 +1163,7 @@
         "javascript": "function binarySearch(nums, target) {\n  // Your code here\n}"
       },
       "solution": {
-        "javascript": "function binarySearch(nums, target) {\n  let left = 0\n  let right = nums.length - 1\n\n  while (left <= right) {\n    const middle = Math.floor((left + right) / 2)\n    if (nums[middle] === target) return middle\n    if (nums[middle] < target) {\n      left = middle + 1\n    } else {\n      right = middle - 1\n    }\n  }\n  return -1\n}"
+        "javascript": "function binarySearch(nums, target) {\n  let low = 0\n  let high = nums.length - 1\n\n  while (low <= high) {\n    const mid = Math.floor((low + high) / 2)\n    if (nums[mid] === target) return mid\n    if (nums[mid] < target) {\n      low = mid + 1\n    } else {\n      high = mid - 1\n    }\n  }\n  return -1\n}"
       },
       "tests": [
         {

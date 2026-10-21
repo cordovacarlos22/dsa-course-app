@@ -232,17 +232,17 @@
       "end": "{{gifts}} regalos para {{n}} invitados. Elige 20 invitados: siguen siendo 5. El bucle nunca corre más de 5 veces, así que es O(1)."
     },
     "sumLoop": {
-      "title": "sumUpTo: suma los números uno por uno",
+      "title": "sumOneTo: suma los números uno por uno",
       "input": "n = {{n}}",
-      "init": "let total = 0: 1 operación. Pasa una sola vez, sin importar n.",
+      "init": "let runningSum = 0: 1 operación. Pasa una sola vez, sin importar n.",
       "startLoop": "let i = 1: 1 operación más, también una sola vez.",
       "compare": "¿i ({{i}}) <= n ({{n}})? Una comparación: 1 operación. Sí, así que el bucle corre.",
-      "add": "total = total + {{i}}: una suma y una asignación, 2 operaciones. Ahora total vale {{total}}. Después i++ suma 2 más.",
+      "add": "runningSum = runningSum + {{i}}: una suma y una asignación, 2 operaciones. Ahora runningSum vale {{total}}. Después i++ suma 2 más.",
       "fastForward": "Con n = {{n}} saltamos al final: cada número cuesta las mismas 5 operaciones.",
       "end": "La suma de 1 a {{n}} es {{total}}, después de {{ops}} operaciones: 5n + 2. Entre más grande es n, más trabajo."
     },
     "sumFormula": {
-      "title": "sumUpToFormula: una fórmula, sin bucle",
+      "title": "sumOneToFormula: una fórmula, sin bucle",
       "input": "n = {{n}}",
       "start": "La misma pregunta con n = {{n}}, respondida con una fórmula en lugar de un bucle.",
       "plusOne": "n + 1 = {{value}}: 1 operación (una suma).",
@@ -257,19 +257,19 @@
       "print": "i = {{i}}: imprime {{i}}.",
       "end": "Le pasamos {{n}} y corrió {{n}} veces: {{n}} líneas. Eso es O(n)."
     },
-    "printPairs": {
-      "title": "printPairs: un bucle dentro de otro",
+    "printSeats": {
+      "title": "printSeats: un bucle dentro de otro",
       "input": "n = {{n}}",
-      "start": "Por cada i, el bucle de adentro recorre cada j.",
-      "print": "Imprime la pareja {{i}}, {{j}}.",
+      "start": "Por cada fila i, el bucle de adentro recorre cada asiento j.",
+      "print": "Fila {{i}}, asiento {{j}}: imprímelo.",
       "end": "n = {{n}} da {{n}} × {{n}} = {{lines}} líneas. Eso es O(n²)."
     },
-    "doubleArray": {
-      "title": "doubleArray: un array nuevo que crece",
-      "input": "{{n}} números",
+    "doubleOrders": {
+      "title": "doubleOrders: un array nuevo que crece",
+      "input": "{{n}} pedidos",
       "start": "doubled empieza como un array vacío. Es memoria nueva que crea la función.",
       "push": "{{value}} × 2 = {{doubled}}: una caja más en doubled.",
-      "end": "Entran {{n}} números, salen {{n}} cajas nuevas de memoria. La memoria extra crece con n: espacio O(n)."
+      "end": "Entran {{n}} pedidos, salen {{n}} cajas nuevas de memoria. La memoria extra crece con n: espacio O(n)."
     },
     "hasAnswer": {
       "title": "hasAnswer: busca un valor, respuesta por respuesta",
@@ -463,7 +463,7 @@
     "title": "Midiendo las dos versiones cuando n crece",
     "loopLegend": "con un bucle",
     "formulaLegend": "con la fórmula",
-    "start": "Medimos sumUpTo con n cada vez más grande, de 200 millones a mil millones, y ponemos cada tiempo en una gráfica.",
+    "start": "Medimos sumOneTo con n cada vez más grande, de 200 millones a mil millones, y ponemos cada tiempo en una gráfica.",
     "firstPoint": "Con n = 200 millones, el bucle tarda como un cuarto de segundo.",
     "loopLine": "Cada vez que n crece 200 millones, el tiempo crece más o menos lo mismo. Los puntos quedan alineados: una línea recta.",
     "formula": "La fórmula casi no tarda nada, sin importar n: una línea plana abajo.",
