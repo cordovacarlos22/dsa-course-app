@@ -231,7 +231,7 @@ Agents: read this at the start of every session and update it at the end (see `A
   - **Linked Lists:** `current`, `previous`, `oldHead`, `target`, `nodeBefore`, `nodeToAdd`, `removed`, `nextNode`, `firstNode`, in lessons, checks, Build its, quiz, scenes, traces, captions and diagram labels.
   - **Classes & Pointers:** an invitation template (`Invitation`, `forAna`/`forBen`, `getGuest`/`setGuest`) replaces the cookie cutter; animations `invitation-template`, `-new`, `-methods`; Build it "The Invitation Class".
   - **Big O / Problem Solving / Arrays & Objects / Introduction:** `sumOneTo` (`runningSum`), `arriveAndLeave`, `printSeats`, `setChairs`/`printPrizes` (floor 10, ceiling 3), `withPlusOnes`, `totalOrders`/`doubleOrders`, `low`/`high`/`mid`, `addNumbers(first, second)`, `countCharacters(text)`, `isLetterOrDigit`, `guestNames`, `timesTwo`; animations `trace-print-seats`, `trace-double-orders`, `trace-count-characters`.
-  - **Checked:** the name check finds only standard names, no 8-word prose matches, Chrome under `vercel.json`'s headers on all 54 lessons of the changed modules (495 step views), 333 quiz answers and 21 exercises in three setups, 0 problems.
+  - **Checked:** the name check finds only standard names, no 8-word prose matches, Chrome under `vercel.json`'s headers on all 46 lessons of the changed modules (495 step views), 333 quiz answers and 21 exercises in three setups, 0 problems.
 - 2026-10-13, `docs/ponytail`: Ponytail reviewed (no network calls; the installed files match the reviewed commit). `AGENTS.md` limits it to app code, and `.claude/skills/README.md` says what it runs and how to update or turn it off.
 
 ## Next
