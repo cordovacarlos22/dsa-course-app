@@ -160,7 +160,7 @@ describe('trace counters', () => {
     for (const input of trace.inputs) {
       const last = Array.from(trace.run(input)).at(-1)
       expect(last.ops).toBe(input.values.length)
-      expect(last.list.pointers.temp).toBe(null)
+      expect(last.list.pointers.current).toBe(null)
     }
   })
 

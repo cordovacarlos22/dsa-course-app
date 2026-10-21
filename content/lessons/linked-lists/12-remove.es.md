@@ -30,7 +30,7 @@ Paso 2: ejemplos. Igual que con insert, dos de ellos son métodos que ya escribi
 
 - **Índice 0, el inicio:** eso es **`shift`**.
 - **El último índice, `length - 1`:** eso es **`pop`**.
-- **La mitad:** camina hasta el nodo antes del que se va, y haz que se lo salte: `temp.next = temp.next.next` de la lección 2.
+- **La mitad:** camina hasta el nodo antes del que se va, y haz que se lo salte: `nodeBefore.next = nodeBefore.next.next` de la lección 2.
 - **Fuera de rango:** un índice negativo, o `length` y más. Ahí no hay nadie, así que remove regresa `undefined`.
 
 Una fila vacía queda cubierta por la revisión del rango: con `length` en 0, ningún índice es válido. Y una fila con un invitado queda cubierta por el caso del inicio, porque su único índice, 0, también es el último.
@@ -45,43 +45,43 @@ linked-list-remove-examples
 
 ## Dividirlo en pasos
 
-Paso 3: el plan. Los extremos van a shift y pop, y la mitad necesita **dos** punteros: **`before`**, el nodo cuyo `next` tiene que cambiar, y **`temp`**, el nodo que se va (lo tenemos que regresar).
+Paso 3: el plan. Los extremos van a shift y pop, y la mitad necesita **dos** punteros: **`nodeBefore`**, el nodo cuyo `next` tiene que cambiar, y **`removed`**, el nodo que se va (lo tenemos que regresar).
 
 ```js
 remove(index) {
   // 1. si index < 0 o index >= length, regresa undefined
   // 2. ¿index 0? regresa this.shift(). ¿Último índice? regresa this.pop()
-  // 3. before = el nodo antes del lugar: this.get(index - 1)
-  // 4. temp = before.next: el nodo que se va
-  // 5. el next de before se salta a temp
-  // 6. el next de temp se vuelve null, para soltarlo
-  // 7. réstale 1 a length, regresa temp
+  // 3. nodeBefore = el nodo antes del lugar: this.get(index - 1)
+  // 4. removed = nodeBefore.next: el nodo que se va
+  // 5. el next de before se salta a removed
+  // 6. el next de removed se vuelve null, para soltarlo
+  // 7. réstale 1 a length, regresa removed
 }
 ```
 
-Fíjate en el paso 4. Para llegar al nodo que se va, podrías llamar `this.get(index)`, pero eso camina otra vez desde `head`. No hace falta: ya estás parado en el nodo justo antes, así que es simplemente `before.next`, a un paso. Un segundo `get` sería una segunda caminata O(n) para algo que cuesta O(1).
+Fíjate en el paso 4. Para llegar al nodo que se va, podrías llamar `this.get(index)`, pero eso camina otra vez desde `head`. No hace falta: ya estás parado en el nodo justo antes, así que es simplemente `nodeBefore.next`, a un paso. Un segundo `get` sería una segunda caminata O(n) para algo que cuesta O(1).
 
-El paso 6 es la misma idea que `temp.next = null` en shift: suelta el nodo que se va, para que quien lo reciba no reciba también el resto de la fila.
+El paso 6 es la misma idea que `oldHead.next = null` en shift: suelta el nodo que se va, para que quien lo reciba no reciba también el resto de la fila.
 
 ```viz
 linked-list-remove-plan
 ```
 
-**Qué acaba de pasar:** el índice 2 pasó la revisión del rango y no era un extremo. `get(1)` caminó hasta Ben, así que `before` fue Ben, y `temp` fue el `next` de Ben, Cleo, sin una segunda caminata. El `next` de Ben se saltó a Cleo y apuntó a Dev, se cortó el `next` de Cleo, y la longitud bajó a 3.
+**Qué acaba de pasar:** el índice 2 pasó la revisión del rango y no era un extremo. `get(1)` caminó hasta Ben, así que `nodeBefore` fue Ben, y `removed` fue el `next` de Ben, Cleo, sin una segunda caminata. El `next` de Ben se saltó a Cleo y apuntó a Dev, se cortó el `next` de Cleo, y la longitud bajó a 3.
 
-**Error común:** escribir solo `before.next = before.next.next`. El nodo sí sale de la fila, pero perdiste tu único puntero a él, así que no puedes cortar su `next` ni regresarlo. Guárdalo primero en `temp`.
+**Error común:** escribir solo `nodeBefore.next = nodeBefore.next.next`. El nodo sí sale de la fila, pero perdiste tu único puntero a él, así que no puedes cortar su `next` ni regresarlo. Guárdalo primero en `removed`.
 
 ## Escribir el código
 
 Paso 4: primero el caso común. En la mitad, son los pasos 3 a 7:
 
 ```js
-const before = this.get(index - 1)
-const temp = before.next
-before.next = temp.next
-temp.next = null
+const nodeBefore = this.get(index - 1)
+const removed = nodeBefore.next
+nodeBefore.next = removed.next
+removed.next = null
 this.length--
-return temp
+return removed
 ```
 
 Luego van arriba los casos especiales. La revisión del rango regresa `undefined`. El índice 0 regresa `this.shift()`, y el último índice regresa `this.pop()`. A diferencia de insert, remove sí puede regresar lo que regresan shift y pop, porque ya regresan el nodo que quitaron: la misma respuesta que da remove.
@@ -90,7 +90,7 @@ Luego van arriba los casos especiales. La revisión del rango regresa `undefined
 trace-ll-remove
 ```
 
-**Qué acaba de pasar:** `remove(2)` caminó hasta Ben con `get(1)`, tomó el `next` de Ben como `temp`, hizo que Ben se saltara a Cleo, soltó a Cleo y regresó su nodo. `remove(0)` le pasó el trabajo a shift. `remove(9)` estaba fuera de rango y regresó `undefined`.
+**Qué acaba de pasar:** `remove(2)` caminó hasta Ben con `get(1)`, tomó el `next` de Ben como `removed`, hizo que Ben se saltara a Cleo, soltó a Cleo y regresó su nodo. `remove(0)` le pasó el trabajo a shift. `remove(9)` estaba fuera de rango y regresó `undefined`.
 
 ```js-run
 class Node {
@@ -106,21 +106,21 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      this.tail.next = newNode
-      this.tail = newNode
+      this.tail.next = nodeToAdd
+      this.tail = nodeToAdd
     }
     this.length++
     return this
@@ -130,45 +130,45 @@ class LinkedList {
     if (!this.head) {
       return undefined
     }
-    let temp = this.head
-    let pre = this.head
-    while (temp.next !== null) {
-      pre = temp
-      temp = temp.next
+    let current = this.head
+    let previous = this.head
+    while (current.next !== null) {
+      previous = current
+      current = current.next
     }
-    this.tail = pre
+    this.tail = previous
     this.tail.next = null
     this.length--
     if (this.length === 0) {
       this.head = null
       this.tail = null
     }
-    return temp
+    return current
   }
 
   shift() {
     if (!this.head) {
       return undefined
     }
-    let temp = this.head
+    let oldHead = this.head
     this.head = this.head.next
-    temp.next = null
+    oldHead.next = null
     this.length--
     if (this.length === 0) {
       this.tail = null
     }
-    return temp
+    return oldHead
   }
 
   get(index) {
     if (index < 0 || index >= this.length) {
       return undefined
     }
-    let temp = this.head
+    let current = this.head
     for (let i = 0; i < index; i++) {
-      temp = temp.next
+      current = current.next
     }
-    return temp
+    return current
   }
 
   remove(index) {
@@ -181,20 +181,20 @@ class LinkedList {
     if (index === this.length - 1) {
       return this.pop()
     }
-    const before = this.get(index - 1)
-    const temp = before.next
-    before.next = temp.next
-    temp.next = null
+    const nodeBefore = this.get(index - 1)
+    const removed = nodeBefore.next
+    nodeBefore.next = removed.next
+    removed.next = null
     this.length--
-    return temp
+    return removed
   }
 
   toArray() {
     const values = []
-    let temp = this.head
-    while (temp !== null) {
-      values.push(temp.value)
-      temp = temp.next
+    let current = this.head
+    while (current !== null) {
+      values.push(current.value)
+      current = current.next
     }
     return values
   }
@@ -215,7 +215,7 @@ Paso 5: el Big O, y la mejora que abarató la mitad.
 
 **Big O:** quitar al inicio es shift: O(1). Quitar al último invitado es pop, y pop recorre la fila: O(n). En la mitad, `get` camina hasta el nodo de antes: O(n). Así que remove es **O(n) en tiempo** y **O(1) en espacio**. El `splice` de un array también es O(n), por la razón contraria: no camina para encontrar el lugar, pero todo lo que va después tiene que reindexarse.
 
-**La mejora:** `const temp = before.next` en vez de `const temp = this.get(index)`. Los dos dan el mismo nodo. El primero es un paso, y el segundo es una segunda caminata desde `head`. Cuando ya estás parado junto al nodo que necesitas, usa la flecha que tienes en la mano en vez de caminar otra vez.
+**La mejora:** `const removed = nodeBefore.next` en vez de `const removed = this.get(index)`. Los dos dan el mismo nodo. El primero es un paso, y el segundo es una segunda caminata desde `head`. Cuando ya estás parado junto al nodo que necesitas, usa la flecha que tienes en la mano en vez de caminar otra vez.
 
 **Ya terminaste la caja de herramientas.** Con remove, nuestra `LinkedList` puede agregar y quitar invitados en cualquier lugar: al inicio, al final y en cualquier índice. Solo queda un método, y es el que más preguntan en las entrevistas: reverse.
 

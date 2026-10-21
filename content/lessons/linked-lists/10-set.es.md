@@ -57,13 +57,13 @@ Paso 3: el plan. Antes de escribirlo, fíjate en que los pasos 1 a 3 del plan de
 
 ```js
 set(index, value) {
-  // 1. temp = this.get(index): el nodo, o undefined
-  // 2. si temp es un nodo: cambia su valor, regresa true
+  // 1. target = this.get(index): el nodo, o undefined
+  // 2. si target es un nodo: cambia su valor, regresa true
   // 3. si no, regresa false
 }
 ```
 
-¿Cómo distingue el paso 2 "un nodo" de `undefined`? Con `if (temp)`. Un nodo es un objeto, y los objetos son **truthy**. `undefined` es **falsy**. Así que `if (temp)` corre justo cuando `get` encontró un nodo. (A diferencia de `if (!value)` en el constructor, esto es seguro: `get` solo regresa un nodo o `undefined`.)
+¿Cómo distingue el paso 2 "un nodo" de `undefined`? Con `if (target)`. Un nodo es un objeto, y los objetos son **truthy**. `undefined` es **falsy**. Así que `if (target)` corre justo cuando `get` encontró un nodo. (A diferencia de `if (!value)` en el constructor, esto es seguro: `get` solo regresa un nodo o `undefined`.)
 
 ```viz
 linked-list-set-plan
@@ -97,21 +97,21 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      this.tail.next = newNode
-      this.tail = newNode
+      this.tail.next = nodeToAdd
+      this.tail = nodeToAdd
     }
     this.length++
     return this
@@ -121,17 +121,17 @@ class LinkedList {
     if (index < 0 || index >= this.length) {
       return undefined
     }
-    let temp = this.head
+    let current = this.head
     for (let i = 0; i < index; i++) {
-      temp = temp.next
+      current = current.next
     }
-    return temp
+    return current
   }
 
   set(index, value) {
-    const temp = this.get(index)
-    if (temp) {
-      temp.value = value
+    const target = this.get(index)
+    if (target) {
+      target.value = value
       return true
     }
     return false

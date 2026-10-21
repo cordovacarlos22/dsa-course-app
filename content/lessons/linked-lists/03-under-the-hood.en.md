@@ -76,17 +76,17 @@ console.log(head.next.next.next.value) // 'Devon': there's only one Dev node
 
 Almost every method you'll write in this module (pop, get, set, insert, remove, reverse) has to reach nodes in the middle of the line. They all do it with the same loop, called **walking** (or **traversing**) the list:
 
-1. Make a pointer called `temp` (short for temporary) and start it where `head` points.
-2. While `temp` isn't `null`, do whatever you need with `temp`'s node, then move it forward: `temp = temp.next`.
-3. When `temp` becomes `null`, you've just stepped past the last node, so the walk is over.
+1. Make a pointer called `current` (the node you're on right now) and start it where `head` points.
+2. While `current` isn't `null`, do whatever you need with `current`'s node, then move it forward: `current = current.next`.
+3. When `current` becomes `null`, you've just stepped past the last node, so the walk is over.
 
-Why use `temp` instead of moving `head`? Because `head` is the only thing that points to the front of the line. If you move `head` forward, the nodes behind it have nothing pointing to them, and they're lost for good. So `head` stays where it is, and `temp` does the walking. And why a `while` loop instead of a `for` loop? Because a walk doesn't count up to a number: it stops when it reaches `null`, which is exactly what the null at the end of the list is for.
+Why use `current` instead of moving `head`? Because `head` is the only thing that points to the front of the line. If you move `head` forward, the nodes behind it have nothing pointing to them, and they're lost for good. So `head` stays where it is, and `current` does the walking. And why a `while` loop instead of a `for` loop? Because a walk doesn't count up to a number: it stops when it reaches `null`, which is exactly what the null at the end of the list is for.
 
 ```viz
 trace-ll-walk
 ```
 
-**What just happened:** `temp` started on Ana, where `head` points. Each time around the loop, it greeted the guest it was on and then moved forward with `temp = temp.next`. After the last guest, `temp` became `null`, and the condition `temp !== null` ended the loop. With an empty line, `head` was already `null`, so the loop never ran. Pick 5 guests and count: the walk visits each node exactly once.
+**What just happened:** `current` started on Ana, where `head` points. Each time around the loop, it greeted the guest it was on and then moved forward with `current = current.next`. After the last guest, `current` became `null`, and the condition `current !== null` ended the loop. With an empty line, `head` was already `null`, so the loop never ran. Pick 5 guests and count: the walk visits each node exactly once.
 
 ```js-run
 const head = {
@@ -94,14 +94,14 @@ const head = {
   next: { value: 'Ben', next: { value: 'Cleo', next: null } },
 }
 
-let temp = head
-while (temp !== null) {
-  console.log('Hi, ' + temp.value + '!')
-  temp = temp.next
+let current = head
+while (current !== null) {
+  console.log('Hi, ' + current.value + '!')
+  current = current.next
 }
 console.log(head.value) // still 'Ana': head never moved
 ```
 
-**The Big O of a walk:** it visits every node once, so it's **O(n) time**. It only needs one extra pointer, `temp`, however long the line is, so it's **O(1) extra space**. That's the cost hiding inside pop, insert, remove and finding a node, from the last lesson.
+**The Big O of a walk:** it visits every node once, so it's **O(n) time**. It only needs one extra pointer, `current`, however long the line is, so it's **O(1) extra space**. That's the cost hiding inside pop, insert, remove and finding a node, from the last lesson.
 
-**Common mistake:** forgetting `temp = temp.next`. Then `temp` never changes, the condition never becomes false, and the loop runs forever (the app stops it after 2 seconds). Another one: writing `while (temp.next !== null)` when you mean to visit every node. The loop stops with `temp` **on** the last node, before its body runs for it, so the last guest never gets greeted. It also crashes on an empty list, because reading `next` from `null` is an error.
+**Common mistake:** forgetting `current = current.next`. Then `current` never changes, the condition never becomes false, and the loop runs forever (the app stops it after 2 seconds). Another one: writing `while (current.next !== null)` when you mean to visit every node. The loop stops with `current` **on** the last node, before its body runs for it, so the last guest never gets greeted. It also crashes on an empty list, because reading `next` from `null` is an error.

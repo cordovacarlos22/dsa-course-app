@@ -52,21 +52,21 @@ console.log(sameArray === guests) // true: no new array was made
 
 ## Break it down
 
-Step 3: the plan. Swapping `head` and `tail` is the easy part: save `head` in `temp`, point `head` at `tail`, then point `tail` at `temp`.
+Step 3: the plan. Swapping `head` and `tail` is the easy part: save `head` in `current`, point `head` at `tail`, then point `tail` at `current`.
 
 The hard part is flipping the arrows. The moment you flip a node's `next` to point backwards, you've let go of the **rest of the line**: nothing points forward to the next node anymore, and there's a **gap**. So before every flip, you need a pointer on the far side of the gap. That's why reverse uses three pointers that walk the line together:
 
-- **`temp`**: the node whose arrow you're flipping right now.
-- **`next`**: the node after `temp`, saved **before** the flip, so the rest of the line isn't lost.
-- **`prev`**: the node before `temp`, where `temp`'s arrow should point after the flip. It starts as `null`, because the first node will become the last one.
+- **`current`**: the node whose arrow you're flipping right now.
+- **`nextNode`**: the node after `current`, saved **before** the flip, so the rest of the line isn't lost.
+- **`previous`**: the node before `current`, where `current`'s arrow should point after the flip. It starts as `null`, because the first node will become the last one.
 
 ```js
 reverse() {
-  // 1. swap head and tail (temp remembers the old head)
-  // 2. prev starts as null, and so does next
-  // 3. for each node: next = temp.next, to remember the rest
-  // 4.   temp.next = prev: flip the arrow
-  // 5.   prev = temp, then temp = next: both move one node on
+  // 1. swap head and tail (current remembers the old head)
+  // 2. previous starts as null, and so does nextNode
+  // 3. for each node: nextNode = current.next, to remember the rest
+  // 4.   current.next = previous: flip the arrow
+  // 5.   previous = current, then current = next: both move one node on
   // 6. return the list
 }
 ```
@@ -75,23 +75,23 @@ reverse() {
 linked-list-reverse-plan
 ```
 
-**What just happened:** after the swap, `temp` sat on Ana with `prev` on `null`. `next` grabbed Ben, Ana's arrow flipped to `null`, and that opened a gap between Ana and Ben. But `next` was still holding Ben, so `prev` moved to Ana and `temp` crossed the gap to Ben. After four rounds, every arrow pointed left.
+**What just happened:** after the swap, `current` sat on Ana with `previous` on `null`. `nextNode` grabbed Ben, Ana's arrow flipped to `null`, and that opened a gap between Ana and Ben. But `nextNode` was still holding Ben, so `previous` moved to Ana and `current` crossed the gap to Ben. After four rounds, every arrow pointed left.
 
-**Common mistake:** flipping first and saving `next` second. After `temp.next = prev`, `temp.next` no longer leads forward, so `next = temp.next` saves the wrong node, and the rest of the line is gone.
+**Common mistake:** flipping first and saving `nextNode` second. After `current.next = previous`, `current.next` no longer leads forward, so `nextNode = current.next` saves the wrong node, and the rest of the line is gone.
 
 ## Write the code
 
 Step 4: the swap, then the loop. We know the loop runs once per node, so a `for` loop up to `this.length` fits. The four lines inside it are steps 3 to 5 of the plan, in that order.
 
-Where are the edge cases? They're handled by the same code. With **one guest**, the swap changes nothing, and the loop runs once: Ana's `next` becomes `prev`, which is `null`, just as it was. With an **empty line**, `temp` is `null`, and the loop runs zero times, so `temp.next` is never read.
+Where are the edge cases? They're handled by the same code. With **one guest**, the swap changes nothing, and the loop runs once: Ana's `next` becomes `previous`, which is `null`, just as it was. With an **empty line**, `current` is `null`, and the loop runs zero times, so `current.next` is never read.
 
-That's why `next` starts as `null`. A version that starts with `let next = temp.next` reads `temp.next` before the loop, and with an empty line, `temp` is `null`, so it crashes.
+That's why `nextNode` starts as `null`. A version that starts with `let nextNode = current.next` reads `current.next` before the loop, and with an empty line, `current` is `null`, so it crashes.
 
 ```viz
 trace-ll-reverse
 ```
 
-**What just happened:** with 4 guests, the swap put `head` on Dev and `tail` on Ana, then each round saved `next`, flipped `temp`'s arrow back to `prev`, and moved both forward. After the last round, `temp` and `next` were `null` and `prev` was on Dev, the new first node. With 1 guest, one round changed nothing. With 0 guests, the loop never ran.
+**What just happened:** with 4 guests, the swap put `head` on Dev and `tail` on Ana, then each round saved `nextNode`, flipped `current`'s arrow back to `previous`, and moved both forward. After the last round, `current` and `nextNode` were `null` and `previous` was on Dev, the new first node. With 1 guest, one round changed nothing. With 0 guests, the loop never ran.
 
 ```js-run
 class Node {
@@ -107,47 +107,47 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      this.tail.next = newNode
-      this.tail = newNode
+      this.tail.next = nodeToAdd
+      this.tail = nodeToAdd
     }
     this.length++
     return this
   }
 
   reverse() {
-    let temp = this.head
+    let current = this.head
     this.head = this.tail
-    this.tail = temp
-    let prev = null
-    let next = null
+    this.tail = current
+    let previous = null
+    let nextNode = null
     for (let i = 0; i < this.length; i++) {
-      next = temp.next
-      temp.next = prev
-      prev = temp
-      temp = next
+      nextNode = current.next
+      current.next = previous
+      previous = current
+      current = nextNode
     }
     return this
   }
 
   toArray() {
     const values = []
-    let temp = this.head
-    while (temp !== null) {
-      values.push(temp.value)
-      temp = temp.next
+    let current = this.head
+    while (current !== null) {
+      values.push(current.value)
+      current = current.next
     }
     return values
   }
@@ -159,7 +159,7 @@ console.log(line.head.value, line.tail.value) // Dev Ana
 console.log(new LinkedList().reverse().length) // 0: the empty line is fine
 ```
 
-**Common mistake:** writing the four loop lines in another order. Each line needs the one before it: `next` must be saved before the flip, and `prev` must move before `temp` does, or `prev` would land on the wrong node.
+**Common mistake:** writing the four loop lines in another order. Each line needs the one before it: `nextNode` must be saved before the flip, and `previous` must move before `current` does, or `previous` would land on the wrong node.
 
 ## Look back
 
@@ -167,7 +167,7 @@ Step 5: the Big O, one refactor, and the whole module in one table.
 
 **Big O:** reverse visits each node once: **O(n) time**. It uses three extra pointers whatever the length of the line, and no new nodes: **O(1) space**. That's the answer interviewers look for. Building a reversed copy is also O(n) time, but it needs O(n) extra space for the new nodes.
 
-**A refactor:** the loop could run `while (temp !== null)` instead of counting to `this.length`. Both stop after the last node. The `while` version doesn't depend on `length` being correct, which is a nice property if you ever reuse this loop on a chain of nodes that doesn't have a `length`, as many interview problems do.
+**A refactor:** the loop could run `while (current !== null)` instead of counting to `this.length`. Both stop after the last node. The `while` version doesn't depend on `length` being correct, which is a nice property if you ever reuse this loop on a chain of nodes that doesn't have a `length`, as many interview problems do.
 
 **The whole `LinkedList` class**, with every method you've built in this module:
 
@@ -186,4 +186,4 @@ Step 5: the Big O, one refactor, and the whole module in one table.
 
 Every row matches the costs you predicted in lesson 2, before writing a single method. The interview problems for this module, coming with the next section of the course, use these same pointer moves: finding the middle node, spotting a cycle, reversing part of a list.
 
-**Common mistake:** memorizing reverse line by line. In an interview, you'll be asked to explain it. Remember the idea instead, a gap opens with every flip and `next` holds the far side, and you can rebuild the four lines from it.
+**Common mistake:** memorizing reverse line by line. In an interview, you'll be asked to explain it. Remember the idea instead, a gap opens with every flip and `nextNode` holds the far side, and you can rebuild the four lines from it.

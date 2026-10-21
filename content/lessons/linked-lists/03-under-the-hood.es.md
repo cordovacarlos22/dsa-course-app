@@ -76,17 +76,17 @@ console.log(head.next.next.next.value) // 'Devon': solo hay un nodo de Dev
 
 Casi todos los métodos que vas a escribir en este módulo (pop, get, set, insert, remove, reverse) tienen que llegar a nodos en medio de la fila. Todos lo hacen con el mismo bucle, que se llama **recorrer** la lista (en inglés, _traversing_):
 
-1. Crea un puntero llamado `temp` (de "temporal") y empiézalo donde apunta `head`.
-2. Mientras `temp` no sea `null`, haz lo que necesites con el nodo de `temp`, y luego avánzalo: `temp = temp.next`.
-3. Cuando `temp` se vuelve `null`, acabas de pasar el último nodo, así que el recorrido terminó.
+1. Crea un puntero llamado `current` (el nodo en el que vas ahora) y empiézalo donde apunta `head`.
+2. Mientras `current` no sea `null`, haz lo que necesites con el nodo de `current`, y luego avánzalo: `current = current.next`.
+3. Cuando `current` se vuelve `null`, acabas de pasar el último nodo, así que el recorrido terminó.
 
-¿Por qué usar `temp` en vez de mover `head`? Porque `head` es lo único que apunta al inicio de la fila. Si avanzas `head`, a los nodos que deja atrás ya no los apunta nada, y se pierden para siempre. Así que `head` se queda donde está, y `temp` es el que camina. ¿Y por qué un bucle `while` y no un `for`? Porque un recorrido no cuenta hasta un número: se detiene al llegar a `null`, que es justo para lo que sirve el null del final de la lista.
+¿Por qué usar `current` en vez de mover `head`? Porque `head` es lo único que apunta al inicio de la fila. Si avanzas `head`, a los nodos que deja atrás ya no los apunta nada, y se pierden para siempre. Así que `head` se queda donde está, y `current` es el que camina. ¿Y por qué un bucle `while` y no un `for`? Porque un recorrido no cuenta hasta un número: se detiene al llegar a `null`, que es justo para lo que sirve el null del final de la lista.
 
 ```viz
 trace-ll-walk
 ```
 
-**Qué acaba de pasar:** `temp` empezó en Ana, donde apunta `head`. En cada vuelta del bucle, saludó al invitado donde estaba y luego avanzó con `temp = temp.next`. Después del último invitado, `temp` se volvió `null`, y la condición `temp !== null` terminó el bucle. Con una fila vacía, `head` ya era `null`, así que el bucle nunca corrió. Elige 5 invitados y cuenta: el recorrido visita cada nodo exactamente una vez.
+**Qué acaba de pasar:** `current` empezó en Ana, donde apunta `head`. En cada vuelta del bucle, saludó al invitado donde estaba y luego avanzó con `current = current.next`. Después del último invitado, `current` se volvió `null`, y la condición `current !== null` terminó el bucle. Con una fila vacía, `head` ya era `null`, así que el bucle nunca corrió. Elige 5 invitados y cuenta: el recorrido visita cada nodo exactamente una vez.
 
 ```js-run
 const head = {
@@ -94,14 +94,14 @@ const head = {
   next: { value: 'Ben', next: { value: 'Cleo', next: null } },
 }
 
-let temp = head
-while (temp !== null) {
-  console.log('¡Hola, ' + temp.value + '!')
-  temp = temp.next
+let current = head
+while (current !== null) {
+  console.log('¡Hola, ' + current.value + '!')
+  current = current.next
 }
 console.log(head.value) // sigue siendo 'Ana': head nunca se movió
 ```
 
-**El Big O de un recorrido:** visita cada nodo una vez, así que es **O(n) en tiempo**. Solo necesita un puntero extra, `temp`, sin importar lo larga que sea la fila, así que es **O(1) en espacio extra**. Ese es el costo escondido dentro de pop, insert, remove y buscar un nodo, de la lección pasada.
+**El Big O de un recorrido:** visita cada nodo una vez, así que es **O(n) en tiempo**. Solo necesita un puntero extra, `current`, sin importar lo larga que sea la fila, así que es **O(1) en espacio extra**. Ese es el costo escondido dentro de pop, insert, remove y buscar un nodo, de la lección pasada.
 
-**Error común:** olvidar `temp = temp.next`. Entonces `temp` nunca cambia, la condición nunca se vuelve falsa, y el bucle corre para siempre (la app lo detiene después de 2 segundos). Otro: escribir `while (temp.next !== null)` cuando quieres visitar todos los nodos. El bucle se detiene con `temp` **en** el último nodo, antes de que su cuerpo corra para él, así que el último invitado nunca recibe su saludo. Además truena con una lista vacía, porque leer `next` de `null` es un error.
+**Error común:** olvidar `current = current.next`. Entonces `current` nunca cambia, la condición nunca se vuelve falsa, y el bucle corre para siempre (la app lo detiene después de 2 segundos). Otro: escribir `while (current.next !== null)` cuando quieres visitar todos los nodos. El bucle se detiene con `current` **en** el último nodo, antes de que su cuerpo corra para él, así que el último invitado nunca recibe su saludo. Además truena con una lista vacía, porque leer `next` de `null` es un error.

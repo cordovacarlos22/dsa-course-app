@@ -1,4 +1,4 @@
-// Walking a linked list: a pointer called temp starts at head and follows
+// Walking a linked list: a pointer called current starts at head and follows
 // next until it reaches null. Every node is visited once, so it's O(n).
 // The list is drawn with LinkedListDiagram (step.list) instead of boxes.
 
@@ -18,7 +18,7 @@ export function chainOf(values) {
   return head
 }
 
-// The diagram with temp on the node at `index` (null once it walked off
+// The diagram with current on the node at `index` (null once it walked off
 // the end). Nodes before it are done.
 function listAt(values, index) {
   const states = {}
@@ -27,8 +27,8 @@ function listAt(values, index) {
   }
   if (index < values.length) states[values[index]] = 'active'
   const head = values.length > 0 ? values[0] : null
-  const temp = index < values.length ? values[index] : null
-  return { nodes: values, states, pointers: { head, temp } }
+  const current = index < values.length ? values[index] : null
+  return { nodes: values, states, pointers: { head, current } }
 }
 
 export const linkedListWalk = {
@@ -37,10 +37,10 @@ export const linkedListWalk = {
   inputs: INPUTS,
   items: () => null,
   code: `function greetLine(head) {
-  let temp = head
-  while (temp !== null) {
-    console.log('Hi, ' + temp.value + '!')
-    temp = temp.next
+  let current = head
+  while (current !== null) {
+    console.log('Hi, ' + current.value + '!')
+    current = current.next
   }
 }`,
   call: (input) => ['greetLine', [chainOf(input.values)]],
@@ -51,7 +51,7 @@ export const linkedListWalk = {
         line: 2,
         captionKey: 'startEmpty',
         ops: 0,
-        vars: [['temp', 'null']],
+        vars: [['current', 'null']],
         list: listAt(values, 0),
         output: [...output],
       }
@@ -61,7 +61,7 @@ export const linkedListWalk = {
         captionKey: 'start',
         params: { name: values[0] },
         ops: 0,
-        vars: [['temp', values[0]]],
+        vars: [['current', values[0]]],
         list: listAt(values, 0),
         output: [...output],
       }
@@ -73,7 +73,7 @@ export const linkedListWalk = {
         captionKey: 'greet',
         params: { name: values[i] },
         ops: i + 1,
-        vars: [['temp', values[i]]],
+        vars: [['current', values[i]]],
         list: listAt(values, i),
         output: [...output],
       }
@@ -83,7 +83,7 @@ export const linkedListWalk = {
         captionKey: isLast ? 'moveToNull' : 'move',
         params: { name: isLast ? values[i] : values[i + 1] },
         ops: i + 1,
-        vars: [['temp', isLast ? 'null' : values[i + 1]]],
+        vars: [['current', isLast ? 'null' : values[i + 1]]],
         list: listAt(values, i + 1),
         output: [...output],
       }
@@ -93,7 +93,7 @@ export const linkedListWalk = {
       captionKey: 'stop',
       params: { count: values.length },
       ops: values.length,
-      vars: [['temp', 'null']],
+      vars: [['current', 'null']],
       list: listAt(values, values.length),
       output: [...output],
     }

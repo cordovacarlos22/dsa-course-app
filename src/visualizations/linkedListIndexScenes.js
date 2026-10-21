@@ -22,12 +22,15 @@ function line(values, options = {}) {
   }
 }
 
-// temp on values[index], the nodes before it done.
+// current on values[index] (get's walk), the nodes before it done.
 function walking(values, index, extra = {}) {
   const states = {}
   for (let k = 0; k < index; k++) states[values[k]] = 'done'
   states[values[index]] = 'active'
-  return line(values, { states, pointers: { temp: values[index], ...extra } })
+  return line(values, {
+    states,
+    pointers: { current: values[index], ...extra },
+  })
 }
 
 const removed = (value, next = null) => ({ value, next, state: 'removed' })
@@ -41,7 +44,7 @@ function fixedLine(nextOf, pointers, states = {}) {
     nextOf,
     states,
     pointers,
-    leftNull: ['prev'],
+    leftNull: ['previous'],
     length: LINE.length,
   }
 }
@@ -127,7 +130,7 @@ export const INDEX_SCENES = {
       comment: 'get4',
       list: line(LINE, {
         states: { Cleo: 'found' },
-        pointers: { temp: 'Cleo' },
+        pointers: { current: 'Cleo' },
       }),
       returnedNode: 'Cleo',
     },
@@ -178,7 +181,7 @@ export const INDEX_SCENES = {
       comment: 'set1',
       list: line(LINE, {
         states: { Ben: 'active' },
-        pointers: { temp: 'Ben' },
+        pointers: { target: 'Ben' },
       }),
     },
     {
@@ -186,7 +189,7 @@ export const INDEX_SCENES = {
       comment: 'set2',
       list: line(['Ana', 'Benny', 'Cleo', 'Dev'], {
         states: { Benny: 'moved' },
-        pointers: { temp: 'Benny' },
+        pointers: { target: 'Benny' },
       }),
       returned: 'true',
     },
@@ -255,16 +258,16 @@ export const INDEX_SCENES = {
       captionKey: 'makeNode',
       comment: 'insert3',
       list: line(LINE, {
-        pointers: { newNode: 'Eve' },
+        pointers: { nodeToAdd: 'Eve' },
         detached: [added('Eve')],
       }),
     },
     {
-      captionKey: 'before',
+      captionKey: 'findNodeBefore',
       comment: 'insert4',
       list: line(LINE, {
         states: { Ben: 'active' },
-        pointers: { temp: 'Ben', newNode: 'Eve' },
+        pointers: { nodeBefore: 'Ben', nodeToAdd: 'Eve' },
         detached: [added('Eve')],
       }),
     },
@@ -273,7 +276,7 @@ export const INDEX_SCENES = {
       comment: 'insert5',
       list: line(LINE, {
         states: { Ben: 'active' },
-        pointers: { temp: 'Ben', newNode: 'Eve' },
+        pointers: { nodeBefore: 'Ben', nodeToAdd: 'Eve' },
         detached: [added('Eve', 'Cleo')],
       }),
     },
@@ -282,7 +285,7 @@ export const INDEX_SCENES = {
       comment: 'insert6',
       list: line(['Ana', 'Ben', 'Eve', 'Cleo', 'Dev'], {
         states: { Eve: 'new' },
-        pointers: { temp: 'Ben', newNode: 'Eve' },
+        pointers: { nodeBefore: 'Ben', nodeToAdd: 'Eve' },
         length: 4,
       }),
     },
@@ -343,19 +346,19 @@ export const INDEX_SCENES = {
     },
     { captionKey: 'notEnds', comment: 'remove2', list: line(LINE) },
     {
-      captionKey: 'before',
+      captionKey: 'nodeBefore',
       comment: 'remove3',
       list: line(LINE, {
         states: { Ben: 'active' },
-        pointers: { before: 'Ben' },
+        pointers: { nodeBefore: 'Ben' },
       }),
     },
     {
-      captionKey: 'temp',
+      captionKey: 'removed',
       comment: 'remove4',
       list: line(LINE, {
         states: { Ben: 'active', Cleo: 'moved' },
-        pointers: { before: 'Ben', temp: 'Cleo' },
+        pointers: { nodeBefore: 'Ben', removed: 'Cleo' },
       }),
     },
     {
@@ -363,7 +366,7 @@ export const INDEX_SCENES = {
       comment: 'remove5',
       list: line(['Ana', 'Ben', 'Dev'], {
         states: { Ben: 'active' },
-        pointers: { before: 'Ben', temp: 'Cleo' },
+        pointers: { nodeBefore: 'Ben', removed: 'Cleo' },
         detached: [removed('Cleo', 'Dev')],
         length: 4,
       }),
@@ -372,7 +375,7 @@ export const INDEX_SCENES = {
       captionKey: 'cut',
       comment: 'remove6',
       list: line(['Ana', 'Ben', 'Dev'], {
-        pointers: { temp: 'Cleo' },
+        pointers: { removed: 'Cleo' },
         detached: [removed('Cleo')],
         length: 4,
       }),
@@ -434,16 +437,16 @@ export const INDEX_SCENES = {
     {
       captionKey: 'swap',
       comment: 'reverse1',
-      list: fixedLine(FORWARD, { ...SWAPPED, temp: 'Ana' }),
+      list: fixedLine(FORWARD, { ...SWAPPED, current: 'Ana' }),
     },
     {
       captionKey: 'start',
       comment: 'reverse2',
       list: fixedLine(FORWARD, {
         ...SWAPPED,
-        temp: 'Ana',
-        prev: null,
-        next: null,
+        current: 'Ana',
+        previous: null,
+        nextNode: null,
       }),
     },
     {
@@ -451,7 +454,7 @@ export const INDEX_SCENES = {
       comment: 'reverse3',
       list: fixedLine(
         FORWARD,
-        { ...SWAPPED, temp: 'Ana', prev: null, next: 'Ben' },
+        { ...SWAPPED, current: 'Ana', previous: null, nextNode: 'Ben' },
         { Ana: 'active' },
       ),
     },
@@ -460,7 +463,7 @@ export const INDEX_SCENES = {
       comment: 'reverse4',
       list: fixedLine(
         { ...FORWARD, Ana: null },
-        { ...SWAPPED, temp: 'Ana', prev: null, next: 'Ben' },
+        { ...SWAPPED, current: 'Ana', previous: null, nextNode: 'Ben' },
         { Ana: 'active' },
       ),
     },
@@ -469,7 +472,7 @@ export const INDEX_SCENES = {
       comment: 'reverse5',
       list: fixedLine(
         { ...FORWARD, Ana: null },
-        { ...SWAPPED, temp: 'Ben', prev: 'Ana', next: 'Ben' },
+        { ...SWAPPED, current: 'Ben', previous: 'Ana', nextNode: 'Ben' },
         { Ana: 'done', Ben: 'active' },
       ),
     },
@@ -478,9 +481,9 @@ export const INDEX_SCENES = {
       comment: 'reverse6',
       list: fixedLine(BACKWARD, {
         ...SWAPPED,
-        temp: null,
-        prev: 'Dev',
-        next: null,
+        current: null,
+        previous: 'Dev',
+        nextNode: null,
       }),
     },
   ],

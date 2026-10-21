@@ -52,14 +52,14 @@ insert(index, value) {
   // 1. si index < 0 o index > length, regresa false
   // 2. ¿index 0? unshift. ¿index === length? push. Luego regresa true
   // 3. crea un nodo nuevo
-  // 4. temp = el nodo antes del lugar: this.get(index - 1)
-  // 5. el next del nodo nuevo apunta al next de temp
-  // 6. el next de temp apunta al nodo nuevo
+  // 4. nodeBefore = el nodo antes del lugar: this.get(index - 1)
+  // 5. el next del nodo nuevo apunta al next de nodeBefore
+  // 6. el next de nodeBefore apunta al nodo nuevo
   // 7. súmale 1 a length, regresa true
 }
 ```
 
-El paso 4 pide el nodo **antes** del lugar, en `index - 1`, porque es el nodo cuyo `next` tiene que cambiar. Desde el nodo en `index` no puedes regresar. Los pasos 5 y 6 siguen el orden que aprendiste con unshift: **primero enlaza el nodo nuevo**, mientras `temp.next` todavía apunta al resto de la fila, y solo después haz que `temp` apunte al nodo nuevo.
+El paso 4 pide el nodo **antes** del lugar, en `index - 1`, porque es el nodo cuyo `next` tiene que cambiar. Desde el nodo en `index` no puedes regresar. Los pasos 5 y 6 siguen el orden que aprendiste con unshift: **primero enlaza el nodo nuevo**, mientras `nodeBefore.next` todavía apunta al resto de la fila, y solo después haz que `nodeBefore` apunte al nodo nuevo.
 
 ```viz
 linked-list-insert-plan
@@ -67,17 +67,17 @@ linked-list-insert-plan
 
 **Qué acaba de pasar:** el índice 2 pasó la revisión del rango y no era un extremo. Se creó un nodo para Eve, y `get(1)` caminó hasta Ben, el nodo antes del lugar. El `next` de Eve apuntó a Cleo, y solo entonces el `next` de Ben apuntó a Eve. La longitud subió a 5, e insert regresó `true`.
 
-**Error común:** hacer el paso 6 antes del 5. Después de `temp.next = newNode`, ya nada apunta a Cleo, así que `newNode.next = temp.next` hace que el nodo de Eve se apunte a sí mismo, y Cleo y Dev se pierden.
+**Error común:** hacer el paso 6 antes del 5. Después de `nodeBefore.next = nodeToAdd`, ya nada apunta a Cleo, así que `nodeToAdd.next = nodeBefore.next` hace que el nodo de Eve se apunte a sí mismo, y Cleo y Dev se pierden.
 
 ## Escribir el código
 
 Paso 4: primero el caso común. En la mitad, son los pasos 3 a 7:
 
 ```js
-const newNode = new Node(value)
-const temp = this.get(index - 1)
-newNode.next = temp.next
-temp.next = newNode
+const nodeToAdd = new Node(value)
+const nodeBefore = this.get(index - 1)
+nodeToAdd.next = nodeBefore.next
+nodeBefore.next = nodeToAdd
 this.length++
 return true
 ```
@@ -106,34 +106,34 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      this.tail.next = newNode
-      this.tail = newNode
+      this.tail.next = nodeToAdd
+      this.tail = nodeToAdd
     }
     this.length++
     return this
   }
 
   unshift(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      newNode.next = this.head
-      this.head = newNode
+      nodeToAdd.next = this.head
+      this.head = nodeToAdd
     }
     this.length++
     return this
@@ -143,11 +143,11 @@ class LinkedList {
     if (index < 0 || index >= this.length) {
       return undefined
     }
-    let temp = this.head
+    let current = this.head
     for (let i = 0; i < index; i++) {
-      temp = temp.next
+      current = current.next
     }
-    return temp
+    return current
   }
 
   insert(index, value) {
@@ -162,20 +162,20 @@ class LinkedList {
       this.push(value)
       return true
     }
-    const newNode = new Node(value)
-    const temp = this.get(index - 1)
-    newNode.next = temp.next
-    temp.next = newNode
+    const nodeToAdd = new Node(value)
+    const nodeBefore = this.get(index - 1)
+    nodeToAdd.next = nodeBefore.next
+    nodeBefore.next = nodeToAdd
     this.length++
     return true
   }
 
   toArray() {
     const values = []
-    let temp = this.head
-    while (temp !== null) {
-      values.push(temp.value)
-      temp = temp.next
+    let current = this.head
+    while (current !== null) {
+      values.push(current.value)
+      current = current.next
     }
     return values
   }

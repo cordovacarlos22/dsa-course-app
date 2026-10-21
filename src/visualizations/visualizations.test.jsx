@@ -215,7 +215,7 @@ describe('linked list animations', () => {
     expect(screen.getByText('4 nodes visited')).toBeInTheDocument()
     expect(
       screen.getByRole('img', {
-        name: 'Ana → Ben → Cleo → Dev → null. head: Ana, tail: Dev, temp: Dev. Not in the line: Eve → null',
+        name: 'Ana → Ben → Cleo → Dev → null. head: Ana, tail: Dev, current: Dev. Not in the line: Eve → null',
       }),
     ).toBeInTheDocument()
   })
@@ -245,11 +245,11 @@ describe('linked list animations', () => {
     expect(screen.queryByText('Returns:')).not.toBeInTheDocument()
   })
 
-  it('walks temp and pre together in the pop trace', async () => {
+  it('walks current and previous together in the pop trace', async () => {
     await renderAtStep('trace-ll-pop', 7)
     expect(
       screen.getByRole('img', {
-        name: 'Ana → Ben → Cleo → Dev → null. head: Ana, tail: Dev, temp: Dev, pre: Cleo. length: 4',
+        name: 'Ana → Ben → Cleo → Dev → null. head: Ana, tail: Dev, current: Dev, previous: Cleo. length: 4',
       }),
     ).toBeInTheDocument()
   })
@@ -259,7 +259,7 @@ describe('linked list animations', () => {
     // Ana's arrow is flipped to null, and next still holds Ben.
     expect(
       screen.getByRole('img', {
-        name: 'Ana → null, Ben → Cleo, Cleo → Dev, Dev → null. head: Dev, tail: Ana, temp: Ana, prev: null, next: Ben. length: 4',
+        name: 'Ana → null, Ben → Cleo, Cleo → Dev, Dev → null. head: Dev, tail: Ana, current: Ana, previous: null, nextNode: Ben. length: 4',
       }),
     ).toBeInTheDocument()
   })

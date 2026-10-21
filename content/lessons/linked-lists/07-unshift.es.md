@@ -74,7 +74,7 @@ linked-list-unshift-plan
 
 **Qué acaba de pasar:** se creó el nodo nuevo para Zoe, la fila no estaba vacía, el `next` de Zoe apuntó a Ana, y solo entonces `head` se movió a Zoe. La longitud subió y se regresó la lista. En una fila vacía, el paso 2 habría hecho todo el trabajo.
 
-**Error común:** escribir el paso 3b antes del 3a. Primero `this.head = newNode` y luego `newNode.next = this.head` hace que el nodo nuevo se apunte **a sí mismo**. Ana, Ben y Cleo se quedan sin nada que los apunte, y el recolector de basura se los lleva.
+**Error común:** escribir el paso 3b antes del 3a. Primero `this.head = nodeToAdd` y luego `nodeToAdd.next = this.head` hace que el nodo nuevo se apunte **a sí mismo**. Ana, Ben y Cleo se quedan sin nada que los apunte, y el recolector de basura se los lleva.
 
 ## Escribir el código
 
@@ -82,9 +82,9 @@ Paso 4: primero el caso común. Con invitados en la fila, son los dos movimiento
 
 ```js
 unshift(value) {
-  const newNode = new Node(value)
-  newNode.next = this.head
-  this.head = newNode
+  const nodeToAdd = new Node(value)
+  nodeToAdd.next = this.head
+  this.head = nodeToAdd
   this.length++
   return this
 }
@@ -112,21 +112,21 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
   }
 
   unshift(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      newNode.next = this.head
-      this.head = newNode
+      nodeToAdd.next = this.head
+      this.head = nodeToAdd
     }
     this.length++
     return this
@@ -134,10 +134,10 @@ class LinkedList {
 
   toArray() {
     const values = []
-    let temp = this.head
-    while (temp !== null) {
-      values.push(temp.value)
-      temp = temp.next
+    let current = this.head
+    while (current !== null) {
+      values.push(current.value)
+      current = current.next
     }
     return values
   }
@@ -159,17 +159,17 @@ Paso 5: el Big O, y una mejora.
 
 **Big O:** un nodo nuevo y dos movimientos de punteros, sin importar lo larga que sea la fila: **O(1) en tiempo** y **O(1) en espacio**. En un array, `unshift` es **O(n)**, porque cada elemento se recorre y recibe un índice nuevo. Este, y `shift` en la próxima lección, son los dos renglones de la tabla de la lección 2 que ganan las listas enlazadas.
 
-**Una mejora:** igual que en push, las dos ramas terminan con la misma línea, `this.head = newNode`. Sácala del `if`:
+**Una mejora:** igual que en push, las dos ramas terminan con la misma línea, `this.head = nodeToAdd`. Sácala del `if`:
 
 ```js
 unshift(value) {
-  const newNode = new Node(value)
+  const nodeToAdd = new Node(value)
   if (!this.head) {
-    this.tail = newNode
+    this.tail = nodeToAdd
   } else {
-    newNode.next = this.head
+    nodeToAdd.next = this.head
   }
-  this.head = newNode
+  this.head = nodeToAdd
   this.length++
   return this
 }

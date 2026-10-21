@@ -74,7 +74,7 @@ linked-list-unshift-plan
 
 **What just happened:** the new node for Zoe was made, the line wasn't empty, Zoe's `next` was pointed at Ana, and only then did `head` move to Zoe. The length went up and the list was returned. On an empty line, step 2 would have done the whole job.
 
-**Common mistake:** writing step 3b before 3a. `this.head = newNode` first, then `newNode.next = this.head`, points the new node at **itself**. Ana, Ben and Cleo have nothing pointing to them, and the garbage collector takes them.
+**Common mistake:** writing step 3b before 3a. `this.head = nodeToAdd` first, then `nodeToAdd.next = this.head`, points the new node at **itself**. Ana, Ben and Cleo have nothing pointing to them, and the garbage collector takes them.
 
 ## Write the code
 
@@ -82,9 +82,9 @@ Step 4: the common case first. With guests in line, it's the two moves from step
 
 ```js
 unshift(value) {
-  const newNode = new Node(value)
-  newNode.next = this.head
-  this.head = newNode
+  const nodeToAdd = new Node(value)
+  nodeToAdd.next = this.head
+  this.head = nodeToAdd
   this.length++
   return this
 }
@@ -112,21 +112,21 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
   }
 
   unshift(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      newNode.next = this.head
-      this.head = newNode
+      nodeToAdd.next = this.head
+      this.head = nodeToAdd
     }
     this.length++
     return this
@@ -134,10 +134,10 @@ class LinkedList {
 
   toArray() {
     const values = []
-    let temp = this.head
-    while (temp !== null) {
-      values.push(temp.value)
-      temp = temp.next
+    let current = this.head
+    while (current !== null) {
+      values.push(current.value)
+      current = current.next
     }
     return values
   }
@@ -159,17 +159,17 @@ Step 5: the Big O, and a refactor.
 
 **Big O:** one new node and two pointer moves, however long the line is: **O(1) time** and **O(1) space**. On an array, `unshift` is **O(n)**, because every item moves over and gets a new index. This, and `shift` in the next lesson, are the two rows of lesson 2's table that linked lists win.
 
-**A refactor:** just like push, both branches end with the same line, `this.head = newNode`. Move it out of the `if`:
+**A refactor:** just like push, both branches end with the same line, `this.head = nodeToAdd`. Move it out of the `if`:
 
 ```js
 unshift(value) {
-  const newNode = new Node(value)
+  const nodeToAdd = new Node(value)
   if (!this.head) {
-    this.tail = newNode
+    this.tail = nodeToAdd
   } else {
-    newNode.next = this.head
+    nodeToAdd.next = this.head
   }
-  this.head = newNode
+  this.head = nodeToAdd
   this.length++
   return this
 }

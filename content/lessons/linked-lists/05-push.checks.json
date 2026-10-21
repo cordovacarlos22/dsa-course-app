@@ -71,8 +71,8 @@
     {
       "type": "choice",
       "question": {
-        "en": "In the not-empty case, why must `this.tail.next = newNode` come **before** `this.tail = newNode`?",
-        "es": "En el caso que no está vacío, ¿por qué `this.tail.next = newNode` tiene que ir **antes** de `this.tail = newNode`?"
+        "en": "In the not-empty case, why must `this.tail.next = nodeToAdd` come **before** `this.tail = nodeToAdd`?",
+        "es": "En el caso que no está vacío, ¿por qué `this.tail.next = nodeToAdd` tiene que ir **antes** de `this.tail = nodeToAdd`?"
       },
       "options": [
         {
@@ -98,8 +98,8 @@
         "es": "Prueba el otro orden en papel: ¿a qué apunta `this.tail.next` después de que `tail` se movió?"
       },
       "explanation": {
-        "en": "If `tail` moves first, `this.tail.next = newNode` makes the new node point to itself, and the old last node still points to `null`. Use `tail` to link, then move it.",
-        "es": "Si `tail` se mueve primero, `this.tail.next = newNode` hace que el nodo nuevo se apunte a sí mismo, y el antiguo último nodo sigue apuntando a `null`. Usa `tail` para enlazar, y luego muévelo."
+        "en": "If `tail` moves first, `this.tail.next = nodeToAdd` makes the new node point to itself, and the old last node still points to `null`. Use `tail` to link, then move it.",
+        "es": "Si `tail` se mueve primero, `this.tail.next = nodeToAdd` hace que el nodo nuevo se apunte a sí mismo, y el antiguo último nodo sigue apuntando a `null`. Usa `tail` para enlazar, y luego muévelo."
       }
     },
     {
@@ -109,11 +109,11 @@
         "es": "Escribe `push(value)` en la clase `LinkedList`, siguiendo el plan de los comentarios. Agrega un nodo al final (en una lista vacía, `head` y `tail` apuntan a él), le suma 1 a `length` y regresa la lista."
       },
       "hint": {
-        "en": "Start with `const newNode = new Node(value)`. Then `if (!this.head)` points `head` and `tail` at it; the `else` does `this.tail.next = newNode` and `this.tail = newNode`. End with `this.length++` and `return this`.",
-        "es": "Empieza con `const newNode = new Node(value)`. Luego `if (!this.head)` hace que `head` y `tail` apunten a él; el `else` hace `this.tail.next = newNode` y `this.tail = newNode`. Termina con `this.length++` y `return this`."
+        "en": "Start with `const nodeToAdd = new Node(value)`. Then `if (!this.head)` points `head` and `tail` at it; the `else` does `this.tail.next = nodeToAdd` and `this.tail = nodeToAdd`. End with `this.length++` and `return this`.",
+        "es": "Empieza con `const nodeToAdd = new Node(value)`. Luego `if (!this.head)` hace que `head` y `tail` apunten a él; el `else` hace `this.tail.next = nodeToAdd` y `this.tail = nodeToAdd`. Termina con `this.length++` y `return this`."
       },
-      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    // 1. make a new node with the value\n    // 2. if the list is empty: head and tail both point to the new node\n    // 3. otherwise: the last node's next points to the new node,\n    //    then tail moves to the new node\n    // 4. add 1 to length\n    // 5. return the list (this)\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
-      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const firstNode = new Node(value)\n      this.head = firstNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    // 1. make a new node with the value\n    // 2. if the list is empty: head and tail both point to the new node\n    // 3. otherwise: the last node's next points to the new node,\n    //    then tail moves to the new node\n    // 4. add 1 to length\n    // 5. return the list (this)\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let current = this.head\n    while (current !== null) {\n      values.push(current.value)\n      current = current.next\n    }\n    return values\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const firstNode = new Node(value)\n      this.head = firstNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const nodeToAdd = new Node(value)\n    if (!this.head) {\n      this.head = nodeToAdd\n      this.tail = nodeToAdd\n    } else {\n      this.tail.next = nodeToAdd\n      this.tail = nodeToAdd\n    }\n    this.length++\n    return this\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let current = this.head\n    while (current !== null) {\n      values.push(current.value)\n      current = current.next\n    }\n    return values\n  }\n}",
       "kind": "class",
       "className": "LinkedList",
       "tests": [

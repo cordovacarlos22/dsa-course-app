@@ -71,8 +71,8 @@
     {
       "type": "choice",
       "question": {
-        "en": "What goes wrong if `unshift` runs `this.head = newNode` **before** `newNode.next = this.head`?",
-        "es": "¿Qué sale mal si `unshift` corre `this.head = newNode` **antes** de `newNode.next = this.head`?"
+        "en": "What goes wrong if `unshift` runs `this.head = nodeToAdd` **before** `nodeToAdd.next = this.head`?",
+        "es": "¿Qué sale mal si `unshift` corre `this.head = nodeToAdd` **antes** de `nodeToAdd.next = this.head`?"
       },
       "options": [
         {
@@ -94,12 +94,12 @@
       ],
       "answer": 2,
       "hint": {
-        "en": "After `this.head = newNode`, what does `this.head` point to?",
-        "es": "Después de `this.head = newNode`, ¿a qué apunta `this.head`?"
+        "en": "After `this.head = nodeToAdd`, what does `this.head` point to?",
+        "es": "Después de `this.head = nodeToAdd`, ¿a qué apunta `this.head`?"
       },
       "explanation": {
-        "en": "Once `head` is on the new node, `newNode.next = this.head` points the new node at itself, and nothing points to the old first node anymore. Link first, then move `head`.",
-        "es": "Cuando `head` ya está en el nodo nuevo, `newNode.next = this.head` hace que el nodo nuevo se apunte a sí mismo, y ya nada apunta al antiguo primer nodo. Primero enlaza, luego mueve `head`."
+        "en": "Once `head` is on the new node, `nodeToAdd.next = this.head` points the new node at itself, and nothing points to the old first node anymore. Link first, then move `head`.",
+        "es": "Cuando `head` ya está en el nodo nuevo, `nodeToAdd.next = this.head` hace que el nodo nuevo se apunte a sí mismo, y ya nada apunta al antiguo primer nodo. Primero enlaza, luego mueve `head`."
       }
     },
     {
@@ -109,11 +109,11 @@
         "es": "Escribe `unshift(value)` en la clase `LinkedList`, siguiendo el plan de los comentarios. Agrega un nodo al inicio (en una lista vacía, `head` y `tail` apuntan a él), le suma 1 a `length` y regresa la lista."
       },
       "hint": {
-        "en": "Same shape as `push`. In the `else`, first `newNode.next = this.head`, then `this.head = newNode`. End with `this.length++` and `return this`.",
-        "es": "La misma forma que `push`. En el `else`, primero `newNode.next = this.head` y luego `this.head = newNode`. Termina con `this.length++` y `return this`."
+        "en": "Same shape as `push`. In the `else`, first `nodeToAdd.next = this.head`, then `this.head = nodeToAdd`. End with `this.length++` and `return this`.",
+        "es": "La misma forma que `push`. En el `else`, primero `nodeToAdd.next = this.head` y luego `this.head = nodeToAdd`. Termina con `this.length++` y `return this`."
       },
-      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  unshift(value) {\n    // 1. make a new node with the value\n    // 2. if the list is empty: head and tail both point to the new node\n    // 3. otherwise: the new node's next points to the first node,\n    //    then head moves to the new node\n    // 4. add 1 to length\n    // 5. return the list (this)\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
-      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  unshift(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      newNode.next = this.head\n      this.head = newNode\n    }\n    this.length++\n    return this\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const firstNode = new Node(value)\n      this.head = firstNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const nodeToAdd = new Node(value)\n    if (!this.head) {\n      this.head = nodeToAdd\n      this.tail = nodeToAdd\n    } else {\n      this.tail.next = nodeToAdd\n      this.tail = nodeToAdd\n    }\n    this.length++\n    return this\n  }\n\n  unshift(value) {\n    // 1. make a new node with the value\n    // 2. if the list is empty: head and tail both point to the new node\n    // 3. otherwise: the new node's next points to the first node,\n    //    then head moves to the new node\n    // 4. add 1 to length\n    // 5. return the list (this)\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let current = this.head\n    while (current !== null) {\n      values.push(current.value)\n      current = current.next\n    }\n    return values\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const firstNode = new Node(value)\n      this.head = firstNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const nodeToAdd = new Node(value)\n    if (!this.head) {\n      this.head = nodeToAdd\n      this.tail = nodeToAdd\n    } else {\n      this.tail.next = nodeToAdd\n      this.tail = nodeToAdd\n    }\n    this.length++\n    return this\n  }\n\n  unshift(value) {\n    const nodeToAdd = new Node(value)\n    if (!this.head) {\n      this.head = nodeToAdd\n      this.tail = nodeToAdd\n    } else {\n      nodeToAdd.next = this.head\n      this.head = nodeToAdd\n    }\n    this.length++\n    return this\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let current = this.head\n    while (current !== null) {\n      values.push(current.value)\n      current = current.next\n    }\n    return values\n  }\n}",
       "kind": "class",
       "className": "LinkedList",
       "tests": [

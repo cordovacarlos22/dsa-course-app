@@ -133,11 +133,11 @@
         "es": "Escribe el constructor de `LinkedList`. Empieza vacía (`head` y `tail` son `null`, `length` es 0). Si se dio un valor, crea un `Node` con él y haz que `head` y `tail` apunten a ese nodo, con `length` 1. Cuidado: ¡`0` es un valor!"
       },
       "hint": {
-        "en": "Check for a missing value with `if (value !== undefined)`, not `if (value)`. Inside: `const newNode = new Node(value)`, then `this.head = newNode`, `this.tail = this.head` and `this.length = 1`.",
-        "es": "Revisa si falta el valor con `if (value !== undefined)`, no con `if (value)`. Adentro: `const newNode = new Node(value)`, luego `this.head = newNode`, `this.tail = this.head` y `this.length = 1`."
+        "en": "Check for a missing value with `if (value !== undefined)`, not `if (value)`. Inside: `const firstNode = new Node(value)`, then `this.head = firstNode`, `this.tail = this.head` and `this.length = 1`.",
+        "es": "Revisa si falta el valor con `if (value !== undefined)`, no con `if (value)`. Adentro: `const firstNode = new Node(value)`, luego `this.head = firstNode`, `this.tail = this.head` y `this.length = 1`."
       },
       "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    // 1. start empty\n    // 2. if a value was given, make the first node\n  }\n}",
-      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const firstNode = new Node(value)\n      this.head = firstNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n}",
       "kind": "class",
       "className": "LinkedList",
       "tests": [

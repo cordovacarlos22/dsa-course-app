@@ -52,30 +52,30 @@ console.log(justAna.pop(), justAna.length) // Ana 0: the array is empty now
 
 ## Break it down
 
-Step 3: the plan. The hard part is the walk, so here's the idea first. Use **two pointers** that walk the line together: **`temp`** goes first, and **`pre`** (short for "previous") stays **one node behind** it. Each time around the loop, `pre` moves to where `temp` is, and then `temp` moves forward one node. When `temp` has no `next`, it's on the last node, and `pre` is on the node right before it: exactly the one `tail` needs.
+Step 3: the plan. The hard part is the walk, so here's the idea first. Use **two pointers** that walk the line together: **`current`** goes first, and **`previous`** stays **one node behind** it. Each time around the loop, `previous` moves to where `current` is, and then `current` moves forward one node. When `current` has no `next`, it's on the last node, and `previous` is on the node right before it: exactly the one `tail` needs.
 
 ```js
 pop() {
   // 1. if the list is empty, return undefined
-  // 2. temp and pre both start at head
-  // 3. walk: while temp has a next, pre = temp, then temp moves on
-  //    (temp ends on the last node, pre on the one before it)
-  // 4. tail moves to pre, and the new tail's next becomes null
+  // 2. current and previous both start at head
+  // 3. walk: while current has a next, previous = current, then current moves on
+  //    (current ends on the last node, previous on the one before it)
+  // 4. tail moves to previous, and the new tail's next becomes null
   // 5. subtract 1 from length
   // 6. if length is now 0, head and tail become null
-  // 7. return temp
+  // 7. return current
 }
 ```
 
-Why `while (temp.next !== null)` and not `while (temp !== null)`, like the walk in lesson 3? Because we want the walk to stop **on** the last node, not after it. (You could also count with a `for` loop up to `this.length`, but the `while` says exactly what we mean: walk until there's no next node.)
+Why `while (current.next !== null)` and not `while (current !== null)`, like the walk in lesson 3? Because we want the walk to stop **on** the last node, not after it. (You could also count with a `for` loop up to `this.length`, but the `while` says exactly what we mean: walk until there's no next node.)
 
 ```viz
 linked-list-pop-plan
 ```
 
-**What just happened:** on a line of three, `temp` and `pre` started at Ana and walked until `temp` was on Cleo, the last guest, with `pre` on Ben. `tail` moved to Ben, Ben's `next` became `null`, the length dropped to 2, and Cleo's node was returned. Step 6 only did something in the one-guest line: after Ana left, the length was 0, so `head` and `tail` went back to `null`.
+**What just happened:** on a line of three, `current` and `previous` started at Ana and walked until `current` was on Cleo, the last guest, with `previous` on Ben. `tail` moved to Ben, Ben's `next` became `null`, the length dropped to 2, and Cleo's node was returned. Step 6 only did something in the one-guest line: after Ana left, the length was 0, so `head` and `tail` went back to `null`.
 
-**Common mistake:** walking with `while (temp !== null)`. The loop then runs one extra time, `temp` ends on `null`, and `pre` ends on the **last** node instead of the one before it. You've walked right past the node you needed.
+**Common mistake:** walking with `while (current !== null)`. The loop then runs one extra time, `current` ends on `null`, and `previous` ends on the **last** node instead of the one before it. You've walked right past the node you needed.
 
 ## Write the code
 
@@ -83,28 +83,28 @@ Step 4: the common case first, then the edge cases. With two or more guests, the
 
 ```js
 pop() {
-  let temp = this.head
-  let pre = this.head
-  while (temp.next !== null) {
-    pre = temp
-    temp = temp.next
+  let current = this.head
+  let previous = this.head
+  while (current.next !== null) {
+    previous = current
+    current = current.next
   }
-  this.tail = pre
+  this.tail = previous
   this.tail.next = null
   this.length--
-  return temp
+  return current
 }
 ```
 
-Now the edge cases. **The empty list:** `temp.next` would crash when `temp` is `null`, so check first, at the top: `if (!this.head) { return undefined }`.
+Now the edge cases. **The empty list:** `current.next` would crash when `current` is `null`, so check first, at the top: `if (!this.head) { return undefined }`.
 
-**One guest:** walk through the code above with only Ana in the line. `temp` and `pre` both start on Ana. `temp.next` is already `null`, so the loop never runs. `this.tail = pre` changes nothing (tail was already on Ana), and so does `this.tail.next = null` (it was already `null`). `this.length--` brings the length to 0. And then... `head` and `tail` are **still pointing at Ana**. So right after the decrement, add: if the length is now 0, set `head` and `tail` to `null`. It has to come **after** `this.length--`, because that's when the length becomes 0.
+**One guest:** walk through the code above with only Ana in the line. `current` and `previous` both start on Ana. `current.next` is already `null`, so the loop never runs. `this.tail = previous` changes nothing (tail was already on Ana), and so does `this.tail.next = null` (it was already `null`). `this.length--` brings the length to 0. And then... `head` and `tail` are **still pointing at Ana**. So right after the decrement, add: if the length is now 0, set `head` and `tail` to `null`. It has to come **after** `this.length--`, because that's when the length becomes 0.
 
 ```viz
 trace-ll-pop
 ```
 
-**What just happened:** with 4 guests, `temp` and `pre` walked together until `temp` was on Dev and `pre` on Cleo, then `tail` moved to Cleo and Dev was cut off, after visiting 4 nodes. With 1 guest, the loop didn't run, and only the `length === 0` check emptied the line. With 0 guests, the first `if` returned `undefined` right away.
+**What just happened:** with 4 guests, `current` and `previous` walked together until `current` was on Dev and `previous` on Cleo, then `tail` moved to Cleo and Dev was cut off, after visiting 4 nodes. With 1 guest, the loop didn't run, and only the `length === 0` check emptied the line. With 0 guests, the first `if` returned `undefined` right away.
 
 ```js-run
 class Node {
@@ -120,21 +120,21 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      this.tail.next = newNode
-      this.tail = newNode
+      this.tail.next = nodeToAdd
+      this.tail = nodeToAdd
     }
     this.length++
     return this
@@ -144,20 +144,20 @@ class LinkedList {
     if (!this.head) {
       return undefined
     }
-    let temp = this.head
-    let pre = this.head
-    while (temp.next !== null) {
-      pre = temp
-      temp = temp.next
+    let current = this.head
+    let previous = this.head
+    while (current.next !== null) {
+      previous = current
+      current = current.next
     }
-    this.tail = pre
+    this.tail = previous
     this.tail.next = null
     this.length--
     if (this.length === 0) {
       this.head = null
       this.tail = null
     }
-    return temp
+    return current
   }
 }
 
@@ -175,7 +175,7 @@ console.log(line.head, line.tail, line.length) // null null 0
 
 Step 5: the Big O, and one thing to improve.
 
-**Big O:** pop walks the whole line to find the node before the tail, so it's **O(n) time**. It only uses two extra pointers, `temp` and `pre`, however long the line is: **O(1) space**. On an array, `pop` is O(1). This is the one end-of-line operation where arrays win.
+**Big O:** pop walks the whole line to find the node before the tail, so it's **O(n) time**. It only uses two extra pointers, `current` and `previous`, however long the line is: **O(1) space**. On an array, `pop` is O(1). This is the one end-of-line operation where arrays win.
 
 **Can we make it O(1)?** You might think: just keep another pointer to the node before the tail. But after one pop, you'd need the node before **that** one, and you'd be walking again. The real fix is to let every node point **backwards** too, with a `prev` pointer next to `next`. Then the node before the tail is always `tail.prev`, one step away. A list like that is a **doubly linked list**, and it's the next module.
 
@@ -189,10 +189,10 @@ for (let i = 0; i < sizes.length; i++) {
   for (let k = sizes[i]; k >= 1; k--) {
     head = { value: 'Guest ' + k, next: head }
   }
-  let temp = head
+  let current = head
   let visited = 1
-  while (temp.next !== null) {
-    temp = temp.next
+  while (current.next !== null) {
+    current = current.next
     visited++
   }
   console.log(sizes[i] + ' guests: ' + visited + ' nodes visited')

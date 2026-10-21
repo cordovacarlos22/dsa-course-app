@@ -27,7 +27,7 @@ const LINE = ['Ana', 'Ben', 'Cleo', 'Dev']
 const ENDS = { head: 'Ana', tail: 'Dev' }
 const WITH_EVE = [...LINE, 'Eve']
 
-// A walk frame: temp on `values[index]`, the nodes before it done.
+// A walk frame: current on `values[index]`, the nodes before it done.
 // `comment` (optional) is added after the code, like `// index 2`.
 function walkFrame(captionKey, code, values, index, pointers, comment) {
   const states = {}
@@ -42,7 +42,7 @@ function walkFrame(captionKey, code, values, index, pointers, comment) {
     list: {
       nodes: values,
       states,
-      pointers: { ...pointers, temp: values[index] },
+      pointers: { ...pointers, current: values[index] },
     },
     visited: index + 1,
   }
@@ -68,30 +68,30 @@ const SCENES = {
   costEnd: [
     { captionKey: 'start', list: { nodes: LINE, pointers: ENDS } },
     {
-      captionKey: 'newNode',
-      code: "const newNode = { value: 'Eve', next: null }",
+      captionKey: 'nodeToAdd',
+      code: "const nodeToAdd = { value: 'Eve', next: null }",
       list: {
         nodes: LINE,
-        pointers: { ...ENDS, newNode: 'Eve' },
+        pointers: { ...ENDS, nodeToAdd: 'Eve' },
         detached: [{ value: 'Eve', next: null, state: 'new' }],
       },
     },
     {
       captionKey: 'link',
-      code: 'tail.next = newNode',
+      code: 'tail.next = nodeToAdd',
       list: {
         nodes: WITH_EVE,
         states: { Eve: 'new' },
-        pointers: { ...ENDS, newNode: 'Eve' },
+        pointers: { ...ENDS, nodeToAdd: 'Eve' },
       },
     },
     {
       captionKey: 'moveTail',
-      code: 'tail = newNode',
+      code: 'tail = nodeToAdd',
       list: {
         nodes: WITH_EVE,
         states: { Eve: 'new' },
-        pointers: { head: 'Ana', tail: 'Eve', newNode: 'Eve' },
+        pointers: { head: 'Ana', tail: 'Eve', nodeToAdd: 'Eve' },
       },
     },
     {
@@ -103,29 +103,29 @@ const SCENES = {
         pointers: { head: 'Ana', tail: 'Eve' },
       },
     },
-    walkFrame('walkStart', 'let temp = head', WITH_EVE, 0, {
+    walkFrame('walkStart', 'let current = head', WITH_EVE, 0, {
       head: 'Ana',
       tail: 'Eve',
     }),
-    walkFrame('walk', 'temp = temp.next', WITH_EVE, 1, {
+    walkFrame('walk', 'current = current.next', WITH_EVE, 1, {
       head: 'Ana',
       tail: 'Eve',
     }),
-    walkFrame('walk', 'temp = temp.next', WITH_EVE, 2, {
+    walkFrame('walk', 'current = current.next', WITH_EVE, 2, {
       head: 'Ana',
       tail: 'Eve',
     }),
-    walkFrame('walkFound', 'temp = temp.next', WITH_EVE, 3, {
+    walkFrame('walkFound', 'current = current.next', WITH_EVE, 3, {
       head: 'Ana',
       tail: 'Eve',
     }),
     {
       captionKey: 'moveTailBack',
-      code: 'tail = temp',
+      code: 'tail = current',
       list: {
         nodes: WITH_EVE,
         states: { Dev: 'moved' },
-        pointers: { head: 'Ana', tail: 'Dev', temp: 'Dev' },
+        pointers: { head: 'Ana', tail: 'Dev', current: 'Dev' },
       },
       visited: 4,
     },
@@ -134,7 +134,7 @@ const SCENES = {
       code: 'tail.next = null',
       list: {
         nodes: LINE,
-        pointers: { head: 'Ana', tail: 'Dev', temp: 'Dev' },
+        pointers: { head: 'Ana', tail: 'Dev', current: 'Dev' },
         detached: [{ value: 'Eve', next: null, state: 'removed' }],
       },
       visited: 4,
@@ -145,30 +145,30 @@ const SCENES = {
   costFront: [
     { captionKey: 'start', list: { nodes: LINE, pointers: ENDS } },
     {
-      captionKey: 'newNode',
-      code: "const newNode = { value: 'Zoe', next: null }",
+      captionKey: 'nodeToAdd',
+      code: "const nodeToAdd = { value: 'Zoe', next: null }",
       list: {
         nodes: LINE,
-        pointers: { ...ENDS, newNode: 'Zoe' },
+        pointers: { ...ENDS, nodeToAdd: 'Zoe' },
         detached: [{ value: 'Zoe', next: null, state: 'new' }],
       },
     },
     {
       captionKey: 'link',
-      code: 'newNode.next = head',
+      code: 'nodeToAdd.next = head',
       list: {
         nodes: LINE,
-        pointers: { ...ENDS, newNode: 'Zoe' },
+        pointers: { ...ENDS, nodeToAdd: 'Zoe' },
         detached: [{ value: 'Zoe', next: 'Ana', state: 'new' }],
       },
     },
     {
       captionKey: 'moveHead',
-      code: 'head = newNode',
+      code: 'head = nodeToAdd',
       list: {
         nodes: ['Zoe', ...LINE],
         states: { Zoe: 'new' },
-        pointers: { head: 'Zoe', tail: 'Dev', newNode: 'Zoe' },
+        pointers: { head: 'Zoe', tail: 'Dev', nodeToAdd: 'Zoe' },
       },
     },
     {
@@ -190,27 +190,27 @@ const SCENES = {
       comment: 'insertAt3',
       list: { nodes: LINE, pointers: ENDS },
     },
-    walkFrame('walkStart', 'let temp = head', LINE, 0, ENDS, 'index'),
-    walkFrame('walk', 'temp = temp.next', LINE, 1, ENDS, 'index'),
-    walkFrame('walkFound', 'temp = temp.next', LINE, 2, ENDS, 'index'),
+    walkFrame('walkStart', 'let current = head', LINE, 0, ENDS, 'index'),
+    walkFrame('walk', 'current = current.next', LINE, 1, ENDS, 'index'),
+    walkFrame('walkFound', 'current = current.next', LINE, 2, ENDS, 'index'),
     {
       captionKey: 'link',
-      code: 'newNode.next = temp.next',
+      code: 'nodeToAdd.next = current.next',
       list: {
         nodes: LINE,
         states: { Cleo: 'active' },
-        pointers: { ...ENDS, temp: 'Cleo', newNode: 'Eve' },
+        pointers: { ...ENDS, current: 'Cleo', nodeToAdd: 'Eve' },
         detached: [{ value: 'Eve', next: 'Dev', state: 'new' }],
       },
       visited: 3,
     },
     {
       captionKey: 'insert',
-      code: 'temp.next = newNode',
+      code: 'current.next = nodeToAdd',
       list: {
         nodes: ['Ana', 'Ben', 'Cleo', 'Eve', 'Dev'],
         states: { Eve: 'new' },
-        pointers: { ...ENDS, temp: 'Cleo', newNode: 'Eve' },
+        pointers: { ...ENDS, current: 'Cleo', nodeToAdd: 'Eve' },
       },
       visited: 3,
     },
@@ -220,17 +220,17 @@ const SCENES = {
       list: {
         nodes: ['Ana', 'Ben', 'Cleo', 'Eve', 'Dev'],
         states: { Ana: 'done', Ben: 'done', Cleo: 'active', Eve: 'moved' },
-        pointers: { ...ENDS, temp: 'Cleo' },
+        pointers: { ...ENDS, current: 'Cleo' },
       },
       visited: 3,
     },
     {
       captionKey: 'remove',
-      code: 'temp.next = temp.next.next',
+      code: 'current.next = current.next.next',
       list: {
         nodes: LINE,
         states: { Cleo: 'active' },
-        pointers: { ...ENDS, temp: 'Cleo' },
+        pointers: { ...ENDS, current: 'Cleo' },
         detached: [{ value: 'Eve', next: 'Dev', state: 'removed' }],
       },
       visited: 3,
@@ -244,14 +244,21 @@ const SCENES = {
       comment: 'findCleo',
       list: { nodes: LINE, pointers: ENDS },
     },
-    walkFrame('check', "temp.value === 'Cleo'", LINE, 0, ENDS, 'no'),
-    walkFrame('check', "temp.value === 'Cleo'", LINE, 1, ENDS, 'no'),
+    walkFrame('check', "current.value === 'Cleo'", LINE, 0, ENDS, 'no'),
+    walkFrame('check', "current.value === 'Cleo'", LINE, 1, ENDS, 'no'),
     {
-      ...walkFrame('foundValue', "temp.value === 'Cleo'", LINE, 2, ENDS, 'yes'),
+      ...walkFrame(
+        'foundValue',
+        "current.value === 'Cleo'",
+        LINE,
+        2,
+        ENDS,
+        'yes',
+      ),
       list: {
         nodes: LINE,
         states: { Ana: 'done', Ben: 'done', Cleo: 'found' },
-        pointers: { ...ENDS, temp: 'Cleo' },
+        pointers: { ...ENDS, current: 'Cleo' },
       },
     },
     walkFrame('byIndex', null, LINE, 2, ENDS, 'findIndex2'),
@@ -274,11 +281,11 @@ const SCENES = {
       code: 'class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}',
     },
     {
-      captionKey: 'newNode',
-      code: "const newNode = new Node('Ana')",
+      captionKey: 'firstNode',
+      code: "const firstNode = new Node('Ana')",
       list: {
         nodes: [],
-        pointers: { newNode: 'Ana' },
+        pointers: { firstNode: 'Ana' },
         detached: [{ value: 'Ana', next: null, state: 'new' }],
       },
     },
@@ -327,7 +334,7 @@ const SCENES = {
       comment: 'planMakeNode',
       list: {
         nodes: [],
-        pointers: { head: null, tail: null, newNode: 'Ana' },
+        pointers: { head: null, tail: null, firstNode: 'Ana' },
         detached: [{ value: 'Ana', next: null, state: 'new' }],
         length: 0,
       },
@@ -338,7 +345,7 @@ const SCENES = {
       list: {
         nodes: ['Ana'],
         states: { Ana: 'new' },
-        pointers: { head: 'Ana', tail: null, newNode: 'Ana' },
+        pointers: { head: 'Ana', tail: null, firstNode: 'Ana' },
         length: 0,
       },
     },
@@ -348,7 +355,7 @@ const SCENES = {
       list: {
         nodes: ['Ana'],
         states: { Ana: 'new' },
-        pointers: { head: 'Ana', tail: 'Ana', newNode: 'Ana' },
+        pointers: { head: 'Ana', tail: 'Ana', firstNode: 'Ana' },
         length: 0,
       },
     },

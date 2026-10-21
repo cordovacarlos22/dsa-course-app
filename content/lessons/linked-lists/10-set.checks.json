@@ -71,8 +71,8 @@
     {
       "type": "choice",
       "question": {
-        "en": "In `set`, why does `if (temp)` work to check whether `get` found a node?",
-        "es": "En `set`, ¿por qué funciona `if (temp)` para revisar si `get` encontró un nodo?"
+        "en": "In `set`, why does `if (target)` work to check whether `get` found a node?",
+        "es": "En `set`, ¿por qué funciona `if (target)` para revisar si `get` encontró un nodo?"
       },
       "options": [
         {
@@ -84,8 +84,8 @@
           "es": "Porque `get` lanza un error cuando no encuentra nada"
         },
         {
-          "en": "It doesn't: you must check `temp !== null`",
-          "es": "No funciona: tienes que revisar `temp !== null`"
+          "en": "It doesn't: you must check `target !== null`",
+          "es": "No funciona: tienes que revisar `target !== null`"
         },
         {
           "en": "A node is an object, which is truthy, and `undefined` is falsy",
@@ -98,8 +98,8 @@
         "es": "¿Cuáles son las dos únicas cosas que puede regresar `get`?"
       },
       "explanation": {
-        "en": "`get` returns a node or `undefined`. Every object is truthy and `undefined` is falsy, so `if (temp)` runs exactly when there's a node to change.",
-        "es": "`get` regresa un nodo o `undefined`. Todo objeto es truthy y `undefined` es falsy, así que `if (temp)` corre justo cuando hay un nodo que cambiar."
+        "en": "`get` returns a node or `undefined`. Every object is truthy and `undefined` is falsy, so `if (target)` runs exactly when there's a node to change.",
+        "es": "`get` regresa un nodo o `undefined`. Todo objeto es truthy y `undefined` es falsy, así que `if (target)` corre justo cuando hay un nodo que cambiar."
       }
     },
     {
@@ -109,11 +109,11 @@
         "es": "Escribe `set(index, value)` en la clase `LinkedList`, reusando `this.get(index)`. Si hay un nodo en `index`, cambia su valor y regresa `true`; si no, regresa `false`."
       },
       "hint": {
-        "en": "`const temp = this.get(index)`, then `if (temp) { temp.value = value; return true }`, and `return false` after the `if`.",
-        "es": "`const temp = this.get(index)`, luego `if (temp) { temp.value = value; return true }`, y `return false` después del `if`."
+        "en": "`const target = this.get(index)`, then `if (target) { target.value = value; return true }`, and `return false` after the `if`.",
+        "es": "`const target = this.get(index)`, luego `if (target) { target.value = value; return true }`, y `return false` después del `if`."
       },
-      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  get(index) {\n    if (index < 0 || index >= this.length) {\n      return undefined\n    }\n    let temp = this.head\n    for (let i = 0; i < index; i++) {\n      temp = temp.next\n    }\n    return temp\n  }\n\n  set(index, value) {\n    // 1. temp = this.get(index): the node, or undefined\n    // 2. if temp is a node: change its value, return true\n    // 3. otherwise, return false\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
-      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  get(index) {\n    if (index < 0 || index >= this.length) {\n      return undefined\n    }\n    let temp = this.head\n    for (let i = 0; i < index; i++) {\n      temp = temp.next\n    }\n    return temp\n  }\n\n  set(index, value) {\n    const temp = this.get(index)\n    if (temp) {\n      temp.value = value\n      return true\n    }\n    return false\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const firstNode = new Node(value)\n      this.head = firstNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const nodeToAdd = new Node(value)\n    if (!this.head) {\n      this.head = nodeToAdd\n      this.tail = nodeToAdd\n    } else {\n      this.tail.next = nodeToAdd\n      this.tail = nodeToAdd\n    }\n    this.length++\n    return this\n  }\n\n  get(index) {\n    if (index < 0 || index >= this.length) {\n      return undefined\n    }\n    let current = this.head\n    for (let i = 0; i < index; i++) {\n      current = current.next\n    }\n    return current\n  }\n\n  set(index, value) {\n    // 1. target = this.get(index): the node, or undefined\n    // 2. if target is a node: change its value, return true\n    // 3. otherwise, return false\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let current = this.head\n    while (current !== null) {\n      values.push(current.value)\n      current = current.next\n    }\n    return values\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const firstNode = new Node(value)\n      this.head = firstNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const nodeToAdd = new Node(value)\n    if (!this.head) {\n      this.head = nodeToAdd\n      this.tail = nodeToAdd\n    } else {\n      this.tail.next = nodeToAdd\n      this.tail = nodeToAdd\n    }\n    this.length++\n    return this\n  }\n\n  get(index) {\n    if (index < 0 || index >= this.length) {\n      return undefined\n    }\n    let current = this.head\n    for (let i = 0; i < index; i++) {\n      current = current.next\n    }\n    return current\n  }\n\n  set(index, value) {\n    const target = this.get(index)\n    if (target) {\n      target.value = value\n      return true\n    }\n    return false\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let current = this.head\n    while (current !== null) {\n      values.push(current.value)\n      current = current.next\n    }\n    return values\n  }\n}",
       "kind": "class",
       "className": "LinkedList",
       "tests": [

@@ -52,30 +52,30 @@ console.log(justAna.pop(), justAna.length) // Ana 0: ahora el array está vacío
 
 ## Dividirlo en pasos
 
-Paso 3: el plan. La parte difícil es la caminata, así que primero la idea. Usa **dos punteros** que recorren la fila juntos: **`temp`** va adelante, y **`pre`** (de "previo") se queda **un nodo atrás**. En cada vuelta del bucle, `pre` se mueve a donde está `temp`, y luego `temp` avanza un nodo. Cuando `temp` ya no tiene `next`, está en el último nodo, y `pre` está en el nodo justo antes: exactamente el que necesita `tail`.
+Paso 3: el plan. La parte difícil es la caminata, así que primero la idea. Usa **dos punteros** que recorren la fila juntos: **`current`** va adelante, y **`previous`** (de "previo") se queda **un nodo atrás**. En cada vuelta del bucle, `previous` se mueve a donde está `current`, y luego `current` avanza un nodo. Cuando `current` ya no tiene `next`, está en el último nodo, y `previous` está en el nodo justo antes: exactamente el que necesita `tail`.
 
 ```js
 pop() {
   // 1. si la lista está vacía, regresa undefined
-  // 2. temp y pre empiezan en head
-  // 3. camina: mientras temp tenga next, pre = temp y luego temp avanza
-  //    (temp termina en el último nodo, pre en el de antes)
-  // 4. tail se mueve a pre, y el next del nuevo tail se vuelve null
+  // 2. current y previous empiezan en head
+  // 3. camina: mientras current tenga next, previous = current y luego current avanza
+  //    (current termina en el último nodo, previous en el de antes)
+  // 4. tail se mueve a previous, y el next del nuevo tail se vuelve null
   // 5. réstale 1 a length
   // 6. si length ahora es 0, head y tail se vuelven null
-  // 7. regresa temp
+  // 7. regresa current
 }
 ```
 
-¿Por qué `while (temp.next !== null)` y no `while (temp !== null)`, como el recorrido de la lección 3? Porque queremos que la caminata se detenga **en** el último nodo, no después de él. (También podrías contar con un bucle `for` hasta `this.length`, pero el `while` dice justo lo que queremos: camina hasta que no haya siguiente nodo.)
+¿Por qué `while (current.next !== null)` y no `while (current !== null)`, como el recorrido de la lección 3? Porque queremos que la caminata se detenga **en** el último nodo, no después de él. (También podrías contar con un bucle `for` hasta `this.length`, pero el `while` dice justo lo que queremos: camina hasta que no haya siguiente nodo.)
 
 ```viz
 linked-list-pop-plan
 ```
 
-**Qué acaba de pasar:** en una fila de tres, `temp` y `pre` empezaron en Ana y caminaron hasta que `temp` quedó en Cleo, el último invitado, con `pre` en Ben. `tail` se movió a Ben, el `next` de Ben se volvió `null`, la longitud bajó a 2, y se regresó el nodo de Cleo. El paso 6 solo hizo algo en la fila de un invitado: cuando Ana se fue, la longitud era 0, así que `head` y `tail` regresaron a `null`.
+**Qué acaba de pasar:** en una fila de tres, `current` y `previous` empezaron en Ana y caminaron hasta que `current` quedó en Cleo, el último invitado, con `previous` en Ben. `tail` se movió a Ben, el `next` de Ben se volvió `null`, la longitud bajó a 2, y se regresó el nodo de Cleo. El paso 6 solo hizo algo en la fila de un invitado: cuando Ana se fue, la longitud era 0, así que `head` y `tail` regresaron a `null`.
 
-**Error común:** caminar con `while (temp !== null)`. Entonces el bucle corre una vez de más, `temp` termina en `null`, y `pre` termina en el **último** nodo en vez del de antes. Te pasaste justo del nodo que necesitabas.
+**Error común:** caminar con `while (current !== null)`. Entonces el bucle corre una vez de más, `current` termina en `null`, y `previous` termina en el **último** nodo en vez del de antes. Te pasaste justo del nodo que necesitabas.
 
 ## Escribir el código
 
@@ -83,28 +83,28 @@ Paso 4: primero el caso común, luego los casos especiales. Con dos o más invit
 
 ```js
 pop() {
-  let temp = this.head
-  let pre = this.head
-  while (temp.next !== null) {
-    pre = temp
-    temp = temp.next
+  let current = this.head
+  let previous = this.head
+  while (current.next !== null) {
+    previous = current
+    current = current.next
   }
-  this.tail = pre
+  this.tail = previous
   this.tail.next = null
   this.length--
-  return temp
+  return current
 }
 ```
 
-Ahora los casos especiales. **La lista vacía:** `temp.next` truena cuando `temp` es `null`, así que revisa primero, arriba de todo: `if (!this.head) { return undefined }`.
+Ahora los casos especiales. **La lista vacía:** `current.next` truena cuando `current` es `null`, así que revisa primero, arriba de todo: `if (!this.head) { return undefined }`.
 
-**Un invitado:** recorre el código de arriba con solo Ana en la fila. `temp` y `pre` empiezan en Ana. `temp.next` ya es `null`, así que el bucle nunca corre. `this.tail = pre` no cambia nada (tail ya estaba en Ana), y `this.tail.next = null` tampoco (ya era `null`). `this.length--` deja la longitud en 0. Y entonces... `head` y `tail` **todavía apuntan a Ana**. Así que justo después de restar, agrega: si la longitud ahora es 0, pon `head` y `tail` en `null`. Tiene que ir **después** de `this.length--`, porque es ahí cuando la longitud se vuelve 0.
+**Un invitado:** recorre el código de arriba con solo Ana en la fila. `current` y `previous` empiezan en Ana. `current.next` ya es `null`, así que el bucle nunca corre. `this.tail = previous` no cambia nada (tail ya estaba en Ana), y `this.tail.next = null` tampoco (ya era `null`). `this.length--` deja la longitud en 0. Y entonces... `head` y `tail` **todavía apuntan a Ana**. Así que justo después de restar, agrega: si la longitud ahora es 0, pon `head` y `tail` en `null`. Tiene que ir **después** de `this.length--`, porque es ahí cuando la longitud se vuelve 0.
 
 ```viz
 trace-ll-pop
 ```
 
-**Qué acaba de pasar:** con 4 invitados, `temp` y `pre` caminaron juntos hasta que `temp` quedó en Dev y `pre` en Cleo; luego `tail` se movió a Cleo y Dev se soltó, después de visitar 4 nodos. Con 1 invitado, el bucle no corrió, y solo la revisión de `length === 0` vació la fila. Con 0 invitados, el primer `if` regresó `undefined` de inmediato.
+**Qué acaba de pasar:** con 4 invitados, `current` y `previous` caminaron juntos hasta que `current` quedó en Dev y `previous` en Cleo; luego `tail` se movió a Cleo y Dev se soltó, después de visitar 4 nodos. Con 1 invitado, el bucle no corrió, y solo la revisión de `length === 0` vació la fila. Con 0 invitados, el primer `if` regresó `undefined` de inmediato.
 
 ```js-run
 class Node {
@@ -120,21 +120,21 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      this.tail.next = newNode
-      this.tail = newNode
+      this.tail.next = nodeToAdd
+      this.tail = nodeToAdd
     }
     this.length++
     return this
@@ -144,20 +144,20 @@ class LinkedList {
     if (!this.head) {
       return undefined
     }
-    let temp = this.head
-    let pre = this.head
-    while (temp.next !== null) {
-      pre = temp
-      temp = temp.next
+    let current = this.head
+    let previous = this.head
+    while (current.next !== null) {
+      previous = current
+      current = current.next
     }
-    this.tail = pre
+    this.tail = previous
     this.tail.next = null
     this.length--
     if (this.length === 0) {
       this.head = null
       this.tail = null
     }
-    return temp
+    return current
   }
 }
 
@@ -175,7 +175,7 @@ console.log(line.head, line.tail, line.length) // null null 0
 
 Paso 5: el Big O, y algo que mejorar.
 
-**Big O:** pop recorre toda la fila para encontrar el nodo antes del tail, así que es **O(n) en tiempo**. Solo usa dos punteros extra, `temp` y `pre`, sin importar lo larga que sea la fila: **O(1) en espacio**. En un array, `pop` es O(1). Esta es la única operación en los extremos de la fila donde ganan los arrays.
+**Big O:** pop recorre toda la fila para encontrar el nodo antes del tail, así que es **O(n) en tiempo**. Solo usa dos punteros extra, `current` y `previous`, sin importar lo larga que sea la fila: **O(1) en espacio**. En un array, `pop` es O(1). Esta es la única operación en los extremos de la fila donde ganan los arrays.
 
 **¿Podemos hacerlo O(1)?** Podrías pensar: solo guarda otro puntero al nodo antes del tail. Pero después de un pop, necesitarías el nodo antes de **ese**, y estarías caminando otra vez. El arreglo de verdad es que cada nodo también apunte **hacia atrás**, con un puntero `prev` junto a `next`. Así el nodo antes del tail siempre es `tail.prev`, a un paso. Una lista así es una **lista doblemente enlazada**, y es el siguiente módulo.
 
@@ -189,10 +189,10 @@ for (let i = 0; i < sizes.length; i++) {
   for (let k = sizes[i]; k >= 1; k--) {
     head = { value: 'Invitado ' + k, next: head }
   }
-  let temp = head
+  let current = head
   let visited = 1
-  while (temp.next !== null) {
-    temp = temp.next
+  while (current.next !== null) {
+    current = current.next
     visited++
   }
   console.log(sizes[i] + ' invitados: ' + visited + ' nodos visitados')

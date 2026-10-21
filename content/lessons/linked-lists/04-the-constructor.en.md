@@ -121,15 +121,15 @@ For the list, start with the common case, a value that was given. Many linked li
 ```js
 class LinkedList {
   constructor(value) {
-    const newNode = new Node(value)
-    this.head = newNode
+    const firstNode = new Node(value)
+    this.head = firstNode
     this.tail = this.head
     this.length = 1
   }
 }
 ```
 
-`new Node(value)` runs the Node constructor and gives back a node, and `newNode` points to it. `this.head = newNode` points the list's `head` at that node. `this.tail = this.head` means "point `tail` wherever `head` points", which is the same node. `this.length = 1` records one guest. Every line uses `this`, because these are properties of **this** list: the one `new` is building.
+`new Node(value)` runs the Node constructor and gives back a node, and `firstNode` points to it. `this.head = firstNode` points the list's `head` at that node. `this.tail = this.head` means "point `tail` wherever `head` points", which is the same node. `this.length = 1` records one guest. Every line uses `this`, because these are properties of **this** list: the one `new` is building.
 
 Now the edge case. Start every list empty, and wrap the common case in `if (value !== undefined)`, so a missing value skips it:
 
@@ -153,8 +153,8 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
@@ -169,7 +169,7 @@ const empty = new LinkedList()
 console.log(empty.head, empty.tail, empty.length) // null null 0
 ```
 
-**Common mistake:** writing `head = newNode` without `this.`. Inside a class, that's an error ("head is not defined"), because `head` isn't a variable: it's a property of the list, and the list is `this`.
+**Common mistake:** writing `head = firstNode` without `this.`. Inside a class, that's an error ("head is not defined"), because `head` isn't a variable: it's a property of the list, and the list is `this`.
 
 ## Look back
 
@@ -177,7 +177,7 @@ console.log(empty.head, empty.tail, empty.length) // null null 0
 
 **Big O:** the constructor does the same few assignments whatever the value is, so it's **O(1) time**. It makes one node at most, so it's **O(1) space**. That's the same as making an array with one item, like `['Ana']`.
 
-**One refactor to think about:** `this.tail = this.head` and `this.tail = newNode` do exactly the same thing. Both point `tail` at the one node that `newNode` and `head` already point to. Neither makes a copy: from the pointers lesson, `=` with an object copies the arrow, not the object. We'll keep `this.tail = this.head`, because it reads as "the tail starts where the head is", but either one is correct.
+**One refactor to think about:** `this.tail = this.head` and `this.tail = firstNode` do exactly the same thing. Both point `tail` at the one node that `firstNode` and `head` already point to. Neither makes a copy: from the pointers lesson, `=` with an object copies the arrow, not the object. We'll keep `this.tail = this.head`, because it reads as "the tail starts where the head is", but either one is correct.
 
 **What the empty start means for later:** because our list can be empty, every method from now on has to handle `head === null`. That's why the empty list is always the first example: in `push`, adding to an empty list has to set `head` too, not just `tail`.
 
@@ -195,10 +195,10 @@ class Node {
   }
 }
 
-const newNode = new Node('Ana')
-const head = newNode
+const firstNode = new Node('Ana')
+const head = firstNode
 const tailOne = head // like this.tail = this.head
-const tailTwo = newNode // like this.tail = newNode
+const tailTwo = firstNode // like this.tail = firstNode
 console.log(tailOne === tailTwo) // true: the same node either way
 ```
 

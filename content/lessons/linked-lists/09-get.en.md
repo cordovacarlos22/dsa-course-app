@@ -57,13 +57,13 @@ Step 3: the plan as comments.
 ```js
 get(index) {
   // 1. if index < 0 or index >= length, return undefined
-  // 2. temp starts at head (index 0)
-  // 3. move temp forward, index times
-  // 4. return temp
+  // 2. current starts at head (index 0)
+  // 3. move current forward, index times
+  // 4. return current
 }
 ```
 
-Step 3 is a walk, but not the open-ended walk of pop. Here we know **exactly how many moves** we need: to reach index 2, move 2 times. When you know the count in advance, a `for` loop is the natural fit: `for (let i = 0; i < index; i++) { temp = temp.next }`. pop used `while`, because it didn't know where the end was until it saw `null`.
+Step 3 is a walk, but not the open-ended walk of pop. Here we know **exactly how many moves** we need: to reach index 2, move 2 times. When you know the count in advance, a `for` loop is the natural fit: `for (let i = 0; i < index; i++) { current = current.next }`. pop used `while`, because it didn't know where the end was until it saw `null`.
 
 The range check comes first because it makes everything after it safe. Once an index has passed it, the walk can never run off the end of the line.
 
@@ -71,9 +71,9 @@ The range check comes first because it makes everything after it safe. Once an i
 linked-list-get-plan
 ```
 
-**What just happened:** the range check passed for index 2. `temp` started at `head`, on index 0, and moved forward once per count: to Ben (1), then Cleo (2). Two moves for index 2, and then `temp` was returned.
+**What just happened:** the range check passed for index 2. `current` started at `head`, on index 0, and moved forward once per count: to Ben (1), then Cleo (2). Two moves for index 2, and then `current` was returned.
 
-**Common mistake:** an off-by-one in the loop, like `i <= index` or starting `i` at 1. Either makes `temp` move one time too many or too few. Check the loop on the smallest example: `get(0)` must not move at all.
+**Common mistake:** an off-by-one in the loop, like `i <= index` or starting `i` at 1. Either makes `current` move one time too many or too few. Check the loop on the smallest example: `get(0)` must not move at all.
 
 ## Write the code
 
@@ -81,15 +81,15 @@ Step 4: the common case first, then the edge case. With an index that exists, `g
 
 ```js
 get(index) {
-  let temp = this.head
+  let current = this.head
   for (let i = 0; i < index; i++) {
-    temp = temp.next
+    current = current.next
   }
-  return temp
+  return current
 }
 ```
 
-Then the edge case: an index that doesn't exist. Without a check, `get(10)` on four guests moves `temp` onto `null` and then crashes trying to read `null.next`. So the range check goes at the top, and returns `undefined` before any walking starts. The check comes straight from step 2's examples: below 0, or `length` and above.
+Then the edge case: an index that doesn't exist. Without a check, `get(10)` on four guests moves `current` onto `null` and then crashes trying to read `null.next`. So the range check goes at the top, and returns `undefined` before any walking starts. The check comes straight from step 2's examples: below 0, or `length` and above.
 
 ```viz
 trace-ll-get
@@ -111,21 +111,21 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      this.tail.next = newNode
-      this.tail = newNode
+      this.tail.next = nodeToAdd
+      this.tail = nodeToAdd
     }
     this.length++
     return this
@@ -135,11 +135,11 @@ class LinkedList {
     if (index < 0 || index >= this.length) {
       return undefined
     }
-    let temp = this.head
+    let current = this.head
     for (let i = 0; i < index; i++) {
-      temp = temp.next
+      current = current.next
     }
-    return temp
+    return current
   }
 }
 
@@ -156,9 +156,9 @@ console.log(line.get(-1)) // undefined
 
 Step 5: the Big O, and one design choice to think about.
 
-**Big O:** `get` walks up to `index` nodes, and the worst case is the last index, which walks the whole line: **O(n) time**. It uses one extra pointer, `temp`: **O(1) space**. An array does the same job in O(1) with `guests[index]`, and that's the biggest difference between the two structures.
+**Big O:** `get` walks up to `index` nodes, and the worst case is the last index, which walks the whole line: **O(n) time**. It uses one extra pointer, `current`: **O(1) space**. An array does the same job in O(1) with `guests[index]`, and that's the biggest difference between the two structures.
 
-**Why return the node, not the value?** Returning `temp.value` would be fine for someone who only wants to read a name. But the next three methods need the **node itself**. `set` changes the node's value, and `insert` and `remove` link new arrows around it. Returning the node makes `get` the shared first step of all three, and reading the value is still one `.value` away.
+**Why return the node, not the value?** Returning `current.value` would be fine for someone who only wants to read a name. But the next three methods need the **node itself**. `set` changes the node's value, and `insert` and `remove` link new arrows around it. Returning the node makes `get` the shared first step of all three, and reading the value is still one `.value` away.
 
 **Could it be faster?** For an index in the second half of the line, walking from the tail would be shorter, but a singly linked list can't walk backwards. A doubly linked list can, and its `get` uses exactly that trick: start from whichever end is closer.
 
@@ -174,4 +174,4 @@ for (let index = 0; index < length; index++) {
 }
 ```
 
-**Common mistake:** calling `get` inside a loop to visit every node: `for (let i = 0; i < line.length; i++) { line.get(i) }`. Each `get` walks from the start again, so the loop does 0 + 1 + 2 + … moves: O(n²). To visit every node, walk once with `temp`, like `toArray` does.
+**Common mistake:** calling `get` inside a loop to visit every node: `for (let i = 0; i < line.length; i++) { line.get(i) }`. Each `get` walks from the start again, so the loop does 0 + 1 + 2 + … moves: O(n²). To visit every node, walk once with `current`, like `toArray` does.
