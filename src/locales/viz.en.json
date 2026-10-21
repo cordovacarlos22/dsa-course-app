@@ -721,23 +721,23 @@
     "outside": "{{char}} has code {{code}}. It's outside every green block: not a letter or a digit.",
     "summary": "Three range checks answer the question, with no regular expression. Watch the edges: '[' is 91, one past 'Z', and '`' is 96, one before 'a'."
   },
-  "cookieCutter": {
-    "classLabel": "The class (the cutter)",
-    "instancesLabel": "The instances (the cookies)",
+  "invitationTemplate": {
+    "classLabel": "The class (the template)",
+    "instancesLabel": "The instances (the invitations)",
     "instances": {
-      "title": "One class, many cookies",
-      "start": "class Cookie is the cookie cutter: a shape you can use again and again. On its own, it isn't a cookie yet.",
-      "first": "new Cookie('chocolate') stamps out the first cookie, an instance named cookieOne, with its own flavor.",
-      "second": "The same cutter makes a second instance, cookieTwo. Same shape, different flavor.",
-      "summary": "One class, two instances. Each cookie keeps its own data, and you can stamp out as many as you need."
+      "title": "One class, many invitations",
+      "start": "class Invitation is the template: one design you can print again and again. On its own, it isn't an invitation yet.",
+      "first": "new Invitation('Ana') prints the first invitation, an instance named forAna, with its own guest.",
+      "second": "The same template prints a second instance, forBen. Same design, different guest.",
+      "summary": "One class, two instances. Each invitation keeps its own data, and you can print as many as you need."
     },
     "new": {
       "title": "What new does, in four small steps",
-      "start": "new Cookie('chocolate') looks like one action, but JavaScript does four things.",
+      "start": "new Invitation('Ana') looks like one action, but JavaScript does four things.",
       "empty": "1. It makes a brand-new, empty object.",
-      "this": "2. It points this at that object, so the constructor knows which cookie it's building.",
-      "run": "3. It runs the constructor. this.flavor = 'chocolate' writes the flavor onto the new object.",
-      "returned": "4. It returns the finished object, and cookieOne now points to it.",
+      "this": "2. It points this at that object, so the constructor knows which invitation it's filling in.",
+      "run": "3. It runs the constructor. this.guest = 'Ana' writes the guest's name onto the new object.",
+      "returned": "4. It returns the finished object, and forAna now points to it.",
       "parts": [
         "Make an empty object",
         "Point this at it",
@@ -746,13 +746,13 @@
       ]
     },
     "methods": {
-      "title": "Getters and setters: each cookie answers for itself",
-      "start": "Two instances of the same class: cookieOne is chocolate and cookieTwo is vanilla.",
-      "getOne": "cookieOne.getFlavor() runs with this pointing at cookieOne, so it returns 'chocolate'.",
-      "getTwo": "Same method, called on cookieTwo: this is cookieTwo now, so it returns 'vanilla'.",
-      "set": "cookieOne.setFlavor('oatmeal') changes only cookieOne. cookieTwo isn't touched.",
-      "getAgain": "Reading it again shows the change: cookieOne.getFlavor() is now 'oatmeal'.",
-      "summary": "Getters read an instance's data and setters change it. Both work on this: whichever cookie you called them on."
+      "title": "Getters and setters: each invitation answers for itself",
+      "start": "Two instances of the same class: forAna is for Ana and forBen is for Ben.",
+      "getOne": "forAna.getGuest() runs with this pointing at forAna, so it returns 'Ana'.",
+      "getTwo": "Same method, called on forBen: this is forBen now, so it returns 'Ben'.",
+      "set": "Ben's invitation had the wrong name. forBen.setGuest('Benny') fixes only forBen. forAna isn't touched.",
+      "getAgain": "Reading it again shows the change: forBen.getGuest() is now 'Benny'.",
+      "summary": "Getters read an instance's data and setters change it. Both work on this: whichever invitation you called them on."
     }
   },
   "listClassPreview": {

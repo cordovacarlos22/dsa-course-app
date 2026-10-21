@@ -6,143 +6,143 @@ minutes: 12
 
 > **Goal:** write a class with a constructor and methods, know what `new` and `this` do, and see why every data structure in this course is a class.
 
-## A class is a cookie cutter
+## A class is an invitation template
 
-So far you've kept data in arrays and objects, and written functions that work on that data. A **class** puts both in one place: it describes what data something holds **and** what you can do with it. Think of a **cookie cutter**. The cutter isn't a cookie. It's a shape you use to stamp out as many cookies as you want, and every cookie it makes has the same shape.
+So far you've kept data in arrays and objects, and written functions that work on that data. A **class** puts both in one place: it describes what data something holds **and** what you can do with it. Think of the **invitation template** for our party. The template isn't an invitation. It's a design you use to print as many invitations as you want, and every invitation it prints has the same layout, with a different guest's name on it.
 
-In code, the cutter is the **class**, and each cookie it makes is an **instance** of that class (you'll also hear "an object created from the class"). Here's a `Cookie` class. By convention, class names start with a **capital letter** (`Cookie`, `LinkedList`), which makes them easy to tell apart from ordinary variables and functions (`cookie`, `push`):
+In code, the template is the **class**, and each invitation it prints is an **instance** of that class (you'll also hear "an object created from the class"). Here's an `Invitation` class. By convention, class names start with a **capital letter** (`Invitation`, `LinkedList`), which makes them easy to tell apart from ordinary variables and functions (`invitation`, `push`):
 
 ```js
-class Cookie {
-  constructor(flavor) {
-    this.flavor = flavor
+class Invitation {
+  constructor(guest) {
+    this.guest = guest
   }
 }
 ```
 
-That's already a complete class. It's tiny, but it can make cookies, and every cookie it makes gets its own `flavor`.
+That's already a complete class. It's tiny, but it can make invitations, and every invitation it makes gets its own `guest`.
 
 ```viz
-cookie-cutter
+invitation-template
 ```
 
-**What just happened:** the class stayed the same the whole time: it's the cutter. `new Cookie('chocolate')` stamped out the first instance, and `new Cookie('vanilla')` stamped out a second one. Both have the same shape (a `flavor`), but each keeps its **own** value. Making a thousand more cookies wouldn't change the cutter at all.
+**What just happened:** the class stayed the same the whole time: it's the template. `new Invitation('Ana')` printed the first instance, and `new Invitation('Ben')` printed a second one. Both have the same layout (a `guest`), but each keeps its **own** value. Printing a thousand more invitations wouldn't change the template at all.
 
-Run it, and notice the last line: two cookies made from the same class are still two different objects.
+Run it, and notice the last line: two invitations made from the same class are still two different objects.
 
 ```js-run
-class Cookie {
-  constructor(flavor) {
-    this.flavor = flavor
+class Invitation {
+  constructor(guest) {
+    this.guest = guest
   }
 }
 
-const cookieOne = new Cookie('chocolate')
-const cookieTwo = new Cookie('vanilla')
+const forAna = new Invitation('Ana')
+const forBen = new Invitation('Ben')
 
-console.log(cookieOne.flavor)
-console.log(cookieTwo.flavor)
-console.log(cookieOne === cookieTwo) // false: two different cookies
+console.log(forAna.guest)
+console.log(forBen.guest)
+console.log(forAna === forBen) // false: two different invitations
 ```
 
-**Common mistake:** forgetting `new`. Without it, `Cookie('chocolate')` doesn't make a cookie: JavaScript stops with a `TypeError`, because a class can only be used with `new`.
+**Common mistake:** forgetting `new`. Without it, `Invitation('Ana')` doesn't make an invitation: JavaScript stops with a `TypeError`, because a class can only be used with `new`.
 
 ## The constructor, new and this
 
-Every class has a special method called the **constructor**. It's the code that runs when a new instance is created, and its job is to set that instance up: here, to store its flavor. The values you pass to the class, like `'chocolate'`, go straight to the constructor's parameters, like `flavor`.
+Every class has a special method called the **constructor**. It's the code that runs when a new instance is created, and its job is to set that instance up: here, to store its guest. The values you pass to the class, like `'Ana'`, go straight to the constructor's parameters, like `guest`.
 
-The keyword **`new`** is what calls the constructor. `new Cookie('chocolate')` looks like a single action, but JavaScript does four small things:
+The keyword **`new`** is what calls the constructor. `new Invitation('Ana')` looks like a single action, but JavaScript does four small things:
 
 1. It makes a brand-new, empty object.
 2. It points **`this`** at that object.
-3. It runs the constructor, which fills the object in (`this.flavor = 'chocolate'`).
+3. It runs the constructor, which fills the object in (`this.guest = 'Ana'`).
 4. It returns the finished object, which we usually store in a variable.
 
 ```viz
-cookie-new
+invitation-new
 ```
 
-**What just happened:** the object was built in front of you: empty, then pointed to by `this`, then filled in by the constructor, then handed to `cookieOne`. That's why the constructor writes `this.flavor` and not just `flavor`. `flavor` is the parameter that was passed in; `this.flavor` is the property stored on **this particular cookie**.
+**What just happened:** the object was built in front of you: empty, then pointed to by `this`, then filled in by the constructor, then handed to `forAna`. That's why the constructor writes `this.guest` and not just `guest`. `guest` is the parameter that was passed in; `this.guest` is the property stored on **this particular invitation**.
 
-**`this`** always means "the instance this code is running for". When the constructor runs for `cookieOne`, `this` is `cookieOne`. When it runs for `cookieTwo`, `this` is `cookieTwo`. The same line of code, `this.flavor = flavor`, writes to a different cookie each time, and that's how one class can make many instances without them getting in each other's way.
+**`this`** always means "the instance this code is running for". When the constructor runs for `forAna`, `this` is `forAna`. When it runs for `forBen`, `this` is `forBen`. The same line of code, `this.guest = guest`, writes to a different invitation each time, and that's how one class can make many instances without them getting in each other's way.
 
-A constructor can also set up properties that aren't passed in. Here, every new cookie starts out unbaked:
+A constructor can also set up properties that aren't passed in. Here, every new invitation starts out unsent:
 
 ```js-run
-class Cookie {
-  constructor(flavor) {
-    this.flavor = flavor
-    this.isBaked = false // every cookie starts raw
+class Invitation {
+  constructor(guest) {
+    this.guest = guest
+    this.isSent = false // every invitation starts unsent
   }
 }
 
-const cookieOne = new Cookie('chocolate')
-console.log(cookieOne.flavor, cookieOne.isBaked)
+const forAna = new Invitation('Ana')
+console.log(forAna.guest, forAna.isSent)
 ```
 
-**Common mistake:** writing `flavor = flavor` instead of `this.flavor = flavor` in the constructor. That only reassigns the parameter, so the cookie ends up with no flavor at all.
+**Common mistake:** writing `guest = guest` instead of `this.guest = guest` in the constructor. That only reassigns the parameter, so the invitation ends up with no guest at all.
 
 ## Methods: getters and setters
 
 A class can also have **methods**: functions that belong to the class and work on an instance's data. You write them inside the class, without the `function` keyword. Most methods fall into two broad groups. A **getter** reads some data from the instance and returns it. A **setter** changes the instance's data.
 
 ```js-run
-class Cookie {
-  constructor(flavor) {
-    this.flavor = flavor
+class Invitation {
+  constructor(guest) {
+    this.guest = guest
   }
 
-  getFlavor() {
-    return this.flavor
+  getGuest() {
+    return this.guest
   }
 
-  setFlavor(flavor) {
-    this.flavor = flavor
+  setGuest(guest) {
+    this.guest = guest
   }
 }
 
-const cookieOne = new Cookie('chocolate')
-const cookieTwo = new Cookie('vanilla')
+const forAna = new Invitation('Ana')
+const forBen = new Invitation('Ben')
 
-console.log(cookieOne.getFlavor())
-console.log(cookieTwo.getFlavor())
+console.log(forAna.getGuest())
+console.log(forBen.getGuest())
 
-cookieOne.setFlavor('oatmeal')
-console.log(cookieOne.getFlavor()) // changed
-console.log(cookieTwo.getFlavor()) // not changed
+forBen.setGuest('Benny') // the name was wrong on Ben's invitation
+console.log(forBen.getGuest()) // changed
+console.log(forAna.getGuest()) // not changed
 ```
 
 ```viz
-cookie-methods
+invitation-methods
 ```
 
-**What just happened:** `getFlavor` is written once, in the class, and every instance can use it. When you call `cookieOne.getFlavor()`, `this` is `cookieOne`; when you call `cookieTwo.getFlavor()`, `this` is `cookieTwo`. That's why the same method gave two different answers, and why `setFlavor` on one cookie never touched the other.
+**What just happened:** `getGuest` is written once, in the class, and every instance can use it. When you call `forAna.getGuest()`, `this` is `forAna`; when you call `forBen.getGuest()`, `this` is `forBen`. That's why the same method gave two different answers, and why `setGuest` on one invitation never touched the other.
 
-Why use methods at all, when you could just write `cookieOne.flavor = 'oatmeal'`? Because methods let the class decide how its data is used. A setter could check the new value first, or update two properties together so they never disagree. When you build a linked list, a method like `push` will keep the list's `head`, `tail` and `length` in sync, which is easy to get wrong if you edit those properties by hand.
+Why use methods at all, when you could just write `forBen.guest = 'Benny'`? Because methods let the class decide how its data is used. A setter could check the new value first, or update two properties together so they never disagree. When you build a linked list, a method like `push` will keep the list's `head`, `tail` and `length` in sync, which is easy to get wrong if you edit those properties by hand.
 
 You may also see JavaScript's own `get` and `set` syntax, which lets a method be read like a property:
 
 ```js
-class Cookie {
-  constructor(flavor) {
-    this._flavor = flavor
+class Invitation {
+  constructor(guest) {
+    this._guest = guest
   }
 
-  get flavor() {
-    return this._flavor
+  get guest() {
+    return this._guest
   }
 }
 
-new Cookie('chocolate').flavor // 'chocolate', no parentheses
+new Invitation('Ana').guest // 'Ana', no parentheses
 ```
 
-In this course we write getters and setters as plain methods, like `getFlavor()`, so it's always clear when a method runs.
+In this course we write getters and setters as plain methods, like `getGuest()`, so it's always clear when a method runs.
 
-**Common mistake:** forgetting the parentheses. `cookieOne.getFlavor` without `()` doesn't call the method: it gives you back the function itself.
+**Common mistake:** forgetting the parentheses. `forAna.getGuest` without `()` doesn't call the method: it gives you back the function itself.
 
 ## Every data structure is a class
 
-Why spend a lesson on cookies? Because **every data structure you'll build in this course is a class**. A linked list, a stack, a queue, a tree, a hash table, a graph: each one is a class with a constructor that sets it up and methods that do specific jobs with its data.
+Why spend a lesson on invitations? Because **every data structure you'll build in this course is a class**. A linked list, a stack, a queue, a tree, a hash table, a graph: each one is a class with a constructor that sets it up and methods that do specific jobs with its data.
 
 Here's a preview of the class you'll build in the next module. The constructor receives a value and creates the list with that first item. Then each method does one job: `push` adds an item at the end, `unshift` adds one at the start, `insert` adds one at a given index, `remove` takes out the item at an index, `pop` removes the last item and `shift` removes the first.
 
@@ -164,8 +164,8 @@ class LinkedList {
 list-class-preview
 ```
 
-**What just happened:** one `LinkedList` instance, `line`, went through every method. Each call did one specific thing, and because the methods belong to the class, `line.push(...)` always works on `line`'s own data. A second list made with `new LinkedList(...)` would have its own guests, and its methods would work on those, exactly like `cookieOne` and `cookieTwo`.
+**What just happened:** one `LinkedList` instance, `line`, went through every method. Each call did one specific thing, and because the methods belong to the class, `line.push(...)` always works on `line`'s own data. A second list made with `new LinkedList(...)` would have its own guests, and its methods would work on those, exactly like `forAna` and `forBen`.
 
-That's the power of classes: once a data structure is written as a class, you can create as many as you need with `new`, and each one carries its own data and its own set of tools. Creating an instance and calling a simple getter or setter like `getFlavor` are both **O(1)**: they do the same small amount of work no matter how many cookies exist. The methods you'll write in the coming modules won't all be that cheap, and measuring them with Big O is a big part of the job.
+That's the power of classes: once a data structure is written as a class, you can create as many as you need with `new`, and each one carries its own data and its own set of tools. Creating an instance and calling a simple getter or setter like `getGuest` are both **O(1)**: they do the same small amount of work no matter how many invitations exist. The methods you'll write in the coming modules won't all be that cheap, and measuring them with Big O is a big part of the job.
 
 **Common mistake:** thinking the class _is_ the data. The class is only the blueprint. The data lives in each instance you create with `new`.

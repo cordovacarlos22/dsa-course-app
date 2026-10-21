@@ -721,23 +721,23 @@
     "outside": "{{char}} tiene el código {{code}}. Está fuera de todos los bloques verdes: no es letra ni dígito.",
     "summary": "Tres revisiones de rango responden la pregunta, sin expresiones regulares. Cuidado con los bordes: '[' es 91, uno después de 'Z', y '`' es 96, uno antes de 'a'."
   },
-  "cookieCutter": {
-    "classLabel": "La clase (el molde)",
-    "instancesLabel": "Las instancias (las galletas)",
+  "invitationTemplate": {
+    "classLabel": "La clase (la plantilla)",
+    "instancesLabel": "Las instancias (las invitaciones)",
     "instances": {
-      "title": "Una clase, muchas galletas",
-      "start": "class Cookie es el molde para galletas: una forma que puedes usar una y otra vez. Por sí sola, todavía no es una galleta.",
-      "first": "new Cookie('chocolate') hace la primera galleta, una instancia llamada cookieOne, con su propio sabor.",
-      "second": "El mismo molde hace una segunda instancia, cookieTwo. La misma forma, otro sabor.",
-      "summary": "Una clase, dos instancias. Cada galleta guarda sus propios datos, y puedes hacer todas las que necesites."
+      "title": "Una clase, muchas invitaciones",
+      "start": "class Invitation es la plantilla: un diseño que puedes imprimir una y otra vez. Por sí sola, todavía no es una invitación.",
+      "first": "new Invitation('Ana') imprime la primera invitación, una instancia llamada forAna, con su propio invitado.",
+      "second": "La misma plantilla imprime una segunda instancia, forBen. El mismo diseño, otro invitado.",
+      "summary": "Una clase, dos instancias. Cada invitación guarda sus propios datos, y puedes imprimir todas las que necesites."
     },
     "new": {
       "title": "Lo que hace new, en cuatro pasos pequeños",
-      "start": "new Cookie('chocolate') parece una sola acción, pero JavaScript hace cuatro cosas.",
+      "start": "new Invitation('Ana') parece una sola acción, pero JavaScript hace cuatro cosas.",
       "empty": "1. Crea un objeto nuevo y vacío.",
-      "this": "2. Hace que this apunte a ese objeto, para que el constructor sepa qué galleta está construyendo.",
-      "run": "3. Ejecuta el constructor. this.flavor = 'chocolate' escribe el sabor en el objeto nuevo.",
-      "returned": "4. Regresa el objeto terminado, y ahora cookieOne apunta a él.",
+      "this": "2. Hace que this apunte a ese objeto, para que el constructor sepa qué invitación está llenando.",
+      "run": "3. Ejecuta el constructor. this.guest = 'Ana' escribe el nombre del invitado en el objeto nuevo.",
+      "returned": "4. Regresa el objeto terminado, y ahora forAna apunta a él.",
       "parts": [
         "Crear un objeto vacío",
         "Hacer que this apunte a él",
@@ -746,13 +746,13 @@
       ]
     },
     "methods": {
-      "title": "Getters y setters: cada galleta responde por sí misma",
-      "start": "Dos instancias de la misma clase: cookieOne es de chocolate y cookieTwo es de vainilla.",
-      "getOne": "cookieOne.getFlavor() corre con this apuntando a cookieOne, así que regresa 'chocolate'.",
-      "getTwo": "El mismo método, llamado en cookieTwo: ahora this es cookieTwo, así que regresa 'vanilla'.",
-      "set": "cookieOne.setFlavor('oatmeal') cambia solo a cookieOne. A cookieTwo no le pasa nada.",
-      "getAgain": "Al leerlo otra vez se ve el cambio: cookieOne.getFlavor() ahora es 'oatmeal'.",
-      "summary": "Los getters leen los datos de una instancia y los setters los cambian. Los dos trabajan con this: la galleta en la que los llamaste."
+      "title": "Getters y setters: cada invitación responde por sí misma",
+      "start": "Dos instancias de la misma clase: forAna es para Ana y forBen es para Ben.",
+      "getOne": "forAna.getGuest() corre con this apuntando a forAna, así que regresa 'Ana'.",
+      "getTwo": "El mismo método, llamado en forBen: ahora this es forBen, así que regresa 'Ben'.",
+      "set": "La invitación de Ben tenía mal el nombre. forBen.setGuest('Benny') corrige solo a forBen. A forAna no le pasa nada.",
+      "getAgain": "Al leerlo otra vez se ve el cambio: forBen.getGuest() ahora es 'Benny'.",
+      "summary": "Los getters leen los datos de una instancia y los setters los cambian. Los dos trabajan con this: la invitación en la que los llamaste."
     }
   },
   "listClassPreview": {

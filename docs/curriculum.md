@@ -208,14 +208,14 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 **Goal:** write classes and understand references, the two tools behind every data structure.
 **Place:** it opens the Data Structures section, right before Linked Lists (Carlos, 2026-10-19), because both courses teach classes right before their first data structure.
 **Sources:** course 1's Section 3 (2 lectures and `cookie.js`). Course 2's class lecture (instance vs. static methods) joins when Carlos sends it.
-**Style:** theory first; cookies with flavors for classes, and guest cards (`{ value: 'Ana' }`) for pointers.
+**Style:** theory first; party invitations printed from a template for classes (our own picture, not the course's cookie cutter), and guest cards (`{ value: 'Ana' }`) for pointers.
 
 - **Lessons** (sources and animations in parentheses):
-  1. Classes: the blueprint for every data structure ✅ (C1 classes lecture: `cookie-cutter`, `cookie-new`, `cookie-methods`, `list-class-preview`)
+  1. Classes: the blueprint for every data structure ✅ (C1 classes lecture: `invitation-template`, `invitation-new`, `invitation-methods`, `list-class-preview`)
   2. Pointers: values vs. references ✅ (C1 pointers lecture: `value-copy`, `reference-copy`, `pointer-move`)
   3. Instance methods vs. static (class) methods ⬜ (waits for course 2's lecture)
 - **Quiz:** classes vs. instances, naming, `constructor`, what `new` does (and forgetting it), `this`, getters/setters, why data structures are classes, copying values vs. sharing references, `===` on objects, moving pointers, garbage collection (and removed list nodes). Static methods come with lesson 3.
-- **Build it:** ✅ The Cookie Class · ✅ The Door Counter (`Counter`: increment, decrement, reset) · A `Point` class with a static `distance` method (with course 2's lecture)
+- **Build it:** ✅ The Invitation Class · ✅ The Door Counter (`Counter`: increment, decrement, reset) · A `Point` class with a static `distance` method (with course 2's lecture)
 - **Interview problems:** none.
 
 ## Linked Lists (`linked-lists`)

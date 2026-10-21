@@ -162,11 +162,11 @@ describe('classes and pointers animations', () => {
     }
   }
 
-  it('changes one cookie without touching the other', async () => {
-    await renderAtStep('cookie-methods', 3)
-    expect(screen.getByText("'oatmeal'")).toBeInTheDocument()
-    expect(screen.getByText("'vanilla'")).toBeInTheDocument()
-    expect(screen.queryByText("'chocolate'")).not.toBeInTheDocument()
+  it('changes one invitation without touching the other', async () => {
+    await renderAtStep('invitation-methods', 3)
+    expect(screen.getByText("'Benny'")).toBeInTheDocument()
+    expect(screen.getByText("'Ana'")).toBeInTheDocument()
+    expect(screen.queryByText("'Ben'")).not.toBeInTheDocument()
   })
 
   it('shows two variables pointing to the same object', async () => {

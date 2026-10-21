@@ -13,7 +13,7 @@ import BinarySearchHalving from './BinarySearchHalving'
 import CharCodeRanges from './CharCodeRanges'
 import CodeTrace from './CodeTrace'
 import ConstantJump from './ConstantJump'
-import CookieCutter from './CookieCutter'
+import InvitationTemplate from './InvitationTemplate'
 import DominantTerm from './DominantTerm'
 import ExampleLadder from './ExampleLadder'
 import FiveSteps from './FiveSteps'
@@ -87,9 +87,9 @@ export const visualizations = {
   'steps-to-code': StepsToCode,
   'solution-layers': SolutionLayers,
   'char-code-ranges': CharCodeRanges,
-  'cookie-cutter': withProps(CookieCutter, { scene: 'instances' }),
-  'cookie-new': withProps(CookieCutter, { scene: 'new' }),
-  'cookie-methods': withProps(CookieCutter, { scene: 'methods' }),
+  'invitation-template': withProps(InvitationTemplate, { scene: 'instances' }),
+  'invitation-new': withProps(InvitationTemplate, { scene: 'new' }),
+  'invitation-methods': withProps(InvitationTemplate, { scene: 'methods' }),
   'list-class-preview': ListClassPreview,
   'value-copy': withProps(PointerArrows, { scene: 'valueCopy' }),
   'reference-copy': withProps(PointerArrows, { scene: 'referenceCopy' }),

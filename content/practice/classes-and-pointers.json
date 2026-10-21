@@ -8,34 +8,34 @@
   "sourceFolder": "course 1 /SECTION 3 - CLASSES AND POINTERS",
   "questions": [
     {
-      "id": "cookie-cutter",
+      "id": "class-template",
       "topic": "Classes",
       "prompt": {
-        "en": "In the cookie-cutter analogy for classes, what are the cookie cutter and the cookies?",
-        "es": "En la analogía del molde para galletas, ¿qué son el molde y las galletas?"
+        "en": "In the invitation-template picture of classes, what are the template and the invitations?",
+        "es": "En la imagen de la plantilla de invitación para las clases, ¿qué son la plantilla y las invitaciones?"
       },
       "options": [
         {
-          "en": "The cookie cutter is an instance; the cookies are classes",
-          "es": "El molde es una instancia; las galletas son clases"
+          "en": "The template is an instance; the invitations are classes",
+          "es": "La plantilla es una instancia; las invitaciones son clases"
         },
         {
-          "en": "The cookie cutter is the class; each cookie is an instance created from it",
-          "es": "El molde es la clase; cada galleta es una instancia creada a partir de ella"
+          "en": "The template is the class; each invitation is an instance created from it",
+          "es": "La plantilla es la clase; cada invitación es una instancia creada a partir de ella"
         },
         {
-          "en": "The cookie cutter is a method; the cookies are properties",
-          "es": "El molde es un método; las galletas son propiedades"
+          "en": "The template is a method; the invitations are properties",
+          "es": "La plantilla es un método; las invitaciones son propiedades"
         },
         {
-          "en": "The cookie cutter is `this`; the cookies are constructors",
-          "es": "El molde es `this`; las galletas son constructores"
+          "en": "The template is `this`; the invitations are constructors",
+          "es": "La plantilla es `this`; las invitaciones son constructores"
         }
       ],
       "correctIndex": 1,
       "explanation": {
-        "en": "A class is the template (the cutter). Every time you use `new`, you stamp out a new instance (a cookie) with its own data.",
-        "es": "Una clase es la plantilla (el molde). Cada vez que usas `new`, haces una instancia nueva (una galleta) con sus propios datos."
+        "en": "A class is the template. Every time you use `new`, you print a new instance (an invitation) with its own data.",
+        "es": "Una clase es la plantilla. Cada vez que usas `new`, imprimes una instancia nueva (una invitación) con sus propios datos."
       }
     },
     {
@@ -47,26 +47,26 @@
       },
       "options": [
         {
-          "en": "All lowercase: `cookie`",
-          "es": "Todo en minúsculas: `cookie`"
+          "en": "All lowercase: `invitation`",
+          "es": "Todo en minúsculas: `invitation`"
         },
         {
-          "en": "All caps: `COOKIE`",
-          "es": "Todo en mayúsculas: `COOKIE`"
+          "en": "All caps: `INVITATION`",
+          "es": "Todo en mayúsculas: `INVITATION`"
         },
         {
-          "en": "With a capital first letter: `Cookie`",
-          "es": "Con la primera letra en mayúscula: `Cookie`"
+          "en": "With a capital first letter: `Invitation`",
+          "es": "Con la primera letra en mayúscula: `Invitation`"
         },
         {
-          "en": "With a `class_` prefix: `class_cookie`",
-          "es": "Con el prefijo `class_`: `class_cookie`"
+          "en": "With a `class_` prefix: `class_invitation`",
+          "es": "Con el prefijo `class_`: `class_invitation`"
         }
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "Class names start with a capital letter (`Cookie`, `LinkedList`). That makes it easy to tell a class apart from regular variables and functions.",
-        "es": "Los nombres de las clases empiezan con mayúscula (`Cookie`, `LinkedList`). Así es fácil distinguir una clase de las variables y funciones normales."
+        "en": "Class names start with a capital letter (`Invitation`, `LinkedList`). That makes it easy to tell a class apart from regular variables and functions.",
+        "es": "Los nombres de las clases empiezan con mayúscula (`Invitation`, `LinkedList`). Así es fácil distinguir una clase de las variables y funciones normales."
       }
     },
     {
@@ -96,8 +96,8 @@
       ],
       "correctIndex": 3,
       "explanation": {
-        "en": "The constructor sets each new instance up: `new Cookie('chocolate')` runs it once, and it stores `flavor` on the new cookie.",
-        "es": "El constructor prepara cada instancia nueva: `new Cookie('chocolate')` lo ejecuta una vez, y guarda `flavor` en la galleta nueva."
+        "en": "The constructor sets each new instance up: `new Invitation('Ana')` runs it once, and it stores `guest` on the new invitation.",
+        "es": "El constructor prepara cada instancia nueva: `new Invitation('Ana')` lo ejecuta una vez, y guarda `guest` en la invitación nueva."
       }
     },
     {
@@ -107,93 +107,93 @@
         "en": "What does the `new` keyword do on this line?",
         "es": "¿Qué hace la palabra clave `new` en esta línea?"
       },
-      "code": "const cookieOne = new Cookie('chocolate')",
+      "code": "const forAna = new Invitation('Ana')",
       "options": [
         {
-          "en": "It creates a new instance of `Cookie` by calling the constructor with `'chocolate'`",
-          "es": "Crea una instancia nueva de `Cookie` llamando al constructor con `'chocolate'`"
+          "en": "It creates a new instance of `Invitation` by calling the constructor with `'Ana'`",
+          "es": "Crea una instancia nueva de `Invitation` llamando al constructor con `'Ana'`"
         },
         {
-          "en": "It changes the `Cookie` class so every cookie is chocolate",
-          "es": "Cambia la clase `Cookie` para que todas las galletas sean de chocolate"
+          "en": "It changes the `Invitation` class so every invitation is for Ana",
+          "es": "Cambia la clase `Invitation` para que todas las invitaciones sean para Ana"
         },
         {
-          "en": "It copies an existing cookie called `cookieOne`",
-          "es": "Copia una galleta que ya existe llamada `cookieOne`"
+          "en": "It copies an existing invitation called `forAna`",
+          "es": "Copia una invitación que ya existe llamada `forAna`"
         },
         {
-          "en": "It declares a new class called `cookieOne`",
-          "es": "Declara una clase nueva llamada `cookieOne`"
+          "en": "It declares a new class called `forAna`",
+          "es": "Declara una clase nueva llamada `forAna`"
         }
       ],
       "correctIndex": 0,
       "explanation": {
-        "en": "`new` calls the constructor and returns a brand-new instance. `cookieOne` points to that chocolate cookie; the class itself doesn't change.",
-        "es": "`new` llama al constructor y regresa una instancia nueva. `cookieOne` apunta a esa galleta de chocolate; la clase en sí no cambia."
+        "en": "`new` calls the constructor and returns a brand-new instance. `forAna` points to Ana's invitation; the class itself doesn't change.",
+        "es": "`new` llama al constructor y regresa una instancia nueva. `forAna` apunta a la invitación de Ana; la clase en sí no cambia."
       }
     },
     {
       "id": "this-keyword",
       "topic": "Classes",
       "prompt": {
-        "en": "Inside `getFlavor`, what does `this` refer to when you run `cookieTwo.getFlavor()`?",
-        "es": "Dentro de `getFlavor`, ¿a qué se refiere `this` cuando ejecutas `cookieTwo.getFlavor()`?"
+        "en": "Inside `getGuest`, what does `this` refer to when you run `forBen.getGuest()`?",
+        "es": "Dentro de `getGuest`, ¿a qué se refiere `this` cuando ejecutas `forBen.getGuest()`?"
       },
-      "code": "class Cookie {\n  constructor(flavor) {\n    this.flavor = flavor\n  }\n  getFlavor() {\n    return this.flavor\n  }\n}\n\nconst cookieOne = new Cookie('chocolate')\nconst cookieTwo = new Cookie('vanilla')",
+      "code": "class Invitation {\n  constructor(guest) {\n    this.guest = guest\n  }\n  getGuest() {\n    return this.guest\n  }\n}\n\nconst forAna = new Invitation('Ana')\nconst forBen = new Invitation('Ben')",
       "options": [
         {
-          "en": "The `Cookie` class",
-          "es": "La clase `Cookie`"
+          "en": "The `Invitation` class",
+          "es": "La clase `Invitation`"
         },
         {
-          "en": "`cookieOne`, because it was created first",
-          "es": "`cookieOne`, porque se creó primero"
+          "en": "`forAna`, because it was created first",
+          "es": "`forAna`, porque se creó primero"
         },
         {
-          "en": "`cookieTwo`, the instance the method was called on",
-          "es": "`cookieTwo`, la instancia en la que se llamó el método"
+          "en": "`forBen`, the instance the method was called on",
+          "es": "`forBen`, la instancia en la que se llamó el método"
         },
         {
-          "en": "Every cookie at once",
-          "es": "Todas las galletas a la vez"
+          "en": "Every invitation at once",
+          "es": "Todas las invitaciones a la vez"
         }
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "`this` is the specific instance the method was called on. `cookieTwo.getFlavor()` reads `cookieTwo`'s flavor, so it returns `'vanilla'`.",
-        "es": "`this` es la instancia específica en la que se llamó el método. `cookieTwo.getFlavor()` lee el sabor de `cookieTwo`, así que regresa `'vanilla'`."
+        "en": "`this` is the specific instance the method was called on. `forBen.getGuest()` reads `forBen`'s guest, so it returns `'Ben'`.",
+        "es": "`this` es la instancia específica en la que se llamó el método. `forBen.getGuest()` lee el invitado de `forBen`, así que regresa `'Ben'`."
       }
     },
     {
       "id": "getters-setters-output",
       "topic": "Classes",
       "prompt": {
-        "en": "After running this code, what do `cookieOne.getFlavor()` and `cookieTwo.getFlavor()` return?",
-        "es": "Después de ejecutar este código, ¿qué regresan `cookieOne.getFlavor()` y `cookieTwo.getFlavor()`?"
+        "en": "After running this code, what do `forAna.getGuest()` and `forBen.getGuest()` return?",
+        "es": "Después de ejecutar este código, ¿qué regresan `forAna.getGuest()` y `forBen.getGuest()`?"
       },
-      "code": "const cookieOne = new Cookie('chocolate')\nconst cookieTwo = new Cookie('vanilla')\n\ncookieOne.setFlavor('oatmeal')",
+      "code": "const forAna = new Invitation('Ana')\nconst forBen = new Invitation('Ben')\n\nforBen.setGuest('Benny')",
       "options": [
         {
-          "en": "`'chocolate'` and `'vanilla'`",
-          "es": "`'chocolate'` y `'vanilla'`"
+          "en": "`'Ana'` and `'Ben'`",
+          "es": "`'Ana'` y `'Ben'`"
         },
         {
-          "en": "`'oatmeal'` and `'oatmeal'`",
-          "es": "`'oatmeal'` y `'oatmeal'`"
+          "en": "`'Benny'` and `'Benny'`",
+          "es": "`'Benny'` y `'Benny'`"
         },
         {
-          "en": "`'chocolate'` and `'oatmeal'`",
-          "es": "`'chocolate'` y `'oatmeal'`"
+          "en": "`'Benny'` and `'Ben'`",
+          "es": "`'Benny'` y `'Ben'`"
         },
         {
-          "en": "`'oatmeal'` and `'vanilla'`",
-          "es": "`'oatmeal'` y `'vanilla'`"
+          "en": "`'Ana'` and `'Benny'`",
+          "es": "`'Ana'` y `'Benny'`"
         }
       ],
       "correctIndex": 3,
       "explanation": {
-        "en": "`setFlavor` changes only the instance it's called on. `cookieOne` becomes oatmeal; `cookieTwo` is a separate instance and stays vanilla.",
-        "es": "`setFlavor` cambia solo la instancia en la que se llama. `cookieOne` se vuelve de avena; `cookieTwo` es otra instancia y sigue siendo de vainilla."
+        "en": "`setGuest` changes only the instance it's called on. `forBen` now says Benny; `forAna` is a separate instance and still says Ana.",
+        "es": "`setGuest` cambia solo la instancia en la que se llama. `forBen` ahora dice Benny; `forAna` es otra instancia y sigue diciendo Ana."
       }
     },
     {
@@ -223,8 +223,8 @@
       ],
       "correctIndex": 0,
       "explanation": {
-        "en": "`getFlavor` reads (gets) `this.flavor`; `setFlavor` writes (sets) it. Most methods you'll write for data structures fall into one of these two groups.",
-        "es": "`getFlavor` lee (get) `this.flavor`; `setFlavor` lo escribe (set). La mayoría de los métodos que vas a escribir para estructuras de datos caen en uno de estos dos grupos."
+        "en": "`getGuest` reads (gets) `this.guest`; `setGuest` writes (sets) it. Most methods you'll write for data structures fall into one of these two groups.",
+        "es": "`getGuest` lee (get) `this.guest`; `setGuest` lo escribe (set). La mayoría de los métodos que vas a escribir para estructuras de datos caen en uno de estos dos grupos."
       }
     },
     {
@@ -262,8 +262,8 @@
       "id": "new-steps",
       "topic": "Classes",
       "prompt": {
-        "en": "Which of these is **not** one of the things `new Cookie('chocolate')` does?",
-        "es": "¿Cuál de estas cosas **no** hace `new Cookie('chocolate')`?"
+        "en": "Which of these is **not** one of the things `new Invitation('Ana')` does?",
+        "es": "¿Cuál de estas cosas **no** hace `new Invitation('Ana')`?"
       },
       "options": [
         {
@@ -285,8 +285,8 @@
       ],
       "correctIndex": 3,
       "explanation": {
-        "en": "`new` makes an empty object, points `this` at it, runs the constructor and returns the object. The methods stay in the class, shared by every instance: they aren't copied into each cookie.",
-        "es": "`new` crea un objeto vacío, hace que `this` apunte a él, ejecuta el constructor y regresa el objeto. Los métodos se quedan en la clase, compartidos por todas las instancias: no se copian en cada galleta."
+        "en": "`new` makes an empty object, points `this` at it, runs the constructor and returns the object. The methods stay in the class, shared by every instance: they aren't copied into each invitation.",
+        "es": "`new` crea un objeto vacío, hace que `this` apunte a él, ejecuta el constructor y regresa el objeto. Los métodos se quedan en la clase, compartidos por todas las instancias: no se copian en cada invitación."
       }
     },
     {
@@ -296,23 +296,23 @@
         "en": "What happens when this code runs?",
         "es": "¿Qué pasa cuando se ejecuta este código?"
       },
-      "code": "class Cookie {\n  constructor(flavor) {\n    this.flavor = flavor\n  }\n}\n\nconst cookieOne = Cookie('chocolate')",
+      "code": "class Invitation {\n  constructor(guest) {\n    this.guest = guest\n  }\n}\n\nconst forAna = Invitation('Ana')",
       "options": [
         {
           "en": "JavaScript throws a `TypeError`: a class can't be called without `new`",
           "es": "JavaScript lanza un `TypeError`: una clase no se puede llamar sin `new`"
         },
         {
-          "en": "`cookieOne` becomes a chocolate cookie, exactly as with `new`",
-          "es": "`cookieOne` se vuelve una galleta de chocolate, igual que con `new`"
+          "en": "`forAna` becomes Ana's invitation, exactly as with `new`",
+          "es": "`forAna` se vuelve la invitación de Ana, igual que con `new`"
         },
         {
-          "en": "`cookieOne` is the string `'chocolate'`",
-          "es": "`cookieOne` es el string `'chocolate'`"
+          "en": "`forAna` is the string `'Ana'`",
+          "es": "`forAna` es el string `'Ana'`"
         },
         {
-          "en": "The `Cookie` class is deleted",
-          "es": "La clase `Cookie` se borra"
+          "en": "The `Invitation` class is deleted",
+          "es": "La clase `Invitation` se borra"
         }
       ],
       "correctIndex": 0,
@@ -515,79 +515,79 @@
   ],
   "exercises": [
     {
-      "slug": "cookie-class",
+      "slug": "invitation-class",
       "kind": "class",
       "title": {
-        "en": "The Cookie Class",
-        "es": "La clase Cookie"
+        "en": "The Invitation Class",
+        "es": "La clase Invitation"
       },
       "description": {
-        "en": "Write a class `Cookie`:\n\n- `constructor(flavor)` stores the flavor on the instance as `this.flavor`.\n- `getFlavor()` returns the cookie's flavor.\n- `setFlavor(flavor)` changes the cookie's flavor.\n\nExample:\n\n```js\nconst cookieOne = new Cookie('chocolate')\ncookieOne.getFlavor() // 'chocolate'\ncookieOne.setFlavor('oatmeal')\ncookieOne.getFlavor() // 'oatmeal'\n```\n\nEach cookie must keep its own flavor: changing one cookie never changes another.",
-        "es": "Escribe una clase `Cookie`:\n\n- `constructor(flavor)` guarda el sabor en la instancia como `this.flavor`.\n- `getFlavor()` regresa el sabor de la galleta.\n- `setFlavor(flavor)` cambia el sabor de la galleta.\n\nEjemplo:\n\n```js\nconst cookieOne = new Cookie('chocolate')\ncookieOne.getFlavor() // 'chocolate'\ncookieOne.setFlavor('oatmeal')\ncookieOne.getFlavor() // 'oatmeal'\n```\n\nCada galleta debe guardar su propio sabor: cambiar una galleta nunca cambia otra."
+        "en": "Write a class `Invitation`:\n\n- `constructor(guest)` stores the guest's name on the instance as `this.guest`.\n- `getGuest()` returns the invitation's guest.\n- `setGuest(guest)` changes the invitation's guest.\n\nExample:\n\n```js\nconst forBen = new Invitation('Ben')\nforBen.getGuest() // 'Ben'\nforBen.setGuest('Benny')\nforBen.getGuest() // 'Benny'\n```\n\nEach invitation must keep its own guest: changing one invitation never changes another.",
+        "es": "Escribe una clase `Invitation`:\n\n- `constructor(guest)` guarda el nombre del invitado en la instancia como `this.guest`.\n- `getGuest()` regresa el invitado de la invitación.\n- `setGuest(guest)` cambia el invitado de la invitación.\n\nEjemplo:\n\n```js\nconst forBen = new Invitation('Ben')\nforBen.getGuest() // 'Ben'\nforBen.setGuest('Benny')\nforBen.getGuest() // 'Benny'\n```\n\nCada invitación debe guardar su propio invitado: cambiar una invitación nunca cambia otra."
       },
       "difficulty": "easy",
       "category": "build",
-      "className": "Cookie",
+      "className": "Invitation",
       "starterCode": {
-        "javascript": "class Cookie {\n  constructor(flavor) {\n    // Your code here\n  }\n\n  getFlavor() {\n    // Your code here\n  }\n\n  setFlavor(flavor) {\n    // Your code here\n  }\n}"
+        "javascript": "class Invitation {\n  constructor(guest) {\n    // Your code here\n  }\n\n  getGuest() {\n    // Your code here\n  }\n\n  setGuest(guest) {\n    // Your code here\n  }\n}"
       },
       "solution": {
-        "javascript": "class Cookie {\n  constructor(flavor) {\n    this.flavor = flavor\n  }\n\n  getFlavor() {\n    return this.flavor\n  }\n\n  setFlavor(flavor) {\n    this.flavor = flavor\n  }\n}"
+        "javascript": "class Invitation {\n  constructor(guest) {\n    this.guest = guest\n  }\n\n  getGuest() {\n    return this.guest\n  }\n\n  setGuest(guest) {\n    this.guest = guest\n  }\n}"
       },
       "tests": [
         {
           "steps": [
             {
-              "create": ["chocolate"]
+              "create": ["Ana"]
             },
             {
-              "call": "getFlavor",
-              "expected": "chocolate"
+              "call": "getGuest",
+              "expected": "Ana"
             }
           ]
         },
         {
           "steps": [
             {
-              "create": ["vanilla"]
+              "create": ["Ben"]
             },
             {
-              "read": "flavor",
-              "expected": "vanilla"
+              "read": "guest",
+              "expected": "Ben"
             }
           ]
         },
         {
           "steps": [
             {
-              "create": ["chocolate"]
+              "create": ["Ben"]
             },
             {
-              "call": "setFlavor",
-              "args": ["oatmeal"]
+              "call": "setGuest",
+              "args": ["Benny"]
             },
             {
-              "call": "getFlavor",
-              "expected": "oatmeal"
+              "call": "getGuest",
+              "expected": "Benny"
             }
           ]
         },
         {
           "steps": [
             {
-              "create": ["lemon"]
+              "create": ["Cleo"]
             },
             {
-              "call": "setFlavor",
-              "args": ["mint"]
+              "call": "setGuest",
+              "args": ["Clio"]
             },
             {
-              "call": "setFlavor",
-              "args": ["ginger"]
+              "call": "setGuest",
+              "args": ["Cleo"]
             },
             {
-              "read": "flavor",
-              "expected": "ginger"
+              "read": "guest",
+              "expected": "Cleo"
             }
           ]
         },
@@ -597,16 +597,16 @@
               "create": [""]
             },
             {
-              "call": "getFlavor",
+              "call": "getGuest",
               "expected": ""
             },
             {
-              "call": "setFlavor",
-              "args": ["chocolate"]
+              "call": "setGuest",
+              "args": ["Dev"]
             },
             {
-              "call": "getFlavor",
-              "expected": "chocolate"
+              "call": "getGuest",
+              "expected": "Dev"
             }
           ]
         }
