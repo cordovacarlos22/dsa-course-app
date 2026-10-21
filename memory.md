@@ -237,7 +237,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 ## Next
 
 - After `fix/tool-findings` merges: check production's headers (`curl -sI https://dsa-course-app.vercel.app/`) and run the app once in a browser for CSP errors.
-- Merge order: #34, #35, then `refactor/own-names`.
+- #34 and #35 (the theory pass) are merged.
 - **Design proposals** from the skills, for Carlos to decide: a self-hosted brand font, and no box nested inside the lesson-complete card.
 - **Stage 8, sign-in (PR 2):** Carlos sets up two Supabase projects (staging and production), Google and GitHub sign-in apps, Apple (when his developer account is ready), Cloudflare Turnstile, and an email-sending service. I send a step-by-step guide for each. Secrets stay in the dashboards; only `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` and `VITE_TURNSTILE_SITE_KEY` go to `.env.local` and Vercel.
 - **Ponytail status line:** in Carlos's first new session, Ponytail asks the agent to offer a `[PONYTAIL]` badge for the status line. It's a change to his global `~/.claude/settings.json`, so only with his yes. To check that it's on, type `/ponytail`: it answers with the level.
