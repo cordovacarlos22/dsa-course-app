@@ -66,9 +66,9 @@ let tail = firstNode
 console.log('¿head y tail apuntan al mismo nodo?', head === tail)
 
 // Agregamos un nodo nuevo al final de la cadena:
-const newNode = { value: 7, next: null }
-tail.next = newNode // 1. el último nodo actual apunta al nuevo
-tail = newNode // 2. tail se mueve al nodo nuevo
+const nodeToAdd = { value: 7, next: null }
+tail.next = nodeToAdd // 1. el último nodo actual apunta al nuevo
+tail = nodeToAdd // 2. tail se mueve al nodo nuevo
 
 console.log('head apunta al nodo con', head.value)
 console.log('tail apunta al nodo con', tail.value)

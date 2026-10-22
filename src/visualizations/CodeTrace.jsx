@@ -8,7 +8,7 @@ import LinkedListDiagram from './LinkedListDiagram'
 // next to it the student sees the input as boxes, the variables, a counter of
 // the operations so far, and what the code printed. See ./traces/index.js.
 
-// The size of an input: a number (n), or how many guests / numbers /
+// The size of an input: a number (n), or how many guests / orders /
 // answers / characters / list values it has. Inputs named by a `label`
 // (like a constructor call) have no size.
 function sizeOf(input) {
@@ -17,7 +17,7 @@ function sizeOf(input) {
   if (input.rsvps) return Object.keys(input.rsvps).length
   if (input.text !== undefined) return input.text.length
   if (input.label !== undefined) return 0
-  return (input.guests ?? input.numbers).length
+  return (input.guests ?? input.orders).length
 }
 
 // The boxes drawn under the code: the guest list by default. A trace can

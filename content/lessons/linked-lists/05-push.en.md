@@ -51,11 +51,11 @@ linked-list-push-examples
 You can see the crash for yourself. Run this, and read the error:
 
 ```js-run
-const newNode = { value: 'Ana', next: null }
+const nodeToAdd = { value: 'Ana', next: null }
 let tail = null // an empty list has no last node
 
 console.log('Linking the new node after the tail...')
-tail.next = newNode // there's no node here to set next on
+tail.next = nodeToAdd // there's no node here to set next on
 ```
 
 That `TypeError` is what a `push` without an empty-list check would do the first time it's used on an empty list.
@@ -86,7 +86,7 @@ linked-list-push-plan
 
 **What just happened:** we played the plan on a line of three. The new node was made first. The line wasn't empty, so step 2 was skipped. Cleo's `next` was pointed at the new node, then `tail` moved to it, then the length went up. With an empty line, step 2 alone would have pointed `head` and `tail` at the node.
 
-**Common mistake:** swapping steps 3a and 3b. If `tail` moves first, then `this.tail.next = newNode` makes the new node point to **itself**, and the old last node, Cleo, still points to `null`. Walking from `head` would never reach Dev. `tail` is your only quick way to the old last node, so use it before you move it.
+**Common mistake:** swapping steps 3a and 3b. If `tail` moves first, then `this.tail.next = nodeToAdd` makes the new node point to **itself**, and the old last node, Cleo, still points to `null`. Walking from `head` would never reach Dev. `tail` is your only quick way to the old last node, so use it before you move it.
 
 ## Write the code
 
@@ -94,9 +94,9 @@ Step 4: the common case first, then the edge case. With guests already in line, 
 
 ```js
 push(value) {
-  const newNode = new Node(value)
-  this.tail.next = newNode
-  this.tail = newNode
+  const nodeToAdd = new Node(value)
+  this.tail.next = nodeToAdd
+  this.tail = nodeToAdd
   this.length++
   return this
 }
@@ -126,21 +126,21 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      this.tail.next = newNode
-      this.tail = newNode
+      this.tail.next = nodeToAdd
+      this.tail = nodeToAdd
     }
     this.length++
     return this
@@ -148,10 +148,10 @@ class LinkedList {
 
   toArray() {
     const values = []
-    let temp = this.head
-    while (temp !== null) {
-      values.push(temp.value)
-      temp = temp.next
+    let current = this.head
+    while (current !== null) {
+      values.push(current.value)
+      current = current.next
     }
     return values
   }
@@ -173,17 +173,17 @@ Step 5: check the Big O, and look for a clearer way to write it.
 
 **Big O:** push makes one node and moves at most two pointers, whatever the length of the line. That's **O(1) time** and **O(1) space**, the same as an array's `push`. The reason it's O(1) is `tail`: without it, you'd have to walk the whole line to find the last node.
 
-**A refactor:** look at the two branches. Both end by pointing `tail` at the new node (`this.tail = newNode`). A line that runs in both branches can move out, after the `if`:
+**A refactor:** look at the two branches. Both end by pointing `tail` at the new node (`this.tail = nodeToAdd`). A line that runs in both branches can move out, after the `if`:
 
 ```js
 push(value) {
-  const newNode = new Node(value)
+  const nodeToAdd = new Node(value)
   if (!this.head) {
-    this.head = newNode
+    this.head = nodeToAdd
   } else {
-    this.tail.next = newNode
+    this.tail.next = nodeToAdd
   }
-  this.tail = newNode
+  this.tail = nodeToAdd
   this.length++
   return this
 }
@@ -209,13 +209,13 @@ class LinkedList {
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
+      this.head = nodeToAdd
     } else {
-      this.tail.next = newNode
+      this.tail.next = nodeToAdd
     }
-    this.tail = newNode
+    this.tail = nodeToAdd
     this.length++
     return this
   }

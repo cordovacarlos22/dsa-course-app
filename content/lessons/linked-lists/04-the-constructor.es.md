@@ -121,15 +121,15 @@ Para la lista, empieza con el caso común, un valor que sí se dio. Muchos const
 ```js
 class LinkedList {
   constructor(value) {
-    const newNode = new Node(value)
-    this.head = newNode
+    const firstNode = new Node(value)
+    this.head = firstNode
     this.tail = this.head
     this.length = 1
   }
 }
 ```
 
-`new Node(value)` corre el constructor de Node y regresa un nodo, y `newNode` apunta a él. `this.head = newNode` hace que el `head` de la lista apunte a ese nodo. `this.tail = this.head` significa "haz que `tail` apunte a donde apunta `head`", que es el mismo nodo. `this.length = 1` anota un invitado. Cada línea usa `this`, porque son propiedades de **esta** lista: la que `new` está construyendo.
+`new Node(value)` corre el constructor de Node y regresa un nodo, y `firstNode` apunta a él. `this.head = firstNode` hace que el `head` de la lista apunte a ese nodo. `this.tail = this.head` significa "haz que `tail` apunte a donde apunta `head`", que es el mismo nodo. `this.length = 1` anota un invitado. Cada línea usa `this`, porque son propiedades de **esta** lista: la que `new` está construyendo.
 
 Ahora el caso especial. Empieza cada lista vacía, y envuelve el caso común en `if (value !== undefined)`, para que un valor que falta se lo salte:
 
@@ -153,8 +153,8 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
@@ -169,7 +169,7 @@ const empty = new LinkedList()
 console.log(empty.head, empty.tail, empty.length) // null null 0
 ```
 
-**Error común:** escribir `head = newNode` sin `this.`. Dentro de una clase, eso es un error ("head is not defined"), porque `head` no es una variable: es una propiedad de la lista, y la lista es `this`.
+**Error común:** escribir `head = firstNode` sin `this.`. Dentro de una clase, eso es un error ("head is not defined"), porque `head` no es una variable: es una propiedad de la lista, y la lista es `this`.
 
 ## Revisar
 
@@ -177,7 +177,7 @@ console.log(empty.head, empty.tail, empty.length) // null null 0
 
 **Big O:** el constructor hace las mismas pocas asignaciones sin importar el valor, así que es **O(1) en tiempo**. Crea un nodo como máximo, así que es **O(1) en espacio**. Es lo mismo que crear un array con un elemento, como `['Ana']`.
 
-**Una mejora para pensar:** `this.tail = this.head` y `this.tail = newNode` hacen exactamente lo mismo. Los dos hacen que `tail` apunte al único nodo al que ya apuntan `newNode` y `head`. Ninguno hace una copia: por la lección de punteros, `=` con un objeto copia la flecha, no el objeto. Nos quedamos con `this.tail = this.head`, porque se lee como "el tail empieza donde está el head", pero cualquiera de los dos es correcto.
+**Una mejora para pensar:** `this.tail = this.head` y `this.tail = firstNode` hacen exactamente lo mismo. Los dos hacen que `tail` apunte al único nodo al que ya apuntan `firstNode` y `head`. Ninguno hace una copia: por la lección de punteros, `=` con un objeto copia la flecha, no el objeto. Nos quedamos con `this.tail = this.head`, porque se lee como "el tail empieza donde está el head", pero cualquiera de los dos es correcto.
 
 **Lo que significa empezar vacía para después:** como nuestra lista puede estar vacía, cada método de aquí en adelante tiene que manejar `head === null`. Por eso la lista vacía siempre es el primer ejemplo: en `push`, agregar a una lista vacía también tiene que poner `head`, no solo `tail`.
 
@@ -195,10 +195,10 @@ class Node {
   }
 }
 
-const newNode = new Node('Ana')
-const head = newNode
+const firstNode = new Node('Ana')
+const head = firstNode
 const tailOne = head // como this.tail = this.head
-const tailTwo = newNode // como this.tail = newNode
+const tailTwo = firstNode // como this.tail = firstNode
 console.log(tailOne === tailTwo) // true: el mismo nodo de las dos formas
 ```
 

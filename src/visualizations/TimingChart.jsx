@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import StepPlayer from '../components/StepPlayer'
 
-// Visualizing time complexity: time sumUpTo with a loop and with the formula
+// Visualizing time complexity: time sumOneTo with a loop and with the formula
 // for bigger and bigger n, and plot the results. The loop's times line up in
 // a straight line; the formula's stay flat near zero. The times are example
 // values of what a real run can look like (they change on every computer).

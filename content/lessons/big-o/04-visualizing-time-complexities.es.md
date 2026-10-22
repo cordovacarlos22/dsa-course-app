@@ -8,7 +8,7 @@ minutes: 9
 
 ## Grafica el tiempo
 
-Una sola medición con el cronómetro no nos dice mucho: es un solo número, de una sola corrida, en una sola computadora. Pero ¿y si medimos las dos versiones de `sumUpTo` con **n cada vez más grande** y ponemos cada resultado en una gráfica? Entonces ya no estamos viendo un número. Estamos viendo una **tendencia**: cómo cambia el tiempo cuando crece la entrada.
+Una sola medición con el cronómetro no nos dice mucho: es un solo número, de una sola corrida, en una sola computadora. Pero ¿y si medimos las dos versiones de `sumOneTo` con **n cada vez más grande** y ponemos cada resultado en una gráfica? Entonces ya no estamos viendo un número. Estamos viendo una **tendencia**: cómo cambia el tiempo cuando crece la entrada.
 
 Hacer una gráfica así es sencillo. El eje horizontal es **n**, el tamaño de la entrada. El eje vertical es el **tiempo** que tardó la función. Para cada valor de n, inicia un temporizador, ejecuta la función, detén el temporizador y pon un punto en (n, tiempo). Luego une los puntos. La forma que hacen los puntos te dice más que cualquiera de ellos.
 
@@ -59,15 +59,15 @@ stopwatch-race
 Ejecuta esto varias veces:
 
 ```js-run
-function sumUpTo(n) {
-  let total = 0
+function sumOneTo(n) {
+  let runningSum = 0
   for (let i = 1; i <= n; i++) {
-    total = total + i
+    runningSum = runningSum + i
   }
-  return total
+  return runningSum
 }
 
-function sumUpToFormula(n) {
+function sumOneToFormula(n) {
   return n * (n + 1) / 2
 }
 
@@ -75,10 +75,10 @@ const sizes = [1000, 10000, 100000, 1000000, 10000000]
 for (let k = 0; k < sizes.length; k++) {
   const n = sizes[k]
   let start = performance.now()
-  sumUpTo(n)
+  sumOneTo(n)
   const loopTime = performance.now() - start
   start = performance.now()
-  sumUpToFormula(n)
+  sumOneToFormula(n)
   const formulaTime = performance.now() - start
   console.log('n =', n, '| bucle:', loopTime.toFixed(3), 'ms | fórmula:', formulaTime.toFixed(3), 'ms')
 }

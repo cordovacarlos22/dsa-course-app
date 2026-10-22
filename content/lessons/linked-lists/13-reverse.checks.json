@@ -71,8 +71,8 @@
     {
       "type": "choice",
       "question": {
-        "en": "Why does reverse save `next = temp.next` **before** `temp.next = prev`?",
-        "es": "¿Por qué reverse guarda `next = temp.next` **antes** de `temp.next = prev`?"
+        "en": "Why does reverse save `nextNode = current.next` **before** `current.next = previous`?",
+        "es": "¿Por qué reverse guarda `nextNode = current.next` **antes** de `current.next = previous`?"
       },
       "options": [
         {
@@ -80,40 +80,40 @@
           "es": "Para contar los nodos"
         },
         {
-          "en": "Because flipping `temp`'s arrow lets go of the rest of the line, and `next` keeps hold of it",
-          "es": "Porque voltear la flecha de `temp` suelta el resto de la fila, y `next` lo sigue sosteniendo"
+          "en": "Because flipping `current`'s arrow lets go of the rest of the line, and `nextNode` keeps hold of it",
+          "es": "Porque voltear la flecha de `current` suelta el resto de la fila, y `nextNode` lo sigue sosteniendo"
         },
         {
           "en": "To swap `head` and `tail`",
           "es": "Para intercambiar `head` y `tail`"
         },
         {
-          "en": "It doesn't matter when `next` is saved",
-          "es": "No importa cuándo se guarda `next`"
+          "en": "It doesn't matter when `nextNode` is saved",
+          "es": "No importa cuándo se guarda `nextNode`"
         }
       ],
       "answer": 1,
       "hint": {
-        "en": "After the flip, where does `temp.next` point?",
-        "es": "Después de voltearla, ¿a dónde apunta `temp.next`?"
+        "en": "After the flip, where does `current.next` point?",
+        "es": "Después de voltearla, ¿a dónde apunta `current.next`?"
       },
       "explanation": {
-        "en": "After `temp.next = prev`, nothing points forward to the rest of the line: there's a gap. Saving `next` first is what lets `temp` cross that gap.",
-        "es": "Después de `temp.next = prev`, nada apunta hacia adelante al resto de la fila: hay un hueco. Guardar `next` primero es lo que deja que `temp` cruce ese hueco."
+        "en": "After `current.next = previous`, nothing points forward to the rest of the line: there's a gap. Saving `nextNode` first is what lets `current` cross that gap.",
+        "es": "Después de `current.next = previous`, nada apunta hacia adelante al resto de la fila: hay un hueco. Guardar `nextNode` primero es lo que deja que `current` cruce ese hueco."
       }
     },
     {
       "type": "code",
       "task": {
-        "en": "Write `reverse()` in the `LinkedList` class, following the plan. Swap `head` and `tail`, flip every `next` arrow with `prev`, `temp` and `next`, and return the list. It must work on an empty list too.",
-        "es": "Escribe `reverse()` en la clase `LinkedList`, siguiendo el plan. Intercambia `head` y `tail`, voltea cada flecha `next` con `prev`, `temp` y `next`, y regresa la lista. También tiene que funcionar con una lista vacía."
+        "en": "Write `reverse()` in the `LinkedList` class, following the plan. Swap `head` and `tail`, flip every `next` arrow with `previous`, `current` and `next`, and return the list. It must work on an empty list too.",
+        "es": "Escribe `reverse()` en la clase `LinkedList`, siguiendo el plan. Intercambia `head` y `tail`, voltea cada flecha `next` con `previous`, `current` y `next`, y regresa la lista. También tiene que funcionar con una lista vacía."
       },
       "hint": {
-        "en": "`let temp = this.head`, `this.head = this.tail`, `this.tail = temp`, `let prev = null`, `let next = null`. Then `for (let i = 0; i < this.length; i++) { next = temp.next; temp.next = prev; prev = temp; temp = next }`, and `return this`.",
-        "es": "`let temp = this.head`, `this.head = this.tail`, `this.tail = temp`, `let prev = null`, `let next = null`. Luego `for (let i = 0; i < this.length; i++) { next = temp.next; temp.next = prev; prev = temp; temp = next }`, y `return this`."
+        "en": "`let current = this.head`, `this.head = this.tail`, `this.tail = current`, `let previous = null`, `let nextNode = null`. Then `for (let i = 0; i < this.length; i++) { nextNode = current.next; current.next = previous; previous = current; current = nextNode }`, and `return this`.",
+        "es": "`let current = this.head`, `this.head = this.tail`, `this.tail = current`, `let previous = null`, `let nextNode = null`. Luego `for (let i = 0; i < this.length; i++) { nextNode = current.next; current.next = previous; previous = current; current = nextNode }`, y `return this`."
       },
-      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  reverse() {\n    // 1. swap head and tail (temp remembers the old head)\n    // 2. prev starts as null, and so does next\n    // 3. for each node: next = temp.next, to remember the rest\n    // 4.   temp.next = prev: flip the arrow\n    // 5.   prev = temp, then temp = next: both move one node on\n    // 6. return the list\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
-      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  reverse() {\n    let temp = this.head\n    this.head = this.tail\n    this.tail = temp\n    let prev = null\n    let next = null\n    for (let i = 0; i < this.length; i++) {\n      next = temp.next\n      temp.next = prev\n      prev = temp\n      temp = next\n    }\n    return this\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const firstNode = new Node(value)\n      this.head = firstNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const nodeToAdd = new Node(value)\n    if (!this.head) {\n      this.head = nodeToAdd\n      this.tail = nodeToAdd\n    } else {\n      this.tail.next = nodeToAdd\n      this.tail = nodeToAdd\n    }\n    this.length++\n    return this\n  }\n\n  reverse() {\n    // 1. swap head and tail (current remembers the old head)\n    // 2. previous starts as null, and so does nextNode\n    // 3. for each node: nextNode = current.next, to remember the rest\n    // 4.   current.next = previous: flip the arrow\n    // 5.   previous = current, then current = next: both move one node on\n    // 6. return the list\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let current = this.head\n    while (current !== null) {\n      values.push(current.value)\n      current = current.next\n    }\n    return values\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const firstNode = new Node(value)\n      this.head = firstNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const nodeToAdd = new Node(value)\n    if (!this.head) {\n      this.head = nodeToAdd\n      this.tail = nodeToAdd\n    } else {\n      this.tail.next = nodeToAdd\n      this.tail = nodeToAdd\n    }\n    this.length++\n    return this\n  }\n\n  reverse() {\n    let current = this.head\n    this.head = this.tail\n    this.tail = current\n    let previous = null\n    let nextNode = null\n    for (let i = 0; i < this.length; i++) {\n      nextNode = current.next\n      current.next = previous\n      previous = current\n      current = nextNode\n    }\n    return this\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let current = this.head\n    while (current !== null) {\n      values.push(current.value)\n      current = current.next\n    }\n    return values\n  }\n}",
       "kind": "class",
       "className": "LinkedList",
       "tests": [

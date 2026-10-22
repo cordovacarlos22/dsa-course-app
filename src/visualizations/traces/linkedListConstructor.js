@@ -35,8 +35,8 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
@@ -103,7 +103,7 @@ class LinkedList {
       vars: [valueVar],
       list: {
         ...empty,
-        pointers: { head: null, tail: null, newNode: value },
+        pointers: { head: null, tail: null, firstNode: value },
         detached: loose,
       },
     }
@@ -115,7 +115,7 @@ class LinkedList {
       list: {
         nodes: [value],
         states: { [value]: 'new' },
-        pointers: { head: value, tail: null, newNode: value },
+        pointers: { head: value, tail: null, firstNode: value },
         length: 0,
       },
     }
@@ -127,7 +127,7 @@ class LinkedList {
       list: {
         nodes: [value],
         states: { [value]: 'new' },
-        pointers: { head: value, tail: value, newNode: value },
+        pointers: { head: value, tail: value, firstNode: value },
         length: 0,
       },
     }

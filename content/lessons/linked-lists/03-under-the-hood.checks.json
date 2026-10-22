@@ -75,11 +75,11 @@
         "es": "Escribe `toArray(head)`. Recorre la lista desde `head` hasta `null` y regresa un array con el `value` de cada nodo, en orden. Una lista vacía (`head` es `null`) da `[]`."
       },
       "hint": {
-        "en": "Inside `while (temp !== null)`, do `values.push(temp.value)`, then move forward with `temp = temp.next`.",
-        "es": "Dentro de `while (temp !== null)`, haz `values.push(temp.value)` y luego avanza con `temp = temp.next`."
+        "en": "Inside `while (current !== null)`, do `values.push(current.value)`, then move forward with `current = current.next`.",
+        "es": "Dentro de `while (current !== null)`, haz `values.push(current.value)` y luego avanza con `current = current.next`."
       },
-      "starterCode": "function toArray(head) {\n  const values = []\n  let temp = head\n  // walk the list and push each value into values\n  return values\n}",
-      "solution": "function toArray(head) {\n  const values = []\n  let temp = head\n  while (temp !== null) {\n    values.push(temp.value)\n    temp = temp.next\n  }\n  return values\n}",
+      "starterCode": "function toArray(head) {\n  const values = []\n  let current = head\n  // walk the list and push each value into values\n  return values\n}",
+      "solution": "function toArray(head) {\n  const values = []\n  let current = head\n  while (current !== null) {\n    values.push(current.value)\n    current = current.next\n  }\n  return values\n}",
       "kind": "function",
       "functionName": "toArray",
       "tests": [

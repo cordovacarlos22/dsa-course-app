@@ -2,96 +2,96 @@ import { useTranslation } from 'react-i18next'
 import StepPlayer from '../components/StepPlayer'
 import { BOX_STATE_STYLES, DEFAULT_BOX_STYLE } from './boxStyles'
 
-// A class is a cookie cutter: one Cookie class stamps out as many cookies
-// (instances) as we want, and each keeps its own flavor. Three scenes, one
-// per lesson step (see ./index.js):
-// - instances: new Cookie(...) twice
+// A class is an invitation template: one Invitation class prints as many
+// invitations (instances) as we want, and each keeps its own guest. Three
+// scenes, one per lesson step (see ./index.js):
+// - instances: new Invitation(...) twice
 // - new: the four things `new` does
-// - methods: getFlavor and setFlavor on one cookie, not the other
+// - methods: getGuest and setGuest on one invitation, not the other
 
 const CLASS_LINES = [
-  'class Cookie {',
-  '  constructor(flavor)',
-  '  getFlavor()',
-  '  setFlavor(flavor)',
+  'class Invitation {',
+  '  constructor(guest)',
+  '  getGuest()',
+  '  setGuest(guest)',
   '}',
 ]
 
-const CHOCOLATE = { name: 'cookieOne', flavor: 'chocolate' }
-const VANILLA = { name: 'cookieTwo', flavor: 'vanilla' }
+const FOR_ANA = { name: 'forAna', guest: 'Ana' }
+const FOR_BEN = { name: 'forBen', guest: 'Ben' }
 
 const SCENES = {
   instances: [
-    { captionKey: 'start', code: 'class Cookie { … }', cookies: [] },
+    { captionKey: 'start', code: 'class Invitation { … }', invitations: [] },
     {
       captionKey: 'first',
-      code: "const cookieOne = new Cookie('chocolate')",
-      cookies: [{ ...CHOCOLATE, state: 'new' }],
+      code: "const forAna = new Invitation('Ana')",
+      invitations: [{ ...FOR_ANA, state: 'new' }],
     },
     {
       captionKey: 'second',
-      code: "const cookieTwo = new Cookie('vanilla')",
-      cookies: [CHOCOLATE, { ...VANILLA, state: 'new' }],
+      code: "const forBen = new Invitation('Ben')",
+      invitations: [FOR_ANA, { ...FOR_BEN, state: 'new' }],
     },
     {
       captionKey: 'summary',
-      code: 'class Cookie { … }',
-      cookies: [CHOCOLATE, VANILLA],
+      code: 'class Invitation { … }',
+      invitations: [FOR_ANA, FOR_BEN],
     },
   ],
   new: [
     {
       captionKey: 'start',
-      code: "const cookieOne = new Cookie('chocolate')",
+      code: "const forAna = new Invitation('Ana')",
       stage: 0,
     },
     {
       captionKey: 'empty',
-      code: "const cookieOne = new Cookie('chocolate')",
+      code: "const forAna = new Invitation('Ana')",
       stage: 1,
     },
     {
       captionKey: 'this',
-      code: "const cookieOne = new Cookie('chocolate')",
+      code: "const forAna = new Invitation('Ana')",
       stage: 2,
     },
-    { captionKey: 'run', code: "this.flavor = 'chocolate'", stage: 3 },
+    { captionKey: 'run', code: "this.guest = 'Ana'", stage: 3 },
     {
       captionKey: 'returned',
-      code: "const cookieOne = new Cookie('chocolate')",
+      code: "const forAna = new Invitation('Ana')",
       stage: 4,
     },
   ],
   methods: [
     {
       captionKey: 'start',
-      code: 'cookieOne, cookieTwo',
-      cookies: [CHOCOLATE, VANILLA],
+      code: 'forAna, forBen',
+      invitations: [FOR_ANA, FOR_BEN],
     },
     {
       captionKey: 'getOne',
-      code: "cookieOne.getFlavor() // 'chocolate'",
-      cookies: [{ ...CHOCOLATE, state: 'found' }, VANILLA],
+      code: "forAna.getGuest() // 'Ana'",
+      invitations: [{ ...FOR_ANA, state: 'found' }, FOR_BEN],
     },
     {
       captionKey: 'getTwo',
-      code: "cookieTwo.getFlavor() // 'vanilla'",
-      cookies: [CHOCOLATE, { ...VANILLA, state: 'found' }],
+      code: "forBen.getGuest() // 'Ben'",
+      invitations: [FOR_ANA, { ...FOR_BEN, state: 'found' }],
     },
     {
       captionKey: 'set',
-      code: "cookieOne.setFlavor('oatmeal')",
-      cookies: [{ ...CHOCOLATE, flavor: 'oatmeal', state: 'moved' }, VANILLA],
+      code: "forBen.setGuest('Benny')",
+      invitations: [FOR_ANA, { ...FOR_BEN, guest: 'Benny', state: 'moved' }],
     },
     {
       captionKey: 'getAgain',
-      code: "cookieOne.getFlavor() // 'oatmeal'",
-      cookies: [{ ...CHOCOLATE, flavor: 'oatmeal', state: 'found' }, VANILLA],
+      code: "forBen.getGuest() // 'Benny'",
+      invitations: [FOR_ANA, { ...FOR_BEN, guest: 'Benny', state: 'found' }],
     },
     {
       captionKey: 'summary',
-      code: 'cookieOne, cookieTwo',
-      cookies: [{ ...CHOCOLATE, flavor: 'oatmeal' }, VANILLA],
+      code: 'forAna, forBen',
+      invitations: [FOR_ANA, { ...FOR_BEN, guest: 'Benny' }],
     },
   ],
 }
@@ -101,7 +101,7 @@ function ClassCard() {
   return (
     <div className="rounded-2xl border-2 border-dashed border-brand/60 bg-sky-50/50 p-3">
       <p className="text-[11px] font-bold tracking-wide text-slate-500 uppercase">
-        {t('viz.cookieCutter.classLabel')}
+        {t('viz.invitationTemplate.classLabel')}
       </p>
       <pre className="mt-1 font-mono text-xs leading-5 text-slate-800">
         {CLASS_LINES.join('\n')}
@@ -110,24 +110,27 @@ function ClassCard() {
   )
 }
 
-function Cookies({ cookies }) {
+function Invitations({ invitations }) {
   const { t } = useTranslation()
   return (
     <div>
       <p className="text-[11px] font-bold tracking-wide text-slate-500 uppercase">
-        {t('viz.cookieCutter.instancesLabel')}
+        {t('viz.invitationTemplate.instancesLabel')}
       </p>
       <ul className="mt-1 flex min-h-24 flex-wrap gap-2">
-        {cookies.map((cookie) => (
+        {invitations.map((invitation) => (
           <li
-            key={cookie.name}
-            className={`flex h-24 w-24 flex-col items-center justify-center rounded-full border-2 text-center transition-colors duration-500 ${
-              BOX_STATE_STYLES[cookie.state] ?? DEFAULT_BOX_STYLE
+            key={invitation.name}
+            className={`flex h-24 w-28 flex-col items-center justify-center rounded-lg border-2 text-center transition-colors duration-500 ${
+              BOX_STATE_STYLES[invitation.state] ?? DEFAULT_BOX_STYLE
             }`}
           >
-            <span className="text-sm font-bold">{cookie.name}</span>
+            <span aria-hidden="true" className="text-lg leading-none">
+              ✉️
+            </span>
+            <span className="text-sm font-bold">{invitation.name}</span>
             <span className="font-mono text-xs">
-              &apos;{cookie.flavor}&apos;
+              &apos;{invitation.guest}&apos;
             </span>
           </li>
         ))}
@@ -136,14 +139,14 @@ function Cookies({ cookies }) {
   )
 }
 
-// The four things `new Cookie('chocolate')` does, ticked off one by one,
+// The four things `new Invitation('Ana')` does, ticked off one by one,
 // next to the object as it's being built.
 const NEW_OBJECT_AT_STAGE = [
   '',
   '{}',
   'this → {}',
-  "this → { flavor: 'chocolate' }",
-  "cookieOne → { flavor: 'chocolate' }",
+  "this → { guest: 'Ana' }",
+  "forAna → { guest: 'Ana' }",
 ]
 
 function NewSteps({ stage }) {
@@ -165,7 +168,7 @@ function NewSteps({ stage }) {
             <span aria-hidden="true" className="w-4 text-green-700">
               {number <= stage ? '✓' : ''}
             </span>
-            {t(`viz.cookieCutter.new.parts.${number - 1}`)}
+            {t(`viz.invitationTemplate.new.parts.${number - 1}`)}
           </li>
         ))}
       </ol>
@@ -176,15 +179,15 @@ function NewSteps({ stage }) {
   )
 }
 
-function CookieCutter({ scene }) {
+function InvitationTemplate({ scene }) {
   const { t } = useTranslation()
   const steps = SCENES[scene].map((step) => ({
     ...step,
-    caption: t(`viz.cookieCutter.${scene}.${step.captionKey}`),
+    caption: t(`viz.invitationTemplate.${scene}.${step.captionKey}`),
   }))
   return (
     <StepPlayer
-      title={t(`viz.cookieCutter.${scene}.title`)}
+      title={t(`viz.invitationTemplate.${scene}.title`)}
       steps={steps}
       renderStep={(step) => (
         <div className="space-y-3">
@@ -194,7 +197,7 @@ function CookieCutter({ scene }) {
           ) : (
             <div className="grid gap-3 @lg:grid-cols-[minmax(0,14rem)_minmax(0,1fr)]">
               <ClassCard />
-              <Cookies cookies={step.cookies} />
+              <Invitations invitations={step.invitations} />
             </div>
           )}
         </div>
@@ -203,4 +206,4 @@ function CookieCutter({ scene }) {
   )
 }
 
-export default CookieCutter
+export default InvitationTemplate

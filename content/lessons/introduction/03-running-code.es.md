@@ -20,8 +20,8 @@ Eso hace que las cajas de código sean el mejor lugar para experimentar. Cambia 
 
 ```js-run
 console.log('1. Esta línea corre primero')
-const total = 2 + 3
-console.log('2. Luego esta: 2 + 3 =', total)
+const result = 2 + 3
+console.log('2. Luego esta: 2 + 3 =', result)
 console.log('3. Y esta corre al final')
 ```
 

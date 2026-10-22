@@ -67,8 +67,8 @@ describe.each(Object.entries(traces))('%s', (name, trace) => {
 })
 
 describe('trace counters', () => {
-  it('reads every character once for charCount (O(n))', () => {
-    const trace = traces['trace-char-count']
+  it('reads every character once for countCharacters (O(n))', () => {
+    const trace = traces['trace-count-characters']
     for (const input of trace.inputs) {
       const last = Array.from(trace.run(input)).at(-1)
       expect(last.ops).toBe(input.text.length)
@@ -114,7 +114,7 @@ describe('trace counters', () => {
     expect(gifts).toEqual([3, 5, 5])
   })
 
-  it('counts 5n + 2 operations for sumUpTo with a loop, and 3 for the formula', () => {
+  it('counts 5n + 2 operations for sumOneTo with a loop, and 3 for the formula', () => {
     for (const input of traces['trace-sum-loop'].inputs) {
       const last = Array.from(traces['trace-sum-loop'].run(input)).at(-1)
       expect(last.ops).toBe(5 * input.n + 2)
@@ -125,24 +125,24 @@ describe('trace counters', () => {
     }
   })
 
-  it('prints n lines for printNumbers and n × n for printPairs', () => {
+  it('prints n lines for printNumbers and n × n for printSeats', () => {
     for (const input of traces['trace-print-numbers'].inputs) {
       expect(
         Array.from(traces['trace-print-numbers'].run(input)).at(-1).ops,
       ).toBe(input.n)
     }
-    for (const input of traces['trace-print-pairs'].inputs) {
+    for (const input of traces['trace-print-seats'].inputs) {
       expect(
-        Array.from(traces['trace-print-pairs'].run(input)).at(-1).ops,
+        Array.from(traces['trace-print-seats'].run(input)).at(-1).ops,
       ).toBe(input.n * input.n)
     }
   })
 
-  it('creates one new box of memory per number in doubleArray', () => {
-    for (const input of traces['trace-double-array'].inputs) {
+  it('creates one new box of memory per order in doubleOrders', () => {
+    for (const input of traces['trace-double-orders'].inputs) {
       expect(
-        Array.from(traces['trace-double-array'].run(input)).at(-1).ops,
-      ).toBe(input.numbers.length)
+        Array.from(traces['trace-double-orders'].run(input)).at(-1).ops,
+      ).toBe(input.orders.length)
     }
   })
 
@@ -160,7 +160,7 @@ describe('trace counters', () => {
     for (const input of trace.inputs) {
       const last = Array.from(trace.run(input)).at(-1)
       expect(last.ops).toBe(input.values.length)
-      expect(last.list.pointers.temp).toBe(null)
+      expect(last.list.pointers.current).toBe(null)
     }
   })
 

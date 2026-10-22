@@ -37,8 +37,8 @@
     {
       "type": "choice",
       "question": {
-        "en": "Before coding `charCount`, which example is most likely to change your code?",
-        "es": "Antes de programar `charCount`, ¿qué ejemplo es más probable que cambie tu código?"
+        "en": "Before coding `countCharacters`, which example is most likely to change your code?",
+        "es": "Antes de programar `countCharacters`, ¿qué ejemplo es más probable que cambie tu código?"
       },
       "options": [
         {

@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import StepPlayer from '../components/StepPlayer'
 
-// Break it down: charCount starts as a plan written in comments, and each
-// comment gets its code underneath, one step at a time. isAlphaNumeric is a
+// Break it down: countCharacters starts as a plan written in comments, and each
+// comment gets its code underneath, one step at a time. isLetterOrDigit is a
 // helper we haven't written yet: naming a step you can't do yet lets you
 // keep going.
 
@@ -12,22 +12,25 @@ const PLAN = [
     key: 'loop',
     indent: '  ',
     code: [
-      '  for (let i = 0; i < str.length; i++) {',
-      '    const char = str[i].toLowerCase()',
+      '  for (let i = 0; i < text.length; i++) {',
+      '    const character = text[i].toLowerCase()',
     ],
   },
   {
     key: 'addOne',
     indent: '    ',
     code: [
-      '    if (isAlphaNumeric(char) && result[char] > 0) {',
-      '      result[char]++',
+      '    if (isLetterOrDigit(character) && result[character] > 0) {',
+      '      result[character]++',
     ],
   },
   {
     key: 'setOne',
     indent: '    ',
-    code: ['    } else if (isAlphaNumeric(char)) {', '      result[char] = 1'],
+    code: [
+      '    } else if (isLetterOrDigit(character)) {',
+      '      result[character] = 1',
+    ],
   },
   { key: 'skip', indent: '    ', code: ['    }', '  }'] },
   { key: 'returnIt', indent: '  ', code: ['  return result'] },
@@ -54,7 +57,7 @@ function StepsToCode() {
           {/* inline-block min-w-full: a highlighted line spans the whole box,
               even when a long line scrolls sideways. */}
           <code className="inline-block min-w-full">
-            <span className="block">{'function charCount(str) {'}</span>
+            <span className="block">{'function countCharacters(text) {'}</span>
             {PLAN.map((part, index) => {
               const isFilled = index < step.filled
               const isNewest = index === step.filled - 1 && !step.done

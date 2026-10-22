@@ -232,17 +232,17 @@
       "end": "{{gifts}} regalos para {{n}} invitados. Elige 20 invitados: siguen siendo 5. El bucle nunca corre más de 5 veces, así que es O(1)."
     },
     "sumLoop": {
-      "title": "sumUpTo: suma los números uno por uno",
+      "title": "sumOneTo: suma los números uno por uno",
       "input": "n = {{n}}",
-      "init": "let total = 0: 1 operación. Pasa una sola vez, sin importar n.",
+      "init": "let runningSum = 0: 1 operación. Pasa una sola vez, sin importar n.",
       "startLoop": "let i = 1: 1 operación más, también una sola vez.",
       "compare": "¿i ({{i}}) <= n ({{n}})? Una comparación: 1 operación. Sí, así que el bucle corre.",
-      "add": "total = total + {{i}}: una suma y una asignación, 2 operaciones. Ahora total vale {{total}}. Después i++ suma 2 más.",
+      "add": "runningSum = runningSum + {{i}}: una suma y una asignación, 2 operaciones. Ahora runningSum vale {{total}}. Después i++ suma 2 más.",
       "fastForward": "Con n = {{n}} saltamos al final: cada número cuesta las mismas 5 operaciones.",
       "end": "La suma de 1 a {{n}} es {{total}}, después de {{ops}} operaciones: 5n + 2. Entre más grande es n, más trabajo."
     },
     "sumFormula": {
-      "title": "sumUpToFormula: una fórmula, sin bucle",
+      "title": "sumOneToFormula: una fórmula, sin bucle",
       "input": "n = {{n}}",
       "start": "La misma pregunta con n = {{n}}, respondida con una fórmula en lugar de un bucle.",
       "plusOne": "n + 1 = {{value}}: 1 operación (una suma).",
@@ -257,19 +257,19 @@
       "print": "i = {{i}}: imprime {{i}}.",
       "end": "Le pasamos {{n}} y corrió {{n}} veces: {{n}} líneas. Eso es O(n)."
     },
-    "printPairs": {
-      "title": "printPairs: un bucle dentro de otro",
+    "printSeats": {
+      "title": "printSeats: un bucle dentro de otro",
       "input": "n = {{n}}",
-      "start": "Por cada i, el bucle de adentro recorre cada j.",
-      "print": "Imprime la pareja {{i}}, {{j}}.",
+      "start": "Por cada fila i, el bucle de adentro recorre cada asiento j.",
+      "print": "Fila {{i}}, asiento {{j}}: imprímelo.",
       "end": "n = {{n}} da {{n}} × {{n}} = {{lines}} líneas. Eso es O(n²)."
     },
-    "doubleArray": {
-      "title": "doubleArray: un array nuevo que crece",
-      "input": "{{n}} números",
+    "doubleOrders": {
+      "title": "doubleOrders: un array nuevo que crece",
+      "input": "{{n}} pedidos",
       "start": "doubled empieza como un array vacío. Es memoria nueva que crea la función.",
       "push": "{{value}} × 2 = {{doubled}}: una caja más en doubled.",
-      "end": "Entran {{n}} números, salen {{n}} cajas nuevas de memoria. La memoria extra crece con n: espacio O(n)."
+      "end": "Entran {{n}} pedidos, salen {{n}} cajas nuevas de memoria. La memoria extra crece con n: espacio O(n)."
     },
     "hasAnswer": {
       "title": "hasAnswer: busca un valor, respuesta por respuesta",
@@ -279,23 +279,23 @@
       "match": "{{name}} respondió '{{answer}}'. ¡Lo encontramos! Devuelve true después de {{ops}} revisiones.",
       "notFound": "El bucle terminó: nadie respondió '{{answer}}'. Devuelve false después de {{ops}} revisiones."
     },
-    "charCount": {
-      "title": "charCount, la versión simple, carácter por carácter",
+    "countCharacters": {
+      "title": "countCharacters, la versión simple, carácter por carácter",
       "input": "'{{text}}'",
-      "start": "charCount('{{text}}'): un objeto vacío por llenar y {{count}} caracteres por leer.",
+      "start": "countCharacters('{{text}}'): un objeto vacío por llenar y {{count}} caracteres por leer.",
       "firstTime": "{{char}} todavía no es clave: result[{{char}}] es undefined, y undefined > 0 es false. Ponlo en 1.",
       "again": "{{char}} ya es clave, así que súmale 1. Ahora va en {{count}}.",
       "done": "Se leyeron los {{ops}} caracteres, en una sola pasada: O(n). El objeto tiene {{keys}} claves."
     },
     "linkedListWalk": {
-      "title": "Recorriendo la fila con temp",
+      "title": "Recorriendo la fila con current",
       "input": "{{n}} invitados",
-      "start": "temp empieza donde apunta head: {{name}}. Movemos temp, nunca head.",
-      "startEmpty": "La fila está vacía. head es null, así que temp también empieza en null.",
-      "greet": "temp no es null, así que el bucle corre: saluda a {{name}}.",
-      "move": "temp = temp.next avanza temp un nodo, a {{name}}.",
-      "moveToNull": "temp = temp.next: {{name}} era el último invitado, así que ahora temp es null.",
-      "stop": "temp es null, así que el bucle se detiene. Nodos visitados: {{count}}. Recorrer la lista es O(n)."
+      "start": "current empieza donde apunta head: {{name}}. Movemos current, nunca head.",
+      "startEmpty": "La fila está vacía. head es null, así que current también empieza en null.",
+      "greet": "current no es null, así que el bucle corre: saluda a {{name}}.",
+      "move": "current = current.next avanza current un nodo, a {{name}}.",
+      "moveToNull": "current = current.next: {{name}} era el último invitado, así que ahora current es null.",
+      "stop": "current es null, así que el bucle se detiene. Nodos visitados: {{count}}. Recorrer la lista es O(n)."
     },
     "linkedListConstructor": {
       "title": "El constructor de LinkedList, línea por línea",
@@ -308,8 +308,8 @@
       "hasValue": "value es {{value}}, no undefined, así que creamos el primer nodo.",
       "zero": "value es 0. Eso no es undefined, así que 0 recibe un nodo como cualquier otro valor.",
       "nodeValue": "new Node({{value}}) corre el constructor de Node: this.value = {{value}}.",
-      "nodeNext": "this.next = null: el nodo nuevo todavía no apunta a nada. newNode apunta a él.",
-      "pointHead": "this.head = newNode: head apunta al nodo nuevo.",
+      "nodeNext": "this.next = null: el nodo nuevo todavía no apunta a nada. firstNode apunta a él.",
+      "pointHead": "this.head = firstNode: head apunta al nodo nuevo.",
       "pointTail": "this.tail = this.head: tail apunta al mismo nodo que head. Un nodo, dos punteros.",
       "done": "this.length = 1. Una lista con un nodo: head y tail están los dos en {{value}}."
     },
@@ -317,13 +317,13 @@
       "title": "push, línea por línea",
       "input_one": "{{count}} invitado",
       "input_other": "{{count}} invitados",
-      "newNode": "new Node('{{value}}') crea el nodo nuevo, y newNode apunta a él. Todavía no está en la fila.",
+      "nodeToAdd": "new Node('{{value}}') crea el nodo nuevo, y nodeToAdd apunta a él. Todavía no está en la fila.",
       "empty": "!this.head es true: head es null, y null es falsy. La fila está vacía.",
-      "emptyHead": "this.head = newNode: el nodo nuevo es el primer invitado...",
-      "emptyTail": "this.tail = newNode: ...y también el último. head y tail lo comparten.",
+      "emptyHead": "this.head = nodeToAdd: el nodo nuevo es el primer invitado...",
+      "emptyTail": "this.tail = nodeToAdd: ...y también el último. head y tail lo comparten.",
       "notEmpty": "!this.head es false: head está en {{head}}, así que pasamos al else.",
-      "link": "this.tail.next = newNode: tail está en {{tail}}, así que el next de {{tail}} ahora apunta a {{value}}.",
-      "moveTail": "this.tail = newNode: tail se mueve a {{value}}, el nuevo último invitado.",
+      "link": "this.tail.next = nodeToAdd: tail está en {{tail}}, así que el next de {{tail}} ahora apunta a {{value}}.",
+      "moveTail": "this.tail = nodeToAdd: tail se mueve a {{value}}, el nuevo último invitado.",
       "length": "this.length++: ahora length es {{length}}.",
       "return": "return this regresa la lista completa. Sin caminar nada: push es O(1)."
     },
@@ -331,13 +331,13 @@
       "title": "unshift, línea por línea",
       "input_one": "{{count}} invitado",
       "input_other": "{{count}} invitados",
-      "newNode": "new Node('{{value}}') crea el nodo nuevo, y newNode apunta a él. Todavía no está en la fila.",
+      "nodeToAdd": "new Node('{{value}}') crea el nodo nuevo, y nodeToAdd apunta a él. Todavía no está en la fila.",
       "empty": "!this.head es true: head es null, y null es falsy. La fila está vacía.",
-      "emptyHead": "this.head = newNode: el nodo nuevo es el primer invitado...",
-      "emptyTail": "this.tail = newNode: ...y también el último. head y tail lo comparten.",
+      "emptyHead": "this.head = nodeToAdd: el nodo nuevo es el primer invitado...",
+      "emptyTail": "this.tail = nodeToAdd: ...y también el último. head y tail lo comparten.",
       "notEmpty": "!this.head es false: head está en {{head}}, así que pasamos al else.",
-      "link": "newNode.next = this.head: {{value}} ahora apunta a {{head}}, el primer invitado. Primero enlaza, para no perder a nadie.",
-      "moveHead": "this.head = newNode: head se mueve a {{value}}, el nuevo primer invitado.",
+      "link": "nodeToAdd.next = this.head: {{value}} ahora apunta a {{head}}, el primer invitado. Primero enlaza, para no perder a nadie.",
+      "moveHead": "this.head = nodeToAdd: head se mueve a {{value}}, el nuevo primer invitado.",
       "length": "this.length++: ahora length es {{length}}.",
       "return": "return this regresa la lista completa. Dos movimientos y sin caminar: unshift es O(1)."
     },
@@ -348,13 +348,13 @@
       "empty": "!this.head es true: la fila está vacía, así que no hay nada a qué hacerle pop.",
       "returnUndefined": "return undefined. La lista no cambia.",
       "notEmpty": "!this.head es false: head está en {{name}}, así que hay un invitado a quien hacerle pop.",
-      "start": "temp y pre empiezan en head, en {{name}}.",
-      "movePre": "temp.next es {{next}}, no null, así que el bucle corre. pre = temp: pre se mueve a {{name}}.",
-      "moveTemp": "temp = temp.next: temp avanza a {{name}}. pre se queda un nodo atrás.",
-      "loopEnds": "temp.next es null: temp está en {{name}}, el último nodo, y pre está en {{pre}}, el de antes. El bucle se detiene.",
-      "loopSkipped": "temp.next ya es null: {{name}} es el único nodo, así que el bucle no corre ni una vez.",
-      "moveTail": "this.tail = pre: tail regresa a {{name}}.",
-      "tailSame": "this.tail = pre: tail ya estaba en {{name}}, así que nada cambia.",
+      "start": "current y previous empiezan en head, en {{name}}.",
+      "movePre": "current.next es {{next}}, no null, así que el bucle corre. previous = current: previous se mueve a {{name}}.",
+      "moveTemp": "current = current.next: current avanza a {{name}}. previous se queda un nodo atrás.",
+      "loopEnds": "current.next es null: current está en {{name}}, el último nodo, y previous está en {{previous}}, el de antes. El bucle se detiene.",
+      "loopSkipped": "current.next ya es null: {{name}} es el único nodo, así que el bucle no corre ni una vez.",
+      "moveTail": "this.tail = previous: tail regresa a {{name}}.",
+      "tailSame": "this.tail = previous: tail ya estaba en {{name}}, así que nada cambia.",
       "cut": "this.tail.next = null: el nuevo tail deja de apuntar a {{name}}. {{name}} queda fuera de la fila.",
       "cutNothing": "this.tail.next = null: ya era null, así que nada cambia. ¡Pero head y tail todavía apuntan a {{name}}!",
       "length": "this.length--: ahora length es {{length}}.",
@@ -362,7 +362,7 @@
       "headNull": "this.head = null.",
       "tailNull": "this.tail = null. Ahora la fila vacía de verdad se ve vacía.",
       "notZero": "length es {{length}}, no 0, así que la fila todavía tiene invitados. Se salta el if.",
-      "return": "return temp: el nodo de {{name}}, el invitado que se fue. Nodos visitados: {{count}}. La caminata crece con la fila, así que pop es O(n)."
+      "return": "return current: el nodo de {{name}}, el invitado que se fue. Nodos visitados: {{count}}. La caminata crece con la fila, así que pop es O(n)."
     },
     "linkedListShift": {
       "title": "shift, línea por línea",
@@ -371,15 +371,15 @@
       "empty": "!this.head es true: la fila está vacía, así que no hay nada a qué hacerle shift.",
       "returnUndefined": "return undefined. La lista no cambia.",
       "notEmpty": "!this.head es false: head está en {{name}}, así que hay un invitado a quien hacerle shift.",
-      "temp": "let temp = this.head: temp apunta al nodo de {{name}}, para poder regresarlo al final.",
+      "oldHead": "let oldHead = this.head: oldHead apunta al nodo de {{name}}, para poder regresarlo al final.",
       "moveHead": "this.head = this.head.next: head se mueve a {{next}}. {{name}} queda fuera de la fila, pero todavía apunta a {{next}}.",
       "headNull": "this.head = this.head.next: {{name}} no tenía next, así que ahora head es null.",
-      "cut": "temp.next = null: el nodo de {{name}} suelta la fila, así que el nodo que regresamos sale solo.",
-      "cutNothing": "temp.next = null: ya era null, así que nada cambia. ¡Pero tail todavía apunta a {{name}}!",
+      "cut": "oldHead.next = null: el nodo de {{name}} suelta la fila, así que el nodo que regresamos sale solo.",
+      "cutNothing": "oldHead.next = null: ya era null, así que nada cambia. ¡Pero tail todavía apunta a {{name}}!",
       "length": "this.length--: ahora length es {{length}}.",
       "tailNull": "length es 0, así que this.tail = null. Ahora head y tail son null.",
       "notZero": "length es {{length}}, no 0, así que tail se queda donde está.",
-      "return": "return temp: el nodo de {{name}}. Un movimiento de head y sin caminar: shift es O(1)."
+      "return": "return oldHead: el nodo de {{name}}. Un movimiento de head y sin caminar: shift es O(1)."
     },
     "linkedListGet": {
       "title": "get, línea por línea",
@@ -387,19 +387,19 @@
       "outOfRange": "El índice {{index}} está fuera de rango: los índices válidos van de 0 a {{last}}.",
       "returnUndefined": "return undefined, sin caminar nada.",
       "inRange": "El índice {{index}} está en rango: es al menos 0 y menor que la longitud, {{length}}.",
-      "start": "temp empieza en head, en {{name}}: índice 0.",
-      "move": "temp = temp.next: temp está en {{name}}, índice {{at}}.",
-      "return": "return temp: el nodo de {{name}}, índice {{index}}. Nodos visitados: {{count}}. Buscar por índice es O(n)."
+      "start": "current empieza en head, en {{name}}: índice 0.",
+      "move": "current = current.next: current está en {{name}}, índice {{at}}.",
+      "return": "return current: el nodo de {{name}}, índice {{index}}. Nodos visitados: {{count}}. Buscar por índice es O(n)."
     },
     "linkedListSet": {
       "title": "set, línea por línea",
       "input": "{{label}}",
       "gotUndefined": "this.get({{index}}) regresa undefined: no hay índice {{index}}.",
-      "notNode": "temp es undefined, que es falsy, así que el if se salta.",
+      "notNode": "target es undefined, que es falsy, así que el if se salta.",
       "returnFalse": "return false: nada cambió.",
       "gotNode": "this.get({{index}}) camina hasta el índice {{index}} y regresa el nodo de {{name}}.",
-      "isNode": "temp es un nodo, que es truthy, así que el if corre.",
-      "change": "temp.value = value: {{old}} se vuelve {{value}}. El mismo nodo, con un valor nuevo.",
+      "isNode": "target es un nodo, que es truthy, así que el if corre.",
+      "change": "target.value = value: {{old}} se vuelve {{value}}. El mismo nodo, con un valor nuevo.",
       "returnTrue": "return true: el valor cambió. La caminata dentro de get hace que set sea O(n)."
     },
     "linkedListInsert": {
@@ -414,10 +414,10 @@
       "isEnd": "El índice {{index}} es igual a la longitud: el final de la fila.",
       "push": "this.push(value) agrega a {{value}} al final, en O(1).",
       "middle": "El índice {{index}} no es 0 ni la longitud, {{length}}: va en la mitad.",
-      "newNode": "new Node(value) crea un nodo para {{value}}.",
-      "before": "this.get({{before}}) camina hasta {{name}}, el nodo justo antes del índice {{index}}.",
-      "linkNew": "newNode.next = temp.next: {{value}} apunta a {{next}}, para no perder a nadie.",
-      "linkBefore": "temp.next = newNode: {{name}} apunta a {{value}}. {{value}} ya está en la fila, en el índice {{index}}.",
+      "nodeToAdd": "new Node(value) crea un nodo para {{value}}.",
+      "findNodeBefore": "this.get({{beforeIndex}}) camina hasta {{name}}, el nodo justo antes del índice {{index}}.",
+      "linkNew": "nodeToAdd.next = nodeBefore.next: {{value}} apunta a {{next}}, para no perder a nadie.",
+      "linkBefore": "nodeBefore.next = nodeToAdd: {{name}} apunta a {{value}}. {{value}} ya está en la fila, en el índice {{index}}.",
       "length": "this.length++: ahora length es {{length}}."
     },
     "linkedListRemove": {
@@ -431,30 +431,30 @@
       "isLast": "El índice {{index}} es el último.",
       "pop": "return this.pop(): el nodo de {{name}} sale del final y se regresa.",
       "middle": "El índice {{index}} está en la mitad: no es 0, ni el último índice, {{last}}.",
-      "before": "this.get({{before}}) camina hasta {{name}}, el nodo antes del que se va.",
-      "temp": "temp = before.next: {{name}}, el nodo que se va. Sin segunda caminata.",
-      "skip": "before.next = temp.next: {{before}} ahora se salta a {{name}} y apunta directo a {{next}}.",
-      "cut": "temp.next = null: el nodo de {{name}} suelta a {{next}}.",
+      "nodeBefore": "this.get({{nodeBefore}}) camina hasta {{name}}, el nodo antes del que se va.",
+      "removed": "removed = nodeBefore.next: {{name}}, el nodo que se va. Sin segunda caminata.",
+      "skip": "nodeBefore.next = removed.next: {{nodeBefore}} ahora se salta a {{name}} y apunta directo a {{next}}.",
+      "cut": "removed.next = null: el nodo de {{name}} suelta a {{next}}.",
       "length": "this.length--: ahora length es {{length}}.",
-      "return": "return temp: el nodo de {{name}}, solo. La caminata hace que remove sea O(n)."
+      "return": "return removed: el nodo de {{name}}, solo. La caminata hace que remove sea O(n)."
     },
     "linkedListReverse": {
       "title": "reverse, línea por línea",
       "input_one": "{{count}} invitado",
       "input_other": "{{count}} invitados",
-      "temp": "temp = this.head: temp recuerda el primer nodo viejo, {{name}}.",
-      "tempEmpty": "temp = this.head: la fila está vacía, así que temp es null.",
+      "current": "current = this.head: current recuerda el primer nodo viejo, {{name}}.",
+      "tempEmpty": "current = this.head: la fila está vacía, así que current es null.",
       "head": "this.head = this.tail: head se mueve a {{name}}, el último nodo viejo.",
       "headEmpty": "this.head = this.tail: los dos son null, así que nada cambia.",
-      "tail": "this.tail = temp: tail se mueve a {{name}}, el primer nodo viejo. head y tail se intercambiaron.",
-      "tailEmpty": "this.tail = temp: sigue en null.",
-      "vars": "prev y next empiezan en null. prev va a ir detrás de temp, y next delante de él.",
-      "remember": "next = temp.next: antes de voltear la flecha de {{name}}, next se queda con {{next}}, el resto de la fila.",
-      "rememberLast": "next = temp.next: {{name}} es el último nodo, así que next es null.",
-      "flipFirst": "temp.next = prev: ahora {{name}} apunta a null. Es el final de la fila volteada.",
-      "flip": "temp.next = prev: la flecha de {{name}} se voltea para apuntar hacia {{prev}}.",
-      "step": "prev = temp y temp = next: prev se mueve a {{prev}}, y temp cruza el hueco hasta {{temp}}.",
-      "stepLast": "prev = temp y temp = next: prev está en {{prev}}, y temp es null. Ya se voltearon todas las flechas.",
+      "tail": "this.tail = current: tail se mueve a {{name}}, el primer nodo viejo. head y tail se intercambiaron.",
+      "tailEmpty": "this.tail = current: sigue en null.",
+      "vars": "previous y next empiezan en null. previous va a ir detrás de current, y next delante de él.",
+      "remember": "nextNode = current.next: antes de voltear la flecha de {{name}}, next se queda con {{next}}, el resto de la fila.",
+      "rememberLast": "nextNode = current.next: {{name}} es el último nodo, así que next es null.",
+      "flipFirst": "current.next = previous: ahora {{name}} apunta a null. Es el final de la fila volteada.",
+      "flip": "current.next = previous: la flecha de {{name}} se voltea para apuntar hacia {{previous}}.",
+      "step": "previous = current y current = next: previous se mueve a {{previous}}, y current cruza el hueco hasta {{current}}.",
+      "stepLast": "previous = current y current = next: previous está en {{previous}}, y current es null. Ya se voltearon todas las flechas.",
       "return": "return this. Cada nodo se visitó una vez, así que es O(n) en tiempo, con solo 3 punteros extra: O(1) en espacio.",
       "returnEmpty": "El bucle nunca corrió: una fila vacía volteada sigue vacía. return this."
     }
@@ -463,7 +463,7 @@
     "title": "Midiendo las dos versiones cuando n crece",
     "loopLegend": "con un bucle",
     "formulaLegend": "con la fórmula",
-    "start": "Medimos sumUpTo con n cada vez más grande, de 200 millones a mil millones, y ponemos cada tiempo en una gráfica.",
+    "start": "Medimos sumOneTo con n cada vez más grande, de 200 millones a mil millones, y ponemos cada tiempo en una gráfica.",
     "firstPoint": "Con n = 200 millones, el bucle tarda como un cuarto de segundo.",
     "loopLine": "Cada vez que n crece 200 millones, el tiempo crece más o menos lo mismo. Los puntos quedan alineados: una línea recta.",
     "formula": "La fórmula casi no tarda nada, sin importar n: una línea plana abajo.",
@@ -583,7 +583,7 @@
         "Las entradas: qué entra, de qué tipo es, qué tan grande puede ser y cuántas son.",
         "Las salidas: qué regresa, y con qué forma: ¿un número, un string, un objeto?",
         "A veces falta algo, como un segundo número. Quizá solo lo notes más adelante, y está bien.",
-        "Buenos nombres desde ahora (add, num1, num2, sum) hacen que cada paso siguiente sea más fácil de explicar."
+        "Buenos nombres desde ahora (addNumbers, first, second, result) hacen que cada paso siguiente sea más fácil de explicar."
       ],
       "summary": "Cinco preguntas, un minuto o dos. Son la forma más barata de no resolver el problema equivocado."
     },
@@ -661,7 +661,7 @@
     }
   },
   "exampleLadder": {
-    "title": "Ejemplos para charCount, de fáciles a raros",
+    "title": "Ejemplos para countCharacters, de fáciles a raros",
     "start": "El problema: contar cuántas veces aparece cada carácter en un string. Escribamos ejemplos antes de cualquier código.",
     "kinds": {
       "simple": "Simple",
@@ -699,15 +699,15 @@
     },
     "makeObject": "Primero lo fácil: un objeto vacío, result, para llenarlo y regresarlo.",
     "loop": "El bucle sobre el string. Pasamos cada carácter a minúscula al leerlo, para que 'H' y 'h' cuenten juntas.",
-    "addOne": "Un carácter que ya es clave suma 1. isAlphaNumeric todavía no existe: le pusimos nombre al paso y seguimos.",
+    "addOne": "Un carácter que ya es clave suma 1. isLetterOrDigit todavía no existe: le pusimos nombre al paso y seguimos.",
     "setOne": "Una letra o dígito nuevo empieza en 1.",
     "skip": "Espacios y puntuación: no hay nada que hacer, así que solo falta cerrar el if y el bucle.",
     "returnIt": "Regresa el objeto. Ahora cada comentario tiene su código.",
-    "summary": "Los comentarios eran el plan, y el plan se volvió el código. Solo falta escribir isAlphaNumeric."
+    "summary": "Los comentarios eran el plan, y el plan se volvió el código. Solo falta escribir isLetterOrDigit."
   },
   "solutionLayers": {
     "title": "Resuelve un problema más simple y luego agrega las partes difíciles",
-    "simple": "Capa 1: el charCount simple. Ignora mayúsculas y minúsculas, y no revisa qué tipo de carácter lee.",
+    "simple": "Capa 1: el countCharacters simple. Ignora mayúsculas y minúsculas, y no revisa qué tipo de carácter lee.",
     "simpleOutput": "Con 'Hi Ana!' funciona, pero 'H' y 'A' se cuentan aparte de 'h' y 'a', y también cuenta el espacio y el '!'.",
     "lowercase": "Capa 2: un solo cambio. Cada carácter pasa a minúscula al leerlo.",
     "lowercaseOutput": "Ahora 'a' tiene 2. Solo el espacio y el '!' siguen mal.",
@@ -721,23 +721,23 @@
     "outside": "{{char}} tiene el código {{code}}. Está fuera de todos los bloques verdes: no es letra ni dígito.",
     "summary": "Tres revisiones de rango responden la pregunta, sin expresiones regulares. Cuidado con los bordes: '[' es 91, uno después de 'Z', y '`' es 96, uno antes de 'a'."
   },
-  "cookieCutter": {
-    "classLabel": "La clase (el molde)",
-    "instancesLabel": "Las instancias (las galletas)",
+  "invitationTemplate": {
+    "classLabel": "La clase (la plantilla)",
+    "instancesLabel": "Las instancias (las invitaciones)",
     "instances": {
-      "title": "Una clase, muchas galletas",
-      "start": "class Cookie es el molde para galletas: una forma que puedes usar una y otra vez. Por sí sola, todavía no es una galleta.",
-      "first": "new Cookie('chocolate') hace la primera galleta, una instancia llamada cookieOne, con su propio sabor.",
-      "second": "El mismo molde hace una segunda instancia, cookieTwo. La misma forma, otro sabor.",
-      "summary": "Una clase, dos instancias. Cada galleta guarda sus propios datos, y puedes hacer todas las que necesites."
+      "title": "Una clase, muchas invitaciones",
+      "start": "class Invitation es la plantilla: un diseño que puedes imprimir una y otra vez. Por sí sola, todavía no es una invitación.",
+      "first": "new Invitation('Ana') imprime la primera invitación, una instancia llamada forAna, con su propio invitado.",
+      "second": "La misma plantilla imprime una segunda instancia, forBen. El mismo diseño, otro invitado.",
+      "summary": "Una clase, dos instancias. Cada invitación guarda sus propios datos, y puedes imprimir todas las que necesites."
     },
     "new": {
       "title": "Lo que hace new, en cuatro pasos pequeños",
-      "start": "new Cookie('chocolate') parece una sola acción, pero JavaScript hace cuatro cosas.",
+      "start": "new Invitation('Ana') parece una sola acción, pero JavaScript hace cuatro cosas.",
       "empty": "1. Crea un objeto nuevo y vacío.",
-      "this": "2. Hace que this apunte a ese objeto, para que el constructor sepa qué galleta está construyendo.",
-      "run": "3. Ejecuta el constructor. this.flavor = 'chocolate' escribe el sabor en el objeto nuevo.",
-      "returned": "4. Regresa el objeto terminado, y ahora cookieOne apunta a él.",
+      "this": "2. Hace que this apunte a ese objeto, para que el constructor sepa qué invitación está llenando.",
+      "run": "3. Ejecuta el constructor. this.guest = 'Ana' escribe el nombre del invitado en el objeto nuevo.",
+      "returned": "4. Regresa el objeto terminado, y ahora forAna apunta a él.",
       "parts": [
         "Crear un objeto vacío",
         "Hacer que this apunte a él",
@@ -746,13 +746,13 @@
       ]
     },
     "methods": {
-      "title": "Getters y setters: cada galleta responde por sí misma",
-      "start": "Dos instancias de la misma clase: cookieOne es de chocolate y cookieTwo es de vainilla.",
-      "getOne": "cookieOne.getFlavor() corre con this apuntando a cookieOne, así que regresa 'chocolate'.",
-      "getTwo": "El mismo método, llamado en cookieTwo: ahora this es cookieTwo, así que regresa 'vanilla'.",
-      "set": "cookieOne.setFlavor('oatmeal') cambia solo a cookieOne. A cookieTwo no le pasa nada.",
-      "getAgain": "Al leerlo otra vez se ve el cambio: cookieOne.getFlavor() ahora es 'oatmeal'.",
-      "summary": "Los getters leen los datos de una instancia y los setters los cambian. Los dos trabajan con this: la galleta en la que los llamaste."
+      "title": "Getters y setters: cada invitación responde por sí misma",
+      "start": "Dos instancias de la misma clase: forAna es para Ana y forBen es para Ben.",
+      "getOne": "forAna.getGuest() corre con this apuntando a forAna, así que regresa 'Ana'.",
+      "getTwo": "El mismo método, llamado en forBen: ahora this es forBen, así que regresa 'Ben'.",
+      "set": "La invitación de Ben tenía mal el nombre. forBen.setGuest('Benny') corrige solo a forBen. A forAna no le pasa nada.",
+      "getAgain": "Al leerlo otra vez se ve el cambio: forBen.getGuest() ahora es 'Benny'.",
+      "summary": "Los getters leen los datos de una instancia y los setters los cambian. Los dos trabajan con this: la invitación en la que los llamaste."
     }
   },
   "listClassPreview": {
@@ -813,36 +813,36 @@
     "costEnd": {
       "title": "El final de la fila: push es O(1), pop es O(n)",
       "start": "Una fila de cuatro invitados. head está en Ana y tail está en Dev.",
-      "newNode": "push('Eve') empieza con un nodo nuevo para Eve. Todavía nada apunta a él.",
-      "link": "tail ya apunta a Dev, así que tail.next = newNode enlaza a Dev con Eve en un solo movimiento.",
-      "moveTail": "tail = newNode mueve tail a Eve. Dos movimientos, tenga la fila 4 invitados o 4,000: push es O(1).",
+      "nodeToAdd": "push('Eve') empieza con un nodo nuevo para Eve. Todavía nada apunta a él.",
+      "link": "tail ya apunta a Dev, así que tail.next = nodeToAdd enlaza a Dev con Eve en un solo movimiento.",
+      "moveTail": "tail = nodeToAdd mueve tail a Eve. Dos movimientos, tenga la fila 4 invitados o 4,000: push es O(1).",
       "popProblem": "Ahora haz pop() de Eve. tail tiene que regresar a Dev, y lo único que apunta a Dev es el next de Cleo. No podemos caminar hacia atrás desde Eve.",
-      "walkStart": "Así que empezamos en head, con un puntero llamado temp. temp está en {{name}}. ¿Su next es el tail? No.",
-      "walk": "temp avanza a {{name}}. Su next todavía no es el tail, así que seguimos caminando.",
-      "walkFound": "temp está en {{name}}, y su next es el tail. Ese es el nuevo último invitado.",
-      "moveTailBack": "tail = temp regresa tail a Dev.",
+      "walkStart": "Así que empezamos en head, con un puntero llamado current. current está en {{name}}. ¿Su next es el tail? No.",
+      "walk": "current avanza a {{name}}. Su next todavía no es el tail, así que seguimos caminando.",
+      "walkFound": "current está en {{name}}, y su next es el tail. Ese es el nuevo último invitado.",
+      "moveTailBack": "tail = current regresa tail a Dev.",
       "cut": "tail.next = null deja fuera a Eve. Ahora nada apunta al nodo de Eve.",
       "summary": "pop tuvo que recorrer toda la fila para encontrar al invitado antes del tail. Entre más larga la fila, más larga la caminata: pop es O(n)."
     },
     "costFront": {
       "title": "El inicio de la fila: unshift y shift son O(1)",
       "start": "La misma fila: head en Ana, tail en Dev.",
-      "newNode": "unshift('Zoe') empieza con un nodo nuevo para Zoe.",
-      "link": "head ya apunta a Ana, así que newNode.next = head hace que Zoe apunte a Ana. Sin caminar.",
-      "moveHead": "head = newNode mueve head a Zoe. Dos movimientos, sin importar lo larga que sea la fila: unshift es O(1).",
+      "nodeToAdd": "unshift('Zoe') empieza con un nodo nuevo para Zoe.",
+      "link": "head ya apunta a Ana, así que nodeToAdd.next = head hace que Zoe apunte a Ana. Sin caminar.",
+      "moveHead": "head = nodeToAdd mueve head a Zoe. Dos movimientos, sin importar lo larga que sea la fila: unshift es O(1).",
       "shift": "shift() es un solo movimiento: head = head.next regresa head a Ana. Ahora nada apunta a Zoe, así que el recolector de basura se lleva su nodo.",
       "summary": "Al inicio, head nos da de inmediato el nodo que necesitamos. Agregar y quitar ahí nunca camina: los dos son O(1)."
     },
     "costMiddle": {
       "title": "La mitad de la fila: insert y remove son O(n)",
       "start": "Insertemos a Eve en el índice 3, entre Cleo y Dev. No hay índices a los cuales saltar, así que contamos mientras caminamos.",
-      "walkStart": "temp empieza en head: {{name}} es el índice 0.",
-      "walk": "temp avanza a {{name}}: índice 1.",
-      "walkFound": "temp avanza a {{name}}: índice 2, el nodo justo antes del índice 3. Aquí nos detenemos.",
-      "link": "newNode.next = temp.next hace que Eve apunte a Dev, el nodo al que apunta Cleo. Primero enlaza el nodo nuevo, para no perder a Dev.",
-      "insert": "temp.next = newNode hace que Cleo apunte a Eve. Eve ya está en el índice 3. Enlazar tomó 2 movimientos, pero la caminata tomó 3 pasos.",
-      "removeWalk": "Ahora quita otra vez el índice 3. La misma caminata: temp se detiene en Cleo, en el índice 2.",
-      "remove": "temp.next = temp.next.next hace que Cleo se salte a Eve y apunte directo a Dev. Nada apunta a Eve, así que Eve ya no está.",
+      "walkStart": "current empieza en head: {{name}} es el índice 0.",
+      "walk": "current avanza a {{name}}: índice 1.",
+      "walkFound": "current avanza a {{name}}: índice 2, el nodo justo antes del índice 3. Aquí nos detenemos.",
+      "link": "nodeToAdd.next = current.next hace que Eve apunte a Dev, el nodo al que apunta Cleo. Primero enlaza el nodo nuevo, para no perder a Dev.",
+      "insert": "current.next = nodeToAdd hace que Cleo apunte a Eve. Eve ya está en el índice 3. Enlazar tomó 2 movimientos, pero la caminata tomó 3 pasos.",
+      "removeWalk": "Ahora quita otra vez el índice 3. La misma caminata: current se detiene en Cleo, en el índice 2.",
+      "remove": "current.next = current.next.next hace que Cleo se salte a Eve y apunte directo a Dev. Nada apunta a Eve, así que Eve ya no está.",
       "summary": "Mover los punteros es O(1), pero la caminata hasta el lugar correcto crece con la fila. insert y remove son O(n)."
     },
     "costLookup": {
@@ -868,7 +868,7 @@
       "unshift": "unshift recibe un valor y crea un nodo, y luego lo agrega al inicio.",
       "insert": "insert recibe un valor y crea un nodo, y luego lo pone en un índice.",
       "nodeClass": "Cuatro métodos crean lo mismo. En vez de escribir ese código cuatro veces, lo escribimos una sola vez, en su propia clase: Node.",
-      "newNode": "Ahora cualquier método crea un nodo en una línea: new Node('Ana') da { value: 'Ana', next: null }."
+      "firstNode": "Ahora cualquier método crea un nodo en una línea: new Node('Ana') da { value: 'Ana', next: null }."
     },
     "constructorExamples": {
       "title": "Ejemplos para el constructor",
@@ -880,7 +880,7 @@
     "constructorPlan": {
       "title": "El plan, como comentarios",
       "empty": "Paso 1: empieza vacía. head y tail apuntan a null, y length es 0.",
-      "makeNode": "Paso 2a: si recibimos un valor, crea un nodo nuevo con él. newNode apunta a ese nodo.",
+      "makeNode": "Paso 2a: si recibimos un valor, crea un nodo nuevo con él. firstNode apunta a ese nodo.",
       "head": "Paso 2b: haz que head apunte al nodo nuevo.",
       "tail": "Paso 2c: haz que tail apunte al mismo nodo. Ahora head y tail comparten un nodo.",
       "length": "Paso 2d: length es 1. Ya tenemos la lista."
@@ -905,50 +905,50 @@
       "push4": "3b. tail se mueve al nodo nuevo",
       "push5": "4. súmale 1 a length, 5. regresa la lista",
       "pop1": "1. si la lista está vacía, regresa undefined",
-      "pop2": "2. temp y pre empiezan en head",
-      "pop3": "3. camina: mientras temp tenga next, pre = temp y luego temp avanza",
-      "pop4": "4. tail se mueve a pre, y el next del nuevo tail se vuelve null",
+      "pop2": "2. current y previous empiezan en head",
+      "pop3": "3. camina: mientras current tenga next, previous = current y luego current avanza",
+      "pop4": "4. tail se mueve a previous, y el next del nuevo tail se vuelve null",
       "pop5": "5. réstale 1 a length",
       "pop6": "6. si length ahora es 0, head y tail se vuelven null",
-      "pop7": "7. regresa temp",
+      "pop7": "7. regresa current",
       "unshift1": "1. crea un nodo nuevo con el valor",
       "unshift2": "2. si la lista está vacía: head y tail apuntan al nodo nuevo",
       "unshift3": "3a. si no: el next del nodo nuevo apunta al primer nodo",
       "unshift4": "3b. head se mueve al nodo nuevo",
       "unshift5": "4. súmale 1 a length, 5. regresa la lista",
       "shift1": "1. si la lista está vacía, regresa undefined",
-      "shift2": "2. temp apunta al primer nodo",
+      "shift2": "2. oldHead apunta al primer nodo",
       "shift3": "3. head se mueve al siguiente nodo",
-      "shift4": "4. el next de temp se vuelve null, para soltarlo",
+      "shift4": "4. el next de oldHead se vuelve null, para soltarlo",
       "shift5": "5. réstale 1 a length",
       "shift6": "6. si length ahora es 0, tail también se vuelve null",
-      "shift7": "7. regresa temp",
+      "shift7": "7. regresa oldHead",
       "get1": "1. si index < 0 o index >= length, regresa undefined",
-      "get2": "2. temp empieza en head (índice 0)",
-      "get3": "3. avanza temp, index veces: ahora en el índice {{index}}",
-      "get4": "4. regresa temp",
-      "set1": "1. temp = this.get(index): el nodo, o undefined",
-      "set2": "2. si temp es un nodo: cambia su valor, regresa true",
+      "get2": "2. current empieza en head (índice 0)",
+      "get3": "3. avanza current, index veces: ahora en el índice {{index}}",
+      "get4": "4. regresa current",
+      "set1": "1. target = this.get(index): el nodo, o undefined",
+      "set2": "2. si target es un nodo: cambia su valor, regresa true",
       "set3": "3. si no, regresa false",
       "insert1": "1. si index < 0 o index > length, regresa false",
       "insert2": "2. ¿index 0? unshift. ¿index === length? push. Luego regresa true",
       "insert3": "3. crea un nodo nuevo",
-      "insert4": "4. temp = el nodo antes del lugar: this.get(index - 1)",
-      "insert5": "5. el next del nodo nuevo apunta al next de temp",
-      "insert6": "6. el next de temp apunta al nodo nuevo",
+      "insert4": "4. nodeBefore = el nodo antes del lugar: this.get(index - 1)",
+      "insert5": "5. el next del nodo nuevo apunta al next de nodeBefore",
+      "insert6": "6. el next de nodeBefore apunta al nodo nuevo",
       "insert7": "7. súmale 1 a length, regresa true",
       "remove1": "1. si index < 0 o index >= length, regresa undefined",
       "remove2": "2. ¿index 0? shift. ¿Último índice? pop. Regresa lo que regresen",
-      "remove3": "3. before = el nodo antes del lugar: this.get(index - 1)",
-      "remove4": "4. temp = before.next: el nodo que se va",
-      "remove5": "5. el next de before se salta a temp",
-      "remove6": "6. el next de temp se vuelve null, para soltarlo",
-      "remove7": "7. réstale 1 a length, regresa temp",
-      "reverse1": "1. intercambia head y tail (temp recuerda el head viejo)",
-      "reverse2": "2. prev empieza en null, y next también",
-      "reverse3": "3. por cada nodo: next = temp.next, para recordar el resto",
-      "reverse4": "4. temp.next = prev: voltea la flecha",
-      "reverse5": "5. prev = temp y luego temp = next: los dos avanzan un nodo",
+      "remove3": "3. nodeBefore = el nodo antes del lugar: this.get(index - 1)",
+      "remove4": "4. removed = nodeBefore.next: el nodo que se va",
+      "remove5": "5. el next de before se salta a removed",
+      "remove6": "6. el next de removed se vuelve null, para soltarlo",
+      "remove7": "7. réstale 1 a length, regresa removed",
+      "reverse1": "1. intercambia head y tail (current recuerda el head viejo)",
+      "reverse2": "2. previous empieza en null, y next también",
+      "reverse3": "3. por cada nodo: nextNode = current.next, para recordar el resto",
+      "reverse4": "4. current.next = previous: voltea la flecha",
+      "reverse5": "5. previous = current y luego current = next: los dos avanzan un nodo",
       "reverse6": "6. después del último nodo, regresa la lista"
     },
     "returns": "Regresa:",
@@ -969,7 +969,7 @@
     },
     "pushPlan": {
       "title": "El plan de push, como comentarios",
-      "makeNode": "Paso 1: crea un nodo nuevo para Dev. newNode apunta a él, pero nada de la fila lo apunta todavía.",
+      "makeNode": "Paso 1: crea un nodo nuevo para Dev. nodeToAdd apunta a él, pero nada de la fila lo apunta todavía.",
       "notEmpty": "Paso 2: ¿la fila está vacía? No, head está en Ana, así que este paso no aplica.",
       "link": "Paso 3a: el último nodo, Cleo, apunta su next al nodo nuevo.",
       "moveTail": "Paso 3b: tail se mueve al nodo nuevo. Ahora Dev es el último invitado.",
@@ -994,12 +994,12 @@
     "popPlan": {
       "title": "El plan de pop, como comentarios",
       "notEmpty": "Paso 1: ¿la fila está vacía? No, así que hay alguien a quien hacerle pop.",
-      "start": "Paso 2: temp y pre empiezan en head, en Ana.",
-      "walk": "Paso 3: camina hasta que temp no tenga next. temp termina en Cleo, el último invitado, y pre en Ben, el de antes.",
-      "moveTail": "Paso 4: tail se mueve a pre, Ben, y el next de Ben se vuelve null. Cleo queda fuera de la fila.",
+      "start": "Paso 2: current y previous empiezan en head, en Ana.",
+      "walk": "Paso 3: camina hasta que current no tenga next. current termina en Cleo, el último invitado, y previous en Ben, el de antes.",
+      "moveTail": "Paso 4: tail se mueve a previous, Ben, y el next de Ben se vuelve null. Cleo queda fuera de la fila.",
       "length": "Paso 5: length baja a 2.",
       "oneLeft": "El paso 6 importa con un invitado: después de hacerle pop a Ana, length es 0, así que head y tail también tienen que volverse null.",
-      "returnTemp": "Paso 7: regresa temp, el nodo de Cleo: el invitado que se fue."
+      "returnTemp": "Paso 7: regresa current, el nodo de Cleo: el invitado que se fue."
     },
     "unshift": {
       "title": "unshift: agregar un invitado al inicio",
@@ -1043,12 +1043,12 @@
     "shiftPlan": {
       "title": "El plan de shift, como comentarios",
       "notEmpty": "Paso 1: ¿la fila está vacía? No, así que hay alguien a quien hacerle shift.",
-      "temp": "Paso 2: temp apunta al primer nodo, el de Ana, para poder regresarlo al final.",
+      "oldHead": "Paso 2: oldHead apunta al primer nodo, el de Ana, para poder regresarlo al final.",
       "moveHead": "Paso 3: head se mueve al siguiente nodo, Ben. El nodo de Ana queda fuera de la fila, pero todavía apunta a Ben.",
       "cut": "Paso 4: el next de Ana se vuelve null. Ahora el nodo que regresamos no arrastra a nadie más.",
       "length": "Paso 5: length baja a 2.",
       "oneLeft": "El paso 6 importa con un invitado: cuando Ana se va, length es 0, así que tail también tiene que volverse null.",
-      "returnTemp": "Paso 7: regresa temp, el nodo de Ana."
+      "returnTemp": "Paso 7: regresa oldHead, el nodo de Ana."
     },
     "nodeOf": "el nodo de {{name}}",
     "get": {
@@ -1068,10 +1068,10 @@
     "getPlan": {
       "title": "El plan de get, como comentarios",
       "check": "Paso 1: ¿2 está en rango? No es menor que 0, y es menor que la longitud, 4. Sí.",
-      "start": "Paso 2: temp empieza en head: índice 0.",
-      "move": "Paso 3: un movimiento hacia adelante, y temp está en el índice 1.",
+      "start": "Paso 2: current empieza en head: índice 0.",
+      "move": "Paso 3: un movimiento hacia adelante, y current está en el índice 1.",
       "arrive": "Otro movimiento: índice 2. El índice 2 toma 2 movimientos.",
-      "return": "Paso 4: regresa temp, el nodo de Cleo."
+      "return": "Paso 4: regresa current, el nodo de Cleo."
     },
     "set": {
       "title": "set: cambiar el valor en un índice",
@@ -1088,7 +1088,7 @@
     "setPlan": {
       "title": "El plan de set, como comentarios",
       "get": "Paso 1: deja que get haga la búsqueda. this.get(1) regresa el nodo de Ben.",
-      "change": "Paso 2: temp es un nodo, así que su valor cambia a 'Benny', y set regresa true.",
+      "change": "Paso 2: target es un nodo, así que su valor cambia a 'Benny', y set regresa true.",
       "missing": "Paso 3: con el índice 9, get regresa undefined, así que set regresa false."
     },
     "insert": {
@@ -1109,7 +1109,7 @@
       "check": "Paso 1: ¿2 está entre 0 y la longitud, 4? Sí.",
       "notEnds": "Paso 2: 2 no es 0 ni 4, así que no sirven ni unshift ni push.",
       "makeNode": "Paso 3: crea un nodo nuevo para Eve.",
-      "before": "Paso 4: get(1) camina hasta Ben, el nodo justo antes del índice 2.",
+      "findNodeBefore": "Paso 4: get(1) camina hasta Ben, el nodo justo antes del índice 2.",
       "linkNew": "Paso 5: el next de Eve apunta a Cleo, el nodo al que apunta Ben. Primero enlaza el nodo nuevo, para no perder a Cleo.",
       "linkBefore": "Paso 6: el next de Ben apunta a Eve. Eve ya está en la fila, en el índice 2.",
       "length": "Paso 7: length sube a 5, e insert regresa true."
@@ -1131,8 +1131,8 @@
       "title": "El plan de remove, como comentarios",
       "check": "Paso 1: ¿2 está en rango, de 0 a 3? Sí.",
       "notEnds": "Paso 2: 2 no es 0 ni el último índice, 3, así que no sirven ni shift ni pop.",
-      "before": "Paso 3: get(1) camina hasta Ben, el nodo antes del índice 2.",
-      "temp": "Paso 4: temp = el next de Ben, Cleo: el nodo que se va. No hace falta una segunda caminata.",
+      "nodeBefore": "Paso 3: get(1) camina hasta Ben, el nodo antes del índice 2.",
+      "removed": "Paso 4: removed = el next de Ben, Cleo: el nodo que se va. No hace falta una segunda caminata.",
       "skip": "Paso 5: el next de Ben se salta a Cleo y apunta a Dev. Cleo queda fuera de la fila, pero todavía apunta a Dev.",
       "cut": "Paso 6: el next de Cleo se vuelve null, así que el nodo que regresamos sale solo.",
       "length": "Paso 7: length baja a 3, y remove regresa el nodo de Cleo."
@@ -1153,12 +1153,12 @@
     },
     "reversePlan": {
       "title": "El plan de reverse, como comentarios",
-      "swap": "Paso 1: intercambia head y tail. temp guarda el head viejo, Ana, para que el bucle pueda empezar ahí.",
-      "start": "Paso 2: prev empieza en null, detrás de Ana. next va a sostener el resto de la fila.",
-      "remember": "Paso 3: next = el next de Ana, Ben. Ahora el resto de la fila tiene un puntero encima.",
-      "flip": "Paso 4: el next de Ana se voltea hacia prev, null. Ahora hay un hueco entre Ana y Ben, pero next todavía sostiene a Ben.",
-      "step": "Paso 5: prev se mueve a Ana, y temp cruza el hueco hasta Ben. Los pasos 3 a 5 se repiten con cada nodo.",
-      "repeat": "Después de 4 vueltas, todas las flechas apuntan a la izquierda, temp es null, y prev está en Dev, el nuevo primer nodo."
+      "swap": "Paso 1: intercambia head y tail. current guarda el head viejo, Ana, para que el bucle pueda empezar ahí.",
+      "start": "Paso 2: previous empieza en null, detrás de Ana. next va a sostener el resto de la fila.",
+      "remember": "Paso 3: nextNode = el next de Ana, Ben. Ahora el resto de la fila tiene un puntero encima.",
+      "flip": "Paso 4: el next de Ana se voltea hacia previous, null. Ahora hay un hueco entre Ana y Ben, pero next todavía sostiene a Ben.",
+      "step": "Paso 5: previous se mueve a Ana, y current cruza el hueco hasta Ben. Los pasos 3 a 5 se repiten con cada nodo.",
+      "repeat": "Después de 4 vueltas, todas las flechas apuntan a la izquierda, current es null, y previous está en Dev, el nuevo primer nodo."
     }
   },
   "arrayVsLinkedList": {

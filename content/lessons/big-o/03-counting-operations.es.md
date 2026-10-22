@@ -23,12 +23,12 @@ trace-sum-formula
 Pruébala con una n enorme. La respuesta aparece al instante, porque mil millones cuestan las mismas 3 operaciones que 3:
 
 ```js-run
-function sumUpToFormula(n) {
+function sumOneToFormula(n) {
   return n * (n + 1) / 2
 }
 
-console.log(sumUpToFormula(3)) // 3 operaciones
-console.log(sumUpToFormula(1000000000)) // siguen siendo 3 operaciones
+console.log(sumOneToFormula(3)) // 3 operaciones
+console.log(sumOneToFormula(1000000000)) // siguen siendo 3 operaciones
 ```
 
 **Error común:** pensar que un número más grande significa más operaciones. La fórmula con n = 1,000,000,000 no hace mil millones de nada. El **tamaño** de la entrada solo importa cuando el código hace algo una vez por elemento, o una vez por número, como un bucle.
@@ -39,10 +39,10 @@ Ahora la versión con el bucle. Su `+` ya no es una sola operación, porque est�
 
 Vamos línea por línea:
 
-- `total = total + i` es una suma **y** una asignación, y corre una vez por número: n sumas y n asignaciones. Si n es 5, son 5 de cada una; si n es mil millones, mil millones de cada una.
+- `runningSum = runningSum + i` es una suma **y** una asignación, y corre una vez por número: n sumas y n asignaciones. Si n es 5, son 5 de cada una; si n es mil millones, mil millones de cada una.
 - `i++` es la forma corta de `i = i + 1`: otra suma y otra asignación, otra vez n veces.
 - `i <= n` es una comparación, que se revisa n veces.
-- `let total = 0` y `let i = 1` pasan una **sola vez**, al principio.
+- `let runningSum = 0` y `let i = 1` pasan una **sola vez**, al principio.
 
 Súmalo todo y obtienes unas **5n + 2** operaciones: 5 por cada número, más 2 al principio. Mira cómo sube el contador:
 
@@ -50,7 +50,7 @@ Súmalo todo y obtienes unas **5n + 2** operaciones: 5 por cada número, más 2 
 trace-sum-loop
 ```
 
-**Qué acaba de pasar:** cada vuelta del bucle costó las mismas 5 operaciones: la comparación, la suma y la asignación de `total = total + i`, y la suma y la asignación de `i++`. Con n = 3 son 5 × 3 + 2 = 17. Elige **n = 10** y obtienes 5 × 10 + 2 = 52. Las dos operaciones del principio nunca se repiten; todo lo demás se repite una vez por número.
+**Qué acaba de pasar:** cada vuelta del bucle costó las mismas 5 operaciones: la comparación, la suma y la asignación de `runningSum = runningSum + i`, y la suma y la asignación de `i++`. Con n = 3 son 5 × 3 + 2 = 17. Elige **n = 10** y obtienes 5 × 10 + 2 = 52. Las dos operaciones del principio nunca se repiten; todo lo demás se repite una vez por número.
 
 | n     | Bucle (5n + 2) | Fórmula |
 | ----- | -------------- | ------- |
@@ -62,11 +62,11 @@ Este es el bucle otra vez, ahora llevando su propia cuenta mientras avanza:
 
 ```js-run
 function countOperations(n) {
-  let operations = 2 // let total = 0 y let i = 1, una vez cada una
-  let total = 0
+  let operations = 2 // let runningSum = 0 y let i = 1, una vez cada una
+  let runningSum = 0
   for (let i = 1; i <= n; i++) {
-    total = total + i
-    operations = operations + 5 // la comparación, + y = en total, + y = en i++
+    runningSum = runningSum + i
+    operations = operations + 5 // la comparación, + y = en runningSum, + y = en i++
   }
   return operations
 }

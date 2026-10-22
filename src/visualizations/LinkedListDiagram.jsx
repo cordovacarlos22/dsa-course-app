@@ -11,8 +11,8 @@ import { BOX_STATE_STYLES, DEFAULT_BOX_STYLE } from './boxStyles'
 //   guests' names, so a value also names its node)
 // - states: { [value]: a state from ./boxStyles.js }, e.g. { Ben: 'active' }
 // - pointers: { [label]: the value it points to, or null }. `head` and
-//   `tail` are drawn above the nodes, every other pointer (temp, pre,
-//   newNode…) below them.
+//   `tail` are drawn above the nodes, every other pointer (current, previous,
+//   nodeToAdd…) below them.
 // - detached: nodes that can't be reached from head, drawn in a row of
 //   their own: [{ value, next: a value or null, state }]
 // - length: shown under the list when it's a number
@@ -22,7 +22,7 @@ import { BOX_STATE_STYLES, DEFAULT_BOX_STYLE } from './boxStyles'
 //   then shows ← or →, or nothing when neither node points at the other.
 //   Reverse needs it: halfway through, some arrows point back and the line
 //   has a gap. Pointers to null sit on the right-hand null, except the ones
-//   in `leftNull` (like prev), which sit on the left-hand one.
+//   in `leftNull` (like previous), which sit on the left-hand one.
 const TOP_POINTERS = ['head', 'tail']
 
 function labelsFor(pointers, target, onTop) {

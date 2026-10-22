@@ -71,17 +71,17 @@
     {
       "type": "code",
       "task": {
-        "en": "Write `countPairs(n)`: use **two nested loops** (`i` outside, `j` inside, both from 0 to n − 1) and return how many pairs they visit.",
-        "es": "Escribe `countPairs(n)`: usa **dos bucles anidados** (`i` afuera, `j` adentro, los dos de 0 a n − 1) y devuelve cuántas parejas visitan."
+        "en": "Write `countSeats(n)`: use **two nested loops** (`i` outside, `j` inside, both from 0 to n − 1) and return how many seats they visit (n rows of n seats).",
+        "es": "Escribe `countSeats(n)`: usa **dos bucles anidados** (`i` afuera, `j` adentro, los dos de 0 a n − 1) y devuelve cuántos asientos visitan (n filas de n asientos)."
       },
       "hint": {
-        "en": "Like `printPairs`, but instead of printing, add 1 to a counter inside the inner loop.",
-        "es": "Como `printPairs`, pero en lugar de imprimir, suma 1 a un contador dentro del bucle de adentro."
+        "en": "Like `printSeats`, but instead of printing, add 1 to a counter inside the inner loop.",
+        "es": "Como `printSeats`, pero en lugar de imprimir, suma 1 a un contador dentro del bucle de adentro."
       },
-      "starterCode": "function countPairs(n) {\n  let pairs = 0\n  // A loop with i, and inside it a loop with j.\n  return pairs\n}\n\nconsole.log(countPairs(3)) // 9\n",
-      "solution": "function countPairs(n) {\n  let pairs = 0\n  for (let i = 0; i < n; i++) {\n    for (let j = 0; j < n; j++) {\n      pairs = pairs + 1\n    }\n  }\n  return pairs\n}\n\nconsole.log(countPairs(3)) // 9\n",
+      "starterCode": "function countSeats(n) {\n  let seats = 0\n  // A loop with i, and inside it a loop with j.\n  return seats\n}\n\nconsole.log(countSeats(3)) // 9\n",
+      "solution": "function countSeats(n) {\n  let seats = 0\n  for (let i = 0; i < n; i++) {\n    for (let j = 0; j < n; j++) {\n      seats = seats + 1\n    }\n  }\n  return seats\n}\n\nconsole.log(countSeats(3)) // 9\n",
       "kind": "function",
-      "functionName": "countPairs",
+      "functionName": "countSeats",
       "tests": [
         {
           "args": [2],

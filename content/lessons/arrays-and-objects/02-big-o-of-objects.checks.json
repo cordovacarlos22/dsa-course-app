@@ -58,11 +58,11 @@
         "es": "Escribe `countAnswer(rsvps, answer)`, que devuelve cuántos invitados dieron esa respuesta. Estás buscando valores, así que recorre los nombres de `Object.keys`. ¿Cuál es su Big O?"
       },
       "hint": {
-        "en": "Inside the loop, `rsvps[names[i]]` is that guest's answer. Add 1 to a counter when it matches.",
-        "es": "Dentro del bucle, `rsvps[names[i]]` es la respuesta de ese invitado. Suma 1 a un contador cuando coincida."
+        "en": "Inside the loop, `rsvps[guestNames[i]]` is that guest's answer. Add 1 to a counter when it matches.",
+        "es": "Dentro del bucle, `rsvps[guestNames[i]]` es la respuesta de ese invitado. Suma 1 a un contador cuando coincida."
       },
-      "starterCode": "function countAnswer(rsvps, answer) {\n  const names = Object.keys(rsvps)\n  let count = 0\n  // Check every guest's answer\n  return count\n}",
-      "solution": "function countAnswer(rsvps, answer) {\n  const names = Object.keys(rsvps)\n  let count = 0\n  for (let i = 0; i < names.length; i++) {\n    if (rsvps[names[i]] === answer) count++\n  }\n  return count\n}",
+      "starterCode": "function countAnswer(rsvps, answer) {\n  const guestNames = Object.keys(rsvps)\n  let count = 0\n  // Check every guest's answer\n  return count\n}",
+      "solution": "function countAnswer(rsvps, answer) {\n  const guestNames = Object.keys(rsvps)\n  let count = 0\n  for (let i = 0; i < guestNames.length; i++) {\n    if (rsvps[guestNames[i]] === answer) count++\n  }\n  return count\n}",
       "kind": "function",
       "functionName": "countAnswer",
       "tests": [

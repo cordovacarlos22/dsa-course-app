@@ -10,16 +10,16 @@ const LINE = ['Ana', 'Ben', 'Cleo', 'Dev']
 
 // The node at `index` in the model (no range check: callers check first).
 function nodeAt(list, index) {
-  let temp = list.head
-  for (let i = 0; i < index; i++) temp = temp.next
-  return temp
+  let current = list.head
+  for (let i = 0; i < index; i++) current = current.next
+  return current
 }
 
 // The nodes before `node`, as 'done' states for a walk.
 function walkStates(list, node, state = 'active') {
   const states = {}
-  for (let temp = list.head; temp !== node; temp = temp.next) {
-    states[temp.value] = 'done'
+  for (let current = list.head; current !== node; current = current.next) {
+    states[current.value] = 'done'
   }
   states[node.value] = state
   return states
@@ -39,11 +39,11 @@ export const linkedListGet = {
   if (index < 0 || index >= this.length) {
     return undefined
   }
-  let temp = this.head
+  let current = this.head
   for (let i = 0; i < index; i++) {
-    temp = temp.next
+    current = current.next
   }
-  return temp
+  return current
 }`,
   play: (LinkedList, { values, index }) => {
     const list = realList(LinkedList, values)
@@ -80,37 +80,37 @@ export const linkedListGet = {
       vars: [['index', index]],
       list: diagramOf(list),
     }
-    let temp = list.head
+    let current = list.head
     yield {
       line: 5,
       captionKey: 'start',
-      params: { name: temp.value },
+      params: { name: current.value },
       ops: 1,
       vars: [['index', index]],
-      list: diagramOf(list, { temp }, walkStates(list, temp)),
+      list: diagramOf(list, { current }, walkStates(list, current)),
     }
     for (let i = 0; i < index; i++) {
-      temp = temp.next
+      current = current.next
       yield {
         line: 7,
         captionKey: 'move',
-        params: { name: temp.value, at: i + 1 },
+        params: { name: current.value, at: i + 1 },
         ops: i + 2,
         vars: [
           ['index', index],
           ['i', i],
         ],
-        list: diagramOf(list, { temp }, walkStates(list, temp)),
+        list: diagramOf(list, { current }, walkStates(list, current)),
       }
     }
     yield {
       line: 9,
       captionKey: 'return',
-      params: { name: temp.value, index, count: index + 1 },
+      params: { name: current.value, index, count: index + 1 },
       ops: index + 1,
       vars: [['index', index]],
-      list: diagramOf(list, { temp }, walkStates(list, temp, 'found')),
-      result: resultOf(list, temp),
+      list: diagramOf(list, { current }, walkStates(list, current, 'found')),
+      result: resultOf(list, current),
     }
   },
 }
@@ -126,9 +126,9 @@ export const linkedListSet = {
   method: true,
   uses: ['trace-ll-get'],
   code: `set(index, value) {
-  const temp = this.get(index)
-  if (temp) {
-    temp.value = value
+  const target = this.get(index)
+  if (target) {
+    target.value = value
     return true
   }
   return false
@@ -166,29 +166,29 @@ export const linkedListSet = {
       }
       return
     }
-    const temp = nodeAt(list, index)
-    const old = temp.value
+    const target = nodeAt(list, index)
+    const old = target.value
     yield {
       line: 2,
       captionKey: 'gotNode',
       params: { index, name: old },
       vars,
-      list: diagramOf(list, { temp }, { [old]: 'active' }),
+      list: diagramOf(list, { target }, { [old]: 'active' }),
     }
     yield {
       line: 3,
       captionKey: 'isNode',
       params: { name: old },
       vars,
-      list: diagramOf(list, { temp }, { [old]: 'active' }),
+      list: diagramOf(list, { target }, { [old]: 'active' }),
     }
-    temp.value = value
+    target.value = value
     yield {
       line: 4,
       captionKey: 'change',
       params: { old, value },
       vars,
-      list: diagramOf(list, { temp }, { [value]: 'moved' }),
+      list: diagramOf(list, { target }, { [value]: 'moved' }),
     }
     yield {
       line: 5,
@@ -223,10 +223,10 @@ export const linkedListInsert = {
     this.push(value)
     return true
   }
-  const newNode = new Node(value)
-  const temp = this.get(index - 1)
-  newNode.next = temp.next
-  temp.next = newNode
+  const nodeToAdd = new Node(value)
+  const nodeBefore = this.get(index - 1)
+  nodeToAdd.next = nodeBefore.next
+  nodeBefore.next = nodeToAdd
   this.length++
   return true
 }`,
@@ -303,9 +303,9 @@ export const linkedListInsert = {
         vars,
         list: diagramOf(list),
       }
-      const newNode = { value, next: null }
-      list.tail.next = newNode
-      list.tail = newNode
+      const nodeToAdd = { value, next: null }
+      list.tail.next = nodeToAdd
+      list.tail = nodeToAdd
       list.length++
       yield {
         line: 10,
@@ -325,46 +325,50 @@ export const linkedListInsert = {
       return
     }
     yield { line: 9, captionKey: 'middle', params, vars, list: diagramOf(list) }
-    const newNode = { value, next: null }
+    const nodeToAdd = { value, next: null }
     yield {
       line: 13,
-      captionKey: 'newNode',
+      captionKey: 'nodeToAdd',
       params,
       vars,
-      list: diagramOf(list, { newNode }, isNew),
+      list: diagramOf(list, { nodeToAdd }, isNew),
     }
-    const temp = nodeAt(list, index - 1)
-    const before = { ...params, name: temp.value, before: index - 1 }
+    const nodeBefore = nodeAt(list, index - 1)
+    const beforeParams = {
+      ...params,
+      name: nodeBefore.value,
+      beforeIndex: index - 1,
+    }
     yield {
       line: 14,
-      captionKey: 'before',
-      params: before,
+      captionKey: 'findNodeBefore',
+      params: beforeParams,
       vars,
       list: diagramOf(
         list,
-        { temp, newNode },
-        { ...isNew, [temp.value]: 'active' },
+        { nodeBefore, nodeToAdd },
+        { ...isNew, [nodeBefore.value]: 'active' },
       ),
     }
-    newNode.next = temp.next
+    nodeToAdd.next = nodeBefore.next
     yield {
       line: 15,
       captionKey: 'linkNew',
-      params: { ...before, next: temp.next.value },
+      params: { ...beforeParams, next: nodeBefore.next.value },
       vars,
       list: diagramOf(
         list,
-        { temp, newNode },
-        { ...isNew, [temp.value]: 'active' },
+        { nodeBefore, nodeToAdd },
+        { ...isNew, [nodeBefore.value]: 'active' },
       ),
     }
-    temp.next = newNode
+    nodeBefore.next = nodeToAdd
     yield {
       line: 16,
       captionKey: 'linkBefore',
-      params: before,
+      params: beforeParams,
       vars,
-      list: diagramOf(list, { temp, newNode }, isNew),
+      list: diagramOf(list, { nodeBefore, nodeToAdd }, isNew),
     }
     list.length++
     yield {
@@ -406,12 +410,12 @@ export const linkedListRemove = {
   if (index === this.length - 1) {
     return this.pop()
   }
-  const before = this.get(index - 1)
-  const temp = before.next
-  before.next = temp.next
-  temp.next = null
+  const nodeBefore = this.get(index - 1)
+  const removed = nodeBefore.next
+  nodeBefore.next = removed.next
+  removed.next = null
   this.length--
-  return temp
+  return removed
 }`,
   play: (LinkedList, { values, index }) => {
     const list = realList(LinkedList, values)
@@ -454,18 +458,18 @@ export const linkedListRemove = {
         vars,
         list: diagramOf(list),
       }
-      const temp = list.head
-      list.head = temp.next
-      temp.next = null
+      const removed = list.head
+      list.head = removed.next
+      removed.next = null
       list.length--
       if (list.length === 0) list.tail = null
       yield {
         line: 6,
         captionKey: 'shift',
-        params: { name: temp.value },
+        params: { name: removed.value },
         vars,
-        list: diagramOf(list, { temp }, { [temp.value]: 'removed' }),
-        result: resultOf(list, temp),
+        list: diagramOf(list, { removed }, { [removed.value]: 'removed' }),
+        result: resultOf(list, removed),
       }
       return
     }
@@ -477,63 +481,63 @@ export const linkedListRemove = {
         vars,
         list: diagramOf(list),
       }
-      const temp = list.tail
-      const pre = nodeAt(list, index - 1)
-      list.tail = pre
-      pre.next = null
+      const removed = list.tail
+      const previous = nodeAt(list, index - 1)
+      list.tail = previous
+      previous.next = null
       list.length--
       yield {
         line: 9,
         captionKey: 'pop',
-        params: { name: temp.value },
+        params: { name: removed.value },
         vars,
-        list: diagramOf(list, { temp }, { [temp.value]: 'removed' }),
-        result: resultOf(list, temp),
+        list: diagramOf(list, { removed }, { [removed.value]: 'removed' }),
+        result: resultOf(list, removed),
       }
       return
     }
     yield { line: 8, captionKey: 'middle', params, vars, list: diagramOf(list) }
-    const before = nodeAt(list, index - 1)
+    const nodeBefore = nodeAt(list, index - 1)
     yield {
       line: 11,
-      captionKey: 'before',
-      params: { name: before.value, before: index - 1 },
+      captionKey: 'nodeBefore',
+      params: { name: nodeBefore.value, nodeBefore: index - 1 },
       vars,
-      list: diagramOf(list, { before }, { [before.value]: 'active' }),
+      list: diagramOf(list, { nodeBefore }, { [nodeBefore.value]: 'active' }),
     }
-    const temp = before.next
+    const removed = nodeBefore.next
     const names = {
-      name: temp.value,
-      before: before.value,
-      next: temp.next.value,
+      name: removed.value,
+      nodeBefore: nodeBefore.value,
+      next: removed.next.value,
     }
     yield {
       line: 12,
-      captionKey: 'temp',
+      captionKey: 'removed',
       params: names,
       vars,
       list: diagramOf(
         list,
-        { before, temp },
-        { [before.value]: 'active', [temp.value]: 'moved' },
+        { nodeBefore, removed },
+        { [nodeBefore.value]: 'active', [removed.value]: 'moved' },
       ),
     }
-    before.next = temp.next
-    const gone = { [temp.value]: 'removed' }
+    nodeBefore.next = removed.next
+    const gone = { [removed.value]: 'removed' }
     yield {
       line: 13,
       captionKey: 'skip',
       params: names,
       vars,
-      list: diagramOf(list, { before, temp }, gone),
+      list: diagramOf(list, { nodeBefore, removed }, gone),
     }
-    temp.next = null
+    removed.next = null
     yield {
       line: 14,
       captionKey: 'cut',
       params: names,
       vars,
-      list: diagramOf(list, { temp }, gone),
+      list: diagramOf(list, { removed }, gone),
     }
     list.length--
     yield {
@@ -541,21 +545,21 @@ export const linkedListRemove = {
       captionKey: 'length',
       params: { length: list.length },
       vars,
-      list: diagramOf(list, { temp }, gone),
+      list: diagramOf(list, { removed }, gone),
     }
     yield {
       line: 16,
       captionKey: 'return',
       params: names,
       vars,
-      list: diagramOf(list, { temp }, gone),
-      result: resultOf(list, temp),
+      list: diagramOf(list, { removed }, gone),
+      result: resultOf(list, removed),
     }
   },
 }
 
 // Reverse draws every node where it started (nextOf), with head, tail,
-// temp, prev and next on top of them.
+// current, previous and nextNode on top of them.
 function reverseDiagram(nodes, list, pointers, states = {}) {
   const nextOf = {}
   for (let i = 0; i < nodes.length; i++) {
@@ -573,7 +577,7 @@ function reverseDiagram(nodes, list, pointers, states = {}) {
     nextOf,
     states,
     pointers: named,
-    leftNull: ['prev'],
+    leftNull: ['previous'],
     length: list.length,
   }
 }
@@ -589,16 +593,16 @@ export const linkedListReverse = {
   items: () => null,
   method: true,
   code: `reverse() {
-  let temp = this.head
+  let current = this.head
   this.head = this.tail
-  this.tail = temp
-  let prev = null
-  let next = null
+  this.tail = current
+  let previous = null
+  let nextNode = null
   for (let i = 0; i < this.length; i++) {
-    next = temp.next
-    temp.next = prev
-    prev = temp
-    temp = next
+    nextNode = current.next
+    current.next = previous
+    previous = current
+    current = nextNode
   }
   return this
 }`,
@@ -611,16 +615,16 @@ export const linkedListReverse = {
     const nodes = []
     for (let node = list.head; node !== null; node = node.next) nodes.push(node)
     const name = (node) => (node ? node.value : null)
-    let temp = list.head
-    let prev = null
-    let next = null
+    let current = list.head
+    let previous = null
+    let nextNode = null
     const draw = (states = {}) =>
-      reverseDiagram(nodes, list, { temp, prev, next }, states)
+      reverseDiagram(nodes, list, { current, previous, nextNode }, states)
     yield {
       line: 2,
-      captionKey: values.length === 0 ? 'tempEmpty' : 'temp',
-      params: { name: name(temp) },
-      list: reverseDiagram(nodes, list, { temp }),
+      captionKey: values.length === 0 ? 'tempEmpty' : 'current',
+      params: { name: name(current) },
+      list: reverseDiagram(nodes, list, { current }),
     }
     const isEmpty = values.length === 0
     list.head = list.tail
@@ -628,37 +632,37 @@ export const linkedListReverse = {
       line: 3,
       captionKey: isEmpty ? 'headEmpty' : 'head',
       params: { name: name(list.head) },
-      list: reverseDiagram(nodes, list, { temp }),
+      list: reverseDiagram(nodes, list, { current }),
     }
-    list.tail = temp
+    list.tail = current
     yield {
       line: 4,
       captionKey: isEmpty ? 'tailEmpty' : 'tail',
       params: { name: name(list.tail) },
-      list: reverseDiagram(nodes, list, { temp }),
+      list: reverseDiagram(nodes, list, { current }),
     }
     yield { line: 6, captionKey: 'vars', list: draw() }
     for (let i = 0; i < values.length; i++) {
-      next = temp.next
+      nextNode = current.next
       yield {
         line: 8,
-        captionKey: next ? 'remember' : 'rememberLast',
-        params: { name: temp.value, next: name(next) },
-        list: draw({ [temp.value]: 'active' }),
+        captionKey: nextNode ? 'remember' : 'rememberLast',
+        params: { name: current.value, next: name(nextNode) },
+        list: draw({ [current.value]: 'active' }),
       }
-      temp.next = prev
+      current.next = previous
       yield {
         line: 9,
-        captionKey: prev ? 'flip' : 'flipFirst',
-        params: { name: temp.value, prev: name(prev) },
-        list: draw({ [temp.value]: 'moved' }),
+        captionKey: previous ? 'flip' : 'flipFirst',
+        params: { name: current.value, previous: name(previous) },
+        list: draw({ [current.value]: 'moved' }),
       }
-      prev = temp
-      temp = next
+      previous = current
+      current = nextNode
       yield {
         line: 11,
-        captionKey: temp ? 'step' : 'stepLast',
-        params: { prev: prev.value, temp: name(temp) },
+        captionKey: current ? 'step' : 'stepLast',
+        params: { previous: previous.value, current: name(current) },
         list: draw(),
       }
     }

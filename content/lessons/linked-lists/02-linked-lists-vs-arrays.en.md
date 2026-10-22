@@ -18,7 +18,7 @@ Now **`pop`**, removing the guest at the back. It looks like push in reverse, bu
 linked-list-cost-end
 ```
 
-**What just happened:** `push('Eve')` took two moves, with no walking, because `tail` handed us Dev's node right away. `pop()` had to find Dev again, the guest before the tail, and the only way in was from the front: `temp` visited Ana, Ben, Cleo and Dev before it could move `tail` back and cut Eve off. In a longer line, that walk would be longer.
+**What just happened:** `push('Eve')` took two moves, with no walking, because `tail` handed us Dev's node right away. `pop()` had to find Dev again, the guest before the tail, and the only way in was from the front: `current` visited Ana, Ben, Cleo and Dev before it could move `tail` back and cut Eve off. In a longer line, that walk would be longer.
 
 Here's the same thing with plain objects. Run it and look at the count:
 
@@ -37,13 +37,13 @@ tail = eve
 console.log('Last guest:', tail.value)
 
 // pop Eve: walk from head to the node right before the tail
-let temp = head
+let current = head
 let visited = 1
-while (temp.next !== tail) {
-  temp = temp.next
+while (current.next !== tail) {
+  current = current.next
   visited++
 }
-tail = temp
+tail = current
 tail.next = null
 console.log('Last guest:', tail.value, '- nodes visited:', visited)
 ```
@@ -85,7 +85,7 @@ console.log(head.value) // Ana
 
 Most of the cost of working in the middle of a linked list is getting there. Say you want to **insert** Eve at index 3. A linked list has no index 3 to jump to, so you walk from `head` and count: index 0, 1, 2. You stop at index 2, the node **right before** the spot. Then two pointer moves link Eve in: Eve's `next` points to the node after it, and the node before points to Eve. The moves are O(1), but the walk grows with the line, so **`insert` is O(n).**
 
-**Removing** at an index works the same way. Walk to the node before the one that's leaving, then point it past that node: `temp.next = temp.next.next`. Nothing points to the removed node anymore, so it's gone. The walk makes **`remove` O(n)** too.
+**Removing** at an index works the same way. Walk to the node before the one that's leaving, then point it past that node: `current.next = current.next.next`. Nothing points to the removed node anymore, so it's gone. The walk makes **`remove` O(n)** too.
 
 **Finding** a guest is a walk as well. To find Cleo **by value**, you check each node from `head` until one matches: O(n), and that's the same on an array, which also has to check items one by one. But finding the guest **by index** is where arrays win: an array jumps straight to `guests[2]` in O(1), while a linked list still has to walk and count. **Finding by index is O(n)** on a linked list.
 
@@ -93,7 +93,7 @@ Most of the cost of working in the middle of a linked list is getting there. Say
 linked-list-cost-middle
 ```
 
-**What just happened:** to insert Eve at index 3, `temp` walked to Cleo at index 2, the node before the spot. Eve was pointed at Dev first, then Cleo was pointed at Eve. To remove index 3, the same walk ended on Cleo, and Cleo was pointed past Eve, straight to Dev.
+**What just happened:** to insert Eve at index 3, `current` walked to Cleo at index 2, the node before the spot. Eve was pointed at Dev first, then Cleo was pointed at Eve. To remove index 3, the same walk ended on Cleo, and Cleo was pointed past Eve, straight to Dev.
 
 ```viz
 linked-list-cost-lookup
@@ -110,11 +110,11 @@ const head = {
 }
 
 // the guest at index 2: move forward 2 times from head
-let temp = head
+let current = head
 for (let i = 0; i < 2; i++) {
-  temp = temp.next
+  current = current.next
 }
-console.log(temp.value) // 'Cleo', after walking
+console.log(current.value) // 'Cleo', after walking
 
 const guests = ['Ana', 'Ben', 'Cleo', 'Dev']
 console.log(guests[2]) // 'Cleo', in one jump

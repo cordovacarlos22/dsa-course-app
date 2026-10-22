@@ -18,7 +18,7 @@ Ahora **`pop`**, quitar al invitado del final. Parece push al revés, pero no lo
 linked-list-cost-end
 ```
 
-**Qué acaba de pasar:** `push('Eve')` tomó dos movimientos, sin caminar, porque `tail` nos dio el nodo de Dev de inmediato. `pop()` tuvo que volver a encontrar a Dev, el invitado antes del tail, y la única entrada era por el inicio: `temp` visitó a Ana, Ben, Cleo y Dev antes de poder regresar `tail` y dejar fuera a Eve. En una fila más larga, esa caminata sería más larga.
+**Qué acaba de pasar:** `push('Eve')` tomó dos movimientos, sin caminar, porque `tail` nos dio el nodo de Dev de inmediato. `pop()` tuvo que volver a encontrar a Dev, el invitado antes del tail, y la única entrada era por el inicio: `current` visitó a Ana, Ben, Cleo y Dev antes de poder regresar `tail` y dejar fuera a Eve. En una fila más larga, esa caminata sería más larga.
 
 Aquí está lo mismo con objetos normales. Córrelo y fíjate en la cuenta:
 
@@ -37,13 +37,13 @@ tail = eve
 console.log('Último invitado:', tail.value)
 
 // pop de Eve: caminar desde head hasta el nodo justo antes del tail
-let temp = head
+let current = head
 let visited = 1
-while (temp.next !== tail) {
-  temp = temp.next
+while (current.next !== tail) {
+  current = current.next
   visited++
 }
-tail = temp
+tail = current
 tail.next = null
 console.log('Último invitado:', tail.value, '- nodos visitados:', visited)
 ```
@@ -85,7 +85,7 @@ console.log(head.value) // Ana
 
 Casi todo el costo de trabajar en medio de una lista enlazada está en llegar ahí. Digamos que quieres **insertar** a Eve en el índice 3. Una lista enlazada no tiene un índice 3 al cual saltar, así que caminas desde `head` y cuentas: índice 0, 1, 2. Te detienes en el índice 2, el nodo **justo antes** del lugar. Luego dos movimientos de punteros meten a Eve: el `next` de Eve apunta al nodo que va después, y el nodo de antes apunta a Eve. Los movimientos son O(1), pero la caminata crece con la fila, así que **`insert` es O(n).**
 
-**Quitar** en un índice funciona igual. Camina hasta el nodo antes del que se va, y apúntalo más allá de ese nodo: `temp.next = temp.next.next`. Ya nada apunta al nodo que quitaste, así que desaparece. La caminata hace que **`remove` también sea O(n).**
+**Quitar** en un índice funciona igual. Camina hasta el nodo antes del que se va, y apúntalo más allá de ese nodo: `current.next = current.next.next`. Ya nada apunta al nodo que quitaste, así que desaparece. La caminata hace que **`remove` también sea O(n).**
 
 **Buscar** a un invitado también es una caminata. Para encontrar a Cleo **por valor**, revisas cada nodo desde `head` hasta que uno coincida: O(n), y es lo mismo en un array, que también tiene que revisar los elementos uno por uno. Pero buscar al invitado **por índice** es donde ganan los arrays: un array salta directo a `guests[2]` en O(1), mientras que una lista enlazada todavía tiene que caminar y contar. **Buscar por índice es O(n)** en una lista enlazada.
 
@@ -93,7 +93,7 @@ Casi todo el costo de trabajar en medio de una lista enlazada está en llegar ah
 linked-list-cost-middle
 ```
 
-**Qué acaba de pasar:** para insertar a Eve en el índice 3, `temp` caminó hasta Cleo en el índice 2, el nodo antes del lugar. Primero Eve apuntó a Dev, y luego Cleo apuntó a Eve. Para quitar el índice 3, la misma caminata terminó en Cleo, y Cleo se apuntó más allá de Eve, directo a Dev.
+**Qué acaba de pasar:** para insertar a Eve en el índice 3, `current` caminó hasta Cleo en el índice 2, el nodo antes del lugar. Primero Eve apuntó a Dev, y luego Cleo apuntó a Eve. Para quitar el índice 3, la misma caminata terminó en Cleo, y Cleo se apuntó más allá de Eve, directo a Dev.
 
 ```viz
 linked-list-cost-lookup
@@ -110,11 +110,11 @@ const head = {
 }
 
 // el invitado en el índice 2: avanzar 2 veces desde head
-let temp = head
+let current = head
 for (let i = 0; i < 2; i++) {
-  temp = temp.next
+  current = current.next
 }
-console.log(temp.value) // 'Cleo', después de caminar
+console.log(current.value) // 'Cleo', después de caminar
 
 const guests = ['Ana', 'Ben', 'Cleo', 'Dev']
 console.log(guests[2]) // 'Cleo', de un salto

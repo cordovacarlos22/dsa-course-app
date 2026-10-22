@@ -6,7 +6,7 @@ minutes: 10
 
 > **Goal:** recognize O(n²) code and understand why it's considered inefficient.
 
-## Print every pair
+## Print every seat
 
 Our next notation is **O(n²)**, read "O of n squared". It's what you get when a loop over the input sits **inside** another loop over the same input. Start with the two loops from the last lesson, but instead of putting them one after the other, put one inside the other, and print both `i` and `j`.
 
@@ -15,7 +15,7 @@ The key is how a **nested loop** runs. The outer loop takes one step, and then t
 Watch it with a small n:
 
 ```viz
-trace-print-pairs
+trace-print-seats
 ```
 
 **What just happened:** with n = 3, `i` started at 0, and the inner loop printed `0 0`, `0 1`, `0 2`. Then `i` moved to 1 and the inner loop started over: `1 0`, `1 1`, `1 2`. Then the same for `i = 2`. Three rows of three: 9 lines, which is 3². Pick n = 4 and you get 16.
@@ -23,7 +23,7 @@ trace-print-pairs
 Run it with 10:
 
 ```js-run
-function printPairs(n) {
+function printSeats(n) {
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       console.log(i, j)
@@ -31,7 +31,7 @@ function printPairs(n) {
   }
 }
 
-printPairs(10)
+printSeats(10)
 ```
 
 Scroll the output: it starts at `0 0` and ends at `9 9`. That's **100 lines**. For each of the 10 values of `i`, the inner loop runs 10 times: **n × n = n²**. That's where O(n²) comes from.
@@ -103,22 +103,22 @@ big-o-growth-chart
 
 **What just happened:** O(n) climbed as a straight line, and O(n²) curved up and left it far behind. By n = 1,000, O(n²) had reached a million operations while O(n) was still at a thousand.
 
-See it in real numbers. Each time n doubles, watch what happens to the pairs:
+See it in real numbers. Each time n doubles, watch what happens to the seats:
 
 ```js-run
-function countPairs(n) {
-  let pairs = 0
+function countSeats(n) {
+  let seats = 0
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
-      pairs = pairs + 1
+      seats = seats + 1
     }
   }
-  return pairs
+  return seats
 }
 
 const sizes = [1000, 2000, 4000]
 for (let k = 0; k < sizes.length; k++) {
-  console.log('n =', sizes[k], '| pairs:', countPairs(sizes[k]))
+  console.log('n =', sizes[k], '| seats:', countSeats(sizes[k]))
 }
 ```
 

@@ -23,12 +23,12 @@ trace-sum-formula
 Try it with a really big n. The answer appears instantly, because a billion costs the same 3 operations as 3 does:
 
 ```js-run
-function sumUpToFormula(n) {
+function sumOneToFormula(n) {
   return n * (n + 1) / 2
 }
 
-console.log(sumUpToFormula(3)) // 3 operations
-console.log(sumUpToFormula(1000000000)) // still 3 operations
+console.log(sumOneToFormula(3)) // 3 operations
+console.log(sumOneToFormula(1000000000)) // still 3 operations
 ```
 
 **Common mistake:** thinking a bigger number means more operations. The formula with n = 1,000,000,000 doesn't do a billion of anything. The input's **size** only matters when the code does something once per item, or once per number, like a loop.
@@ -39,10 +39,10 @@ Now the loop version. Its `+` isn't one operation anymore, because it sits **ins
 
 Let's go line by line:
 
-- `total = total + i` is an addition **and** an assignment, and it runs once per number: n additions and n assignments. If n is 5, that's 5 of each; if n is a billion, a billion of each.
+- `runningSum = runningSum + i` is an addition **and** an assignment, and it runs once per number: n additions and n assignments. If n is 5, that's 5 of each; if n is a billion, a billion of each.
 - `i++` is short for `i = i + 1`: another addition and another assignment, again n times.
 - `i <= n` is a comparison, checked n times.
-- `let total = 0` and `let i = 1` happen only **once**, at the start.
+- `let runningSum = 0` and `let i = 1` happen only **once**, at the start.
 
 Add it up and you get about **5n + 2** operations: 5 for every number, plus 2 at the start. Watch the counter climb:
 
@@ -50,7 +50,7 @@ Add it up and you get about **5n + 2** operations: 5 for every number, plus 2 at
 trace-sum-loop
 ```
 
-**What just happened:** every turn of the loop cost the same 5 operations: the comparison, the addition and assignment in `total = total + i`, and the addition and assignment in `i++`. With n = 3 that's 5 × 3 + 2 = 17. Pick **n = 10** and you get 5 × 10 + 2 = 52. The two operations at the start never repeat; everything else repeats once per number.
+**What just happened:** every turn of the loop cost the same 5 operations: the comparison, the addition and assignment in `runningSum = runningSum + i`, and the addition and assignment in `i++`. With n = 3 that's 5 × 3 + 2 = 17. Pick **n = 10** and you get 5 × 10 + 2 = 52. The two operations at the start never repeat; everything else repeats once per number.
 
 | n     | Loop (5n + 2) | Formula |
 | ----- | ------------- | ------- |
@@ -62,11 +62,11 @@ Here's the loop again, this time keeping its own count as it goes:
 
 ```js-run
 function countOperations(n) {
-  let operations = 2 // let total = 0 and let i = 1, once each
-  let total = 0
+  let operations = 2 // let runningSum = 0 and let i = 1, once each
+  let runningSum = 0
   for (let i = 1; i <= n; i++) {
-    total = total + i
-    operations = operations + 5 // the comparison, + and = in total, + and = in i++
+    runningSum = runningSum + i
+    operations = operations + 5 // the comparison, + and = in runningSum, + and = in i++
   }
   return operations
 }

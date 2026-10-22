@@ -41,11 +41,11 @@
         "es": "Escribe `addToFront(head, value)`. Crea un nodo nuevo `{ value, next }` que apunte al antiguo primer nodo, y regrésalo: es el nuevo head. `head` puede ser `null` (una lista vacía)."
       },
       "hint": {
-        "en": "Set `newNode.next = head`, then `return newNode`. With an empty list, `head` is `null`, so the new node's `next` is `null`: that's right.",
-        "es": "Haz `newNode.next = head` y luego `return newNode`. Con una lista vacía, `head` es `null`, así que el `next` del nodo nuevo es `null`: eso está bien."
+        "en": "Set `nodeToAdd.next = head`, then `return nodeToAdd`. With an empty list, `head` is `null`, so the new node's `next` is `null`: that's right.",
+        "es": "Haz `nodeToAdd.next = head` y luego `return nodeToAdd`. Con una lista vacía, `head` es `null`, así que el `next` del nodo nuevo es `null`: eso está bien."
       },
-      "starterCode": "function addToFront(head, value) {\n  const newNode = { value: value, next: null }\n  // point the new node at the old head, then return the new head\n  return head\n}",
-      "solution": "function addToFront(head, value) {\n  const newNode = { value: value, next: null }\n  newNode.next = head\n  return newNode\n}",
+      "starterCode": "function addToFront(head, value) {\n  const nodeToAdd = { value: value, next: null }\n  // point the new node at the old head, then return the new head\n  return head\n}",
+      "solution": "function addToFront(head, value) {\n  const nodeToAdd = { value: value, next: null }\n  nodeToAdd.next = head\n  return nodeToAdd\n}",
       "kind": "function",
       "functionName": "addToFront",
       "tests": [
@@ -125,11 +125,11 @@
         "es": "Escribe `indexOf(head, value)`. Recorre la lista desde `head`, contando índices desde 0, y regresa el índice del primer nodo cuyo `value` coincida. Regresa `-1` si ningún nodo coincide (o si la lista está vacía)."
       },
       "hint": {
-        "en": "Use `while (temp !== null)`. Inside, return `index` when `temp.value === value`; otherwise move `temp = temp.next` and add 1 to `index`.",
-        "es": "Usa `while (temp !== null)`. Adentro, regresa `index` cuando `temp.value === value`; si no, mueve `temp = temp.next` y súmale 1 a `index`."
+        "en": "Use `while (current !== null)`. Inside, return `index` when `current.value === value`; otherwise move `current = current.next` and add 1 to `index`.",
+        "es": "Usa `while (current !== null)`. Adentro, regresa `index` cuando `current.value === value`; si no, mueve `current = current.next` y súmale 1 a `index`."
       },
-      "starterCode": "function indexOf(head, value) {\n  let temp = head\n  let index = 0\n  // walk until temp is null, and return index when the value matches\n  return -1\n}",
-      "solution": "function indexOf(head, value) {\n  let temp = head\n  let index = 0\n  while (temp !== null) {\n    if (temp.value === value) {\n      return index\n    }\n    temp = temp.next\n    index++\n  }\n  return -1\n}",
+      "starterCode": "function indexOf(head, value) {\n  let current = head\n  let index = 0\n  // walk until current is null, and return index when the value matches\n  return -1\n}",
+      "solution": "function indexOf(head, value) {\n  let current = head\n  let index = 0\n  while (current !== null) {\n    if (current.value === value) {\n      return index\n    }\n    current = current.next\n    index++\n  }\n  return -1\n}",
       "kind": "function",
       "functionName": "indexOf",
       "tests": [

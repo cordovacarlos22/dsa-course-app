@@ -54,17 +54,17 @@ console.log(justAna.shift(), justAna.length) // Ana 0
 
 Step 3: the plan. Two details are easy to miss, so here they are before the comments.
 
-First, you need a pointer to the first node **before** `head` moves off it, because you're going to return that node. That's `temp`. Second, once `head` has moved, the old first node is out of the line, but its `next` **still points to the second guest**. If you return it like that, whoever gets it is holding the rest of the line too. So cut it loose: `temp.next = null`.
+First, you need a pointer to the first node **before** `head` moves off it, because you're going to return that node. That's `oldHead`. Second, once `head` has moved, the old first node is out of the line, but its `next` **still points to the second guest**. If you return it like that, whoever gets it is holding the rest of the line too. So cut it loose: `oldHead.next = null`.
 
 ```js
 shift() {
   // 1. if the list is empty, return undefined
-  // 2. temp points to the first node
+  // 2. oldHead points to the first node
   // 3. head moves to the next node
-  // 4. temp's next becomes null, to cut it off from the line
+  // 4. oldHead's next becomes null, to cut it off from the line
   // 5. subtract 1 from length
   // 6. if length is now 0, tail becomes null too
-  // 7. return temp
+  // 7. return oldHead
 }
 ```
 
@@ -72,7 +72,7 @@ shift() {
 linked-list-shift-plan
 ```
 
-**What just happened:** `temp` grabbed Ana's node, then `head` moved to Ben. Ana's node was out of the line but still pointed to Ben, until step 4 cut that arrow. The length dropped to 2, and Ana's node was returned on its own. In the one-guest line, step 6 set `tail` to `null` after Ana left.
+**What just happened:** `oldHead` grabbed Ana's node, then `head` moved to Ben. Ana's node was out of the line but still pointed to Ben, until step 4 cut that arrow. The length dropped to 2, and Ana's node was returned on its own. In the one-guest line, step 6 set `tail` to `null` after Ana left.
 
 Here's what step 4 prevents. Run it:
 
@@ -82,15 +82,15 @@ let head = {
   next: { value: 'Ben', next: { value: 'Cleo', next: null } },
 }
 
-const temp = head
+const oldHead = head
 head = head.next
-console.log(temp) // Ana's node is out of the line, but still holds Ben and Cleo
+console.log(oldHead) // Ana's node is out of the line, but still holds Ben and Cleo
 
-temp.next = null
-console.log(temp) // now it's only Ana
+oldHead.next = null
+console.log(oldHead) // now it's only Ana
 ```
 
-**Common mistake:** skipping `temp.next = null`. The list itself is fine without it, but the returned node still points into the line, so code that uses it can reach, and even change, guests who are still in the list.
+**Common mistake:** skipping `oldHead.next = null`. The list itself is fine without it, but the returned node still points into the line, so code that uses it can reach, and even change, guests who are still in the list.
 
 ## Write the code
 
@@ -98,21 +98,21 @@ Step 4: the common case first. With two or more guests, it's steps 2 to 5 and 7:
 
 ```js
 shift() {
-  let temp = this.head
+  let oldHead = this.head
   this.head = this.head.next
-  temp.next = null
+  oldHead.next = null
   this.length--
-  return temp
+  return oldHead
 }
 ```
 
-Now the edge cases. **The empty list:** `this.head.next` crashes when `head` is `null`, so check at the top: `if (!this.head) { return undefined }`. **One guest:** walk through the code with only Ana. `temp` points to Ana, `head` becomes Ana's `next`, which is `null`, `temp.next = null` changes nothing, and the length drops to 0. But `tail` still points to Ana. So, after the decrement, add: if the length is now 0, set `tail` to `null`.
+Now the edge cases. **The empty list:** `this.head.next` crashes when `head` is `null`, so check at the top: `if (!this.head) { return undefined }`. **One guest:** walk through the code with only Ana. `oldHead` points to Ana, `head` becomes Ana's `next`, which is `null`, `oldHead.next = null` changes nothing, and the length drops to 0. But `tail` still points to Ana. So, after the decrement, add: if the length is now 0, set `tail` to `null`.
 
 ```viz
 trace-ll-shift
 ```
 
-**What just happened:** with 4 guests, `temp` took Ana, `head` moved to Ben, Ana's `next` was cut, and the length dropped to 3. With 1 guest, `head` became `null` on its own, and the `length === 0` check set `tail` to `null`. With 0 guests, the first `if` returned `undefined`.
+**What just happened:** with 4 guests, `oldHead` took Ana, `head` moved to Ben, Ana's `next` was cut, and the length dropped to 3. With 1 guest, `head` became `null` on its own, and the `length === 0` check set `tail` to `null`. With 0 guests, the first `if` returned `undefined`.
 
 ```js-run
 class Node {
@@ -128,21 +128,21 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      this.tail.next = newNode
-      this.tail = newNode
+      this.tail.next = nodeToAdd
+      this.tail = nodeToAdd
     }
     this.length++
     return this
@@ -152,14 +152,14 @@ class LinkedList {
     if (!this.head) {
       return undefined
     }
-    let temp = this.head
+    let oldHead = this.head
     this.head = this.head.next
-    temp.next = null
+    oldHead.next = null
     this.length--
     if (this.length === 0) {
       this.tail = null
     }
-    return temp
+    return oldHead
   }
 }
 
@@ -199,13 +199,13 @@ class LinkedList {
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
+      this.head = nodeToAdd
     } else {
-      this.tail.next = newNode
+      this.tail.next = nodeToAdd
     }
-    this.tail = newNode
+    this.tail = nodeToAdd
     this.length++
     return this
   }
@@ -214,14 +214,14 @@ class LinkedList {
     if (!this.head) {
       return undefined
     }
-    let temp = this.head
+    let oldHead = this.head
     this.head = this.head.next
-    temp.next = null
+    oldHead.next = null
     this.length--
     if (this.length === 0) {
       this.tail = null
     }
-    return temp
+    return oldHead
   }
 }
 

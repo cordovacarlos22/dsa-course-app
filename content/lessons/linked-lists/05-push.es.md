@@ -51,11 +51,11 @@ linked-list-push-examples
 Puedes ver el error tú mismo. Corre esto, y lee el error:
 
 ```js-run
-const newNode = { value: 'Ana', next: null }
+const nodeToAdd = { value: 'Ana', next: null }
 let tail = null // una lista vacía no tiene último nodo
 
 console.log('Enlazando el nodo nuevo después del tail...')
-tail.next = newNode // aquí no hay ningún nodo al cual ponerle next
+tail.next = nodeToAdd // aquí no hay ningún nodo al cual ponerle next
 ```
 
 Ese `TypeError` es lo que haría un `push` sin revisar la lista vacía la primera vez que se usara en una lista vacía.
@@ -86,7 +86,7 @@ linked-list-push-plan
 
 **Qué acaba de pasar:** jugamos el plan con una fila de tres. Primero se creó el nodo nuevo. La fila no estaba vacía, así que el paso 2 se saltó. El `next` de Cleo apuntó al nodo nuevo, luego `tail` se movió a él, y luego subió la longitud. Con una fila vacía, el paso 2 solo habría hecho que `head` y `tail` apuntaran al nodo.
 
-**Error común:** cambiar el orden de los pasos 3a y 3b. Si `tail` se mueve primero, `this.tail.next = newNode` hace que el nodo nuevo se apunte **a sí mismo**, y el antiguo último nodo, Cleo, sigue apuntando a `null`. Recorrer desde `head` nunca llegaría a Dev. `tail` es tu única forma rápida de llegar al antiguo último nodo, así que úsalo antes de moverlo.
+**Error común:** cambiar el orden de los pasos 3a y 3b. Si `tail` se mueve primero, `this.tail.next = nodeToAdd` hace que el nodo nuevo se apunte **a sí mismo**, y el antiguo último nodo, Cleo, sigue apuntando a `null`. Recorrer desde `head` nunca llegaría a Dev. `tail` es tu única forma rápida de llegar al antiguo último nodo, así que úsalo antes de moverlo.
 
 ## Escribir el código
 
@@ -94,9 +94,9 @@ Paso 4: primero el caso común, luego el caso especial. Con invitados en la fila
 
 ```js
 push(value) {
-  const newNode = new Node(value)
-  this.tail.next = newNode
-  this.tail = newNode
+  const nodeToAdd = new Node(value)
+  this.tail.next = nodeToAdd
+  this.tail = nodeToAdd
   this.length++
   return this
 }
@@ -126,21 +126,21 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      this.tail.next = newNode
-      this.tail = newNode
+      this.tail.next = nodeToAdd
+      this.tail = nodeToAdd
     }
     this.length++
     return this
@@ -148,10 +148,10 @@ class LinkedList {
 
   toArray() {
     const values = []
-    let temp = this.head
-    while (temp !== null) {
-      values.push(temp.value)
-      temp = temp.next
+    let current = this.head
+    while (current !== null) {
+      values.push(current.value)
+      current = current.next
     }
     return values
   }
@@ -173,17 +173,17 @@ Paso 5: revisa el Big O, y busca una forma más clara de escribirlo.
 
 **Big O:** push crea un nodo y mueve como máximo dos punteros, sin importar lo larga que sea la fila. Eso es **O(1) en tiempo** y **O(1) en espacio**, igual que el `push` de un array. Lo que lo hace O(1) es `tail`: sin él, tendrías que recorrer toda la fila para encontrar el último nodo.
 
-**Una mejora:** mira las dos ramas. Las dos terminan haciendo que `tail` apunte al nodo nuevo (`this.tail = newNode`). Una línea que corre en las dos ramas se puede sacar, después del `if`:
+**Una mejora:** mira las dos ramas. Las dos terminan haciendo que `tail` apunte al nodo nuevo (`this.tail = nodeToAdd`). Una línea que corre en las dos ramas se puede sacar, después del `if`:
 
 ```js
 push(value) {
-  const newNode = new Node(value)
+  const nodeToAdd = new Node(value)
   if (!this.head) {
-    this.head = newNode
+    this.head = nodeToAdd
   } else {
-    this.tail.next = newNode
+    this.tail.next = nodeToAdd
   }
-  this.tail = newNode
+  this.tail = nodeToAdd
   this.length++
   return this
 }
@@ -209,13 +209,13 @@ class LinkedList {
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
+      this.head = nodeToAdd
     } else {
-      this.tail.next = newNode
+      this.tail.next = nodeToAdd
     }
-    this.tail = newNode
+    this.tail = nodeToAdd
     this.length++
     return this
   }

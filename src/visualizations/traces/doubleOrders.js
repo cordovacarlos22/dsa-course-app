@@ -1,35 +1,35 @@
-// Space complexity: doubleArray builds a new array with one box per number,
+// Space complexity: doubleOrders builds a new array with one box per order,
 // so the extra memory grows with n: O(n) space.
 
-export const doubleArray = {
-  key: 'doubleArray',
+export const doubleOrders = {
+  key: 'doubleOrders',
   counter: 'memoryBoxes',
-  inputs: [{ numbers: [1, 2, 3] }, { numbers: [1, 2, 3, 4, 5, 6] }],
-  items: (input) => input.numbers,
-  code: `function doubleArray(numbers) {
+  inputs: [{ orders: [1, 2, 3] }, { orders: [1, 2, 3, 4, 5, 6] }],
+  items: (input) => input.orders,
+  code: `function doubleOrders(orders) {
   const doubled = []
-  for (let i = 0; i < numbers.length; i++) {
-    doubled.push(numbers[i] * 2)
+  for (let i = 0; i < orders.length; i++) {
+    doubled.push(orders[i] * 2)
   }
   return doubled
 }`,
-  call: (input) => ['doubleArray', [input.numbers]],
-  *run({ numbers }) {
+  call: (input) => ['doubleOrders', [input.orders]],
+  *run({ orders }) {
     const doubled = []
     const show = () => '[' + doubled.join(', ') + ']'
     yield {
       line: 2,
       captionKey: 'start',
-      params: { n: numbers.length },
+      params: { n: orders.length },
       ops: 0,
       vars: [['doubled', show()]],
     }
-    for (let i = 0; i < numbers.length; i++) {
-      doubled.push(numbers[i] * 2)
+    for (let i = 0; i < orders.length; i++) {
+      doubled.push(orders[i] * 2)
       yield {
         line: 4,
         captionKey: 'push',
-        params: { value: numbers[i], doubled: numbers[i] * 2 },
+        params: { value: orders[i], doubled: orders[i] * 2 },
         ops: doubled.length,
         vars: [
           ['i', i],
@@ -47,7 +47,7 @@ export const doubleArray = {
     yield {
       line: 6,
       captionKey: 'end',
-      params: { n: numbers.length },
+      params: { n: orders.length },
       ops: doubled.length,
       vars: [['doubled', show()]],
       result: doubled,

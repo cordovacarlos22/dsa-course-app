@@ -73,7 +73,7 @@ export const METHOD_SCENES = {
       captionKey: 'makeNode',
       comment: 'push1',
       list: line(THREE, {
-        pointers: { newNode: 'Dev' },
+        pointers: { nodeToAdd: 'Dev' },
         detached: [added('Dev')],
       }),
     },
@@ -81,7 +81,7 @@ export const METHOD_SCENES = {
       captionKey: 'notEmpty',
       comment: 'push2',
       list: line(THREE, {
-        pointers: { newNode: 'Dev' },
+        pointers: { nodeToAdd: 'Dev' },
         detached: [added('Dev')],
       }),
     },
@@ -90,7 +90,7 @@ export const METHOD_SCENES = {
       comment: 'push3',
       list: line([...THREE, 'Dev'], {
         states: { Dev: 'new' },
-        pointers: { tail: 'Cleo', newNode: 'Dev' },
+        pointers: { tail: 'Cleo', nodeToAdd: 'Dev' },
         length: 3,
       }),
     },
@@ -99,7 +99,7 @@ export const METHOD_SCENES = {
       comment: 'push4',
       list: line([...THREE, 'Dev'], {
         states: { Dev: 'new' },
-        pointers: { newNode: 'Dev' },
+        pointers: { nodeToAdd: 'Dev' },
         length: 3,
       }),
     },
@@ -162,21 +162,21 @@ export const METHOD_SCENES = {
     {
       captionKey: 'start',
       comment: 'pop2',
-      list: line(THREE, { pointers: { temp: 'Ana', pre: 'Ana' } }),
+      list: line(THREE, { pointers: { current: 'Ana', previous: 'Ana' } }),
     },
     {
       captionKey: 'walk',
       comment: 'pop3',
       list: line(THREE, {
         states: { Cleo: 'active' },
-        pointers: { temp: 'Cleo', pre: 'Ben' },
+        pointers: { current: 'Cleo', previous: 'Ben' },
       }),
     },
     {
       captionKey: 'moveTail',
       comment: 'pop4',
       list: line(['Ana', 'Ben'], {
-        pointers: { temp: 'Cleo', pre: 'Ben' },
+        pointers: { current: 'Cleo', previous: 'Ben' },
         detached: [removed('Cleo')],
         length: 3,
       }),
@@ -185,7 +185,7 @@ export const METHOD_SCENES = {
       captionKey: 'length',
       comment: 'pop5',
       list: line(['Ana', 'Ben'], {
-        pointers: { temp: 'Cleo', pre: 'Ben' },
+        pointers: { current: 'Cleo', previous: 'Ben' },
         detached: [removed('Cleo')],
       }),
     },
@@ -245,7 +245,7 @@ export const METHOD_SCENES = {
       captionKey: 'makeNode',
       comment: 'unshift1',
       list: line(THREE, {
-        pointers: { newNode: 'Zoe' },
+        pointers: { nodeToAdd: 'Zoe' },
         detached: [added('Zoe')],
       }),
     },
@@ -253,7 +253,7 @@ export const METHOD_SCENES = {
       captionKey: 'notEmpty',
       comment: 'unshift2',
       list: line(THREE, {
-        pointers: { newNode: 'Zoe' },
+        pointers: { nodeToAdd: 'Zoe' },
         detached: [added('Zoe')],
       }),
     },
@@ -261,7 +261,7 @@ export const METHOD_SCENES = {
       captionKey: 'link',
       comment: 'unshift3',
       list: line(THREE, {
-        pointers: { newNode: 'Zoe' },
+        pointers: { nodeToAdd: 'Zoe' },
         detached: [added('Zoe', 'Ana')],
       }),
     },
@@ -270,7 +270,7 @@ export const METHOD_SCENES = {
       comment: 'unshift4',
       list: line(['Zoe', ...THREE], {
         states: { Zoe: 'new' },
-        pointers: { newNode: 'Zoe' },
+        pointers: { nodeToAdd: 'Zoe' },
         length: 3,
       }),
     },
@@ -331,15 +331,15 @@ export const METHOD_SCENES = {
   shiftPlan: [
     { captionKey: 'notEmpty', comment: 'shift1', list: line(THREE) },
     {
-      captionKey: 'temp',
+      captionKey: 'oldHead',
       comment: 'shift2',
-      list: line(THREE, { pointers: { temp: 'Ana' } }),
+      list: line(THREE, { pointers: { oldHead: 'Ana' } }),
     },
     {
       captionKey: 'moveHead',
       comment: 'shift3',
       list: line(['Ben', 'Cleo'], {
-        pointers: { temp: 'Ana' },
+        pointers: { oldHead: 'Ana' },
         detached: [removed('Ana', 'Ben')],
         length: 3,
       }),
@@ -348,7 +348,7 @@ export const METHOD_SCENES = {
       captionKey: 'cut',
       comment: 'shift4',
       list: line(['Ben', 'Cleo'], {
-        pointers: { temp: 'Ana' },
+        pointers: { oldHead: 'Ana' },
         detached: [removed('Ana')],
         length: 3,
       }),
@@ -357,7 +357,7 @@ export const METHOD_SCENES = {
       captionKey: 'length',
       comment: 'shift5',
       list: line(['Ben', 'Cleo'], {
-        pointers: { temp: 'Ana' },
+        pointers: { oldHead: 'Ana' },
         detached: [removed('Ana')],
       }),
     },
@@ -365,7 +365,7 @@ export const METHOD_SCENES = {
       captionKey: 'oneLeft',
       comment: 'shift6',
       list: line([], {
-        pointers: { temp: 'Ana' },
+        pointers: { oldHead: 'Ana' },
         detached: [removed('Ana')],
       }),
     },

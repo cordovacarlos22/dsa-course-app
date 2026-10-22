@@ -6,7 +6,7 @@ minutes: 10
 
 > **Meta:** reconocer código O(n²) y entender por qué se considera ineficiente.
 
-## Imprime cada pareja
+## Imprime cada asiento
 
 Nuestra siguiente notación es **O(n²)**, que se lee "O de n al cuadrado". Es lo que obtienes cuando un bucle sobre la entrada está **dentro** de otro bucle sobre la misma entrada. Empieza con los dos bucles de la lección anterior, pero en lugar de ponerlos uno después del otro, pon uno dentro del otro, e imprime `i` y `j`.
 
@@ -15,7 +15,7 @@ La clave es cómo corre un **bucle anidado**. El bucle de afuera da un paso, y l
 Míralo con una n pequeña:
 
 ```viz
-trace-print-pairs
+trace-print-seats
 ```
 
 **Qué acaba de pasar:** con n = 3, `i` empezó en 0, y el bucle de adentro imprimió `0 0`, `0 1`, `0 2`. Luego `i` pasó a 1 y el bucle de adentro empezó otra vez: `1 0`, `1 1`, `1 2`. Luego lo mismo con `i = 2`. Tres filas de tres: 9 líneas, que es 3². Elige n = 4 y obtienes 16.
@@ -23,7 +23,7 @@ trace-print-pairs
 Ejecútala con 10:
 
 ```js-run
-function printPairs(n) {
+function printSeats(n) {
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       console.log(i, j)
@@ -31,7 +31,7 @@ function printPairs(n) {
   }
 }
 
-printPairs(10)
+printSeats(10)
 ```
 
 Recorre la salida: empieza en `0 0` y termina en `9 9`. Son **100 líneas**. Por cada uno de los 10 valores de `i`, el bucle de adentro corre 10 veces: **n × n = n²**. De ahí sale O(n²).
@@ -103,22 +103,22 @@ big-o-growth-chart
 
 **Qué acaba de pasar:** O(n) subió como una línea recta, y O(n²) se curvó hacia arriba y la dejó muy atrás. Con n = 1,000, O(n²) ya iba en un millón de operaciones mientras O(n) seguía en mil.
 
-Míralo con números reales. Cada vez que n se duplica, fíjate qué pasa con las parejas:
+Míralo con números reales. Cada vez que n se duplica, fíjate qué pasa con los asientos:
 
 ```js-run
-function countPairs(n) {
-  let pairs = 0
+function countSeats(n) {
+  let seats = 0
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
-      pairs = pairs + 1
+      seats = seats + 1
     }
   }
-  return pairs
+  return seats
 }
 
 const sizes = [1000, 2000, 4000]
 for (let k = 0; k < sizes.length; k++) {
-  console.log('n =', sizes[k], '| parejas:', countPairs(sizes[k]))
+  console.log('n =', sizes[k], '| asientos:', countSeats(sizes[k]))
 }
 ```
 

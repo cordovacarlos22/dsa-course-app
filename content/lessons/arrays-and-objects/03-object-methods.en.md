@@ -82,11 +82,11 @@ Look at this function. For every guest, it counts how many guests there are in t
 
 ```js
 function shareOfGuests(rsvps) {
-  const names = Object.keys(rsvps) // O(n), once
-  for (let i = 0; i < names.length; i++) {
+  const guestNames = Object.keys(rsvps) // O(n), once
+  for (let i = 0; i < guestNames.length; i++) {
     // Object.keys runs again on EVERY pass: O(n) each time
-    const total = Object.keys(rsvps).length
-    console.log(names[i] + ' is 1 of ' + total)
+    const guestCount = Object.keys(rsvps).length
+    console.log(guestNames[i] + ' is 1 of ' + guestCount)
   }
 }
 ```
@@ -103,10 +103,10 @@ The fix is simple: do the expensive work **once**, before the loop, and save the
 
 ```js-run
 function shareOfGuests(rsvps) {
-  const names = Object.keys(rsvps) // O(n), once
-  const total = names.length // O(1): names is an array
-  for (let i = 0; i < names.length; i++) {
-    console.log(names[i] + ' is 1 of ' + total)
+  const guestNames = Object.keys(rsvps) // O(n), once
+  const guestCount = guestNames.length // O(1): guestNames is an array
+  for (let i = 0; i < guestNames.length; i++) {
+    console.log(guestNames[i] + ' is 1 of ' + guestCount)
   }
 }
 

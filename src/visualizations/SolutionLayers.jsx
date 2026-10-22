@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import StepPlayer from '../components/StepPlayer'
 import ObjectCards from './ObjectCards'
 
-// Solve a simpler problem first: charCount without the hard parts, then the
+// Solve a simpler problem first: countCharacters without the hard parts, then the
 // hard parts added back one at a time. After each layer we run it on
 // 'Hi Ana!' and look at what's still wrong. Nothing written earlier is
 // thrown away: each layer only adds.
@@ -10,14 +10,14 @@ import ObjectCards from './ObjectCards'
 const LAYERS = [
   {
     lines: [
-      'function charCount(str) {',
+      'function countCharacters(text) {',
       '  const result = {}',
-      '  for (let i = 0; i < str.length; i++) {',
-      '    const char = str[i]',
-      '    if (result[char] > 0) {',
-      '      result[char]++',
+      '  for (let i = 0; i < text.length; i++) {',
+      '    const character = text[i]',
+      '    if (result[character] > 0) {',
+      '      result[character]++',
       '    } else {',
-      '      result[char] = 1',
+      '      result[character] = 1',
       '    }',
       '  }',
       '  return result',
@@ -38,14 +38,14 @@ const LAYERS = [
   },
   {
     lines: [
-      'function charCount(str) {',
+      'function countCharacters(text) {',
       '  const result = {}',
-      '  for (let i = 0; i < str.length; i++) {',
-      '    const char = str[i].toLowerCase()',
-      '    if (result[char] > 0) {',
-      '      result[char]++',
+      '  for (let i = 0; i < text.length; i++) {',
+      '    const character = text[i].toLowerCase()',
+      '    if (result[character] > 0) {',
+      '      result[character]++',
       '    } else {',
-      '      result[char] = 1',
+      '      result[character] = 1',
       '    }',
       '  }',
       '  return result',
@@ -64,15 +64,15 @@ const LAYERS = [
   },
   {
     lines: [
-      'function charCount(str) {',
+      'function countCharacters(text) {',
       '  const result = {}',
-      '  for (let i = 0; i < str.length; i++) {',
-      '    const char = str[i].toLowerCase()',
-      '    if (isAlphaNumeric(char)) {',
-      '      if (result[char] > 0) {',
-      '        result[char]++',
+      '  for (let i = 0; i < text.length; i++) {',
+      '    const character = text[i].toLowerCase()',
+      '    if (isLetterOrDigit(character)) {',
+      '      if (result[character] > 0) {',
+      '        result[character]++',
       '      } else {',
-      '        result[char] = 1',
+      '        result[character] = 1',
       '      }',
       '    }',
       '  }',
@@ -137,7 +137,7 @@ function SolutionLayers() {
             </pre>
             <div className="space-y-2 rounded-xl border border-slate-200 p-3">
               <p className="font-mono text-sm">
-                charCount(&apos;Hi Ana!&apos;)
+                countCharacters(&apos;Hi Ana!&apos;)
               </p>
               {step.showOutput ? (
                 <ObjectCards

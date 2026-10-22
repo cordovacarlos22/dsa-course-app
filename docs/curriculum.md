@@ -56,16 +56,16 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
   2. Timing our code ✅ (C2: `trace-sum-loop`, `trace-sum-formula`, `big-o-growth-chart`, `stopwatch-race`)
   3. Counting operations ✅ (C2: `trace-sum-formula`, `trace-sum-loop`, `linear-boxes`, `trace-count-guests`)
   4. Visualizing time complexities ✅ (C2: `timing-chart`, `stopwatch-race`, `big-o-growth-chart`)
-  5. The official intro to Big O ✅ (C2: `big-o-growth-chart`, `same-shape`, `trace-print-pairs`)
+  5. The official intro to Big O ✅ (C2: `big-o-growth-chart`, `same-shape`, `trace-print-seats`)
   6. Best, average and worst case ✅ (C1 + Big O notes handout: `search-cases`, `trace-is-invited`)
   7. O(n): linear time ✅ (C1: `trace-print-numbers`, `linear-boxes`, `trace-welcome-all`)
   8. Drop the constants ✅ (C1 + C2: `trace-welcome-and-goodbye`, `same-shape`, `big-o-growth-chart`)
-  9. O(n²): a loop inside a loop ✅ (C1: `trace-print-pairs`, `nested-grid`, `big-o-growth-chart`)
+  9. O(n²): a loop inside a loop ✅ (C1: `trace-print-seats`, `nested-grid`, `big-o-growth-chart`)
   10. Drop the non-dominant terms ✅ (C1 + C2: `dominant-term`, `big-o-growth-chart`)
   11. O(1): constant time ✅ (C1: `trace-sum-formula`, `constant-jump`, `trace-is-invited`)
   12. Rules of thumb ✅ (C2: `trace-party-summary`, `trace-greet-everyone`, `trace-give-gifts`)
   13. Different terms for inputs ✅ (C1: `two-inputs`, `trace-welcome-and-goodbye`)
-  14. Space complexity ✅ (C2: `memory-boxes`, `trace-count-guests`, `trace-double-array`)
+  14. Space complexity ✅ (C2: `memory-boxes`, `trace-count-guests`, `trace-double-orders`)
   15. Logarithms and O(log n) ✅ (C1 + C2: `halving-count`, `binary-search-halving`, `big-o-growth-chart`)
   16. Big O of arrays ✅ (C1 + C2 "When are arrays slow?": `constant-jump`, `array-reindex`, `array-splice`, `search-cases`)
   17. Wrap-up ✅ (C1 wrap-up + cheat sheet, C2 recap: `big-o-growth-chart`, `search-cases`, `dominant-term`)
@@ -98,17 +98,17 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 **Status:** ✅ 7 lessons, 21 steps (EN + ES, 21 checkpoints) · ✅ quiz, 14 questions (EN + ES) · ✅ 3 interview problems · ⬜ slides
 **Goal:** have a repeatable method for any problem, even one you've never seen.
 **Sources:** course 2's Section 4 (7 lectures and the first 25 pages of its slides; no quiz).
-**Style:** theory first; the same two examples all the way through, `add(num1, num2)` and `charCount(str)`, and the `five-steps` map reused in every lesson.
+**Style:** theory first; the same two examples all the way through, `add(num1, num2)` and `countCharacters(str)`, and the `five-steps` map reused in every lesson.
 
 - **Lessons** (sources and animations in parentheses):
   1. Why you need a method ✅ (C2 intro: `trace-is-invited`, `five-steps`)
   2. Step 1: Understand the problem ✅ (C2 L21: `five-steps-understand`)
   3. Step 2: Explore concrete examples ✅ (C2 L22: `five-steps-examples`, `example-ladder`)
   4. Step 3: Break it down ✅ (C2 L23: `five-steps-break-down`, `steps-to-code`)
-  5. Step 4: Solve or simplify ✅ (C2 L24: `five-steps-solve`, `trace-char-count`, `solution-layers`)
+  5. Step 4: Solve or simplify ✅ (C2 L24: `five-steps-solve`, `trace-count-characters`, `solution-layers`)
   6. Step 5: Look back and refactor ✅ (C2 L25: `five-steps-look-back`, `char-code-ranges`)
   7. The method in an interview ✅ (C2 recap, plus the interview advice from every lecture: `five-steps`)
-- **Quiz:** what each step is for, what to ask about inputs and outputs, number limits in JavaScript, the four kinds of examples, invalid inputs that look valid, planning with comments, simplifying, `NaN` from a missing count, refactoring vs. Big O, `charCount`'s O(1) space, thinking out loud.
+- **Quiz:** what each step is for, what to ask about inputs and outputs, number limits in JavaScript, the four kinds of examples, invalid inputs that look valid, planning with comments, simplifying, `NaN` from a missing count, refactoring vs. Big O, `countCharacters`'s O(1) space, thinking out loud.
 - **Build it:** none.
 - **Interview problems:** ✅ Count the Vowels · ✅ Character Counter · ✅ Title Case (each description prompts the 5 steps)
 
@@ -208,14 +208,14 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 **Goal:** write classes and understand references, the two tools behind every data structure.
 **Place:** it opens the Data Structures section, right before Linked Lists (Carlos, 2026-10-19), because both courses teach classes right before their first data structure.
 **Sources:** course 1's Section 3 (2 lectures and `cookie.js`). Course 2's class lecture (instance vs. static methods) joins when Carlos sends it.
-**Style:** theory first; cookies with flavors for classes, and guest cards (`{ value: 'Ana' }`) for pointers.
+**Style:** theory first; party invitations printed from a template for classes (our own picture, not the course's cookie cutter), and guest cards (`{ value: 'Ana' }`) for pointers.
 
 - **Lessons** (sources and animations in parentheses):
-  1. Classes: the blueprint for every data structure ✅ (C1 classes lecture: `cookie-cutter`, `cookie-new`, `cookie-methods`, `list-class-preview`)
+  1. Classes: the blueprint for every data structure ✅ (C1 classes lecture: `invitation-template`, `invitation-new`, `invitation-methods`, `list-class-preview`)
   2. Pointers: values vs. references ✅ (C1 pointers lecture: `value-copy`, `reference-copy`, `pointer-move`)
   3. Instance methods vs. static (class) methods ⬜ (waits for course 2's lecture)
 - **Quiz:** classes vs. instances, naming, `constructor`, what `new` does (and forgetting it), `this`, getters/setters, why data structures are classes, copying values vs. sharing references, `===` on objects, moving pointers, garbage collection (and removed list nodes). Static methods come with lesson 3.
-- **Build it:** ✅ The Cookie Class · ✅ The Door Counter (`Counter`: increment, decrement, reset) · A `Point` class with a static `distance` method (with course 2's lecture)
+- **Build it:** ✅ The Invitation Class · ✅ The Door Counter (`Counter`: increment, decrement, reset) · A `Point` class with a static `distance` method (with course 2's lecture)
 - **Interview problems:** none.
 
 ## Linked Lists (`linked-lists`)

@@ -71,8 +71,8 @@
     {
       "type": "choice",
       "question": {
-        "en": "How many times does the loop move `temp` forward in `get(3)`?",
-        "es": "¿Cuántas veces mueve el bucle a `temp` hacia adelante en `get(3)`?"
+        "en": "How many times does the loop move `current` forward in `get(3)`?",
+        "es": "¿Cuántas veces mueve el bucle a `current` hacia adelante en `get(3)`?"
       },
       "options": [
         {
@@ -94,12 +94,12 @@
       ],
       "answer": 3,
       "hint": {
-        "en": "`temp` starts on index 0. How many moves reach index 3?",
-        "es": "`temp` empieza en el índice 0. ¿Cuántos movimientos llegan al índice 3?"
+        "en": "`current` starts on index 0. How many moves reach index 3?",
+        "es": "`current` empieza en el índice 0. ¿Cuántos movimientos llegan al índice 3?"
       },
       "explanation": {
-        "en": "`temp` starts on index 0, and each move adds 1: 0 → 1 → 2 → 3. Three moves for index 3, which is what `for (let i = 0; i < index; i++)` does.",
-        "es": "`temp` empieza en el índice 0, y cada movimiento suma 1: 0 → 1 → 2 → 3. Tres movimientos para el índice 3, que es lo que hace `for (let i = 0; i < index; i++)`."
+        "en": "`current` starts on index 0, and each move adds 1: 0 → 1 → 2 → 3. Three moves for index 3, which is what `for (let i = 0; i < index; i++)` does.",
+        "es": "`current` empieza en el índice 0, y cada movimiento suma 1: 0 → 1 → 2 → 3. Tres movimientos para el índice 3, que es lo que hace `for (let i = 0; i < index; i++)`."
       }
     },
     {
@@ -109,11 +109,11 @@
         "es": "Escribe `get(index)` en la clase `LinkedList`, siguiendo el plan. Regresa el nodo en `index`, o `undefined` cuando `index` es menor que 0 o no es menor que `length`."
       },
       "hint": {
-        "en": "Start with `if (index < 0 || index >= this.length) { return undefined }`. Then `let temp = this.head` and move it with `for (let i = 0; i < index; i++) { temp = temp.next }`. Return `temp`.",
-        "es": "Empieza con `if (index < 0 || index >= this.length) { return undefined }`. Luego `let temp = this.head` y muévelo con `for (let i = 0; i < index; i++) { temp = temp.next }`. Regresa `temp`."
+        "en": "Start with `if (index < 0 || index >= this.length) { return undefined }`. Then `let current = this.head` and move it with `for (let i = 0; i < index; i++) { current = current.next }`. Return `current`.",
+        "es": "Empieza con `if (index < 0 || index >= this.length) { return undefined }`. Luego `let current = this.head` y muévelo con `for (let i = 0; i < index; i++) { current = current.next }`. Regresa `current`."
       },
-      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  get(index) {\n    // 1. if index < 0 or index >= length, return undefined\n    // 2. temp starts at head (index 0)\n    // 3. move temp forward, index times\n    // 4. return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
-      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  get(index) {\n    if (index < 0 || index >= this.length) {\n      return undefined\n    }\n    let temp = this.head\n    for (let i = 0; i < index; i++) {\n      temp = temp.next\n    }\n    return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const firstNode = new Node(value)\n      this.head = firstNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const nodeToAdd = new Node(value)\n    if (!this.head) {\n      this.head = nodeToAdd\n      this.tail = nodeToAdd\n    } else {\n      this.tail.next = nodeToAdd\n      this.tail = nodeToAdd\n    }\n    this.length++\n    return this\n  }\n\n  get(index) {\n    // 1. if index < 0 or index >= length, return undefined\n    // 2. current starts at head (index 0)\n    // 3. move current forward, index times\n    // 4. return current\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let current = this.head\n    while (current !== null) {\n      values.push(current.value)\n      current = current.next\n    }\n    return values\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const firstNode = new Node(value)\n      this.head = firstNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const nodeToAdd = new Node(value)\n    if (!this.head) {\n      this.head = nodeToAdd\n      this.tail = nodeToAdd\n    } else {\n      this.tail.next = nodeToAdd\n      this.tail = nodeToAdd\n    }\n    this.length++\n    return this\n  }\n\n  get(index) {\n    if (index < 0 || index >= this.length) {\n      return undefined\n    }\n    let current = this.head\n    for (let i = 0; i < index; i++) {\n      current = current.next\n    }\n    return current\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let current = this.head\n    while (current !== null) {\n      values.push(current.value)\n      current = current.next\n    }\n    return values\n  }\n}",
       "kind": "class",
       "className": "LinkedList",
       "tests": [

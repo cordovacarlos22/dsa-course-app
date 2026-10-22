@@ -71,8 +71,8 @@
     {
       "type": "choice",
       "question": {
-        "en": "Why does `shift` set `temp.next = null` before returning `temp`?",
-        "es": "¿Por qué `shift` hace `temp.next = null` antes de regresar `temp`?"
+        "en": "Why does `shift` set `oldHead.next = null` before returning `oldHead`?",
+        "es": "¿Por qué `shift` hace `oldHead.next = null` antes de regresar `oldHead`?"
       },
       "options": [
         {
@@ -98,8 +98,8 @@
         "es": "Después de que `head` se mueve, ¿a qué sigue apuntando el `next` del antiguo primer nodo?"
       },
       "explanation": {
-        "en": "The removed node still points to the second guest. Returning it like that would hand over the rest of the line too. `temp.next = null` cuts that last arrow.",
-        "es": "El nodo que se quitó todavía apunta al segundo invitado. Regresarlo así entregaría también el resto de la fila. `temp.next = null` corta esa última flecha."
+        "en": "The removed node still points to the second guest. Returning it like that would hand over the rest of the line too. `oldHead.next = null` cuts that last arrow.",
+        "es": "El nodo que se quitó todavía apunta al segundo invitado. Regresarlo así entregaría también el resto de la fila. `oldHead.next = null` corta esa última flecha."
       }
     },
     {
@@ -109,11 +109,11 @@
         "es": "Escribe `shift()` en la clase `LinkedList`, siguiendo el plan de los comentarios. Quita el primer nodo y lo regresa (suelto, con `next` en `null`), regresa `undefined` en una lista vacía, y pone `tail` en `null` cuando la lista queda vacía."
       },
       "hint": {
-        "en": "`let temp = this.head`, then `this.head = this.head.next`, `temp.next = null` and `this.length--`. After the decrement, if `this.length === 0`, set `this.tail = null`. Return `temp`.",
-        "es": "`let temp = this.head`, luego `this.head = this.head.next`, `temp.next = null` y `this.length--`. Después de restar, si `this.length === 0`, haz `this.tail = null`. Regresa `temp`."
+        "en": "`let oldHead = this.head`, then `this.head = this.head.next`, `oldHead.next = null` and `this.length--`. After the decrement, if `this.length === 0`, set `this.tail = null`. Return `oldHead`.",
+        "es": "`let oldHead = this.head`, luego `this.head = this.head.next`, `oldHead.next = null` y `this.length--`. Después de restar, si `this.length === 0`, haz `this.tail = null`. Regresa `oldHead`."
       },
-      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  shift() {\n    // 1. if the list is empty, return undefined\n    // 2. temp points to the first node\n    // 3. head moves to the next node\n    // 4. temp's next becomes null, to cut it off\n    // 5. subtract 1 from length\n    // 6. if length is now 0, tail becomes null too\n    // 7. return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
-      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const newNode = new Node(value)\n      this.head = newNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const newNode = new Node(value)\n    if (!this.head) {\n      this.head = newNode\n      this.tail = newNode\n    } else {\n      this.tail.next = newNode\n      this.tail = newNode\n    }\n    this.length++\n    return this\n  }\n\n  shift() {\n    if (!this.head) {\n      return undefined\n    }\n    let temp = this.head\n    this.head = this.head.next\n    temp.next = null\n    this.length--\n    if (this.length === 0) {\n      this.tail = null\n    }\n    return temp\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let temp = this.head\n    while (temp !== null) {\n      values.push(temp.value)\n      temp = temp.next\n    }\n    return values\n  }\n}",
+      "starterCode": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const firstNode = new Node(value)\n      this.head = firstNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const nodeToAdd = new Node(value)\n    if (!this.head) {\n      this.head = nodeToAdd\n      this.tail = nodeToAdd\n    } else {\n      this.tail.next = nodeToAdd\n      this.tail = nodeToAdd\n    }\n    this.length++\n    return this\n  }\n\n  shift() {\n    // 1. if the list is empty, return undefined\n    // 2. oldHead points to the first node\n    // 3. head moves to the next node\n    // 4. oldHead's next becomes null, to cut it off\n    // 5. subtract 1 from length\n    // 6. if length is now 0, tail becomes null too\n    // 7. return oldHead\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let current = this.head\n    while (current !== null) {\n      values.push(current.value)\n      current = current.next\n    }\n    return values\n  }\n}",
+      "solution": "class Node {\n  constructor(value) {\n    this.value = value\n    this.next = null\n  }\n}\n\nclass LinkedList {\n  constructor(value) {\n    this.head = null\n    this.tail = null\n    this.length = 0\n    if (value !== undefined) {\n      const firstNode = new Node(value)\n      this.head = firstNode\n      this.tail = this.head\n      this.length = 1\n    }\n  }\n\n  push(value) {\n    const nodeToAdd = new Node(value)\n    if (!this.head) {\n      this.head = nodeToAdd\n      this.tail = nodeToAdd\n    } else {\n      this.tail.next = nodeToAdd\n      this.tail = nodeToAdd\n    }\n    this.length++\n    return this\n  }\n\n  shift() {\n    if (!this.head) {\n      return undefined\n    }\n    let oldHead = this.head\n    this.head = this.head.next\n    oldHead.next = null\n    this.length--\n    if (this.length === 0) {\n      this.tail = null\n    }\n    return oldHead\n  }\n\n  // our helper: the values from head to tail, as an array\n  toArray() {\n    const values = []\n    let current = this.head\n    while (current !== null) {\n      values.push(current.value)\n      current = current.next\n    }\n    return values\n  }\n}",
       "kind": "class",
       "className": "LinkedList",
       "tests": [

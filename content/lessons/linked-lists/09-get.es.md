@@ -57,13 +57,13 @@ Paso 3: el plan como comentarios.
 ```js
 get(index) {
   // 1. si index < 0 o index >= length, regresa undefined
-  // 2. temp empieza en head (índice 0)
-  // 3. avanza temp, index veces
-  // 4. regresa temp
+  // 2. current empieza en head (índice 0)
+  // 3. avanza current, index veces
+  // 4. regresa current
 }
 ```
 
-El paso 3 es una caminata, pero no la caminata sin fin conocido de pop. Aquí sabemos **exactamente cuántos movimientos** necesitamos: para llegar al índice 2, muévete 2 veces. Cuando conoces la cuenta de antemano, un bucle `for` es lo natural: `for (let i = 0; i < index; i++) { temp = temp.next }`. pop usó `while`, porque no sabía dónde estaba el final hasta ver `null`.
+El paso 3 es una caminata, pero no la caminata sin fin conocido de pop. Aquí sabemos **exactamente cuántos movimientos** necesitamos: para llegar al índice 2, muévete 2 veces. Cuando conoces la cuenta de antemano, un bucle `for` es lo natural: `for (let i = 0; i < index; i++) { current = current.next }`. pop usó `while`, porque no sabía dónde estaba el final hasta ver `null`.
 
 La revisión del rango va primero porque hace seguro todo lo que viene después. Cuando un índice ya la pasó, la caminata nunca puede salirse del final de la fila.
 
@@ -71,9 +71,9 @@ La revisión del rango va primero porque hace seguro todo lo que viene después.
 linked-list-get-plan
 ```
 
-**Qué acaba de pasar:** la revisión del rango pasó para el índice 2. `temp` empezó en `head`, en el índice 0, y avanzó una vez por cada cuenta: a Ben (1), luego a Cleo (2). Dos movimientos para el índice 2, y luego se regresó `temp`.
+**Qué acaba de pasar:** la revisión del rango pasó para el índice 2. `current` empezó en `head`, en el índice 0, y avanzó una vez por cada cuenta: a Ben (1), luego a Cleo (2). Dos movimientos para el índice 2, y luego se regresó `current`.
 
-**Error común:** equivocarse por uno en el bucle, como `i <= index` o empezar `i` en 1. Cualquiera de los dos hace que `temp` se mueva una vez de más o de menos. Prueba el bucle con el ejemplo más chico: `get(0)` no debe moverse nada.
+**Error común:** equivocarse por uno en el bucle, como `i <= index` o empezar `i` en 1. Cualquiera de los dos hace que `current` se mueva una vez de más o de menos. Prueba el bucle con el ejemplo más chico: `get(0)` no debe moverse nada.
 
 ## Escribir el código
 
@@ -81,15 +81,15 @@ Paso 4: primero el caso común, luego el caso especial. Con un índice que exist
 
 ```js
 get(index) {
-  let temp = this.head
+  let current = this.head
   for (let i = 0; i < index; i++) {
-    temp = temp.next
+    current = current.next
   }
-  return temp
+  return current
 }
 ```
 
-Luego el caso especial: un índice que no existe. Sin revisión, `get(10)` con cuatro invitados mueve `temp` a `null` y luego truena al intentar leer `null.next`. Así que la revisión del rango va arriba de todo, y regresa `undefined` antes de empezar a caminar. La revisión sale directo de los ejemplos del paso 2: menor que 0, o `length` y más.
+Luego el caso especial: un índice que no existe. Sin revisión, `get(10)` con cuatro invitados mueve `current` a `null` y luego truena al intentar leer `null.next`. Así que la revisión del rango va arriba de todo, y regresa `undefined` antes de empezar a caminar. La revisión sale directo de los ejemplos del paso 2: menor que 0, o `length` y más.
 
 ```viz
 trace-ll-get
@@ -111,21 +111,21 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      this.tail.next = newNode
-      this.tail = newNode
+      this.tail.next = nodeToAdd
+      this.tail = nodeToAdd
     }
     this.length++
     return this
@@ -135,11 +135,11 @@ class LinkedList {
     if (index < 0 || index >= this.length) {
       return undefined
     }
-    let temp = this.head
+    let current = this.head
     for (let i = 0; i < index; i++) {
-      temp = temp.next
+      current = current.next
     }
-    return temp
+    return current
   }
 }
 
@@ -156,9 +156,9 @@ console.log(line.get(-1)) // undefined
 
 Paso 5: el Big O, y una decisión de diseño para pensar.
 
-**Big O:** `get` camina hasta `index` nodos, y el peor caso es el último índice, que recorre toda la fila: **O(n) en tiempo**. Usa un puntero extra, `temp`: **O(1) en espacio**. Un array hace el mismo trabajo en O(1) con `guests[index]`, y esa es la diferencia más grande entre las dos estructuras.
+**Big O:** `get` camina hasta `index` nodos, y el peor caso es el último índice, que recorre toda la fila: **O(n) en tiempo**. Usa un puntero extra, `current`: **O(1) en espacio**. Un array hace el mismo trabajo en O(1) con `guests[index]`, y esa es la diferencia más grande entre las dos estructuras.
 
-**¿Por qué regresar el nodo y no el valor?** Regresar `temp.value` estaría bien para quien solo quiere leer un nombre. Pero los siguientes tres métodos necesitan **el nodo mismo**. `set` cambia el valor del nodo, e `insert` y `remove` enlazan flechas nuevas alrededor de él. Regresar el nodo hace que `get` sea el primer paso compartido de los tres, y leer el valor sigue estando a un `.value` de distancia.
+**¿Por qué regresar el nodo y no el valor?** Regresar `current.value` estaría bien para quien solo quiere leer un nombre. Pero los siguientes tres métodos necesitan **el nodo mismo**. `set` cambia el valor del nodo, e `insert` y `remove` enlazan flechas nuevas alrededor de él. Regresar el nodo hace que `get` sea el primer paso compartido de los tres, y leer el valor sigue estando a un `.value` de distancia.
 
 **¿Podría ser más rápido?** Para un índice en la segunda mitad de la fila, caminar desde el tail sería más corto, pero una lista enlazada simple no puede caminar hacia atrás. Una lista doblemente enlazada sí puede, y su `get` usa justo ese truco: empezar desde el extremo más cercano.
 
@@ -174,4 +174,4 @@ for (let index = 0; index < length; index++) {
 }
 ```
 
-**Error común:** llamar `get` dentro de un bucle para visitar todos los nodos: `for (let i = 0; i < line.length; i++) { line.get(i) }`. Cada `get` vuelve a caminar desde el inicio, así que el bucle hace 0 + 1 + 2 + … movimientos: O(n²). Para visitar todos los nodos, camina una sola vez con `temp`, como hace `toArray`.
+**Error común:** llamar `get` dentro de un bucle para visitar todos los nodos: `for (let i = 0; i < line.length; i++) { line.get(i) }`. Cada `get` vuelve a caminar desde el inicio, así que el bucle hace 0 + 1 + 2 + … movimientos: O(n²). Para visitar todos los nodos, camina una sola vez con `current`, como hace `toArray`.

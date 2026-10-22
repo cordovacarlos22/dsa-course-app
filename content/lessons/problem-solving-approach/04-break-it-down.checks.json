@@ -37,8 +37,8 @@
     {
       "type": "choice",
       "question": {
-        "en": "In the plan for `charCount`, where does most of the logic go?",
-        "es": "En el plan de `charCount`, ¿dónde va casi toda la lógica?"
+        "en": "In the plan for `countCharacters`, where does most of the logic go?",
+        "es": "En el plan de `countCharacters`, ¿dónde va casi toda la lógica?"
       },
       "options": [
         {
@@ -71,15 +71,15 @@
     {
       "type": "code",
       "task": {
-        "en": "The function below has a plan but no code. Turn each comment into code: `countSpaces(str)` returns how many spaces (`' '`) the string has.",
-        "es": "La función tiene un plan pero nada de código. Convierte cada comentario en código: `countSpaces(str)` regresa cuántos espacios (`' '`) tiene el string."
+        "en": "The function below has a plan but no code. Turn each comment into code: `countSpaces(text)` returns how many spaces (`' '`) the string has.",
+        "es": "La función tiene un plan pero nada de código. Convierte cada comentario en código: `countSpaces(text)` regresa cuántos espacios (`' '`) tiene el string."
       },
       "hint": {
         "en": "Follow the comments in order: a counter, a loop, an `if`, a return.",
         "es": "Sigue los comentarios en orden: un contador, un bucle, un `if`, un return."
       },
-      "starterCode": "function countSpaces(str) {\n  // start a counter at 0\n  // loop over the string, one character at a time\n  //   if the character is a space, add 1 to the counter\n  // return the counter\n}",
-      "solution": "function countSpaces(str) {\n  // start a counter at 0\n  let count = 0\n  // loop over the string, one character at a time\n  for (let i = 0; i < str.length; i++) {\n    //   if the character is a space, add 1 to the counter\n    if (str[i] === ' ') count++\n  }\n  // return the counter\n  return count\n}",
+      "starterCode": "function countSpaces(text) {\n  // start a counter at 0\n  // loop over the string, one character at a time\n  //   if the character is a space, add 1 to the counter\n  // return the counter\n}",
+      "solution": "function countSpaces(text) {\n  // start a counter at 0\n  let count = 0\n  // loop over the string, one character at a time\n  for (let i = 0; i < text.length; i++) {\n    //   if the character is a space, add 1 to the counter\n    if (text[i] === ' ') count++\n  }\n  // return the counter\n  return count\n}",
       "kind": "function",
       "functionName": "countSpaces",
       "tests": [

@@ -10,9 +10,9 @@ minutes: 9
 
 Next is **O(1)**, read "O of 1". It describes code whose work **doesn't change** when the input grows. Not "very little work", but **the same** work: whether n is 1 or a billion, the code does the same fixed number of operations. The 1 in O(1) doesn't mean "one operation". It stands for any fixed amount, the way the 1 in f(n) = 1 from the definition never changes with n.
 
-Here's the simplest example: a function that just returns n + n. It does **one operation**, the addition. It doesn't matter if n is 1 or a million; it's always one operation. Add another addition, like `return n + n + n`, and it's two operations, so O(2). As you've probably guessed, we drop the constant and simplify that to **O(1)**: the number of operations is a constant that doesn't change when n changes.
+Here's the simplest example. If every one of n guests brings a plus-one, the head count is n + n. A function that returns it does **one operation**, the addition. It doesn't matter if n is 1 or a million; it's always one operation. Add another addition, like `return n + n + n`, and it's two operations, so O(2). As you've probably guessed, we drop the constant and simplify that to **O(1)**: the number of operations is a constant that doesn't change when n changes.
 
-The formula version of `sumUpTo` is the same kind of code:
+The formula version of `sumOneTo` is the same kind of code:
 
 ```viz
 trace-sum-formula
@@ -20,19 +20,19 @@ trace-sum-formula
 
 **What just happened:** n + 1, then the multiplication, then the division: 3 operations. Pick n = 1,000,000 and the counter still stops at 3. Three operations every time, so O(3), which we write as **O(1)**.
 
-Here are `addItems` and `addItemsAgain`, with a tiny n and a huge one:
+Here they are: `withPlusOnes` (everyone brings one friend) and `withTwoFriends` (everyone brings two), with a tiny n and a huge one:
 
 ```js-run
-function addItems(n) {
+function withPlusOnes(n) {
   return n + n
 }
 
-function addItemsAgain(n) {
+function withTwoFriends(n) {
   return n + n + n
 }
 
-console.log(addItems(1), addItems(1000000))
-console.log(addItemsAgain(1), addItemsAgain(1000000))
+console.log(withPlusOnes(1), withPlusOnes(1000000))
+console.log(withTwoFriends(1), withTwoFriends(1000000))
 ```
 
 **Common mistake:** thinking O(1) means "exactly one step". A function that always does 3 steps, or 300, is O(1) too. What makes it O(1) is that the number never grows with the input.
@@ -78,7 +78,7 @@ On the graph, O(1) is a **flat line** along the bottom. It's the **most efficien
 
 Constant time doesn't mean "instant". A function that always does 1,000 operations is still O(1), because that 1,000 never grows: it does the same work for 10 items or 10 million. What O(1) promises is that the work **doesn't grow** with the input.
 
-That's exactly why the formula version of `sumUpTo` beat the loop version: the formula is O(1), the loop is O(n), and the gap gets bigger every time n grows. It's also why O(1) operations are so valuable for things an app does all the time: you can read `guests.length` a thousand times and it never gets slower as the party grows.
+That's exactly why the formula version of `sumOneTo` beat the loop version: the formula is O(1), the loop is O(n), and the gap gets bigger every time n grows. It's also why O(1) operations are so valuable for things an app does all the time: you can read `guests.length` a thousand times and it never gets slower as the party grows.
 
 Careful, though: short code isn't the same as constant time. Watch what one innocent-looking line can hide:
 

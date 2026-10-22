@@ -55,19 +55,19 @@ export const printNumbers = {
   },
 }
 
-export const printPairs = {
-  key: 'printPairs',
+export const printSeats = {
+  key: 'printSeats',
   counter: 'lines',
   inputs: [{ n: 2 }, { n: 3 }, { n: 4 }],
   items: (input) => zeroTo(input.n),
-  code: `function printPairs(n) {
+  code: `function printSeats(n) {
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       console.log(i, j)
     }
   }
 }`,
-  call: (input) => ['printPairs', [input.n]],
+  call: (input) => ['printSeats', [input.n]],
   *run({ n }) {
     const output = []
     yield {

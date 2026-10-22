@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import StepPlayer from '../components/StepPlayer'
 import ObjectCards from './ObjectCards'
 
-// Examples for charCount, from simple to invalid. The simple ones have an
+// Examples for countCharacters, from simple to invalid. The simple ones have an
 // obvious answer; the harder ones raise questions to ask before coding.
 // The last step shows the answers we decided on: lowercase letters and
 // digits only.
@@ -108,7 +108,9 @@ function ExampleLadder() {
                 <p className="text-[11px] font-bold tracking-wide text-slate-500 uppercase">
                   {t(`viz.exampleLadder.kinds.${row.kind}`)}
                 </p>
-                <p className="font-mono text-sm">charCount({row.input})</p>
+                <p className="font-mono text-sm">
+                  countCharacters({row.input})
+                </p>
               </div>
               <RowOutput row={row} decided={step.decided} />
             </li>

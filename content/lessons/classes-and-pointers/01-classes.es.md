@@ -6,143 +6,143 @@ minutes: 12
 
 > **Meta:** escribir una clase con un constructor y métodos, saber qué hacen `new` y `this`, y ver por qué cada estructura de datos de este curso es una clase.
 
-## Una clase es un molde para galletas
+## Una clase es una plantilla de invitación
 
-Hasta ahora has guardado datos en arrays y objetos, y has escrito funciones que trabajan con esos datos. Una **clase** junta las dos cosas en un solo lugar: describe qué datos guarda algo **y** qué puedes hacer con ellos. Piensa en un **molde para galletas**. El molde no es una galleta. Es una forma que usas para hacer todas las galletas que quieras, y cada galleta que hace tiene la misma forma.
+Hasta ahora has guardado datos en arrays y objetos, y has escrito funciones que trabajan con esos datos. Una **clase** junta las dos cosas en un solo lugar: describe qué datos guarda algo **y** qué puedes hacer con ellos. Piensa en la **plantilla de invitación** de nuestra fiesta. La plantilla no es una invitación. Es un diseño que usas para imprimir todas las invitaciones que quieras, y cada invitación que imprime tiene el mismo diseño, con el nombre de un invitado distinto.
 
-En código, el molde es la **clase**, y cada galleta que hace es una **instancia** de esa clase (también vas a oír "un objeto creado a partir de la clase"). Aquí tienes una clase `Cookie` (galleta). Por convención, los nombres de las clases empiezan con **mayúscula** (`Cookie`, `LinkedList`), y así es fácil distinguirlos de las variables y funciones normales (`cookie`, `push`):
+En código, la plantilla es la **clase**, y cada invitación que imprime es una **instancia** de esa clase (también vas a oír "un objeto creado a partir de la clase"). Aquí tienes una clase `Invitation` (invitación). Por convención, los nombres de las clases empiezan con **mayúscula** (`Invitation`, `LinkedList`), y así es fácil distinguirlos de las variables y funciones normales (`invitation`, `push`):
 
 ```js
-class Cookie {
-  constructor(flavor) {
-    this.flavor = flavor
+class Invitation {
+  constructor(guest) {
+    this.guest = guest
   }
 }
 ```
 
-Eso ya es una clase completa. Es pequeña, pero puede hacer galletas, y cada galleta que hace recibe su propio sabor, `flavor`.
+Esa ya es una clase completa. Es chiquita, pero puede hacer invitaciones, y cada invitación que hace recibe su propio `guest` (invitado).
 
 ```viz
-cookie-cutter
+invitation-template
 ```
 
-**Qué acaba de pasar:** la clase fue la misma todo el tiempo: es el molde. `new Cookie('chocolate')` hizo la primera instancia, y `new Cookie('vanilla')` hizo una segunda. Las dos tienen la misma forma (un `flavor`), pero cada una guarda su **propio** valor. Hacer mil galletas más no cambiaría el molde para nada.
+**Qué acaba de pasar:** la clase fue la misma todo el tiempo: es la plantilla. `new Invitation('Ana')` imprimió la primera instancia, y `new Invitation('Ben')` imprimió una segunda. Las dos tienen el mismo diseño (un `guest`), pero cada una guarda su **propio** valor. Imprimir mil invitaciones más no cambiaría la plantilla para nada.
 
-Ejecútalo, y fíjate en la última línea: dos galletas hechas con la misma clase siguen siendo dos objetos distintos.
+Ejecútalo, y fíjate en la última línea: dos invitaciones hechas con la misma clase siguen siendo dos objetos distintos.
 
 ```js-run
-class Cookie {
-  constructor(flavor) {
-    this.flavor = flavor
+class Invitation {
+  constructor(guest) {
+    this.guest = guest
   }
 }
 
-const cookieOne = new Cookie('chocolate')
-const cookieTwo = new Cookie('vanilla')
+const forAna = new Invitation('Ana')
+const forBen = new Invitation('Ben')
 
-console.log(cookieOne.flavor)
-console.log(cookieTwo.flavor)
-console.log(cookieOne === cookieTwo) // false: dos galletas distintas
+console.log(forAna.guest)
+console.log(forBen.guest)
+console.log(forAna === forBen) // false: dos invitaciones distintas
 ```
 
-**Error común:** olvidar `new`. Sin él, `Cookie('chocolate')` no hace una galleta: JavaScript se detiene con un `TypeError`, porque una clase solo se puede usar con `new`.
+**Error común:** olvidar `new`. Sin él, `Invitation('Ana')` no hace una invitación: JavaScript se detiene con un `TypeError`, porque una clase solo se puede usar con `new`.
 
 ## El constructor, new y this
 
-Cada clase tiene un método especial llamado **constructor**. Es el código que corre cuando se crea una instancia nueva, y su trabajo es prepararla: aquí, guardar su sabor. Los valores que le pasas a la clase, como `'chocolate'`, van directo a los parámetros del constructor, como `flavor`.
+Cada clase tiene un método especial llamado **constructor**. Es el código que corre cuando se crea una instancia nueva, y su trabajo es prepararla: aquí, guardar a su invitado. Los valores que le pasas a la clase, como `'Ana'`, van directo a los parámetros del constructor, como `guest`.
 
-La palabra clave **`new`** es la que llama al constructor. `new Cookie('chocolate')` parece una sola acción, pero JavaScript hace cuatro cosas pequeñas:
+La palabra clave **`new`** es la que llama al constructor. `new Invitation('Ana')` parece una sola acción, pero JavaScript hace cuatro cosas pequeñas:
 
 1. Crea un objeto nuevo y vacío.
 2. Hace que **`this`** apunte a ese objeto.
-3. Ejecuta el constructor, que llena el objeto (`this.flavor = 'chocolate'`).
+3. Ejecuta el constructor, que llena el objeto (`this.guest = 'Ana'`).
 4. Regresa el objeto terminado, que normalmente guardamos en una variable.
 
 ```viz
-cookie-new
+invitation-new
 ```
 
-**Qué acaba de pasar:** el objeto se construyó frente a ti: vacío, luego apuntado por `this`, luego llenado por el constructor, y al final entregado a `cookieOne`. Por eso el constructor escribe `this.flavor` y no solo `flavor`. `flavor` es el parámetro que se recibió; `this.flavor` es la propiedad guardada en **esta galleta en particular**.
+**Qué acaba de pasar:** el objeto se construyó frente a ti: vacío, luego apuntado por `this`, luego llenado por el constructor, luego entregado a `forAna`. Por eso el constructor escribe `this.guest` y no solo `guest`. `guest` es el parámetro que se pasó; `this.guest` es la propiedad guardada en **esta invitación en particular**.
 
-**`this`** siempre quiere decir "la instancia para la que está corriendo este código". Cuando el constructor corre para `cookieOne`, `this` es `cookieOne`. Cuando corre para `cookieTwo`, `this` es `cookieTwo`. La misma línea de código, `this.flavor = flavor`, escribe en una galleta distinta cada vez, y así una sola clase puede hacer muchas instancias sin que se estorben entre sí.
+**`this`** siempre significa "la instancia para la que está corriendo este código". Cuando el constructor corre para `forAna`, `this` es `forAna`. Cuando corre para `forBen`, `this` es `forBen`. La misma línea de código, `this.guest = guest`, escribe en una invitación distinta cada vez, y así una sola clase puede hacer muchas instancias sin que se estorben entre sí.
 
-Un constructor también puede preparar propiedades que no se le pasan. Aquí, cada galleta nueva empieza sin hornear:
+Un constructor también puede preparar propiedades que no se le pasan. Aquí, cada invitación nueva empieza sin enviar:
 
 ```js-run
-class Cookie {
-  constructor(flavor) {
-    this.flavor = flavor
-    this.isBaked = false // cada galleta empieza cruda
+class Invitation {
+  constructor(guest) {
+    this.guest = guest
+    this.isSent = false // cada invitación empieza sin enviar
   }
 }
 
-const cookieOne = new Cookie('chocolate')
-console.log(cookieOne.flavor, cookieOne.isBaked)
+const forAna = new Invitation('Ana')
+console.log(forAna.guest, forAna.isSent)
 ```
 
-**Error común:** escribir `flavor = flavor` en vez de `this.flavor = flavor` en el constructor. Eso solo reasigna el parámetro, así que la galleta termina sin ningún sabor.
+**Error común:** escribir `guest = guest` en vez de `this.guest = guest` en el constructor. Eso solo reasigna el parámetro, así que la invitación se queda sin invitado.
 
 ## Métodos: getters y setters
 
-Una clase también puede tener **métodos**: funciones que pertenecen a la clase y trabajan con los datos de una instancia. Se escriben dentro de la clase, sin la palabra `function`. La mayoría de los métodos caen en dos grandes grupos. Un **getter** lee algún dato de la instancia y lo regresa. Un **setter** cambia los datos de la instancia.
+Una clase también puede tener **métodos**: funciones que pertenecen a la clase y trabajan con los datos de una instancia. Se escriben dentro de la clase, sin la palabra `function`. La mayoría de los métodos caen en dos grupos generales. Un **getter** lee algún dato de la instancia y lo regresa. Un **setter** cambia los datos de la instancia.
 
 ```js-run
-class Cookie {
-  constructor(flavor) {
-    this.flavor = flavor
+class Invitation {
+  constructor(guest) {
+    this.guest = guest
   }
 
-  getFlavor() {
-    return this.flavor
+  getGuest() {
+    return this.guest
   }
 
-  setFlavor(flavor) {
-    this.flavor = flavor
+  setGuest(guest) {
+    this.guest = guest
   }
 }
 
-const cookieOne = new Cookie('chocolate')
-const cookieTwo = new Cookie('vanilla')
+const forAna = new Invitation('Ana')
+const forBen = new Invitation('Ben')
 
-console.log(cookieOne.getFlavor())
-console.log(cookieTwo.getFlavor())
+console.log(forAna.getGuest())
+console.log(forBen.getGuest())
 
-cookieOne.setFlavor('oatmeal')
-console.log(cookieOne.getFlavor()) // cambió
-console.log(cookieTwo.getFlavor()) // no cambió
+forBen.setGuest('Benny') // el nombre estaba mal en la invitación de Ben
+console.log(forBen.getGuest()) // cambió
+console.log(forAna.getGuest()) // no cambió
 ```
 
 ```viz
-cookie-methods
+invitation-methods
 ```
 
-**Qué acaba de pasar:** `getFlavor` se escribe una sola vez, en la clase, y cada instancia lo puede usar. Cuando llamas `cookieOne.getFlavor()`, `this` es `cookieOne`; cuando llamas `cookieTwo.getFlavor()`, `this` es `cookieTwo`. Por eso el mismo método dio dos respuestas distintas, y por eso `setFlavor` en una galleta nunca tocó a la otra.
+**Qué acaba de pasar:** `getGuest` se escribe una sola vez, en la clase, y cada instancia lo puede usar. Cuando llamas `forAna.getGuest()`, `this` es `forAna`; cuando llamas `forBen.getGuest()`, `this` es `forBen`. Por eso el mismo método dio dos respuestas distintas, y por eso `setGuest` en una invitación nunca tocó a la otra.
 
-¿Para qué usar métodos, si podrías escribir directamente `cookieOne.flavor = 'oatmeal'`? Porque los métodos le dejan a la clase decidir cómo se usan sus datos. Un setter podría revisar el valor nuevo primero, o actualizar dos propiedades juntas para que nunca se contradigan. Cuando construyas una lista enlazada, un método como `push` va a mantener sincronizados el `head`, el `tail` y el `length` de la lista, algo que es fácil hacer mal si cambias esas propiedades a mano.
+¿Para qué usar métodos, si podrías escribir `forBen.guest = 'Benny'` directamente? Porque los métodos dejan que la clase decida cómo se usan sus datos. Un setter podría revisar el valor nuevo primero, o actualizar dos propiedades juntas para que nunca se contradigan. Cuando construyas una lista enlazada, un método como `push` va a mantener sincronizados el `head`, el `tail` y el `length` de la lista, algo fácil de hacer mal si cambias esas propiedades a mano.
 
-También vas a ver la sintaxis propia de JavaScript, `get` y `set`, que deja leer un método como si fuera una propiedad:
+Quizá también veas la sintaxis propia de JavaScript, `get` y `set`, que deja leer un método como si fuera una propiedad:
 
 ```js
-class Cookie {
-  constructor(flavor) {
-    this._flavor = flavor
+class Invitation {
+  constructor(guest) {
+    this._guest = guest
   }
 
-  get flavor() {
-    return this._flavor
+  get guest() {
+    return this._guest
   }
 }
 
-new Cookie('chocolate').flavor // 'chocolate', sin paréntesis
+new Invitation('Ana').guest // 'Ana', sin paréntesis
 ```
 
-En este curso escribimos los getters y setters como métodos normales, como `getFlavor()`, para que siempre quede claro cuándo corre un método.
+En este curso escribimos los getters y setters como métodos normales, como `getGuest()`, para que siempre quede claro cuándo corre un método.
 
-**Error común:** olvidar los paréntesis. `cookieOne.getFlavor` sin `()` no llama al método: te regresa la función misma.
+**Error común:** olvidar los paréntesis. `forAna.getGuest` sin `()` no llama al método: te regresa la función misma.
 
 ## Cada estructura de datos es una clase
 
-¿Por qué una lección entera sobre galletas? Porque **cada estructura de datos que vas a construir en este curso es una clase**. Una lista enlazada, una pila, una cola, un árbol, una tabla hash, un grafo: cada una es una clase con un constructor que la prepara y métodos que hacen trabajos específicos con sus datos.
+¿Por qué una lección entera sobre invitaciones? Porque **cada estructura de datos que vas a construir en este curso es una clase**. Una lista enlazada, una pila, una cola, un árbol, una tabla hash, un grafo: cada una es una clase con un constructor que la prepara y métodos que hacen trabajos específicos con sus datos.
 
 Este es un adelanto de la clase que vas a construir en el siguiente módulo. El constructor recibe un valor y crea la lista con ese primer elemento. Luego cada método hace un trabajo: `push` agrega un elemento al final, `unshift` agrega uno al principio, `insert` agrega uno en un índice, `remove` saca el elemento de un índice, `pop` quita el último y `shift` quita el primero.
 
@@ -164,8 +164,8 @@ class LinkedList {
 list-class-preview
 ```
 
-**Qué acaba de pasar:** una instancia de `LinkedList`, `line`, pasó por todos los métodos. Cada llamada hizo una cosa específica, y como los métodos pertenecen a la clase, `line.push(...)` siempre trabaja con los datos de `line`. Una segunda lista hecha con `new LinkedList(...)` tendría sus propios invitados, y sus métodos trabajarían con esos, igual que `cookieOne` y `cookieTwo`.
+**Qué acaba de pasar:** una instancia de `LinkedList`, `line`, pasó por todos los métodos. Cada llamada hizo una cosa específica, y como los métodos pertenecen a la clase, `line.push(...)` siempre trabaja con los datos de `line`. Una segunda lista hecha con `new LinkedList(...)` tendría sus propios invitados, y sus métodos trabajarían con esos, igual que `forAna` y `forBen`.
 
-Ese es el poder de las clases: cuando una estructura de datos está escrita como clase, puedes crear todas las que necesites con `new`, y cada una lleva sus propios datos y su propio juego de herramientas. Crear una instancia y llamar a un getter o setter sencillo como `getFlavor` son **O(1)**: hacen la misma pequeña cantidad de trabajo sin importar cuántas galletas existan. Los métodos que vas a escribir en los siguientes módulos no van a ser todos tan baratos, y medirlos con Big O es una parte importante del trabajo.
+Ese es el poder de las clases: cuando una estructura de datos está escrita como clase, puedes crear todas las que necesites con `new`, y cada una lleva sus propios datos y su propio juego de herramientas. Crear una instancia y llamar a un getter o setter sencillo como `getGuest` son **O(1)**: hacen la misma pequeña cantidad de trabajo sin importar cuántas invitaciones existan. Los métodos que vas a escribir en los siguientes módulos no van a ser todos tan baratos, y medirlos con Big O es una parte importante del trabajo.
 
 **Error común:** pensar que la clase _es_ los datos. La clase es solo el plano. Los datos viven en cada instancia que creas con `new`.

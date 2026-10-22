@@ -3,17 +3,17 @@
     {
       "type": "code",
       "task": {
-        "en": "Write `sumUpTo(n)` **with a loop**: start `total` at 0, add every number from 1 to n, and return the total.",
-        "es": "Escribe `sumUpTo(n)` **con un bucle**: empieza `total` en 0, suma cada número del 1 al n y devuelve el total."
+        "en": "Write `sumOneTo(n)` **with a loop**: start `runningSum` at 0, add every number from 1 to n, and return the total.",
+        "es": "Escribe `sumOneTo(n)` **con un bucle**: empieza `runningSum` en 0, suma cada número del 1 al n y devuelve el total."
       },
       "hint": {
-        "en": "`for (let i = 1; i <= n; i++) { total = total + i }`, then `return total`.",
-        "es": "`for (let i = 1; i <= n; i++) { total = total + i }`, y luego `return total`."
+        "en": "`for (let i = 1; i <= n; i++) { runningSum = runningSum + i }`, then `return runningSum`.",
+        "es": "`for (let i = 1; i <= n; i++) { runningSum = runningSum + i }`, y luego `return runningSum`."
       },
-      "starterCode": "function sumUpTo(n) {\n  let total = 0\n  // Add every number from 1 to n.\n  return total\n}\n\nconsole.log(sumUpTo(3)) // 6\n",
-      "solution": "function sumUpTo(n) {\n  let total = 0\n  for (let i = 1; i <= n; i++) {\n    total = total + i\n  }\n  return total\n}\n\nconsole.log(sumUpTo(3)) // 6\n",
+      "starterCode": "function sumOneTo(n) {\n  let runningSum = 0\n  // Add every number from 1 to n.\n  return runningSum\n}\n\nconsole.log(sumOneTo(3)) // 6\n",
+      "solution": "function sumOneTo(n) {\n  let runningSum = 0\n  for (let i = 1; i <= n; i++) {\n    runningSum = runningSum + i\n  }\n  return runningSum\n}\n\nconsole.log(sumOneTo(3)) // 6\n",
       "kind": "function",
-      "functionName": "sumUpTo",
+      "functionName": "sumOneTo",
       "tests": [
         {
           "args": [3],
@@ -36,17 +36,17 @@
     {
       "type": "code",
       "task": {
-        "en": "Now write `sumUpToFormula(n)` **without a loop**, using the formula n × (n + 1) ÷ 2.",
-        "es": "Ahora escribe `sumUpToFormula(n)` **sin bucle**, con la fórmula n × (n + 1) ÷ 2."
+        "en": "Now write `sumOneToFormula(n)` **without a loop**, using the formula n × (n + 1) ÷ 2.",
+        "es": "Ahora escribe `sumOneToFormula(n)` **sin bucle**, con la fórmula n × (n + 1) ÷ 2."
       },
       "hint": {
         "en": "One line: `return n * (n + 1) / 2`.",
         "es": "Una sola línea: `return n * (n + 1) / 2`."
       },
-      "starterCode": "function sumUpToFormula(n) {\n  // One line of math, no loop.\n  return n\n}\n\nconsole.log(sumUpToFormula(3)) // 6\n",
-      "solution": "function sumUpToFormula(n) {\n  return n * (n + 1) / 2\n}\n\nconsole.log(sumUpToFormula(3)) // 6\n",
+      "starterCode": "function sumOneToFormula(n) {\n  // One line of math, no loop.\n  return n\n}\n\nconsole.log(sumOneToFormula(3)) // 6\n",
+      "solution": "function sumOneToFormula(n) {\n  return n * (n + 1) / 2\n}\n\nconsole.log(sumOneToFormula(3)) // 6\n",
       "kind": "function",
-      "functionName": "sumUpToFormula",
+      "functionName": "sumOneToFormula",
       "tests": [
         {
           "args": [3],

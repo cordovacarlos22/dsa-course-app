@@ -52,14 +52,14 @@ insert(index, value) {
   // 1. if index < 0 or index > length, return false
   // 2. index 0? unshift. index === length? push. Then return true
   // 3. make a new node
-  // 4. temp = the node before the spot: this.get(index - 1)
-  // 5. the new node's next points to temp's next
-  // 6. temp's next points to the new node
+  // 4. nodeBefore = the node before the spot: this.get(index - 1)
+  // 5. the new node's next points to nodeBefore's next
+  // 6. nodeBefore's next points to the new node
   // 7. add 1 to length, return true
 }
 ```
 
-Step 4 asks for the node **before** the spot, at `index - 1`, because that's the node whose `next` has to change. You can't go back from the node at `index`. Steps 5 and 6 are the order you learned with unshift: **link the new node first**, while `temp.next` still points to the rest of the line, and only then point `temp` at the new node.
+Step 4 asks for the node **before** the spot, at `index - 1`, because that's the node whose `next` has to change. You can't go back from the node at `index`. Steps 5 and 6 are the order you learned with unshift: **link the new node first**, while `nodeBefore.next` still points to the rest of the line, and only then point `nodeBefore` at the new node.
 
 ```viz
 linked-list-insert-plan
@@ -67,17 +67,17 @@ linked-list-insert-plan
 
 **What just happened:** index 2 passed the range check and wasn't an end. A node for Eve was made, and `get(1)` walked to Ben, the node before the spot. Eve's `next` was pointed at Cleo, and only then was Ben's `next` pointed at Eve. The length went up to 5, and insert returned `true`.
 
-**Common mistake:** doing step 6 before step 5. After `temp.next = newNode`, nothing points to Cleo anymore, so `newNode.next = temp.next` points Eve's node at itself, and Cleo and Dev are lost.
+**Common mistake:** doing step 6 before step 5. After `nodeBefore.next = nodeToAdd`, nothing points to Cleo anymore, so `nodeToAdd.next = nodeBefore.next` points Eve's node at itself, and Cleo and Dev are lost.
 
 ## Write the code
 
 Step 4: the common case first. In the middle, it's steps 3 to 7:
 
 ```js
-const newNode = new Node(value)
-const temp = this.get(index - 1)
-newNode.next = temp.next
-temp.next = newNode
+const nodeToAdd = new Node(value)
+const nodeBefore = this.get(index - 1)
+nodeToAdd.next = nodeBefore.next
+nodeBefore.next = nodeToAdd
 this.length++
 return true
 ```
@@ -106,34 +106,34 @@ class LinkedList {
     this.tail = null
     this.length = 0
     if (value !== undefined) {
-      const newNode = new Node(value)
-      this.head = newNode
+      const firstNode = new Node(value)
+      this.head = firstNode
       this.tail = this.head
       this.length = 1
     }
   }
 
   push(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      this.tail.next = newNode
-      this.tail = newNode
+      this.tail.next = nodeToAdd
+      this.tail = nodeToAdd
     }
     this.length++
     return this
   }
 
   unshift(value) {
-    const newNode = new Node(value)
+    const nodeToAdd = new Node(value)
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = nodeToAdd
+      this.tail = nodeToAdd
     } else {
-      newNode.next = this.head
-      this.head = newNode
+      nodeToAdd.next = this.head
+      this.head = nodeToAdd
     }
     this.length++
     return this
@@ -143,11 +143,11 @@ class LinkedList {
     if (index < 0 || index >= this.length) {
       return undefined
     }
-    let temp = this.head
+    let current = this.head
     for (let i = 0; i < index; i++) {
-      temp = temp.next
+      current = current.next
     }
-    return temp
+    return current
   }
 
   insert(index, value) {
@@ -162,20 +162,20 @@ class LinkedList {
       this.push(value)
       return true
     }
-    const newNode = new Node(value)
-    const temp = this.get(index - 1)
-    newNode.next = temp.next
-    temp.next = newNode
+    const nodeToAdd = new Node(value)
+    const nodeBefore = this.get(index - 1)
+    nodeToAdd.next = nodeBefore.next
+    nodeBefore.next = nodeToAdd
     this.length++
     return true
   }
 
   toArray() {
     const values = []
-    let temp = this.head
-    while (temp !== null) {
-      values.push(temp.value)
-      temp = temp.next
+    let current = this.head
+    while (current !== null) {
+      values.push(current.value)
+      current = current.next
     }
     return values
   }

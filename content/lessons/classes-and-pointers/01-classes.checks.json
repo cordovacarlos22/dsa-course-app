@@ -3,21 +3,21 @@
     {
       "type": "choice",
       "question": {
-        "en": "After `const cookieOne = new Cookie('chocolate')`, what is `cookieOne`?",
-        "es": "Después de `const cookieOne = new Cookie('chocolate')`, ¿qué es `cookieOne`?"
+        "en": "After `const forAna = new Invitation('Ana')`, what is `forAna`?",
+        "es": "Después de `const forAna = new Invitation('Ana')`, ¿qué es `forAna`?"
       },
       "options": [
         {
-          "en": "The `Cookie` class itself",
-          "es": "La clase `Cookie` misma"
+          "en": "The `Invitation` class itself",
+          "es": "La clase `Invitation` misma"
         },
         {
           "en": "The constructor",
           "es": "El constructor"
         },
         {
-          "en": "An instance of the `Cookie` class",
-          "es": "Una instancia de la clase `Cookie`"
+          "en": "An instance of the `Invitation` class",
+          "es": "Una instancia de la clase `Invitation`"
         },
         {
           "en": "A method of the class",
@@ -26,12 +26,12 @@
       ],
       "answer": 2,
       "hint": {
-        "en": "The class is the cutter. What does the cutter make?",
-        "es": "La clase es el molde. ¿Qué hace el molde?"
+        "en": "The class is the template. What does the template print?",
+        "es": "La clase es la plantilla. ¿Qué imprime la plantilla?"
       },
       "explanation": {
-        "en": "`Cookie` is the class (the cutter), and `new` stamped out one instance of it (a cookie). `cookieOne` points to that instance.",
-        "es": "`Cookie` es la clase (el molde), y `new` hizo una instancia de ella (una galleta). `cookieOne` apunta a esa instancia."
+        "en": "`Invitation` is the class (the template), and `new` printed one instance of it (an invitation). `forAna` points to that instance.",
+        "es": "`Invitation` es la clase (la plantilla), y `new` imprimió una instancia de ella (una invitación). `forAna` apunta a esa instancia."
       }
     },
     {
@@ -191,12 +191,12 @@
       ],
       "answer": 1,
       "hint": {
-        "en": "Think of `cookieOne.setFlavor(...)` and `cookieTwo`.",
-        "es": "Piensa en `cookieOne.setFlavor(...)` y `cookieTwo`."
+        "en": "Think of `forBen.setGuest(...)` and `forAna`.",
+        "es": "Piensa en `forBen.setGuest(...)` y `forAna`."
       },
       "explanation": {
-        "en": "The class is shared, but the data isn't. `a.push` runs with `this` pointing at `a`, so only `a` changes, just like `setFlavor` on one cookie.",
-        "es": "La clase se comparte, pero los datos no. `a.push` corre con `this` apuntando a `a`, así que solo cambia `a`, igual que `setFlavor` en una galleta."
+        "en": "The class is shared, but the data isn't. `a.push` runs with `this` pointing at `a`, so only `a` changes, just like `setGuest` on one invitation.",
+        "es": "La clase se comparte, pero los datos no. `a.push` corre con `this` apuntando a `a`, así que solo cambia `a`, igual que `setGuest` en una invitación."
       }
     }
   ]

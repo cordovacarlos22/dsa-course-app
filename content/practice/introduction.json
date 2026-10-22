@@ -140,26 +140,26 @@
       },
       "options": [
         {
-          "en": "`tail = newNode`, then `tail.next = newNode`",
-          "es": "`tail = newNode` y luego `tail.next = newNode`"
+          "en": "`tail = nodeToAdd`, then `tail.next = nodeToAdd`",
+          "es": "`tail = nodeToAdd` y luego `tail.next = nodeToAdd`"
         },
         {
-          "en": "`head.next = newNode`, then `head = newNode`",
-          "es": "`head.next = newNode` y luego `head = newNode`"
+          "en": "`head.next = nodeToAdd`, then `head = nodeToAdd`",
+          "es": "`head.next = nodeToAdd` y luego `head = nodeToAdd`"
         },
         {
-          "en": "`tail.next = newNode`, then `tail = newNode`",
-          "es": "`tail.next = newNode` y luego `tail = newNode`"
+          "en": "`tail.next = nodeToAdd`, then `tail = nodeToAdd`",
+          "es": "`tail.next = nodeToAdd` y luego `tail = nodeToAdd`"
         },
         {
-          "en": "`newNode.next = tail`, then `head = tail`",
-          "es": "`newNode.next = tail` y luego `head = tail`"
+          "en": "`nodeToAdd.next = tail`, then `head = tail`",
+          "es": "`nodeToAdd.next = tail` y luego `head = tail`"
         }
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "First the current last node points to the new node (`tail.next = newNode`); then `tail` moves to the new node (`tail = newNode`). Doing it in the other order would lose the link.",
-        "es": "Primero el último nodo actual apunta al nodo nuevo (`tail.next = newNode`); luego `tail` se mueve al nodo nuevo (`tail = newNode`). Si lo haces en el otro orden, pierdes el enlace."
+        "en": "First the current last node points to the new node (`tail.next = nodeToAdd`); then `tail` moves to the new node (`tail = nodeToAdd`). Doing it in the other order would lose the link.",
+        "es": "Primero el último nodo actual apunta al nodo nuevo (`tail.next = nodeToAdd`); luego `tail` se mueve al nodo nuevo (`tail = nodeToAdd`). Si lo haces en el otro orden, pierdes el enlace."
       }
     },
     {

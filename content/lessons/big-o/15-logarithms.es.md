@@ -65,10 +65,10 @@ Cuenta las mitades para listas cada vez más grandes. Fíjate qué tan despacio 
 
 ```js-run
 function halvingsToOne(n) {
-  let left = n
+  let remaining = n
   let steps = 0
-  while (left > 1) {
-    left = Math.floor(left / 2)
+  while (remaining > 1) {
+    remaining = Math.floor(remaining / 2)
     steps++
   }
   return steps

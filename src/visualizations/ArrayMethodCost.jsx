@@ -101,9 +101,9 @@ const SCENES = {
     },
     {
       captionKey: 'reduce',
-      code: 'guests.reduce((total, name) => total + name.length, 0)',
+      code: 'guests.reduce((letters, name) => letters + name.length, 0)',
       rows: [{ items: FIVE, states: boxes(0, 5, 'done') }],
-      value: FIVE.reduce((total, name) => total + name.length, 0),
+      value: FIVE.reduce((letters, name) => letters + name.length, 0),
       work: 5,
     },
     { captionKey: 'summary', code: 'guests', rows: [{ items: FIVE }] },

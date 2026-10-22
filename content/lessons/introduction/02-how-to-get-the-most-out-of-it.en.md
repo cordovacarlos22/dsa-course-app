@@ -66,9 +66,9 @@ let tail = firstNode
 console.log('Do head and tail point to the same node?', head === tail)
 
 // Add a new node to the end of the chain:
-const newNode = { value: 7, next: null }
-tail.next = newNode // 1. the current last node points to the new one
-tail = newNode // 2. tail moves to the new node
+const nodeToAdd = { value: 7, next: null }
+tail.next = nodeToAdd // 1. the current last node points to the new one
+tail = nodeToAdd // 2. tail moves to the new node
 
 console.log('head points to the node with', head.value)
 console.log('tail points to the node with', tail.value)

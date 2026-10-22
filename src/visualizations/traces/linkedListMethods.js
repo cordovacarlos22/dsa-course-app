@@ -17,7 +17,7 @@ export function listOf(values) {
   return { head, tail, length: values.length }
 }
 
-// Draws the model. `extra` are pointers like temp and newNode (label →
+// Draws the model. `extra` are pointers like current and nodeToAdd (label →
 // node or null). Nodes that can't be reached from head but that something
 // still points to are drawn as "not in the line".
 export function diagramOf(list, extra = {}, states = {}) {
@@ -88,13 +88,13 @@ export const linkedListPush = {
   items: () => null,
   method: true,
   code: `push(value) {
-  const newNode = new Node(value)
+  const nodeToAdd = new Node(value)
   if (!this.head) {
-    this.head = newNode
-    this.tail = newNode
+    this.head = nodeToAdd
+    this.tail = nodeToAdd
   } else {
-    this.tail.next = newNode
-    this.tail = newNode
+    this.tail.next = nodeToAdd
+    this.tail = nodeToAdd
   }
   this.length++
   return this
@@ -105,7 +105,7 @@ export const linkedListPush = {
   },
   *run({ values, value }) {
     const list = listOf(values)
-    const newNode = { value, next: null }
+    const nodeToAdd = { value, next: null }
     const isNew = { [value]: 'new' }
     const vars = () => [['value', quoted(value)]]
     const params = {
@@ -115,10 +115,10 @@ export const linkedListPush = {
     }
     yield {
       line: 2,
-      captionKey: 'newNode',
+      captionKey: 'nodeToAdd',
       params,
       vars: vars(),
-      list: diagramOf(list, { newNode }, isNew),
+      list: diagramOf(list, { nodeToAdd }, isNew),
     }
     if (!list.head) {
       yield {
@@ -126,23 +126,23 @@ export const linkedListPush = {
         captionKey: 'empty',
         params,
         vars: vars(),
-        list: diagramOf(list, { newNode }, isNew),
+        list: diagramOf(list, { nodeToAdd }, isNew),
       }
-      list.head = newNode
+      list.head = nodeToAdd
       yield {
         line: 4,
         captionKey: 'emptyHead',
         params,
         vars: vars(),
-        list: diagramOf(list, { newNode }, isNew),
+        list: diagramOf(list, { nodeToAdd }, isNew),
       }
-      list.tail = newNode
+      list.tail = nodeToAdd
       yield {
         line: 5,
         captionKey: 'emptyTail',
         params,
         vars: vars(),
-        list: diagramOf(list, { newNode }, isNew),
+        list: diagramOf(list, { nodeToAdd }, isNew),
       }
     } else {
       yield {
@@ -150,23 +150,23 @@ export const linkedListPush = {
         captionKey: 'notEmpty',
         params: { ...params, head: list.head.value },
         vars: vars(),
-        list: diagramOf(list, { newNode }, isNew),
+        list: diagramOf(list, { nodeToAdd }, isNew),
       }
-      list.tail.next = newNode
+      list.tail.next = nodeToAdd
       yield {
         line: 7,
         captionKey: 'link',
         params,
         vars: vars(),
-        list: diagramOf(list, { newNode }, isNew),
+        list: diagramOf(list, { nodeToAdd }, isNew),
       }
-      list.tail = newNode
+      list.tail = nodeToAdd
       yield {
         line: 8,
         captionKey: 'moveTail',
         params,
         vars: vars(),
-        list: diagramOf(list, { newNode }, isNew),
+        list: diagramOf(list, { nodeToAdd }, isNew),
       }
     }
     list.length++
@@ -195,13 +195,13 @@ export const linkedListUnshift = {
   items: () => null,
   method: true,
   code: `unshift(value) {
-  const newNode = new Node(value)
+  const nodeToAdd = new Node(value)
   if (!this.head) {
-    this.head = newNode
-    this.tail = newNode
+    this.head = nodeToAdd
+    this.tail = nodeToAdd
   } else {
-    newNode.next = this.head
-    this.head = newNode
+    nodeToAdd.next = this.head
+    this.head = nodeToAdd
   }
   this.length++
   return this
@@ -212,7 +212,7 @@ export const linkedListUnshift = {
   },
   *run({ values, value }) {
     const list = listOf(values)
-    const newNode = { value, next: null }
+    const nodeToAdd = { value, next: null }
     const isNew = { [value]: 'new' }
     const vars = () => [['value', quoted(value)]]
     const params = {
@@ -222,10 +222,10 @@ export const linkedListUnshift = {
     }
     yield {
       line: 2,
-      captionKey: 'newNode',
+      captionKey: 'nodeToAdd',
       params,
       vars: vars(),
-      list: diagramOf(list, { newNode }, isNew),
+      list: diagramOf(list, { nodeToAdd }, isNew),
     }
     if (!list.head) {
       yield {
@@ -233,23 +233,23 @@ export const linkedListUnshift = {
         captionKey: 'empty',
         params,
         vars: vars(),
-        list: diagramOf(list, { newNode }, isNew),
+        list: diagramOf(list, { nodeToAdd }, isNew),
       }
-      list.head = newNode
+      list.head = nodeToAdd
       yield {
         line: 4,
         captionKey: 'emptyHead',
         params,
         vars: vars(),
-        list: diagramOf(list, { newNode }, isNew),
+        list: diagramOf(list, { nodeToAdd }, isNew),
       }
-      list.tail = newNode
+      list.tail = nodeToAdd
       yield {
         line: 5,
         captionKey: 'emptyTail',
         params,
         vars: vars(),
-        list: diagramOf(list, { newNode }, isNew),
+        list: diagramOf(list, { nodeToAdd }, isNew),
       }
     } else {
       yield {
@@ -257,23 +257,23 @@ export const linkedListUnshift = {
         captionKey: 'notEmpty',
         params,
         vars: vars(),
-        list: diagramOf(list, { newNode }, isNew),
+        list: diagramOf(list, { nodeToAdd }, isNew),
       }
-      newNode.next = list.head
+      nodeToAdd.next = list.head
       yield {
         line: 7,
         captionKey: 'link',
         params,
         vars: vars(),
-        list: diagramOf(list, { newNode }, isNew),
+        list: diagramOf(list, { nodeToAdd }, isNew),
       }
-      list.head = newNode
+      list.head = nodeToAdd
       yield {
         line: 8,
         captionKey: 'moveHead',
         params,
         vars: vars(),
-        list: diagramOf(list, { newNode }, isNew),
+        list: diagramOf(list, { nodeToAdd }, isNew),
       }
     }
     list.length++
@@ -305,20 +305,20 @@ export const linkedListPop = {
   if (!this.head) {
     return undefined
   }
-  let temp = this.head
-  let pre = this.head
-  while (temp.next !== null) {
-    pre = temp
-    temp = temp.next
+  let current = this.head
+  let previous = this.head
+  while (current.next !== null) {
+    previous = current
+    current = current.next
   }
-  this.tail = pre
+  this.tail = previous
   this.tail.next = null
   this.length--
   if (this.length === 0) {
     this.head = null
     this.tail = null
   }
-  return temp
+  return current
 }`,
   play: (LinkedList, { values }) => {
     const list = realList(LinkedList, values)
@@ -326,9 +326,9 @@ export const linkedListPop = {
   },
   *run({ values }) {
     const list = listOf(values)
-    const vars = (temp, pre) => [
-      ['temp', temp ? temp.value : '-'],
-      ['pre', pre ? pre.value : '-'],
+    const vars = (current, previous) => [
+      ['current', current ? current.value : '-'],
+      ['previous', previous ? previous.value : '-'],
     ]
     if (!list.head) {
       yield {
@@ -356,72 +356,72 @@ export const linkedListPop = {
       vars: vars(null, null),
       list: diagramOf(list),
     }
-    let temp = list.head
-    let pre = list.head
+    let current = list.head
+    let previous = list.head
     let visited = 1
     const walking = () => {
       const states = {}
-      for (let node = list.head; node !== temp; node = node.next) {
+      for (let node = list.head; node !== current; node = node.next) {
         states[node.value] = 'done'
       }
-      states[temp.value] = 'active'
-      return diagramOf(list, { temp, pre }, states)
+      states[current.value] = 'active'
+      return diagramOf(list, { current, previous }, states)
     }
     yield {
       line: 6,
       captionKey: 'start',
-      params: { name: temp.value },
+      params: { name: current.value },
       ops: visited,
-      vars: vars(temp, pre),
+      vars: vars(current, previous),
       list: walking(),
     }
-    while (temp.next !== null) {
-      pre = temp
+    while (current.next !== null) {
+      previous = current
       yield {
         line: 8,
         captionKey: 'movePre',
-        params: { name: temp.value, next: temp.next.value },
+        params: { name: current.value, next: current.next.value },
         ops: visited,
-        vars: vars(temp, pre),
+        vars: vars(current, previous),
         list: walking(),
       }
-      temp = temp.next
+      current = current.next
       visited++
       yield {
         line: 9,
         captionKey: 'moveTemp',
-        params: { name: temp.value },
+        params: { name: current.value },
         ops: visited,
-        vars: vars(temp, pre),
+        vars: vars(current, previous),
         list: walking(),
       }
     }
     yield {
       line: 7,
       captionKey: values.length === 1 ? 'loopSkipped' : 'loopEnds',
-      params: { name: temp.value, pre: pre.value },
+      params: { name: current.value, previous: previous.value },
       ops: visited,
-      vars: vars(temp, pre),
+      vars: vars(current, previous),
       list: walking(),
     }
-    const gone = { [temp.value]: 'removed' }
-    list.tail = pre
+    const gone = { [current.value]: 'removed' }
+    list.tail = previous
     yield {
       line: 11,
       captionKey: values.length === 1 ? 'tailSame' : 'moveTail',
-      params: { name: pre.value },
+      params: { name: previous.value },
       ops: visited,
-      vars: vars(temp, pre),
-      list: diagramOf(list, { temp, pre }),
+      vars: vars(current, previous),
+      list: diagramOf(list, { current, previous }),
     }
     list.tail.next = null
     yield {
       line: 12,
       captionKey: values.length === 1 ? 'cutNothing' : 'cut',
-      params: { name: temp.value },
+      params: { name: current.value },
       ops: visited,
-      vars: vars(temp, pre),
-      list: diagramOf(list, { temp }, values.length === 1 ? {} : gone),
+      vars: vars(current, previous),
+      list: diagramOf(list, { current }, values.length === 1 ? {} : gone),
     }
     list.length--
     yield {
@@ -429,32 +429,32 @@ export const linkedListPop = {
       captionKey: 'length',
       params: { length: list.length },
       ops: visited,
-      vars: vars(temp, pre),
-      list: diagramOf(list, { temp }, values.length === 1 ? {} : gone),
+      vars: vars(current, previous),
+      list: diagramOf(list, { current }, values.length === 1 ? {} : gone),
     }
     if (list.length === 0) {
       yield {
         line: 14,
         captionKey: 'nowEmpty',
         ops: visited,
-        vars: vars(temp, pre),
-        list: diagramOf(list, { temp }),
+        vars: vars(current, previous),
+        list: diagramOf(list, { current }),
       }
       list.head = null
       yield {
         line: 15,
         captionKey: 'headNull',
         ops: visited,
-        vars: vars(temp, pre),
-        list: diagramOf(list, { temp }, gone),
+        vars: vars(current, previous),
+        list: diagramOf(list, { current }, gone),
       }
       list.tail = null
       yield {
         line: 16,
         captionKey: 'tailNull',
         ops: visited,
-        vars: vars(temp, pre),
-        list: diagramOf(list, { temp }, gone),
+        vars: vars(current, previous),
+        list: diagramOf(list, { current }, gone),
       }
     } else {
       yield {
@@ -462,18 +462,18 @@ export const linkedListPop = {
         captionKey: 'notZero',
         params: { length: list.length },
         ops: visited,
-        vars: vars(temp, pre),
-        list: diagramOf(list, { temp }, gone),
+        vars: vars(current, previous),
+        list: diagramOf(list, { current }, gone),
       }
     }
     yield {
       line: 18,
       captionKey: 'return',
-      params: { name: temp.value, count: visited },
+      params: { name: current.value, count: visited },
       ops: visited,
-      vars: vars(temp, pre),
-      list: diagramOf(list, { temp }, gone),
-      result: resultOf(list, temp),
+      vars: vars(current, previous),
+      list: diagramOf(list, { current }, gone),
+      result: resultOf(list, current),
     }
   },
 }
@@ -488,14 +488,14 @@ export const linkedListShift = {
   if (!this.head) {
     return undefined
   }
-  let temp = this.head
+  let oldHead = this.head
   this.head = this.head.next
-  temp.next = null
+  oldHead.next = null
   this.length--
   if (this.length === 0) {
     this.tail = null
   }
-  return temp
+  return oldHead
 }`,
   play: (LinkedList, { values }) => {
     const list = realList(LinkedList, values)
@@ -503,7 +503,7 @@ export const linkedListShift = {
   },
   *run({ values }) {
     const list = listOf(values)
-    const vars = (temp) => [['temp', temp ? temp.value : '-']]
+    const vars = (oldHead) => [['oldHead', oldHead ? oldHead.value : '-']]
     if (!list.head) {
       yield {
         line: 2,
@@ -527,64 +527,64 @@ export const linkedListShift = {
       vars: vars(null),
       list: diagramOf(list),
     }
-    const temp = list.head
-    const gone = { [temp.value]: 'removed' }
+    const oldHead = list.head
+    const gone = { [oldHead.value]: 'removed' }
     yield {
       line: 5,
-      captionKey: 'temp',
-      params: { name: temp.value },
-      vars: vars(temp),
-      list: diagramOf(list, { temp }, { [temp.value]: 'active' }),
+      captionKey: 'oldHead',
+      params: { name: oldHead.value },
+      vars: vars(oldHead),
+      list: diagramOf(list, { oldHead }, { [oldHead.value]: 'active' }),
     }
     list.head = list.head.next
     yield {
       line: 6,
       captionKey: list.head ? 'moveHead' : 'headNull',
-      params: { name: temp.value, next: list.head ? list.head.value : null },
-      vars: vars(temp),
-      list: diagramOf(list, { temp }, gone),
+      params: { name: oldHead.value, next: list.head ? list.head.value : null },
+      vars: vars(oldHead),
+      list: diagramOf(list, { oldHead }, gone),
     }
-    temp.next = null
+    oldHead.next = null
     yield {
       line: 7,
       captionKey: values.length === 1 ? 'cutNothing' : 'cut',
-      params: { name: temp.value },
-      vars: vars(temp),
-      list: diagramOf(list, { temp }, gone),
+      params: { name: oldHead.value },
+      vars: vars(oldHead),
+      list: diagramOf(list, { oldHead }, gone),
     }
     list.length--
     yield {
       line: 8,
       captionKey: 'length',
       params: { length: list.length },
-      vars: vars(temp),
-      list: diagramOf(list, { temp }, gone),
+      vars: vars(oldHead),
+      list: diagramOf(list, { oldHead }, gone),
     }
     if (list.length === 0) {
       list.tail = null
       yield {
         line: 10,
         captionKey: 'tailNull',
-        params: { name: temp.value },
-        vars: vars(temp),
-        list: diagramOf(list, { temp }, gone),
+        params: { name: oldHead.value },
+        vars: vars(oldHead),
+        list: diagramOf(list, { oldHead }, gone),
       }
     } else {
       yield {
         line: 9,
         captionKey: 'notZero',
         params: { length: list.length },
-        vars: vars(temp),
-        list: diagramOf(list, { temp }, gone),
+        vars: vars(oldHead),
+        list: diagramOf(list, { oldHead }, gone),
       }
     }
     yield {
       line: 12,
       captionKey: 'return',
-      params: { name: temp.value },
-      vars: vars(temp),
-      list: diagramOf(list, { temp }, gone),
-      result: resultOf(list, temp),
+      params: { name: oldHead.value },
+      vars: vars(oldHead),
+      list: diagramOf(list, { oldHead }, gone),
+      result: resultOf(list, oldHead),
     }
   },
 }
