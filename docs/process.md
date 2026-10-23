@@ -49,7 +49,7 @@ Dependabot opens PRs for outdated or vulnerable dependencies every week. Those P
 
 ### 4. Test
 
-- **Review:** the Reviewer agent reviews the diff. A change that touches a `security` area also gets a `security-audit` review.
+- **Review:** the Reviewer agent (`.claude/agents/reviewer.md`) reviews every PR, Dependabot's included, in a Claude Code session on Carlos's computer (on his Claude plan, so a review costs nothing extra). It checks the issue's acceptance criteria, runs the checks on the PR's code in a separate worktree, and uses a checklist for each kind of change: code, content (including the originality check against the course sources), dependency updates, and CI. A change that touches a `security` area also gets a `security-audit` review. It posts one comment: **Verdict: approve** or **Verdict: changes needed**, the blocking items, optional nitpicks and what it checked. Then it moves the issue to **QA** or back to **In progress**.
 - **QA:** the QA agent tests the PR's build in the QA environment (the Docker `preview` service, or the staging site after a merge) and posts a QA report on the PR: what it tested, what passed, and bugs filed as new issues.
 - **Carlos** tests the staging site when he wants to and approves the production release.
 
