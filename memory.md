@@ -21,6 +21,8 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Decisions
 
+- 2026-10-23: **Infisical Cloud holds every secret** (Carlos chose it over Doppler and OpenBao). Infisical is open source with a free cloud tier and can be self-hosted later; Doppler is hosted-only and closed source; OpenBao (the open-source Vault fork) would need a server Carlos runs, unseals and backs up himself. It gets set up as #51, right before the release pipeline (#39), so the first real secret (the Vercel token) goes straight in. GitHub Actions logs in with OIDC, so no long-lived token is stored in GitHub. The same day, GitHub secret scanning, push protection and Dependabot security updates were turned on ("non-provider patterns" needs paid GitHub Secret Protection, so gitleaks in CI covers it), a full gitleaks scan of all 208 commits found nothing, and `main` now requires **CI passed** and **CodeQL**.
+
 - 2026-10-23: **A big-tech delivery process** (Carlos: "develop software more securely… like a big tech company"). Every change goes plan → code → build → test → ship (`docs/process.md`): GitHub Issues from templates on a "DSA course app" board (Carlos chose GitHub Projects over Jira), GitHub Actions for build and tests (kept over Jenkins/GitLab), a Docker dev and QA environment, a staging site, a QA agent and his own sign-off before production. Roles live in `.claude/agents/` (product-manager, reviewer, qa). The planned work runs through it as issues #37–#46. Agents share Carlos's GitHub account for now, so the reviewer posts its verdict as a comment; a bot account is issue #40.
 
 - 2026-10-11 (replaced the same day, see below): **Lessons are visual-first** (an animation opens every step, 1–3 sentences after it), **one story per module** (Big O: guest list), and **beginner loops** (`for (let i = 0; …; i++)`, no `for...of`/`forEach`). Reason: Carlos's students prefer visuals and many only know basic JavaScript.
@@ -243,7 +245,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Next
 
-- **Process first (2026-10-23):** #37 CI pipeline (e2e + security), #38 Docker, #39 release pipeline (staging + approval), #40 bot account, then #41 source paths, #42 code-box replay, #43–#46 deeper modules. Carlos: run `gh auth refresh -s project` so the board can be created.
+- **Process first (2026-10-23):** #37 CI pipeline (e2e + security, PR #50), #38 Docker, #51 Infisical, #39 release pipeline (staging + approval), #40 bot account, then #41 source paths, #42 code-box replay, #43–#46 deeper modules.
 
 - After `fix/tool-findings` merges: check production's headers (`curl -sI https://dsa-course-app.vercel.app/`) and run the app once in a browser for CSP errors.
 - #34 and #35 (the theory pass) are merged.
