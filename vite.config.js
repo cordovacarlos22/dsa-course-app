@@ -32,5 +32,11 @@ export default defineConfig({
     // jsdom gives tests a fake browser (document, window) to render React into.
     environment: 'jsdom',
     setupFiles: './src/test/setup.js',
+    // npm run test:coverage: how much of the app code the unit tests run.
+    coverage: {
+      provider: 'v8',
+      include: ['src/**/*.{js,jsx}'],
+      reporter: ['text-summary', 'html'],
+    },
   },
 })

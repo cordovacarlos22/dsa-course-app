@@ -21,6 +21,9 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Decisions
 
+- 2026-10-23: **Infisical Cloud holds every secret** (Carlos chose it over Doppler and OpenBao). Infisical is open source with a free cloud tier and can be self-hosted later; Doppler is hosted-only and closed source; OpenBao (the open-source Vault fork) would need a server Carlos runs, unseals and backs up himself. It gets set up as #51, right before the release pipeline (#39), so the first real secret (the Vercel token) goes straight in. GitHub Actions logs in with OIDC, so no long-lived token is stored in GitHub. The same day, GitHub secret scanning, push protection and Dependabot security updates were turned on ("non-provider patterns" needs paid GitHub Secret Protection, so gitleaks in CI covers it), a full gitleaks scan of all 208 commits found nothing, and `main` now requires **CI passed** and **CodeQL**.
+- 2026-10-23: **zod 3 → 4.6.6** (`scripts/content-schema.js` only, never shipped to the browser) to fix a high advisory (GHSA-mrhx-c7xc-m3w5) that made the new dependency audit fail #50. 4.6.6 is 12 days old, under the 14-day rule: a security exception. The schema stayed the same; zod 4 now also requires `expected` in every function test, which all content already has.
+
 - 2026-10-23: **A big-tech delivery process** (Carlos: "develop software more securely… like a big tech company"). Every change goes plan → code → build → test → ship (`docs/process.md`): GitHub Issues from templates on a "DSA course app" board (Carlos chose GitHub Projects over Jira), GitHub Actions for build and tests (kept over Jenkins/GitLab), a Docker dev and QA environment, a staging site, a QA agent and his own sign-off before production. Roles live in `.claude/agents/` (product-manager, reviewer, qa). The planned work runs through it as issues #37–#46. Agents share Carlos's GitHub account for now, so the reviewer posts its verdict as a comment; a bot account is issue #40.
 
 - 2026-10-11 (replaced the same day, see below): **Lessons are visual-first** (an animation opens every step, 1–3 sentences after it), **one story per module** (Big O: guest list), and **beginner loops** (`for (let i = 0; …; i++)`, no `for...of`/`forEach`). Reason: Carlos's students prefer visuals and many only know basic JavaScript.
@@ -234,11 +237,16 @@ Agents: read this at the start of every session and update it at the end (see `A
   - **Classes & Pointers:** an invitation template (`Invitation`, `forAna`/`forBen`, `getGuest`/`setGuest`) replaces the cookie cutter; animations `invitation-template`, `-new`, `-methods`; Build it "The Invitation Class".
   - **Big O / Problem Solving / Arrays & Objects / Introduction:** `sumOneTo` (`runningSum`), `arriveAndLeave`, `printSeats`, `setChairs`/`printPrizes` (floor 10, ceiling 3), `withPlusOnes`, `totalOrders`/`doubleOrders`, `low`/`high`/`mid`, `addNumbers(first, second)`, `countCharacters(text)`, `isLetterOrDigit`, `guestNames`, `timesTwo`; animations `trace-print-seats`, `trace-double-orders`, `trace-count-characters`.
   - **Checked:** the name check finds only standard names, no 8-word prose matches, Chrome under `vercel.json`'s headers on all 46 lessons of the changed modules (495 step views), 333 quiz answers and 21 exercises in three setups, 0 problems.
+- 2026-10-23, `ci/37-pipeline` (#37):
+  - **CI split into jobs:** lint and format, unit tests with coverage, content, build, end-to-end (a matrix of 3 projects against the built `dist/`), security (`npm audit --audit-level=high` and gitleaks 8.30.1 with a checksum), and a final **CI passed** job for branch protection. CodeQL runs in its own workflow; Dependabot is weekly with a 14-day cooldown.
+  - **Pinned and limited:** every action is pinned to a commit SHA, and the token is read-only except CodeQL's `security-events: write`.
+  - **End-to-end in the repo:** Playwright (`e2e/*.e2e.js`, `playwright.config.js`) replaces the scratchpad browser checks. Every lesson step (animations played, snippets run), every quiz and every exercise, at 1280 en, 375 es and 320 en with reduced motion; no CSP violations or page errors; no sideways scroll. 219 tests pass in about 2 minutes. `scripts/serve-preview.mjs` serves `dist/` with `vercel.json`'s headers for e2e and QA.
+  - **Exercises on phones:** the tests open the Code tab before pressing Check, because Check switches to the Output tab.
 - 2026-10-13, `docs/ponytail`: Ponytail reviewed (no network calls; the installed files match the reviewed commit). `AGENTS.md` limits it to app code, and `.claude/skills/README.md` says what it runs and how to update or turn it off.
 
 ## Next
 
-- **Process first (2026-10-23):** #37 CI pipeline (e2e + security), #38 Docker, #39 release pipeline (staging + approval), #40 bot account, then #41 source paths, #42 code-box replay, #43–#46 deeper modules. Carlos: run `gh auth refresh -s project` so the board can be created.
+- **Process first (2026-10-23):** #37 CI pipeline (e2e + security, PR #50), #38 Docker, #51 Infisical, #39 release pipeline (staging + approval), #40 bot account, then #41 source paths, #42 code-box replay, #43–#46 deeper modules.
 
 - After `fix/tool-findings` merges: check production's headers (`curl -sI https://dsa-course-app.vercel.app/`) and run the app once in a browser for CSP errors.
 - #34 and #35 (the theory pass) are merged.

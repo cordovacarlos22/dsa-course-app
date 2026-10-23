@@ -80,9 +80,12 @@ npm run lint          # ESLint
 npm run format        # format all files with Prettier
 npm run format:check  # check formatting (CI runs this)
 npm run build         # production build into dist/
+npm run test:coverage # unit tests with a coverage report (coverage/index.html)
+npm run test:e2e      # end-to-end tests in a real browser (run `npm run build` first)
+npm run serve:preview # serve dist/ with vercel.json's security headers (port 4174)
 ```
 
-Before every commit, run: `npm run lint && npm run format:check && npm test && npm run build`
+Before every commit, run: `npm run lint && npm run format:check && npm test && npm run content:validate && npm run build`. Before opening a PR, also run `npm run test:e2e` (CI runs it on every PR, plus `npm audit`, CodeQL and a gitleaks secret scan).
 
 ## Coding rules
 

@@ -39,7 +39,7 @@ Labels: `type:feature`, `type:bug`, `type:chore`, `type:content`, `area:lessons`
 
 ### 3. Build
 
-GitHub Actions runs on every PR, and every job must pass before a merge:
+GitHub Actions runs on every PR (`.github/workflows/ci.yml` and `codeql.yml`), and the final **CI passed** job, which branch protection requires, only passes when every job did:
 
 - **lint and format**, **unit tests**, **content validation** and **build**,
 - **end-to-end tests** against the built app, served with the production security headers,
@@ -66,7 +66,8 @@ An issue is **Done** when its acceptance criteria are met, its tests are added, 
 
 ## Security basics, always
 
-- Secrets live only in GitHub, Vercel and Supabase settings. Never in the repo, an issue, a PR or a log.
+- Secrets will live only in **Infisical** (#51, set up before the release pipeline). GitHub, Vercel and Supabase get their copies from there. A secret never goes in the repo, an issue, a PR or a log.
+- GitHub **secret scanning** and **push protection** are on: a push that contains a known kind of secret is blocked, and CI's gitleaks job scans every commit.
 - Workflows get the smallest permissions they need, and third-party actions are pinned to a commit.
 - Student code runs only in the Web Worker, with the app's Content-Security-Policy.
 - Anything that touches login, data, the code runner, the AI tutor or secrets is labeled `security` and gets a security review before it merges.
@@ -83,14 +84,17 @@ For now every agent works through **Carlos's GitHub account**, so GitHub sees on
 
 ## Status: what's live today
 
-| Piece                                                                | Status                     |
-| -------------------------------------------------------------------- | -------------------------- |
-| Issue templates, PR template, CODEOWNERS, agent roles                | ✅ live                    |
-| Labels and the first issues (#37–#46)                                | ✅ live                    |
-| Board "DSA course app" (github.com/users/cordovacarlos22/projects/9) | ✅ live                    |
-| CI: lint, format, unit tests, content, build                         | ✅ live                    |
-| CI: end-to-end tests, dependency audit, CodeQL, secret scan          | ⏳ next PR (`ci/pipeline`) |
-| Docker dev and QA environment                                        | ⏳ `chore/docker`          |
-| Staging deploy, Carlos's approval, production promote, rollback      | ⏳ `ci/release`            |
+| Piece                                                                              | Status            |
+| ---------------------------------------------------------------------------------- | ----------------- |
+| Issue templates, PR template, CODEOWNERS, agent roles                              | ✅ live           |
+| Labels and the first issues (#37–#46)                                              | ✅ live           |
+| Board "DSA course app" (github.com/users/cordovacarlos22/projects/9)               | ✅ live           |
+| CI: lint, format, unit tests, content, build                                       | ✅ live           |
+| CI: end-to-end tests (3 setups), dependency audit, CodeQL, secret scan, Dependabot | ✅ live (#37)     |
+| Required checks on `main`: CI passed and CodeQL                                    | ✅ live           |
+| GitHub secret scanning, push protection, Dependabot security updates               | ✅ live           |
+| Secrets in Infisical (OIDC from GitHub Actions)                                    | ⏳ #51            |
+| Docker dev and QA environment                                                      | ⏳ `chore/docker` |
+| Staging deploy, Carlos's approval, production promote, rollback                    | ⏳ `ci/release`   |
 
 Until the release pipeline is live, Vercel deploys `main` to production on every merge, so Carlos's approval happens when he merges the PR.

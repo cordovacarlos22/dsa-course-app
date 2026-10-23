@@ -33,7 +33,8 @@ dist-ssr
 # Vercel CLI
 .vercel
 
-# Playwright
+# Playwright and test coverage
+coverage
 test-results
 playwright-report
 

@@ -9,7 +9,10 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "serve:preview": "node scripts/serve-preview.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "content:validate": "node scripts/validate-content.js"
@@ -27,16 +30,18 @@
     "react-router": "^7.18.4",
     "remark-gfm": "^4.0.1",
     "tailwindcss": "^4.3.3",
-    "zod": "^3.25.76"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@playwright/test": "1.64.0",
     "@tailwindcss/typography": "^0.5.20",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.7",
     "@vitejs/plugin-react": "^4.4.1",
+    "@vitest/coverage-v8": "4.1.11",
     "eslint": "^9.25.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react-hooks": "^5.2.0",
