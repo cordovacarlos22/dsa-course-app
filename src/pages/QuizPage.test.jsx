@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
@@ -62,7 +62,10 @@ describe('quiz page', () => {
         name: 'Introduction quiz',
       }),
     ).toBeInTheDocument()
-    expect(document.title).toBe('Introduction quiz · DSA in JavaScript')
+    // The title is set in an effect, a moment after the heading appears.
+    await waitFor(() =>
+      expect(document.title).toBe('Introduction quiz · DSA in JavaScript'),
+    )
     expect(screen.getByText(`Question 1 of ${QUIZ.length}`)).toBeInTheDocument()
     // Nothing is selected yet.
     expect(screen.getByRole('button', { name: 'Check answer' })).toBeDisabled()

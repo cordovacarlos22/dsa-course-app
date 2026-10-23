@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
@@ -80,7 +80,10 @@ describe('exercise page', () => {
       }),
     ).toBeInTheDocument()
     expect(screen.getByText(/Build it · Easy/)).toBeInTheDocument()
-    expect(document.title).toBe('The Door Counter · DSA in JavaScript')
+    // The title is set in an effect, a moment after the heading appears.
+    await waitFor(() =>
+      expect(document.title).toBe('The Door Counter · DSA in JavaScript'),
+    )
     // The description is the task, and the editor starts with the starter code.
     expect(screen.getByText(/Someone at the party door/)).toBeInTheDocument()
     const editor = await screen.findByLabelText('Code editor')
