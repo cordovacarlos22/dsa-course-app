@@ -83,14 +83,14 @@ For now every agent works through **Carlos's GitHub account**, so GitHub sees on
 
 ## Status: what's live today
 
-| Piece                                                           | Status                                              |
-| --------------------------------------------------------------- | --------------------------------------------------- |
-| Issue templates, PR template, CODEOWNERS, agent roles           | ✅ live                                             |
-| Labels and the first issues (#37–#46)                           | ✅ live                                             |
-| Board "DSA course app"                                          | ⏳ needs Carlos to run `gh auth refresh -s project` |
-| CI: lint, format, unit tests, content, build                    | ✅ live                                             |
-| CI: end-to-end tests, dependency audit, CodeQL, secret scan     | ⏳ next PR (`ci/pipeline`)                          |
-| Docker dev and QA environment                                   | ⏳ `chore/docker`                                   |
-| Staging deploy, Carlos's approval, production promote, rollback | ⏳ `ci/release`                                     |
+| Piece                                                                | Status                     |
+| -------------------------------------------------------------------- | -------------------------- |
+| Issue templates, PR template, CODEOWNERS, agent roles                | ✅ live                    |
+| Labels and the first issues (#37–#46)                                | ✅ live                    |
+| Board "DSA course app" (github.com/users/cordovacarlos22/projects/9) | ✅ live                    |
+| CI: lint, format, unit tests, content, build                         | ✅ live                    |
+| CI: end-to-end tests, dependency audit, CodeQL, secret scan          | ⏳ next PR (`ci/pipeline`) |
+| Docker dev and QA environment                                        | ⏳ `chore/docker`          |
+| Staging deploy, Carlos's approval, production promote, rollback      | ⏳ `ci/release`            |
 
 Until the release pipeline is live, Vercel deploys `main` to production on every merge, so Carlos's approval happens when he merges the PR.
