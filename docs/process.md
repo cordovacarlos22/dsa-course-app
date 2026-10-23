@@ -39,7 +39,7 @@ Labels: `type:feature`, `type:bug`, `type:chore`, `type:content`, `area:lessons`
 
 ### 3. Build
 
-GitHub Actions runs on every PR, and every job must pass before a merge:
+GitHub Actions runs on every PR (`.github/workflows/ci.yml` and `codeql.yml`), and the final **CI passed** job, which branch protection requires, only passes when every job did:
 
 - **lint and format**, **unit tests**, **content validation** and **build**,
 - **end-to-end tests** against the built app, served with the production security headers,
@@ -83,14 +83,14 @@ For now every agent works through **Carlos's GitHub account**, so GitHub sees on
 
 ## Status: what's live today
 
-| Piece                                                                | Status                     |
-| -------------------------------------------------------------------- | -------------------------- |
-| Issue templates, PR template, CODEOWNERS, agent roles                | ✅ live                    |
-| Labels and the first issues (#37–#46)                                | ✅ live                    |
-| Board "DSA course app" (github.com/users/cordovacarlos22/projects/9) | ✅ live                    |
-| CI: lint, format, unit tests, content, build                         | ✅ live                    |
-| CI: end-to-end tests, dependency audit, CodeQL, secret scan          | ⏳ next PR (`ci/pipeline`) |
-| Docker dev and QA environment                                        | ⏳ `chore/docker`          |
-| Staging deploy, Carlos's approval, production promote, rollback      | ⏳ `ci/release`            |
+| Piece                                                                              | Status            |
+| ---------------------------------------------------------------------------------- | ----------------- |
+| Issue templates, PR template, CODEOWNERS, agent roles                              | ✅ live           |
+| Labels and the first issues (#37–#46)                                              | ✅ live           |
+| Board "DSA course app" (github.com/users/cordovacarlos22/projects/9)               | ✅ live           |
+| CI: lint, format, unit tests, content, build                                       | ✅ live           |
+| CI: end-to-end tests (3 setups), dependency audit, CodeQL, secret scan, Dependabot | ✅ live (#37)     |
+| Docker dev and QA environment                                                      | ⏳ `chore/docker` |
+| Staging deploy, Carlos's approval, production promote, rollback                    | ⏳ `ci/release`   |
 
 Until the release pipeline is live, Vercel deploys `main` to production on every merge, so Carlos's approval happens when he merges the PR.

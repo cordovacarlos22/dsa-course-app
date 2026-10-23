@@ -11,6 +11,7 @@ export default [
       '.vite',
       'playwright-report',
       'test-results',
+      'coverage',
       // Duplicates that macOS / iCloud create, like "file 2.jsx"
       '**/* [0-9].*',
     ],
@@ -42,8 +43,14 @@ export default [
   },
   {
     // Config files and scripts run in Node.js, not in the browser.
-    files: ['*.config.js', 'scripts/**/*.js'],
+    files: ['*.config.js', 'scripts/**/*.{js,mjs}', 'e2e/**/*.js'],
     languageOptions: { globals: globals.node },
+  },
+  {
+    // Playwright fixtures use an empty {} and a use() callback, which the
+    // React hooks rules would mistake for React code.
+    files: ['e2e/**/*.js'],
+    rules: { 'no-empty-pattern': 'off', 'react-hooks/rules-of-hooks': 'off' },
   },
   // Turns off style rules that would fight with Prettier. Keep this last.
   prettier,

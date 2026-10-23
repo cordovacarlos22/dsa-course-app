@@ -1,0 +1,29 @@
+# Dependabot opens a PR when a dependency or a GitHub Action is outdated or
+# has a security advisory. Those PRs go through the same CI as any other.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    # Wait two weeks after a release before proposing it (fresh releases are
+    # where compromised packages show up first). Security fixes still come
+    # right away.
+    cooldown:
+      default-days: 14
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+    labels: ['type:chore', 'area:ci']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 14
+    groups:
+      actions:
+        patterns: ['*']
+    labels: ['type:chore', 'area:ci']

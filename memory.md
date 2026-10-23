@@ -234,6 +234,11 @@ Agents: read this at the start of every session and update it at the end (see `A
   - **Classes & Pointers:** an invitation template (`Invitation`, `forAna`/`forBen`, `getGuest`/`setGuest`) replaces the cookie cutter; animations `invitation-template`, `-new`, `-methods`; Build it "The Invitation Class".
   - **Big O / Problem Solving / Arrays & Objects / Introduction:** `sumOneTo` (`runningSum`), `arriveAndLeave`, `printSeats`, `setChairs`/`printPrizes` (floor 10, ceiling 3), `withPlusOnes`, `totalOrders`/`doubleOrders`, `low`/`high`/`mid`, `addNumbers(first, second)`, `countCharacters(text)`, `isLetterOrDigit`, `guestNames`, `timesTwo`; animations `trace-print-seats`, `trace-double-orders`, `trace-count-characters`.
   - **Checked:** the name check finds only standard names, no 8-word prose matches, Chrome under `vercel.json`'s headers on all 46 lessons of the changed modules (495 step views), 333 quiz answers and 21 exercises in three setups, 0 problems.
+- 2026-10-23, `ci/37-pipeline` (#37):
+  - **CI split into jobs:** lint and format, unit tests with coverage, content, build, end-to-end (a matrix of 3 projects against the built `dist/`), security (`npm audit --audit-level=high` and gitleaks 8.30.1 with a checksum), and a final **CI passed** job for branch protection. CodeQL runs in its own workflow; Dependabot is weekly with a 14-day cooldown.
+  - **Pinned and limited:** every action is pinned to a commit SHA, and the token is read-only except CodeQL's `security-events: write`.
+  - **End-to-end in the repo:** Playwright (`e2e/*.e2e.js`, `playwright.config.js`) replaces the scratchpad browser checks. Every lesson step (animations played, snippets run), every quiz and every exercise, at 1280 en, 375 es and 320 en with reduced motion; no CSP violations or page errors; no sideways scroll. 219 tests pass in about 2 minutes. `scripts/serve-preview.mjs` serves `dist/` with `vercel.json`'s headers for e2e and QA.
+  - **Exercises on phones:** the tests open the Code tab before pressing Check, because Check switches to the Output tab.
 - 2026-10-13, `docs/ponytail`: Ponytail reviewed (no network calls; the installed files match the reviewed commit). `AGENTS.md` limits it to app code, and `.claude/skills/README.md` says what it runs and how to update or turn it off.
 
 ## Next
