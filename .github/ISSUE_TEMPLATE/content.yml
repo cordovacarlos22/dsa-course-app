@@ -1,0 +1,37 @@
+name: Content
+description: New or deeper lessons, quizzes or exercises.
+labels: ['type:content', 'area:lessons']
+body:
+  - type: input
+    id: module
+    attributes:
+      label: Module
+      description: The module slug from content/course.json, e.g. big-o.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: The files in the course folder this is based on (only "DSA + LEETCODE for Coding Interviews — Clear, Step-by-Step Animated Walkthroughs!").
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: What students should be able to do
+      description: After this work, a student can explain and do…
+    validations:
+      required: true
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Acceptance criteria
+      value: |
+        - [ ] Every point in the sources is covered (coverage checklist attached to the PR)
+        - [ ] Theory first in every step, EN + ES
+        - [ ] Our own sentences (8-word check) and our own code names (name check)
+        - [ ] Checkpoints pass `npm run content:validate`
+        - [ ] QA passed at 1280 / 375 (es) / 320 px
+    validations:
+      required: true

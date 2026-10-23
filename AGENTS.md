@@ -33,15 +33,15 @@ Free with login while it's being built; payments come later.
 
 ## Stack
 
-| Part     | Tool                                                          |
-| -------- | ------------------------------------------------------------- |
-| Frontend | React + Vite, **plain JavaScript (JSX), never TypeScript**    |
-| Styling  | Tailwind CSS v4                                               |
-| Backend  | Supabase (Postgres, Auth, Row Level Security, Edge Functions) |
-| AI tutor | Claude API, called only from the `tutor` Edge Function        |
-| Tests    | Vitest + React Testing Library, Playwright (smoke test)       |
-| CI/CD    | GitHub Actions                                                |
-| Hosting  | Vercel (blue/green deploys driven by GitHub Actions)          |
+| Part     | Tool                                                                  |
+| -------- | --------------------------------------------------------------------- |
+| Frontend | React + Vite, **plain JavaScript (JSX), never TypeScript**            |
+| Styling  | Tailwind CSS v4                                                       |
+| Backend  | Supabase (Postgres, Auth, Row Level Security, Edge Functions)         |
+| AI tutor | Claude API, called only from the `tutor` Edge Function                |
+| Tests    | Vitest + React Testing Library, Playwright (smoke test)               |
+| CI/CD    | GitHub Actions                                                        |
+| Hosting  | Vercel (staging, then production after approval; see docs/process.md) |
 
 ## Folder map
 
@@ -118,19 +118,17 @@ Carlos also uses **Ponytail** ([DietrichGebert/ponytail](https://github.com/Diet
 - **Never install or update skills automatically** (`npx skills add`, plugin marketplaces, the Impeccable engine). Follow "Updating a skill" in `.claude/skills/README.md`. Ponytail's marketplace auto-update stays off, and an update gets the same review.
 - **Audit output stays out of git.** A full security audit writes to `~/security-audit-skill/…`, outside the repo, and its findings describe weaknesses that may still be open.
 
-## Git workflow (like a big-tech team)
+## How we build and ship (read `docs/process.md`)
 
-1. Never commit to `main` directly. Create a branch: `feat/quiz-page`, `fix/timer-reset`, `chore/ci`.
-2. Make **small commits** using [Conventional Commits](https://www.conventionalcommits.org): `feat: add quiz score screen`, `fix: stop timer on submit`, `test: cover runner timeout`.
-3. Open a Pull Request. CI must pass (lint, format, tests, build, preview smoke test).
-4. Merge to `main`. The deploy pipeline releases the change with blue/green.
-5. One stage of the plan = one branch = one PR.
+Every change goes through **plan → code → build → test → ship**, with roles for a product manager, developer, reviewer and QA agent (`.claude/agents/`) and Carlos as product owner. The short version:
 
-## Deployment (blue/green)
+1. **Plan:** work starts as a GitHub issue from a template (Feature, Bug or Content) on the "DSA course app" board. Only issues Carlos moved to **Ready** get built.
+2. **Code:** one issue = one branch (`type/<issue>-<slug>`) = one PR that says `Closes #<issue>` and fills the PR template. Never commit to `main`. Small [Conventional Commits](https://www.conventionalcommits.org).
+3. **Build:** GitHub Actions must be green (lint, format, unit tests, content, build; end-to-end and security scans as they're added).
+4. **Test:** the Reviewer agent reviews, the QA agent tests and files bugs as issues, and Carlos signs off.
+5. **Ship:** today Vercel deploys `main` straight to production. The staging site and the approval gate before production are being added (see the status table in `docs/process.md`).
 
-- `main` is deployed by GitHub Actions, not by Vercel's Git integration.
-- The pipeline deploys a new "green" copy without switching the domain, smoke-tests it, then promotes it. The old "blue" copy stays available for instant rollback.
-- **Database rule: expand, then contract.** Blue and green share the same database, so a migration must never break the version that's currently live. Add new tables/columns first. Remove or rename old ones only in a later release, once no live version uses them.
+**Database rule (stage 8): expand, then contract.** A migration must never break the version that's live: add new tables and columns first, and remove or rename old ones only in a later release.
 
 ## AI tutor rules
 

@@ -1,0 +1,42 @@
+name: Feature
+description: Something new for students or for how we build the app.
+labels: ['type:feature']
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What's wrong or missing today, and who feels it?
+    validations:
+      required: true
+  - type: textarea
+    id: story
+    attributes:
+      label: User story
+      description: 'As a <student / Carlos / agent>, I want <…> so that <…>.'
+    validations:
+      required: true
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Acceptance criteria
+      description: A checklist anyone can test. Each line passes or fails.
+      value: |
+        - [ ]
+    validations:
+      required: true
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+      description: What this issue won't do, so the PR stays small.
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks and security notes
+      description: Does it touch login, data, secrets, the code runner, the AI tutor or the security headers? If so, add the `security` label.
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Open questions for Carlos
+      description: Anything that has to be decided before this is Ready.

@@ -21,6 +21,8 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Decisions
 
+- 2026-10-23: **A big-tech delivery process** (Carlos: "develop software more securely… like a big tech company"). Every change goes plan → code → build → test → ship (`docs/process.md`): GitHub Issues from templates on a "DSA course app" board (Carlos chose GitHub Projects over Jira), GitHub Actions for build and tests (kept over Jenkins/GitLab), a Docker dev and QA environment, a staging site, a QA agent and his own sign-off before production. Roles live in `.claude/agents/` (product-manager, reviewer, qa). The planned work runs through it as issues #37–#46. Agents share Carlos's GitHub account for now, so the reviewer posts its verdict as a comment; a bot account is issue #40.
+
 - 2026-10-11 (replaced the same day, see below): **Lessons are visual-first** (an animation opens every step, 1–3 sentences after it), **one story per module** (Big O: guest list), and **beginner loops** (`for (let i = 0; …; i++)`, no `for...of`/`forEach`). Reason: Carlos's students prefer visuals and many only know basic JavaScript.
 - 2026-10-11: **Show, then explain.** Carlos: keeping the reading low didn't mean erasing it. Every step keeps its animation, but lessons teach at the depth of the course notes and transcripts (300–500 words, every point covered, in our own words). **Coding steps use Learn | Editor over Output** (two columns, the editor above the output), because three columns were too tight.
 - 2026-10-12: **Celebrations, like a game** (Carlos: "like Duolingo, where they celebrate each of your achievements"). The first time a step's check passes: a small confetti burst and a cheer ("Great job!", or "🔥 3 in a row on the first try!"). The lesson's last step: two confetti cannons and a "Lesson complete" card with stats (checks, first tries, "Perfect lesson"). The module's last lesson: star fireworks and a 🏆, plus a badge on the module page. Revisits stay quiet. **Sounds** are made with Web Audio (no audio files), with a 🔊 mute button in the header (saved as `sounds` in localStorage). Devices that ask for less motion get no confetti or pop animations. One entry point, `celebrate(level)` in `src/lib/celebrate.js` (reuse it for quizzes); `canvas-confetti` is loaded on demand. **XP points, daily streaks and badges come in stage 8**, with Supabase (Carlos's choice), so they follow students across devices.
@@ -235,6 +237,8 @@ Agents: read this at the start of every session and update it at the end (see `A
 - 2026-10-13, `docs/ponytail`: Ponytail reviewed (no network calls; the installed files match the reviewed commit). `AGENTS.md` limits it to app code, and `.claude/skills/README.md` says what it runs and how to update or turn it off.
 
 ## Next
+
+- **Process first (2026-10-23):** #37 CI pipeline (e2e + security), #38 Docker, #39 release pipeline (staging + approval), #40 bot account, then #41 source paths, #42 code-box replay, #43–#46 deeper modules. Carlos: run `gh auth refresh -s project` so the board can be created.
 
 - After `fix/tool-findings` merges: check production's headers (`curl -sI https://dsa-course-app.vercel.app/`) and run the app once in a browser for CSP errors.
 - #34 and #35 (the theory pass) are merged.
