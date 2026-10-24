@@ -40,7 +40,7 @@ Recorre la salida: empieza en `0 0` y termina en `9 9`. Son **100 líneas**. Por
 
 ## La cuadrícula
 
-Una cuadrícula es una buena forma de imaginar O(n²). Cada **fila** es un paso del bucle de afuera, y cada fila tiene una **celda** por cada paso del bucle de adentro. Con n filas y n columnas, hay n × n celdas, y el código visita cada una. En nuestra fiesta, imagina que cada invitado saluda a cada uno de los demás: una fila por invitado, una celda por saludo.
+Una cuadrícula es una buena forma de imaginar O(n²). Cada **fila** es un paso del bucle de afuera, y cada fila tiene una **celda** por cada paso del bucle de adentro. Con n filas y n columnas, hay n × n celdas, y el código visita cada una. En nuestra fiesta, imagina que cada persona invitada saluda a todas las demás: una fila por persona, una celda por saludo.
 
 La cuadrícula también muestra por qué O(n²) crece tan rápido. Haz la lista el doble de larga y la cuadrícula tiene el doble de filas **y** el doble de columnas, así que tiene **4 veces** más celdas. Diez veces más invitados significa cien veces más celdas.
 
@@ -48,11 +48,11 @@ La cuadrícula también muestra por qué O(n²) crece tan rápido. Haz la lista 
 nested-grid
 ```
 
-**Qué acaba de pasar:** cada fila era un invitado, y en cada fila el bucle de adentro recorrió cada columna. 3 invitados llenaron una cuadrícula de 3 × 3: 9 celdas. Luego la lista se duplicó a 6 invitados, y la cuadrícula se volvió de 6 × 6 = 36 celdas. El doble de invitados, cuatro veces el trabajo. (Las celdas grises eran un invitado encontrándose a sí mismo, que el código se salta, pero el bucle igual las visita.)
+**Qué acaba de pasar:** cada fila era una persona, y en cada fila el bucle de adentro recorrió cada columna. 3 invitados llenaron una cuadrícula de 3 × 3: 9 celdas. Luego la lista se duplicó a 6 invitados, y la cuadrícula se volvió de 6 × 6 = 36 celdas. El doble de invitados, cuatro veces el trabajo. (Las celdas grises eran una persona encontrándose consigo misma, que el código se salta, pero el bucle igual las visita.)
 
 También vas a escuchar que esto se llama **tiempo cuadrático**, y en general **tiempo polinomial**: cada bucle anidado sobre la entrada agrega otra potencia de n. Tres bucles anidados uno dentro del otro corren n × n × n veces, que es **O(n³)**.
 
-Y un bucle anidado sigue siendo O(n²) aunque el de adentro sea más corto. Si el bucle de adentro solo llega hasta `i` (`for (let j = 0; j <= i; j++)`), corre 1 + 2 + … + n veces en total. Eso es n(n + 1) / 2, la fórmula de la lección 2: más o menos n² / 2. Quita la constante, y sigue siendo **O(n²)**. Ejecuta las dos:
+Y un bucle anidado sigue siendo O(n²) aunque el de adentro sea más corto. Si el bucle de adentro solo llega hasta `i` (`for (let j = 0; j <= i; j++)`), corre 1 + 2 + … + n veces en total. Eso es n(n + 1) / 2, la fórmula de la lección 2: más o menos n² / 2. Quita la constante, y sigue siendo **O(n²)**. Antes de ejecutarlas, predice los dos conteos para n = 10:
 
 ```js-run
 function countTriples(n) {

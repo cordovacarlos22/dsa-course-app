@@ -52,7 +52,7 @@ nested-grid
 
 You'll also hear this called **quadratic time**, and in general **polynomial time**: each nested loop over the input adds another power of n. Three loops nested inside each other run n × n × n times, which is **O(n³)**.
 
-And a nested loop is still O(n²) even when the inner loop is shorter. If the inner loop only goes up to `i` (`for (let j = 0; j <= i; j++)`), it runs 1 + 2 + … + n times in total. That's n(n + 1) / 2, the formula from lesson 2: about n² / 2. Drop the constant, and it's still **O(n²)**. Run both:
+And a nested loop is still O(n²) even when the inner loop is shorter. If the inner loop only goes up to `i` (`for (let j = 0; j <= i; j++)`), it runs 1 + 2 + … + n times in total. That's n(n + 1) / 2, the formula from lesson 2: about n² / 2. Drop the constant, and it's still **O(n²)**. Before you run them, predict both counts for n = 10:
 
 ```js-run
 function countTriples(n) {
