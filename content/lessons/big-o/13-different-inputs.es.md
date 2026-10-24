@@ -20,7 +20,7 @@ Esta es la misma idea con una fiesta que tiene invitados (a) y ayudantes (b):
 two-inputs
 ```
 
-**Qué acaba de pasar:** la fiesta tenía 4 invitados y 2 ayudantes: dos listas distintas. El primer bucle le dio la bienvenida a cada invitado (a pasos), y luego un segundo bucle recorrió a los ayudantes (b pasos más), para un total de **O(a + b)**. En la última escena, cada invitado le dio las gracias a cada ayudante: un bucle sobre los ayudantes **dentro** de un bucle sobre los invitados. Eso son a × b pasos: **O(a · b)**.
+**Qué acaba de pasar:** la fiesta tenía 4 invitados y 2 ayudantes: dos listas distintas. El primer bucle le dio la bienvenida a cada persona (a pasos), y luego un segundo bucle recorrió a los ayudantes (b pasos más), para un total de **O(a + b)**. En la última escena, cada persona invitada le dio las gracias a cada ayudante: un bucle sobre los ayudantes **dentro** de un bucle sobre los invitados. Eso son a × b pasos: **O(a · b)**.
 
 Esta es `printBoth`, la versión con números:
 
