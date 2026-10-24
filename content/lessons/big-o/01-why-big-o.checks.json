@@ -136,38 +136,29 @@
       }
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "What does **space complexity** describe?",
-        "es": "¿Qué describe la **complejidad espacial**?"
+        "en": "In your own words: what do time complexity and space complexity each describe, and why does Big O count operations instead of seconds?",
+        "es": "Con tus palabras: ¿qué describe la complejidad temporal y qué describe la espacial, y por qué Big O cuenta operaciones en vez de segundos?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "Time complexity describes how the number of operations grows as the input grows, and space complexity describes how the memory the code needs grows. We count operations because seconds change from one computer to another, and even from run to run, but the number of operations only depends on the code and its input.",
+        "es": "La complejidad temporal describe cómo crece el número de operaciones cuando crece la entrada, y la espacial describe cómo crece la memoria que necesita el código. Contamos operaciones porque los segundos cambian de una computadora a otra, y hasta de una ejecución a otra, pero el número de operaciones solo depende del código y de su entrada."
+      },
+      "checklist": [
         {
-          "en": "How many seconds the code takes",
-          "es": "Cuántos segundos tarda el código"
+          "en": "Says time complexity is about how the operations grow",
+          "es": "Dice que la complejidad temporal trata de cómo crecen las operaciones"
         },
         {
-          "en": "How the memory the code needs grows with the input",
-          "es": "Cómo crece con la entrada la memoria que necesita el código"
+          "en": "Says space complexity is about memory",
+          "es": "Dice que la complejidad espacial trata de la memoria"
         },
         {
-          "en": "How many lines of code the function has",
-          "es": "Cuántas líneas de código tiene la función"
-        },
-        {
-          "en": "How fast your computer is",
-          "es": "Qué tan rápida es tu computadora"
+          "en": "Says seconds change between computers or runs, but the operation count doesn't",
+          "es": "Dice que los segundos cambian entre computadoras o ejecuciones, pero el número de operaciones no"
         }
-      ],
-      "answer": 1,
-      "hint": {
-        "en": "Time complexity counts operations. What does space complexity measure?",
-        "es": "La complejidad temporal cuenta operaciones. ¿Qué mide la complejidad espacial?"
-      },
-      "explanation": {
-        "en": "Space complexity is how much memory the code uses as the input grows. Code 2 can be slower but lighter.",
-        "es": "La complejidad espacial es cuánta memoria usa el código cuando crece la entrada. El código 2 puede ser más lento pero más ligero."
-      }
+      ]
     }
   ]
 }
