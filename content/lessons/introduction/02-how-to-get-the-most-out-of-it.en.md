@@ -96,10 +96,10 @@ Now try it with different values. Predict what this prints, then run it:
 
 ```js-run
 // A number: the variable holds the value itself.
-let seats = 10
-let seatsLeft = seats // copies the number
-seatsLeft = seatsLeft - 1
-console.log('seats:', seats, '| seatsLeft:', seatsLeft)
+let plates = 10
+let platesLeft = plates // copies the number
+platesLeft = platesLeft - 1
+console.log('plates:', plates, '| platesLeft:', platesLeft)
 
 // An object: the variable holds an arrow to the object.
 const ana = { name: 'Ana', table: 1 }
@@ -108,7 +108,7 @@ sameGuest.table = 4
 console.log('Ana sits at table', ana.table)
 ```
 
-`seats` stayed 10, because `seatsLeft` got its own copy of the number. But `ana.table` became 4, even though the code only changed `sameGuest`. There was only ever **one** guest object, with two arrows pointing at it. Linked lists are built on exactly this: a node's `next` is an arrow to another node, and moving an arrow changes what the list looks like without copying anything.
+`plates` stayed 10, because `platesLeft` got its own copy of the number. But `ana.table` became 4, even though the code only changed `sameGuest`. There was only ever **one** guest object, with two arrows pointing at it. Linked lists are built on exactly this: a node's `next` is an arrow to another node, and moving an arrow changes what the list looks like without copying anything.
 
 **Common mistake:** expecting `const` to freeze an object. `const sameGuest = ana` means that arrow can't be moved to a different object, but the object it points at can still change. That's why `sameGuest.table = 4` worked.
 

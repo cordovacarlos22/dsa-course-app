@@ -96,10 +96,10 @@ Ahora pruébalo con otros valores. Predice qué imprime esto y luego ejecútalo:
 
 ```js-run
 // Un número: la variable guarda el valor mismo.
-let seats = 10
-let seatsLeft = seats // copia el número
-seatsLeft = seatsLeft - 1
-console.log('seats:', seats, '| seatsLeft:', seatsLeft)
+let plates = 10
+let platesLeft = plates // copia el número
+platesLeft = platesLeft - 1
+console.log('plates:', plates, '| platesLeft:', platesLeft)
 
 // Un objeto: la variable guarda una flecha hacia el objeto.
 const ana = { name: 'Ana', table: 1 }
@@ -108,7 +108,7 @@ sameGuest.table = 4
 console.log('Ana se sienta en la mesa', ana.table)
 ```
 
-`seats` siguió en 10, porque `seatsLeft` recibió su propia copia del número. Pero `ana.table` cambió a 4, aunque el código solo cambió `sameGuest`. Siempre hubo **un solo** objeto, con dos flechas apuntándole. Las listas enlazadas se construyen justo sobre esto: el `next` de un nodo es una flecha a otro nodo, y mover una flecha cambia cómo se ve la lista sin copiar nada.
+`plates` siguió en 10, porque `platesLeft` recibió su propia copia del número. Pero `ana.table` cambió a 4, aunque el código solo cambió `sameGuest`. Siempre hubo **un solo** objeto, con dos flechas apuntándole. Las listas enlazadas se construyen justo sobre esto: el `next` de un nodo es una flecha a otro nodo, y mover una flecha cambia cómo se ve la lista sin copiar nada.
 
 **Error común:** esperar que `const` congele un objeto. `const sameGuest = ana` significa que esa flecha no se puede mover a otro objeto, pero el objeto al que apunta sí puede cambiar. Por eso funcionó `sameGuest.table = 4`.
 
