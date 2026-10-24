@@ -187,8 +187,8 @@
           "es": "Mejor Ω(1) y peor O(1): contar siempre es rápido"
         },
         {
-          "en": "Both are n checks, so it's Θ(n)",
-          "es": "Los dos son n revisiones, así que es Θ(n)"
+          "en": "Both are n checks, since it can't stop early: Θ(n)",
+          "es": "Los dos son n revisiones, porque no puede parar antes: Θ(n)"
         }
       ],
       "correctIndex": 3,
@@ -643,7 +643,7 @@
       "topic": "Big O: Rules of Thumb",
       "prompt": {
         "en": "A loop runs once per guest, and inside it there's only one comparison. What does the loop cost?",
-        "es": "Un bucle corre una vez por invitado y adentro solo hay una comparación. ¿Cuánto cuesta el bucle?"
+        "es": "Un bucle corre una vez por cada persona invitada y adentro solo hay una comparación. ¿Cuánto cuesta el bucle?"
       },
       "options": [
         {
@@ -729,7 +729,7 @@
       "correctIndex": 2,
       "explanation": {
         "en": "It builds a new array with one tag per guest, so the extra memory grows with n: O(n) space.",
-        "es": "Construye un array nuevo con un gafete por invitado, así que la memoria extra crece con n: espacio O(n)."
+        "es": "Construye un array nuevo con un gafete por cada nombre, así que la memoria extra crece con n: espacio O(n)."
       }
     },
     {
@@ -971,8 +971,8 @@
           "es": "No lo es: la definición dice que sigue siendo O(5n + 2)"
         },
         {
-          "en": "Because from n = 2 on, 5n + 2 stays under 6n",
-          "es": "Porque desde n = 2, 5n + 2 se queda debajo de 6n"
+          "en": "Because from n = 2 on, 5n + 2 is never more than 6n",
+          "es": "Porque desde n = 2, 5n + 2 nunca es mayor que 6n"
         }
       ],
       "correctIndex": 3,
@@ -1558,7 +1558,7 @@
       },
       "description": {
         "en": "Before you write any code, **predict**. This function prints a party's announcements for `n` guests:\n\n```js\nfunction announce(n) {\n  console.log('Doors open!')\n  for (let i = 0; i < n; i++) {\n    console.log('Welcome, guest ' + i)\n  }\n  for (let i = 0; i < n; i++) {\n    console.log('Goodbye, guest ' + i)\n  }\n  console.log('Doors closed!')\n}\n```\n\nHow many lines does `announce(3)` print? And `announce(1000)`?\n\nNow write `countPrintedLines(n)`, which returns how many lines `announce(n)` prints. Don't call `announce` and don't loop: work out the formula, so your function answers instantly, even for a trillion guests (one test uses n = 1,000,000,000,000, and a loop that big would be stopped after 2 seconds).\n\nExample: `countPrintedLines(3)` → `8`\n\nGoal: O(1) time, O(1) space. And `announce` itself? Two loops in a row are O(2n), which simplifies to O(n).",
-        "es": "Antes de escribir código, **predice**. Esta función imprime los anuncios de una fiesta para `n` invitados:\n\n```js\nfunction announce(n) {\n  console.log('Doors open!')\n  for (let i = 0; i < n; i++) {\n    console.log('Welcome, guest ' + i)\n  }\n  for (let i = 0; i < n; i++) {\n    console.log('Goodbye, guest ' + i)\n  }\n  console.log('Doors closed!')\n}\n```\n\n¿Cuántas líneas imprime `announce(3)`? ¿Y `announce(1000)`?\n\nAhora escribe `countPrintedLines(n)`, que devuelve cuántas líneas imprime `announce(n)`. No llames a `announce` ni uses un bucle: encuentra la fórmula, para que tu función responda al instante, incluso con un billón de invitados (una prueba usa n = 1,000,000,000,000, y un bucle tan grande se detendría después de 2 segundos).\n\nEjemplo: `countPrintedLines(3)` → `8`\n\nMeta: tiempo O(1), espacio O(1). ¿Y `announce`? Dos bucles seguidos son O(2n), que se simplifica a O(n)."
+        "es": "Antes de escribir código, **predice**. Esta función imprime los anuncios de una fiesta para `n` invitados:\n\n```js\nfunction announce(n) {\n  console.log('¡Se abren las puertas!')\n  for (let i = 0; i < n; i++) {\n    console.log('Hola, persona invitada ' + i)\n  }\n  for (let i = 0; i < n; i++) {\n    console.log('Adiós, persona invitada ' + i)\n  }\n  console.log('¡Se cierran las puertas!')\n}\n```\n\n¿Cuántas líneas imprime `announce(3)`? ¿Y `announce(1000)`?\n\nAhora escribe `countPrintedLines(n)`, que devuelve cuántas líneas imprime `announce(n)`. No llames a `announce` ni uses un bucle: encuentra la fórmula, para que tu función responda al instante, incluso con un billón de invitados (una prueba usa n = 1,000,000,000,000, y un bucle tan grande se detendría después de 2 segundos).\n\nEjemplo: `countPrintedLines(3)` → `8`\n\nMeta: tiempo O(1), espacio O(1). ¿Y `announce`? Dos bucles seguidos son O(2n), que se simplifica a O(n)."
       },
       "difficulty": "easy",
       "category": "interview",

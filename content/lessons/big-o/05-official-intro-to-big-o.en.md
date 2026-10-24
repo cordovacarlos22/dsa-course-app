@@ -135,7 +135,7 @@ function printSeats(n) {
 console.log('n = 2:', printSeats(2), 'seats') // 4
 console.log('n = 3:', printSeats(3), 'seats') // 9
 console.log('n = 4:', printSeats(4), 'seats') // 16
-console.log('n = 10:', printSeats(10), 'seats') // 100
+console.log('n = 10:', printSeats(10), 'seats')
 ```
 
 2 → 4, 3 → 9, 4 → 16, 10 → 100: the runtime grows like n × n, so it's **O(n²)**. That grows much faster than O(n): try n = 1,000 and you get a million seats.

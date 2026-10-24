@@ -135,4 +135,4 @@ console.log(countShortNames(['Cleo', 'Hana', 'Ivan', 'Jade', 'Lola', 'Omar'])) /
 
 Neither: both lists cost 6 checks. The names changed how many short ones there were, but not how much work the loop did. That's what a Θ(n) loop looks like.
 
-**Common mistake:** thinking every loop has an O(1) best case. A loop only has a lucky input if it can stop early, with a `return` or a `break` inside. If it always runs to the end, its best case is as slow as its worst.
+**Common mistake:** thinking every loop has an Ω(1) best case. A loop only has a lucky input if it can stop early, with a `return` or a `break` inside. If it always runs to the end, its best case is as slow as its worst.

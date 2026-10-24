@@ -62,7 +62,7 @@
       "type": "code",
       "task": {
         "en": "Write `welcomeMessages(guests)`: return a new array with `'Welcome, <name>!'` for every guest, in order.",
-        "es": "Escribe `welcomeMessages(guests)`: devuelve un array nuevo con `'Welcome, <name>!'` para cada invitado, en orden."
+        "es": "Escribe `welcomeMessages(guests)`: devuelve un array nuevo con `'Welcome, <name>!'` para cada nombre, en orden."
       },
       "hint": {
         "en": "Start with `const messages = []`, and inside the loop `messages.push('Welcome, ' + guests[i] + '!')`.",

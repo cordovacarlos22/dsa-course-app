@@ -14,10 +14,10 @@
   },
   "arrayReindex": {
     "title": "Operaciones de array y reindexado",
-    "start": "Cada invitado del array tiene un índice, empezando en 0.",
-    "push": "push('Eli') agrega al final. Ningún otro invitado se mueve: O(1).",
-    "pop": "pop() quita del final. Ningún otro invitado se mueve: O(1).",
-    "shift": "shift() quita al primer invitado, así que todos los demás bajan un índice: O(n).",
+    "start": "Cada nombre del array tiene un índice, empezando en 0.",
+    "push": "push('Eli') agrega al final. Ningún otro nombre se mueve: O(1).",
+    "pop": "pop() quita del final. Ningún otro nombre se mueve: O(1).",
+    "shift": "shift() quita el primer nombre, así que todos los demás bajan un índice: O(n).",
     "unshift": "unshift('Ana') agrega al principio, así que todos los invitados suben un índice: O(n).",
     "legendNew": "nuevo",
     "legendMoved": "reindexado",
@@ -55,11 +55,11 @@
     "summary": "Big O siempre significa el peor caso: el código nunca será más lento que esto."
   },
   "linearBoxes": {
-    "title": "O(n): un paso por invitado",
+    "title": "O(n): un paso por persona",
     "chartLabel": "Los pasos crecen en línea recta con el número de invitados",
     "stepsAxis": "pasos",
     "count": "{{n}} invitados → {{count}} pasos",
-    "one": "Bienvenida a {{guest}}: un paso.",
+    "one": "Le damos la bienvenida a {{guest}}: un paso.",
     "four": "4 invitados, 4 pasos.",
     "eight": "Duplica los invitados (8) y el trabajo también se duplica: 8 pasos.",
     "sixteen": "16 invitados → 16 pasos.",
@@ -85,10 +85,10 @@
     "summary": "n, 2n y 3n tienen la misma forma, así que todas son O(n). Eliminamos la constante."
   },
   "nestedGrid": {
-    "title": "O(n²): cada invitado saluda a cada invitado",
+    "title": "O(n²): cada persona saluda a todas las demás",
     "count": "{{cells}} de {{n}} × {{n}} celdas",
-    "start": "Cada fila es un invitado (i). Por cada fila, el bucle de adentro recorre todas las columnas (j).",
-    "row": "La fila de {{guest}} está lista: el bucle de adentro corrió {{n}} veces. Las celdas grises son un invitado consigo mismo (se saltan).",
+    "start": "Cada fila es una persona (i). Por cada fila, el bucle de adentro recorre todas las columnas (j).",
+    "row": "La fila de {{guest}} está lista: el bucle de adentro corrió {{n}} veces. Las celdas grises son una persona consigo misma (se saltan).",
     "full": "3 invitados → 3 × 3 = {{total}} pasos internos.",
     "double": "Duplica los invitados a {{n}}: {{n}} × {{n}} = {{total}} pasos. ¡El doble de invitados, 4 veces el trabajo!",
     "summary": "Un bucle dentro de otro sobre la misma lista es O(n²), tiempo cuadrático."
@@ -102,9 +102,9 @@
   "twoInputs": {
     "title": "Dos entradas: invitados (a) y ayudantes (b)",
     "start": "La fiesta tiene 4 invitados (a) y 2 ayudantes (b): dos listas distintas.",
-    "guests": "Primer bucle: dar la bienvenida a cada invitado. Son a pasos.",
+    "guests": "Primer bucle: dar la bienvenida a cada persona. Son a pasos.",
     "helpers": "Después, un segundo bucle sobre los ayudantes: b pasos más. En total: O(a + b).",
-    "grid": "Ahora cada invitado le agradece a cada ayudante: un bucle sobre los ayudantes dentro de un bucle sobre los invitados. Son a × b pasos: O(a · b).",
+    "grid": "Ahora cada persona invitada le agradece a cada ayudante: un bucle sobre los ayudantes dentro de un bucle sobre los invitados. Son a × b pasos: O(a · b).",
     "summary": "No llames n a los dos tamaños: podría haber 4 invitados y 1,000 ayudantes. Usa una letra por entrada."
   },
   "memoryBoxes": {
@@ -114,7 +114,7 @@
     "boxes_other": "{{count}} cajas de memoria",
     "counter": "Contar {{n}} invitados solo necesita una caja: el contador.",
     "counterBig": "Con {{n}} invitados sigue siendo una caja. Espacio O(1).",
-    "tags": "Hacer un gafete para cada uno de los {{n}} invitados necesita una caja nueva por invitado.",
+    "tags": "Hacer un gafete para cada uno de los {{n}} nombres necesita una caja nueva por nombre.",
     "tagsBig": "{{n}} invitados → {{n}} gafetes. La memoria crece con n: espacio O(n).",
     "summary": "La complejidad espacial cuenta la memoria extra que crea el código cuando crece la entrada."
   },
@@ -175,20 +175,20 @@
       "isShort": "'{{guest}}' tiene {{length}} letras, 3 o menos: una operación por la revisión…",
       "isLong": "'{{guest}}' tiene {{length}} letras, más de 3: una operación por la revisión.",
       "addOne": "…y una por count = count + 1 (ahora {{count}}). Después i++ es una más.",
-      "fastForward": "Con {{n}} invitados saltamos al final. Cada invitado cuesta 3 o 4 operaciones.",
+      "fastForward": "Con {{n}} invitados saltamos al final. Cada nombre cuesta 3 o 4 operaciones.",
       "end": "Listo: {{ops}} operaciones para {{n}} invitados. Prueba los otros tamaños: el total crece con n."
     },
     "welcomeAll": {
-      "title": "welcomeAll: un mensaje por invitado",
+      "title": "welcomeAll: un mensaje por persona",
       "input": "{{n}} invitados",
-      "start": "Da la bienvenida a {{n}} invitados, uno por uno.",
+      "start": "Da la bienvenida a {{n}} invitados, una persona a la vez.",
       "print": "i = {{i}}: imprime 'Welcome, {{guest}}!'",
       "end": "{{n}} invitados → {{n}} mensajes. El trabajo crece con n: O(n)."
     },
     "welcomeAndGoodbye": {
       "title": "Dos bucles seguidos",
       "input": "{{n}} invitados",
-      "start": "Primero da la bienvenida a cada invitado y después despídete de cada invitado.",
+      "start": "Primero da la bienvenida a cada persona y después despídete de cada una.",
       "welcome": "Welcome, {{guest}}!",
       "secondLoop": "El primer bucle terminó ({{n}} mensajes). Ahora empieza el segundo bucle.",
       "goodbye": "Goodbye, {{guest}}!",
@@ -197,7 +197,7 @@
     "greetEveryone": {
       "title": "greetEveryone: un bucle dentro de otro",
       "input": "{{n}} invitados",
-      "start": "Por cada invitado i, el bucle de adentro recorre a todos los invitados j.",
+      "start": "Por cada persona i, el bucle de adentro recorre a todas las personas j.",
       "self": "i y j son {{a}}: nadie se saluda a sí mismo, pero el bucle de adentro igual dio un paso.",
       "greet": "{{a}} saluda a {{b}}. 👋",
       "end": "{{n}} × {{n}} = {{steps}} pasos internos ({{greetings}} saludos). Eso es O(n²)."
@@ -219,8 +219,8 @@
       "compare": "¿i ({{i}}) < {{n}}? Una comparación: 1 operación. Sí, así que el bucle corre.",
       "add": "count = count + 1: una suma y una asignación, 2 operaciones. Ahora count vale {{count}}.",
       "next": "i++ es la forma corta de i = i + 1: 2 operaciones más. De vuelta a la comparación.",
-      "fastForward": "Con {{n}} invitados saltamos al final. Cada invitado cuesta las mismas 5 operaciones.",
-      "end": "{{ops}} operaciones para contar {{n}} invitados: 5 por invitado más 3, o sea 5n + 3. guests.length da la misma respuesta ({{count}}) en 1 paso."
+      "fastForward": "Con {{n}} invitados saltamos al final. Cada nombre cuesta las mismas 5 operaciones.",
+      "end": "{{ops}} operaciones para contar {{n}} invitados: 5 por nombre más 3, o sea 5n + 3. guests.length da la misma respuesta ({{count}}) en 1 paso."
     },
     "giveGifts": {
       "title": "Un bucle con límite",

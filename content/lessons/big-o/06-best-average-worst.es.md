@@ -135,4 +135,4 @@ console.log(countShortNames(['Cleo', 'Hana', 'Ivan', 'Jade', 'Lola', 'Omar'])) /
 
 Con ninguna: las dos listas cuestan 6 revisiones. Los nombres cambiaron cuántos cortos había, pero no cuánto trabajo hizo el bucle. Así se ve un bucle Θ(n).
 
-**Error común:** pensar que todo bucle tiene un mejor caso O(1). Un bucle solo tiene una entrada con suerte si puede detenerse antes, con un `return` o un `break` adentro. Si siempre corre hasta el final, su mejor caso es igual de lento que el peor.
+**Error común:** pensar que todo bucle tiene un mejor caso Ω(1). Un bucle solo tiene una entrada con suerte si puede detenerse antes, con un `return` o un `break` adentro. Si siempre corre hasta el final, su mejor caso es igual de lento que el peor.
