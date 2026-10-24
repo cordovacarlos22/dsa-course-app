@@ -1,7 +1,7 @@
 ---
 title: Midiendo el tiempo de nuestro código
 order: 2
-minutes: 11
+minutes: 12
 ---
 
 > **Meta:** comparar dos soluciones que funcionan con un cronómetro, y ver por qué medir el tiempo no es una medida suficiente.
@@ -78,7 +78,7 @@ Antes de responder, tenemos que ponernos de acuerdo en qué significa "mejor". P
 - **Más legible:** otra persona lo puede entender y cambiar.
 - **Más corto:** a algunas personas les encanta el código con la menor cantidad de caracteres posible.
 
-Todas son válidas, y la respuesta correcta depende de la situación. Pero la mayoría de los desarrolladores está de acuerdo en que **la velocidad y la memoria** suelen ir primero, y por desgracia, perseguirlas muchas veces hace el código más difícil de leer. Escribir código rápido, ligero **y** fácil de leer es el acto de equilibrio de la buena programación, y va a salir una y otra vez en este curso.
+Todas son válidas, y la respuesta correcta depende de la situación. Pero casi toda la gente que programa está de acuerdo en que **la velocidad y la memoria** suelen ir primero, y por desgracia, perseguirlas muchas veces hace el código más difícil de leer. Escribir código rápido, ligero **y** fácil de leer es el acto de equilibrio de la buena programación, y va a salir una y otra vez en este curso.
 
 "Más rápido con entradas grandes" es lo que separa a nuestras dos soluciones. Con números pequeños, las dos terminan al instante. La diferencia solo aparece cuando n crece, y de eso trata esta gráfica:
 
@@ -114,7 +114,7 @@ Vamos a empezar con la velocidad, y volveremos a la memoria más adelante en est
 
 La forma más simple de medir la velocidad es un cronómetro. En el navegador, `performance.now()` te dice cuántos milisegundos han pasado desde que se abrió la página. Guárdalo en una variable antes de que corra el código, revísalo otra vez después y réstalos: la diferencia es cuánto tardó el código, en milisegundos. (Divide entre 1,000 si lo quieres en segundos.)
 
-Los desarrolladores de verdad hacen esto. Se llama **benchmarking** (medir el rendimiento), y es una buena forma de confirmar que un cambio hizo tu código más rápido. Pero el tiempo tiene un problema, y la siguiente animación lo muestra:
+Quienes programan hacen esto de verdad. Se llama **benchmarking** (medir el rendimiento), y es una buena forma de confirmar que un cambio hizo tu código más rápido. Pero el tiempo tiene un problema, y la siguiente animación lo muestra:
 
 ```viz
 stopwatch-race
@@ -122,7 +122,7 @@ stopwatch-race
 
 **Qué acaba de pasar:** el mismo código corrió en una laptop rápida y en un teléfono viejo. La laptop terminó mucho antes, y una segunda corrida dio tiempos distintos en las dos, aunque nada cambió en el código. Pero las dos máquinas hicieron exactamente el mismo número de pasos, y los pasos solo cambiaron cuando cambió el número de invitados. En la última escena, un trabajo chiquito marcó 0.0 ms en las dos: demasiado rápido para medirlo.
 
-Ahora mide tú nuestras dos soluciones. Presiona **Ejecutar** varias veces:
+Ahora mide tú nuestras dos soluciones. Antes de presionar **Ejecutar**, predice cuál gana, y más o menos por cuánto. Luego ejecútalo varias veces:
 
 ```js-run
 function sumOneTo(n) {
@@ -154,6 +154,8 @@ La fórmula gana por mucho. Pero mira los tiempos cuando lo vuelves a ejecutar: 
 2. **La misma máquina registra tiempos distintos.** Otros programas, el navegador y las optimizaciones de JavaScript cambian un poco en cada ejecución.
 3. **El código rápido puede ser demasiado rápido para medirlo.** Cuando varias soluciones terminan en una fracción mínima de milisegundo, el cronómetro no puede decir cuál es de verdad la más eficiente.
 
-Medir el tiempo no es mala idea; los desarrolladores lo hacen todo el tiempo para confirmar que un cambio ayudó. Pero imagina un código que tarda una hora, comparado con otra versión que tarda cuatro. No quieres ejecutar las dos (¡y esperar cinco horas!) solo para saber cuál es mejor. Necesitamos una forma de hablar de cómo se comporta el código **sin** medirlo. Ahí es donde entra Big O.
+**Por dentro:** dos cosas hacen que los tiempos se muevan incluso en una sola computadora. Primero, los motores de JavaScript no ejecutan tu código igual cada vez: observan qué partes se ejecutan mucho, como un bucle muy usado, y las compilan a código de máquina más rápido mientras el programa corre. Así que las primeras ejecuciones pueden ser más lentas que las siguientes, antes de que eso pase. Segundo, los navegadores hacen `performance.now()` un poco menos preciso a propósito, como medida de seguridad, así que un trabajo que tarda unos microsegundos puede aparecer como 0. Las dos son razones para medir con entradas grandes y varias ejecuciones, y las dos son razones para contar operaciones.
+
+Medir el tiempo no es mala idea; quienes programan lo hacen todo el tiempo para confirmar que un cambio ayudó. Pero imagina un código que tarda una hora, comparado con otra versión que tarda cuatro. No quieres ejecutar las dos (¡y esperar cinco horas!) solo para saber cuál es mejor. Necesitamos una forma de hablar de cómo se comporta el código **sin** medirlo. Ahí es donde entra Big O.
 
 **Error común:** medir una vez y confiar en el número. Una sola corrida se puede desviar por cualquier otra cosa que esté haciendo tu computadora. Si vas a medir, hazlo varias veces, con una entrada grande, y compara la tendencia, no un solo resultado.

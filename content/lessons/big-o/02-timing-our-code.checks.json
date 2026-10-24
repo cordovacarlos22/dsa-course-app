@@ -70,7 +70,7 @@
       "type": "choice",
       "question": {
         "en": "When developers compare solutions, which two things usually matter most?",
-        "es": "Cuando los desarrolladores comparan soluciones, ¿qué dos cosas suelen importar más?"
+        "es": "Cuando se comparan soluciones en programación, ¿qué dos cosas suelen importar más?"
       },
       "options": [
         {
@@ -101,38 +101,29 @@
       }
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "Which of these is a real problem with timing code with a stopwatch?",
-        "es": "¿Cuál de estos es un problema real de medir el código con un cronómetro?"
+        "en": "In your own words: why isn't a stopwatch a reliable way to decide which of two solutions is better?",
+        "es": "Con tus palabras: ¿por qué un cronómetro no es una forma confiable de decidir cuál de dos soluciones es mejor?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "The same code gets different times on different computers, and even on the same computer from one run to the next. Very fast code can be too quick for the stopwatch to measure at all. And to compare slow code, you'd have to wait for it to finish. We need a way to compare code without timing it.",
+        "es": "El mismo código da tiempos distintos en computadoras distintas, y hasta en la misma computadora de una ejecución a otra. El código muy rápido puede ser demasiado rápido para que el cronómetro lo mida. Y para comparar código lento, tendrías que esperar a que termine. Necesitamos una forma de comparar código sin medir su tiempo."
+      },
+      "checklist": [
         {
-          "en": "`performance.now()` doesn't exist in browsers",
-          "es": "`performance.now()` no existe en los navegadores"
+          "en": "Says different computers give different times",
+          "es": "Dice que computadoras distintas dan tiempos distintos"
         },
         {
-          "en": "Timing always gives exactly the same number",
-          "es": "Medir el tiempo siempre da exactamente el mismo número"
+          "en": "Says the same computer gives different times from run to run",
+          "es": "Dice que la misma computadora da tiempos distintos en cada ejecución"
         },
         {
-          "en": "Very fast code can be too fast to measure precisely",
-          "es": "El código muy rápido puede ser demasiado rápido para medirlo con precisión"
-        },
-        {
-          "en": "You can only time code that has a loop",
-          "es": "Solo puedes medir código que tiene un bucle"
+          "en": "Says very fast code can be too fast to measure",
+          "es": "Dice que el código muy rápido puede ser demasiado rápido para medirlo"
         }
-      ],
-      "answer": 2,
-      "hint": {
-        "en": "There are three problems in the list. Which option is one of them?",
-        "es": "En la lista hay tres problemas. ¿Qué opción es uno de ellos?"
-      },
-      "explanation": {
-        "en": "Times change between machines and between runs, and tiny times are too small to measure precisely.",
-        "es": "Los tiempos cambian entre máquinas y entre ejecuciones, y los tiempos mínimos son demasiado pequeños para medirlos con precisión."
-      }
+      ]
     }
   ]
 }

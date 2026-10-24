@@ -1,7 +1,7 @@
 ---
 title: Why Big O?
 order: 1
-minutes: 11
+minutes: 12
 ---
 
 > **Goal:** understand why we need a way to compare code, and what this module will teach you.
@@ -75,6 +75,8 @@ function reverseWithMethods(text) {
 console.log(reverseWithLoop('hello'), reverseWithMethods('hello'))
 ```
 
+**Under the hood:** `reverseWithMethods` looks like one step, but it's three trips over the letters. `split('')` walks the text and builds an array with one item per letter. `reverse()` walks that array, swapping letters from the two ends toward the middle. And `join('')` walks it once more to glue the letters into a new text. That's three hidden loops, and each one grows with the length of the text. Built-in methods aren't magic: someone wrote the loop for you.
+
 **Common mistake:** judging code by how short it is. `reverseWithMethods` is one line, but `split`, `reverse` and `join` each go through every letter behind the scenes. Fewer lines doesn't mean less work.
 
 ## A version that never stops early
@@ -89,7 +91,7 @@ trace-is-invited-all
 
 **What just happened:** `isInvitedAll` set `found = true` when it saw the name… and then kept reading anyway. Pick **find 'Ana'**: Ana is the very first guest, and the code still checks all 6 names. `isInvited` would have stopped after one check.
 
-Run both versions side by side. Each one counts its checks as it goes:
+Before you run it, predict: how many checks will each version make for 'Ana', who's first in line? And for 'Zoe', who isn't on the list? Then run both versions side by side. Each one counts its checks as it goes:
 
 ```js-run
 const guests = ['Ana', 'Ben', 'Cleo', 'Dev', 'Eli', 'Fay']
@@ -122,7 +124,11 @@ function isInvitedAll(name) {
 
 console.log('isInvited:   ', isInvited('Ana'))
 console.log('isInvitedAll:', isInvitedAll('Ana'))
+console.log('isInvited:   ', isInvited('Zoe'))
+console.log('isInvitedAll:', isInvitedAll('Zoe'))
 ```
+
+For 'Ana', it's 1 check against 6: `isInvited` stopped as soon as it could. For 'Zoe', both made 6 checks, because when the name isn't there, even the version that stops early has to read the whole list. So stopping early helps with some inputs, never hurts, and in the worst case both versions do the same work. You'll meet that idea again in the lesson on best, average and worst cases.
 
 **Common mistake:** deciding it doesn't matter because the list is short. With 6 guests you'd never notice a difference. With 6 million names in a database, one version can answer instantly and the other reads every name, every time.
 

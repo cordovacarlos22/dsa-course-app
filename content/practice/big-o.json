@@ -73,6 +73,38 @@
       }
     },
     {
+      "id": "hidden-loops-in-methods",
+      "topic": "Big O: Intro",
+      "prompt": {
+        "en": "This function is one line long. How many trips over the letters does it make?",
+        "es": "Esta función mide una sola línea. ¿Cuántos recorridos de las letras hace?"
+      },
+      "code": "function reverseWithMethods(text) {\n  return text.split('').reverse().join('')\n}",
+      "options": [
+        {
+          "en": "One, because the whole function is a single line",
+          "es": "Uno, porque toda la función es una sola línea"
+        },
+        {
+          "en": "None, because built-in methods take no time at all",
+          "es": "Ninguno, porque los métodos incluidos no tardan nada"
+        },
+        {
+          "en": "It depends on how fast the computer that runs it is",
+          "es": "Depende de qué tan rápida sea la computadora que lo ejecuta"
+        },
+        {
+          "en": "Three: one each for `split`, `reverse` and `join`",
+          "es": "Tres: uno por `split`, otro por `reverse` y otro por `join`"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Each built-in method has a loop inside. `split('')` walks the text to build an array, `reverse()` walks the array, and `join('')` walks it again to make the new text. Fewer lines doesn't mean less work.",
+        "es": "Cada método incluido tiene un bucle por dentro. `split('')` recorre el texto para armar un array, `reverse()` recorre el array, y `join('')` lo vuelve a recorrer para formar el texto nuevo. Menos líneas no significa menos trabajo."
+      }
+    },
+    {
       "id": "best-case-omega",
       "topic": "Big O: Worst Case",
       "prompt": {
@@ -608,6 +640,37 @@
       }
     },
     {
+      "id": "space-complexity-describes",
+      "topic": "Big O: Intro",
+      "prompt": {
+        "en": "What does **space complexity** describe?",
+        "es": "¿Qué describe la **complejidad espacial**?"
+      },
+      "options": [
+        {
+          "en": "How the memory the code needs grows with the input",
+          "es": "Cómo crece con la entrada la memoria que necesita el código"
+        },
+        {
+          "en": "How many seconds the code takes to finish on your computer",
+          "es": "Cuántos segundos tarda el código en terminar en tu computadora"
+        },
+        {
+          "en": "How many lines of code the function has in it",
+          "es": "Cuántas líneas de código tiene la función"
+        },
+        {
+          "en": "How fast your computer's processor can work",
+          "es": "Qué tan rápido puede trabajar el procesador de tu computadora"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Space complexity is about memory: how much extra memory the code needs as the input grows. Seconds are time, not space, and the computer's speed or the number of lines doesn't change it.",
+        "es": "La complejidad espacial trata de la memoria: cuánta memoria extra necesita el código cuando crece la entrada. Los segundos son tiempo, no espacio, y ni la velocidad de la computadora ni el número de líneas la cambian."
+      }
+    },
+    {
       "id": "timing-formula-vs-loop",
       "topic": "Big O: Timing Our Code",
       "prompt": {
@@ -636,6 +699,162 @@
       "explanation": {
         "en": "One multiplication, one addition and one division, whatever n is: always 3, so O(1). The loop does about 5n + 2, so O(n).",
         "es": "Una multiplicación, una suma y una división, sea cual sea n: siempre 3, así que O(1). El bucle hace unas 5n + 2, así que O(n)."
+      }
+    },
+    {
+      "id": "first-runs-slower",
+      "topic": "Big O: Timing Our Code",
+      "prompt": {
+        "en": "You time the same function 5 times in a row, and the first runs are slower than the later ones. What's a likely reason?",
+        "es": "Mides la misma función 5 veces seguidas, y las primeras ejecuciones son más lentas que las siguientes. ¿Cuál es una razón probable?"
+      },
+      "options": [
+        {
+          "en": "The engine compiles busy code into faster machine code as it runs",
+          "es": "El motor compila el código muy usado a código de máquina más rápido mientras corre"
+        },
+        {
+          "en": "The function's Big O changes after the first run, then stays the same",
+          "es": "El Big O de la función cambia después de la primera ejecución y luego se queda igual"
+        },
+        {
+          "en": "The computer runs faster the longer it stays switched on",
+          "es": "La computadora corre más rápido mientras más tiempo lleva prendida"
+        },
+        {
+          "en": "`performance.now()` gets more precise with every call you make to it",
+          "es": "`performance.now()` se vuelve más preciso con cada llamada que le haces"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Engines watch which code runs a lot and compile it into faster machine code while the program runs, so early runs can be slower. That's one more reason a stopwatch isn't a reliable way to compare code, and why Big O counts operations.",
+        "es": "Los motores observan qué código se ejecuta mucho y lo compilan a código de máquina más rápido mientras el programa corre, así que las primeras ejecuciones pueden ser más lentas. Es una razón más por la que un cronómetro no es una forma confiable de comparar código, y por la que Big O cuenta operaciones."
+      }
+    },
+    {
+      "id": "timing-stopwatch-problem",
+      "topic": "Big O: Timing Our Code",
+      "prompt": {
+        "en": "Which of these is a real problem with timing code with a stopwatch?",
+        "es": "¿Cuál de estos es un problema real de medir el código con un cronómetro?"
+      },
+      "options": [
+        {
+          "en": "`performance.now()` doesn't exist in browsers, only in Node.js",
+          "es": "`performance.now()` no existe en los navegadores, solo en Node.js"
+        },
+        {
+          "en": "Timing always gives exactly the same number on every run",
+          "es": "Medir el tiempo siempre da exactamente el mismo número en cada ejecución"
+        },
+        {
+          "en": "You can only time code that has at least one loop in it",
+          "es": "Solo puedes medir el tiempo de código que tenga al menos un bucle"
+        },
+        {
+          "en": "Very fast code can be too fast to measure precisely",
+          "es": "El código muy rápido puede ser demasiado rápido para medirlo con precisión"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Times change between machines and between runs, and tiny times are too small to measure precisely.",
+        "es": "Los tiempos cambian entre máquinas y entre ejecuciones, y los tiempos mínimos son demasiado pequeños para medirlos con precisión."
+      }
+    },
+    {
+      "id": "count-first-and-last",
+      "topic": "Big O: Counting Operations",
+      "prompt": {
+        "en": "About how many operations does this function do for a line of 1,000 guests?",
+        "es": "¿Más o menos cuántas operaciones hace esta función con una fila de 1,000 personas?"
+      },
+      "code": "function firstAndLast(guests) {\n  return guests[0] + ' opens the party and ' + guests[guests.length - 1] + ' closes it'\n}",
+      "options": [
+        {
+          "en": "About 1,000: one for each guest in line",
+          "es": "Unas 1,000: una por cada persona de la fila"
+        },
+        {
+          "en": "About 5,000: five for each guest in line",
+          "es": "Unas 5,000: cinco por cada persona de la fila"
+        },
+        {
+          "en": "About 2,000: two for each guest in line",
+          "es": "Unas 2,000: dos por cada persona de la fila"
+        },
+        {
+          "en": "About 4: no loop, so no repeats",
+          "es": "Unas 4: no hay bucle, nada se repite"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "One subtraction and three additions, and nothing repeats, because there's no loop. With 4 guests or 1,000, it's the same 4 operations.",
+        "es": "Una resta y tres sumas, y nada se repite, porque no hay bucle. Con 4 personas o con 1,000, son las mismas 4 operaciones."
+      }
+    },
+    {
+      "id": "growth-ratio",
+      "topic": "Big O: Visualizing Time Complexities",
+      "prompt": {
+        "en": "You count a function's operations for n = 1,000, then 10,000, then 100,000. Each count is about 10 times the one before. What does that tell you?",
+        "es": "Cuentas las operaciones de una función con n = 1,000, luego 10,000, luego 100,000. Cada conteo es unas 10 veces el anterior. ¿Qué te dice eso?"
+      },
+      "options": [
+        {
+          "en": "The work grows in proportion to n: a straight line",
+          "es": "El trabajo crece en proporción a n: una línea recta"
+        },
+        {
+          "en": "The work stays the same: a flat line, whatever n is",
+          "es": "El trabajo se queda igual: una línea plana, sea cual sea n"
+        },
+        {
+          "en": "The work grows with n × n: a curve that bends up",
+          "es": "El trabajo crece con n × n: una curva que se dobla hacia arriba"
+        },
+        {
+          "en": "Nothing yet: you'd need to time it on a computer",
+          "es": "Nada todavía: tendrías que medir el tiempo en una computadora"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "n grew 10 times at each step, and so did the count. Work that grows by the same factor as n grows in proportion to n. Flat work would stay the same, and n × n work would grow 100 times.",
+        "es": "n creció 10 veces en cada paso, y la cuenta también. Un trabajo que crece por el mismo factor que n crece en proporción a n. Un trabajo plano se quedaría igual, y uno de n × n crecería 100 veces."
+      }
+    },
+    {
+      "id": "tiny-inputs-trend",
+      "topic": "Big O: Visualizing Time Complexities",
+      "prompt": {
+        "en": "With tiny inputs, your timings jump around from run to run. What should you pay attention to?",
+        "es": "Con entradas muy pequeñas, tus tiempos brincan de una ejecución a otra. ¿En qué deberías fijarte?"
+      },
+      "options": [
+        {
+          "en": "The general trend as n gets big",
+          "es": "La tendencia general cuando n se hace grande"
+        },
+        {
+          "en": "The exact number of milliseconds of the fastest run",
+          "es": "El número exacto de milisegundos de la ejecución más rápida"
+        },
+        {
+          "en": "Only the very first run",
+          "es": "Solo la primera ejecución"
+        },
+        {
+          "en": "Nothing: timing is always useless",
+          "es": "Nada: medir el tiempo siempre es inútil"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Don't read the exact numbers, read the trend. That's what Big O describes.",
+        "es": "No leas los números exactos, lee la tendencia. Eso es lo que describe Big O."
       }
     },
     {

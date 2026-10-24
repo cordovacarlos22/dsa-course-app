@@ -1,7 +1,7 @@
 ---
 title: ¿Por qué Big O?
 order: 1
-minutes: 11
+minutes: 12
 ---
 
 > **Meta:** entender por qué necesitamos una forma de comparar código y qué te va a enseñar este módulo.
@@ -75,6 +75,8 @@ function reverseWithMethods(text) {
 console.log(reverseWithLoop('hello'), reverseWithMethods('hello'))
 ```
 
+**Por dentro:** `reverseWithMethods` parece un solo paso, pero son tres recorridos de las letras. `split('')` recorre el texto y arma un array con un elemento por letra. `reverse()` recorre ese array, intercambiando letras desde los dos extremos hacia el centro. Y `join('')` lo recorre una vez más para unir las letras en un texto nuevo. Son tres bucles escondidos, y cada uno crece con el largo del texto. Los métodos incluidos no son magia: alguien escribió el bucle por ti.
+
 **Error común:** juzgar el código por lo corto que es. `reverseWithMethods` es una sola línea, pero `split`, `reverse` y `join` recorren cada letra por dentro. Menos líneas no significa menos trabajo.
 
 ## Una versión que nunca se detiene antes
@@ -89,7 +91,7 @@ trace-is-invited-all
 
 **Qué acaba de pasar:** `isInvitedAll` puso `found = true` cuando vio el nombre… y aun así siguió leyendo. Elige **buscar a 'Ana'**: Ana va primero en la lista, y el código igual revisa los 6 nombres. `isInvited` se habría detenido después de una revisión.
 
-Ejecuta las dos versiones lado a lado. Cada una cuenta sus revisiones mientras avanza:
+Antes de ejecutarlo, predice cuántas revisiones hará cada versión para 'Ana', que va primero en la lista, y para 'Zoe', que no está en la lista. Luego ejecuta las dos versiones; cada una cuenta sus revisiones mientras avanza:
 
 ```js-run
 const guests = ['Ana', 'Ben', 'Cleo', 'Dev', 'Eli', 'Fay']
@@ -122,7 +124,11 @@ function isInvitedAll(name) {
 
 console.log('isInvited:   ', isInvited('Ana'))
 console.log('isInvitedAll:', isInvitedAll('Ana'))
+console.log('isInvited:   ', isInvited('Zoe'))
+console.log('isInvitedAll:', isInvitedAll('Zoe'))
 ```
+
+Para 'Ana', es 1 revisión contra 6: `isInvited` se detuvo en cuanto pudo. Para 'Zoe', las dos hicieron 6 revisiones, porque cuando el nombre no está, hasta la versión que se detiene antes tiene que leer toda la lista. Así que detenerse antes ayuda con algunas entradas, nunca estorba, y en el peor caso las dos versiones hacen el mismo trabajo. Vas a ver esa idea otra vez en la lección del mejor caso, el caso promedio y el peor caso.
 
 **Error común:** decidir que no importa porque la lista es corta. Con 6 invitados nunca notarías la diferencia. Con 6 millones de nombres en una base de datos, una versión puede responder al instante y la otra lee cada nombre, cada vez.
 
@@ -159,7 +165,7 @@ Big O también mide la **complejidad espacial**: cuánta **memoria** usa el cód
 memory-boxes
 ```
 
-**Qué acaba de pasar:** contar a los invitados necesitó una sola caja de memoria, el contador, ya fueran 3 invitados o 6, y seguiría siendo una sola caja con 6 millones. Hacer un gafete para cada invitado necesitó una caja nueva por invitado, así que la memoria creció con la lista. Los mismos invitados, dos trabajos, y dos cantidades muy distintas de memoria extra.
+**Qué acaba de pasar:** contar a los invitados necesitó una sola caja de memoria, el contador, ya fueran 3 invitados o 6, y seguiría siendo una sola caja con 6 millones. Hacer un gafete para cada nombre de la lista necesitó una caja nueva por nombre, así que la memoria creció con la lista. Los mismos invitados, dos trabajos, y dos cantidades muy distintas de memoria extra.
 
 Estos son los dos trabajos en código:
 
@@ -173,7 +179,7 @@ for (let i = 0; i < guests.length; i++) {
 }
 console.log('Invitados:', count)
 
-// Un gafete nuevo por invitado:
+// Un gafete nuevo por cada nombre:
 const nameTags = []
 for (let i = 0; i < guests.length; i++) {
   nameTags.push('Hola, me llamo ' + guests[i])

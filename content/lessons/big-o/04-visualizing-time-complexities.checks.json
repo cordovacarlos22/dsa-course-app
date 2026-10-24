@@ -35,38 +35,25 @@
       }
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "With tiny inputs, your timings jump around from run to run. What should you pay attention to?",
-        "es": "Con entradas muy pequeñas, tus tiempos brincan de una ejecución a otra. ¿En qué deberías fijarte?"
+        "en": "In your own words: why do the timings of tiny inputs jump around, and what should you look at instead?",
+        "es": "Con tus palabras: ¿por qué los tiempos de entradas muy pequeñas saltan de un lado a otro, y qué deberías mirar en su lugar?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "With a tiny input, the work takes a fraction of a millisecond, so everything else the computer is doing, like other apps, the browser and JavaScript getting ready, is bigger than the work itself. Instead of single numbers, look at the trend with big inputs: how much the time grows each time n grows.",
+        "es": "Con una entrada muy pequeña, el trabajo tarda una fracción de milisegundo, así que todo lo demás que hace la computadora, como otras apps, el navegador y JavaScript preparándose, es más grande que el trabajo mismo. En vez de números sueltos, mira la tendencia con entradas grandes: cuánto crece el tiempo cada vez que crece n."
+      },
+      "checklist": [
         {
-          "en": "The exact number of milliseconds of the fastest run",
-          "es": "El número exacto de milisegundos de la ejecución más rápida"
+          "en": "Says everything else the computer is doing is bigger than such tiny work",
+          "es": "Dice que todo lo demás que hace la computadora es más grande que un trabajo tan pequeño"
         },
         {
-          "en": "The general trend as n gets big",
-          "es": "La tendencia general cuando n se hace grande"
-        },
-        {
-          "en": "Only the very first run",
-          "es": "Solo la primera ejecución"
-        },
-        {
-          "en": "Nothing: timing is always useless",
-          "es": "Nada: medir el tiempo siempre es inútil"
+          "en": "Says to read the trend with big inputs, not single numbers",
+          "es": "Dice que hay que leer la tendencia con entradas grandes, no números sueltos"
         }
-      ],
-      "answer": 1,
-      "hint": {
-        "en": "Look for the sentence in bold near the end of this step: \"don't read…\"",
-        "es": "Busca la frase en negritas cerca del final de este paso: \"no leas…\""
-      },
-      "explanation": {
-        "en": "Don't read the exact numbers, read the trend. That's what Big O describes.",
-        "es": "No leas los números exactos, lee la tendencia. Eso es lo que describe Big O."
-      }
+      ]
     },
     {
       "type": "choice",
