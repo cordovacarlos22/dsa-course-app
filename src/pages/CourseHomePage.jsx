@@ -33,7 +33,7 @@ function CourseHomePage() {
               <ModuleCard key={module.slug} module={module} />
             ))}
           </ol>
-          <ExamCard section={section} />
+          <ExamCard section={section} language={language} />
         </section>
       ))}
     </div>
@@ -41,7 +41,7 @@ function CourseHomePage() {
 }
 
 // The exam at the end of a section, for sections whose modules have quizzes.
-function ExamCard({ section }) {
+function ExamCard({ section, language }) {
   const { t } = useTranslation()
   let questions = 0
   for (let i = 0; i < section.modules.length; i++) {
@@ -58,7 +58,7 @@ function ExamCard({ section }) {
       <span>
         <span className="block text-lg font-bold">
           <span aria-hidden="true">📝 </span>
-          {t('exam.card')}
+          {t('exam.card', { title: localize(section.title, language) })}
         </span>
         <span className="mt-1 block text-sm text-slate-600">
           {t('exam.cardDetail', { count: Math.min(EXAM_SIZE, questions) })}

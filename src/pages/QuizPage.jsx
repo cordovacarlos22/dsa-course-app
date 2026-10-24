@@ -171,7 +171,15 @@ function QuizStart({ quiz, questionCount, focusHeading, onStart }) {
 
 // One question at a time, then the score card. `quiz` is { title, back:
 // { to, label }, scoreId, doneLabel? }: a module quiz or a section exam.
-export function QuizPlayer({ quiz, questions, isFullRun, onRestart }) {
+// `focusFirstQuestion`: false when the player is the first thing on the page
+// (an exam), so opening the page doesn't move the focus past its title.
+export function QuizPlayer({
+  quiz,
+  questions,
+  isFullRun,
+  focusFirstQuestion = true,
+  onRestart,
+}) {
   const { t } = useTranslation()
   const { language } = useLanguage()
   const [index, setIndex] = useState(0) // the question on screen
@@ -181,9 +189,12 @@ export function QuizPlayer({ quiz, questions, isFullRun, onRestart }) {
   // At the end: { score, total, best, isSaved }
   const [result, setResult] = useState(null)
   const headingRef = useRef(null)
-  // What was on screen last time, to notice when it changes. It starts at
-  // "nothing", so pressing Start moves the focus to the first question.
-  const shownRef = useRef({ index: -1, isDone: false })
+  // What was on screen last time, to notice when it changes. Starting at
+  // "nothing" moves the focus to the first question (after Start).
+  const shownRef = useRef({
+    index: focusFirstQuestion ? -1 : 0,
+    isDone: false,
+  })
 
   const question = questions[index]
   const isChecked = answers.length > index
@@ -246,6 +257,7 @@ export function QuizPlayer({ quiz, questions, isFullRun, onRestart }) {
           onTryAgain={onRestart}
           back={quiz.back}
           doneLabel={quiz.doneLabel ?? t('quiz.complete')}
+          shortRunLabel={quiz.shortRunLabel ?? t('quiz.shortRun')}
         />
       </article>
     )
@@ -402,6 +414,7 @@ function QuizResult({
   onTryAgain,
   back,
   doneLabel,
+  shortRunLabel,
 }) {
   const { t } = useTranslation()
   const { language } = useLanguage()
@@ -433,7 +446,7 @@ function QuizResult({
           </p>
         )}
         {!isSaved && (
-          <p className="mt-1 text-sm text-slate-500">{t('quiz.shortRun')}</p>
+          <p className="mt-1 text-sm text-slate-500">{shortRunLabel}</p>
         )}
         <div className="mt-5 flex flex-wrap justify-center gap-2">
           <button

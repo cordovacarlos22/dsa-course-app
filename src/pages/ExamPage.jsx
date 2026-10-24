@@ -28,6 +28,7 @@ function ExamPage() {
     back: { to: '/learn', label: t('exam.backToCourse') },
     scoreId: `exam:${section.slug}`,
     doneLabel: t('exam.complete'),
+    shortRunLabel: t('exam.shortRun'),
   }
   // Called before the early return: hooks must run on every render.
   useDocumentTitle(hasExam ? quiz.title : t('notFound.title'))
@@ -50,6 +51,7 @@ function Exam({ quiz, questions }) {
       quiz={quiz}
       questions={run.questions}
       isFullRun
+      focusFirstQuestion={run.id > 0}
       onRestart={() => setRun({ id: run.id + 1, questions: pick() })}
     />
   )

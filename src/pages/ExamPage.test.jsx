@@ -31,8 +31,11 @@ beforeEach(() => celebrate.mockReset())
 describe('section exam', () => {
   it('is linked at the end of a section that has quizzes, and not where none exist', async () => {
     await renderAt('/learn')
-    const exams = screen.getAllByRole('link', { name: /Section exam/ })
+    const exams = screen
+      .getAllByRole('link')
+      .filter((link) => link.getAttribute('href').endsWith('/exam'))
     expect(exams[0]).toHaveAttribute('href', '/learn/sections/foundations/exam')
+    expect(exams[0]).toHaveTextContent('Foundations exam')
     expect(exams[0]).toHaveTextContent('20 questions mixed')
     // Foundations, Problem Solving and Data Structures have quizzes so far.
     expect(exams).toHaveLength(3)

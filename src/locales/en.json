@@ -323,12 +323,13 @@
   },
   "exam": {
     "title": "Section {{number}} exam: {{title}}",
-    "card": "Section exam",
+    "card": "{{title}} exam",
     "cardDetail": "{{count}} questions mixed from this section's modules",
     "take": "Take the exam",
     "best": "Your best: {{score}} of {{total}}",
     "from": "From {{module}}",
     "complete": "Exam complete!",
-    "backToCourse": "Back to the course"
+    "backToCourse": "Back to the course",
+    "shortRun": "Only an exam with every question answered updates your best score."
   }
 }
