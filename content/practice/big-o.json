@@ -73,6 +73,38 @@
       }
     },
     {
+      "id": "hidden-loops-in-methods",
+      "topic": "Big O: Intro",
+      "prompt": {
+        "en": "This function is one line long. How many trips over the letters does it make?",
+        "es": "Esta función mide una sola línea. ¿Cuántos recorridos de las letras hace?"
+      },
+      "code": "function reverseWithMethods(text) {\n  return text.split('').reverse().join('')\n}",
+      "options": [
+        {
+          "en": "One, because it's one line",
+          "es": "Uno, porque es una sola línea"
+        },
+        {
+          "en": "None: built-in methods take no time",
+          "es": "Ninguno: los métodos incluidos no tardan nada"
+        },
+        {
+          "en": "It depends on how fast the computer is",
+          "es": "Depende de qué tan rápida sea la computadora"
+        },
+        {
+          "en": "Three: `split`, `reverse` and `join` each go through the letters",
+          "es": "Tres: `split`, `reverse` y `join` recorren las letras cada uno"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Each built-in method has a loop inside. `split('')` walks the text to build an array, `reverse()` walks the array, and `join('')` walks it again to make the new text. Fewer lines doesn't mean less work.",
+        "es": "Cada método incluido tiene un bucle por dentro. `split('')` recorre el texto para armar un array, `reverse()` recorre el array, y `join('')` lo vuelve a recorrer para formar el texto nuevo. Menos líneas no significa menos trabajo."
+      }
+    },
+    {
       "id": "best-case-omega",
       "topic": "Big O: Worst Case",
       "prompt": {
@@ -636,6 +668,100 @@
       "explanation": {
         "en": "One multiplication, one addition and one division, whatever n is: always 3, so O(1). The loop does about 5n + 2, so O(n).",
         "es": "Una multiplicación, una suma y una división, sea cual sea n: siempre 3, así que O(1). El bucle hace unas 5n + 2, así que O(n)."
+      }
+    },
+    {
+      "id": "first-runs-slower",
+      "topic": "Big O: Timing Our Code",
+      "prompt": {
+        "en": "You time the same function 5 times in a row, and the first runs are slower than the later ones. What's a likely reason?",
+        "es": "Mides la misma función 5 veces seguidas, y las primeras ejecuciones son más lentas que las siguientes. ¿Cuál es una razón probable?"
+      },
+      "options": [
+        {
+          "en": "The JavaScript engine compiles code that runs a lot into faster machine code while the program runs",
+          "es": "El motor de JavaScript compila a código de máquina más rápido el código que se ejecuta mucho, mientras el programa corre"
+        },
+        {
+          "en": "The function's Big O changes after the first run",
+          "es": "El Big O de la función cambia después de la primera ejecución"
+        },
+        {
+          "en": "The computer gets faster the longer it's on",
+          "es": "La computadora se vuelve más rápida mientras más tiempo está prendida"
+        },
+        {
+          "en": "`performance.now()` gets more precise with every call",
+          "es": "`performance.now()` se vuelve más preciso con cada llamada"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Engines watch which code runs a lot and compile it into faster machine code while the program runs, so early runs can be slower. That's one more reason a stopwatch isn't a reliable way to compare code, and why Big O counts operations.",
+        "es": "Los motores observan qué código se ejecuta mucho y lo compilan a código de máquina más rápido mientras el programa corre, así que las primeras ejecuciones pueden ser más lentas. Es una razón más por la que un cronómetro no es una forma confiable de comparar código, y por la que Big O cuenta operaciones."
+      }
+    },
+    {
+      "id": "count-first-and-last",
+      "topic": "Big O: Counting Operations",
+      "prompt": {
+        "en": "About how many operations does this function do for a line of 1,000 guests?",
+        "es": "¿Más o menos cuántas operaciones hace esta función con una fila de 1,000 personas?"
+      },
+      "code": "function firstAndLast(guests) {\n  return guests[0] + ' opens the party and ' + guests[guests.length - 1] + ' closes it'\n}",
+      "options": [
+        {
+          "en": "About 1,000: one per guest",
+          "es": "Unas 1,000: una por persona"
+        },
+        {
+          "en": "About 5,000",
+          "es": "Unas 5,000"
+        },
+        {
+          "en": "About 2,000: one for each end of the line",
+          "es": "Unas 2,000: una por cada extremo de la fila"
+        },
+        {
+          "en": "About 4, the same as for any number of guests: there's no loop",
+          "es": "Unas 4, igual que con cualquier número de personas: no hay bucle"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "One subtraction and three additions, and nothing repeats, because there's no loop. With 4 guests or 1,000, it's the same 4 operations.",
+        "es": "Una resta y tres sumas, y nada se repite, porque no hay bucle. Con 4 personas o con 1,000, son las mismas 4 operaciones."
+      }
+    },
+    {
+      "id": "growth-ratio",
+      "topic": "Big O: Visualizing Time Complexities",
+      "prompt": {
+        "en": "You count a function's operations for n = 1,000, then 10,000, then 100,000. Each count is about 10 times the one before. What does that tell you?",
+        "es": "Cuentas las operaciones de una función con n = 1,000, luego 10,000, luego 100,000. Cada conteo es unas 10 veces el anterior. ¿Qué te dice eso?"
+      },
+      "options": [
+        {
+          "en": "The work grows in proportion to n: a straight line",
+          "es": "El trabajo crece en proporción a n: una línea recta"
+        },
+        {
+          "en": "The work stays the same: a flat line",
+          "es": "El trabajo se queda igual: una línea plana"
+        },
+        {
+          "en": "The work grows with n × n",
+          "es": "El trabajo crece con n × n"
+        },
+        {
+          "en": "Nothing: you'd need to time it",
+          "es": "Nada: tendrías que medir el tiempo"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "n grew 10 times at each step, and so did the count. Work that grows by the same factor as n grows in proportion to n. Flat work would stay the same, and n × n work would grow 100 times.",
+        "es": "n creció 10 veces en cada paso, y la cuenta también. Un trabajo que crece por el mismo factor que n crece en proporción a n. Un trabajo plano se quedaría igual, y uno de n × n crecería 100 veces."
       }
     },
     {
