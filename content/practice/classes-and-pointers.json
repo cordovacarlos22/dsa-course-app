@@ -691,7 +691,7 @@
         },
         {
           "en": "`3`, because both names point to one array",
-          "es": "`3`, porque los dos nombres apuntan a un solo array"
+          "es": "`3`: los dos nombres apuntan a un array"
         },
         {
           "en": "It throws an error, because `guests` didn't change",
@@ -880,7 +880,7 @@
       },
       "description": {
         "en": "Someone at the party door clicks a counter every time a guest comes in or leaves. Write a class `Counter`:\n\n- `constructor()` starts `this.count` at `0`.\n- `increment()` adds 1 to the count and returns the new count.\n- `decrement()` subtracts 1 and returns the new count (it may go below 0).\n- `reset()` sets the count back to 0 and returns it.\n\nExample:\n\n```js\nconst door = new Counter()\ndoor.increment() // 1\ndoor.increment() // 2\ndoor.decrement() // 1\ndoor.reset() // 0\n```",
-        "es": "Alguien en la puerta de la fiesta presiona un contador cada vez que alguien entra o sale. Escribe una clase `Counter`:\n\n- `constructor()` empieza `this.count` en `0`.\n- `increment()` le suma 1 a la cuenta y regresa la cuenta nueva.\n- `decrement()` le resta 1 y regresa la cuenta nueva (puede quedar abajo de 0).\n- `reset()` regresa la cuenta a 0 y la regresa.\n\nEjemplo:\n\n```js\nconst door = new Counter()\ndoor.increment() // 1\ndoor.increment() // 2\ndoor.decrement() // 1\ndoor.reset() // 0\n```"
+        "es": "Alguien en la puerta de la fiesta presiona un contador cada vez que una persona entra o sale. Escribe una clase `Counter`:\n\n- `constructor()` empieza `this.count` en `0`.\n- `increment()` le suma 1 a la cuenta y regresa la cuenta nueva.\n- `decrement()` le resta 1 y regresa la cuenta nueva (puede quedar abajo de 0).\n- `reset()` regresa la cuenta a 0 y la regresa.\n\nEjemplo:\n\n```js\nconst door = new Counter()\ndoor.increment() // 1\ndoor.increment() // 2\ndoor.decrement() // 1\ndoor.reset() // 0\n```"
       },
       "difficulty": "easy",
       "category": "build",

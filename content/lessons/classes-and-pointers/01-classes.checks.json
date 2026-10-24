@@ -202,12 +202,12 @@
     {
       "type": "explain",
       "question": {
-        "en": "In your own words: what does `new Invitation('Ana')` do, and what does `this` mean inside the class?",
-        "es": "Con tus palabras: ¿qué hace `new Invitation('Ana')`, y qué significa `this` dentro de la clase?"
+        "en": "In your own words: what does `new Invitation('Ana')` do, what does `this` mean inside the class, and when is a class worth writing instead of a plain object?",
+        "es": "Con tus palabras: ¿qué hace `new Invitation('Ana')`, qué significa `this` dentro de la clase, y cuándo vale la pena escribir una clase en vez de un objeto simple?"
       },
       "modelAnswer": {
-        "en": "`new` makes a fresh, empty object, points `this` at it, runs the constructor to fill it in (here, storing 'Ana' as its guest) and hands the finished object back. Inside a method, `this` is the instance the method was called on: in `forAna.getGuest()`, `this` is `forAna`. That's how one class, written once, works on many instances without mixing up their data: each instance keeps its own data, and they all share the class's methods.",
-        "es": "`new` crea un objeto nuevo y vacío, hace que `this` le apunte, ejecuta el constructor para llenarlo (aquí, guardar 'Ana' como su guest) y regresa el objeto terminado. Dentro de un método, `this` es la instancia con la que se llamó al método: en `forAna.getGuest()`, `this` es `forAna`. Así una sola clase, escrita una vez, trabaja con muchas instancias sin mezclar sus datos: cada instancia guarda sus propios datos, y todas comparten los métodos de la clase."
+        "en": "`new` makes a fresh, empty object, points `this` at it, runs the constructor to fill it in (here, storing 'Ana' as its guest) and hands the finished object back. Inside a method, `this` is the instance the method was called on: in `forAna.getGuest()`, `this` is `forAna`. That's how one class, written once, works on many instances without mixing up their data: each instance keeps its own data, and they all share the class's methods. A class is worth it when you need many objects with the same shape and the same methods, like invitations or linked lists; for one-off data, like the party settings, a plain object is enough.",
+        "es": "`new` crea un objeto nuevo y vacío, hace que `this` le apunte, ejecuta el constructor para llenarlo (aquí, guardar 'Ana' como su guest) y regresa el objeto terminado. Dentro de un método, `this` es la instancia con la que se llamó al método: en `forAna.getGuest()`, `this` es `forAna`. Así una sola clase, escrita una vez, trabaja con muchas instancias sin mezclar sus datos: cada instancia guarda sus propios datos, y todas comparten los métodos de la clase. Una clase vale la pena cuando necesitas muchos objetos con la misma forma y los mismos métodos, como invitaciones o listas enlazadas; para datos de una sola vez, como la configuración de la fiesta, basta un objeto simple."
       },
       "checklist": [
         {
@@ -225,6 +225,10 @@
         {
           "en": "Says each instance keeps its own data while sharing the class's methods",
           "es": "Dice que cada instancia guarda sus propios datos y comparte los métodos de la clase"
+        },
+        {
+          "en": "Says a class fits many objects of the same shape, and a plain object fits a one-off",
+          "es": "Dice que una clase sirve para muchos objetos con la misma forma, y un objeto simple para algo de una sola vez"
         }
       ]
     }

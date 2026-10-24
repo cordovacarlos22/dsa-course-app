@@ -308,7 +308,7 @@ for (let i = 0; i < guests.length; i++) {
 
 **Qué acaba de pasar:** la configuración no necesitó una clase: hay una sola fiesta. Las personas invitadas sí: tres instancias, una forma y un método `arrive` (llegar) que solo cambió a Ben, porque `this` era `guests[1]` cuando corrió. Luego el bucle leyó los datos propios de cada instancia.
 
-Las estructuras de datos siempre son el segundo caso. Vas a crear muchas listas, pilas y árboles, cada uno con sus propios datos y los mismos métodos, así que cada una es una clase.
+Las estructuras de datos siempre son el segundo caso. Vas a crear muchas listas, pilas y árboles, cada estructura con sus propios datos y los mismos métodos, así que cada una es una clase.
 
 **Big O:** crear una instancia es **O(1)**, y también lo es un método como `arrive`, que cambia una propiedad. El bucle que imprime a todas las personas es **O(n)**: el costo viene de visitar n instancias, no de la clase.
 

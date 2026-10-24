@@ -159,6 +159,10 @@
         {
           "en": "Says a change through either pointer shows up through the other",
           "es": "Dice que un cambio a través de cualquiera de los punteros se ve a través del otro"
+        },
+        {
+          "en": "Says a function that receives an object gets a copy of the pointer, so it can change the caller's object",
+          "es": "Dice que una función que recibe un objeto recibe una copia del puntero, así que puede cambiar el objeto de quien la llama"
         }
       ]
     }
