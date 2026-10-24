@@ -77,8 +77,8 @@ function countTriangle(n) {
   return count
 }
 
-console.log(countTriples(10)) // 1000: n × n × n = O(n³)
-console.log(countTriangle(10)) // 55: más o menos n² / 2, sigue siendo O(n²)
+console.log(countTriples(10)) // n × n × n: O(n³)
+console.log(countTriangle(10)) // más o menos n² / 2: sigue siendo O(n²)
 ```
 
 **Error común:** decidir que un bucle de adentro más corto hace que el código sea O(n). El bucle de adentro se alarga conforme crece `i`, así que el total sigue siendo como la mitad de n², y la mitad de una curva que se dobla hacia arriba sigue doblándose hacia arriba.

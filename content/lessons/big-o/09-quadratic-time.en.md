@@ -77,8 +77,8 @@ function countTriangle(n) {
   return count
 }
 
-console.log(countTriples(10)) // 1000: n × n × n = O(n³)
-console.log(countTriangle(10)) // 55: about n² / 2, still O(n²)
+console.log(countTriples(10)) // n × n × n: O(n³)
+console.log(countTriangle(10)) // about n² / 2: still O(n²)
 ```
 
 **Common mistake:** deciding that a shorter inner loop makes the code O(n). The inner loop gets longer as `i` grows, so the total is still about half of n², and half of a curve that bends upward still bends upward.

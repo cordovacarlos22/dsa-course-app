@@ -69,7 +69,7 @@ La misma idea funciona con cualquier mezcla: quédate con el término que crece 
 
 Mira n² + 5n + 8 con n = 1,000: eso es 1,000,000 + 5,000 + 8. La diferencia entre 1,005,008 y 1,000,000 es mínima, y eso solo con n = 1,000. Pon mil millones y la parte 5n + 8 no significa nada.
 
-Una buena forma de imaginarlo: mira la gráfica desde muy, muy lejos, como si fuera desde el espacio. Desde ahí solo se ve la curva que crece más rápido; todo lo demás es una mancha plana abajo.
+Otra forma de verlo: estira el eje de n de la gráfica hasta valores enormes. Entre más a la derecha vas, más se eleva la curva que crece más rápido sobre las demás, hasta que todo lo demás parece una línea plana abajo.
 
 ```viz
 big-o-growth-chart
@@ -103,9 +103,9 @@ Cuidado con las constantes grandes: O(n + 1,000,000) sigue siendo solo **O(n)**.
 
 ## Encuentra el término dominante en el código
 
-Hasta ahora los términos llegaban ya escritos, como n² + 5n + 8. En el código real nadie te da la expresión: la armas tú, un bloque a la vez, y luego te quedas solo con la parte que crece más rápido. Los pasos:
+Hasta ahora los términos llegaban ya escritos, como n² + 5n + 8. En el código real nadie te da la expresión: la armas tú, un bloque a la vez, y luego te quedas únicamente con la parte que crece más rápido. Los pasos:
 
-1. Dale a cada bloque de código su costo: una línea sola es O(1), un bucle sobre la entrada es O(n), y un bucle dentro de otro bucle sobre la entrada es O(n²).
+1. Dale a cada bloque de código su costo: una línea simple (una cuenta, una asignación, leer por índice) es O(1), salvo que llame a un método que esconda un bucle; un bucle sobre la entrada es O(n); y un bucle dentro de otro bucle sobre la entrada es O(n²).
 2. Suma los bloques que van **uno después del otro**.
 3. Quédate con el término dominante y quita las constantes.
 
@@ -140,4 +140,4 @@ Otras dos formas que vas a ver todo el tiempo:
 - **Un bucle sobre la entrada y luego un bucle de largo fijo** (por ejemplo, poner 10 mesas): n + 10, así que **O(n)**. Un bucle que nunca crece es una constante, por grande que parezca.
 - **Dos bucles anidados, uno después del otro:** n² + n² = 2n², y al quitar el 2 queda **O(n²)**. Dos copias del mismo término forman una constante más grande, no un término nuevo.
 
-**Error común:** quedarte con el bloque que va primero, o con el que tiene más líneas. Dónde está un bloque y qué tan largo se ve no importan: busca el bloque que crece más rápido con la entrada, y ese es el que se queda Big O.
+**Error común:** quedarte con el bloque que va primero, o con el que tiene más líneas. Dónde está un bloque y qué tan largo se ve no importan: busca el bloque que crece más rápido con la entrada, y con ese se queda Big O.

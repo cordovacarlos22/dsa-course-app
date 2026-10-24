@@ -69,7 +69,7 @@ The same idea works for any mix: keep the term that grows fastest and drop the r
 
 Look at n² + 5n + 8 with n = 1,000: that's 1,000,000 + 5,000 + 8. The difference between 1,005,008 and 1,000,000 is tiny, and that's only with n = 1,000. Plug in a billion and the 5n + 8 part is meaningless.
 
-A good way to picture it: imagine looking at the chart from very, very far away, as if from outer space. From there, only the fastest-growing curve is visible; everything else is a flat smudge along the bottom.
+Another way to see it: stretch the chart's n axis out to huge values. The further right you go, the more the fastest-growing curve towers over the others, until everything else looks like a flat line along the bottom.
 
 ```viz
 big-o-growth-chart
@@ -105,7 +105,7 @@ Careful with big constants: O(n + 1,000,000) is still just **O(n)**. However big
 
 So far the terms came already written out, like n² + 5n + 8. In real code, nobody hands you the expression: you build it yourself, one block at a time, and then keep only the fastest-growing part. The steps:
 
-1. Give each block of code its cost: a line on its own is O(1), a loop over the input is O(n), and a loop inside a loop over the input is O(n²).
+1. Give each block of code its cost: a simple line (math, an assignment, reading by index) is O(1), unless it calls a method that hides a loop; a loop over the input is O(n); and a loop inside a loop over the input is O(n²).
 2. Add up the blocks that come **one after the other**.
 3. Keep the dominant term and drop the constants.
 
