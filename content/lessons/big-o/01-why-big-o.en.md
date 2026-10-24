@@ -75,7 +75,7 @@ function reverseWithMethods(text) {
 console.log(reverseWithLoop('hello'), reverseWithMethods('hello'))
 ```
 
-**Under the hood:** `reverseWithMethods` looks like one step, but it's three trips over the letters. `split('')` walks the text and builds an array with one item per letter. `reverse()` walks that array, swapping letters from the two ends toward the middle. And `join('')` walks it once more to glue the letters into a new text. That's three hidden loops, each as long as the text. Built-in methods aren't magic: someone wrote the loop for you.
+**Under the hood:** `reverseWithMethods` looks like one step, but it's three trips over the letters. `split('')` walks the text and builds an array with one item per letter. `reverse()` walks that array, swapping letters from the two ends toward the middle. And `join('')` walks it once more to glue the letters into a new text. That's three hidden loops, and each one grows with the length of the text. Built-in methods aren't magic: someone wrote the loop for you.
 
 **Common mistake:** judging code by how short it is. `reverseWithMethods` is one line, but `split`, `reverse` and `join` each go through every letter behind the scenes. Fewer lines doesn't mean less work.
 

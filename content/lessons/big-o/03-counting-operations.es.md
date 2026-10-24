@@ -76,7 +76,7 @@ console.log(countOperations(10)) // 52
 console.log(countOperations(1000)) // 5002
 ```
 
-**Error común:** preocuparte porque tu cuenta no coincide con la de otra persona. ¿La comparación que finalmente termina el bucle es una operación más? ¿`i++` es una operación o dos? Cada persona puede llegar a un total un poco distinto, como 5n + 2 o 5n + 3, y no pasa nada. Como muestra el siguiente paso, el número exacto no es lo que buscamos.
+**Error común:** preocuparte porque tu cuenta no coincide con la de otra persona. ¿La comparación que finalmente termina el bucle es una operación más? ¿`i++` es una operación o dos? Cada persona puede llegar a un total un poco distinto, como 5n + 2 o 5n + 3, y no pasa nada. Como muestra el último paso de esta lección, el número exacto no es lo que buscamos.
 
 ## Cuéntalo tú
 
@@ -91,11 +91,11 @@ Practiquemos con dos funciones nuevas. La primera calcula la edad promedio de la
 
 ```js-run
 function averageAge(ages) {
-  let total = 0
+  let sumOfAges = 0
   for (let i = 0; i < ages.length; i++) {
-    total = total + ages[i]
+    sumOfAges = sumOfAges + ages[i]
   }
-  return total / ages.length
+  return sumOfAges / ages.length
 }
 
 console.log(averageAge([31, 25, 40, 28])) // 31
@@ -103,10 +103,10 @@ console.log(averageAge([31, 25, 40, 28])) // 31
 
 Contemos:
 
-- **Una sola vez:** `let total = 0` (1 asignación), `let i = 0` (1 asignación) y, al final, `total / ages.length` (1 división): 3 operaciones.
-- **Una vez por cada edad:** la comparación `i < ages.length`, la suma y la asignación de `total = total + ages[i]`, y la suma y la asignación de `i++`: 5 operaciones.
+- **Una sola vez:** `let sumOfAges = 0` (1 asignación), `let i = 0` (1 asignación) y, al final, `sumOfAges / ages.length` (1 división): 3 operaciones.
+- **Una vez por cada edad:** la comparación `i < ages.length`, la suma y la asignación de `sumOfAges = sumOfAges + ages[i]`, y la suma y la asignación de `i++`: 5 operaciones.
 
-Son unas **5n + 3** operaciones para n edades: la misma forma que `sumOneTo`, que crece en proporción al largo de la lista.
+Son unas **5n + 3** operaciones para n edades: la misma forma que la de `sumOneTo`. El trabajo crece en proporción al largo de la lista.
 
 La segunda función anuncia a quien abre y a quien cierra la fila:
 
@@ -125,9 +125,9 @@ Ahora deja que la computadora cuente `averageAge` con listas cada vez más grand
 
 ```js-run
 function countAverageAgeOperations(n) {
-  let operations = 3 // let total = 0, let i = 0, y la división del final
+  let operations = 3 // let sumOfAges = 0, let i = 0, y la división del final
   for (let i = 0; i < n; i++) {
-    operations = operations + 5 // la comparación, + y = de total, + y = de i++
+    operations = operations + 5 // la comparación, + y = de sumOfAges, + y = de i++
   }
   return operations
 }

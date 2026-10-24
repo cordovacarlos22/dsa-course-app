@@ -88,25 +88,29 @@ Con n pequeño, los tiempos del bucle brincan de un lado a otro: a esa escala ta
 
 Esa es la lección: **no leas los números exactos, lee la tendencia**.
 
-Este es el truco de comparar hecho con conteos de operaciones, que nunca se mueven. Cada tamaño es 10 veces el anterior, así que divide cada conteo entre el anterior: cerca de 10 significa que el trabajo crece en proporción a n, y 1 significa que no crece nada. Predice qué van a mostrar los números del bucle y luego ejecútalo:
+Aquí está el mismo truco de comparación, pero con conteos de operaciones, que nunca varían. Cada tamaño es 10 veces el anterior, así que divide cada conteo entre el anterior: si da cerca de 10, el trabajo crece en proporción a n; si da 1, no crece nada. Predice qué van a mostrar los números y luego ejecútalo:
 
 ```js-run
 const sizes = [1000, 10000, 100000, 1000000]
 let previousLoop = 0
+let previousFormula = 0
 for (let k = 0; k < sizes.length; k++) {
   const n = sizes[k]
   const loopOperations = 5 * n + 2
   const formulaOperations = 3
   let growth = ''
   if (previousLoop > 0) {
-    growth = ' (' + (loopOperations / previousLoop).toFixed(2) + ' veces el anterior)'
+    const loopGrowth = (loopOperations / previousLoop).toFixed(2)
+    const formulaGrowth = (formulaOperations / previousFormula).toFixed(2)
+    growth = ' (veces el anterior: bucle ' + loopGrowth + ', fórmula ' + formulaGrowth + ')'
   }
-  console.log('n = ' + n + ': bucle ' + loopOperations + growth + ' | fórmula ' + formulaOperations)
+  console.log('n = ' + n + ': bucle ' + loopOperations + ', fórmula ' + formulaOperations + growth)
   previousLoop = loopOperations
+  previousFormula = formulaOperations
 }
 ```
 
-Cada vez que n creció 10 veces, la cuenta del bucle creció 10 veces: una línea recta. La cuenta de la fórmula se quedó en 3: una línea plana. Usa la misma prueba con tiempos reales: con entradas grandes, una razón cerca de 10 significa que el trabajo crece en proporción a n, aunque los milisegundos exactos se muevan.
+Cada vez que n creció 10 veces, la cuenta del bucle creció 10 veces: una línea recta. La cuenta de la fórmula se quedó en 3, una razón de 1: una línea plana. Usa la misma prueba con tiempos reales: con entradas grandes, una razón cerca de 10 significa que el trabajo crece en proporción a n, aunque los milisegundos exactos se muevan.
 
 **Error común:** decidir con una sola corrida pequeña que el bucle "a veces es más rápido". Con entradas chiquitas, el ruido pesa más que el trabajo, así que cualquiera de las dos versiones puede parecer más rápida. Solo las entradas grandes muestran cuál crece de verdad.
 
@@ -118,7 +122,7 @@ Esas tendencias son justo lo que describe Big O. Cada forma tiene un nombre, que
 - **O(n)**, **tiempo lineal:** una línea recta. El trabajo crece en proporción a n, como el bucle.
 - **O(n²)**, **tiempo cuadrático:** una curva que se dobla hacia arriba muy rápido. El trabajo crece con n × n.
 - **O(log n)**, **tiempo logarítmico:** una curva que crece muy despacio. Duplicar n agrega solo un paso más.
-- **O(n log n)**, **tiempo linearítmico:** una línea que se curva hacia arriba solo un poco más que O(n). Así crecen los mejores algoritmos de ordenamiento generales, como merge sort.
+- **O(n log n)**, **tiempo linearítmico:** una curva que sube un poco más rápido que la línea recta de O(n). Así crecen los mejores algoritmos de ordenamiento generales, como merge sort.
 
 Más adelante en el módulo vas a ver cada una otra vez, casi todas en una lección propia (O(n log n) llega con los logaritmos). Por ahora, lo importante es que **la forma importa más que cualquier medición aislada**. Al pasar de 1,000 elementos a 1,000,000 (1,000 veces más), una función O(1) hace el mismo trabajo, una función O(n) hace 1,000 veces más trabajo y una función O(n²) hace un **millón** de veces más.
 

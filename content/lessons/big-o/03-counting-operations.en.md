@@ -76,7 +76,7 @@ console.log(countOperations(10)) // 52
 console.log(countOperations(1000)) // 5002
 ```
 
-**Common mistake:** worrying that your count doesn't match someone else's. Is the comparison that finally ends the loop one more operation? Is `i++` one operation or two? People get slightly different totals, like 5n + 2 or 5n + 3, and that's fine. As the next step shows, the exact number isn't what we're after.
+**Common mistake:** worrying that your count doesn't match someone else's. Is the comparison that finally ends the loop one more operation? Is `i++` one operation or two? People get slightly different totals, like 5n + 2 or 5n + 3, and that's fine. As the last step of this lesson shows, the exact number isn't what we're after.
 
 ## Count it yourself
 
@@ -91,11 +91,11 @@ Let's practice on two new functions. The first works out the average age of the 
 
 ```js-run
 function averageAge(ages) {
-  let total = 0
+  let sumOfAges = 0
   for (let i = 0; i < ages.length; i++) {
-    total = total + ages[i]
+    sumOfAges = sumOfAges + ages[i]
   }
-  return total / ages.length
+  return sumOfAges / ages.length
 }
 
 console.log(averageAge([31, 25, 40, 28])) // 31
@@ -103,8 +103,8 @@ console.log(averageAge([31, 25, 40, 28])) // 31
 
 Let's count it:
 
-- **Once:** `let total = 0` (1 assignment), `let i = 0` (1 assignment) and, at the end, `total / ages.length` (1 division): 3 operations.
-- **Once per age:** the comparison `i < ages.length`, the addition and assignment in `total = total + ages[i]`, and the addition and assignment in `i++`: 5 operations.
+- **Once:** `let sumOfAges = 0` (1 assignment), `let i = 0` (1 assignment) and, at the end, `sumOfAges / ages.length` (1 division): 3 operations.
+- **Once per age:** the comparison `i < ages.length`, the addition and assignment in `sumOfAges = sumOfAges + ages[i]`, and the addition and assignment in `i++`: 5 operations.
 
 That's about **5n + 3** operations for n ages: the same shape as `sumOneTo`, growing in proportion to the length of the list.
 
@@ -125,9 +125,9 @@ Now let the computer count `averageAge` for growing lists. Before you run it, pr
 
 ```js-run
 function countAverageAgeOperations(n) {
-  let operations = 3 // let total = 0, let i = 0, and the division at the end
+  let operations = 3 // let sumOfAges = 0, let i = 0, and the division at the end
   for (let i = 0; i < n; i++) {
-    operations = operations + 5 // the comparison, + and = for total, + and = in i++
+    operations = operations + 5 // the comparison, + and = for sumOfAges, + and = in i++
   }
   return operations
 }

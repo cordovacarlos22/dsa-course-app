@@ -167,7 +167,7 @@ describe('course home', () => {
     renderAsReturningStudent('/learn')
     const bigO = screen.getByRole('link', { name: /Big O 17 lessons/ })
     expect(bigO).toHaveAttribute('href', '/learn/big-o')
-    expect(bigO).toHaveTextContent('17 lessons · 37 questions · 3 exercises')
+    expect(bigO).toHaveTextContent('17 lessons · 40 questions · 3 exercises')
     const arraysAndObjects = screen.getByRole('link', {
       name: /Big O of Arrays & Objects/,
     })

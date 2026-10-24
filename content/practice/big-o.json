@@ -42,6 +42,37 @@
       }
     },
     {
+      "id": "space-complexity-describes",
+      "topic": "Big O: Intro",
+      "prompt": {
+        "en": "What does **space complexity** describe?",
+        "es": "¿Qué describe la **complejidad espacial**?"
+      },
+      "options": [
+        {
+          "en": "How the memory the code needs grows with the input",
+          "es": "Cómo crece con la entrada la memoria que necesita el código"
+        },
+        {
+          "en": "How many seconds the code takes to finish on your computer",
+          "es": "Cuántos segundos tarda el código en terminar en tu computadora"
+        },
+        {
+          "en": "How many lines of code the function has in it",
+          "es": "Cuántas líneas de código tiene la función"
+        },
+        {
+          "en": "How fast your computer's processor can work",
+          "es": "Qué tan rápido puede trabajar el procesador de tu computadora"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Space complexity is how much memory the code uses as the input grows. Code 2 can be slower but lighter.",
+        "es": "La complejidad espacial es cuánta memoria usa el código cuando crece la entrada. El código 2 puede ser más lento pero más ligero."
+      }
+    },
+    {
       "id": "operations-not-seconds",
       "topic": "Big O: Intro",
       "prompt": {
@@ -82,20 +113,20 @@
       "code": "function reverseWithMethods(text) {\n  return text.split('').reverse().join('')\n}",
       "options": [
         {
-          "en": "One, because it's one line",
-          "es": "Uno, porque es una sola línea"
+          "en": "One, because the whole function is a single line",
+          "es": "Uno, porque toda la función es una sola línea"
         },
         {
-          "en": "None: built-in methods take no time",
-          "es": "Ninguno: los métodos incluidos no tardan nada"
+          "en": "None, because built-in methods take no time at all",
+          "es": "Ninguno, porque los métodos incluidos no tardan nada"
         },
         {
-          "en": "It depends on how fast the computer is",
-          "es": "Depende de qué tan rápida sea la computadora"
+          "en": "It depends on how fast the computer that runs it is",
+          "es": "Depende de qué tan rápida sea la computadora que lo ejecuta"
         },
         {
-          "en": "Three: `split`, `reverse` and `join` each go through the letters",
-          "es": "Tres: `split`, `reverse` y `join` recorren las letras cada uno"
+          "en": "Three: one each for `split`, `reverse` and `join`",
+          "es": "Tres: uno por `split`, otro por `reverse` y otro por `join`"
         }
       ],
       "correctIndex": 3,
@@ -679,26 +710,57 @@
       },
       "options": [
         {
-          "en": "The JavaScript engine compiles code that runs a lot into faster machine code while the program runs",
-          "es": "El motor de JavaScript compila a código de máquina más rápido el código que se ejecuta mucho, mientras el programa corre"
+          "en": "The engine compiles busy code into faster machine code as it runs",
+          "es": "El motor compila el código muy usado a código de máquina más rápido mientras corre"
         },
         {
-          "en": "The function's Big O changes after the first run",
-          "es": "El Big O de la función cambia después de la primera ejecución"
+          "en": "The function's Big O changes after the first run, then stays the same",
+          "es": "El Big O de la función cambia después de la primera ejecución y luego se queda igual"
         },
         {
-          "en": "The computer gets faster the longer it's on",
-          "es": "La computadora se vuelve más rápida mientras más tiempo está prendida"
+          "en": "The computer warms up and gets faster the longer it stays switched on",
+          "es": "La computadora se calienta y se vuelve más rápida mientras más tiempo está prendida"
         },
         {
-          "en": "`performance.now()` gets more precise with every call",
-          "es": "`performance.now()` se vuelve más preciso con cada llamada"
+          "en": "`performance.now()` gets more precise with every call you make to it",
+          "es": "`performance.now()` se vuelve más preciso con cada llamada que le haces"
         }
       ],
       "correctIndex": 0,
       "explanation": {
         "en": "Engines watch which code runs a lot and compile it into faster machine code while the program runs, so early runs can be slower. That's one more reason a stopwatch isn't a reliable way to compare code, and why Big O counts operations.",
         "es": "Los motores observan qué código se ejecuta mucho y lo compilan a código de máquina más rápido mientras el programa corre, así que las primeras ejecuciones pueden ser más lentas. Es una razón más por la que un cronómetro no es una forma confiable de comparar código, y por la que Big O cuenta operaciones."
+      }
+    },
+    {
+      "id": "timing-stopwatch-problem",
+      "topic": "Big O: Timing Our Code",
+      "prompt": {
+        "en": "Which of these is a real problem with timing code with a stopwatch?",
+        "es": "¿Cuál de estos es un problema real de medir el código con un cronómetro?"
+      },
+      "options": [
+        {
+          "en": "`performance.now()` doesn't exist in browsers, only in Node.js",
+          "es": "`performance.now()` no existe en los navegadores, solo en Node.js"
+        },
+        {
+          "en": "Timing always gives exactly the same number on every run",
+          "es": "Medir el tiempo siempre da exactamente el mismo número en cada ejecución"
+        },
+        {
+          "en": "You can only time code that has at least one loop in it",
+          "es": "Solo puedes medir el tiempo de código que tenga al menos un bucle"
+        },
+        {
+          "en": "Very fast code can be too fast to measure precisely",
+          "es": "El código muy rápido puede ser demasiado rápido para medirlo con precisión"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Times change between machines and between runs, and tiny times are too small to measure precisely.",
+        "es": "Los tiempos cambian entre máquinas y entre ejecuciones, y los tiempos mínimos son demasiado pequeños para medirlos con precisión."
       }
     },
     {
@@ -711,20 +773,20 @@
       "code": "function firstAndLast(guests) {\n  return guests[0] + ' opens the party and ' + guests[guests.length - 1] + ' closes it'\n}",
       "options": [
         {
-          "en": "About 1,000: one per guest",
-          "es": "Unas 1,000: una por persona"
+          "en": "About 1,000: one for each guest in line",
+          "es": "Unas 1,000: una por cada persona de la fila"
         },
         {
-          "en": "About 5,000",
-          "es": "Unas 5,000"
+          "en": "About 5,000: five for each guest in line",
+          "es": "Unas 5,000: cinco por cada persona de la fila"
         },
         {
-          "en": "About 2,000: one for each end of the line",
-          "es": "Unas 2,000: una por cada extremo de la fila"
+          "en": "About 2,000: two for each guest in line",
+          "es": "Unas 2,000: dos por cada persona de la fila"
         },
         {
-          "en": "About 4, the same as for any number of guests: there's no loop",
-          "es": "Unas 4, igual que con cualquier número de personas: no hay bucle"
+          "en": "About 4: no loop, so no repeats",
+          "es": "Unas 4: no hay bucle, nada se repite"
         }
       ],
       "correctIndex": 3,
@@ -746,22 +808,53 @@
           "es": "El trabajo crece en proporción a n: una línea recta"
         },
         {
-          "en": "The work stays the same: a flat line",
-          "es": "El trabajo se queda igual: una línea plana"
+          "en": "The work stays the same: a flat line, whatever n is",
+          "es": "El trabajo se queda igual: una línea plana, sea cual sea n"
         },
         {
-          "en": "The work grows with n × n",
-          "es": "El trabajo crece con n × n"
+          "en": "The work grows with n × n: a curve that bends up",
+          "es": "El trabajo crece con n × n: una curva que se dobla hacia arriba"
         },
         {
-          "en": "Nothing: you'd need to time it",
-          "es": "Nada: tendrías que medir el tiempo"
+          "en": "Nothing yet: you'd need to time it on a computer",
+          "es": "Nada todavía: tendrías que medir el tiempo en una computadora"
         }
       ],
       "correctIndex": 0,
       "explanation": {
         "en": "n grew 10 times at each step, and so did the count. Work that grows by the same factor as n grows in proportion to n. Flat work would stay the same, and n × n work would grow 100 times.",
         "es": "n creció 10 veces en cada paso, y la cuenta también. Un trabajo que crece por el mismo factor que n crece en proporción a n. Un trabajo plano se quedaría igual, y uno de n × n crecería 100 veces."
+      }
+    },
+    {
+      "id": "tiny-inputs-trend",
+      "topic": "Big O: Visualizing Time Complexities",
+      "prompt": {
+        "en": "With tiny inputs, your timings jump around from run to run. What should you pay attention to?",
+        "es": "Con entradas muy pequeñas, tus tiempos brincan de una ejecución a otra. ¿En qué deberías fijarte?"
+      },
+      "options": [
+        {
+          "en": "The general trend as n gets big",
+          "es": "La tendencia general cuando n se hace grande"
+        },
+        {
+          "en": "The exact number of milliseconds of the fastest run",
+          "es": "El número exacto de milisegundos de la ejecución más rápida"
+        },
+        {
+          "en": "Only the very first run",
+          "es": "Solo la primera ejecución"
+        },
+        {
+          "en": "Nothing: timing is always useless",
+          "es": "Nada: medir el tiempo siempre es inútil"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Don't read the exact numbers, read the trend. That's what Big O describes.",
+        "es": "No leas los números exactos, lee la tendencia. Eso es lo que describe Big O."
       }
     },
     {

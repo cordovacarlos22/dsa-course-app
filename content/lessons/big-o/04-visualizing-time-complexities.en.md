@@ -88,25 +88,29 @@ With small n, the loop's times jump around: at that tiny scale, everything else 
 
 That's the lesson: **don't read the exact numbers, read the trend**.
 
-Here's the comparison trick done with operation counts, which never wobble. Each size is 10 times the one before, so divide each count by the previous one: about 10 means the work grows in proportion to n, and 1 means it doesn't grow at all. Predict what the loop's numbers will show, then run it:
+Here's the comparison trick done with operation counts, which never wobble. Each size is 10 times the one before, so divide each count by the previous one: about 10 means the work grows in proportion to n, and 1 means it doesn't grow at all. Predict what the numbers will show, then run it:
 
 ```js-run
 const sizes = [1000, 10000, 100000, 1000000]
 let previousLoop = 0
+let previousFormula = 0
 for (let k = 0; k < sizes.length; k++) {
   const n = sizes[k]
   const loopOperations = 5 * n + 2
   const formulaOperations = 3
   let growth = ''
   if (previousLoop > 0) {
-    growth = ' (' + (loopOperations / previousLoop).toFixed(2) + ' times the last one)'
+    const loopGrowth = (loopOperations / previousLoop).toFixed(2)
+    const formulaGrowth = (formulaOperations / previousFormula).toFixed(2)
+    growth = ' (times the last one: loop ' + loopGrowth + ', formula ' + formulaGrowth + ')'
   }
-  console.log('n = ' + n + ': loop ' + loopOperations + growth + ' | formula ' + formulaOperations)
+  console.log('n = ' + n + ': loop ' + loopOperations + ', formula ' + formulaOperations + growth)
   previousLoop = loopOperations
+  previousFormula = formulaOperations
 }
 ```
 
-Every time n grew 10 times, the loop's count grew 10 times: a straight line. The formula's count stayed at 3: a flat line. Use the same test on real timings: with big inputs, a ratio near 10 means the work grows in proportion to n, even when the exact milliseconds wobble.
+Every time n grew 10 times, the loop's count grew 10 times: a straight line. The formula's count stayed at 3, a ratio of 1: a flat line. Use the same test on real timings: with big inputs, a ratio near 10 means the work grows in proportion to n, even when the exact milliseconds wobble.
 
 **Common mistake:** deciding from one small run that the loop is "sometimes faster". With tiny inputs, the noise is bigger than the work, so either version can look faster. Only big inputs show which one really grows.
 
@@ -118,7 +122,7 @@ These trends are exactly what Big O describes. Each shape has a name, written wi
 - **O(n)**, **linear time:** a straight line. The work grows in proportion to n, like the loop.
 - **O(n²)**, **quadratic time:** a curve that bends up steeply. The work grows with n × n.
 - **O(log n)**, **logarithmic time:** a curve that grows very slowly. Doubling n adds just one more step.
-- **O(n log n)**, **linearithmic time:** a line that bends up just a little more than O(n). It's how the best general sorting algorithms grow, like merge sort.
+- **O(n log n)**, **linearithmic time:** a curve that climbs a little faster than O(n)'s straight line. It's how the best general sorting algorithms grow, like merge sort.
 
 You'll meet each of these again later in the module, most of them in a lesson of their own (O(n log n) comes with logarithms). For now, the point is that the **shape matters more than any single measurement**. Going from 1,000 items to 1,000,000 items (1,000 times more), an O(1) function does the same work, an O(n) function does 1,000 times more work, and an O(n²) function does a **million** times more.
 

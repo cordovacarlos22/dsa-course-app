@@ -75,7 +75,7 @@ function reverseWithMethods(text) {
 console.log(reverseWithLoop('hello'), reverseWithMethods('hello'))
 ```
 
-**Por dentro:** `reverseWithMethods` parece un solo paso, pero son tres recorridos de las letras. `split('')` recorre el texto y arma un array con un elemento por letra. `reverse()` recorre ese array, intercambiando letras desde los dos extremos hacia el centro. Y `join('')` lo recorre una vez más para unir las letras en un texto nuevo. Son tres bucles escondidos, cada uno tan largo como el texto. Los métodos incluidos no son magia: alguien escribió el bucle por ti.
+**Por dentro:** `reverseWithMethods` parece un solo paso, pero son tres recorridos de las letras. `split('')` recorre el texto y arma un array con un elemento por letra. `reverse()` recorre ese array, intercambiando letras desde los dos extremos hacia el centro. Y `join('')` lo recorre una vez más para unir las letras en un texto nuevo. Son tres bucles escondidos, y cada uno crece con el largo del texto. Los métodos incluidos no son magia: alguien escribió el bucle por ti.
 
 **Error común:** juzgar el código por lo corto que es. `reverseWithMethods` es una sola línea, pero `split`, `reverse` y `join` recorren cada letra por dentro. Menos líneas no significa menos trabajo.
 
@@ -91,7 +91,7 @@ trace-is-invited-all
 
 **Qué acaba de pasar:** `isInvitedAll` puso `found = true` cuando vio el nombre… y aun así siguió leyendo. Elige **buscar a 'Ana'**: Ana va primero en la lista, y el código igual revisa los 6 nombres. `isInvited` se habría detenido después de una revisión.
 
-Antes de ejecutarlo, predice: ¿cuántas revisiones hará cada versión para 'Ana', que va primero en la fila? ¿Y para 'Zoe', que no está en la lista? Luego ejecuta las dos versiones lado a lado. Cada una cuenta sus revisiones mientras avanza:
+Antes de ejecutarlo, predice cuántas revisiones hará cada versión para 'Ana', que va primero en la fila, y para 'Zoe', que no está en la lista. Luego ejecuta las dos versiones; cada una cuenta sus revisiones mientras avanza:
 
 ```js-run
 const guests = ['Ana', 'Ben', 'Cleo', 'Dev', 'Eli', 'Fay']
