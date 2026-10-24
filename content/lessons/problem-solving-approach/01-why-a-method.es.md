@@ -12,13 +12,13 @@ minutes: 9
 
 Así que los pasos para encontrar los primeros 100 números primos son un algoritmo. También lo son los pasos que sigue una red social para ordenar millones de publicaciones, construidos por equipos grandes durante muchos años. Y también lo es un bucle de tres líneas: `isInvited`, del módulo de Big O, que revisa la lista de invitados nombre por nombre, también es un algoritmo. Casi cualquier tarea se puede resolver con **muchos algoritmos distintos**, y Big O es la forma de compararlos.
 
-Casi todo lo que haces como programador involucra un algoritmo, desde una pequeña función de ayuda hasta una app completa. En este curso nos enfocamos en un tipo más específico: problemas que puedes resolver con una función, de los que salen en las **entrevistas de programación** y en el código de todos los días. La buena noticia es que lo que aprendes con problemas pequeños te sirve para los grandes.
+Casi todo lo que haces al programar involucra un algoritmo, desde una pequeña función de ayuda hasta una app completa. En este curso nos enfocamos en un tipo más específico: problemas que puedes resolver con una función, de los que salen en las **entrevistas de programación** y en el código de todos los días. La buena noticia es que lo que aprendes con problemas pequeños te sirve para los grandes.
 
 ```viz
 trace-is-invited
 ```
 
-**Qué acaba de pasar:** `isInvited` siguió un conjunto fijo de pasos: empezar con el primer invitado, comparar el nombre, pasar al siguiente, y detenerse cuando encuentra el nombre o se le acaban los invitados. Esos pasos son el algoritmo. Otro algoritmo podría ordenar la lista primero y luego saltar como en la búsqueda binaria: la misma tarea, pasos distintos y un Big O distinto.
+**Qué acaba de pasar:** `isInvited` siguió un conjunto fijo de pasos: empezar con el primer nombre de la lista, compararlo, pasar al siguiente, y detenerse cuando encuentra el nombre o se le acaba la lista. Esos pasos son el algoritmo. Otro algoritmo podría ordenar la lista primero y luego saltar como en la búsqueda binaria: la misma tarea, pasos distintos y un Big O distinto.
 
 Aquí tienes otro algoritmo que puedes ejecutar. Encuentra los primeros 10 **números primos** (números mayores que 1 que solo se pueden dividir exactamente entre 1 y entre sí mismos):
 
@@ -57,11 +57,11 @@ Así que hay dos formas de mejorar:
 
 Las dos sirven mucho más allá de las entrevistas. Cada funcionalidad que vayas a construir empieza como un problema que todavía no has resuelto, así que un método para problemas nuevos es un método para toda tu carrera.
 
-**Error común:** memorizar cientos de soluciones en vez de aprender a encontrar una. Una respuesta memorizada se rompe en cuanto el entrevistador cambia un detalle. Un método sigue funcionando.
+**Error común:** memorizar cientos de soluciones en vez de aprender a encontrar una. Una respuesta memorizada se rompe en cuanto quien te entrevista cambia un detalle. Un método sigue funcionando.
 
 ## Los 5 pasos
 
-Este es el plan. No es magia, no es infalible y no va a resolver el problema por ti. Lo que hace es darte algo concreto que hacer después, cada vez, para que te mantengas tranquilo y sigas avanzando. Muchas de estas ideas vienen de un libro clásico sobre resolver problemas, _How to Solve It_ ("Cómo plantear y resolver problemas"), que escribió el matemático **George Pólya** en 1945. Lo escribió para problemas de matemáticas, pero funciona igual de bien para el código.
+Este es el plan. No es magia, no es infalible y no va a resolver el problema por ti. Lo que hace es darte algo concreto que hacer después, cada vez, para que mantengas la calma y sigas avanzando. Muchas de estas ideas vienen de un libro clásico sobre resolver problemas, _How to Solve It_ ("Cómo plantear y resolver problemas"), que escribió el matemático **George Pólya** en 1945. Lo escribió para problemas de matemáticas, pero funciona igual de bien para el código.
 
 Los cinco pasos son:
 

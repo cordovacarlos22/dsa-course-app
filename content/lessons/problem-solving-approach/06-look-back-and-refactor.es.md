@@ -8,7 +8,7 @@ minutes: 12
 
 ## Todavía no terminas
 
-Tu código funciona. Es tentador parar ahí, cerrar la laptop y seguir con otra cosa, y a veces es lo correcto: con una fecha límite mañana, lo que más importa es que funcione. Pero el paso 5, **revisar y refactorizar**, es el que te convierte en mejor desarrollador. Saltártelo es perder una oportunidad de aprender.
+Tu código funciona. Es tentador parar ahí, cerrar la laptop y seguir con otra cosa, y a veces es lo correcto: con una fecha límite mañana, lo que más importa es que funcione. Pero el paso 5, **revisar y refactorizar**, es el que te hace programar mejor. Saltártelo es perder una oportunidad de aprender.
 
 Revisar quiere decir examinar tu solución de verdad, línea por línea. ¿Qué te gusta de ella, y qué no? ¿Es fácil de leer? ¿Es eficiente? Esas dos metas, **eficiencia** y **legibilidad**, a veces jalan en direcciones distintas, y el buen código encuentra un equilibrio entre las dos. **Refactorizar** quiere decir cambiar cómo está escrito el código sin cambiar lo que hace. Estas son las preguntas que debes hacerte:
 
@@ -24,7 +24,7 @@ Revisar quiere decir examinar tu solución de verdad, línea por línea. ¿Qué 
 five-steps-look-back
 ```
 
-**Qué acaba de pasar:** las siete preguntas aparecieron una por una. Fíjate en que solo una trata de la velocidad. Las demás tratan de que sea correcto, claro, y de aprender. En una entrevista, hazlas en voz alta cuando termines, aunque no te dé tiempo de actuar sobre todas. La última es una gran pregunta para el entrevistador: casi siempre ha visto el mismo problema resuelto de muchas formas, y "¿qué otras soluciones has visto?" te puede enseñar mucho. Trabajando solo, busca otras soluciones en internet, incluso en otro lenguaje. Compararlas con la tuya es una de las formas más rápidas de aprender ideas nuevas.
+**Qué acaba de pasar:** las siete preguntas aparecieron una por una. Fíjate en que solo una trata de la velocidad. Las demás tratan de que sea correcto, claro, y de aprender. En una entrevista, hazlas en voz alta cuando termines, aunque no te dé tiempo de actuar sobre todas. La última es una gran pregunta para quien te entrevista: casi siempre ha visto el mismo problema resuelto de muchas formas, y "¿qué otras soluciones has visto?" te puede enseñar mucho. Cuando practiques por tu cuenta, busca otras soluciones en internet, incluso en otro lenguaje. Compararlas con la tuya es una de las formas más rápidas de aprender ideas nuevas.
 
 **Error común:** pensar que refactorizar quiere decir "hacerlo más corto". Un código más corto que nadie puede leer no es mejor. La meta es código correcto, claro y lo bastante rápido.
 

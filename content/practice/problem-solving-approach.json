@@ -12,7 +12,7 @@
       "topic": "Understand the problem",
       "prompt": {
         "en": "An interviewer says: \"Write a function that returns the sum of two numbers.\" What's the best first move?",
-        "es": "Un entrevistador dice: \"Escribe una función que regrese la suma de dos números.\" ¿Qué es lo mejor que puedes hacer primero?"
+        "es": "En una entrevista te dicen: \"Escribe una función que regrese la suma de dos números.\" ¿Qué es lo mejor que puedes hacer primero?"
       },
       "options": [
         {
@@ -29,7 +29,7 @@
         },
         {
           "en": "Ask the interviewer for the solution",
-          "es": "Pedirle la solución al entrevistador"
+          "es": "Pedirle la solución a quien te entrevista"
         }
       ],
       "correctIndex": 0,
@@ -129,7 +129,7 @@
       "correctIndex": 1,
       "explanation": {
         "en": "Start with the cases you're sure about, then move into the strange ones. Each harder example tends to raise a question about the rules.",
-        "es": "Empieza con los casos de los que estás seguro, y luego avanza hacia los raros. Cada ejemplo más difícil suele traer una pregunta sobre las reglas."
+        "es": "Empieza con los casos que tienes claros, y luego avanza hacia los raros. Cada ejemplo más difícil suele traer una pregunta sobre las reglas."
       }
     },
     {
@@ -244,7 +244,7 @@
         },
         {
           "en": "The interviewer can see every step you were about to take",
-          "es": "El entrevistador puede ver cada paso que ibas a dar"
+          "es": "Quien te entrevista puede ver cada paso que ibas a dar"
         },
         {
           "en": "It gives you extra time",
@@ -387,7 +387,7 @@
       "topic": "The method in an interview",
       "prompt": {
         "en": "You've finished and your code works. Which question is great to ask the interviewer?",
-        "es": "Ya terminaste y tu código funciona. ¿Qué pregunta es muy buena para hacerle al entrevistador?"
+        "es": "Ya terminaste y tu código funciona. ¿Qué pregunta es muy buena para hacerle a quien te entrevista?"
       },
       "options": [
         {
@@ -427,7 +427,7 @@
         },
         {
           "en": "The interviewer can follow your process, and can only help with what they hear",
-          "es": "El entrevistador puede seguir tu proceso, y solo puede ayudarte con lo que escucha"
+          "es": "Quien te entrevista puede seguir tu proceso, y solo puede ayudarte con lo que escucha"
         },
         {
           "en": "It makes the code shorter",

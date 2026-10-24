@@ -198,24 +198,24 @@
       "topic": "Arrays",
       "prompt": {
         "en": "You add 10,000 guests to an array, one at a time. Which way costs O(1) per guest?",
-        "es": "Agregas 10,000 invitados a un array, uno por uno. ¿Qué forma cuesta O(1) por invitado?"
+        "es": "Agregas 10,000 nombres a un array, uno por uno. ¿Qué forma cuesta O(1) por nombre?"
       },
       "options": [
         {
           "en": "`unshift` each guest",
-          "es": "Hacer `unshift` con cada invitado"
+          "es": "Hacer `unshift` con cada nombre"
         },
         {
           "en": "`splice(0, 0, guest)` each guest",
-          "es": "Hacer `splice(0, 0, guest)` con cada invitado"
+          "es": "Hacer `splice(0, 0, guest)` con cada nombre"
         },
         {
           "en": "`concat` a one-guest array each time",
-          "es": "Hacer `concat` con un array de un invitado cada vez"
+          "es": "Hacer `concat` con un array de un solo nombre cada vez"
         },
         {
           "en": "`push` each guest",
-          "es": "Hacer `push` con cada invitado"
+          "es": "Hacer `push` con cada nombre"
         }
       ],
       "correctIndex": 3,
@@ -415,7 +415,7 @@
       "topic": "Choosing a structure",
       "prompt": {
         "en": "Two versions of `countArrived(guests, arrivals)`. Version A checks each arrival with `guests.includes(name)`. Version B first builds an object with every guest as a key, then checks each arrival with `hasOwnProperty`. With n guests and m arrivals, which is faster as both grow?",
-        "es": "Dos versiones de `countArrived(guests, arrivals)`. La versión A revisa cada llegada con `guests.includes(name)`. La versión B primero construye un objeto con cada invitado como clave, y luego revisa cada llegada con `hasOwnProperty`. Con n invitados y m llegadas, ¿cuál es más rápida conforme crecen los dos?"
+        "es": "Dos versiones de `countArrived(guests, arrivals)`. La versión A revisa cada llegada con `guests.includes(name)`. La versión B primero construye un objeto con cada nombre de la lista como clave, y luego revisa cada llegada con `hasOwnProperty`. Con n invitados y m llegadas, ¿cuál es más rápida conforme crecen los dos?"
       },
       "options": [
         {
@@ -548,7 +548,7 @@
       },
       "description": {
         "en": "Guests sometimes change their minds. Write `finalAnswers(responses)`, where `responses` is an array of `[name, answer]` pairs in the order they arrived. Return an object with each guest's **latest** answer.\n\nExample: `finalAnswers([['Ana', 'yes'], ['Ben', 'no'], ['Ana', 'maybe']])` → `{ Ana: 'maybe', Ben: 'no' }`\n\nSaving an answer in an object is O(1), whether the guest is new or not, so one pass gives you O(n) time.",
-        "es": "A veces los invitados cambian de opinión. Escribe `finalAnswers(responses)`, donde `responses` es un array de pares `[nombre, respuesta]` en el orden en que llegaron. Devuelve un objeto con la respuesta **más reciente** de cada invitado.\n\nEjemplo: `finalAnswers([['Ana', 'yes'], ['Ben', 'no'], ['Ana', 'maybe']])` → `{ Ana: 'maybe', Ben: 'no' }`\n\nGuardar una respuesta en un objeto es O(1), sea el invitado nuevo o no, así que una pasada te da tiempo O(n)."
+        "es": "A veces los invitados cambian de opinión. Escribe `finalAnswers(responses)`, donde `responses` es un array de pares `[nombre, respuesta]` en el orden en que llegaron. Devuelve un objeto con la respuesta **más reciente** de cada persona.\n\nEjemplo: `finalAnswers([['Ana', 'yes'], ['Ben', 'no'], ['Ana', 'maybe']])` → `{ Ana: 'maybe', Ben: 'no' }`\n\nGuardar una respuesta en un objeto es O(1), sea un nombre nuevo o no, así que una pasada te da tiempo O(n)."
       },
       "difficulty": "easy",
       "category": "interview",
@@ -625,7 +625,7 @@
       },
       "description": {
         "en": "Write `countArrived(guests, arrivals)`. `guests` is the list of invited names and `arrivals` is the list of people who showed up at the door, in order. Return how many arrivals are on the guest list. If an invited name arrives twice, count it twice.\n\nExample: `countArrived(['Ana', 'Ben', 'Cleo'], ['Ben', 'Zoe', 'Ana'])` → `2`\n\nChecking every arrival with `guests.includes(name)` works, but it's O(n · m) for n guests and m arrivals. Make it **O(n + m)**: build an object of the guests once, then check each arrival in O(1). Careful with names like `toString`.",
-        "es": "Escribe `countArrived(guests, arrivals)`. `guests` es la lista de nombres invitados y `arrivals` es la lista de personas que llegaron a la puerta, en orden. Devuelve cuántas llegadas están en la lista de invitados. Si un nombre invitado llega dos veces, cuéntalo dos veces.\n\nEjemplo: `countArrived(['Ana', 'Ben', 'Cleo'], ['Ben', 'Zoe', 'Ana'])` → `2`\n\nRevisar cada llegada con `guests.includes(name)` funciona, pero es O(n · m) para n invitados y m llegadas. Hazla **O(n + m)**: construye un objeto con los invitados una vez, y luego revisa cada llegada en O(1). Cuidado con nombres como `toString`."
+        "es": "Escribe `countArrived(guests, arrivals)`. `guests` es la lista de nombres invitados y `arrivals` es la lista de personas que llegaron a la puerta, en orden. Devuelve cuántas llegadas están en la lista de invitados. Si un nombre de la lista llega dos veces, cuenta las dos llegadas.\n\nEjemplo: `countArrived(['Ana', 'Ben', 'Cleo'], ['Ben', 'Zoe', 'Ana'])` → `2`\n\nRevisar cada llegada con `guests.includes(name)` funciona, pero es O(n · m) para n invitados y m llegadas. Hazla **O(n + m)**: construye un objeto con los invitados una vez, y luego revisa cada llegada en O(1). Cuidado con nombres como `toString`."
       },
       "difficulty": "medium",
       "category": "interview",

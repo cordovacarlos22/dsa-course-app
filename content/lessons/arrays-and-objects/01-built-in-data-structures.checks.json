@@ -13,7 +13,7 @@
         },
         {
           "en": "The array keeps its items in order, so every guest got a new index; the object has no order, so it has no start",
-          "es": "El array guarda sus elementos en orden, así que cada invitado recibió un índice nuevo; el objeto no tiene orden, así que no tiene principio"
+          "es": "El array guarda sus elementos en orden, así que cada nombre recibió un índice nuevo; el objeto no tiene orden, así que no tiene principio"
         },
         {
           "en": "Objects are always faster than arrays",
@@ -38,7 +38,7 @@
       "type": "code",
       "task": {
         "en": "Write `lastGuest(guests)` so it returns the last guest of the list **with access, not search**: no loop, one step whatever the size of the list.",
-        "es": "Escribe `lastGuest(guests)` para que devuelva el último invitado de la lista **accediendo, no buscando**: sin bucle, un solo paso sin importar el tamaño de la lista."
+        "es": "Escribe `lastGuest(guests)` para que devuelva el último nombre de la lista **accediendo, no buscando**: sin bucle, un solo paso sin importar el tamaño de la lista."
       },
       "hint": {
         "en": "The last index is always one less than the length: `guests.length - 1`.",

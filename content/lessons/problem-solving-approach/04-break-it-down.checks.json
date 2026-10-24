@@ -17,7 +17,7 @@
         },
         {
           "en": "The interviewer can't read code without comments",
-          "es": "El entrevistador no puede leer código sin comentarios"
+          "es": "Quien te entrevista no puede leer código sin comentarios"
         },
         {
           "en": "It's required by JavaScript",
@@ -31,7 +31,7 @@
       },
       "explanation": {
         "en": "A plan separates what to do from how to write it in JavaScript, and the step you can't put into words shows you where you're stuck.",
-        "es": "Un plan separa qué hacer de cómo escribirlo en JavaScript, y el paso que no puedes poner en palabras te muestra dónde estás atascado."
+        "es": "Un plan separa qué hacer de cómo escribirlo en JavaScript, y el paso que no puedes poner en palabras te muestra dónde te atascas."
       }
     },
     {

@@ -38,7 +38,7 @@
       "type": "code",
       "task": {
         "en": "Write `hasReplied(rsvps, name)`, which returns `true` if the guest has a key in the object, and `false` if not. Make it O(1), and make sure inherited methods like `'toString'` don't count.",
-        "es": "Escribe `hasReplied(rsvps, name)`, que devuelve `true` si el invitado tiene una clave en el objeto, y `false` si no. Hazla O(1), y asegúrate de que los métodos heredados como `'toString'` no cuenten."
+        "es": "Escribe `hasReplied(rsvps, name)`, que devuelve `true` si ese nombre tiene una clave en el objeto, y `false` si no. Hazla O(1), y asegúrate de que los métodos heredados como `'toString'` no cuenten."
       },
       "hint": {
         "en": "`in` counts inherited methods too. Which method only counts the keys the object owns?",

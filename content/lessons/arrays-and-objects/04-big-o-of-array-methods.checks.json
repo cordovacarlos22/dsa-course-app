@@ -96,7 +96,7 @@
       "type": "choice",
       "question": {
         "en": "Your app looks up a guest's answer by name thousands of times a night, and the order of the guests never matters. Which structure fits best?",
-        "es": "Tu app busca la respuesta de un invitado por su nombre miles de veces por noche, y el orden de los invitados nunca importa. ¿Qué estructura conviene más?"
+        "es": "Tu app busca la respuesta de una persona por su nombre miles de veces por noche, y el orden de los invitados nunca importa. ¿Qué estructura conviene más?"
       },
       "options": [
         {
@@ -113,7 +113,7 @@
         },
         {
           "en": "An array where every new guest is added with `unshift`",
-          "es": "Un array donde cada invitado nuevo se agrega con `unshift`"
+          "es": "Un array donde cada nombre nuevo se agrega con `unshift`"
         }
       ],
       "answer": 1,
@@ -123,7 +123,7 @@
       },
       "explanation": {
         "en": "With names as keys, each lookup is O(1). Searching an array is O(n) per lookup, sorting is O(n log n) each time, and unshift is O(n) per guest.",
-        "es": "Con los nombres como claves, cada búsqueda es O(1). Buscar en un array es O(n) por búsqueda, ordenar es O(n log n) cada vez, y unshift es O(n) por invitado."
+        "es": "Con los nombres como claves, cada búsqueda es O(1). Buscar en un array es O(n) por búsqueda, ordenar es O(n log n) cada vez, y unshift es O(n) por cada nombre."
       }
     }
   ]

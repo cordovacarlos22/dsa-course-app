@@ -4,7 +4,7 @@
       "type": "choice",
       "question": {
         "en": "You're stuck on one part of a problem. What does \"solve a simpler problem\" mean?",
-        "es": "Estás atascado en una parte de un problema. ¿Qué quiere decir \"resolver un problema más simple\"?"
+        "es": "Te atascaste en una parte de un problema. ¿Qué quiere decir \"resolver un problema más simple\"?"
       },
       "options": [
         {
@@ -13,7 +13,7 @@
         },
         {
           "en": "Wait until the interviewer gives you the answer",
-          "es": "Esperar a que el entrevistador te dé la respuesta"
+          "es": "Esperar a que quien te entrevista te dé la respuesta"
         },
         {
           "en": "Delete what you have and start over",

@@ -223,7 +223,7 @@ When Carlos says _"write the lessons for module N"_:
    - New animation: build it with `StepPlayer` in `src/visualizations/`, add its name to `names.js` **and** register it in `index.js`, and put its captions in `src/locales/viz.en.json` and `viz.es.json` (they load with the animations, not with the first page; components still read them as `t('viz.…')`).
    - **Linked list pictures** use `LinkedListDiagram` (`nodes`, `pointers`, `detached`, `length`), so every list looks the same; a code trace draws one by yielding `list` in its steps. Comments inside an animation's code are translated (`linkedList.comments` in the captions), like the comments in lessons.
 
-6. Run `npm run content:validate` (checks file names, front matter, animation names, that every `js-run` block compiles, the beginner loop style, and that each `.checks.json` has one checkpoint per step in every language with passing solutions and failing starter code), then open a PR for Carlos to review.
+6. Run `npm run content:validate` (checks file names, front matter, animation names, that every `js-run` block compiles, the beginner loop style, and that each `.checks.json` has one checkpoint per step in every language with passing solutions and failing starter code; it also warns about Spanish that gives a guest or the student a gender), then open a PR for Carlos to review.
 
 ## Content generation procedure
 
