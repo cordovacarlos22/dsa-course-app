@@ -128,7 +128,8 @@ For now every agent works through **Carlos's GitHub account**, so GitHub sees on
 | Secrets in Infisical (OIDC from GitHub Actions)                                    | ⏳ #51                                                             |
 | Docker dev and QA environment                                                      | ✅ (#38)                                                           |
 | Release: `production` branch, Carlos's approval, ruleset, rollback                 | ✅ built (#39): on once Vercel's production branch is `production` |
-| Staging on `staging.charliecodeacademy.com`                                        | ⏳ #70 (the domain)                                                |
+| Own domain: landing on `charliecodeacademy.com`, course on `app.`                  | ✅ live (#70)                                                      |
+| Staging on `staging.charliecodeacademy.com`                                        | ⏳ after #39's switch                                              |
 | Automatic tests against staging                                                    | ⏳ after #51                                                       |
 
 Until Carlos switches Vercel's production branch to `production`, Vercel deploys `main` to production on every merge, so his approval still happens when he merges the PR.

@@ -204,7 +204,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Classes & Pointers (`classes-and-pointers`)
 
-**Status:** ✅ 2 lessons, 7 steps (EN + ES, 7 checkpoints) · ✅ quiz, 16 questions (EN + ES) · ✅ 2 build it · ⬜ slides
+**Status:** ✅ 2 lessons, 9 steps, deeper (#45) (EN + ES, 9 checkpoints, 2 of them explain) · ✅ quiz, 24 questions (EN + ES) · ✅ 5 build it · ⬜ slides
 **Goal:** write classes and understand references, the two tools behind every data structure.
 **Place:** it opens the Data Structures section, right before Linked Lists (Carlos, 2026-10-19), because both courses teach classes right before their first data structure.
 **Sources:** course 1's Section 3 (2 lectures and `cookie.js`). Course 2's class lecture (instance vs. static methods) joins when Carlos sends it.
@@ -215,7 +215,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
   2. Pointers: values vs. references ✅ (C1 pointers lecture: `value-copy`, `reference-copy`, `pointer-move`)
   3. Instance methods vs. static (class) methods ⬜ (waits for course 2's lecture)
 - **Quiz:** classes vs. instances, naming, `constructor`, what `new` does (and forgetting it), `this`, getters/setters, why data structures are classes, copying values vs. sharing references, `===` on objects, moving pointers, garbage collection (and removed list nodes). Static methods come with lesson 3.
-- **Build it:** ✅ The Invitation Class · ✅ The Door Counter (`Counter`: increment, decrement, reset) · A `Point` class with a static `distance` method (with course 2's lecture)
+- **Build it:** ✅ The Invitation Class · ✅ The Door Counter (`Counter`: increment, decrement, reset) · ✅ The Seating Table (`Table`: seat, freeSeats) · ✅ Count the Cards (follow `next` pointers) · ✅ Every Other Card · A `Point` class with a static `distance` method (with course 2's lecture)
 - **Interview problems:** none.
 
 ## Linked Lists (`linked-lists`)
