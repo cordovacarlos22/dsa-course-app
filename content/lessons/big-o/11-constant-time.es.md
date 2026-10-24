@@ -10,7 +10,7 @@ minutes: 9
 
 Sigue **O(1)**, que se lee "O de 1". Describe código cuyo trabajo **no cambia** cuando crece la entrada. No "muy poco trabajo", sino **el mismo** trabajo: sea n 1 o mil millones, el código hace el mismo número fijo de operaciones. El 1 de O(1) no significa "una operación". Representa cualquier cantidad fija, igual que el 1 de f(n) = 1 en la definición nunca cambia con n.
 
-Este es el ejemplo más simple. Si cada uno de n invitados trae a un acompañante, el total de personas es n + n. Una función que lo regresa hace **una operación**, la suma. No importa si n es 1 o un millón; siempre es una operación. Agrega otra suma, como `return n + n + n`, y son dos operaciones, así que O(2). Como seguro ya adivinaste, quitamos la constante y lo simplificamos a **O(1)**: el número de operaciones es una constante que no cambia cuando cambia n.
+Este es el ejemplo más simple. Si cada una de las n personas invitadas trae a alguien más, el total de personas es n + n. Una función que lo regresa hace **una operación**, la suma. No importa si n es 1 o un millón; siempre es una operación. Agrega otra suma, como `return n + n + n`, y son dos operaciones, así que O(2). Como seguro ya adivinaste, quitamos la constante y lo simplificamos a **O(1)**: el número de operaciones es una constante que no cambia cuando cambia n.
 
 La versión con la fórmula de `sumOneTo` es el mismo tipo de código:
 
@@ -20,7 +20,7 @@ trace-sum-formula
 
 **Qué acaba de pasar:** n + 1, luego la multiplicación, luego la división: 3 operaciones. Elige n = 1,000,000 y el contador se sigue quedando en 3. Tres operaciones cada vez, así que O(3), que escribimos como **O(1)**.
 
-Aquí están: `withPlusOnes` (cada quien trae a un amigo) y `withTwoFriends` (cada quien trae a dos), con una n chiquita y una enorme:
+Aquí están: `withPlusOnes` (cada quien trae a una persona más) y `withTwoFriends` (cada quien trae a dos), con una n chiquita y una enorme:
 
 ```js-run
 function withPlusOnes(n) {
@@ -58,12 +58,12 @@ Pruébalo con una lista grande. Armar la lista tarda un momento, porque el bucle
 ```js-run
 const guests = []
 for (let i = 0; i < 1000000; i++) {
-  guests.push('Invitado ' + i)
+  guests.push('Persona ' + i)
 }
 
 console.log(guests[3]) // salta a la caja 3
 console.log(guests[500000]) // salta a la caja 500000, igual de rápido
-console.log(guests[guests.length - 1]) // el último invitado, sigue siendo un salto
+console.log(guests[guests.length - 1]) // la última persona, sigue siendo un salto
 console.log(guests.length) // el array ya sabe su tamaño
 
 const party = { host: 'Ana', theme: 'Retro' }
@@ -94,8 +94,8 @@ Así que cuando busques el Big O de una línea, pregúntate: _¿salta directo a 
 const guests = ['Ana', 'Ben', 'Cleo', 'Dev', 'Eli', 'Fay']
 
 console.log(guests[4]) // salta directo a la caja 4: O(1)
-console.log(guests.includes('Zoe')) // primero revisa a cada invitado: O(n)
+console.log(guests.includes('Zoe')) // primero revisa cada nombre: O(n)
 console.log(guests.indexOf('Fay')) // revisa invitados hasta encontrar a Fay: O(n)
 ```
 
-**Error común:** decir que una línea es O(1) porque es corta. `guests.includes('Zoe')` es una sola línea, pero su costo es un bucle sobre cada invitado. Juzga una línea por cuánto trabajo hace, no por cuánto espacio ocupa en la pantalla.
+**Error común:** decir que una línea es O(1) porque es corta. `guests.includes('Zoe')` es una sola línea, pero su costo es un bucle sobre toda la lista. Juzga una línea por cuánto trabajo hace, no por cuánto espacio ocupa en la pantalla.

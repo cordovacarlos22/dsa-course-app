@@ -1,7 +1,7 @@
 ---
 title: Drop the non-dominant terms
 order: 10
-minutes: 9
+minutes: 12
 ---
 
 > **Goal:** simplify expressions like O(n² + n) with the second rule: keep only the term that grows fastest.
@@ -69,7 +69,7 @@ The same idea works for any mix: keep the term that grows fastest and drop the r
 
 Look at n² + 5n + 8 with n = 1,000: that's 1,000,000 + 5,000 + 8. The difference between 1,005,008 and 1,000,000 is tiny, and that's only with n = 1,000. Plug in a billion and the 5n + 8 part is meaningless.
 
-A good way to picture it: imagine looking at the chart from very, very far away, as if from outer space. From there, only the fastest-growing curve is visible; everything else is a flat smudge along the bottom.
+Another way to see it: stretch the chart's n axis out to huge values. The further right you go, the more the fastest-growing curve towers over the others, until everything else looks like a flat line along the bottom.
 
 ```viz
 big-o-growth-chart
@@ -100,3 +100,44 @@ The ratio gets closer and closer to 1: for big n, the dropped terms change almos
 Careful with big constants: O(n + 1,000,000) is still just **O(n)**. However big it is, a fixed number doesn't grow, and once n is large enough, the n part always wins.
 
 **Common mistake:** comparing the terms with a small n. At n = 1,000, the 1,000,000 in n + 1,000,000 is far bigger than n, so it's tempting to call the code O(1). But Big O asks what happens as n keeps growing, and at n = a billion, the n part is a thousand times bigger than the constant.
+
+## Spot the dominant term in code
+
+So far the terms came already written out, like n² + 5n + 8. In real code, nobody hands you the expression: you build it yourself, one block at a time, and then keep only the fastest-growing part. The steps:
+
+1. Give each block of code its cost: a simple line (math, an assignment, reading by index) is O(1), unless it calls a method that hides a loop; a loop over the input is O(n); and a loop inside a loop over the input is O(n²).
+2. Add up the blocks that come **one after the other**.
+3. Keep the dominant term and drop the constants.
+
+Here's a function that gets the party ready, with the cost of each block in a comment:
+
+```js-run
+function prepareParty(guests) {
+  console.log('Guests:', guests.length) // O(1)
+
+  for (let i = 0; i < guests.length; i++) {
+    console.log('Name tag for ' + guests[i]) // O(n): one tag per guest
+  }
+
+  let introductions = 0
+  for (let i = 0; i < guests.length; i++) {
+    for (let j = 0; j < guests.length; j++) {
+      if (i !== j) {
+        introductions = introductions + 1 // O(n²): every guest meets every other guest
+      }
+    }
+  }
+  console.log('Introductions:', introductions)
+}
+
+prepareParty(['Ana', 'Ben', 'Cleo', 'Dev'])
+```
+
+Adding up the blocks gives O(1) + O(n) + O(n²). The nested loop is the dominant term, so `prepareParty` is **O(n²)**. With 4 guests, that's 4 name tags and 12 introductions; with 1,000 guests, 1,000 name tags and 999,000 introductions. The name tags hardly matter next to the introductions.
+
+Two more shapes you'll meet all the time:
+
+- **A loop over the input, then a loop of fixed length** (say, setting out 10 tables): n + 10, so **O(n)**. A loop that never grows is a constant, however big it looks.
+- **Two nested loops, one after the other:** n² + n² = 2n², and dropping the 2 gives **O(n²)**. Two copies of the same term make a bigger constant, not a new term.
+
+**Common mistake:** keeping the block that comes first, or the one with the most lines. Where a block sits and how long it looks don't matter: find the block that grows fastest with the input, and that's the one Big O keeps.

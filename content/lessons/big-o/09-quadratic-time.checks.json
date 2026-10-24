@@ -68,38 +68,29 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "An O(n²) function runs with 1,000 items. About how many steps does it take?",
-        "es": "Una función O(n²) corre con 1,000 elementos. ¿Más o menos cuántos pasos da?"
+        "en": "In your own words: why is O(n²) code considered inefficient, even when it feels fast in a quick test?",
+        "es": "Con tus palabras: ¿por qué se considera ineficiente el código O(n²), aunque parezca veloz cuando lo pruebas con pocos datos?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "Its work grows with n × n: double the input and the work quadruples, and 10 times the input means 100 times the work. With a few items that's still instant, so a small test hides it, but with real data it explodes: 100,000 items is 10 billion steps. An O(n) version of the same job would only grow in proportion.",
+        "es": "Su trabajo crece con n × n: duplica la entrada y el trabajo se cuadruplica, y 10 veces la entrada significa 100 veces el trabajo. Con pocos elementos sigue siendo instantáneo, así que una prueba pequeña lo esconde, pero con datos reales se dispara: 100,000 elementos son 10 mil millones de pasos. Una versión O(n) del mismo trabajo solo crecería en proporción."
+      },
+      "checklist": [
         {
-          "en": "1,000",
-          "es": "1,000"
+          "en": "Says the work grows with n × n (double the input, four times the work)",
+          "es": "Dice que el trabajo crece con n × n (duplica la entrada, cuatro veces el trabajo)"
         },
         {
-          "en": "2,000",
-          "es": "2,000"
+          "en": "Says small tests hide the problem",
+          "es": "Dice que las pruebas pequeñas esconden el problema"
         },
         {
-          "en": "1,000,000",
-          "es": "1,000,000"
-        },
-        {
-          "en": "1,000,000,000",
-          "es": "1,000,000,000"
+          "en": "Says an O(n) version grows much more slowly",
+          "es": "Dice que una versión O(n) crece mucho más despacio"
         }
-      ],
-      "answer": 2,
-      "hint": {
-        "en": "n² means n × n.",
-        "es": "n² quiere decir n × n."
-      },
-      "explanation": {
-        "en": "1,000 × 1,000 = 1,000,000 steps. That's why O(n²) is considered inefficient.",
-        "es": "1,000 × 1,000 = 1,000,000 de pasos. Por eso O(n²) se considera ineficiente."
-      }
+      ]
     }
   ]
 }

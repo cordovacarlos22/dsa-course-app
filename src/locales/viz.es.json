@@ -198,7 +198,7 @@
       "title": "greetEveryone: un bucle dentro de otro",
       "input": "{{n}} invitados",
       "start": "Por cada persona i, el bucle de adentro recorre a todas las personas j.",
-      "self": "i y j son {{a}}: nadie se saluda a sí mismo, pero el bucle de adentro igual dio un paso.",
+      "self": "i y j son {{a}}: no hay saludo, pero el bucle de adentro igual dio un paso.",
       "greet": "{{a}} saluda a {{b}}. 👋",
       "end": "{{n}} × {{n}} = {{steps}} pasos internos ({{greetings}} saludos). Eso es O(n²)."
     },

@@ -46,10 +46,10 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Big O (`big-o`)
 
-**Status:** ✅ 17 lessons, 54 steps (EN + ES, 54 checkpoints, all theory first; lessons 1–8 deeper, with explain checks, #43) · ✅ quiz, 44 questions (EN + ES) · ✅ 4 interview problems · ⬜ slides
+**Status:** ✅ 17 lessons, 55 steps (EN + ES, 55 checkpoints, all theory first; lessons 1–12 deeper, with explain checks, #43 and #44) · ✅ quiz, 46 questions (EN + ES) · ✅ 5 interview problems · ⬜ slides
 **Goal:** measure and compare the efficiency of code, in time and space.
 **Sources:** Carlos's two Big O files (course 1 "Section 2 - Big o notes.docx" and course 2 "Intro to Big O.docx", text and images; see AGENTS.md).
-**Style:** one lesson per lecture of both courses, at their depth (450–900 words each), with the courses' own examples written as indexed loops; every step has an animation except lesson 3's "Count it yourself" (practice with runnable counters), and the party **guest list** is the story of the animations.
+**Style:** one lesson per lecture of both courses, at their depth (450–900 words each), with the courses' own examples written as indexed loops; every step has an animation except two practice steps, lesson 3's "Count it yourself" and lesson 10's "Spot the dominant term in code", which use runnable code instead, and the party **guest list** is the story of the animations.
 
 - **Lessons** (sources and animations in parentheses):
   1. Why Big O? ✅ (C2 intro + motivation, C1 intro: `big-o-growth-chart`, `trace-is-invited`, `trace-is-invited-all`, `stopwatch-race`, `memory-boxes`)
@@ -61,7 +61,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
   7. O(n): linear time ✅ (C1: `trace-print-numbers`, `linear-boxes`, `trace-welcome-all`)
   8. Drop the constants ✅ (C1 + C2: `trace-welcome-and-goodbye`, `same-shape`, `big-o-growth-chart`)
   9. O(n²): a loop inside a loop ✅ (C1: `trace-print-seats`, `nested-grid`, `big-o-growth-chart`)
-  10. Drop the non-dominant terms ✅ (C1 + C2: `dominant-term`, `big-o-growth-chart`)
+  10. Drop the non-dominant terms ✅ (with "Spot the dominant term in code"; C1 + C2: `dominant-term`, `big-o-growth-chart`)
   11. O(1): constant time ✅ (C1: `trace-sum-formula`, `constant-jump`, `trace-is-invited`)
   12. Rules of thumb ✅ (C2: `trace-party-summary`, `trace-greet-everyone`, `trace-give-gifts`)
   13. Different terms for inputs ✅ (C1: `two-inputs`, `trace-welcome-and-goodbye`)
@@ -71,7 +71,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
   17. Wrap-up ✅ (C1 wrap-up + cheat sheet, C2 recap: `big-o-growth-chart`, `search-cases`, `dominant-term`)
 - **Quiz:** the topics of course 1's quiz and course 2's three quizzes (simplifying, time complexity of functions, space complexity), plus timing and counting, Ω/Θ/O, logarithms and array operations. Our own questions and code.
 - **Build it:** none.
-- **Interview problems:** ✅ Find the Maximum · ✅ Contains Duplicate · ✅ Binary Search · ✅ Count the Operations (predict the count, then check it)
+- **Interview problems:** ✅ Find the Maximum · ✅ Contains Duplicate · ✅ Binary Search · ✅ Count the Operations (predict the count, then check it) · ✅ Count the Handshakes (medium: n(n − 1) / 2 as a formula)
 
 ## Big O of Arrays & Objects (`arrays-and-objects`)
 
