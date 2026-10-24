@@ -49,7 +49,7 @@
     "checks_one": "{{count}} revisión",
     "checks_other": "{{count}} revisiones",
     "start": "isInvited lee la lista desde el principio. Cuánto trabajo hace depende de dónde está el nombre.",
-    "best": "'{{name}}' es el primero: encontrado en {{checks}} revisión. El mejor caso se llama Ω (omega).",
+    "best": "'{{name}}' va primero: encontrado en {{checks}} revisión. El mejor caso se llama Ω (omega).",
     "average": "'{{name}}' está en el medio: {{checks}} revisiones. El caso promedio se llama Θ (theta).",
     "worst": "'{{name}}' no está en la lista: se revisaron los {{checks}} nombres. El peor caso se llama O: big O.",
     "summary": "Big O siempre significa el peor caso: el código nunca será más lento que esto."

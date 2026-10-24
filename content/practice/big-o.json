@@ -226,7 +226,7 @@
       "correctIndex": 2,
       "explanation": {
         "en": "The loop runs once per guest, so the work grows in a straight line with n (the number of guests): O(n).",
-        "es": "El bucle corre una vez por invitado, así que el trabajo crece en línea recta con n (el número de invitados): O(n)."
+        "es": "El bucle corre una vez por nombre, así que el trabajo crece en línea recta con n (el número de invitados): O(n)."
       }
     },
     {

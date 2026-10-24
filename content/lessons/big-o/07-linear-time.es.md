@@ -81,7 +81,7 @@ Este es O(n) con un array. `welcomeAll` imprime un mensaje de bienvenida por cad
 trace-welcome-all
 ```
 
-**Qué acaba de pasar:** con 3 invitados, el bucle imprimió 3 mensajes; con 6 invitados, 6 mensajes. El bucle recorrió el array una vez, haciendo un trabajo pequeño y fijo por cada invitado. La misma forma que `printNumbers`: O(n), donde n es el número de invitados.
+**Qué acaba de pasar:** con 3 invitados, el bucle imprimió 3 mensajes; con 6 invitados, 6 mensajes. El bucle recorrió el array una vez, haciendo un trabajo pequeño y fijo por cada nombre. La misma forma que `printNumbers`: O(n), donde n es el número de invitados.
 
 Para reconocer O(n) en el código, busca **un bucle que recorra la entrada una vez**, haciendo una cantidad de trabajo pequeña y fija por cada elemento. Por ejemplo:
 
