@@ -42,37 +42,6 @@
       }
     },
     {
-      "id": "space-complexity-describes",
-      "topic": "Big O: Intro",
-      "prompt": {
-        "en": "What does **space complexity** describe?",
-        "es": "¿Qué describe la **complejidad espacial**?"
-      },
-      "options": [
-        {
-          "en": "How the memory the code needs grows with the input",
-          "es": "Cómo crece con la entrada la memoria que necesita el código"
-        },
-        {
-          "en": "How many seconds the code takes to finish on your computer",
-          "es": "Cuántos segundos tarda el código en terminar en tu computadora"
-        },
-        {
-          "en": "How many lines of code the function has in it",
-          "es": "Cuántas líneas de código tiene la función"
-        },
-        {
-          "en": "How fast your computer's processor can work",
-          "es": "Qué tan rápido puede trabajar el procesador de tu computadora"
-        }
-      ],
-      "correctIndex": 0,
-      "explanation": {
-        "en": "Space complexity is how much memory the code uses as the input grows. Code 2 can be slower but lighter.",
-        "es": "La complejidad espacial es cuánta memoria usa el código cuando crece la entrada. El código 2 puede ser más lento pero más ligero."
-      }
-    },
-    {
       "id": "operations-not-seconds",
       "topic": "Big O: Intro",
       "prompt": {
@@ -671,6 +640,37 @@
       }
     },
     {
+      "id": "space-complexity-describes",
+      "topic": "Big O: Intro",
+      "prompt": {
+        "en": "What does **space complexity** describe?",
+        "es": "¿Qué describe la **complejidad espacial**?"
+      },
+      "options": [
+        {
+          "en": "How the memory the code needs grows with the input",
+          "es": "Cómo crece con la entrada la memoria que necesita el código"
+        },
+        {
+          "en": "How many seconds the code takes to finish on your computer",
+          "es": "Cuántos segundos tarda el código en terminar en tu computadora"
+        },
+        {
+          "en": "How many lines of code the function has in it",
+          "es": "Cuántas líneas de código tiene la función"
+        },
+        {
+          "en": "How fast your computer's processor can work",
+          "es": "Qué tan rápido puede trabajar el procesador de tu computadora"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Space complexity is about memory: how much extra memory the code needs as the input grows. Seconds are time, not space, and the computer's speed or the number of lines doesn't change it.",
+        "es": "La complejidad espacial trata de la memoria: cuánta memoria extra necesita el código cuando crece la entrada. Los segundos son tiempo, no espacio, y ni la velocidad de la computadora ni el número de líneas la cambian."
+      }
+    },
+    {
       "id": "timing-formula-vs-loop",
       "topic": "Big O: Timing Our Code",
       "prompt": {
@@ -718,8 +718,8 @@
           "es": "El Big O de la función cambia después de la primera ejecución y luego se queda igual"
         },
         {
-          "en": "The computer warms up and gets faster the longer it stays switched on",
-          "es": "La computadora se calienta y se vuelve más rápida mientras más tiempo está prendida"
+          "en": "The computer runs faster the longer it stays switched on",
+          "es": "La computadora corre más rápido mientras más tiempo lleva prendida"
         },
         {
           "en": "`performance.now()` gets more precise with every call you make to it",

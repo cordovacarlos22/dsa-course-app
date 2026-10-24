@@ -91,7 +91,7 @@ trace-is-invited-all
 
 **Qué acaba de pasar:** `isInvitedAll` puso `found = true` cuando vio el nombre… y aun así siguió leyendo. Elige **buscar a 'Ana'**: Ana va primero en la lista, y el código igual revisa los 6 nombres. `isInvited` se habría detenido después de una revisión.
 
-Antes de ejecutarlo, predice cuántas revisiones hará cada versión para 'Ana', que va primero en la fila, y para 'Zoe', que no está en la lista. Luego ejecuta las dos versiones; cada una cuenta sus revisiones mientras avanza:
+Antes de ejecutarlo, predice cuántas revisiones hará cada versión para 'Ana', que va primero en la lista, y para 'Zoe', que no está en la lista. Luego ejecuta las dos versiones; cada una cuenta sus revisiones mientras avanza:
 
 ```js-run
 const guests = ['Ana', 'Ben', 'Cleo', 'Dev', 'Eli', 'Fay']

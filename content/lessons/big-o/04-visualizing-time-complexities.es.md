@@ -130,7 +130,7 @@ Más adelante en el módulo vas a ver cada una otra vez, casi todas en una lecci
 big-o-growth-chart
 ```
 
-**Qué acaba de pasar:** la gráfica dibujó cada forma en los mismos ejes. O(1) se quedó plana, O(log n) subió despacito, O(n) subió en línea recta, y O(n²) se disparó, llegando a 1,000,000 de operaciones con n = 1,000. Recórrela otra vez y compara dónde queda cada línea en la orilla derecha.
+**Qué acaba de pasar:** la gráfica dibujó cada forma en los mismos ejes. O(1) se quedó plana, O(log n) subió despacito, O(n) subió en línea recta, y O(n²) se disparó, llegando a 1,000,000 de operaciones con n = 1,000. Recórrela otra vez y compara dónde queda cada línea en la orilla derecha. (O(n log n) no está en esta gráfica: la vas a ver junto a estas en la lección de los logaritmos.)
 
 Ejecuta los números detrás de esa comparación:
 

@@ -130,7 +130,7 @@ You'll meet each of these again later in the module, most of them in a lesson of
 big-o-growth-chart
 ```
 
-**What just happened:** the chart drew each shape on the same axes. O(1) stayed flat, O(log n) crept up slowly, O(n) climbed in a straight line, and O(n²) shot up, reaching 1,000,000 operations by n = 1,000. Step through it again and compare where each line is at the right edge.
+**What just happened:** the chart drew each shape on the same axes. O(1) stayed flat, O(log n) crept up slowly, O(n) climbed in a straight line, and O(n²) shot up, reaching 1,000,000 operations by n = 1,000. Step through it again and compare where each line is at the right edge. (O(n log n) isn't on this chart: you'll see it next to these in the logarithms lesson.)
 
 Run the numbers behind that comparison:
 
