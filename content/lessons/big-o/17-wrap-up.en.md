@@ -75,6 +75,8 @@ console.log('O(2ⁿ):', Math.pow(2, n))
 console.log('O(n!):', factorial)
 ```
 
+**Under the hood:** where do O(2ⁿ) and O(n!) come from? From code that tries **every possibility**. Each guest can be invited or not, so n guests give 2ⁿ possible guest lists: 1,024 for 10 guests, over a million for 20. Code that checks every possible list is O(2ⁿ). And n guests can sit in n! different orders (n × (n − 1) × … × 1): 3,628,800 orders for 10 guests, and about 2.4 quintillion for 20. Code that tries every seating order is O(n!). A few problems really need that much work, but most of the time, a function that tries everything is a sign that a smarter approach exists.
+
 **Common mistake:** memorizing the table instead of the reasons. If you know **why** binary search is O(log n) (it halves the data every step), you'll recognize the same shape in code you've never seen. A memorized table can't do that.
 
 ## Recap

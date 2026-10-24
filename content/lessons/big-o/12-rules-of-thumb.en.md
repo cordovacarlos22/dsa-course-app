@@ -44,6 +44,8 @@ function partySummary(guests) {
 console.log(partySummary(['Ana', 'Ben', 'Cleo', 'Dev', 'Eli']))
 ```
 
+**Under the hood:** rule 2 has a catch worth knowing. `let sameList = guests` is O(1) even for a million guests, because it doesn't copy any guests: it copies a **reference** to the same array, so both names point to one list (the Classes & Pointers module digs into this). But `let copyOfList = guests.slice()` really copies: it builds a new array and puts every guest in it, one by one, so it's O(n). Methods that build a new array out of an old one, like `slice()` and `concat()`, cost as much as the items they copy. When a line makes a copy, count the copying.
+
 **Common mistake:** adding up the O(1) lines as if they mattered: "four O(1) lines and one O(n), so O(n + 4)". Drop the constants and the non-dominant terms, and it's just **O(n)**. The loop decides the cost.
 
 ## Loops multiply

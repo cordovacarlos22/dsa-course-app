@@ -68,6 +68,8 @@ console.log(line)
 console.log('Length:', line.length) // 20 characters: 4 per turn, so O(n) space
 ```
 
+**Under the hood:** here are the sizes behind these rules. By the language's rules, every JavaScript number is a 64-bit value, **8 bytes**, whatever it's worth: one fixed-size box. A string takes about 1 or 2 bytes per character in most engines, so a 50-character name is roughly 50 to 100 bytes. An array keeps one slot per item, a few bytes each (a number, or a reference to a string or object), plus a little bookkeeping. And the variables a function declares, like `count` and `i`, usually get their space when the function starts and give it back when it returns, so calling a function a million times doesn't pile up a million counters.
+
 **Common mistake:** thinking a bigger number takes more space. `let guestCount = 5` and `let guestCount = 5000000` take the same memory. A number is one box, whatever is written in it. It's strings, arrays and objects that grow.
 
 ## Totaling vs doubling the orders

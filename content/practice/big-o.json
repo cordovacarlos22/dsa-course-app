@@ -1106,34 +1106,34 @@
       }
     },
     {
-      "id": "simplify-n-to-the-fourth-plus-n",
+      "id": "simplify-n-plus-n-log-n",
       "topic": "Big O: Drop Non-Dominants",
       "prompt": {
-        "en": "Simplify O(n⁴ + n) as much as possible.",
-        "es": "Simplifica O(n⁴ + n) lo más posible."
+        "en": "Simplify O(n + n log n) as much as possible.",
+        "es": "Simplifica O(n + n log n) lo más posible."
       },
       "options": [
-        {
-          "en": "O(n⁵)",
-          "es": "O(n⁵)"
-        },
         {
           "en": "O(n)",
           "es": "O(n)"
         },
         {
-          "en": "O(n⁴)",
-          "es": "O(n⁴)"
+          "en": "O(log n)",
+          "es": "O(log n)"
         },
         {
-          "en": "O(n⁴ + n)",
-          "es": "O(n⁴ + n)"
+          "en": "O(n log n)",
+          "es": "O(n log n)"
+        },
+        {
+          "en": "O(n² log n)",
+          "es": "O(n² log n)"
         }
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "n⁴ grows much faster than n, so it's the dominant term and n is dropped: O(n⁴). O(n⁴ + n) isn't simplified yet, and adding terms never adds their exponents, so it isn't O(n⁵).",
-        "es": "n⁴ crece mucho más rápido que n, así que es el término dominante y n se elimina: O(n⁴). O(n⁴ + n) todavía no está simplificado, y sumar términos nunca suma sus exponentes, así que no es O(n⁵)."
+        "en": "n log n grows faster than n (it's n times something that keeps growing), so n log n is the dominant term and n is dropped. Adding the terms never multiplies them, so it isn't O(n² log n).",
+        "es": "n log n crece más rápido que n (es n por algo que sigue creciendo), así que n log n es el término dominante y n se elimina. Sumar los términos nunca los multiplica, así que no es O(n² log n)."
       }
     },
     {

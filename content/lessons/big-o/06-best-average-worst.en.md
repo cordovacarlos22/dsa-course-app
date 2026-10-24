@@ -100,6 +100,8 @@ With 6 guests, the average is 3.5 checks: about half the list. Double the guests
 
 That doesn't mean the other cases are useless. When you analyze code, think about all three: the best case, what usually happens, and the worst case. But when someone asks for "the Big O", give them the worst case.
 
+**Under the hood:** built-in methods have best and worst cases too. JavaScript's own rules for `includes` and `indexOf` describe a loop: start at index 0, compare each item with the value you're looking for, and stop at the first match. So `guests.includes('Ana')` is Ω(1) when Ana is first on the list, and O(n) when the name isn't there at all, exactly like `isInvited`. Whenever you call a method on a list, ask it the same two questions you'd ask your own loop: can it stop early, and what's the worst input?
+
 **Common mistake:** answering "O(1)" because the name you tried was first on the list. That's the best case, Ω(1). The Big O of `isInvited` is O(n), because some inputs make it read every name.
 
 ## When all three cases match

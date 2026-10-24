@@ -44,6 +44,8 @@ function partySummary(guests) {
 console.log(partySummary(['Ana', 'Ben', 'Cleo', 'Dev', 'Eli']))
 ```
 
+**Por dentro:** la regla 2 tiene un detalle que conviene conocer. `let sameList = guests` es O(1) aunque haya un millón de personas en la lista, porque no copia a nadie: copia una **referencia** al mismo array, así que los dos nombres apuntan a una sola lista (el módulo de Clases y punteros entra a fondo en esto). Pero `let copyOfList = guests.slice()` sí copia: arma un array nuevo y mete en él a cada persona de la lista, una por una, así que es O(n). Los métodos que arman un array nuevo a partir de otro, como `slice()` y `concat()`, cuestan tanto como los elementos que copian. Cuando una línea hace una copia, cuenta la copia.
+
 **Error común:** sumar las líneas O(1) como si importaran: "cuatro líneas O(1) y una O(n), así que O(n + 4)". Quita las constantes y los términos no dominantes, y es solo **O(n)**. El bucle decide el costo.
 
 ## Los bucles multiplican

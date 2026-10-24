@@ -59,13 +59,13 @@ for (let k = 0; k < sizes.length; k++) {
 
 La misma idea funciona con cualquier mezcla: quédate con el término que crece más rápido y quita los demás. Para encontrar el término dominante, compara cómo crece cada término, del más lento al más rápido: una constante (como 8) nunca crece, luego log n, luego n, luego n log n, luego n², luego n³. Gana el término que va más adelante en esa lista.
 
-| Contaste     | Escríbelo así | Por qué                                                        |
-| ------------ | ------------- | -------------------------------------------------------------- |
-| n + 10       | O(n)          | 10 es una constante: nunca crece                               |
-| 1,000n + 50  | O(n)          | quita el 50 y luego la constante 1,000                         |
-| n² + 5n + 8  | O(n²)         | con n = 1,000: 1,000,000 contra solo 5,008 del resto           |
-| n² + n³      | O(n³)         | n³ crece más rápido que n², así que n³ es el término dominante |
-| 2n² + 7n + 3 | O(n²)         | quita 7n y 3, y luego la constante 2                           |
+| Contaste     | Escríbelo así | Por qué                                                       |
+| ------------ | ------------- | ------------------------------------------------------------- |
+| n + 75       | O(n)          | 75 es una constante: nunca crece                              |
+| 1,000n + 50  | O(n)          | quita el 50 y luego la constante 1,000                        |
+| n² + 5n + 8  | O(n²)         | con n = 1,000: 1,000,000 contra solo 5,008 del resto          |
+| n³ + n       | O(n³)         | n³ crece más rápido que n, así que n³ es el término dominante |
+| 2n² + 7n + 3 | O(n²)         | quita 7n y 3, y luego la constante 2                          |
 
 Mira n² + 5n + 8 con n = 1,000: eso es 1,000,000 + 5,000 + 8. La diferencia entre 1,005,008 y 1,000,000 es mínima, y eso solo con n = 1,000. Pon mil millones y la parte 5n + 8 no significa nada.
 
@@ -98,6 +98,8 @@ for (let k = 0; k < sizes.length; k++) {
 La proporción se acerca cada vez más a 1: con n grande, los términos que quitamos casi no cambian nada.
 
 Cuidado con las constantes grandes: O(n + 1,000,000) sigue siendo solo **O(n)**. Por grande que sea, un número fijo no crece, y cuando n es lo bastante grande, la parte n siempre gana.
+
+**Por dentro:** esta regla sale de la misma definición que quitar constantes: un código es O(f(n)) si, cuando n ya es lo bastante grande, sus operaciones nunca pasan de una constante por f(n). ¿Entonces n² + n queda debajo de alguna constante por n²? Sí: para cualquier n de 1 en adelante, n nunca es mayor que n², así que n² + n es como mucho n² + n² = 2n². El término pequeño quedó dentro de la constante 2, y las constantes ya estaban permitidas. El mismo truco funciona con cualquier término más pequeño: n² + 5n + 8 nunca pasa de 14n² cuando n es al menos 1.
 
 **Error común:** comparar los términos con una n pequeña. Con n = 1,000, el 1,000,000 de n + 1,000,000 es mucho más grande que n, así que dan ganas de decir que el código es O(1). Pero Big O pregunta qué pasa cuando n sigue creciendo, y con n = mil millones, la parte n es mil veces más grande que la constante.
 
@@ -137,7 +139,7 @@ Al sumar los bloques queda O(1) + O(n) + O(n²). El bucle anidado es el término
 
 Otras dos formas que vas a ver todo el tiempo:
 
-- **Un bucle sobre la entrada y luego un bucle de largo fijo** (por ejemplo, poner 10 mesas): n + 10, así que **O(n)**. Un bucle que nunca crece es una constante, por grande que parezca.
+- **Un bucle sobre la entrada y luego un bucle de largo fijo** (por ejemplo, poner 12 mesas): n + 12, así que **O(n)**. Un bucle que nunca crece es una constante, por grande que parezca.
 - **Dos bucles anidados, uno después del otro:** n² + n² = 2n², y al quitar el 2 queda **O(n²)**. Dos copias del mismo término forman una constante más grande, no un término nuevo.
 
 **Error común:** quedarte con el bloque que va primero, o con el que tiene más líneas. Dónde está un bloque y qué tan largo se ve no importan: busca el bloque que crece más rápido con la entrada, y con ese se queda Big O.

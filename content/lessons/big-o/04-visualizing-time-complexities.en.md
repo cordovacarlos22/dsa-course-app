@@ -146,4 +146,6 @@ console.log('O(n²) grew', (big * big) / (small * small), 'times')
 
 In the next lesson we'll give Big O its official definition, and then go through each shape one by one.
 
+**Under the hood:** how do operations turn into time? A modern computer does very roughly **a billion** simple operations per second (the real number depends on the machine and on the operation). That's enough to estimate. An O(n) loop over a million items is about a million operations: around a thousandth of a second. An O(n²) loop over the same million items is a trillion operations: around a thousand seconds, which is more than a quarter of an hour. Same computer, same input. The shape decides whether the user waits a blink or goes for a coffee.
+
 **Common mistake:** thinking O(n²) is "a little worse" than O(n). With 10 items the difference is small (100 steps against 10). With a million items, it's a million steps against a **trillion**. The gap keeps growing as n grows.

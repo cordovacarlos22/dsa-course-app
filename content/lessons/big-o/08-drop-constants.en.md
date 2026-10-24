@@ -79,9 +79,9 @@ This rule comes straight from the definition: code is O(f(n)) if, once n is big 
 
 Try simplifying these:
 
-- O(100 × n) → **O(n)**
-- O(25) → **O(1)**
-- O(n + n + n + n) → O(4n) → **O(n)**
+- O(n × 40) → **O(n)**
+- O(1,000,000) → **O(1)**
+- O(2n + 5n) → O(7n) → **O(n)**
 
 The big picture is the same as the chart from lesson 4. Each shape there is one line, and there's no separate line for 2n or 100n: they're all part of the O(n) family.
 
@@ -114,5 +114,7 @@ console.log('Two passes:', twoPasses, 'steps')
 ```
 
 Both are O(n), and both would double if the guest list doubled. Two passes do twice the work, which you might fix someday, but that's a second-level improvement. Big O is about the big picture first: is the work flat, a straight line, or a curve that shoots up?
+
+**Under the hood:** the constant isn't even a reliable number. Our counts treat every operation as equal, but the processor doesn't. Reading a value that's already in its **cache** (a small, very fast memory right next to it) can be around a hundred times faster than fetching it from the main memory. And the engine may turn one line into several machine steps, or several lines into one. So two functions that both "do 2n operations" can run at quite different speeds on the same computer. The constant depends on the hardware and the engine; the shape doesn't. That's one more reason Big O keeps only the shape.
 
 **Common mistake:** writing the constant in an interview answer, like "it's O(2n)". It isn't wrong math, but it tells the interviewer you haven't simplified yet. Say "it's O(n)", and if it helps, add "it goes through the list twice".

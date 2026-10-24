@@ -70,6 +70,8 @@ const party = { host: 'Ana', theme: 'Retro' }
 console.log(party.host) // reading a key is O(1) too
 ```
 
+**Under the hood:** that little math only works if every box is the same size. But names have different lengths, so how can a 3-letter name and a 20-letter name sit in same-sized boxes? They don't have to fit. For text and objects, each box holds a **reference**: a small, fixed-size note that says where the real value lives in memory. Every reference takes the same space, so box 500,000 is always at the start of the row plus 500,000 box widths, and one multiplication and one addition find it. You'll work with references a lot in the Classes & Pointers module.
+
 **Common mistake:** thinking the last item of an array is slower to reach than the first. `guests[0]` and `guests[999999]` are the same one jump, because the computer works out where each box is instead of walking to it.
 
 ## The most efficient Big O

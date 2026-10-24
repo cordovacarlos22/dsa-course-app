@@ -85,6 +85,8 @@ One small exception: on an **empty** array, the start and the end are the same p
 
 Remember: at the **end** of an array, adding and removing are O(1). At the **start**, both are O(n). That doesn't mean you must never use `shift` or `unshift`. Sometimes you really need something to go first. Just know what it costs, and avoid doing it inside a loop over a big array.
 
+**Under the hood:** if an array keeps its items side by side in one block of memory, what happens when `push` reaches the end of that block? The engine plans ahead: it keeps a few empty slots past the last item, so most pushes just fill the next free slot. When the slots run out, it grabs a bigger block (in Chrome's engine, about one and a half times as big), copies every item over and carries on. That one copy is O(n), but it happens so rarely that, spread over all the pushes, each push still costs O(1) on average. You'll hear this called **amortized O(1)**.
+
 **Common mistake:** "`shift()` is one short line, so it must be O(1)." The cost of a method is the work it does inside, not the length of the line you type.
 
 ## Inserting in the middle

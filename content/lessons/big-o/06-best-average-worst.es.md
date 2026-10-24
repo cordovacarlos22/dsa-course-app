@@ -100,6 +100,8 @@ Con 6 invitados, el promedio es 3.5 revisiones: más o menos la mitad de la list
 
 Eso no quiere decir que los otros casos no sirvan. Cuando analices código, piensa en los tres: el mejor caso, lo que pasa normalmente y el peor caso. Pero cuando alguien te pregunte "el Big O", dale el peor caso.
 
+**Por dentro:** los métodos que ya trae JavaScript también tienen mejor y peor caso. Las reglas del propio lenguaje para `includes` e `indexOf` describen un bucle: empezar en el índice 0, comparar cada elemento con el valor que buscas y parar en la primera coincidencia. Así que `guests.includes('Ana')` es Ω(1) cuando Ana está primero en la lista, y O(n) cuando el nombre no está, igual que `isInvited`. Cada vez que llames un método sobre una lista, hazle las mismas dos preguntas que le harías a tu propio bucle: ¿puede parar antes?, y ¿cuál es la peor entrada?
+
 **Error común:** responder "O(1)" porque el nombre que probaste estaba primero en la lista. Ese es el mejor caso, Ω(1). El Big O de `isInvited` es O(n), porque algunas entradas lo obligan a leer cada nombre.
 
 ## Cuando los tres casos coinciden

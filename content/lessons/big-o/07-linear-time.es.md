@@ -104,4 +104,6 @@ console.log(guests.includes('Zoe'))
 console.log(guests.indexOf('Dev'))
 ```
 
+**Por dentro:** los strings también esconden bucles. Un string guarda su `length`, así que leerlo es un paso. Pero `name.toUpperCase()` construye un string nuevo carácter por carácter, `name.split('')` arma un array con un elemento por carácter, y `name.includes('an')` revisa posición tras posición hasta encontrar una coincidencia. Cada uno crece con el largo del texto. Para el nombre de una persona son unos cuantos pasos; para un libro entero guardado en un solo string, son cientos de miles. Cuando n es la cantidad de caracteres, una sola llamada a un método puede ser un bucle O(n).
+
 **Error común:** decir que un bucle es O(1) porque puede detenerse antes. `isInvited` se detiene en cuanto encuentra el nombre, así que a veces hace una sola revisión. Pero Big O es el peor caso, y en el peor caso el nombre no está y se revisa a todos los invitados. Un bucle que puede detenerse antes sigue contando como **O(n)**.

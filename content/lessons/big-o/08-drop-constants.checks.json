@@ -62,21 +62,21 @@
     {
       "type": "choice",
       "question": {
-        "en": "Simplify O(n + n + n + n).",
-        "es": "Simplifica O(n + n + n + n)."
+        "en": "Simplify O(3n + 3n).",
+        "es": "Simplifica O(3n + 3n)."
       },
       "options": [
         {
-          "en": "O(4n)",
-          "es": "O(4n)"
+          "en": "O(6n)",
+          "es": "O(6n)"
         },
         {
           "en": "O(n)",
           "es": "O(n)"
         },
         {
-          "en": "O(n⁴)",
-          "es": "O(n⁴)"
+          "en": "O(9n²)",
+          "es": "O(9n²)"
         },
         {
           "en": "O(1)",
@@ -89,8 +89,8 @@
         "es": "Primero súmalos y luego elimina la constante."
       },
       "explanation": {
-        "en": "n + n + n + n = 4n, and dropping the constant gives O(n).",
-        "es": "n + n + n + n = 4n, y al eliminar la constante queda O(n)."
+        "en": "3n + 3n = 6n, and dropping the constant gives O(n). Adding never multiplies, so it isn't O(9n²).",
+        "es": "3n + 3n = 6n, y al eliminar la constante queda O(n). Sumar nunca multiplica, así que no es O(9n²)."
       }
     }
   ]

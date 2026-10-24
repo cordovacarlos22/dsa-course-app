@@ -85,6 +85,8 @@ Una pequeña excepción: en un array **vacío**, el principio y el final son el 
 
 Recuerda: al **final** de un array, agregar y quitar son O(1). Al **principio**, los dos son O(n). Eso no quiere decir que nunca debas usar `shift` o `unshift`. A veces de verdad necesitas que algo vaya primero. Solo ten claro cuánto cuesta, y evita hacerlo dentro de un bucle sobre un array grande.
 
+**Por dentro:** si un array guarda sus elementos uno junto a otro en un solo bloque de memoria, ¿qué pasa cuando `push` llega al final de ese bloque? El motor se adelanta: deja algunos espacios vacíos después del último elemento, así que casi todos los `push` solo llenan el siguiente espacio libre. Cuando se acaban, toma un bloque más grande (en el motor de Chrome, como una vez y media más grande), copia todos los elementos y sigue. Esa copia es O(n), pero pasa tan pocas veces que, repartida entre todos los `push`, cada uno sigue costando O(1) en promedio. A esto le dicen **O(1) amortizado**.
+
 **Error común:** "`shift()` es una línea cortita, así que debe ser O(1)." El costo de un método es el trabajo que hace por dentro, no lo largo de la línea que escribes.
 
 ## Insertar en el medio

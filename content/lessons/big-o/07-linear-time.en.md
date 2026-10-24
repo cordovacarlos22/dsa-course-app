@@ -104,4 +104,6 @@ console.log(guests.includes('Zoe'))
 console.log(guests.indexOf('Dev'))
 ```
 
+**Under the hood:** strings hide loops too. A string keeps its `length` stored, so reading it is one step. But `name.toUpperCase()` builds a brand-new string one character at a time, `name.split('')` makes an array with one item per character, and `name.includes('an')` checks position after position until it finds a match. Each of those grows with the length of the text. For a guest's name, that's a handful of steps; for a whole book stored in one string, it's hundreds of thousands. When n is the number of characters, one method call can be an O(n) loop.
+
 **Common mistake:** calling a loop O(1) because it can stop early. `isInvited` stops as soon as it finds the name, so sometimes it does just one check. But Big O is the worst case, and in the worst case the name isn't there and every guest gets checked. A loop that can stop early still counts as **O(n)**.

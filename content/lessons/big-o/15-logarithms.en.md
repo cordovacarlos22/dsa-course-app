@@ -45,6 +45,8 @@ console.log('16 boxes:', halvings, 'halvings')
 
 Logs can have other bases: log₃, log₁₀, and one called "natural log". Technically you always need a base, but in Big O the base doesn't change the shape of the curve, so we leave it out and just write **log n**.
 
+**Under the hood:** why can Big O leave the base out? Because switching bases only multiplies by a constant. log₂ of a number is always about 3.32 times its log₁₀: log₂(1,000) ≈ 9.97 while log₁₀(1,000) = 3, and for a million it's about 19.93 against 6. Same ratio, every time. A constant multiplier is exactly what the drop-constants rule throws away, so log₂ n, log₁₀ n and the natural log all draw the same curve, just stretched a little. That's why everyone simply writes O(log n).
+
 **Common mistake:** thinking log n means "n divided by 2". Half of a million is 500,000; log₂ of a million is about 20. The log isn't one halving: it's **how many** halvings it takes to get down to 1.
 
 ## Divide and conquer
