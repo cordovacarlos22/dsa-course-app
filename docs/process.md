@@ -55,7 +55,7 @@ Dependabot opens PRs for outdated or vulnerable dependencies every week. Those P
 
 ### 5. Ship
 
-- **Staging:** every merge to `main` deploys to staging on Vercel: `staging.charliecodeacademy.com` once the domain is set up, Vercel's `main` branch address until then. Staging is behind Vercel's login, so only Carlos opens it. Automatic tests against staging come after #51, which keeps the secret that lets CI past the login.
+- **Staging (after the switch below):** every merge to `main` deploys to staging on Vercel: Vercel's `main` branch address, and `staging.charliecodeacademy.com` once that domain is added. It's added only after the switch, because before it a domain on `main` serves production. Staging is behind Vercel's login, so only Carlos opens it. Automatic tests against staging come after #51, which keeps the secret that lets CI past the login.
 - **Release:** production is the `production` branch. To ship, run **Release** (GitHub → Actions → Release → Run workflow; it takes a commit, and the default is `main`'s latest).
   - The run waits for **Carlos's approval** in the `release` environment, which only accepts runs started from `main`.
   - It then moves `production` forward to that commit, and Vercel deploys it.
