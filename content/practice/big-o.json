@@ -1297,6 +1297,37 @@
       }
     },
     {
+      "id": "space-what-counts",
+      "topic": "Big O: Space Complexity",
+      "prompt": {
+        "en": "When we measure space complexity in this course, what do we count?",
+        "es": "Cuando medimos la complejidad espacial en este curso, ¿qué contamos?"
+      },
+      "options": [
+        {
+          "en": "Only the extra memory it creates: auxiliary space",
+          "es": "Solo la memoria extra que crea: el espacio auxiliar"
+        },
+        {
+          "en": "The memory of the input itself, plus everything in it",
+          "es": "La memoria de la entrada misma, con todo lo que tiene"
+        },
+        {
+          "en": "How many seconds the code takes on a typical computer",
+          "es": "Cuántos segundos tarda el código en una computadora normal"
+        },
+        {
+          "en": "The size of the whole program file on the disk",
+          "es": "El tamaño de todo el archivo del programa en el disco"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "We ignore the input and count only the space the algorithm needs on its own: auxiliary space.",
+        "es": "Ignoramos la entrada y contamos solo el espacio que necesita el algoritmo por sí mismo: el espacio auxiliar."
+      }
+    },
+    {
       "id": "space-even-indexes",
       "topic": "Big O: Space Complexity",
       "prompt": {
@@ -1356,6 +1387,37 @@
       "explanation": {
         "en": "The new array has n items; `sumSoFar` and `j` are just numbers. The nested loops cost time, not space: O(n) space.",
         "es": "El array nuevo tiene n elementos; `sumSoFar` y `j` solo son números. Los bucles anidados cuestan tiempo, no espacio: espacio O(n)."
+      }
+    },
+    {
+      "id": "trade-space-for-time",
+      "topic": "Big O: Space Complexity",
+      "prompt": {
+        "en": "A function walks a list once and writes every name it sees into an object, to spot a repeated name. What are its time and space?",
+        "es": "Una función recorre una lista una vez y anota en un objeto cada nombre que ve, para detectar un nombre repetido. ¿Cuál es su tiempo y su espacio?"
+      },
+      "options": [
+        {
+          "en": "O(n²) time and O(1) space, like the nested loops",
+          "es": "Tiempo O(n²) y espacio O(1), como los bucles anidados"
+        },
+        {
+          "en": "O(n) time and O(1) space, because objects are free",
+          "es": "Tiempo O(n) y espacio O(1), porque los objetos son gratis"
+        },
+        {
+          "en": "O(n) time and O(n) space: memory for speed",
+          "es": "Tiempo O(n) y espacio O(n): memoria a cambio de velocidad"
+        },
+        {
+          "en": "O(1) time and O(n) space, because it uses an object",
+          "es": "Tiempo O(1) y espacio O(n), porque usa un objeto"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "One pass over the list is O(n) time, and the object can end up holding every name: O(n) space. It spends memory to avoid the nested loops' O(n²) time.",
+        "es": "Una sola pasada por la lista es tiempo O(n), y el objeto puede terminar guardando todos los nombres: espacio O(n). Gasta memoria para evitar el tiempo O(n²) de los bucles anidados."
       }
     },
     {
@@ -1511,8 +1573,8 @@
         "es": "Contiene duplicados"
       },
       "description": {
-        "en": "Write a function `containsDuplicate(nums)` that returns `true` if any value appears at least twice in the array, and `false` if every value is different.\n\nExample: `containsDuplicate([1, 2, 3, 1])` → `true`\n\nThe obvious solution compares every pair with two nested loops: O(n²). Can you get it to O(n) time? Hint: a `Set` remembers what you've already seen.",
-        "es": "Escribe una función `containsDuplicate(nums)` que devuelva `true` si algún valor aparece al menos dos veces en el arreglo, y `false` si todos los valores son diferentes.\n\nEjemplo: `containsDuplicate([1, 2, 3, 1])` → `true`\n\nLa solución obvia compara cada par con dos ciclos anidados: O(n²). ¿Puedes lograrlo en tiempo O(n)? Pista: un `Set` recuerda lo que ya viste."
+        "en": "Write a function `containsDuplicate(nums)` that returns `true` if any value appears at least twice in the array, and `false` if every value is different.\n\nExample: `containsDuplicate([1, 2, 3, 1])` → `true`\n\nThe obvious solution compares every pair with two nested loops: O(n²). Can you get it to O(n) time? Hint: an object can remember what you've already seen, like the guest book in the space complexity lesson.",
+        "es": "Escribe una función `containsDuplicate(nums)` que devuelva `true` si algún valor aparece al menos dos veces en el arreglo, y `false` si todos los valores son diferentes.\n\nEjemplo: `containsDuplicate([1, 2, 3, 1])` → `true`\n\nLa solución obvia compara cada par con dos ciclos anidados: O(n²). ¿Puedes lograrlo en tiempo O(n)? Pista: un objeto puede recordar lo que ya viste, como el libro de visitas de la lección de complejidad espacial."
       },
       "difficulty": "easy",
       "category": "interview",
@@ -1521,7 +1583,7 @@
         "javascript": "function containsDuplicate(nums) {\n  // Your code here\n}"
       },
       "solution": {
-        "javascript": "function containsDuplicate(nums) {\n  const seen = new Set()\n  for (let i = 0; i < nums.length; i++) {\n    if (seen.has(nums[i])) return true\n    seen.add(nums[i])\n  }\n  return false\n}"
+        "javascript": "function containsDuplicate(nums) {\n  const seen = {}\n  for (let i = 0; i < nums.length; i++) {\n    if (seen[nums[i]] === true) return true\n    seen[nums[i]] = true\n  }\n  return false\n}"
       },
       "tests": [
         {
@@ -1709,6 +1771,64 @@
       ],
       "expectedComplexity": {
         "time": "O(1)",
+        "space": "O(1)"
+      }
+    },
+    {
+      "slug": "count-the-halvings",
+      "title": {
+        "en": "Count the Halvings",
+        "es": "Cuenta los cortes a la mitad"
+      },
+      "description": {
+        "en": "Binary search cuts the list in half again and again. How many cuts can it make? Write `countHalvings(n)`, which returns how many times you can halve n, rounding down each time, before you reach 1.\n\nFor 25: 25 → 12 → 6 → 3 → 1 is 4 halvings, so `countHalvings(25)` → `4`. For 1 there's nothing to cut: `0`.\n\nUse a loop that halves a copy of n until it reaches 1, counting the turns. Then try a billion: how many halvings does it take?\n\nGoal: O(log n) time, O(1) space.",
+        "es": "La búsqueda binaria parte la lista a la mitad una y otra vez. ¿Cuántos cortes puede hacer? Escribe `countHalvings(n)`, que devuelve cuántas veces puedes partir n a la mitad, redondeando hacia abajo cada vez, antes de llegar a 1.\n\nPara 25: 25 → 12 → 6 → 3 → 1 son 4 cortes, así que `countHalvings(25)` → `4`. Para 1 no hay nada que cortar: `0`.\n\nUsa un bucle que parta a la mitad una copia de n hasta llegar a 1, contando las vueltas. Luego prueba con mil millones: ¿cuántos cortes necesita?\n\nMeta: tiempo O(log n), espacio O(1)."
+      },
+      "difficulty": "easy",
+      "category": "interview",
+      "functionName": "countHalvings",
+      "starterCode": {
+        "javascript": "function countHalvings(n) {\n  // Your code here\n}"
+      },
+      "solution": {
+        "javascript": "function countHalvings(n) {\n  let halvings = 0\n  let size = n\n  while (size > 1) {\n    size = Math.floor(size / 2)\n    halvings++\n  }\n  return halvings\n}"
+      },
+      "tests": [
+        {
+          "args": [1],
+          "expected": 0
+        },
+        {
+          "args": [2],
+          "expected": 1
+        },
+        {
+          "args": [3],
+          "expected": 1
+        },
+        {
+          "args": [8],
+          "expected": 3
+        },
+        {
+          "args": [25],
+          "expected": 4
+        },
+        {
+          "args": [1000],
+          "expected": 9
+        },
+        {
+          "args": [1000000000],
+          "expected": 29
+        },
+        {
+          "args": [2147483648],
+          "expected": 31
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(log n)",
         "space": "O(1)"
       }
     }
