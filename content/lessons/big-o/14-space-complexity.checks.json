@@ -1,38 +1,29 @@
 {
   "steps": [
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "When we measure space complexity in this course, what do we count?",
-        "es": "Cuando medimos la complejidad espacial en este curso, ¿qué contamos?"
+        "en": "In your own words: what do we measure in space complexity, and what do we leave out?",
+        "es": "Con tus palabras: ¿qué medimos en la complejidad espacial, y qué dejamos fuera?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "We measure the extra memory an algorithm creates while it runs, like new variables, arrays or strings, and how that grows with the input. We leave out the input itself, because it was there before the function ran, and it grows with n no matter what the code does. That's called auxiliary space.",
+        "es": "Medimos la memoria extra que crea el algoritmo mientras corre, como variables, arrays o textos nuevos, y cómo crece con la entrada. Dejamos fuera la entrada misma, porque ya estaba ahí antes de que corriera la función, y crece con n haga lo que haga el código. A eso se le llama espacio auxiliar."
+      },
+      "checklist": [
         {
-          "en": "The memory of the input itself",
-          "es": "La memoria de la entrada misma"
+          "en": "Says we measure the memory the algorithm creates (its own variables, arrays, strings)",
+          "es": "Dice que medimos la memoria que crea el algoritmo (sus variables, arrays y textos)"
         },
         {
-          "en": "Only the extra memory the algorithm creates (auxiliary space)",
-          "es": "Solo la memoria extra que crea el algoritmo (espacio auxiliar)"
+          "en": "Says the input itself doesn't count",
+          "es": "Dice que la entrada misma no cuenta"
         },
         {
-          "en": "How many seconds the code takes",
-          "es": "Cuántos segundos tarda el código"
-        },
-        {
-          "en": "The size of the whole program file",
-          "es": "El tamaño de todo el archivo del programa"
+          "en": "Says it's about how that memory grows with the input",
+          "es": "Dice que importa cómo crece esa memoria con la entrada"
         }
-      ],
-      "answer": 1,
-      "hint": {
-        "en": "The input grows anyway. What do we ignore?",
-        "es": "La entrada crece de todos modos. ¿Qué ignoramos?"
-      },
-      "explanation": {
-        "en": "We ignore the input and count only the space the algorithm needs on its own: auxiliary space.",
-        "es": "Ignoramos la entrada y contamos solo el espacio que necesita el algoritmo por sí mismo: el espacio auxiliar."
-      }
+      ]
     },
     {
       "type": "choice",
@@ -96,6 +87,40 @@
           "expected": []
         }
       ]
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "`hasDuplicateFast` writes each name it sees into an object. Compared with the nested-loop version, what does it trade?",
+        "es": "`hasDuplicateFast` anota cada nombre que ve en un objeto. Comparada con la versión de bucles anidados, ¿qué intercambia?"
+      },
+      "options": [
+        {
+          "en": "Less memory and less time, so it's better in every case",
+          "es": "Menos memoria y menos tiempo, así que es mejor en todos los casos"
+        },
+        {
+          "en": "More time, O(n²), to save memory for each name it sees",
+          "es": "Más tiempo, O(n²), para ahorrar memoria con cada nombre que ve"
+        },
+        {
+          "en": "More memory, O(n) space, to drop from O(n²) to O(n) time",
+          "es": "Más memoria, espacio O(n), para bajar de tiempo O(n²) a O(n)"
+        },
+        {
+          "en": "Nothing: both versions use the same time and the same space",
+          "es": "Nada: las dos versiones usan el mismo tiempo y el mismo espacio"
+        }
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "Count what each version keeps in memory, and how many times each one walks the list.",
+        "es": "Cuenta qué guarda en memoria cada versión, y cuántas veces recorre la lista cada una."
+      },
+      "explanation": {
+        "en": "The object can grow to n names: O(n) space instead of O(1). In exchange, one pass replaces the nested loops: O(n) time instead of O(n²).",
+        "es": "El objeto puede crecer hasta n nombres: espacio O(n) en vez de O(1). A cambio, una sola pasada reemplaza los bucles anidados: tiempo O(n) en vez de O(n²)."
+      }
     }
   ]
 }

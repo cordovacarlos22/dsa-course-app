@@ -1,7 +1,7 @@
 ---
 title: Space complexity
 order: 14
-minutes: 11
+minutes: 14
 ---
 
 > **Goal:** measure how much extra memory code needs, with the same Big O notation.
@@ -118,3 +118,40 @@ Try these:
 You don't need to master space complexity before moving on. The goal is that when we say "this one has great space complexity but terrible time complexity", you know what that means.
 
 **Common mistake:** assuming time and space always match. Both functions above take O(n) time, but one is O(1) space and the other O(n). And a slow O(n²) function can still use almost no memory. Always give both answers separately.
+
+## Trading space for time
+
+Time and space often pull in opposite directions. Sometimes you can make code **faster** by letting it use **more memory**: you remember what you've already seen, so you never have to look for it again. That's called **trading space for time**, and it's one of the most useful ideas in this whole course.
+
+Here's a classic job: _does the guest list have the same name twice?_ The first idea compares every name with every name after it, using two nested loops. It only keeps `i` and `j`, so it's **O(1) space**, but it's **O(n²) time**. The second idea walks the list **once** and writes every name it sees into an object, like a guest book. Before writing a name down, it checks whether the name is already in the book, and checking an object's key is a single jump, O(1). One pass makes it **O(n) time**, but the book can hold up to n names: **O(n) space**.
+
+```js-run
+function hasDuplicateSlow(guests) {
+  for (let i = 0; i < guests.length; i++) {
+    for (let j = i + 1; j < guests.length; j++) {
+      if (guests[i] === guests[j]) {
+        return true
+      }
+    }
+  }
+  return false
+}
+
+function hasDuplicateFast(guests) {
+  const seen = {}
+  for (let i = 0; i < guests.length; i++) {
+    if (seen[guests[i]] === true) {
+      return true
+    }
+    seen[guests[i]] = true
+  }
+  return false
+}
+
+const guests = ['Ana', 'Ben', 'Cleo', 'Ben']
+console.log(hasDuplicateSlow(guests), hasDuplicateFast(guests)) // true true
+```
+
+Both give the same answers. With 10 names, nobody would notice a difference. With 100,000, the slow version makes up to about 5 billion comparisons, while the fast one takes 100,000 steps and keeps a book of up to 100,000 names. Usually that's a great deal: memory is cheap, and waiting isn't. But when memory is tight, the slow version's O(1) space can be the right choice. That's exactly what an interviewer means by _"What if we care more about memory?"_
+
+**Common mistake:** thinking the faster version is always better. It's faster for big lists, but it pays with memory. Which one wins depends on what you're shorter on, time or memory, and interviews often ask about both sides.
