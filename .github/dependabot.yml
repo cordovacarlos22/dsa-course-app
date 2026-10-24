@@ -35,6 +35,14 @@ updates:
         update-types: [minor, patch]
     labels: ['type:chore', 'area:ci']
 
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 14
+    labels: ['type:chore', 'area:ci']
+
   - package-ecosystem: github-actions
     directory: /
     schedule:
