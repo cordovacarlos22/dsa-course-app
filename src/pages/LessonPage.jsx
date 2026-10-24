@@ -20,6 +20,7 @@ import {
 } from '../lib/progress'
 import LessonMarkdown from '../components/LessonMarkdown'
 import ChoiceCheckpoint from '../components/lesson/ChoiceCheckpoint'
+import ExplainCheckpoint from '../components/lesson/ExplainCheckpoint'
 import CodeWorkspace from '../components/lesson/CodeWorkspace'
 import LessonComplete from '../components/lesson/LessonComplete'
 import NotFoundPage from './NotFoundPage'
@@ -203,7 +204,16 @@ function LessonPlayer({ module, lessonIndex }) {
               </h2>
             )}
             <LessonMarkdown markdown={step.body} />
-            {step.checkpoint && (
+            {step.checkpoint?.type === 'explain' && (
+              <ExplainCheckpoint
+                key={stepIndex}
+                checkpoint={step.checkpoint}
+                isPassed={isPassed}
+                cheer={cheer}
+                onPassed={markPassed}
+              />
+            )}
+            {step.checkpoint?.type === 'choice' && (
               <ChoiceCheckpoint
                 key={stepIndex}
                 checkpoint={step.checkpoint}

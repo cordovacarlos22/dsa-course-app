@@ -237,7 +237,19 @@
     "hint": "Pista",
     "showAnswer": "Mostrar respuesta",
     "answerShown": "La respuesta correcta está marcada en verde. Selecciónala y vuelve a comprobar.",
-    "passedBefore": "Ya pasaste este paso."
+    "passedBefore": "Ya pasaste este paso.",
+    "explain": {
+      "title": "Explícalo con tus palabras",
+      "yourAnswer": "Tu explicación",
+      "tip": "Escríbela con tus propias palabras, como si se lo explicaras a una amistad.",
+      "compare": "Comparar con una respuesta modelo",
+      "writeFirst": "Escribe al menos una oración primero.",
+      "modelAnswer": "Una respuesta modelo",
+      "checklist": "Marca cada punto que cubre tu explicación:",
+      "missing": "¿Te falta un punto? Agrégalo a tu explicación con tus propias palabras y márcalo.",
+      "done": "Listo",
+      "passed": "¡Explicado!"
+    }
   },
   "workspace": {
     "panes": "Espacio de trabajo",
