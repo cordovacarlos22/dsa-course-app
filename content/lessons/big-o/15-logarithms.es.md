@@ -45,7 +45,7 @@ console.log('16 cajas:', halvings, 'mitades')
 
 Los logaritmos pueden tener otras bases: log₃, log₁₀ y uno que se llama "logaritmo natural". Técnicamente siempre necesitas una base, pero en Big O la base no cambia la forma de la curva, así que la dejamos fuera y escribimos solo **log n**.
 
-**Por dentro:** ¿por qué Big O puede dejar fuera la base? Porque cambiar de base solo multiplica por una constante. El log₂ de un número siempre es como 3.32 veces su log₁₀: log₂(1,000) ≈ 9.97 mientras que log₁₀(1,000) = 3, y para un millón son unos 19.93 contra 6. La misma proporción, siempre. Un multiplicador constante es justo lo que la regla de quitar constantes elimina, así que log₂ n, log₁₀ n y el logaritmo natural dibujan la misma curva, solo un poco estirada. Por eso todo el mundo escribe simplemente O(log n).
+**Por dentro:** ¿por qué Big O puede dejar fuera la base? Porque cambiar de base solo multiplica por una constante. El log₂ de un número siempre es como 3.32 veces su log₁₀: log₂(1,000) ≈ 9.97 mientras que log₁₀(1,000) = 3, y para un millón son unos 19.93 contra 6. La misma proporción, siempre. Un multiplicador constante es justo lo que la regla de quitar constantes elimina, así que log₂ n, log₁₀ n y el logaritmo natural dibujan la misma curva, solo estirada por un factor constante. Por eso todo el mundo escribe simplemente O(log n).
 
 **Error común:** pensar que log n significa "n entre 2". La mitad de un millón es 500,000; log₂ de un millón es más o menos 20. El logaritmo no es una mitad: es **cuántas** mitades se necesitan para llegar a 1.
 

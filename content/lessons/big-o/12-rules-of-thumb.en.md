@@ -89,14 +89,14 @@ console.log('Nested loops:', steps, 'steps') // 16
 
 How many times a loop runs isn't always obvious. Rule 4 needs the **length** of the loop, and sometimes that length has a fixed **floor** (it never runs fewer times than some number) or a fixed **ceiling** (it never runs more). Two built-in helpers show up a lot here: `Math.max(a, b)` gives the bigger of two numbers, and `Math.min(a, b)` gives the smaller one.
 
-- **A floor:** the party hall always sets out at least 10 chairs, even for 3 guests. A loop up to `Math.max(10, guestCount)` runs **at least** 10 times. For a small party it always runs 10 times, but we only care about what happens as the input grows: with 10 million guests, it runs 10 million times, and the 10 doesn't matter. So it's **O(n)**.
+- **A floor:** the party hall always sets out at least 12 chairs, even for 3 guests. A loop up to `Math.max(12, guestCount)` runs **at least** 12 times. For a small party it always runs 12 times, but we only care about what happens as the input grows: with 10 million guests, it runs 10 million times, and the 12 doesn't matter. So it's **O(n)**.
 - **A ceiling:** there are only 3 prizes, so at most 3 guests can win one. A loop up to `Math.min(3, guestCount)` runs **at most** 3 times. With 2 guests it runs twice, but once there are more than 3 guests, it **always** runs 3 times: 1,000 guests or a million, still 3. A fixed maximum is a constant, so it's **O(1)**.
 
 Compare the two functions:
 
 ```js-run
 function setChairs(guestCount) {
-  for (let chair = 1; chair <= Math.max(10, guestCount); chair++) {
+  for (let chair = 1; chair <= Math.max(12, guestCount); chair++) {
     console.log('Chair', chair)
   }
 }
@@ -107,8 +107,8 @@ function printPrizes(guestCount) {
   }
 }
 
-setChairs(3) // still sets out 10 chairs
-setChairs(12) // sets out 12 chairs
+setChairs(3) // still sets out 12 chairs
+setChairs(20) // sets out 20 chairs
 printPrizes(2) // only 2 guests, so 2 prizes
 printPrizes(50) // stops at 3 prizes
 ```
@@ -123,12 +123,12 @@ trace-give-gifts
 
 Practice with these:
 
-| Code shape                               | Big O |
-| ---------------------------------------- | ----- |
-| A loop from 1 to n, printing each number | O(n)  |
-| A loop up to Math.max(n, 10)             | O(n)  |
-| A loop up to Math.min(n, 10)             | O(1)  |
-| A loop over an array with an `if` inside | O(n)  |
-| A loop inside a loop over the same array | O(n²) |
+| Code shape                                   | Big O |
+| -------------------------------------------- | ----- |
+| A loop that runs n + 25 times                | O(n)  |
+| A loop up to Math.max(n, 12)                 | O(n)  |
+| A loop up to Math.min(n, 3)                  | O(1)  |
+| A loop that jumps 2 items at a time          | O(n)  |
+| A loop over the array with `includes` inside | O(n²) |
 
 **Common mistake:** mixing up `Math.max` and `Math.min`. `max` sets a floor, so the loop still grows with n: O(n). `min` sets a ceiling, so the loop can never grow past it: O(1). Ask: "Can this loop get longer when n grows?"

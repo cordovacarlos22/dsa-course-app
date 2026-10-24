@@ -23,8 +23,8 @@
           "es": "Líneas de código y legibilidad"
         },
         {
-          "en": "Time complexity and space complexity",
-          "es": "Complejidad de tiempo y complejidad de espacio"
+          "en": "Time and space complexity",
+          "es": "Complejidad temporal y espacial"
         },
         {
           "en": "Compile time and file size",
@@ -50,20 +50,20 @@
       },
       "options": [
         {
-          "en": "Seconds are too small to measure",
-          "es": "Los segundos son demasiado pequeños para medirlos"
+          "en": "Seconds are too small a unit to measure code",
+          "es": "Los segundos son una unidad demasiado pequeña para medir código"
         },
         {
-          "en": "Counting operations is always faster",
-          "es": "Contar operaciones siempre es más rápido"
+          "en": "Counting operations is always quicker than timing code",
+          "es": "Contar operaciones siempre es más rápido que medir el tiempo"
         },
         {
-          "en": "Seconds depend on the computer, but the number of operations depends only on the code and the input size",
-          "es": "Los segundos dependen de la computadora, pero el número de operaciones depende solo del código y del tamaño de la entrada"
+          "en": "Seconds vary by computer; operation counts don't",
+          "es": "Los segundos cambian con la computadora; las operaciones no"
         },
         {
-          "en": "JavaScript cannot measure time",
-          "es": "JavaScript no puede medir el tiempo"
+          "en": "JavaScript has no built-in way to measure time",
+          "es": "JavaScript no tiene ninguna forma de medir el tiempo"
         }
       ],
       "correctIndex": 2,
@@ -95,7 +95,7 @@
         },
         {
           "en": "Three: one each for `split`, `reverse` and `join`",
-          "es": "Tres: uno por `split`, otro por `reverse` y otro por `join`"
+          "es": "Tres: uno por `split`, uno por `reverse` y uno por `join`"
         }
       ],
       "correctIndex": 3,
@@ -109,7 +109,7 @@
       "topic": "Big O: Worst Case",
       "prompt": {
         "en": "You search an unsorted array of n items one by one, and the item you want is at index 0. Which notation describes this best-case scenario?",
-        "es": "Buscas en un arreglo desordenado de n elementos uno por uno, y el elemento que quieres está en el índice 0. ¿Qué notación describe este mejor caso?"
+        "es": "Buscas en un array desordenado de n elementos uno por uno, y el elemento que quieres está en el índice 0. ¿Qué notación describe este mejor caso?"
       },
       "options": [
         {
@@ -265,7 +265,7 @@
       "topic": "Big O: Drop Constants",
       "prompt": {
         "en": "This function has two loops, one after the other. What is its Big O?",
-        "es": "Esta función tiene dos ciclos, uno después del otro. ¿Cuál es su Big O?"
+        "es": "Esta función tiene dos bucles, uno después del otro. ¿Cuál es su Big O?"
       },
       "code": "function welcomeAndGoodbye(guests) {\n  for (let i = 0; i < guests.length; i++) {\n    console.log('Welcome, ' + guests[i])\n  }\n  for (let j = 0; j < guests.length; j++) {\n    console.log('Goodbye, ' + guests[j])\n  }\n}",
       "options": [
@@ -352,7 +352,7 @@
       "correctIndex": 3,
       "explanation": {
         "en": "Each loop is nested inside the previous one, so the counts multiply: n × n × n = O(n³). Nested loops multiply; loops one after another add.",
-        "es": "Cada ciclo está anidado dentro del anterior, así que las cantidades se multiplican: n × n × n = O(n³). Los ciclos anidados se multiplican; los ciclos uno tras otro se suman."
+        "es": "Cada bucle está anidado dentro del anterior, así que las cantidades se multiplican: n × n × n = O(n³). Los bucles anidados se multiplican; los bucles uno tras otro se suman."
       }
     },
     {
@@ -391,7 +391,7 @@
       "topic": "Big O: Drop Non-Dominants",
       "prompt": {
         "en": "This function has a nested loop followed by a single loop. What is its Big O?",
-        "es": "Esta función tiene un ciclo anidado seguido de un ciclo simple. ¿Cuál es su Big O?"
+        "es": "Esta función tiene un bucle anidado seguido de un bucle simple. ¿Cuál es su Big O?"
       },
       "code": "function greetThenWelcome(guests) {\n  for (let i = 0; i < guests.length; i++) {\n    for (let j = 0; j < guests.length; j++) {\n      if (i !== j) console.log(guests[i] + ' greets ' + guests[j])\n    }\n  }\n  for (let k = 0; k < guests.length; k++) {\n    console.log('Welcome, ' + guests[k])\n  }\n}",
       "options": [
@@ -415,7 +415,7 @@
       "correctIndex": 2,
       "explanation": {
         "en": "The total is n² + n. When n is large, n² is so much bigger that n barely matters, so we drop the non-dominant term: O(n²). And it isn't 2n²: the second loop is a single loop, not another nested one.",
-        "es": "El total es n² + n. Cuando n es grande, n² es tanto mayor que n casi no importa, así que eliminamos el término no dominante: O(n²). Y no es 2n²: el segundo es un ciclo simple, no otro anidado."
+        "es": "El total es n² + n. Cuando n es grande, n² es tanto mayor que n casi no importa, así que eliminamos el término no dominante: O(n²). Y no es 2n²: el segundo es un bucle simple, no otro anidado."
       }
     },
     {
@@ -517,7 +517,7 @@
       "topic": "Big O: O(log n)",
       "prompt": {
         "en": "You look for a number in a sorted array of 1,024 items by checking the middle and discarding half each time. At most, how many halvings until one item is left?",
-        "es": "Buscas un número en un arreglo ordenado de 1,024 elementos revisando el centro y descartando la mitad cada vez. Como máximo, ¿cuántas divisiones hasta que quede un solo elemento?"
+        "es": "Buscas un número en un array ordenado de 1,024 elementos revisando el centro y descartando la mitad cada vez. Como máximo, ¿cuántas divisiones hasta que quede un solo elemento?"
       },
       "options": [
         {
@@ -635,7 +635,7 @@
       "correctIndex": 1,
       "explanation": {
         "en": "For every one of the a iterations, the inner loop runs b times, so we multiply: O(a × b). It's only O(n²) if a and b are the same input.",
-        "es": "Por cada una de las a iteraciones, el ciclo interno corre b veces, así que multiplicamos: O(a × b). Solo es O(n²) si a y b son la misma entrada."
+        "es": "Por cada una de las a iteraciones, el bucle interno corre b veces, así que multiplicamos: O(a × b). Solo es O(n²) si a y b son la misma entrada."
       }
     },
     {
@@ -647,8 +647,8 @@
       },
       "options": [
         {
-          "en": "10, 100 and 1,000",
-          "es": "10, 100 y 1,000"
+          "en": "100, 1,000 and 1,000,000",
+          "es": "100, 1,000 y 1,000,000"
         },
         {
           "en": "100, 1,000 and 2,000",
@@ -752,8 +752,8 @@
           "es": "`guests.includes('Zoe')`"
         },
         {
-          "en": "`let guestCount = 0`",
-          "es": "`let guestCount = 0`"
+          "en": "`let guestCount = guests.length`",
+          "es": "`let guestCount = guests.length`"
         }
       ],
       "correctIndex": 2,
@@ -909,7 +909,7 @@
         },
         {
           "en": "Very fast code can be too fast to measure precisely",
-          "es": "El código muy rápido puede ser demasiado rápido para medirlo con precisión"
+          "es": "Un código muy rápido puede ser demasiado rápido para medirlo bien"
         }
       ],
       "correctIndex": 3,
@@ -1168,45 +1168,13 @@
       }
     },
     {
-      "id": "time-at-least-ten",
+      "id": "time-table-minimum",
       "topic": "Big O: Rules of Thumb",
       "prompt": {
-        "en": "What is the time complexity of this function?",
-        "es": "¿Cuál es la complejidad temporal de esta función?"
+        "en": "The hall sets out one table per 8 guests, but never fewer than 3. What is the time complexity of this function?",
+        "es": "El salón pone una mesa por cada 8 personas, pero nunca menos de 3. ¿Cuál es la complejidad temporal de esta función?"
       },
-      "code": "function labelChairs(guestCount) {\n  for (let i = 1; i <= Math.max(guestCount, 10); i++) {\n    console.log('Chair', i)\n  }\n}",
-      "options": [
-        {
-          "en": "O(1)",
-          "es": "O(1)"
-        },
-        {
-          "en": "O(n)",
-          "es": "O(n)"
-        },
-        {
-          "en": "O(n log n)",
-          "es": "O(n log n)"
-        },
-        {
-          "en": "O(n²)",
-          "es": "O(n²)"
-        }
-      ],
-      "correctIndex": 1,
-      "explanation": {
-        "en": "For small n it always prints 10 numbers, but as n grows it prints n of them. Big O cares about large n: O(n).",
-        "es": "Con n pequeño siempre imprime 10 números, pero cuando n crece imprime n. A Big O le importa n grande: O(n)."
-      }
-    },
-    {
-      "id": "time-at-most-ten",
-      "topic": "Big O: Rules of Thumb",
-      "prompt": {
-        "en": "What is the time complexity of this function?",
-        "es": "¿Cuál es la complejidad temporal de esta función?"
-      },
-      "code": "function announceWinners(guestCount) {\n  for (let i = 1; i <= Math.min(guestCount, 10); i++) {\n    console.log('Winner', i)\n  }\n}",
+      "code": "function setTables(guestCount) {\n  let tables = guestCount / 8\n  if (tables < 3) {\n    tables = 3\n  }\n  for (let t = 1; t <= tables; t++) {\n    console.log('Table', t)\n  }\n}",
       "options": [
         {
           "en": "O(1)",
@@ -1225,20 +1193,52 @@
           "es": "O(n²)"
         }
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "explanation": {
-        "en": "However big n gets, the loop never runs more than 10 times. A fixed maximum is constant: O(1).",
-        "es": "Por grande que sea n, el bucle nunca corre más de 10 veces. Un máximo fijo es constante: O(1)."
+        "en": "Small parties always get 3 tables, but from 24 guests on, it sets out guestCount / 8 of them, and that keeps growing with n. A minimum doesn't stop the growth, and dividing by 8 is just a constant: O(n).",
+        "es": "Las fiestas pequeñas siempre tienen 3 mesas, pero desde 24 personas pone guestCount / 8, y eso sigue creciendo con n. Un mínimo no frena el crecimiento, y dividir entre 8 es solo una constante: O(n)."
       }
     },
     {
-      "id": "time-even-indexes",
+      "id": "time-first-five-rsvps",
+      "topic": "Big O: Rules of Thumb",
+      "prompt": {
+        "en": "Only the first 5 RSVPs get checked. What is the time complexity of this function?",
+        "es": "Solo se revisan las primeras 5 confirmaciones. ¿Cuál es la complejidad temporal de esta función?"
+      },
+      "code": "function checkFirstRsvps(guests) {\n  for (let i = 0; i < guests.length; i++) {\n    if (i === 5) {\n      return\n    }\n    console.log('Checking', guests[i])\n  }\n}",
+      "options": [
+        {
+          "en": "O(1)",
+          "es": "O(1)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(5n)",
+          "es": "O(5n)"
+        },
+        {
+          "en": "O(log n)",
+          "es": "O(log n)"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "The loop returns as soon as i reaches 5, so it never takes more than 5 turns (plus the check that stops it), however long the guest list is. A fixed maximum is constant: O(1).",
+        "es": "El bucle sale en cuanto i llega a 5, así que nunca da más de 5 vueltas (más la revisión que lo detiene), por larga que sea la lista. Un máximo fijo es constante: O(1)."
+      }
+    },
+    {
+      "id": "time-every-third-guest",
       "topic": "Big O: Rules of Thumb",
       "prompt": {
         "en": "What is the time complexity of this function?",
         "es": "¿Cuál es la complejidad temporal de esta función?"
       },
-      "code": "function evenIndexItems(items) {\n  const result = []\n  for (let i = 0; i < items.length; i++) {\n    if (i % 2 === 0) result.push(items[i])\n  }\n  return result\n}",
+      "code": "function everyThirdGuest(guests) {\n  const picked = []\n  for (let i = 0; i < guests.length; i += 3) {\n    picked.push(guests[i])\n  }\n  return picked\n}",
       "options": [
         {
           "en": "O(1)",
@@ -1259,18 +1259,18 @@
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "One loop over the whole array, with O(1) work inside (a check and maybe a push): O(n).",
-        "es": "Un bucle sobre todo el array, con trabajo O(1) adentro (una revisión y quizá un push): O(n)."
+        "en": "Jumping 3 at a time means about n / 3 turns. A third of n is still a constant times n, so it's O(n). Skipping a fixed number of items isn't halving: only cutting what's left in half gives O(log n).",
+        "es": "Saltar de 3 en 3 son unas n / 3 vueltas. Un tercio de n sigue siendo una constante por n, así que es O(n). Saltar una cantidad fija no es partir a la mitad: solo partir a la mitad lo que queda da O(log n)."
       }
     },
     {
-      "id": "time-running-totals",
+      "id": "time-shared-first-letters",
       "topic": "Big O: O(n^2)",
       "prompt": {
         "en": "What is the time complexity of this function?",
         "es": "¿Cuál es la complejidad temporal de esta función?"
       },
-      "code": "function runningTotals(numbers) {\n  const totals = []\n  for (let i = 0; i < numbers.length; i++) {\n    let sumSoFar = 0\n    for (let j = 0; j <= i; j++) {\n      sumSoFar = sumSoFar + numbers[j]\n    }\n    totals.push(sumSoFar)\n  }\n  return totals\n}",
+      "code": "function countSharedFirstLetters(guests) {\n  let matches = 0\n  for (let i = 0; i < guests.length; i++) {\n    for (let j = i + 1; j < guests.length; j++) {\n      if (guests[i][0] === guests[j][0]) {\n        matches++\n      }\n    }\n  }\n  return matches\n}",
       "options": [
         {
           "en": "O(n)",
@@ -1291,18 +1291,18 @@
       ],
       "correctIndex": 3,
       "explanation": {
-        "en": "The inner loop runs 1, then 2, … up to n times: about n² / 2 steps in total. Drop the constant: O(n²).",
-        "es": "El bucle de adentro corre 1, luego 2, … hasta n veces: unos n² / 2 pasos en total. Quita la constante: O(n²)."
+        "en": "It compares every pair of guests once: (n − 1) + (n − 2) + … + 1 comparisons, about n² / 2. Drop the ½: O(n²).",
+        "es": "Compara cada par de personas una vez: (n − 1) + (n − 2) + … + 1 comparaciones, unas n² / 2. Quita el ½: O(n²)."
       }
     },
     {
-      "id": "space-print-up-to",
+      "id": "space-countdown",
       "topic": "Big O: Space Complexity",
       "prompt": {
         "en": "What is the **space** complexity of this function?",
         "es": "¿Cuál es la complejidad **espacial** de esta función?"
       },
-      "code": "function printUpTo(n) {\n  for (let i = 1; i <= n; i++) {\n    console.log(i)\n  }\n}",
+      "code": "function countdown(n) {\n  for (let i = n; i >= 1; i--) {\n    console.log(i)\n  }\n  console.log('Surprise!')\n}",
       "options": [
         {
           "en": "O(1)",
@@ -1313,8 +1313,8 @@
           "es": "O(n)"
         },
         {
-          "en": "O(n log n)",
-          "es": "O(n log n)"
+          "en": "O(log n)",
+          "es": "O(log n)"
         },
         {
           "en": "O(n²)",
@@ -1323,8 +1323,8 @@
       ],
       "correctIndex": 0,
       "explanation": {
-        "en": "It only keeps one number, i, whatever n is. Printing doesn't store anything: O(1) space.",
-        "es": "Solo guarda un número, i, sea cual sea n. Imprimir no guarda nada: espacio O(1)."
+        "en": "It only keeps one number, i, whatever n is. Printing shows each number and keeps nothing, so nothing piles up: O(1) space.",
+        "es": "Solo guarda un número, i, sea cual sea n. Imprimir muestra cada número sin guardarlo, así que nada se acumula: espacio O(1)."
       }
     },
     {
@@ -1359,12 +1359,13 @@
       }
     },
     {
-      "id": "space-even-indexes",
+      "id": "space-long-name-tags",
       "topic": "Big O: Space Complexity",
       "prompt": {
-        "en": "What is the **space** complexity of `evenIndexItems` (the function that copies the items at even indexes into a new array)?",
-        "es": "¿Cuál es la complejidad **espacial** de `evenIndexItems` (la función que copia los elementos de los índices pares en un array nuevo)?"
+        "en": "What is the **space** complexity of this function?",
+        "es": "¿Cuál es la complejidad **espacial** de esta función?"
       },
+      "code": "function longNameTags(guests) {\n  const tags = []\n  for (let i = 0; i < guests.length; i++) {\n    if (guests[i].length > 5) {\n      tags.push('Hello, ' + guests[i])\n    }\n  }\n  return tags\n}",
       "options": [
         {
           "en": "O(1)",
@@ -1385,17 +1386,18 @@
       ],
       "correctIndex": 1,
       "explanation": {
-        "en": "The new array holds about n / 2 items. Drop the ½: O(n) space.",
-        "es": "El array nuevo guarda unos n / 2 elementos. Quita el ½: espacio O(n)."
+        "en": "In the worst case every name is long, so `tags` gets one name tag per guest: n items. Maybe only a few names qualify, but Big O plans for the worst case: O(n) space.",
+        "es": "En el peor caso todos los nombres son largos, así que `tags` recibe un gafete por persona: n elementos. Quizá solo califiquen unos pocos, pero Big O se prepara para el peor caso: espacio O(n)."
       }
     },
     {
-      "id": "space-running-totals",
+      "id": "space-same-letter-counts",
       "topic": "Big O: Space Complexity",
       "prompt": {
-        "en": "`runningTotals` uses nested loops and returns a new array with one total per number. What is its **space** complexity?",
-        "es": "`runningTotals` usa bucles anidados y devuelve un array nuevo con un total por número. ¿Cuál es su complejidad **espacial**?"
+        "en": "This function uses nested loops and returns one count per guest. What is its **space** complexity?",
+        "es": "Esta función usa bucles anidados y devuelve una cuenta por persona. ¿Cuál es su complejidad **espacial**?"
       },
+      "code": "function sameLetterCounts(guests) {\n  const counts = []\n  for (let i = 0; i < guests.length; i++) {\n    let count = 0\n    for (let j = 0; j < guests.length; j++) {\n      if (j !== i && guests[j][0] === guests[i][0]) {\n        count++\n      }\n    }\n    counts.push(count)\n  }\n  return counts\n}",
       "options": [
         {
           "en": "O(1)",
@@ -1416,8 +1418,8 @@
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "The new array has n items; `sumSoFar` and `j` are just numbers. The nested loops cost time, not space: O(n) space.",
-        "es": "El array nuevo tiene n elementos; `sumSoFar` y `j` solo son números. Los bucles anidados cuestan tiempo, no espacio: espacio O(n)."
+        "en": "`counts` gets one number per guest: n items. `count`, `i` and `j` are just a few numbers. The nested loops cost time (O(n²)), not space: O(n) space.",
+        "es": "`counts` recibe un número por persona: n elementos. `count`, `i` y `j` son solo unos cuantos números. Los bucles anidados cuestan tiempo (O(n²)), no espacio: espacio O(n)."
       }
     },
     {
@@ -1555,7 +1557,7 @@
       },
       "description": {
         "en": "Write a function `findMax(nums)` that returns the largest number in the array. If the array is empty, return `null`. Don't use `Math.max(...nums)`: walk through the array yourself.\n\nExample: `findMax([3, 1, 4, 1, 5])` → `5`\n\nGoal: O(n) time, O(1) space.",
-        "es": "Escribe una función `findMax(nums)` que devuelva el número más grande del arreglo. Si el arreglo está vacío, devuelve `null`. No uses `Math.max(...nums)`: recorre el arreglo tú mismo.\n\nEjemplo: `findMax([3, 1, 4, 1, 5])` → `5`\n\nMeta: tiempo O(n), espacio O(1)."
+        "es": "Escribe una función `findMax(nums)` que devuelva el número más grande del array. Si el array está vacío, devuelve `null`. No uses `Math.max(...nums)`: recorre el array tú mismo.\n\nEjemplo: `findMax([3, 1, 4, 1, 5])` → `5`\n\nMeta: tiempo O(n), espacio O(1)."
       },
       "difficulty": "easy",
       "category": "interview",
@@ -1605,7 +1607,7 @@
       },
       "description": {
         "en": "Write a function `containsDuplicate(nums)` that returns `true` if any value appears at least twice in the array, and `false` if every value is different.\n\nExample: `containsDuplicate([1, 2, 3, 1])` → `true`\n\nThe obvious solution compares every pair with two nested loops: O(n²). Can you get it to O(n) time? Hint: an object can remember what you've already seen, like the guest book in the space complexity lesson.",
-        "es": "Escribe una función `containsDuplicate(nums)` que devuelva `true` si algún valor aparece al menos dos veces en el arreglo, y `false` si todos los valores son diferentes.\n\nEjemplo: `containsDuplicate([1, 2, 3, 1])` → `true`\n\nLa solución obvia compara cada par con dos ciclos anidados: O(n²). ¿Puedes lograrlo en tiempo O(n)? Pista: un objeto puede recordar lo que ya viste, como el libro de visitas de la lección de complejidad espacial."
+        "es": "Escribe una función `containsDuplicate(nums)` que devuelva `true` si algún valor aparece al menos dos veces en el array, y `false` si todos los valores son diferentes.\n\nEjemplo: `containsDuplicate([1, 2, 3, 1])` → `true`\n\nLa solución obvia compara cada par con dos bucles anidados: O(n²). ¿Puedes lograrlo en tiempo O(n)? Pista: un objeto puede recordar lo que ya viste, como el libro de visitas de la lección de complejidad espacial."
       },
       "difficulty": "easy",
       "category": "interview",
@@ -1655,7 +1657,7 @@
       },
       "description": {
         "en": "Write a function `binarySearch(nums, target)`. `nums` is sorted in ascending order with no repeated values. Return the index of `target`, or `-1` if it isn't in the array.\n\nExample: `binarySearch([-1, 0, 3, 5, 9, 12], 9)` → `4`\n\nDon't check every item (that's O(n)). Look at the middle, then discard the half that can't contain the target. Goal: O(log n) time.",
-        "es": "Escribe una función `binarySearch(nums, target)`. `nums` está ordenado de menor a mayor y no tiene valores repetidos. Devuelve el índice de `target`, o `-1` si no está en el arreglo.\n\nEjemplo: `binarySearch([-1, 0, 3, 5, 9, 12], 9)` → `4`\n\nNo revises cada elemento (eso es O(n)). Mira el centro y descarta la mitad que no puede contener el objetivo. Meta: tiempo O(log n)."
+        "es": "Escribe una función `binarySearch(nums, target)`. `nums` está ordenado de menor a mayor y no tiene valores repetidos. Devuelve el índice de `target`, o `-1` si no está en el array.\n\nEjemplo: `binarySearch([-1, 0, 3, 5, 9, 12], 9)` → `4`\n\nNo revises cada elemento (eso es O(n)). Mira el centro y descarta la mitad que no puede contener el objetivo. Meta: tiempo O(log n)."
       },
       "difficulty": "medium",
       "category": "interview",

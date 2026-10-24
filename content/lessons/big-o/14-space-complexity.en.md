@@ -68,7 +68,7 @@ console.log(line)
 console.log('Length:', line.length) // 20 characters: 4 per turn, so O(n) space
 ```
 
-**Under the hood:** here are the sizes behind these rules. By the language's rules, every JavaScript number is a 64-bit value, **8 bytes**, whatever it's worth: one fixed-size box. A string takes about 1 or 2 bytes per character in most engines, so a 50-character name is roughly 50 to 100 bytes. An array keeps one slot per item, a few bytes each (a number, or a reference to a string or object), plus a little bookkeeping. And the variables a function declares, like `count` and `i`, usually get their space when the function starts and give it back when it returns, so calling a function a million times doesn't pile up a million counters.
+**Under the hood:** here are the sizes behind these rules. By the language's rules, every JavaScript number is a 64-bit value, **8 bytes**, whatever it's worth: one fixed-size box. A string takes about 1 or 2 bytes per character in most engines, so a 50-character name is roughly 50 to 100 bytes. An array keeps one slot per item, a few bytes each (a number, or a reference to a string or object), plus a little bookkeeping. And the variables a function declares, like `count` and `i`, usually get their space when the function starts and give it back when it returns, so calling a function a million times, one call after another, doesn't pile up a million counters. (Calls that wait on each other are another story, which you'll meet with recursion.)
 
 **Common mistake:** thinking a bigger number takes more space. `let guestCount = 5` and `let guestCount = 5000000` take the same memory. A number is one box, whatever is written in it. It's strings, arrays and objects that grow.
 
@@ -113,9 +113,9 @@ A function can be great at one and terrible at the other: think of a function th
 
 Try these:
 
-- A loop from 1 to n that only prints `i`: **O(1) space** (just `i`).
-- A function that copies every item at an even index into a new array: about n / 2 items, so **O(n) space**.
-- A function that fills a new array with a running total for every item: n items, so **O(n) space**, even if it uses nested loops to compute them.
+- A loop that adds every guest's age into one total: **O(1) space** (just the total and `i`).
+- A function that copies the names starting with 'A' into a new array: in the worst case every name does, so **O(n) space**.
+- A function that returns one count per guest, even if it uses nested loops to work each count out: n counts, so **O(n) space**.
 
 You don't need to master space complexity before moving on. The goal is that when we say "this one has great space complexity but terrible time complexity", you know what that means.
 
