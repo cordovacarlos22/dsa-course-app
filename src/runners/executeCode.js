@@ -1,4 +1,5 @@
 import { runCheckpointTests } from './testHarness'
+import { tagConsoleCalls } from './consoleLines'
 
 // Runs a student's JavaScript and collects what it prints with console.log.
 // It runs inside a Web Worker (see javascript.worker.js), so an infinite loop
@@ -19,23 +20,56 @@ export function formatValue(value) {
   }
 }
 
-// A console that writes into `logs` instead of the browser's console.
-function captureConsole(logs) {
-  const print = (...values) => logs.push(values.map(formatValue).join(' '))
-  return { log: print, info: print, warn: print, error: print }
+// A console that writes into `logs` instead of the browser's console, and
+// the code line of each printed line into `lines` (null when unknown).
+function captureConsole(logs, lines = []) {
+  function consoleForLine(line) {
+    const print = (...values) => {
+      logs.push(values.map(formatValue).join(' '))
+      lines.push(line)
+    }
+    return { log: print, info: print, warn: print, error: print }
+  }
+  // tagConsoleCalls turns `console.log(…)` into `console.atLine(3).log(…)`.
+  return { ...consoleForLine(null), atLine: consoleForLine }
 }
 
-// Returns { logs: string[], error: string | null }.
+// `new Function` puts two lines of its own before the student's first line.
+const WRAPPER_LINES = 2
+
+// The student's line where an error was thrown, when the browser says.
+// Chrome names the code by its sourceURL in the stack; Safari has error.line.
+function errorLine(error, code) {
+  const fromStack = /student-code\.js:(\d+):\d+/.exec(error?.stack ?? '')
+  const reported = fromStack ? Number(fromStack[1]) : error?.line
+  const line = reported - WRAPPER_LINES
+  const lastLine = code.split('\n').length
+  return Number.isInteger(line) && line >= 1 && line <= lastLine ? line : null
+}
+
+// Returns { logs: string[], lines: (number | null)[], error: string | null,
+// errorLine: number | null }. `lines[i]` is the code line that printed
+// `logs[i]`, for the replay after Run.
 export function executeCode(code) {
   const logs = []
-  const fakeConsole = captureConsole(logs)
+  const lines = []
+  const fakeConsole = captureConsole(logs, lines)
 
   try {
     // The student's code sees our `console`, so we can capture its output.
-    new Function('console', code)(fakeConsole)
-    return { logs, error: null }
+    const run = new Function(
+      'console',
+      `${tagConsoleCalls(code)}\n//# sourceURL=student-code.js`,
+    )
+    run(fakeConsole)
+    return { logs, lines, error: null, errorLine: null }
   } catch (error) {
-    return { logs, error: `${error.name}: ${error.message}` }
+    return {
+      logs,
+      lines,
+      error: `${error.name}: ${error.message}`,
+      errorLine: errorLine(error, code),
+    }
   }
 }
 

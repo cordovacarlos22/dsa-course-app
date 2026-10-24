@@ -42,11 +42,14 @@ function runInWorker(job, timeoutMs, emptyResult) {
   })
 }
 
-// Runs JavaScript and resolves with { logs, error, problem }.
+// Runs JavaScript and resolves with { logs, lines, error, errorLine,
+// problem } (see executeCode.js).
 export function runJavaScript(code, timeoutMs = RUN_TIMEOUT_MS) {
   return runInWorker({ type: 'run', code }, timeoutMs, {
     logs: [],
+    lines: [],
     error: null,
+    errorLine: null,
   })
 }
 
