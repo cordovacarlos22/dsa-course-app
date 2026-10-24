@@ -61,7 +61,7 @@ Las dos sirven mucho más allá de las entrevistas. Cada funcionalidad que vayas
 
 ## Los 5 pasos
 
-Este es el plan. No es magia, no es infalible y no va a resolver el problema por ti. Lo que hace es darte algo concreto que hacer después, cada vez, para que te mantengas tranquilo y sigas avanzando. Muchas de estas ideas vienen de un libro clásico sobre resolver problemas, _How to Solve It_ ("Cómo plantear y resolver problemas"), que escribió el matemático **George Pólya** en 1945. Lo escribió para problemas de matemáticas, pero funciona igual de bien para el código.
+Este es el plan. No es magia, no es infalible y no va a resolver el problema por ti. Lo que hace es darte algo concreto que hacer después, cada vez, para que mantengas la calma y sigas avanzando. Muchas de estas ideas vienen de un libro clásico sobre resolver problemas, _How to Solve It_ ("Cómo plantear y resolver problemas"), que escribió el matemático **George Pólya** en 1945. Lo escribió para problemas de matemáticas, pero funciona igual de bien para el código.
 
 Los cinco pasos son:
 

@@ -28,14 +28,14 @@ El método no es solo para entrevistas. Cada vez que te enfrentes a algo nuevo, 
 
 ## Piensa en voz alta
 
-En una entrevista, el método solo ayuda si quien te entrevista puede verlo. Nadie puede leerte la mente, así que **di lo que estás haciendo** y comparte el proceso en voz alta. Así podría sonar en cada paso:
+En una entrevista, el método solo ayuda si quien te entrevista puede verlo. Nadie puede leerte la mente, así que **di lo que estás haciendo** y hazle partícipe del proceso. Así podría sonar en cada paso:
 
 | Paso                 | Lo que podrías decir                                                                                                                |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | Entender             | "Con mis palabras: cuento cada letra y cada dígito. La entrada es un string y la salida es un objeto, ¿cierto?"                     |
 | Ejemplos             | "Déjame escribir algunos ejemplos. ¿Qué debería regresar un string vacío? ¿Las mayúsculas cuentan aparte?"                          |
 | Dividir en pasos     | "Este es mi plan: crear un objeto, recorrer el string, contar las letras y los dígitos, regresar el objeto."                        |
-| Resolver/simplificar | "Todavía no estoy seguro de cómo revisar las letras, así que primero escribo todo lo demás y luego regreso a eso."                  |
+| Resolver/simplificar | "Todavía no tengo claro cómo revisar las letras, así que primero escribo todo lo demás y luego regreso a eso."                      |
 | Revisar              | "Ya funciona. Este if/else podría ser una línea, y la revisión podría usar códigos de caracteres. ¿Qué otras soluciones has visto?" |
 
 Algunos hábitos más ayudan. **Escribe tus ejemplos donde quien te entrevista pueda verlos**, y prueba tu código con ellos al final. Cuando te atasques, **di exactamente en qué te atascaste**: una pregunta precisa consigue una pista útil, y el silencio no consigue nada. Y si se acaba el tiempo, **explícale el resto de tu plan**.

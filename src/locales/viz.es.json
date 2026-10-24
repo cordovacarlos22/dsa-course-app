@@ -176,7 +176,7 @@
       "isLong": "'{{guest}}' tiene {{length}} letras, más de 3: una operación por la revisión.",
       "addOne": "…y una por count = count + 1 (ahora {{count}}). Después i++ es una más.",
       "fastForward": "Con {{n}} invitados saltamos al final. Cada nombre cuesta 3 o 4 operaciones.",
-      "end": "Listo: {{ops}} operaciones para {{n}} invitados. Prueba los otros tamaños: el total crece con n."
+      "end": "Terminó: {{ops}} operaciones para {{n}} invitados. Prueba los otros tamaños: el total crece con n."
     },
     "welcomeAll": {
       "title": "welcomeAll: un mensaje por persona",
@@ -304,7 +304,7 @@
       "tail": "this.tail = null: tampoco hay último nodo todavía.",
       "length": "this.length = 0. Esto ya es una lista válida, vacía.",
       "noValue": "value es undefined: no se pasó nada. El if se salta, y la lista se queda vacía.",
-      "emptyDone": "Listo: una lista vacía. head y tail son null y length es 0. push puede agregar invitados después.",
+      "emptyDone": "Terminó: una lista vacía. head y tail son null y length es 0. push puede agregar invitados después.",
       "hasValue": "value es {{value}}, no undefined, así que creamos el primer nodo.",
       "zero": "value es 0. Eso no es undefined, así que 0 recibe un nodo como cualquier otro valor.",
       "nodeValue": "new Node({{value}}) corre el constructor de Node: this.value = {{value}}.",
@@ -486,7 +486,7 @@
     "start": "La misma fiesta guardada de dos formas. El array guarda a los invitados en orden; el objeto etiqueta cada respuesta con el nombre de quien respondió.",
     "access": "Leer con un índice o una clave salta directo a una caja. Los dos son O(1).",
     "addEnd": "Agregar al final del array, o agregar una clave nueva al objeto, toca una caja. Los dos son O(1).",
-    "addStart": "Agregar al principio es distinto. El array tiene que reindexar a cada nombre: O(n). El objeto no tiene principio, así que sigue tocando una caja.",
+    "addStart": "Agregar al principio es distinto. El array tiene que reindexar cada nombre: O(n). El objeto no tiene principio, así que sigue tocando una caja.",
     "search": "Buscar algo que no está obliga a revisar cada caja, en los dos: O(n).",
     "summary": "Los arrays te dan orden. Los objetos te dan claves rápidas, pero sin orden. Toda estructura de datos es un intercambio como este."
   },
@@ -570,7 +570,7 @@
     },
     "understand": {
       "title": "Paso 1: entender el problema",
-      "start": "Antes de escribir código, hazte cinco preguntas: en voz alta en una entrevista, o a ti mismo en casa.",
+      "start": "Antes de escribir código, hazte cinco preguntas: en voz alta en una entrevista, o en silencio en casa.",
       "items": [
         "¿Puedo explicarlo con mis propias palabras?",
         "¿Qué entra?",

@@ -229,12 +229,21 @@ export function countMissingSpanish(value) {
 // AGENTS.md: Spanish never gives a guest or the student a gender. These catch
 // the usual slips; the plural "los invitados" is a separate decision (#90).
 const GENDERED_SPANISH = [
-  /\binvitad[oa]\b/i, // one guest: "el último invitado"
+  // one guest: "el último invitado"
+  /\binvitad[oa]\b/i,
+  // a person's role: "como programador", "un candidato"
   /\b(?:desarrollador|programador)a?\b|\bcandidat[oa]\b/i,
-  /\b(?:estés|estás|eres|seas|quedarte|quedas|quedes) (?:segur|list|atascad|atorad|perdid|callad|preparad|cansad|confundid)[oa]\b/i,
-  /(?<!\b(?:la|de|las|una|su|sus) )\bbienvenid[oa]s?\b/i, // the greeting, not "la bienvenida"
-  /\b(?:el|un|al|del) (?:estudiante|alumno|usuario|lector|compañero|anfitrión|entrevistador)\b/i,
+  // the student described: "cuando estés listo", "estoy seguro", "te mantengas tranquilo"
+  /\b(?:estés|estás|estoy|eres|seas|quedarte|quedas|quedes|mantengas) (?:segur|list|atascad|atorad|perdid|callad|preparad|cansad|confundid|tranquil|nervios)[oa]\b/i,
+  // "¿Listo?" or "Listo:" starting a sentence
+  /(?:^|["¿¡]|[.:!?] )listo\b/i,
+  // the greeting, not "la bienvenida"
+  /(?<!\b(?:la|de|las|una|su|sus) )\bbienvenid[oa]s?\b/i,
+  // a role with a masculine article: "el entrevistador", "un usuario"
+  /\b(?:el|un|al|del) (?:estudiante|alumno|usuario|lector|anfitrión|entrevistador)\b/i,
+  // a classmate: "un compañero"
   /\bcompañer[oa]\b/i,
+  // "a ti mismo", "tú mismo"
   /\b(?:ti|tú) mism[oa]\b/i,
 ]
 // "Persona invitada" agrees with "persona", so it's neutral.

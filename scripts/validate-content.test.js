@@ -621,4 +621,19 @@ describe('findGenderedSpanish', () => {
     const json = '{\n  "id": "un-invitado",\n  "es": "Cada invitado llega."\n}'
     expect(findGenderedSpanish(json, true)).toEqual([3])
   })
+
+  it('finds "estoy seguro" and "te mantengas tranquilo"', () => {
+    expect(findGenderedSpanish('Todavía no estoy seguro.')).toEqual([1])
+    expect(findGenderedSpanish('Para que te mantengas tranquilo.')).toEqual([1])
+  })
+
+  it('finds "listo" starting a sentence, but not "listos" about modules', () => {
+    expect(findGenderedSpanish('¿Listo para empezar?')).toEqual([1])
+    expect(findGenderedSpanish('"done": "Listo: una lista vacía."')).toEqual([
+      1,
+    ])
+    expect(
+      findGenderedSpanish('Los primeros módulos ya están listos.'),
+    ).toEqual([])
+  })
 })

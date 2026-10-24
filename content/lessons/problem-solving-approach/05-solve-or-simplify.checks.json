@@ -4,7 +4,7 @@
       "type": "choice",
       "question": {
         "en": "You're stuck on one part of a problem. What does \"solve a simpler problem\" mean?",
-        "es": "Te atascas en una parte de un problema. ¿Qué quiere decir \"resolver un problema más simple\"?"
+        "es": "Te atascaste en una parte de un problema. ¿Qué quiere decir \"resolver un problema más simple\"?"
       },
       "options": [
         {

@@ -1557,7 +1557,7 @@
       },
       "description": {
         "en": "Write a function `findMax(nums)` that returns the largest number in the array. If the array is empty, return `null`. Don't use `Math.max(...nums)`: walk through the array yourself.\n\nExample: `findMax([3, 1, 4, 1, 5])` → `5`\n\nGoal: O(n) time, O(1) space.",
-        "es": "Escribe una función `findMax(nums)` que devuelva el número más grande del array. Si el array está vacío, devuelve `null`. No uses `Math.max(...nums)`: recorre el array tú mismo.\n\nEjemplo: `findMax([3, 1, 4, 1, 5])` → `5`\n\nMeta: tiempo O(n), espacio O(1)."
+        "es": "Escribe una función `findMax(nums)` que devuelva el número más grande del array. Si el array está vacío, devuelve `null`. No uses `Math.max(...nums)`: recorre el array por tu cuenta.\n\nEjemplo: `findMax([3, 1, 4, 1, 5])` → `5`\n\nMeta: tiempo O(n), espacio O(1)."
       },
       "difficulty": "easy",
       "category": "interview",
