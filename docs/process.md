@@ -85,6 +85,22 @@ An issue is **Done** when its acceptance criteria are met, its tests are added, 
 - Student code runs only in the Web Worker, with the app's Content-Security-Policy.
 - Anything that touches login, data, the code runner, the AI tutor or secrets is labeled `security` and gets a security review before it merges.
 
+## Domains
+
+The app has its own domain, `charliecodeacademy.com` (registered on Cloudflare; its DNS points to Vercel). One Vercel project serves every address:
+
+| Address                          | Serves                                                  |
+| -------------------------------- | ------------------------------------------------------- |
+| `charliecodeacademy.com`         | the landing page                                        |
+| `www.charliecodeacademy.com`     | a redirect to `charliecodeacademy.com`                  |
+| `app.charliecodeacademy.com`     | the course for students (`/` goes to `/learn`)          |
+| `staging.charliecodeacademy.com` | the latest `main` (staging, #39), behind Vercel's login |
+
+- **DNS:** every record for Vercel is **DNS only** (Cloudflare's proxy off), because the proxy breaks Vercel's certificates and caching.
+- **Protection:** Vercel's **Standard Protection**. The landing page and `app.` are public; previews and `staging.` ask for the Vercel login.
+- **Two addresses, one app:** pages under `/learn` belong to `app.`, the rest to the landing page. `src/lib/crossSite.js` sends a page loaded on the wrong address to the right one, carrying the language (`?lang=`), so the course's progress always lives on `app.`. `vercel.json` redirects direct visits by host.
+- **Switching it on:** set `VITE_SITE_ORIGIN=https://charliecodeacademy.com` and `VITE_APP_ORIGIN=https://app.charliecodeacademy.com` in Vercel for **Production only**. In Preview they would send staging's visitors to production. Without them (dev, tests, previews), the app stays on one address.
+
 ## Accounts: who GitHub sees
 
 For now every agent works through **Carlos's GitHub account**, so GitHub sees one person: it won't let a PR's author approve their own PR, and the history doesn't show the roles apart. Until that changes:
