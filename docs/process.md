@@ -36,6 +36,7 @@ Labels: `type:feature`, `type:bug`, `type:chore`, `type:content`, `area:lessons`
 - Small commits with [Conventional Commits](https://www.conventionalcommits.org): `feat:`, `fix:`, `test:`, `docs:`, `chore:`, `ci:`, `content:`.
 - The PR uses the template, says `Closes #<issue>`, and lists what was tested and what Carlos must decide.
 - Every feature comes with tests of what the user sees. Docs and `memory.md` are updated in the same PR.
+- `git fetch` before you branch, and rebase on the latest `main` before you open a PR. PRs that touch `package-lock.json` or `memory.md` merge **one at a time**, each rebased on the one before. Don't use GitHub's "Update branch" button: it merges `main` into the branch and can leave the lock file out of sync (it broke #74).
 
 ### 3. Build
 

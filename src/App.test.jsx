@@ -1,4 +1,4 @@
-import { act, render, screen, within } from '@testing-library/react'
+import { act, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
 import { describe, it, expect } from 'vitest'
@@ -114,7 +114,10 @@ describe('tab titles', () => {
   it('names a lesson by its title', async () => {
     renderAsReturningStudent('/learn/big-o/01-why-big-o')
     await screen.findByRole('heading', { level: 1, name: 'Why Big O?' })
-    expect(document.title).toBe('Why Big O? · DSA in JavaScript')
+    // The title is set in an effect, a moment after the heading appears.
+    await waitFor(() =>
+      expect(document.title).toBe('Why Big O? · DSA in JavaScript'),
+    )
   })
 
   it('says when a page does not exist', () => {

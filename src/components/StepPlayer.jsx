@@ -25,20 +25,17 @@ function StepPlayer({ title, steps, renderStep, toolbar = null }) {
   const isFirst = index === 0
   const isLast = index === steps.length - 1
 
-  // While playing, move forward on a timer and stop at the last step
-  // (or start over, when it plays on its own).
+  // While playing, move forward on a timer and stop when it reaches the last
+  // step (or start over, when it plays on its own).
   useEffect(() => {
     if (!isPlaying) return
-    if (isLast && !autoPlay) {
-      setIsPlaying(false)
-      return
-    }
-    const timer = setTimeout(
-      () => setIndex((i) => (i + 1) % steps.length),
-      PLAY_INTERVAL_MS,
-    )
+    const timer = setTimeout(() => {
+      const nextIndex = (index + 1) % steps.length
+      setIndex(nextIndex)
+      if (nextIndex === steps.length - 1 && !autoPlay) setIsPlaying(false)
+    }, PLAY_INTERVAL_MS)
     return () => clearTimeout(timer)
-  }, [isPlaying, isLast, index, autoPlay, steps.length])
+  }, [isPlaying, index, autoPlay, steps.length])
 
   function togglePlay() {
     // Pressing Play on the last step starts again from the beginning.
