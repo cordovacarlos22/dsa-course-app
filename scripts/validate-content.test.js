@@ -61,6 +61,23 @@ describe('validatePractice', () => {
     expect(validatePractice(makeValidPractice())).toEqual([])
   })
 
+  it('accepts a module that draws on two course folders', () => {
+    const practice = makeValidPractice()
+    practice.sourceFolder = [
+      'course 1 /Section 2 - Big o ',
+      'course 2/section 2 - big o ',
+    ]
+    expect(validatePractice(practice)).toEqual([])
+  })
+
+  it('rejects an empty list of source folders', () => {
+    const practice = makeValidPractice()
+    practice.sourceFolder = []
+    expect(validatePractice(practice)).toEqual([
+      expect.stringContaining('sourceFolder'),
+    ])
+  })
+
   it('rejects a missing English text', () => {
     const practice = makeValidPractice()
     delete practice.questions[0].prompt.en

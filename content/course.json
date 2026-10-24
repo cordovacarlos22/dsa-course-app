@@ -16,7 +16,7 @@
         "en": "Introduction",
         "es": "Introducción"
       },
-      "sourceFolder": "recursos originales/modulo-01-introduccion"
+      "sourceFolder": "course 1 /SECTION 1 - INTRODUCTION"
     },
     {
       "slug": "big-o",
@@ -25,7 +25,10 @@
         "en": "Big O",
         "es": "Big O"
       },
-      "sourceFolder": "recursos originales/modulo-02-big-o"
+      "sourceFolder": [
+        "course 1 /Section 2 - Big o ",
+        "course 2/section 2 - big o "
+      ]
     },
     {
       "slug": "arrays-and-objects",
@@ -33,7 +36,8 @@
       "title": {
         "en": "Big O of Arrays & Objects",
         "es": "Big O de arrays y objetos"
-      }
+      },
+      "sourceFolder": "course 2/section 3 - "
     },
     {
       "slug": "problem-solving-approach",
@@ -41,7 +45,8 @@
       "title": {
         "en": "A Problem-Solving Approach",
         "es": "Un método para resolver problemas"
-      }
+      },
+      "sourceFolder": "course 2/section 4 - problem solving aproach"
     },
     {
       "slug": "problem-solving-patterns",
@@ -57,8 +62,7 @@
       "title": {
         "en": "Recursion",
         "es": "Recursión"
-      },
-      "sourceFolder": "recursos originales/modulo-11-recursion"
+      }
     },
     {
       "slug": "searching",
@@ -74,8 +78,7 @@
       "title": {
         "en": "Basic Sorts",
         "es": "Ordenamientos básicos"
-      },
-      "sourceFolder": "recursos originales/modulo-14-ordenamiento-basico"
+      }
     },
     {
       "slug": "merge-sort",
@@ -83,8 +86,7 @@
       "title": {
         "en": "Merge Sort",
         "es": "Merge Sort"
-      },
-      "sourceFolder": "recursos originales/modulo-15-ordenamiento-merge-sort"
+      }
     },
     {
       "slug": "quick-sort",
@@ -92,8 +94,7 @@
       "title": {
         "en": "Quick Sort",
         "es": "Quick Sort"
-      },
-      "sourceFolder": "recursos originales/modulo-16-ordenamiento-quick-sort"
+      }
     },
     {
       "slug": "radix-sort",
@@ -110,7 +111,7 @@
         "en": "Classes & Pointers",
         "es": "Clases y punteros"
       },
-      "sourceFolder": "recursos originales/modulo-03-clases-punteros"
+      "sourceFolder": "course 1 /SECTION 3 - CLASSES AND POINTERS"
     },
     {
       "slug": "linked-lists",
@@ -127,8 +128,7 @@
       "title": {
         "en": "Doubly Linked Lists",
         "es": "Listas doblemente enlazadas"
-      },
-      "sourceFolder": "recursos originales/modulo-05-listas-doblemente-enlazadas"
+      }
     },
     {
       "slug": "stacks-and-queues",
@@ -136,8 +136,7 @@
       "title": {
         "en": "Stacks & Queues",
         "es": "Pilas y colas"
-      },
-      "sourceFolder": "recursos originales/modulo-06-pilas-colas"
+      }
     },
     {
       "slug": "binary-search-trees",
@@ -145,8 +144,7 @@
       "title": {
         "en": "Binary Search Trees",
         "es": "Árboles binarios de búsqueda"
-      },
-      "sourceFolder": "recursos originales/modulo-07-arboles"
+      }
     },
     {
       "slug": "tree-traversal",
@@ -154,8 +152,7 @@
       "title": {
         "en": "Tree Traversal",
         "es": "Recorridos de árboles"
-      },
-      "sourceFolder": "recursos originales/modulo-13-recorridos-arboles"
+      }
     },
     {
       "slug": "heaps-and-priority-queues",
@@ -163,8 +160,7 @@
       "title": {
         "en": "Heaps & Priority Queues",
         "es": "Heaps y colas de prioridad"
-      },
-      "sourceFolder": "recursos originales/modulo-10-heaps"
+      }
     },
     {
       "slug": "hash-tables",
@@ -172,8 +168,7 @@
       "title": {
         "en": "Hash Tables",
         "es": "Tablas hash"
-      },
-      "sourceFolder": "recursos originales/modulo-08-tablas-hash"
+      }
     },
     {
       "slug": "graphs",
@@ -181,8 +176,7 @@
       "title": {
         "en": "Graphs",
         "es": "Grafos"
-      },
-      "sourceFolder": "recursos originales/modulo-09-grafos"
+      }
     },
     {
       "slug": "graph-traversal",
@@ -206,8 +200,7 @@
       "title": {
         "en": "Dynamic Programming",
         "es": "Programación dinámica"
-      },
-      "sourceFolder": "recursos originales/modulo-17-programacion-dimanica"
+      }
     },
     {
       "slug": "array-interview-problems",
