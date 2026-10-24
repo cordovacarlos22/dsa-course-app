@@ -1,0 +1,15 @@
+{
+  // VS Code → "Reopen in Container" runs the `dev` service from
+  // docker-compose.yml and opens the project inside it.
+  "name": "DSA course app",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/app",
+  "remoteUser": "node",
+  "forwardPorts": [5173],
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+    }
+  }
+}

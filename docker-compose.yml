@@ -1,0 +1,28 @@
+# docker compose up dev      → the dev server on http://localhost:5173
+# docker compose up preview  → the production build on http://localhost:4174
+# Both only listen on this computer (127.0.0.1), never on the network.
+# After a dependency change: docker compose up --build -V dev (-V gives the
+# container a fresh node_modules instead of the old one).
+name: dsa-course-app
+services:
+  dev:
+    build:
+      context: .
+      target: base
+    # Vite has to listen on every interface inside the container to be
+    # reachable through the published port.
+    command: ['npm', 'run', 'dev', '--', '--host', '0.0.0.0']
+    ports:
+      - '127.0.0.1:5173:5173'
+    volumes:
+      # Edits on your computer show up in the container right away...
+      - .:/app
+      # ...but the container keeps its own Linux node_modules.
+      - /app/node_modules
+
+  preview:
+    build:
+      context: .
+      target: preview
+    ports:
+      - '127.0.0.1:4174:4174'
