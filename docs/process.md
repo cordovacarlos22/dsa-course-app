@@ -126,7 +126,7 @@ For now every agent works through **Carlos's GitHub account**, so GitHub sees on
 | Required checks on `main`: CI passed and CodeQL                                    | ✅ live                                                            |
 | GitHub secret scanning, push protection, Dependabot security updates               | ✅ live                                                            |
 | Secrets in Infisical (OIDC from GitHub Actions)                                    | ⏳ #51                                                             |
-| Docker dev and QA environment                                                      | ⏳ `chore/docker`                                                  |
+| Docker dev and QA environment                                                      | ✅ (#38)                                                           |
 | Release: `production` branch, Carlos's approval, ruleset, rollback                 | ✅ built (#39): on once Vercel's production branch is `production` |
 | Staging on `staging.charliecodeacademy.com`                                        | ⏳ #70 (the domain)                                                |
 | Automatic tests against staging                                                    | ⏳ after #51                                                       |

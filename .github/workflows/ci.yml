@@ -118,6 +118,43 @@ jobs:
           path: playwright-report/
           retention-days: 14
 
+  # The Docker QA environment (Dockerfile, docker-compose.yml): the image
+  # builds, and the app it serves passes the end-to-end tests. One setup is
+  # enough here; the e2e job above covers the other three.
+  docker:
+    name: Docker preview
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Build and start the preview container
+        run: |
+          docker compose up --build --detach preview
+          # Try 30 times, about a minute and a half at most, for an answer.
+          for attempt in $(seq 1 30); do
+            curl -sf --max-time 2 -o /dev/null http://127.0.0.1:4174/ && exit 0
+            sleep 1
+          done
+          docker compose logs preview
+          exit 1
+      - name: Install the browser
+        run: npx playwright install --with-deps chromium
+      - name: End-to-end tests against the container
+        run: npx playwright test --project=desktop-en
+        env:
+          E2E_BASE_URL: http://127.0.0.1:4174
+      - name: Keep the report when something fails
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: playwright-report-docker
+          path: playwright-report/
+          retention-days: 14
+
   security:
     name: Security scans
     runs-on: ubuntu-latest
@@ -145,7 +182,7 @@ jobs:
   ci-passed:
     name: CI passed
     if: always()
-    needs: [lint, unit, content, build, e2e, security]
+    needs: [lint, unit, content, build, e2e, docker, security]
     runs-on: ubuntu-latest
     steps:
       - name: Every job passed

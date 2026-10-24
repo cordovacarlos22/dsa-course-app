@@ -1,0 +1,16 @@
+# What never goes into the image: things the image builds or installs itself,
+# secrets, and files the app doesn't need to run.
+node_modules
+dist
+coverage
+playwright-report
+test-results
+.vite
+.git
+.github
+.claude
+.devcontainer
+**/.env*
+!**/.env.example
+*.log
+.DS_Store
