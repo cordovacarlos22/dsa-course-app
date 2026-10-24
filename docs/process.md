@@ -58,10 +58,16 @@ Dependabot opens PRs for outdated or vulnerable dependencies every week. Those P
 - **Staging (after the switch below):** every merge to `main` deploys to staging on Vercel: Vercel's `main` branch address, and `staging.charliecodeacademy.com` once that domain is added. It's added only after the switch, because before it a domain on `main` serves production. Staging is behind Vercel's login, so only Carlos opens it. Automatic tests against staging come after #51, which keeps the secret that lets CI past the login.
 - **Release:** production is the `production` branch. To ship, run **Release** (GitHub → Actions → Release → Run workflow; it takes a commit, and the default is `main`'s latest).
   - The run waits for **Carlos's approval** in the `release` environment, which only accepts runs started from `main`.
-  - It then moves `production` forward to that commit, and Vercel deploys it.
-  - When the repository variable `PRODUCTION_URLS` is set, it waits for Vercel's deploy and checks that every address answers 200 with the Content-Security-Policy.
-- **The `production` branch is guarded by a ruleset:** it only accepts commits whose **CI passed** and **CodeQL** checks passed on `main`, and it can't be force-pushed or deleted. So it only ever moves forward, through Release. When several PRs merge within minutes, only the last merge gets a full CI run (a newer push cancels the older run on `main`), so release the latest commit, which is the default.
-- **Rollback:** in Vercel → Deployments, choose the previous production deploy → **Instant Rollback** (seconds, no rebuild). Then fix forward: revert the bad change on `main` with a PR and release that commit.
+  - It then moves `production` forward to that commit, and Vercel deploys it. The commit must be one of `main`'s own commits (a merge, not a commit from inside a PR) and newer than what's live.
+  - Release after the commit's checks on `main` are green: the ruleset below refuses a commit whose checks haven't passed yet. When several PRs merge within minutes, only the last merge gets a full CI run (a newer push cancels the older run on `main`), so release the latest commit, which is the default.
+  - When the repository variable `PRODUCTION_URLS` is set, it waits for Vercel's deploy and checks that every address answers 200 with the Content-Security-Policy. That proves the site is up with its headers, not which deploy is live; Vercel's dashboard shows that.
+- **A ruleset guards the `production` branch:** it only accepts commits whose **CI passed** and **CodeQL** checks passed, and it can't be force-pushed or deleted. It can't tell whether a commit was merged, though: a PR's own commits pass those checks too. Only the Release workflow checks for `main`.
+- **So nobody pushes `production` by hand, agents included.** Only Release moves it. (GitHub can't enforce this on a personal repo without an extra deploy-key secret: a possible later step, Carlos's call.)
+- **Rollback:**
+  1. In Vercel → Deployments, choose the previous production deploy → **Instant Rollback** (seconds, no rebuild).
+  2. While rolled back, **Vercel stops moving the domains to new production deploys**, so a release alone won't go live.
+  3. Fix forward: revert the bad change on `main` with a PR, and release that commit.
+  4. In Vercel, **promote** the new production deploy (or press **Undo Rollback**), so the domains follow `production` again. Check in Vercel's dashboard which deploy is live.
 - **Switching it on (Carlos, once):**
   1. In Vercel → Settings → Environments → Production → Branch Tracking, change `main` to `production`. Until then, Vercel still deploys `main` to production on every merge, and Release only moves a branch nobody deploys.
   2. Once the domain is live, set the repository variable `PRODUCTION_URLS` to `https://charliecodeacademy.com https://app.charliecodeacademy.com/learn`.
