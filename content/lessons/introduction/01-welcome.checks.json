@@ -64,38 +64,29 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "Which section comes right after **Foundations**?",
-        "es": "¿Qué sección viene justo después de **Fundamentos**?"
+        "en": "In your own words: why does the course teach Big O and a problem-solving method **before** you build data structures?",
+        "es": "Con tus palabras: ¿por qué el curso enseña Big O y un método para resolver problemas **antes** de que construyas estructuras de datos?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "Big O gives you a way to compare any two pieces of code, so you can judge how fast each method of a data structure is. A problem-solving method gives you a plan for problems you have never seen. When you build a data structure, you use both, instead of memorizing answers.",
+        "es": "Big O te da una forma de comparar dos códigos cualesquiera, así puedes juzgar qué tan rápido es cada método de una estructura de datos. Un método para resolver problemas te da un plan para problemas que nunca has visto. Cuando construyes una estructura de datos usas los dos, en vez de memorizar respuestas."
+      },
+      "checklist": [
         {
-          "en": "Data structures",
-          "es": "Estructuras de datos"
+          "en": "Says Big O lets you compare or judge code",
+          "es": "Dice que Big O sirve para comparar o juzgar código"
         },
         {
-          "en": "Dynamic programming",
-          "es": "Programación dinámica"
+          "en": "Says the method gives you a plan for new problems",
+          "es": "Dice que el método te da un plan para problemas nuevos"
         },
         {
-          "en": "Problem solving",
-          "es": "Resolución de problemas"
-        },
-        {
-          "en": "Interview practice",
-          "es": "Práctica de entrevistas"
+          "en": "Says you use both later, when you build data structures",
+          "es": "Dice que después usas los dos, al construir estructuras de datos"
         }
-      ],
-      "answer": 2,
-      "hint": {
-        "en": "Read the table from the top: the second row is the answer.",
-        "es": "Lee la tabla desde arriba: la segunda fila es la respuesta."
-      },
-      "explanation": {
-        "en": "After the foundations comes a method for solving problems, then searching and sorting, then the data structures.",
-        "es": "Después de los fundamentos viene un método para resolver problemas, luego búsqueda y ordenamiento, y después las estructuras de datos."
-      }
+      ]
     },
     {
       "type": "choice",

@@ -63,6 +63,20 @@ const nextButton = () =>
     { name: /^next/i },
   )
 
+// Passes an explain step the way a student does: write, compare, tick
+// every point of the checklist, then Done.
+async function explainAndFinish(user) {
+  await user.type(
+    screen.getByLabelText('Your explanation'),
+    'Big O compares code, and a method gives me a plan.',
+  )
+  await user.click(
+    screen.getByRole('button', { name: 'Compare with a model answer' }),
+  )
+  for (const box of screen.getAllByRole('checkbox')) await user.click(box)
+  await user.click(screen.getByRole('button', { name: 'Done' }))
+}
+
 beforeEach(() => {
   checkJavaScript.mockReset()
   celebrate.mockReset()
@@ -184,6 +198,23 @@ describe('lesson page', () => {
     ).toBeInTheDocument()
   })
 
+  it('keeps Next locked on an explain step until every point is ticked', async () => {
+    const user = userEvent.setup()
+    saveProgress('introduction', '01-welcome', {
+      ...emptyProgress(),
+      passed: [0, 1],
+    })
+    renderAt('/learn/introduction/01-welcome')
+    await screen.findByText('Step 3 of 4', { selector: 'p' })
+    expect(nextButton()).toBeDisabled()
+
+    await explainAndFinish(user)
+
+    expect(nextButton()).toBeEnabled()
+    expect(celebrate).toHaveBeenCalledWith('step')
+    expect(loadProgress('introduction', '01-welcome').passed).toContain(2)
+  })
+
   it('does not let a student skip ahead with the URL', async () => {
     renderAt(`${LESSON}?step=5`)
     expect(
@@ -265,7 +296,7 @@ describe('celebrations', () => {
     expect(screen.getByText('✓ Correct! Nice!')).toBeInTheDocument()
   })
 
-  it('cheers a streak of answers right on the first try', async () => {
+  it('cheers a streak of steps passed on the first try', async () => {
     const user = userEvent.setup()
     saveProgress('introduction', '01-welcome', {
       ...emptyProgress(),
@@ -274,8 +305,7 @@ describe('celebrations', () => {
     renderAt(WELCOME)
     await screen.findByText('Step 3 of 4', { selector: 'p' })
 
-    await user.click(screen.getByRole('radio', { name: 'Problem solving' }))
-    await user.click(screen.getByRole('button', { name: 'Check answer' }))
+    await explainAndFinish(user)
     expect(screen.getByText(/3 in a row on the first try/)).toBeInTheDocument()
   })
 
