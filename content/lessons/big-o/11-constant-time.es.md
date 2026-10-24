@@ -94,8 +94,8 @@ Así que cuando busques el Big O de una línea, pregúntate: _¿salta directo a 
 const guests = ['Ana', 'Ben', 'Cleo', 'Dev', 'Eli', 'Fay']
 
 console.log(guests[4]) // salta directo a la caja 4: O(1)
-console.log(guests.includes('Zoe')) // primero revisa a cada invitado: O(n)
+console.log(guests.includes('Zoe')) // primero revisa cada nombre: O(n)
 console.log(guests.indexOf('Fay')) // revisa invitados hasta encontrar a Fay: O(n)
 ```
 
-**Error común:** decir que una línea es O(1) porque es corta. `guests.includes('Zoe')` es una sola línea, pero su costo es un bucle sobre cada invitado. Juzga una línea por cuánto trabajo hace, no por cuánto espacio ocupa en la pantalla.
+**Error común:** decir que una línea es O(1) porque es corta. `guests.includes('Zoe')` es una sola línea, pero su costo es un bucle sobre toda la lista. Juzga una línea por cuánto trabajo hace, no por cuánto espacio ocupa en la pantalla.

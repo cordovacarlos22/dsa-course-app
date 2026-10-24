@@ -27,7 +27,7 @@
       "answer": 3,
       "hint": {
         "en": "Which one runs once per guest?",
-        "es": "¿Cuál corre una vez por invitado?"
+        "es": "¿Cuál corre una vez por cada persona de la lista?"
       },
       "explanation": {
         "en": "Index lookups, arithmetic and assignments are O(1). A loop over the guests runs n times: O(n).",
@@ -35,38 +35,29 @@
       }
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "A loop over the guests runs n times, and inside it there's **another loop over the guests**. What's the cost?",
-        "es": "Un bucle sobre los invitados corre n veces, y adentro hay **otro bucle sobre los invitados**. ¿Cuál es el costo?"
+        "en": "In your own words: why does a loop with another loop over the same list inside it cost O(n²)?",
+        "es": "Con tus palabras: ¿por qué un bucle con otro bucle sobre la misma lista adentro cuesta O(n²)?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "A loop costs how many times it runs times the work inside each time. The outer loop runs n times, and each time the inner loop runs n more times, so the total is n × n = n². The same happens when the inner loop is hidden in a method like includes.",
+        "es": "Un bucle cuesta cuántas veces se ejecuta por el trabajo de adentro en cada vuelta. El bucle de afuera da n vueltas, y en cada una el de adentro da n vueltas más, así que el total es n × n = n². Lo mismo pasa cuando el bucle de adentro está escondido en un método como includes."
+      },
+      "checklist": [
         {
-          "en": "n + n = O(n)",
-          "es": "n + n = O(n)"
+          "en": "Says a loop costs its number of runs times the work inside",
+          "es": "Dice que un bucle cuesta sus vueltas por el trabajo de adentro"
         },
         {
-          "en": "n × 1 = O(n)",
-          "es": "n × 1 = O(n)"
+          "en": "Says n outer runs × n inner steps = n²",
+          "es": "Dice que n vueltas de afuera × n pasos de adentro = n²"
         },
         {
-          "en": "n × n = O(n²)",
-          "es": "n × n = O(n²)"
-        },
-        {
-          "en": "O(1)",
-          "es": "O(1)"
+          "en": "Says a hidden loop, like includes, counts too",
+          "es": "Dice que un bucle escondido, como includes, también cuenta"
         }
-      ],
-      "answer": 2,
-      "hint": {
-        "en": "Cost of a loop = times it runs × the work inside.",
-        "es": "Costo de un bucle = veces que corre × el trabajo de adentro."
-      },
-      "explanation": {
-        "en": "n times, and each time n more steps: n × n = O(n²).",
-        "es": "n veces, y cada vez n pasos más: n × n = O(n²)."
-      }
+      ]
     },
     {
       "type": "code",

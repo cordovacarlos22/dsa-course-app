@@ -56,7 +56,7 @@ La misma regla funciona cuando lo de adentro es un bucle escondido. Un bucle sob
 trace-greet-everyone
 ```
 
-**Qué acaba de pasar:** por cada invitado `i`, el bucle de adentro recorrió a cada invitado `j`. Cuando `i` y `j` eran el mismo invitado, no hubo saludo, pero el bucle de adentro igual dio un paso. Con n invitados, son n × n pasos adentro: **O(n²)**.
+**Qué acaba de pasar:** por cada persona `i`, el bucle de adentro recorrió a cada persona `j`. Cuando `i` y `j` eran la misma persona, no hubo saludo, pero el bucle de adentro igual dio un paso. Con n invitados, son n × n pasos adentro: **O(n²)**.
 
 Cada vez que veas un bucle, hazte dos preguntas: _¿cuántas veces corre?_ y _¿cuánto trabajo pasa adentro, cada vez?_ Luego multiplica. Estas son las dos formas, con un contador en cada una:
 

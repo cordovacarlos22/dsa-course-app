@@ -64,38 +64,29 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "Which line hides a loop, so it's O(n)?",
-        "es": "¿Qué línea esconde un bucle, así que es O(n)?"
+        "en": "In your own words: how can you tell whether a line of code is O(1) or hides a loop?",
+        "es": "Con tus palabras: ¿cómo sabes si una línea de código es O(1) o esconde un bucle?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "Ask whether the line jumps straight to its answer or has to look through the data. Reading an item by its index, a key in an object or an array's length jumps straight there, so it's O(1). Methods like includes and indexOf look through the items one by one, so they're O(n), even though they fit on one line.",
+        "es": "Pregúntate si la línea salta directo a su respuesta o tiene que revisar los datos. Leer un elemento por su índice, una clave de un objeto o el largo de un array salta directo ahí, así que es O(1). Métodos como includes e indexOf revisan los elementos uno por uno, así que son O(n), aunque quepan en una línea."
+      },
+      "checklist": [
         {
-          "en": "`guests[3]`",
-          "es": "`guests[3]`"
+          "en": "Says O(1) lines jump straight to the answer (like an index, a key or length)",
+          "es": "Dice que las líneas O(1) saltan directo a la respuesta (como un índice, una clave o length)"
         },
         {
-          "en": "`guests.length`",
-          "es": "`guests.length`"
+          "en": "Says methods like includes or indexOf look through the items (O(n))",
+          "es": "Dice que métodos como includes o indexOf revisan los elementos (O(n))"
         },
         {
-          "en": "`guests.includes('Zoe')`",
-          "es": "`guests.includes('Zoe')`"
-        },
-        {
-          "en": "`guests.length * 2`",
-          "es": "`guests.length * 2`"
+          "en": "Says how short a line is doesn't tell you its cost",
+          "es": "Dice que lo corta que es una línea no dice cuánto cuesta"
         }
-      ],
-      "answer": 2,
-      "hint": {
-        "en": "Which one has to check the guests one by one to answer?",
-        "es": "¿Cuál tiene que revisar a los invitados uno por uno para responder?"
-      },
-      "explanation": {
-        "en": "`includes` looks at the guests one by one until it finds 'Zoe' or runs out: O(n). The others jump straight to the answer.",
-        "es": "`includes` mira a los invitados uno por uno hasta encontrar a 'Zoe' o quedarse sin invitados: O(n). Los demás saltan directo a la respuesta."
-      }
+      ]
     }
   ]
 }
