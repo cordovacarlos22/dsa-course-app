@@ -61,6 +61,12 @@ describe('crossSiteUrl', () => {
     ).toBe(`${app}/learn/big-o?step=2&lang=es#top`)
   })
 
+  it('never leaves the two addresses, even for a path that starts with //', () => {
+    const url = urlFor('//example.com/x', appHost)
+    expect(url).toBe(`${site}//example.com/x?lang=es`)
+    expect(new URL(url).host).toBe(siteHost)
+  })
+
   it('does not treat a page that only starts with "learn" as a course page', () => {
     expect(urlFor('/learning-tips', siteHost)).toBeNull()
   })

@@ -21,10 +21,10 @@ export function crossSiteUrl({
   // Hosts, not whole origins: a trailing slash or http:// in a Vercel
   // setting must never make a page send students to itself forever.
   if ((isCoursePage ? appHost : siteHost) === here) return null
-  const url = new URL(
-    pathname + search + hash,
-    isCoursePage ? appOrigin : siteOrigin,
-  )
+  // Glue the path onto the address as text: new URL(path, base) would read a
+  // crafted path that starts with // as a different website.
+  const target = new URL(isCoursePage ? appOrigin : siteOrigin).origin
+  const url = new URL(target + pathname + search + hash)
   // The language comes along: each address has its own browser storage.
   url.searchParams.set('lang', language)
   return url.href
