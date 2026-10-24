@@ -3,6 +3,9 @@
 
 // Long enough for any exercise; short enough that a stuck loop feels quick.
 export const RUN_TIMEOUT_MS = 2000
+// How long the worker may take to load (a slow phone on a slow network)
+// before we give up and say the code could not run.
+const LOAD_TIMEOUT_MS = 10000
 
 // Sends one job to a fresh Web Worker and waits for the answer. Never rejects.
 // The result always has `problem: null | 'timeout' | 'crash'`, which says what
@@ -15,38 +18,53 @@ function runInWorker(job, timeoutMs, emptyResult) {
       { type: 'module' },
     )
 
-    // If the code doesn't finish in time (e.g. `while (true) {}`), we kill
-    // the worker. That's the only way to stop an infinite loop.
-    const timer = setTimeout(() => {
-      worker.terminate()
-      resolve({ ...emptyResult, problem: 'timeout' })
-    }, timeoutMs)
-
-    worker.onmessage = (event) => {
+    function finish(result) {
       clearTimeout(timer)
       worker.terminate()
-      resolve({ ...event.data, problem: null })
+      resolve(result)
+    }
+
+    let timer = setTimeout(
+      () => finish({ ...emptyResult, problem: 'crash' }),
+      LOAD_TIMEOUT_MS,
+    )
+    let isJobSent = false
+
+    worker.onmessage = (event) => {
+      // The worker says 'ready' once its code has loaded. Only then does the
+      // student's code get its time, so slow loading never looks like an
+      // infinite loop. Only the first 'ready' counts: the student's code
+      // could post one too, and must not restart its own clock.
+      if (event.data === 'ready') {
+        if (isJobSent) return
+        isJobSent = true
+        clearTimeout(timer)
+        // If the code doesn't finish in time (e.g. `while (true) {}`), we
+        // kill the worker. That's the only way to stop an infinite loop.
+        timer = setTimeout(
+          () => finish({ ...emptyResult, problem: 'timeout' }),
+          timeoutMs,
+        )
+        worker.postMessage(job)
+        return
+      }
+      finish({ ...event.data, problem: null })
     }
 
     worker.onerror = (event) => {
-      clearTimeout(timer)
-      worker.terminate()
-      resolve({
-        ...emptyResult,
-        error: event.message || null,
-        problem: 'crash',
-      })
+      finish({ ...emptyResult, error: event.message || null, problem: 'crash' })
     }
-
-    worker.postMessage(job)
   })
 }
 
-// Runs JavaScript and resolves with { logs, error, problem }.
+// Runs JavaScript and resolves with { logs, lines, error, errorLine,
+// problem } (see executeCode.js).
 export function runJavaScript(code, timeoutMs = RUN_TIMEOUT_MS) {
   return runInWorker({ type: 'run', code }, timeoutMs, {
     logs: [],
+    lines: [],
     error: null,
+    errorLine: null,
   })
 }
 

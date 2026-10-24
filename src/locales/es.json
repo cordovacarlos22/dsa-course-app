@@ -185,7 +185,14 @@
     "noOutput": "(no se imprimió nada)",
     "hint": "Edita el código y presiona Ejecutar (o Ctrl/Cmd + Enter).",
     "timedOut": "Se detuvo después de {{seconds}} segundos. ¿Hay un bucle infinito?",
-    "crashed": "El código no se pudo ejecutar."
+    "crashed": "El código no se pudo ejecutar.",
+    "codeThatRan": "El código que se ejecutó, línea por línea",
+    "replay": "Repetir",
+    "step": "Paso",
+    "showAll": "Mostrar todo",
+    "edit": "Editar",
+    "lineTag": "línea {{line}}",
+    "allAtOnce": "{{count}} líneas de salida, así que se muestran todas a la vez."
   },
   "lesson": {
     "lessonsTitle": "Lecciones",

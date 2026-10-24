@@ -185,7 +185,14 @@
     "noOutput": "(nothing was printed)",
     "hint": "Edit the code and press Run (or Ctrl/Cmd + Enter).",
     "timedOut": "Stopped after {{seconds}} seconds. Is there an infinite loop?",
-    "crashed": "The code could not run."
+    "crashed": "The code could not run.",
+    "codeThatRan": "The code that ran, line by line",
+    "replay": "Replay",
+    "step": "Step",
+    "showAll": "Show all",
+    "edit": "Edit",
+    "lineTag": "line {{line}}",
+    "allAtOnce": "{{count}} lines of output, so they all show at once."
   },
   "lesson": {
     "lessonsTitle": "Lessons",

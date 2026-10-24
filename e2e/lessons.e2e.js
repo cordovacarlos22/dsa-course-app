@@ -1,4 +1,11 @@
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { test, expect, sidewaysScroll, lessonsByModule } from './fixtures.js'
+
+const LOCALES = join(import.meta.dirname, '..', 'src', 'locales')
+const showAllLabel = (language) =>
+  JSON.parse(readFileSync(join(LOCALES, `${language}.json`), 'utf8')).runnable
+    .showAll
 
 // Snippets that are meant to fail: a lesson shows an error or an infinite
 // loop on purpose, so the student learns to read it.
@@ -41,11 +48,15 @@ async function playToTheEnd(figure, problems, where) {
 }
 
 // Runs a snippet and checks its output: no error, unless it's meant to.
-async function runSnippet(box, problems, where) {
+// After Run, the output replays line by line; "Show all" skips to the end.
+async function runSnippet(box, problems, where, language) {
   const code = await box.locator('textarea').inputValue()
-  await box.locator('textarea + div button').first().click()
+  await box.locator('button', { hasText: '▶' }).click()
   const output = box.locator('[role=status]')
   await expect(output).toBeVisible({ timeout: 5000 })
+  const showAll = box.getByRole('button', { name: showAllLabel(language) })
+  if ((await showAll.count()) > 0 && (await showAll.isEnabled()))
+    await showAll.click()
   const text = await output.innerText()
   const failed = /Error|could not run|no se pudo|Stopped after|Se detuvo/.test(
     text,
@@ -64,7 +75,7 @@ async function runSnippet(box, problems, where) {
 for (const module of lessonsByModule()) {
   test.describe(module.slug, () => {
     for (const lesson of module.lessons) {
-      test(lesson.slug, async ({ page }) => {
+      test(lesson.slug, async ({ page, language }) => {
         const problems = []
         await unlockLesson(page, module.slug, lesson)
         for (let step = 1; step <= lesson.steps; step++) {
@@ -85,10 +96,8 @@ for (const module of lessonsByModule()) {
           for (const figure of await page.locator('figure').all()) {
             await playToTheEnd(figure, problems, where)
           }
-          for (const box of await page
-            .locator('div.not-prose:has(> textarea)')
-            .all()) {
-            await runSnippet(box, problems, where)
+          for (const box of await page.locator('[data-runnable-code]').all()) {
+            await runSnippet(box, problems, where, language)
           }
         }
         expect(problems).toEqual([])
