@@ -5,8 +5,8 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useLanguage } from '../hooks/useLanguage'
 import { celebrate } from '../lib/celebrate'
 import { getModule, localize } from '../lib/course'
-import { getPractice } from '../lib/practice'
-import { saveQuizScore } from '../lib/quizScores'
+import { getPractice, pickQuestions } from '../lib/practice'
+import { loadQuizScore, saveQuizScore } from '../lib/quizScores'
 import { playSound } from '../lib/sounds'
 import InlineMarkdown from '../components/lesson/InlineMarkdown'
 import NotFoundPage from './NotFoundPage'
@@ -14,9 +14,10 @@ import NotFoundPage from './NotFoundPage'
 // From this share of right answers, the result says "Great work".
 const GREAT_SCORE = 0.7
 
-// A module's quiz (/learn/:module/quiz), one question at a time. Each
-// question gets one answer: Check shows if it was right, with the
-// explanation, and the score card at the end lists the ones to review.
+// A module's quiz (/learn/:module/quiz). A start screen picks the order and
+// how many questions, then they come one at a time. Each question gets one
+// answer: Check shows if it was right, with the explanation, and the score
+// card at the end lists the ones to review.
 function QuizPage() {
   const { moduleSlug } = useParams()
   const { t } = useTranslation()
@@ -33,27 +34,142 @@ function QuizPage() {
 
   if (!hasQuiz) return <NotFoundPage />
 
-  // `key`: "Try again" and a new module both start with fresh state.
+  // `key`: a new module starts with fresh state.
+  return (
+    <Quiz key={moduleSlug} module={module} questions={practice.questions} />
+  )
+}
+
+// The start screen until the student starts, then the questions they chose.
+function Quiz({ module, questions }) {
+  const [run, setRun] = useState(null) // { questions, isFullRun }
+
+  if (!run) {
+    return (
+      <QuizStart
+        module={module}
+        questionCount={questions.length}
+        onStart={(choice) =>
+          setRun({
+            questions: pickQuestions(questions, choice),
+            isFullRun: choice.count === 'all',
+          })
+        }
+      />
+    )
+  }
   return (
     <QuizPlayer
-      key={moduleSlug}
       module={module}
-      questions={practice.questions}
+      questions={run.questions}
+      isFullRun={run.isFullRun}
+      onRestart={() => setRun(null)}
     />
   )
 }
 
-function QuizPlayer({ module, questions }) {
+function QuizHeader({ module }) {
+  const { t } = useTranslation()
+  const { language } = useLanguage()
+  const moduleTitle = localize(module.title, language)
+  return (
+    <>
+      <Link
+        to={`/learn/${module.slug}`}
+        className="text-sm font-medium text-brand hover:underline"
+      >
+        ← {t('lesson.backToModule', { module: moduleTitle })}
+      </Link>
+      <h1 className="mt-4 text-2xl font-extrabold sm:text-3xl">
+        {t('quiz.title', { module: moduleTitle })}
+      </h1>
+    </>
+  )
+}
+
+// In order or random, and 5, 10 or all the questions (only the counts the
+// quiz has more questions than).
+function QuizStart({ module, questionCount, onStart }) {
+  const { t } = useTranslation()
+  const [order, setOrder] = useState('inOrder')
+  const [count, setCount] = useState('all')
+  const counts = [5, 10].filter((option) => option < questionCount)
+
+  function start(event) {
+    event.preventDefault()
+    onStart({ order, count })
+  }
+
+  const choice = (name, value, current, onChange, label) => (
+    <label
+      key={value}
+      className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 ${current === value ? 'border-brand bg-brand/5' : 'border-slate-200 hover:border-slate-400'}`}
+    >
+      <input
+        type="radio"
+        name={name}
+        checked={current === value}
+        onChange={() => onChange(value)}
+        className="accent-brand"
+      />
+      {label}
+    </label>
+  )
+
+  return (
+    <article className="mx-auto max-w-3xl">
+      <QuizHeader module={module} />
+      <form
+        onSubmit={start}
+        className="mt-6 space-y-6 rounded-2xl border-2 border-brand/30 bg-white p-6"
+      >
+        <h2 className="text-lg font-bold">{t('quiz.setupHeading')}</h2>
+        <fieldset className="min-w-0">
+          <legend className="font-semibold">{t('quiz.order')}</legend>
+          <div className="mt-2 grid gap-2 sm:grid-cols-2">
+            {choice('order', 'inOrder', order, setOrder, t('quiz.inOrder'))}
+            {choice('order', 'random', order, setOrder, t('quiz.random'))}
+          </div>
+        </fieldset>
+        <fieldset className="min-w-0">
+          <legend className="font-semibold">{t('quiz.howMany')}</legend>
+          <div className="mt-2 grid gap-2 sm:grid-cols-3">
+            {counts.map((option) =>
+              choice('count', option, count, setCount, String(option)),
+            )}
+            {choice(
+              'count',
+              'all',
+              count,
+              setCount,
+              t('quiz.countAll', { count: questionCount }),
+            )}
+          </div>
+        </fieldset>
+        <button
+          type="submit"
+          className="rounded-lg bg-brand px-4 py-2 font-semibold text-white hover:brightness-110"
+        >
+          {t('quiz.start')}
+        </button>
+      </form>
+    </article>
+  )
+}
+
+function QuizPlayer({ module, questions, isFullRun, onRestart }) {
   const { t } = useTranslation()
   const { language } = useLanguage()
   const [index, setIndex] = useState(0) // the question on screen
   // The option chosen for each question that was checked, in order.
   const [answers, setAnswers] = useState([])
   const [selected, setSelected] = useState(null)
-  const [result, setResult] = useState(null) // { score, best } at the end
+  // At the end: { score, total, best, isSaved }
+  const [result, setResult] = useState(null)
   const headingRef = useRef(null)
-  // What was on screen last time, to notice when it changes.
-  const shownRef = useRef({ index, isDone: false })
+  // What was on screen last time, to notice when it changes. It starts at
+  // "nothing", so pressing Start moves the focus to the first question.
+  const shownRef = useRef({ index: -1, isDone: false })
 
   const question = questions[index]
   const isChecked = answers.length > index
@@ -61,8 +177,7 @@ function QuizPlayer({ module, questions }) {
   const moduleTitle = localize(module.title, language)
 
   // A new question (or the score card) moves the focus to its heading, so
-  // screen readers read it and Tab continues from there. Not when the page
-  // first opens.
+  // screen readers read it and Tab continues from there.
   useEffect(() => {
     const isDone = result !== null
     const shown = shownRef.current
@@ -85,45 +200,37 @@ function QuizPlayer({ module, questions }) {
       setSelected(null)
       return
     }
+    finish()
+  }
+
+  // Scores the questions answered so far: all of them, or fewer after
+  // "Finish now". Only a full quiz can change the best score, so a short
+  // practice never replaces it.
+  function finish() {
+    const total = answers.length
     const score = answers.filter(
       (answer, i) => answer === questions[i].correctIndex,
     ).length
-    const best = saveQuizScore(module.slug, score, questions.length)
-    celebrate(score === questions.length ? 'module' : 'lesson')
-    setResult({ score, best })
+    const isSaved = isFullRun && total === questions.length
+    const best = isSaved
+      ? saveQuizScore(module.slug, score, total)
+      : loadQuizScore(module.slug)
+    celebrate(score === total ? 'module' : 'lesson')
+    setResult({ score, total, best, isSaved })
   }
 
-  function tryAgain() {
-    setIndex(0)
-    setAnswers([])
-    setSelected(null)
-    setResult(null)
-  }
-
-  const header = (
-    <>
-      <Link
-        to={`/learn/${module.slug}`}
-        className="text-sm font-medium text-brand hover:underline"
-      >
-        ← {t('lesson.backToModule', { module: moduleTitle })}
-      </Link>
-      <h1 className="mt-4 text-2xl font-extrabold sm:text-3xl">
-        {t('quiz.title', { module: moduleTitle })}
-      </h1>
-    </>
-  )
+  const header = <QuizHeader module={module} />
 
   if (result) {
     return (
       <article className="mx-auto max-w-3xl">
         {header}
         <QuizResult
-          questions={questions}
+          questions={questions.slice(0, answers.length)}
           answers={answers}
           result={result}
           headingRef={headingRef}
-          onTryAgain={tryAgain}
+          onTryAgain={onRestart}
           moduleSlug={module.slug}
           moduleTitle={moduleTitle}
         />
@@ -225,6 +332,17 @@ function QuizPlayer({ module, questions }) {
           )}
         </div>
       </form>
+
+      {/* Outside the form: ends the quiz early and scores what's answered. */}
+      {isChecked && !isLast && (
+        <button
+          type="button"
+          onClick={finish}
+          className="mt-3 rounded-lg px-3 py-2 text-sm font-semibold text-slate-600 underline-offset-2 hover:text-brand hover:underline"
+        >
+          {t('quiz.finishNow')}
+        </button>
+      )}
     </article>
   )
 }
@@ -269,8 +387,7 @@ function QuizResult({
 }) {
   const { t } = useTranslation()
   const { language } = useLanguage()
-  const { score, best } = result
-  const total = questions.length
+  const { score, total, best, isSaved } = result
   const message =
     score === total
       ? t('quiz.perfect')
@@ -292,9 +409,14 @@ function QuizResult({
           {t('quiz.score', { score, total })}
         </p>
         <p className="mt-2 text-slate-700">{message}</p>
-        <p className="mt-1 text-sm text-slate-500">
-          {t('quiz.best', { score: best.best, total: best.total })}
-        </p>
+        {best && (
+          <p className="mt-1 text-sm text-slate-500">
+            {t('quiz.best', { score: best.best, total: best.total })}
+          </p>
+        )}
+        {!isSaved && (
+          <p className="mt-1 text-sm text-slate-500">{t('quiz.shortRun')}</p>
+        )}
         <div className="mt-5 flex flex-wrap justify-center gap-2">
           <button
             type="button"

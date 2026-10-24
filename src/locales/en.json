@@ -283,7 +283,16 @@
     "review": "Questions to review",
     "yourAnswer": "Your answer",
     "rightAnswer": "Right answer",
-    "tryAgain": "Try again"
+    "tryAgain": "Try again",
+    "setupHeading": "How do you want to practice?",
+    "order": "Order",
+    "inOrder": "In order",
+    "random": "Random",
+    "howMany": "How many questions",
+    "countAll": "All ({{count}})",
+    "start": "Start the quiz",
+    "finishNow": "Finish now",
+    "shortRun": "Only a quiz with all the questions updates your best score."
   },
   "exercise": {
     "category": {
