@@ -35,6 +35,74 @@
       }
     },
     {
+      "type": "choice",
+      "question": {
+        "en": "What does `new NameTag('Cleo')` do?",
+        "es": "¿Qué hace `new NameTag('Cleo')`?"
+      },
+      "options": [
+        {
+          "en": "Changes the `NameTag` class so every tag says Cleo",
+          "es": "Cambia la clase `NameTag` para que todos los gafetes digan Cleo"
+        },
+        {
+          "en": "Prints Cleo's name tag right away",
+          "es": "Imprime el gafete de Cleo de inmediato"
+        },
+        {
+          "en": "Nothing, until you call `read`",
+          "es": "Nada, hasta que llames a `read`"
+        },
+        {
+          "en": "Makes a new name tag object from the `NameTag` blueprint, holding `'Cleo'`",
+          "es": "Crea un objeto gafete nuevo con el plano `NameTag`, que guarda `'Cleo'`"
+        }
+      ],
+      "answer": 3,
+      "hint": {
+        "en": "A class is a blueprint. What does `new` make from a blueprint?",
+        "es": "Una clase es un plano. ¿Qué crea `new` a partir de un plano?"
+      },
+      "explanation": {
+        "en": "`new` builds a new object from the class, and the constructor stores `'Cleo'` in it. The class itself doesn't change, and nothing is printed until you log something.",
+        "es": "`new` construye un objeto nuevo a partir de la clase, y el constructor guarda `'Cleo'` en él. La clase no cambia, y no se imprime nada hasta que uses `console.log`."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "Predict the result. `let tables = 3`, then `let copy = tables`, then `copy = 5`. Next, `const guest = { table: 3 }`, then `const other = guest`, then `other.table = 5`. What are `tables` and `guest.table` now?",
+        "es": "Predice el resultado. `let tables = 3`, luego `let copy = tables`, luego `copy = 5`. Después, `const guest = { table: 3 }`, luego `const other = guest`, luego `other.table = 5`. ¿Cuánto valen ahora `tables` y `guest.table`?"
+      },
+      "options": [
+        {
+          "en": "`3` and `5`",
+          "es": "`3` y `5`"
+        },
+        {
+          "en": "`5` and `5`",
+          "es": "`5` y `5`"
+        },
+        {
+          "en": "`3` and `3`",
+          "es": "`3` y `3`"
+        },
+        {
+          "en": "`5` and `3`",
+          "es": "`5` y `3`"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "A number gets copied. An object variable copies only the arrow.",
+        "es": "Un número se copia. Una variable de objeto solo copia la flecha."
+      },
+      "explanation": {
+        "en": "`copy` got its own copy of the number 3, so changing it leaves `tables` at 3. `other` is a second arrow to the same object as `guest`, so `other.table = 5` changes `guest.table` too.",
+        "es": "`copy` recibió su propia copia del número 3, así que cambiarla deja `tables` en 3. `other` es otra flecha al mismo objeto que `guest`, así que `other.table = 5` también cambia `guest.table`."
+      }
+    },
+    {
       "type": "code",
       "task": {
         "en": "Practice moving a pointer. Each node looks like `{ value, next }`, and the last node has `next: null`. Write `lastValue(head)`: start at `head`, follow the `next` pointers to the last node, and return its `value`.",
@@ -88,38 +156,29 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "When is the best time to take a module's quiz and exercises?",
-        "es": "¿Cuál es el mejor momento para hacer el cuestionario y los ejercicios de un módulo?"
+        "en": "In your own words: why is it better to practice right after a lesson than to save the practice for later?",
+        "es": "Con tus palabras: ¿por qué es mejor practicar justo después de una lección que dejar la práctica para después?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "Right after the lesson, the idea is still fresh, so you can use it while you still remember how it works. Pulling the idea back out of your memory, by answering a question or writing the code yourself, is what makes it stick. Reading a solution only feels like understanding it.",
+        "es": "Justo después de la lección la idea sigue fresca, así que puedes usarla mientras todavía recuerdas cómo funciona. Sacar la idea de tu memoria, respondiendo una pregunta o escribiendo el código tú, es lo que hace que se quede. Leer una solución solo se siente como entenderla."
+      },
+      "checklist": [
         {
-          "en": "At the end of the whole course",
-          "es": "Al final de todo el curso"
+          "en": "Says the idea is still fresh right after the lesson",
+          "es": "Dice que justo después de la lección la idea sigue fresca"
         },
         {
-          "en": "Only before an interview",
-          "es": "Solo antes de una entrevista"
+          "en": "Says recalling the idea, or writing the code yourself, makes it stick",
+          "es": "Dice que recordar la idea, o escribir el código tú, hace que se quede"
         },
         {
-          "en": "Right after you finish the module's lessons",
-          "es": "Justo después de terminar las lecciones del módulo"
-        },
-        {
-          "en": "Never, reading the lessons is enough",
-          "es": "Nunca, con leer las lecciones basta"
+          "en": "Says reading a solution isn't the same as being able to write it",
+          "es": "Dice que leer una solución no es lo mismo que poder escribirla"
         }
-      ],
-      "answer": 2,
-      "hint": {
-        "en": "Practice sticks best when the topic is still fresh.",
-        "es": "La práctica funciona mejor cuando el tema todavía está fresco."
-      },
-      "explanation": {
-        "en": "A little practice right after each module sticks much better than a lot of practice months later.",
-        "es": "Un poco de práctica justo después de cada módulo se queda mucho mejor que mucha práctica meses después."
-      }
+      ]
     }
   ]
 }

@@ -1,38 +1,29 @@
 {
   "steps": [
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "Which keyboard shortcut runs the code in a code box?",
-        "es": "¿Qué atajo de teclado ejecuta el código de una caja de código?"
+        "en": "In your own words: why does the course run your code in a Web Worker instead of inside the page?",
+        "es": "Con tus palabras: ¿por qué el curso ejecuta tu código en un Web Worker en vez de dentro de la página?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "A page runs its JavaScript one thing at a time, so code that never stops would freeze the whole page. A Web Worker runs the code next to the page instead, so the lesson keeps working while the code runs, and the course can stop the worker if the code is still busy after 2 seconds.",
+        "es": "Una página ejecuta su JavaScript una cosa a la vez, así que un código que nunca termina congelaría toda la página. Un Web Worker ejecuta el código junto a la página, así que la lección sigue funcionando mientras el código corre, y el curso puede detener el worker si el código sigue ocupado después de 2 segundos."
+      },
+      "checklist": [
         {
-          "en": "Ctrl + S (Cmd + S on a Mac)",
-          "es": "Ctrl + S (Cmd + S en Mac)"
+          "en": "Says a page runs JavaScript one thing at a time",
+          "es": "Dice que una página ejecuta JavaScript una cosa a la vez"
         },
         {
-          "en": "Ctrl + Enter (Cmd + Enter on a Mac)",
-          "es": "Ctrl + Enter (Cmd + Enter en Mac)"
+          "en": "Says the lesson keeps working (doesn't freeze) while the code runs",
+          "es": "Dice que la lección sigue funcionando (no se congela) mientras el código corre"
         },
         {
-          "en": "Shift + Tab",
-          "es": "Shift + Tab"
-        },
-        {
-          "en": "Alt + R",
-          "es": "Alt + R"
+          "en": "Says code that gets stuck can be stopped after 2 seconds",
+          "es": "Dice que el código que se atora se puede detener después de 2 segundos"
         }
-      ],
-      "answer": 1,
-      "hint": {
-        "en": "It's in the list at the top of this step, next to **Run**.",
-        "es": "Está en la lista al principio de este paso, junto a **Ejecutar**."
-      },
-      "explanation": {
-        "en": "Ctrl + Enter (Cmd + Enter on a Mac) runs the code, just like the Run button.",
-        "es": "Ctrl + Enter (Cmd + Enter en Mac) ejecuta el código, igual que el botón Ejecutar."
-      }
+      ]
     },
     {
       "type": "choice",
