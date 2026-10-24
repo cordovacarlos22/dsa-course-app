@@ -10,7 +10,7 @@ minutes: 10
 
 Cuando te dan un problema nuevo, sobre todo con el reloj corriendo, las ganas son de empezar a escribir de inmediato. El corazón se acelera, y ver código en la pantalla se siente como avanzar. Pero escribir rápido en la dirección equivocada no es avanzar. El primer paso es tomarte un minuto y asegurarte de **entender el problema**.
 
-Suena obvio, pero hay una forma concreta de hacerlo. Hazte estas cinco preguntas, a ti mismo o en voz alta al entrevistador:
+Suena obvio, pero hay una forma concreta de hacerlo. Hazte estas cinco preguntas, en silencio o en voz alta para quien te entrevista:
 
 1. **¿Puedo explicarlo con mis propias palabras?** Si solo puedes repetirlo, todavía no lo entiendes.
 2. **¿Qué entra?** Las entradas: de qué tipo, qué tan grandes, cuántas.
@@ -45,7 +45,7 @@ console.log(1e308 + 1e308) // demasiado grande: Infinity
 
 ¿Y cuántas entradas? Sumar diez números es algo perfectamente razonable. Una función que solo acepta dos es una decisión, y es mejor tomarla a propósito que por accidente.
 
-Nada de esto quiere decir que debas preocuparte por cada entrada. Quiere decir que debes **preguntar**. Muchas veces el entrevistador te dirá "supón que son enteros de tamaño normal". Pero ahora los dos lo saben, y demostraste que sabes que ese límite existe.
+Nada de esto quiere decir que debas preocuparte por cada entrada. Quiere decir que debes **preguntar**. Muchas veces quien te entrevista te dirá "supón que son enteros de tamaño normal". Pero ahora ambas partes lo saben, y demostraste que sabes que ese límite existe.
 
 **Error común:** suponer que "números" quiere decir enteros pequeños. Quien escribió el problema puede tener en mente algo muy distinto.
 

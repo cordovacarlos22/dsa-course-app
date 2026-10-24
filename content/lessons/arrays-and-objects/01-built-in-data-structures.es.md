@@ -23,9 +23,9 @@ array-vs-object
 **Qué acaba de pasar:** la misma fiesta se guardó de dos formas distintas.
 
 - El **array** `guests` guarda a los invitados **en orden**, cada uno en una posición numerada (un índice).
-- Al **objeto** `rsvps` no le importa el orden. **Etiqueta** cada respuesta con una clave, el nombre del invitado.
+- Al **objeto** `rsvps` no le importa el orden. **Etiqueta** cada respuesta con una clave: el nombre de quien respondió.
 
-Leer, agregar al final y buscar cuestan más o menos lo mismo en los dos. Pero cuando Zoe se agregó al principio, el array tuvo que reindexar a cada invitado, mientras que el objeto no tenía ningún "principio" del cual preocuparse. Ese es el intercambio que vas a estudiar en este módulo: el array paga por su orden.
+Leer, agregar al final y buscar cuestan más o menos lo mismo en los dos. Pero cuando Zoe se agregó al principio, el array tuvo que reindexar a cada persona de la lista, mientras que el objeto no tenía ningún "principio" del cual preocuparse. Ese es el intercambio que vas a estudiar en este módulo: el array paga por su orden.
 
 Ejecuta esto para ver las dos estructuras y una sorpresa:
 
@@ -59,7 +59,7 @@ La diferencia entre las dos últimas es la que más se confunde. Acceder pregunt
 search-cases
 ```
 
-**Qué acaba de pasar:** buscar a un invitado por nombre obliga a revisar las cajas una por una. En el mejor caso el nombre está en la primera caja; en el peor caso no está y se revisan todas las cajas. Eso es buscar, y en una lista desordenada es **O(n)**.
+**Qué acaba de pasar:** buscar un nombre en la lista obliga a revisar las cajas una por una. En el mejor caso el nombre está en la primera caja; en el peor caso no está y se revisan todas las cajas. Eso es buscar, y en una lista desordenada es **O(n)**.
 
 Compáralo con leer `guests[3]`, que salta directo a la caja 3 en un paso, como viste en el módulo de Big O. El mismo array, los mismos invitados, dos costos muy distintos: todo depende de si sabes **dónde** o solo **qué**.
 

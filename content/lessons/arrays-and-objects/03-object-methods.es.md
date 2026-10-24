@@ -78,7 +78,7 @@ Todo objeto hereda algunos métodos incluidos, como `toString`, del propio JavaS
 
 Esta es la lección más útil de este módulo: **el costo de una línea es el costo de todo lo que se ejecuta dentro de ella**. `Object.keys(rsvps)` parece un pasito, pero ahora sabes que es un bucle sobre cada propiedad. Eso está bien cuando lo llamas una vez. Se vuelve un problema cuando lo llamas **dentro de otro bucle**.
 
-Mira esta función. Por cada invitado, cuenta cuántos invitados hay en total:
+Mira esta función. Por cada nombre de la lista, cuenta cuántos invitados hay en total:
 
 ```js
 function shareOfGuests(rsvps) {

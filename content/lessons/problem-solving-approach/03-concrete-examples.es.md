@@ -10,7 +10,7 @@ minutes: 10
 
 El segundo paso es **explorar ejemplos concretos**: entradas reales, escritas junto con la salida que esperas. Está muy ligado al primer paso. Un problema descrito con palabras puede sentirse perfectamente claro hasta que pruebas una entrada real y te das cuenta de que no sabes qué debería salir.
 
-Los ejemplos hacen dos trabajos. Primero, te ayudan a **entender el problema**: cada ejemplo que no puedes responder es una pregunta que hacer. Segundo, son **pruebas de cordura**: cuando ya escribiste una solución, sabes lo que debería regresar para cada ejemplo, así que puedes revisarla de inmediato. Los equipos profesionales hacen lo mismo a mayor escala. Una **historia de usuario** describe qué debe pasar cuando un usuario hace algo, y una **prueba unitaria** ejecuta un pedazo de código con una entrada y revisa la salida. De hecho, cada comprobación de código de este curso es una lista de ejemplos: entradas, y las salidas que tu código debe regresar.
+Los ejemplos hacen dos trabajos. Primero, te ayudan a **entender el problema**: cada ejemplo que no puedes responder es una pregunta que hacer. Segundo, son **pruebas de cordura**: cuando ya escribiste una solución, sabes lo que debería regresar para cada ejemplo, así que puedes revisarla de inmediato. Los equipos profesionales hacen lo mismo a mayor escala. Una **historia de usuario** describe qué debe pasar cuando alguien usa la app y hace algo, y una **prueba unitaria** ejecuta un pedazo de código con una entrada y revisa la salida. De hecho, cada comprobación de código de este curso es una lista de ejemplos: entradas, y las salidas que tu código debe regresar.
 
 Nuestro problema para el resto del módulo es: **"Escribe una función que reciba un string y regrese cuántas veces aparece cada carácter."** Llamémosla `countCharacters`. La salida va a ser un objeto: cada clave es un carácter, y su valor es cuántas veces aparece ese carácter. Empieza con ejemplos simples, y escríbelos:
 
@@ -21,11 +21,11 @@ Nuestro problema para el resto del módulo es: **"Escribe una función que recib
 five-steps-examples
 ```
 
-**Qué acaba de pasar:** la lista del paso 2 tiene cuatro tipos de ejemplos, y vas a usar los cuatro con `countCharacters` en esta lección: simples, más complejos, vacíos e inválidos. Ir en ese orden quiere decir que empiezas con los casos de los que estás seguro y luego avanzas hacia los raros.
+**Qué acaba de pasar:** la lista del paso 2 tiene cuatro tipos de ejemplos, y vas a usar los cuatro con `countCharacters` en esta lección: simples, más complejos, vacíos e inválidos. Ir en ese orden quiere decir que empiezas con los casos que tienes claros y luego avanzas hacia los raros.
 
 Hasta los ejemplos simples traen una pregunta. Para `'aaa'`, ¿el objeto también debería tener todas las demás letras con 0, como `{ a: 3, b: 0, c: 0, … }`? Eso podría hacer el código un poco más simple, porque cada clave ya existiría, pero el objeto siempre tendría decenas de claves. Pregunta. Nosotros diremos que no: solo los caracteres que de verdad aparecen.
 
-**Error común:** guardar los ejemplos en tu cabeza. Escríbelos donde tú (y el entrevistador) puedan verlos. Los vas a necesitar otra vez en el paso 5.
+**Error común:** guardar los ejemplos en tu cabeza. Escríbelos donde tú (y quien te entrevista) puedan verlos. Los vas a necesitar otra vez en el paso 5.
 
 ## De lo simple a lo más complejo
 
@@ -34,7 +34,7 @@ Cuando los ejemplos simples estén claros, pasa a los **más complejos**. Son lo
 - `countCharacters('Hi Ana!')`: ¿contamos el **espacio**? ¿El **`!`**? ¿**`'H'` y `'h'`** son el mismo carácter, o dos distintos? ¿Y `'A'` y `'a'`?
 - `countCharacters('Party at 8!')`: ¿hay que contar el **dígito** `'8'`?
 
-Ninguna de estas tiene una respuesta obvia, porque el problema tal como está escrito no lo dice. En una entrevista preguntarías; trabajando solo, decidirías y escribirías la decisión. Para este módulo, decidimos: **contar solo letras y dígitos, ignorar mayúsculas y minúsculas (contarlo todo en minúsculas) y saltarse los espacios y la puntuación**.
+Ninguna de estas tiene una respuesta obvia, porque el problema tal como está escrito no lo dice. En una entrevista preguntarías; practicando por tu cuenta, decidirías y escribirías la decisión. Para este módulo, decidimos: **contar solo letras y dígitos, ignorar mayúsculas y minúsculas (contarlo todo en minúsculas) y saltarse los espacios y la puntuación**.
 
 ```viz
 example-ladder

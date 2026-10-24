@@ -68,9 +68,9 @@ console.log(countCharacters('banana')) // {} por ahora, ¡pero corre!
 
 Los problemas de entrevista muchas veces son demasiado largos para terminarlos en el tiempo que tienes, y a veces es a propósito. Los entrevistadores quieren ver **cómo** trabajas, no solo si llegas a la última línea. Aquí es donde un plan escrito vale la pena.
 
-Imagina que se te acaba el tiempo a la mitad del bucle. Sin un plan, el entrevistador ve media función y tiene que adivinar a dónde ibas. Con el plan escrito arriba, puede ver cada paso que estabas por dar. Muchas veces esa es la diferencia entre "no terminó" y "claramente sabía cómo resolverlo". Es común que un candidato avance aunque no haya terminado el problema, porque su proceso era fácil de seguir.
+Imagina que se te acaba el tiempo a la mitad del bucle. Sin un plan, quien te entrevista ve media función y tiene que adivinar a dónde ibas. Con el plan escrito arriba, puede ver cada paso que estabas por dar. Muchas veces esa es la diferencia entre "no terminó" y "claramente sabía cómo resolverlo". Es común que alguien pase a la siguiente etapa aunque no haya terminado el problema, porque su proceso era fácil de seguir.
 
-El plan también te protege de ti mismo. Si empiezas a programar sin uno, es fácil quedarte atascado en un solo enfoque, entrar en pánico cuando no funciona y borrarlo todo. Con un plan, puedes dar un paso atrás, mirar los pasos y encontrar dónde se descompuso algo, en vez de empezar de cero.
+El plan también te protege de tus propios impulsos. Si empiezas a programar sin uno, es fácil que te atasques en un solo enfoque, entrar en pánico cuando no funciona y borrarlo todo. Con un plan, puedes dar un paso atrás, mirar los pasos y encontrar dónde se descompuso algo, en vez de empezar de cero.
 
 Planear no cambia el Big O de tu solución: el plan de `countCharacters` ya te dice que es un solo bucle sobre el string, así que va a ser O(n). Saberlo antes de escribir una sola línea es otra ventaja del plan.
 

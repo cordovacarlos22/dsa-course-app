@@ -28,7 +28,7 @@
     "cta": "Empezar a aprender",
     "ctaSecondary": "Ver el temario",
     "howTitle": "Cómo vas a aprender",
-    "howSubtitle": "Las ideas difíciles se vuelven fáciles cuando puedes verlas y probarlas tú mismo.",
+    "howSubtitle": "Las ideas difíciles se vuelven fáciles cuando puedes verlas y probarlas por tu cuenta.",
     "comingSoon": "Próximamente",
     "preview": {
       "title": "Prueba un paso ahora mismo",
@@ -67,7 +67,7 @@
       "Construir desde cero listas enlazadas, pilas, colas, árboles, heaps, tablas hash y grafos",
       "Recorrer grafos y encontrar el camino más corto con el algoritmo de Dijkstra",
       "Entender la programación dinámica en lugar de memorizarla",
-      "Llegar a tus entrevistas técnicas listo para explicar tu razonamiento en voz alta"
+      "Llegar a tus entrevistas técnicas sabiendo explicar tu razonamiento en voz alta"
     ],
     "curriculumTitle": "El temario",
     "curriculumSubtitle": "{{modules}} módulos en {{sections}} secciones. Se agregan módulos nuevos a medida que crece el curso.",
@@ -75,15 +75,15 @@
     "audience": [
       {
         "title": "Preparación para entrevistas",
-        "text": "Desarrolladores de JavaScript que quieren llegar con confianza a sus entrevistas técnicas."
+        "text": "Quienes programan en JavaScript y quieren llegar con confianza a sus entrevistas técnicas."
       },
       {
-        "title": "Estudiantes universitarios",
+        "title": "Estudiantes de universidad",
         "text": "Estudiantes que quieren que su clase de estructuras de datos y algoritmos por fin les haga clic."
       },
       {
-        "title": "Programadores autodidactas",
-        "text": "Programadores que quieren llenar los huecos de ciencias de la computación que nadie les enseñó."
+        "title": "Autodidactas",
+        "text": "Quienes aprenden a programar por su cuenta y quieren llenar los huecos de ciencias de la computación que nadie les enseñó."
       },
       {
         "title": "Cambio de carrera",
@@ -135,7 +135,7 @@
         "a": "No. Empezamos desde cero con Big O y un método para resolver problemas. Solo necesitas JavaScript básico."
       }
     ],
-    "finalTitle": "¿Listo para empezar?",
+    "finalTitle": "¿Empezamos?",
     "finalText": "Los primeros módulos ya están listos. Empieza por la introducción y aprende a tu ritmo."
   },
   "course": {

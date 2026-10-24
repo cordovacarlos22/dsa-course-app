@@ -24,6 +24,8 @@ import { deepEqual, playClassSteps } from '../src/runners/testHarness.js'
 const PRACTICE_DIR = 'content/practice'
 const COURSE_FILE = 'content/course.json'
 const LESSONS_DIR = 'content/lessons'
+// UI text and animation captions students read in Spanish.
+const SPANISH_LOCALE_FILES = ['src/locales/es.json', 'src/locales/viz.es.json']
 
 // A buggy solution can loop forever, so each test gets a time limit.
 const TEST_TIMEOUT_MS = 1000
@@ -224,6 +226,34 @@ export function countMissingSpanish(value) {
   )
 }
 
+// AGENTS.md: Spanish never gives a guest or the student a gender. These catch
+// the usual slips; the plural "los invitados" is a separate decision (#90).
+const GENDERED_SPANISH = [
+  /\binvitad[oa]\b/i, // one guest: "el último invitado"
+  /\b(?:desarrollador|programador)a?\b|\bcandidat[oa]\b/i,
+  /\b(?:estés|estás|eres|seas|quedarte|quedas|quedes) (?:segur|list|atascad|atorad|perdid|callad|preparad|cansad|confundid)[oa]\b/i,
+  /(?<!\b(?:la|de|las|una|su|sus) )\bbienvenid[oa]s?\b/i, // the greeting, not "la bienvenida"
+  /\b(?:el|un|al|del) (?:estudiante|alumno|usuario|lector|compañero|anfitrión|entrevistador)\b/i,
+  /\bcompañer[oa]\b/i,
+  /\b(?:ti|tú) mism[oa]\b/i,
+]
+// "Persona invitada" agrees with "persona", so it's neutral.
+const NEUTRAL_SPANISH = /\bpersonas? invitadas?\b/gi
+
+// Returns the numbers (from 1) of the lines that give someone a gender.
+// In a .json content file only the "es" strings are Spanish.
+export function findGenderedSpanish(text, onlyEsKeys = false) {
+  const lines = text.split('\n')
+  const found = []
+  for (let i = 0; i < lines.length; i++) {
+    if (onlyEsKeys && !lines[i].includes('"es":')) continue
+    const line = lines[i].replace(NEUTRAL_SPANISH, '')
+    if (GENDERED_SPANISH.some((pattern) => pattern.test(line)))
+      found.push(i + 1)
+  }
+  return found
+}
+
 // "01-what-is-big-o.en.md" → { order: 1, slug: "01-what-is-big-o", language: "en" }
 const LESSON_FILE_NAME = /^((\d{2})-[a-z0-9]+(?:-[a-z0-9]+)*)\.(en|es)\.md$/
 
@@ -392,12 +422,19 @@ async function validateAllLessons(course) {
       .map((entry) => entry.name)
       .sort()
   } catch {
-    return { lessonCount: 0, checkpointCount: 0, hasErrors: false } // no lessons folder yet
+    // no lessons folder yet
+    return {
+      lessonCount: 0,
+      checkpointCount: 0,
+      hasErrors: false,
+      gendered: [],
+    }
   }
 
   let lessonCount = 0
   let checkpointCount = 0
   let hasErrors = false
+  const gendered = []
   for (const moduleSlug of moduleFolders) {
     const folder = join(LESSONS_DIR, moduleSlug)
     const allFiles = (await readdir(folder)).filter(
@@ -409,6 +446,9 @@ async function validateAllLessons(course) {
     for (const fileName of fileNames.sort()) {
       const text = await readFile(join(folder, fileName), 'utf8')
       const errors = validateLesson({ moduleSlug, fileName, text }, course)
+      if (fileName.endsWith('.es.md')) {
+        addGenderedSpanish(gendered, `lessons/${moduleSlug}/${fileName}`, text)
+      }
       lessonCount++
       if (errors.length > 0) {
         hasErrors = true
@@ -427,7 +467,14 @@ async function validateAllLessons(course) {
           )
         }
       }
-      const data = JSON.parse(await readFile(join(folder, checksName), 'utf8'))
+      const checksText = await readFile(join(folder, checksName), 'utf8')
+      const data = JSON.parse(checksText)
+      addGenderedSpanish(
+        gendered,
+        `lessons/${moduleSlug}/${checksName}`,
+        checksText,
+        true,
+      )
       const errors =
         Object.keys(stepCounts).length === 0
           ? [`no lesson file "${lessonBase}.en.md" for these checkpoints`]
@@ -445,11 +492,17 @@ async function validateAllLessons(course) {
       console.error('    - has no English version (.en.md)')
     }
   }
-  return { lessonCount, checkpointCount, hasErrors }
+  return { lessonCount, checkpointCount, hasErrors, gendered }
 }
 
 function plural(count, word) {
   return `${count} ${word}${count === 1 ? '' : 's'}`
+}
+
+// Adds { path, lines } to `found` when the file has gendered Spanish.
+function addGenderedSpanish(found, path, text, onlyEsKeys = false) {
+  const lines = findGenderedSpanish(text, onlyEsKeys)
+  if (lines.length > 0) found.push({ path, lines })
 }
 
 // e.g. "12 questions, 1 exercise, all solutions pass"
@@ -463,7 +516,8 @@ function describePractice(practice) {
 }
 
 async function main() {
-  const course = JSON.parse(await readFile(COURSE_FILE, 'utf8'))
+  const courseText = await readFile(COURSE_FILE, 'utf8')
+  const course = JSON.parse(courseText)
   const courseErrors = validateCourse(course)
   if (courseErrors.length > 0) {
     console.error('✗ course.json')
@@ -477,9 +531,13 @@ async function main() {
     .sort()
   let hasErrors = false
   let missingSpanish = countMissingSpanish(course)
+  const gendered = []
+  addGenderedSpanish(gendered, 'course.json', courseText, true)
 
   for (const file of files) {
-    const data = JSON.parse(await readFile(join(PRACTICE_DIR, file), 'utf8'))
+    const text = await readFile(join(PRACTICE_DIR, file), 'utf8')
+    const data = JSON.parse(text)
+    addGenderedSpanish(gendered, file, text, true)
     const errors = validatePractice(data)
     if (errors.length === 0) errors.push(...checkPracticeInCourse(data, course))
 
@@ -511,6 +569,19 @@ async function main() {
 
   if (missingSpanish > 0) {
     console.warn(`⚠ ${missingSpanish} texts still need a Spanish translation`)
+  }
+
+  gendered.push(...lessons.gendered)
+  for (const path of SPANISH_LOCALE_FILES) {
+    addGenderedSpanish(gendered, path, await readFile(path, 'utf8'))
+  }
+  if (gendered.length > 0) {
+    console.warn(
+      `⚠ ${plural(gendered.length, 'file')} with Spanish that gives a guest or the student a gender (AGENTS.md):`,
+    )
+    gendered.forEach(({ path, lines }) =>
+      console.warn(`    ${path}: line ${lines.join(', ')}`),
+    )
   }
   if (hasErrors) process.exit(1)
 }

@@ -483,10 +483,10 @@
     "title": "Dos estructuras de datos gratis: un array y un objeto",
     "array": "Array: en orden, por índice",
     "object": "Objeto: sin orden, por clave",
-    "start": "La misma fiesta guardada de dos formas. El array guarda a los invitados en orden; el objeto etiqueta cada respuesta con el nombre del invitado.",
+    "start": "La misma fiesta guardada de dos formas. El array guarda a los invitados en orden; el objeto etiqueta cada respuesta con el nombre de quien respondió.",
     "access": "Leer con un índice o una clave salta directo a una caja. Los dos son O(1).",
     "addEnd": "Agregar al final del array, o agregar una clave nueva al objeto, toca una caja. Los dos son O(1).",
-    "addStart": "Agregar al principio es distinto. El array tiene que reindexar a cada invitado: O(n). El objeto no tiene principio, así que sigue tocando una caja.",
+    "addStart": "Agregar al principio es distinto. El array tiene que reindexar a cada nombre: O(n). El objeto no tiene principio, así que sigue tocando una caja.",
     "search": "Buscar algo que no está obliga a revisar cada caja, en los dos: O(n).",
     "summary": "Los arrays te dan orden. Los objetos te dan claves rápidas, pero sin orden. Toda estructura de datos es un intercambio como este."
   },
@@ -510,7 +510,7 @@
     },
     "hasKey": {
       "title": "¿Está esta clave? ¿Está este valor?",
-      "start": "Dos preguntas: ¿un invitado está en la lista (una clave)? y ¿alguien respondió 'late' (un valor)?",
+      "start": "Dos preguntas: ¿un nombre está en la lista (una clave)? y ¿alguien respondió 'late' (un valor)?",
       "has": "hasOwnProperty('Dev') salta a donde estaría la clave de Dev. Ahí está: true. 1 caja, O(1).",
       "hasNot": "hasOwnProperty('Zoe') salta a donde estaría la clave de Zoe. No hay nada: false. Sigue siendo 1 paso.",
       "value": "Los valores no tienen atajo. Para saber si alguien dijo 'late', hay que leer cada respuesta: O(n).",
@@ -536,17 +536,17 @@
       "concat": "concat copia cada elemento de los dos arrays a uno nuevo: 6 + 3 = 9 cajas. Eso es O(n + m), que simplemente llamamos O(n).",
       "slice": "slice(1, 4) copia los elementos desde el índice 1 hasta el 4 (sin incluirlo): 3 cajas. El costo es el tamaño de la copia.",
       "sliceAll": "slice() sin argumentos copia todo el array: las 6 cajas. En el peor caso, O(n).",
-      "spliceMiddle": "splice(2, 0, 'Zoe') inserta a Zoe en el índice 2. Cada invitado después de Zoe sube un índice: 5 cajas.",
+      "spliceMiddle": "splice(2, 0, 'Zoe') inserta a Zoe en el índice 2. Cada nombre después de Zoe sube un índice: 5 cajas.",
       "spliceStart": "En el índice 0, splice mueve a todos: 7 cajas. Big O toma este peor caso: O(n).",
       "summary": "Los tres crecen con el tamaño del array: O(n)."
     },
     "loops": {
       "title": "forEach, map, filter y reduce: bucles escondidos",
-      "start": "Cinco invitados. Cada uno de estos métodos ejecuta tu función una vez por cada invitado.",
-      "forEach": "forEach visita a cada invitado una vez para imprimir su nombre: 5 cajas. No devuelve nada.",
-      "map": "map visita a cada invitado y construye un array nuevo del mismo tamaño: 5 visitas, 5 cajas nuevas.",
-      "filter": "filter visita a cada invitado y se queda con los que pasan la prueba (nombres de 3 letras): 5 visitas, se quedan 4.",
-      "reduce": "reduce visita a cada invitado y los combina en un solo valor, la suma de las letras de sus nombres: {{value}}.",
+      "start": "Cinco nombres. Cada uno de estos métodos ejecuta tu función una vez por cada nombre.",
+      "forEach": "forEach visita cada nombre una vez para imprimirlo: 5 cajas. No devuelve nada.",
+      "map": "map visita cada nombre y construye un array nuevo del mismo tamaño: 5 visitas, 5 cajas nuevas.",
+      "filter": "filter visita cada nombre y se queda con los que pasan la prueba (los de 3 letras): 5 visitas, se quedan 4.",
+      "reduce": "reduce visita cada nombre y los combina en un solo valor, la suma de sus letras: {{value}}.",
       "summary": "Una línea cada uno, pero cada uno es un bucle sobre todo el array: O(n)."
     }
   },
@@ -597,7 +597,7 @@
         "Prueba una entrada inválida"
       ],
       "notes": [
-        "Primero los ejemplos simples: las entradas más fáciles, con salidas de las que estás seguro.",
+        "Primero los ejemplos simples: las entradas más fáciles, con salidas que tienes claras.",
         "Luego los difíciles: espacios, mayúsculas, dígitos. Cada uno suele traer una pregunta.",
         "Entradas vacías, como '' o []: ¿qué debería regresar?",
         "Entradas inválidas, como un número donde va un string: ¿regresar algo, o detenerse con un error?"
@@ -615,7 +615,7 @@
       "notes": [
         "No cada línea, y no código de verdad: solo los pasos principales, como comentarios cortos.",
         "Decidir primero qué hacer te ahorra pelear con la sintaxis y con la lógica al mismo tiempo.",
-        "Escribir el plan muestra los pasos de los que no estás seguro, para que preguntes por ellos a tiempo."
+        "Escribir el plan muestra los pasos que todavía no tienes claros, para que preguntes por ellos a tiempo."
       ],
       "summary": "Un plan escrito es algo que puedes mostrar, revisar y retomar, aunque se acabe el tiempo."
     },

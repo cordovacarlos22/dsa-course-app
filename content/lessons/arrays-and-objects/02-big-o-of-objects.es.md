@@ -88,7 +88,7 @@ La función hash solo funciona en una dirección: convierte una clave en una cas
 trace-has-answer
 ```
 
-**Qué acaba de pasar:** `hasAnswer` obtuvo la lista de nombres con `Object.keys` (lo vas a estudiar en la siguiente lección) y luego leyó la respuesta de cada invitado hasta encontrar una que coincidiera. Buscar `'maybe'` se detuvo en Cleo, el tercer nombre de la lista. Buscar `'late'` tuvo que revisar a todos los invitados antes de poder devolver `false`. Conforme crece la cantidad de propiedades, el peor caso crece con ella: buscar un valor es **O(n)**.
+**Qué acaba de pasar:** `hasAnswer` obtuvo la lista de nombres con `Object.keys` (lo vas a estudiar en la siguiente lección) y luego leyó la respuesta de cada nombre hasta encontrar una que coincidiera. Buscar `'maybe'` se detuvo en Cleo, el tercer nombre de la lista. Buscar `'late'` tuvo que revisar a todos los invitados antes de poder devolver `false`. Conforme crece la cantidad de propiedades, el peor caso crece con ella: buscar un valor es **O(n)**.
 
 ```js-run
 function hasAnswer(rsvps, answer) {

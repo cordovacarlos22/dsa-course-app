@@ -26,7 +26,7 @@
       "type": "code",
       "task": {
         "en": "Write `saveAnswer(rsvps, name, answer)`. It saves the guest's answer in the object (a new guest gets a new key; a guest who changes their mind gets their answer replaced) and returns the object. It must be O(1): no loop.",
-        "es": "Escribe `saveAnswer(rsvps, name, answer)`. Guarda la respuesta del invitado en el objeto (un invitado nuevo recibe una clave nueva; un invitado que cambia de opinión recibe su respuesta reemplazada) y devuelve el objeto. Tiene que ser O(1): sin bucle."
+        "es": "Escribe `saveAnswer(rsvps, name, answer)`. Guarda la respuesta de esa persona en el objeto (un nombre nuevo recibe una clave nueva; si alguien cambia de opinión, su respuesta se reemplaza) y devuelve el objeto. Tiene que ser O(1): sin bucle."
       },
       "hint": {
         "en": "Inserting and updating use the same syntax. The name is in a variable, so use brackets: `rsvps[name] = …`",
@@ -59,7 +59,7 @@
       },
       "hint": {
         "en": "Inside the loop, `rsvps[guestNames[i]]` is that guest's answer. Add 1 to a counter when it matches.",
-        "es": "Dentro del bucle, `rsvps[guestNames[i]]` es la respuesta de ese invitado. Suma 1 a un contador cuando coincida."
+        "es": "Dentro del bucle, `rsvps[guestNames[i]]` es la respuesta de esa persona. Suma 1 a un contador cuando coincida."
       },
       "starterCode": "function countAnswer(rsvps, answer) {\n  const guestNames = Object.keys(rsvps)\n  let count = 0\n  // Check every guest's answer\n  return count\n}",
       "solution": "function countAnswer(rsvps, answer) {\n  const guestNames = Object.keys(rsvps)\n  let count = 0\n  for (let i = 0; i < guestNames.length; i++) {\n    if (rsvps[guestNames[i]] === answer) count++\n  }\n  return count\n}",

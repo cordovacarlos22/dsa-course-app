@@ -6,6 +6,7 @@ import {
   countSteps,
   findAdvancedLoops,
   findDuplicateOptions,
+  findGenderedSpanish,
   findLessonsMissingEnglish,
   isIcloudDuplicate,
   validateCourse,
@@ -592,5 +593,32 @@ describe('findDuplicateOptions', () => {
     expect(validateLessonChecks(checks, { en: 2 }).join()).toMatch(
       /checkpoint 1 has the same en option twice/,
     )
+  })
+})
+
+describe('findGenderedSpanish', () => {
+  it('finds a single guest, but not "persona invitada" or the plural', () => {
+    const lines =
+      'Cada invitado llega.\nLa persona invitada llega.\nLos invitados llegan.'
+    expect(findGenderedSpanish(lines)).toEqual([1])
+  })
+
+  it('finds gendered words about the student or the interviewer', () => {
+    expect(findGenderedSpanish('Cuando estés listo, sigue.')).toEqual([1])
+    expect(findGenderedSpanish('Te protege de ti mismo.')).toEqual([1])
+    expect(findGenderedSpanish('Pregúntale al entrevistador.')).toEqual([1])
+    expect(
+      findGenderedSpanish('Si te atascas, dile a quien te entrevista.'),
+    ).toEqual([])
+  })
+
+  it('tells the greeting from the noun', () => {
+    expect(findGenderedSpanish('¡Bienvenido al curso!')).toEqual([1])
+    expect(findGenderedSpanish('Te damos la bienvenida.')).toEqual([])
+  })
+
+  it('reads only the "es" strings of a JSON file when asked', () => {
+    const json = '{\n  "id": "un-invitado",\n  "es": "Cada invitado llega."\n}'
+    expect(findGenderedSpanish(json, true)).toEqual([3])
   })
 })

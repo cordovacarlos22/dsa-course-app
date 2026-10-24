@@ -21,7 +21,7 @@ Hasta los nombres cuentan la historia: en inglés, _shift_ quiere decir "recorre
 array-reindex
 ```
 
-**Qué acaba de pasar:** `push` y `pop` solo tocaron la caja del final, mientras que `shift` y `unshift` hicieron que cada invitado se moviera a un índice nuevo. Acceder a un elemento por su índice, como ya sabes, también es O(1), así que el final de un array se porta tan bien como un objeto.
+**Qué acaba de pasar:** `push` y `pop` solo tocaron la caja del final, mientras que `shift` y `unshift` hicieron que cada nombre se moviera a un índice nuevo. Acceder a un elemento por su índice, como ya sabes, también es O(1), así que el final de un array se porta tan bien como un objeto.
 
 Esto importa más cuando el método se ejecuta **dentro de un bucle**. Aquí hay una fila de invitados que se atiende desde el frente, de dos formas:
 
@@ -132,7 +132,7 @@ guests.forEach((name) => console.log('Hola, ' + name))
 ```js-run
 const guests = ['Ana', 'Ben', 'Cleo', 'Dev', 'Eli']
 
-// Lo que forEach hace por ti: un bucle sobre cada invitado
+// Lo que forEach hace por ti: un bucle sobre cada nombre
 for (let i = 0; i < guests.length; i++) {
   console.log('Hola, ' + guests[i])
 }
@@ -144,7 +144,7 @@ console.log(guests.reduce((letters, name) => letters + name.length, 0))
 
 En este curso seguimos escribiendo casi todos los bucles como `for (let i = 0; …)`, porque así se ve cada paso. Pero ahora sabes que cuando ves `forEach`, `map`, `filter` o `reduce`, estás viendo un bucle.
 
-**Error común:** olvidar el costo del callback. `guests.map((name) => guests.indexOf(name))` ejecuta `indexOf`, una búsqueda O(n), una vez por invitado: eso es **O(n²)**. El costo total es n veces el costo del callback.
+**Error común:** olvidar el costo del callback. `guests.map((name) => guests.indexOf(name))` ejecuta `indexOf`, una búsqueda O(n), una vez por nombre: eso es **O(n²)**. El costo total es n veces el costo del callback.
 
 ## ¿Arrays u objetos?
 
