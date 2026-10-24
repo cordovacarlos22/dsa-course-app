@@ -28,12 +28,16 @@ function runInWorker(job, timeoutMs, emptyResult) {
       () => finish({ ...emptyResult, problem: 'crash' }),
       LOAD_TIMEOUT_MS,
     )
+    let isJobSent = false
 
     worker.onmessage = (event) => {
       // The worker says 'ready' once its code has loaded. Only then does the
       // student's code get its time, so slow loading never looks like an
-      // infinite loop.
+      // infinite loop. Only the first 'ready' counts: the student's code
+      // could post one too, and must not restart its own clock.
       if (event.data === 'ready') {
+        if (isJobSent) return
+        isJobSent = true
         clearTimeout(timer)
         // If the code doesn't finish in time (e.g. `while (true) {}`), we
         // kill the worker. That's the only way to stop an infinite loop.

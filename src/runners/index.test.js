@@ -43,6 +43,20 @@ describe('runJavaScript', () => {
     expect(worker.isTerminated).toBe(true)
   })
 
+  it("doesn't let the student's code restart its own clock", async () => {
+    vi.useFakeTimers()
+    vi.stubGlobal('Worker', FakeWorker)
+    const answer = runJavaScript("while (true) { postMessage('ready') }")
+    worker.send('ready')
+
+    vi.advanceTimersByTime(1500)
+    worker.send('ready')
+    vi.advanceTimersByTime(500)
+
+    await expect(answer).resolves.toMatchObject({ problem: 'timeout' })
+    expect(worker.jobs).toHaveLength(1)
+  })
+
   it("resolves with the worker's answer", async () => {
     vi.stubGlobal('Worker', FakeWorker)
     const answer = runJavaScript("console.log('hi')")
