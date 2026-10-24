@@ -31,33 +31,62 @@
       }
     },
     {
+      "type": "explain",
+      "question": {
+        "en": "In your own words: why does Big O describe the worst case, and not the best or the average?",
+        "es": "Con tus palabras: ¿por qué Big O describe el peor caso, y no el mejor ni el promedio?"
+      },
+      "modelAnswer": {
+        "en": "The worst case is a promise: whatever the input, the code will never be slower than that. A slow input that's rare will still reach a real user one day, so planning for it means no surprises. It's also the case everyone can agree on, because it only depends on the code, while the average depends on which inputs are likely.",
+        "es": "El peor caso es una promesa: sea cual sea la entrada, el código nunca va a ser más lento que eso. Una entrada lenta que casi nunca pasa igual le va a tocar a alguien de verdad algún día, así que planear para ella evita sorpresas. Además es el caso en el que todos pueden estar de acuerdo, porque solo depende del código, mientras que el promedio depende de qué entradas son probables."
+      },
+      "checklist": [
+        {
+          "en": "Says the worst case is a promise: the code is never slower than that",
+          "es": "Dice que el peor caso es una promesa: el código nunca es más lento que eso"
+        },
+        {
+          "en": "Says rare slow inputs still happen to real users",
+          "es": "Dice que las entradas lentas poco comunes igual le pasan a alguien de verdad"
+        },
+        {
+          "en": "Says the worst case depends only on the code (the average depends on the inputs)",
+          "es": "Dice que el peor caso solo depende del código (el promedio depende de las entradas)"
+        }
+      ]
+    },
+    {
       "type": "choice",
       "question": {
-        "en": "Someone asks: \"What's the Big O of `isInvited`?\" Which case are they asking about?",
-        "es": "Alguien pregunta: \"¿Cuál es el Big O de `isInvited`?\". ¿Por qué caso pregunta?"
+        "en": "`countShortNames` never stops early. With 1,000 guests, how many names does it check in its **best** case?",
+        "es": "`countShortNames` nunca se detiene antes. Con 1,000 invitados, ¿cuántos nombres revisa en su **mejor** caso?"
       },
       "options": [
         {
-          "en": "The best case: the name is first",
-          "es": "El mejor caso: el nombre es el primero"
+          "en": "1",
+          "es": "1"
         },
         {
-          "en": "The average case: the name is in the middle",
-          "es": "El caso promedio: el nombre está en el medio"
+          "en": "About 500",
+          "es": "Unos 500"
         },
         {
-          "en": "The worst case: the name isn't on the list, so all n guests are checked",
-          "es": "El peor caso: el nombre no está, así que se revisa a los n invitados"
+          "en": "It depends on how many names are short",
+          "es": "Depende de cuántos nombres sean cortos"
+        },
+        {
+          "en": "1,000",
+          "es": "1,000"
         }
       ],
-      "answer": 2,
+      "answer": 3,
       "hint": {
-        "en": "Big O is the promise \"never slower than this\".",
-        "es": "Big O es la promesa de \"nunca más lento que esto\"."
+        "en": "Can any list of 1,000 names make this loop stop early?",
+        "es": "¿Alguna lista de 1,000 nombres puede hacer que este bucle se detenga antes?"
       },
       "explanation": {
-        "en": "Big O is always the worst case. For isInvited that's n checks: O(n).",
-        "es": "Big O siempre es el peor caso. Para isInvited son n revisiones: O(n)."
+        "en": "The loop has no `return` or `break` inside, so it checks all 1,000 names for every list. Its best, average and worst cases are the same: Θ(n).",
+        "es": "El bucle no tiene ningún `return` ni `break` adentro, así que revisa los 1,000 nombres con cualquier lista. Su mejor caso, su caso promedio y su peor caso son iguales: Θ(n)."
       }
     }
   ]

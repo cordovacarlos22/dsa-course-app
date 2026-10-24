@@ -35,38 +35,29 @@
       }
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "How do you write O(2n) in Big O?",
-        "es": "¿Cómo se escribe O(2n) en Big O?"
+        "en": "In your own words: why can Big O drop the 2 in O(2n)?",
+        "es": "Con tus palabras: ¿por qué Big O puede quitar el 2 de O(2n)?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "A constant only changes how steep the line is, not its shape. n, 2n and 100n are all straight lines, and each one doubles when n doubles. Big O describes the shape of the growth, and its definition already allows any constant times f(n), so writing the 2 adds nothing.",
+        "es": "Una constante solo cambia qué tan empinada es la línea, no su forma. n, 2n y 100n son líneas rectas, y cada una se duplica cuando n se duplica. Big O describe la forma del crecimiento, y su definición ya permite cualquier constante por f(n), así que escribir el 2 no agrega nada."
+      },
+      "checklist": [
         {
-          "en": "O(2n)",
-          "es": "O(2n)"
+          "en": "Says a constant changes how steep the line is, not its shape",
+          "es": "Dice que una constante cambia qué tan empinada es la línea, no su forma"
         },
         {
-          "en": "O(n²)",
-          "es": "O(n²)"
+          "en": "Says n and 2n grow the same way (both double when n doubles)",
+          "es": "Dice que n y 2n crecen igual (las dos se duplican cuando n se duplica)"
         },
         {
-          "en": "O(n)",
-          "es": "O(n)"
-        },
-        {
-          "en": "O(2)",
-          "es": "O(2)"
+          "en": "Says Big O only describes the shape of the growth",
+          "es": "Dice que Big O solo describe la forma del crecimiento"
         }
-      ],
-      "answer": 2,
-      "hint": {
-        "en": "2n is still a straight line. Rule 1: drop the constants.",
-        "es": "2n sigue siendo una línea recta. Regla 1: elimina las constantes."
-      },
-      "explanation": {
-        "en": "n, 2n and 100n have the same shape, so they're all O(n).",
-        "es": "n, 2n y 100n tienen la misma forma, así que todas son O(n)."
-      }
+      ]
     },
     {
       "type": "choice",

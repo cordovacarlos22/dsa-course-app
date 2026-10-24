@@ -1,7 +1,7 @@
 ---
 title: La introducción oficial a Big O
 order: 5
-minutes: 11
+minutes: 12
 ---
 
 > **Meta:** conocer el significado oficial de Big O y usarlo en cuatro ejemplos.
@@ -10,7 +10,7 @@ minutes: 11
 
 Hemos estado hablando de Big O sin presentarlo oficialmente. Aquí está: **la notación Big O es una forma formal de contar "a ojo".** Nos deja decir con precisión **cómo cambia el tiempo de ejecución de un algoritmo cuando su entrada se hace más grande**. Eso es todo: una descripción de la relación entre el tamaño de la entrada y el tiempo que tarda el código.
 
-"Formal" es la palabra importante. Contar "a ojo" por sí solo es solo una costumbre: contar más o menos y quedarse con la tendencia. Big O convierte esa costumbre en una regla precisa que todos usan igual, para que cuando alguien dice "esto es O(n)", cualquier otro desarrollador sepa exactamente de qué tipo de crecimiento habla. Ignora a propósito los detalles pequeños y se queda solo con la tendencia general.
+"Formal" es la palabra importante. Contar "a ojo" por sí solo es solo una costumbre: contar más o menos y quedarse con la tendencia. Big O convierte esa costumbre en una regla precisa que todos usan igual, para que cuando alguien dice "esto es O(n)", cualquier otra persona que programe sepa exactamente de qué tipo de crecimiento habla. Ignora a propósito los detalles pequeños y se queda solo con la tendencia general.
 
 Ya vimos dos tendencias:
 
@@ -25,7 +25,7 @@ timing-chart
 
 **Qué acaba de pasar:** los tiempos del bucle se alinearon en una línea recta, y los de la fórmula se quedaron planos abajo. Esas dos líneas son lo que describe Big O. No le importa que el bucle tardara un poco más de un segundo con n = mil millones en una computadora en particular; le importa que el tiempo del bucle crece **con** n, y el de la fórmula no.
 
-Cuando no estés seguro con un código, pregúntate: _cuando la entrada crece, ¿cómo se va a ver esta gráfica?_ ¿El tiempo se queda plano, crece en línea recta o se dispara? Puedes responderlo duplicando n y viendo qué pasa con el trabajo:
+Cuando tengas dudas con un código, pregúntate: _cuando la entrada crece, ¿cómo se va a ver esta gráfica?_ ¿El tiempo se queda plano, crece en línea recta o se dispara? Puedes responderlo duplicando n y viendo qué pasa con el trabajo:
 
 ```js-run
 // Las cuentas de operaciones que encontramos en la lección 3:
@@ -113,13 +113,13 @@ function arriveAndLeave(n) {
   for (let j = n - 1; j >= 0; j--) {
     console.log(j)
   }
-  console.log('Se fue el último invitado.')
+  console.log('Ya no queda nadie.')
 }
 
 arriveAndLeave(3)
 ```
 
-Seis números para n = 3: dos bucles de n, así que unas 2n, y eso es **O(n)**. Ahora cuenta los asientos que visita `printSeats`:
+Seis números para n = 3: dos bucles de n, así que unas 2n, y eso es **O(n)**. Ahora cuenta los asientos que visita `printSeats`. Antes de ejecutarlo, predice la respuesta para n = 10:
 
 ```js-run
 function printSeats(n) {
@@ -135,9 +135,12 @@ function printSeats(n) {
 console.log('n = 2:', printSeats(2), 'asientos') // 4
 console.log('n = 3:', printSeats(3), 'asientos') // 9
 console.log('n = 4:', printSeats(4), 'asientos') // 16
+console.log('n = 10:', printSeats(10), 'asientos')
 ```
 
-2 → 4, 3 → 9, 4 → 16: el tiempo crece como n × n, así que es **O(n²)**. Eso crece mucho más rápido que O(n): prueba con n = 1,000 y obtienes un millón de asientos.
+2 → 4, 3 → 9, 4 → 16, 10 → 100: el tiempo crece como n × n, así que es **O(n²)**. Eso crece mucho más rápido que O(n): prueba con n = 1,000 y obtienes un millón de asientos.
+
+**Por dentro:** fíjate dónde está `let j = 0`: dentro de las `{ }` del bucle de afuera. Así que se ejecuta otra vez en cada vuelta del bucle de afuera, y el bucle de adentro empieza desde 0 cada vez. Ese reinicio es toda la diferencia entre bucles seguidos y bucles anidados. Seguidos, el segundo bucle empieza una sola vez, cuando el primero ya terminó. Anidados, el bucle de adentro empieza n veces, una por cada vuelta del de afuera, y cada inicio cuesta n vueltas más.
 
 Así que nuestras cuatro funciones son: constante, lineal, lineal y cuadrática. Si esto se siente como mucho, es normal. Las siguientes lecciones ven cada forma con calma, una por una.
 

@@ -18,7 +18,7 @@ Esta es la misma forma con la lista de invitados, un bucle de bienvenidas y lueg
 trace-welcome-and-goodbye
 ```
 
-**Qué acaba de pasar:** el primer bucle le dio la bienvenida a cada invitado, un mensaje para cada uno. Cuando terminó, el segundo bucle empezó desde el principio y se despidió de cada invitado. Con 3 invitados, son 3 + 3 = 6 mensajes; con 6 invitados, 12. El total siempre es 2n.
+**Qué acaba de pasar:** el primer bucle le dio la bienvenida a cada persona, un mensaje por nombre. Cuando terminó, el segundo bucle empezó desde el principio y se despidió de cada persona. Con 3 invitados, son 3 + 3 = 6 mensajes; con 6 invitados, 12. El total siempre es 2n.
 
 Esta es `printTwice`, la versión con números:
 
@@ -98,15 +98,15 @@ const n = 1000000
 
 let onePass = 0
 for (let i = 0; i < n; i++) {
-  onePass++ // darle la bienvenida a cada invitado
+  onePass++ // darle la bienvenida a cada persona
 }
 
 let twoPasses = 0
 for (let i = 0; i < n; i++) {
-  twoPasses++ // darle la bienvenida a cada invitado
+  twoPasses++ // darle la bienvenida a cada persona
 }
 for (let i = 0; i < n; i++) {
-  twoPasses++ // luego despedirse de cada invitado
+  twoPasses++ // luego despedirse de cada persona
 }
 
 console.log('Una pasada:', onePass, 'pasos')

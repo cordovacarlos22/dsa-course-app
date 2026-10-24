@@ -46,7 +46,7 @@ Eso es porque O(n) es **proporcional**: el número de operaciones es directament
 linear-boxes
 ```
 
-**Qué acaba de pasar:** cada invitado agregó un paso. 4 invitados tomaron 4 pasos, 8 invitados tomaron 8, y 16 tomaron 16. Cada punto cayó sobre la misma línea recta, porque cada invitado nuevo cuesta el mismo trabajo que el anterior. A medida que avance el módulo, vamos a agregar las otras notaciones a esta misma gráfica, para que puedas compararlas entre sí.
+**Qué acaba de pasar:** cada persona agregó un paso. 4 invitados tomaron 4 pasos, 8 invitados tomaron 8, y 16 tomaron 16. Cada punto cayó sobre la misma línea recta, porque cada persona nueva cuesta el mismo trabajo que la anterior. A medida que avance el módulo, vamos a agregar las otras notaciones a esta misma gráfica, para que puedas compararlas entre sí.
 
 Lo proporcional tiene una prueba sencilla: divide el trabajo entre n. Si el resultado se queda más o menos igual cuando n crece, el crecimiento es lineal. Ejecútalo:
 
@@ -75,13 +75,13 @@ La proporción se queda en 1: cada elemento cuesta un paso. Un bucle con 4 opera
 
 Fíjate en que **n** no siempre es un número que le pasas. En `printNumbers`, n es el número mismo. Pero casi siempre, n es **el tamaño de la entrada**: el largo de un array, el número de caracteres de un texto, el número de invitados. Sea cual sea la entrada, n mide cuánto hay de ella, y el trabajo crece con él.
 
-Este es O(n) con un array. `welcomeAll` imprime un mensaje de bienvenida por invitado:
+Este es O(n) con un array. `welcomeAll` imprime un mensaje de bienvenida por cada nombre:
 
 ```viz
 trace-welcome-all
 ```
 
-**Qué acaba de pasar:** con 3 invitados, el bucle imprimió 3 mensajes; con 6 invitados, 6 mensajes. El bucle recorrió el array una vez, haciendo un trabajo pequeño y fijo por cada invitado. La misma forma que `printNumbers`: O(n), donde n es el número de invitados.
+**Qué acaba de pasar:** con 3 invitados, el bucle imprimió 3 mensajes; con 6 invitados, 6 mensajes. El bucle recorrió el array una vez, haciendo un trabajo pequeño y fijo por cada nombre. La misma forma que `printNumbers`: O(n), donde n es el número de invitados.
 
 Para reconocer O(n) en el código, busca **un bucle que recorra la entrada una vez**, haciendo una cantidad de trabajo pequeña y fija por cada elemento. Por ejemplo:
 
@@ -94,7 +94,7 @@ Y cuidado con los **bucles escondidos**. `guests.includes('Zoe')` y `guests.inde
 ```js-run
 const guests = ['Ana', 'Ben', 'Cleo', 'Dev']
 
-// Un bucle, un mensaje por invitado: O(n).
+// Un bucle, un mensaje por nombre: O(n).
 for (let i = 0; i < guests.length; i++) {
   console.log('¡Hola, ' + guests[i] + '!')
 }

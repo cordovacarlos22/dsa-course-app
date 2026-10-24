@@ -167,6 +167,37 @@
       }
     },
     {
+      "id": "tight-bound",
+      "topic": "Big O: Worst Case",
+      "prompt": {
+        "en": "A loop with no `return` or `break` inside counts the short names on a list of n guests. What are its best and worst cases?",
+        "es": "Un bucle sin ningún `return` ni `break` adentro cuenta los nombres cortos de una lista de n invitados. ¿Cuáles son su mejor y su peor caso?"
+      },
+      "options": [
+        {
+          "en": "Best Ω(1) when the first name is short, worst O(n)",
+          "es": "Mejor Ω(1) cuando el primer nombre es corto, peor O(n)"
+        },
+        {
+          "en": "Best Ω(n), but worst O(n²) when many names are short",
+          "es": "Mejor Ω(n), pero peor O(n²) cuando hay muchos nombres cortos"
+        },
+        {
+          "en": "Best Ω(1) and worst O(1): counting is always quick",
+          "es": "Mejor Ω(1) y peor O(1): contar siempre es rápido"
+        },
+        {
+          "en": "Both are n checks, since it can't stop early: Θ(n)",
+          "es": "Los dos son n revisiones, porque no puede parar antes: Θ(n)"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "The loop can't stop early, so every list of n names costs n checks. When the best and worst cases grow the same way, Θ(n) describes it exactly: a tight bound.",
+        "es": "El bucle no puede detenerse antes, así que cada lista de n nombres cuesta n revisiones. Cuando el mejor y el peor caso crecen igual, Θ(n) lo describe exactamente: un límite ajustado."
+      }
+    },
+    {
       "id": "single-loop",
       "topic": "Big O: O(n)",
       "prompt": {
@@ -195,7 +226,38 @@
       "correctIndex": 2,
       "explanation": {
         "en": "The loop runs once per guest, so the work grows in a straight line with n (the number of guests): O(n).",
-        "es": "El bucle corre una vez por invitado, así que el trabajo crece en línea recta con n (el número de invitados): O(n)."
+        "es": "El bucle corre una vez por nombre, así que el trabajo crece en línea recta con n (el número de invitados): O(n)."
+      }
+    },
+    {
+      "id": "linear-three-times",
+      "topic": "Big O: O(n)",
+      "prompt": {
+        "en": "An O(n) function does 1,000 steps for 1,000 items. About how many for 3,000 items?",
+        "es": "Una función O(n) da 1,000 pasos con 1,000 elementos. ¿Más o menos cuántos con 3,000 elementos?"
+      },
+      "options": [
+        {
+          "en": "1,000",
+          "es": "1,000"
+        },
+        {
+          "en": "3,000",
+          "es": "3,000"
+        },
+        {
+          "en": "9,000",
+          "es": "9,000"
+        },
+        {
+          "en": "9,000,000",
+          "es": "9,000,000"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "Linear time: 3 times the items, 3 times the steps.",
+        "es": "Tiempo lineal: el triple de elementos, el triple de pasos."
       }
     },
     {
@@ -291,6 +353,37 @@
       "explanation": {
         "en": "Each loop is nested inside the previous one, so the counts multiply: n × n × n = O(n³). Nested loops multiply; loops one after another add.",
         "es": "Cada ciclo está anidado dentro del anterior, así que las cantidades se multiplican: n × n × n = O(n³). Los ciclos anidados se multiplican; los ciclos uno tras otro se suman."
+      }
+    },
+    {
+      "id": "nested-restart",
+      "topic": "Big O: O(n^2)",
+      "prompt": {
+        "en": "In two nested loops, why does the inner loop run all n of its turns for every turn of the outer loop?",
+        "es": "En dos bucles anidados, ¿por qué el bucle de adentro da todas sus n vueltas por cada vuelta del de afuera?"
+      },
+      "options": [
+        {
+          "en": "Because `let j = 0` runs again on every outer turn, so it starts over",
+          "es": "Porque `let j = 0` se ejecuta en cada vuelta de afuera, así que empieza de nuevo"
+        },
+        {
+          "en": "Because JavaScript makes a separate copy of the inner loop for each n",
+          "es": "Porque JavaScript hace una copia aparte del bucle de adentro para cada n"
+        },
+        {
+          "en": "Because the inner loop always finishes first, before the outer one starts",
+          "es": "Porque el bucle de adentro siempre termina primero, antes de que empiece el de afuera"
+        },
+        {
+          "en": "It doesn't: the inner loop only runs once, however big n gets",
+          "es": "No es así: el bucle de adentro solo corre una vez, por grande que sea n"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "The inner loop's `let j = 0` sits inside the outer loop, so every outer turn starts the inner loop from 0 again: n starts × n turns each = n².",
+        "es": "El `let j = 0` del bucle de adentro está dentro del bucle de afuera, así que cada vuelta de afuera vuelve a empezar el de adentro desde 0: n inicios × n vueltas cada uno = n²."
       }
     },
     {
@@ -550,7 +643,7 @@
       "topic": "Big O: Rules of Thumb",
       "prompt": {
         "en": "A loop runs once per guest, and inside it there's only one comparison. What does the loop cost?",
-        "es": "Un bucle corre una vez por invitado y adentro solo hay una comparación. ¿Cuánto cuesta el bucle?"
+        "es": "Un bucle corre una vez por cada persona invitada y adentro solo hay una comparación. ¿Cuánto cuesta el bucle?"
       },
       "options": [
         {
@@ -636,7 +729,7 @@
       "correctIndex": 2,
       "explanation": {
         "en": "It builds a new array with one tag per guest, so the extra memory grows with n: O(n) space.",
-        "es": "Construye un array nuevo con un gafete por invitado, así que la memoria extra crece con n: espacio O(n)."
+        "es": "Construye un array nuevo con un gafete por cada nombre, así que la memoria extra crece con n: espacio O(n)."
       }
     },
     {
@@ -855,6 +948,37 @@
       "explanation": {
         "en": "Don't read the exact numbers, read the trend. That's what Big O describes.",
         "es": "No leas los números exactos, lee la tendencia. Eso es lo que describe Big O."
+      }
+    },
+    {
+      "id": "five-n-plus-two-definition",
+      "topic": "Big O: Official Intro",
+      "prompt": {
+        "en": "Using the official definition, why is 5n + 2 still O(n)?",
+        "es": "Con la definición oficial, ¿por qué 5n + 2 sigue siendo O(n)?"
+      },
+      "options": [
+        {
+          "en": "Because 5n + 2 is always smaller than n, whatever n is",
+          "es": "Porque 5n + 2 siempre es menor que n, sea cual sea n"
+        },
+        {
+          "en": "Because Big O only counts the + 2, and the 5n doesn't matter",
+          "es": "Porque Big O solo cuenta el + 2, y el 5n no importa"
+        },
+        {
+          "en": "It isn't: the definition says it stays O(5n + 2)",
+          "es": "No lo es: la definición dice que sigue siendo O(5n + 2)"
+        },
+        {
+          "en": "Because from n = 2 on, 5n + 2 is never more than 6n",
+          "es": "Porque desde n = 2, 5n + 2 nunca es mayor que 6n"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "For n ≥ 2, 5n + 2 ≤ 6n. A constant times n is a straight line, so it's O(n).",
+        "es": "Para n ≥ 2, 5n + 2 ≤ 6n. Una constante por n es una línea recta, así que es O(n)."
       }
     },
     {
@@ -1423,6 +1547,56 @@
       ],
       "expectedComplexity": {
         "time": "O(log n)",
+        "space": "O(1)"
+      }
+    },
+    {
+      "slug": "count-the-operations",
+      "title": {
+        "en": "Count the Operations",
+        "es": "Cuenta las operaciones"
+      },
+      "description": {
+        "en": "Before you write any code, **predict**. This function prints a party's announcements for `n` guests:\n\n```js\nfunction announce(n) {\n  console.log('Doors open!')\n  for (let i = 0; i < n; i++) {\n    console.log('Welcome, guest ' + i)\n  }\n  for (let i = 0; i < n; i++) {\n    console.log('Goodbye, guest ' + i)\n  }\n  console.log('Doors closed!')\n}\n```\n\nHow many lines does `announce(3)` print? And `announce(1000)`?\n\nNow write `countPrintedLines(n)`, which returns how many lines `announce(n)` prints. Don't call `announce` and don't loop: work out the formula, so your function answers instantly, even for a trillion guests (one test uses n = 1,000,000,000,000, and a loop that big would be stopped after 2 seconds).\n\nExample: `countPrintedLines(3)` → `8`\n\nGoal: O(1) time, O(1) space. And `announce` itself? Two loops in a row are O(2n), which simplifies to O(n).",
+        "es": "Antes de escribir código, **predice**. Esta función imprime los anuncios de una fiesta para `n` invitados:\n\n```js\nfunction announce(n) {\n  console.log('¡Se abren las puertas!')\n  for (let i = 0; i < n; i++) {\n    console.log('Hola, persona invitada ' + i)\n  }\n  for (let i = 0; i < n; i++) {\n    console.log('Adiós, persona invitada ' + i)\n  }\n  console.log('¡Se cierran las puertas!')\n}\n```\n\n¿Cuántas líneas imprime `announce(3)`? ¿Y `announce(1000)`?\n\nAhora escribe `countPrintedLines(n)`, que devuelve cuántas líneas imprime `announce(n)`. No llames a `announce` ni uses un bucle: encuentra la fórmula, para que tu función responda al instante, incluso con un billón de invitados (una prueba usa n = 1,000,000,000,000, y un bucle tan grande se detendría después de 2 segundos).\n\nEjemplo: `countPrintedLines(3)` → `8`\n\nMeta: tiempo O(1), espacio O(1). ¿Y `announce`? Dos bucles seguidos son O(2n), que se simplifica a O(n)."
+      },
+      "difficulty": "easy",
+      "category": "interview",
+      "functionName": "countPrintedLines",
+      "starterCode": {
+        "javascript": "function countPrintedLines(n) {\n  // Your code here\n}"
+      },
+      "solution": {
+        "javascript": "function countPrintedLines(n) {\n  // 1 line before the loops, n welcomes, n goodbyes and 1 line after\n  return 2 * n + 2\n}"
+      },
+      "tests": [
+        {
+          "args": [0],
+          "expected": 2
+        },
+        {
+          "args": [1],
+          "expected": 4
+        },
+        {
+          "args": [3],
+          "expected": 8
+        },
+        {
+          "args": [10],
+          "expected": 22
+        },
+        {
+          "args": [1000],
+          "expected": 2002
+        },
+        {
+          "args": [1000000000000],
+          "expected": 2000000000002
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(1)",
         "space": "O(1)"
       }
     }
