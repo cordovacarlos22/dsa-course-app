@@ -1044,24 +1044,24 @@
       }
     },
     {
-      "id": "simplify-a-constant",
+      "id": "simplify-constant-terms",
       "topic": "Big O: Drop Constants",
       "prompt": {
-        "en": "Simplify O(25) as much as possible.",
-        "es": "Simplifica O(25) lo más posible."
+        "en": "Simplify O(3 + 40 + 700) as much as possible.",
+        "es": "Simplifica O(3 + 40 + 700) lo más posible."
       },
       "options": [
         {
-          "en": "O(25)",
-          "es": "O(25)"
+          "en": "O(743)",
+          "es": "O(743)"
         },
         {
           "en": "O(n)",
           "es": "O(n)"
         },
         {
-          "en": "O(n!)",
-          "es": "O(n!)"
+          "en": "O(3n)",
+          "es": "O(3n)"
         },
         {
           "en": "O(1)",
@@ -1070,52 +1070,21 @@
       ],
       "correctIndex": 3,
       "explanation": {
-        "en": "25 operations every time is a constant amount of work, and constant work is written O(1).",
-        "es": "25 operaciones cada vez es una cantidad de trabajo constante, y el trabajo constante se escribe O(1)."
+        "en": "3, 40 and 700 are all fixed amounts of work: none of them depends on n. However big a constant is, constant work is written O(1).",
+        "es": "3, 40 y 700 son cantidades fijas de trabajo: ninguna depende de n. Por grande que sea una constante, el trabajo constante se escribe O(1)."
       }
     },
     {
-      "id": "simplify-repeated-n",
+      "id": "simplify-same-rate-terms",
       "topic": "Big O: Drop Constants",
       "prompt": {
-        "en": "Simplify O(n + n + n + n) as much as possible.",
-        "es": "Simplifica O(n + n + n + n) lo más posible."
+        "en": "Simplify O(n + n/2 + 3n) as much as possible.",
+        "es": "Simplifica O(n + n/2 + 3n) lo más posible."
       },
       "options": [
         {
-          "en": "O(4n)",
-          "es": "O(4n)"
-        },
-        {
-          "en": "O(n)",
-          "es": "O(n)"
-        },
-        {
-          "en": "O(n²)",
-          "es": "O(n²)"
-        },
-        {
-          "en": "O(n⁴)",
-          "es": "O(n⁴)"
-        }
-      ],
-      "correctIndex": 1,
-      "explanation": {
-        "en": "n + n + n + n is 4n, and dropping the constant 4 leaves O(n).",
-        "es": "n + n + n + n es 4n, y al quitar la constante 4 queda O(n)."
-      }
-    },
-    {
-      "id": "simplify-n-squared-plus-n-cubed",
-      "topic": "Big O: Drop Non-Dominants",
-      "prompt": {
-        "en": "Simplify O(n² + n³) as much as possible.",
-        "es": "Simplifica O(n² + n³) lo más posible."
-      },
-      "options": [
-        {
-          "en": "O(n²)",
-          "es": "O(n²)"
+          "en": "O(4.5n)",
+          "es": "O(4.5n)"
         },
         {
           "en": "O(n)",
@@ -1126,14 +1095,45 @@
           "es": "O(n³)"
         },
         {
+          "en": "O(n/2)",
+          "es": "O(n/2)"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "n, n/2 and 3n all grow at the same rate as n. Together they're 4.5n, and dropping the constant 4.5 leaves O(n). Adding terms never multiplies them, so it isn't O(n³).",
+        "es": "n, n/2 y 3n crecen al mismo ritmo que n. Juntos suman 4.5n, y al quitar la constante 4.5 queda O(n). Sumar términos nunca los multiplica, así que no es O(n³)."
+      }
+    },
+    {
+      "id": "simplify-n-to-the-fourth-plus-n",
+      "topic": "Big O: Drop Non-Dominants",
+      "prompt": {
+        "en": "Simplify O(n⁴ + n) as much as possible.",
+        "es": "Simplifica O(n⁴ + n) lo más posible."
+      },
+      "options": [
+        {
           "en": "O(n⁵)",
           "es": "O(n⁵)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n⁴)",
+          "es": "O(n⁴)"
+        },
+        {
+          "en": "O(n⁴ + n)",
+          "es": "O(n⁴ + n)"
         }
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "n³ grows faster than n², so n³ is the dominant term and n² is dropped.",
-        "es": "n³ crece más rápido que n², así que n³ es el término dominante y n² se elimina."
+        "en": "n⁴ grows much faster than n, so it's the dominant term and n is dropped: O(n⁴). O(n⁴ + n) isn't simplified yet, and adding terms never adds their exponents, so it isn't O(n⁵).",
+        "es": "n⁴ crece mucho más rápido que n, así que es el término dominante y n se elimina: O(n⁴). O(n⁴ + n) todavía no está simplificado, y sumar términos nunca suma sus exponentes, así que no es O(n⁵)."
       }
     },
     {

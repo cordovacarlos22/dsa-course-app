@@ -10,7 +10,7 @@ minutes: 12
 
 Some algorithms have a Big O that isn't O(1), O(n) or O(n²). One that comes up more than you might expect involves **logarithms**, so here's the short version. Whether you learned logs at school and forgot them, or never learned them at all, you don't need to be a math master.
 
-A **logarithm undoes an exponent**. An exponent starts from how many times you multiply and gives you the result. A logarithm starts from the result and gives you back how many times you multiplied:
+A **logarithm undoes an exponent**. An exponent starts from how many 2s you multiply together and gives you the result. A logarithm starts from the result and gives you back how many 2s you multiplied:
 
 - **2³ = 8** means "multiply three 2s together and you get 8".
 - **log₂(8) = 3** asks the same thing backwards: "2 to **what** power equals 8?" The answer is 3.

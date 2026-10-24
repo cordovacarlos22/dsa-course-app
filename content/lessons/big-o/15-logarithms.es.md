@@ -10,7 +10,7 @@ minutes: 12
 
 Algunos algoritmos tienen un Big O que no es O(1), O(n) ni O(n²). Uno que aparece más de lo que esperarías tiene que ver con **logaritmos**, así que aquí va la versión corta. Ya sea que aprendiste logaritmos en la escuela y los olvidaste, o que nunca los aprendiste, no necesitas dominar las matemáticas.
 
-Un **logaritmo deshace un exponente**. Un exponente parte de cuántas veces multiplicas y te da el resultado. Un logaritmo parte del resultado y te devuelve cuántas veces multiplicaste:
+Un **logaritmo deshace un exponente**. Un exponente parte de cuántos 2 multiplicas entre sí y te da el resultado. Un logaritmo parte del resultado y te devuelve cuántos 2 multiplicaste:
 
 - **2³ = 8** significa "multiplica tres 2 entre sí y obtienes 8".
 - **log₂(8) = 3** pregunta lo mismo al revés: "¿2 elevado a **qué** potencia da 8?" La respuesta es 3.
