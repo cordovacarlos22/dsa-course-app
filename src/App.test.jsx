@@ -3,7 +3,9 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
 import { describe, it, expect } from 'vitest'
 import App from './App'
+import { getModule } from './lib/course'
 import { getSavedLanguage, saveLanguage } from './lib/languageStorage'
+import { emptyProgress, saveProgress } from './lib/progress'
 
 // Renders the whole app at a given URL, like a student opening that page.
 function renderAppAt(path) {
@@ -150,6 +152,23 @@ describe('course home', () => {
     expect(modules[0]).toHaveTextContent('Introduction')
     expect(modules[22]).toHaveTextContent('Dynamic Programming')
     expect(modules[23]).toHaveTextContent('Array Interview Problems')
+  })
+
+  it('shows a finished module as complete, and only that one', () => {
+    const introduction = getModule('introduction')
+    for (let i = 0; i < introduction.lessons.length; i++) {
+      saveProgress('introduction', introduction.lessons[i].slug, {
+        ...emptyProgress(),
+        completed: true,
+      })
+    }
+    renderAsReturningStudent('/learn')
+    expect(
+      screen.getByRole('link', { name: /Introduction Module complete/ }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('link', { name: /Big O 17 lessons/ }),
+    ).not.toHaveTextContent('Module complete')
   })
 
   it('teaches classes and pointers right before the first data structure', () => {
