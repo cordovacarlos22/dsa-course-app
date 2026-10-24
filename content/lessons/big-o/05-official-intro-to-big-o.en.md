@@ -1,7 +1,7 @@
 ---
 title: The official intro to Big O
 order: 5
-minutes: 11
+minutes: 12
 ---
 
 > **Goal:** know the official meaning of Big O, and use it on four examples.
@@ -119,7 +119,7 @@ function arriveAndLeave(n) {
 arriveAndLeave(3)
 ```
 
-Six numbers for n = 3: two loops of n, so about 2n, and that's **O(n)**. Now count the seats that `printSeats` visits:
+Six numbers for n = 3: two loops of n, so about 2n, and that's **O(n)**. Now count the seats that `printSeats` visits. Before you run it, predict the answer for n = 10:
 
 ```js-run
 function printSeats(n) {
@@ -135,9 +135,12 @@ function printSeats(n) {
 console.log('n = 2:', printSeats(2), 'seats') // 4
 console.log('n = 3:', printSeats(3), 'seats') // 9
 console.log('n = 4:', printSeats(4), 'seats') // 16
+console.log('n = 10:', printSeats(10), 'seats') // 100
 ```
 
-2 → 4, 3 → 9, 4 → 16: the runtime grows like n × n, so it's **O(n²)**. That grows much faster than O(n): try n = 1,000 and you get a million seats.
+2 → 4, 3 → 9, 4 → 16, 10 → 100: the runtime grows like n × n, so it's **O(n²)**. That grows much faster than O(n): try n = 1,000 and you get a million seats.
+
+**Under the hood:** look at where `let j = 0` sits: inside the outer loop's `{ }`. So it runs again on every turn of the outer loop, and the inner loop starts over from 0 each time. That restart is the whole difference between loops in a row and nested loops. In a row, the second loop starts once, after the first one is done. Nested, the inner loop starts n times, once per turn of the outer loop, and every start costs n more turns.
 
 So our four functions are: constant, linear, linear and quadratic. If this feels like a lot, that's normal. The next lessons take each shape slowly, one at a time.
 

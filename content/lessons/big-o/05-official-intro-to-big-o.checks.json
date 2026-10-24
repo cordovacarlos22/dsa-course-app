@@ -35,38 +35,29 @@
       }
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "Using the official definition, why is 5n + 2 still O(n)?",
-        "es": "Con la definición oficial, ¿por qué 5n + 2 sigue siendo O(n)?"
+        "en": "In your own words: in the official definition, what do \"a constant times f(n)\" and \"once n is big enough\" let Big O ignore?",
+        "es": "Con tus palabras: en la definición oficial, ¿qué le permiten ignorar a Big O \"una constante por f(n)\" y \"cuando n ya es lo bastante grande\"?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "\"A constant times f(n)\" lets Big O ignore how steep the line is: 2n, 5n and 50n are all straight lines, so they're all O(n). \"Once n is big enough\" lets it ignore small inputs, where small extras, like the + 2 in 5n + 2, can push the count over the limit. What's left is the shape of the growth with big inputs.",
+        "es": "\"Una constante por f(n)\" le permite ignorar qué tan empinada es la línea: 2n, 5n y 50n son líneas rectas, así que todas son O(n). \"Cuando n ya es lo bastante grande\" le permite ignorar las entradas pequeñas, donde los extras pequeños, como el + 2 de 5n + 2, pueden pasar la cuenta por encima del límite. Lo que queda es la forma del crecimiento con entradas grandes."
+      },
+      "checklist": [
         {
-          "en": "Because 5n + 2 is smaller than n",
-          "es": "Porque 5n + 2 es menor que n"
+          "en": "Says multiplying by a constant (like 5n instead of n) doesn't change the Big O",
+          "es": "Dice que multiplicar por una constante (como 5n en vez de n) no cambia el Big O"
         },
         {
-          "en": "Because once n is big enough, 5n + 2 is never more than a constant times n (like 6n)",
-          "es": "Porque cuando n es lo bastante grande, 5n + 2 nunca es mayor que una constante por n (como 6n)"
+          "en": "Says only big inputs count: with a small n the count can go over the limit",
+          "es": "Dice que solo cuentan las entradas grandes: con una n pequeña la cuenta puede pasarse del límite"
         },
         {
-          "en": "Because we only count the 2",
-          "es": "Porque solo contamos el 2"
-        },
-        {
-          "en": "It isn't: it's O(5n + 2)",
-          "es": "No lo es: es O(5n + 2)"
+          "en": "Says what's left is the shape of the growth",
+          "es": "Dice que lo que queda es la forma del crecimiento"
         }
-      ],
-      "answer": 1,
-      "hint": {
-        "en": "The definition says: once n is big enough, never more than a constant times f(n).",
-        "es": "La definición dice: cuando n ya es lo bastante grande, nunca mayor que una constante por f(n)."
-      },
-      "explanation": {
-        "en": "For n ≥ 2, 5n + 2 ≤ 6n. A constant times n is a straight line, so it's O(n).",
-        "es": "Para n ≥ 2, 5n + 2 ≤ 6n. Una constante por n es una línea recta, así que es O(n)."
-      }
+      ]
     },
     {
       "type": "code",
