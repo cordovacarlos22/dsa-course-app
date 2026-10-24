@@ -44,6 +44,8 @@ function partySummary(guests) {
 console.log(partySummary(['Ana', 'Ben', 'Cleo', 'Dev', 'Eli']))
 ```
 
+**Por dentro:** la regla 2 tiene un detalle que conviene conocer. `let sameList = guests` es O(1) aunque haya un millón de personas en la lista, porque no copia a nadie: copia una **referencia** al mismo array, así que los dos nombres apuntan a una sola lista (el módulo de Clases y punteros entra a fondo en esto). Pero `let copyOfList = guests.slice()` sí copia: arma un array nuevo y mete en él a cada persona de la lista, una por una, así que es O(n). Los métodos que arman un array nuevo a partir de otro, como `slice()` y `concat()`, cuestan tanto como los elementos que copian. Cuando una línea hace una copia, cuenta la copia.
+
 **Error común:** sumar las líneas O(1) como si importaran: "cuatro líneas O(1) y una O(n), así que O(n + 4)". Quita las constantes y los términos no dominantes, y es solo **O(n)**. El bucle decide el costo.
 
 ## Los bucles multiplican
@@ -87,14 +89,14 @@ console.log('Bucles anidados:', steps, 'pasos') // 16
 
 Cuántas veces corre un bucle no siempre es obvio. La regla 4 necesita el **largo** del bucle, y a veces ese largo tiene un **piso** fijo (nunca corre menos veces que cierto número) o un **techo** fijo (nunca corre más). Dos ayudantes incluidos aparecen mucho aquí: `Math.max(a, b)` da el mayor de dos números, y `Math.min(a, b)` da el menor.
 
-- **Un piso:** el salón de fiestas siempre pone al menos 10 sillas, aunque lleguen 3 invitados. Un bucle hasta `Math.max(10, guestCount)` corre **al menos** 10 veces. Para una fiesta chica siempre corre 10 veces, pero solo nos importa qué pasa cuando la entrada crece: con 10 millones de invitados, corre 10 millones de veces, y el 10 no importa. Así que es **O(n)**.
+- **Un piso:** el salón de fiestas siempre pone al menos 12 sillas, aunque lleguen 3 invitados. Un bucle hasta `Math.max(12, guestCount)` corre **al menos** 12 veces. Para una fiesta chica siempre corre 12 veces, pero solo nos importa qué pasa cuando la entrada crece: con 10 millones de invitados, corre 10 millones de veces, y el 12 no importa. Así que es **O(n)**.
 - **Un techo:** solo hay 3 premios, así que como mucho 3 invitados pueden ganar uno. Un bucle hasta `Math.min(3, guestCount)` corre **como mucho** 3 veces. Con 2 invitados corre dos veces, pero en cuanto hay más de 3 invitados, **siempre** corre 3 veces: 1,000 invitados o un millón, siguen siendo 3. Un máximo fijo es una constante, así que es **O(1)**.
 
 Compara las dos funciones:
 
 ```js-run
 function setChairs(guestCount) {
-  for (let chair = 1; chair <= Math.max(10, guestCount); chair++) {
+  for (let chair = 1; chair <= Math.max(12, guestCount); chair++) {
     console.log('Silla', chair)
   }
 }
@@ -105,8 +107,8 @@ function printPrizes(guestCount) {
   }
 }
 
-setChairs(3) // igual pone 10 sillas
-setChairs(12) // pone 12 sillas
+setChairs(3) // igual pone 12 sillas
+setChairs(20) // pone 20 sillas
 printPrizes(2) // solo 2 invitados, así que 2 premios
 printPrizes(50) // se detiene en 3 premios
 ```
@@ -121,12 +123,12 @@ trace-give-gifts
 
 Practica con estos:
 
-| Forma del código                             | Big O |
-| -------------------------------------------- | ----- |
-| Un bucle del 1 a n que imprime cada número   | O(n)  |
-| Un bucle hasta Math.max(n, 10)               | O(n)  |
-| Un bucle hasta Math.min(n, 10)               | O(1)  |
-| Un bucle sobre un array con un `if` adentro  | O(n)  |
-| Un bucle dentro de otro sobre el mismo array | O(n²) |
+| Forma del código                               | Big O |
+| ---------------------------------------------- | ----- |
+| Un bucle que corre n + 25 veces                | O(n)  |
+| Un bucle hasta Math.max(n, 12)                 | O(n)  |
+| Un bucle hasta Math.min(n, 3)                  | O(1)  |
+| Un bucle que salta de 3 en 3                   | O(n)  |
+| Un bucle sobre el array con `includes` adentro | O(n²) |
 
 **Error común:** confundir `Math.max` con `Math.min`. `max` pone un piso, así que el bucle sigue creciendo con n: O(n). `min` pone un techo, así que el bucle nunca puede pasar de ahí: O(1). Pregúntate: "¿Este bucle se puede alargar cuando n crece?"

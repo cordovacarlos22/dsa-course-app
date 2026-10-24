@@ -34,6 +34,8 @@ It prints 0 through 9: **ten things**. That's O(n) in a sentence: we passed the 
 
 If you counted the operations exactly, you'd get something like 4n + 1: a comparison, a print and an `i++` (two operations) for every number, plus `let i = 0` once. But you already know the exact count doesn't matter: it grows in proportion to n, so it's O(n).
 
+**Under the hood:** in `printNumbers`, the slow part isn't the loop: it's `console.log`. Counting to a million takes a few milliseconds, but printing a million lines can take seconds, because every line has to be turned into text and drawn on the screen. It's still O(n): each turn does a fixed amount of work, and printing only makes that fixed amount bigger. Big O tells you how the work grows, not how heavy each step is.
+
 **Common mistake:** expecting `printNumbers(10)` to print 1 through 10. The loop starts at 0 and stops **before** n, so it prints 0 through 9. That's still ten numbers, which is exactly what O(n) promises: n turns of the loop.
 
 ## A straight line

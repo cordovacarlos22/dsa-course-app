@@ -79,9 +79,9 @@ Esta regla sale directamente de la definición: un código es O(f(n)) si, cuando
 
 Intenta simplificar estas:
 
-- O(100 × n) → **O(n)**
-- O(25) → **O(1)**
-- O(n + n + n + n) → O(4n) → **O(n)**
+- O(n × 40) → **O(n)**
+- O(1,000,000) → **O(1)**
+- O(2n + 5n) → O(7n) → **O(n)**
 
 El panorama general es el mismo que el de la gráfica de la lección 4. Ahí cada forma es una sola línea, y no hay una línea aparte para 2n o 100n: todas son parte de la familia O(n).
 
@@ -114,5 +114,7 @@ console.log('Dos pasadas:', twoPasses, 'pasos')
 ```
 
 Las dos son O(n), y las dos se duplicarían si la lista de invitados se duplicara. Dos pasadas hacen el doble de trabajo, algo que quizá arregles algún día, pero es una mejora de segundo nivel. Big O se fija primero en el panorama general: ¿el trabajo es plano, una línea recta o una curva que se dispara?
+
+**Por dentro:** la constante ni siquiera es un número confiable. Nuestras cuentas tratan todas las operaciones como iguales, pero el procesador no. Leer un valor que ya está en su **caché** (una memoria pequeña y muy rápida, pegada a él) puede ser unas cien veces más rápido que traerlo de la memoria principal. Y el motor puede convertir una línea en varios pasos de máquina, o varias líneas en uno. Así que dos funciones que "hacen 2n operaciones" pueden correr a velocidades bastante distintas en la misma computadora. La constante depende del hardware y del motor; la forma no. Esa es una razón más para que Big O se quede solo con la forma.
 
 **Error común:** escribir la constante en una respuesta de entrevista, como "es O(2n)". Las matemáticas no están mal, pero le dice a quien te entrevista que todavía no simplificaste. Di "es O(n)", y si ayuda, agrega "recorre la lista dos veces".

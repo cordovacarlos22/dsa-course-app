@@ -34,6 +34,8 @@ Imprime del 0 al 9: **diez cosas**. Eso es O(n) en una frase: le pasamos a la fu
 
 Si contaras las operaciones con exactitud, te saldría algo como 4n + 1: una comparación, una impresión y un `i++` (dos operaciones) por cada número, más `let i = 0` una vez. Pero ya sabes que la cuenta exacta no importa: crece en proporción a n, así que es O(n).
 
+**Por dentro:** en `printNumbers`, lo lento no es el bucle: es `console.log`. Contar hasta un millón toma unos milisegundos, pero imprimir un millón de líneas puede tomar segundos, porque cada línea se convierte en texto y se dibuja en la pantalla. Sigue siendo O(n): cada vuelta hace una cantidad fija de trabajo, e imprimir solo hace más grande esa cantidad fija. Big O te dice cómo crece el trabajo, no qué tan pesado es cada paso.
+
 **Error común:** esperar que `printNumbers(10)` imprima del 1 al 10. El bucle empieza en 0 y se detiene **antes** de n, así que imprime del 0 al 9. Siguen siendo diez números, que es justo lo que promete O(n): n vueltas del bucle.
 
 ## Una línea recta

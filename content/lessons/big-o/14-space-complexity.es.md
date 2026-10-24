@@ -68,6 +68,8 @@ console.log(line)
 console.log('Largo:', line.length) // 20 caracteres: 4 por vuelta, así que espacio O(n)
 ```
 
+**Por dentro:** estos son los tamaños detrás de las reglas. Según las reglas del lenguaje, todo número de JavaScript es un valor de 64 bits, **8 bytes**, valga lo que valga: una caja de tamaño fijo. Un string ocupa más o menos 1 o 2 bytes por carácter en la mayoría de los motores, así que un nombre de 50 caracteres ocupa más o menos entre 50 y 100 bytes. Un array guarda un espacio por elemento, de unos pocos bytes cada uno (un número, o una referencia a un string u objeto), más un poco de información de control. Y las variables que declara una función, como `count` e `i`, normalmente reciben su espacio cuando la función empieza y lo devuelven cuando termina, así que llamar una función un millón de veces, una llamada tras otra, no acumula un millón de contadores. (Las llamadas que esperan unas a otras son otra historia, que vas a ver con la recursión.)
+
 **Error común:** pensar que un número más grande ocupa más espacio. `let guestCount = 5` y `let guestCount = 5000000` ocupan la misma memoria. Un número es una caja, sin importar qué tenga escrito. Los que crecen son los textos, los arrays y los objetos.
 
 ## Sumar vs duplicar los pedidos
@@ -111,9 +113,9 @@ Una función puede ser excelente en una cosa y terrible en la otra: piensa en un
 
 Prueba con estas:
 
-- Un bucle del 1 a n que solo imprime `i`: **espacio O(1)** (solo `i`).
-- Una función que copia a un array nuevo cada elemento en un índice par: unos n / 2 elementos, así que **espacio O(n)**.
-- Una función que llena un array nuevo con un total acumulado para cada elemento: n elementos, así que **espacio O(n)**, aunque use bucles anidados para calcularlos.
+- Un bucle que suma la edad de cada persona en un solo total: **espacio O(1)** (solo el total e `i`).
+- Una función que copia a un array nuevo los nombres que empiezan con 'A': en el peor caso empiezan así todos, así que **espacio O(n)**.
+- Una función que devuelve una cuenta por persona, aunque use bucles anidados para sacar cada cuenta: n cuentas, así que **espacio O(n)**.
 
 No necesitas dominar la complejidad espacial antes de seguir. La meta es que cuando digamos "esta tiene una complejidad espacial excelente pero una complejidad temporal terrible", sepas qué significa.
 

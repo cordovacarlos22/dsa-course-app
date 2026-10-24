@@ -61,10 +61,10 @@ The same idea works for any mix: keep the term that grows fastest and drop the r
 
 | You counted  | Write it as | Why                                                 |
 | ------------ | ----------- | --------------------------------------------------- |
-| n + 10       | O(n)        | 10 is a constant: it never grows                    |
+| n + 75       | O(n)        | 75 is a constant: it never grows                    |
 | 1,000n + 50  | O(n)        | drop the 50, then the constant 1,000                |
 | n² + 5n + 8  | O(n²)       | at n = 1,000: 1,000,000 vs only 5,008 from the rest |
-| n² + n³      | O(n³)       | n³ grows faster than n², so n³ is the dominant term |
+| n³ + n       | O(n³)       | n³ grows faster than n, so n³ is the dominant term  |
 | 2n² + 7n + 3 | O(n²)       | drop 7n and 3, then the constant 2                  |
 
 Look at n² + 5n + 8 with n = 1,000: that's 1,000,000 + 5,000 + 8. The difference between 1,005,008 and 1,000,000 is tiny, and that's only with n = 1,000. Plug in a billion and the 5n + 8 part is meaningless.
@@ -98,6 +98,8 @@ for (let k = 0; k < sizes.length; k++) {
 The ratio gets closer and closer to 1: for big n, the dropped terms change almost nothing.
 
 Careful with big constants: O(n + 1,000,000) is still just **O(n)**. However big it is, a fixed number doesn't grow, and once n is large enough, the n part always wins.
+
+**Under the hood:** this rule comes from the same definition as dropping constants: code is O(f(n)) if, once n is big enough, its operations never go over a constant times f(n). So is n² + n under some constant times n²? Yes: for any n of 1 or more, n is never bigger than n², so n² + n is at most n² + n² = 2n². The smaller term got folded into the constant 2, and constants were already allowed. The same trick works for any smaller term: n² + 5n + 8 is never more than 14n² once n is at least 1.
 
 **Common mistake:** comparing the terms with a small n. At n = 1,000, the 1,000,000 in n + 1,000,000 is far bigger than n, so it's tempting to call the code O(1). But Big O asks what happens as n keeps growing, and at n = a billion, the n part is a thousand times bigger than the constant.
 
@@ -137,7 +139,7 @@ Adding up the blocks gives O(1) + O(n) + O(n²). The nested loop is the dominant
 
 Two more shapes you'll meet all the time:
 
-- **A loop over the input, then a loop of fixed length** (say, setting out 10 tables): n + 10, so **O(n)**. A loop that never grows is a constant, however big it looks.
+- **A loop over the input, then a loop of fixed length** (say, setting out 12 tables): n + 12, so **O(n)**. A loop that never grows is a constant, however big it looks.
 - **Two nested loops, one after the other:** n² + n² = 2n², and dropping the 2 gives **O(n²)**. Two copies of the same term make a bigger constant, not a new term.
 
 **Common mistake:** keeping the block that comes first, or the one with the most lines. Where a block sits and how long it looks don't matter: find the block that grows fastest with the input, and that's the one Big O keeps.

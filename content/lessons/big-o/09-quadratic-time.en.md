@@ -124,4 +124,6 @@ for (let k = 0; k < sizes.length; k++) {
 
 1 million, then 4 million, then 16 million: every time the input doubles, the work quadruples. Later in the course you'll learn patterns that turn many O(n²) solutions into O(n), and sorting algorithms like bubble sort that are O(n²).
 
+**Under the hood:** most O(n²) code is comparing **pairs**: for each item, it looks at every other item. Questions like "do two guests have the same name?" or "which two numbers add up to 10?" are about pairs, and a list of n items has about n² / 2 of them, so the obvious solution checks them all. The faster O(n) solutions you'll learn don't get lucky and skip pairs. They **remember** what they've already seen, usually in an object, so a single look can answer "have I seen this one before?" without a second loop. You'll see exactly that trick in the space complexity lesson: trading space for time.
+
 **Common mistake:** testing O(n²) code with five items and deciding it's fast. With 5 items it does 25 steps, which feels instant. With 100,000 items it does 10 billion. Always ask what happens when the input is big.

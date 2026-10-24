@@ -146,4 +146,6 @@ console.log('O(n²) creció', (big * big) / (small * small), 'veces')
 
 En la siguiente lección le vamos a dar a Big O su definición oficial, y después vamos a ver cada forma una por una.
 
+**Por dentro:** ¿cómo se convierten las operaciones en tiempo? Una computadora moderna hace, muy a grandes rasgos, **mil millones** de operaciones simples por segundo (el número real depende de la máquina y de la operación). Eso alcanza para estimar. Un bucle O(n) sobre un millón de elementos son como un millón de operaciones: alrededor de una milésima de segundo. Un bucle O(n²) sobre ese mismo millón son un billón de operaciones: alrededor de mil segundos, más de un cuarto de hora. Misma computadora, misma entrada. La forma decide si quien usa la app espera un parpadeo o se va por un café.
+
 **Error común:** pensar que O(n²) es "un poquito peor" que O(n). Con 10 elementos la diferencia es pequeña (100 pasos contra 10). Con un millón de elementos, es un millón de pasos contra un **billón** (un millón de millones). La distancia sigue creciendo conforme crece n.

@@ -124,4 +124,6 @@ for (let k = 0; k < sizes.length; k++) {
 
 1 millón, luego 4 millones, luego 16 millones: cada vez que la entrada se duplica, el trabajo se cuadruplica. Más adelante en el curso vas a aprender patrones que convierten muchas soluciones O(n²) en O(n), y algoritmos de ordenamiento como bubble sort que son O(n²).
 
+**Por dentro:** casi todo el código O(n²) compara **pares**: por cada elemento, mira todos los demás. Preguntas como "¿hay dos personas con el mismo nombre?" o "¿qué dos números suman 10?" son sobre pares, y una lista de n elementos tiene como n² / 2 pares, así que la solución obvia los revisa todos. Las soluciones O(n) más rápidas que vas a aprender no se saltan pares por suerte: **recuerdan** lo que ya vieron, casi siempre en un objeto, así que con una sola consulta responden "¿ya vi este?" sin un segundo bucle. Vas a ver justo ese truco en la lección de complejidad espacial: cambiar espacio por tiempo.
+
 **Error común:** probar código O(n²) con cinco elementos y decidir que es rápido. Con 5 elementos hace 25 pasos, que se siente instantáneo. Con 100,000 elementos hace 10 mil millones. Pregúntate siempre qué pasa cuando la entrada es grande.

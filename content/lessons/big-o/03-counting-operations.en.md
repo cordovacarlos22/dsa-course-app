@@ -31,6 +31,8 @@ console.log(sumOneToFormula(3)) // 3 operations
 console.log(sumOneToFormula(1000000000)) // still 3 operations
 ```
 
+**Under the hood:** why is 3,000,000 × 4,000,000 still just one multiplication? Because JavaScript stores every number in the same amount of memory: 64 bits (8 bytes), whether it's 3 or 3 million. The processor multiplies two 64-bit numbers with a single instruction, so the cost doesn't depend on the value. That only changes for enormous whole numbers: past about 9 quadrillion (2⁵³), plain numbers stop being exact, and JavaScript has a separate type for them, `BigInt`, whose math does get slower as the numbers get longer. For everything in this course, one arithmetic operation is one step.
+
 **Common mistake:** thinking a bigger number means more operations. The formula with n = 1,000,000,000 doesn't do a billion of anything. The input's **size** only matters when the code does something once per item, or once per number, like a loop.
 
 ## Count the loop

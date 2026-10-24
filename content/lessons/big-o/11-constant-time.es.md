@@ -70,6 +70,8 @@ const party = { host: 'Ana', theme: 'Retro' }
 console.log(party.host) // leer una clave también es O(1)
 ```
 
+**Por dentro:** esa pequeña cuenta solo funciona si todas las cajas miden lo mismo. Pero los nombres tienen largos distintos, así que ¿cómo caben un nombre de 3 letras y uno de 20 en cajas del mismo tamaño? No tienen que caber. Para textos y objetos, cada caja guarda una **referencia**: una nota pequeña, de tamaño fijo, que dice en qué parte de la memoria vive el valor real. Todas las referencias ocupan lo mismo, así que la caja 500,000 siempre está en el inicio de la fila más 500,000 anchos de caja, y una multiplicación y una suma la encuentran. Vas a trabajar mucho con referencias en el módulo de Clases y punteros.
+
 **Error común:** pensar que el último elemento de un array tarda más en alcanzarse que el primero. `guests[0]` y `guests[999999]` son el mismo salto, porque la computadora calcula dónde está cada caja en vez de caminar hasta ella.
 
 ## El Big O más eficiente
