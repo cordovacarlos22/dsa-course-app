@@ -39,16 +39,16 @@ describe('ExplainCheckpoint', () => {
       name: 'Compare with a model answer',
     })
 
+    const box = screen.getByLabelText('Your explanation')
     expect(compare).toBeDisabled()
     expect(screen.getByText('Write at least a sentence first.')).toBeVisible()
-    await user.type(screen.getByLabelText('Your explanation'), 'Because')
+    expect(box).toHaveAccessibleDescription(/Write at least a sentence first\./)
+    await user.type(box, 'Because')
     expect(compare).toBeDisabled()
 
-    await user.type(
-      screen.getByLabelText('Your explanation'),
-      ' computers are not equally fast',
-    )
+    await user.type(box, ' computers are not equally fast')
     expect(compare).toBeEnabled()
+    expect(box).not.toHaveAccessibleDescription(/Write at least/)
     expect(screen.queryByText(/the number of steps does not/)).toBeNull()
   })
 
@@ -65,6 +65,10 @@ describe('ExplainCheckpoint', () => {
     )
 
     expect(screen.getByText(/the number of steps does not/)).toBeInTheDocument()
+    // Focus moves to the model answer, so a screen reader reads it next.
+    expect(
+      screen.getByRole('heading', { name: 'A model answer' }).parentElement,
+    ).toHaveFocus()
     // The student can keep improving their explanation.
     expect(screen.getByLabelText('Your explanation')).toHaveValue(
       'Each computer runs at its own speed.',
@@ -117,6 +121,9 @@ describe('ExplainCheckpoint', () => {
 
   it('shows a step passed earlier as done when the student comes back', () => {
     renderCheckpoint({ isPassed: true })
+
+    // Opening the step doesn't pull focus to the model answer.
+    expect(document.body).toHaveFocus()
 
     expect(screen.getByText(/the number of steps does not/)).toBeVisible()
     for (const box of screen.getAllByRole('checkbox')) {

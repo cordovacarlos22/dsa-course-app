@@ -30,6 +30,7 @@ function ExplainCheckpoint({ checkpoint, isPassed, cheer, onPassed }) {
   const shouldFocusModel = useRef(false)
 
   const canCompare = answer.trim().length >= MIN_ANSWER_LENGTH
+  const showsRule = !isCompared && !canCompare
   const allTicked = ticked.every(Boolean)
 
   function compare() {
@@ -76,7 +77,9 @@ function ExplainCheckpoint({ checkpoint, isPassed, cheer, onPassed }) {
           </p>
           <textarea
             id={`${id}-answer`}
-            aria-describedby={`${id}-tip`}
+            // Tab skips the disabled Compare button, so the rule next to it
+            // is read out with the box.
+            aria-describedby={showsRule ? `${id}-tip ${id}-rule` : `${id}-tip`}
             value={answer}
             onChange={(event) => setAnswer(event.target.value)}
             rows={4}
@@ -95,8 +98,8 @@ function ExplainCheckpoint({ checkpoint, isPassed, cheer, onPassed }) {
           >
             {t('checkpoint.explain.compare')}
           </button>
-          {!canCompare && (
-            <span className="text-sm text-slate-600">
+          {showsRule && (
+            <span id={`${id}-rule`} className="text-sm text-slate-600">
               {t('checkpoint.explain.writeFirst')}
             </span>
           )}
