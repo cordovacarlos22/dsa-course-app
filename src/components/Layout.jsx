@@ -77,11 +77,13 @@ function Layout() {
 
 // The URL of this page on the other address, or null to stay.
 function useOtherAddress() {
-  const { pathname } = useLocation()
+  const { pathname, search, hash } = useLocation()
   const { language } = useLanguage()
   const otherAddress = crossSiteUrl({
     pathname,
-    here: window.location.origin,
+    search,
+    hash,
+    here: window.location.host,
     siteOrigin: import.meta.env.VITE_SITE_ORIGIN,
     appOrigin: import.meta.env.VITE_APP_ORIGIN,
     language,
