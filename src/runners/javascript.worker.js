@@ -9,3 +9,6 @@ self.onmessage = (event) => {
     type === 'check' ? checkCode(code, checkpoint) : executeCode(code),
   )
 }
+
+// Loaded: the page can send the job and start the clock.
+self.postMessage('ready')
