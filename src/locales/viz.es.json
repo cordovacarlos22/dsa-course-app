@@ -727,8 +727,8 @@
     "instances": {
       "title": "Una clase, muchas invitaciones",
       "start": "class Invitation es la plantilla: un diseño que puedes imprimir una y otra vez. Por sí sola, todavía no es una invitación.",
-      "first": "new Invitation('Ana') imprime la primera invitación, una instancia llamada forAna, con su propio invitado.",
-      "second": "La misma plantilla imprime una segunda instancia, forBen. El mismo diseño, otro invitado.",
+      "first": "new Invitation('Ana') imprime la primera invitación, una instancia llamada forAna, con su propio nombre.",
+      "second": "La misma plantilla imprime una segunda instancia, forBen. El mismo diseño, otro nombre.",
       "summary": "Una clase, dos instancias. Cada invitación guarda sus propios datos, y puedes imprimir todas las que necesites."
     },
     "new": {
@@ -736,7 +736,7 @@
       "start": "new Invitation('Ana') parece una sola acción, pero JavaScript hace cuatro cosas.",
       "empty": "1. Crea un objeto nuevo y vacío.",
       "this": "2. Hace que this apunte a ese objeto, para que el constructor sepa qué invitación está llenando.",
-      "run": "3. Ejecuta el constructor. this.guest = 'Ana' escribe el nombre del invitado en el objeto nuevo.",
+      "run": "3. Ejecuta el constructor. this.guest = 'Ana' escribe el nombre en el objeto nuevo.",
       "returned": "4. Regresa el objeto terminado, y ahora forAna apunta a él.",
       "parts": [
         "Crear un objeto vacío",
@@ -757,14 +757,14 @@
   },
   "listClassPreview": {
     "title": "Un adelanto: la clase LinkedList en acción",
-    "create": "new LinkedList('Ana') crea una lista con un invitado. El constructor prepara todo.",
-    "push": "push('Ben') agrega un invitado al final.",
-    "unshift": "unshift('Zoe') agrega un invitado al principio.",
-    "insert": "insert(1, 'Cleo') pone a un invitado en el índice 1, entre Zoe y Ana.",
+    "create": "new LinkedList('Ana') crea una lista con un nombre. El constructor prepara todo.",
+    "push": "push('Ben') agrega un nombre al final.",
+    "unshift": "unshift('Zoe') agrega un nombre al principio.",
+    "insert": "insert(1, 'Cleo') pone un nombre en el índice 1, entre Zoe y Ana.",
     "remove": "remove(1) saca a quien está en el índice 1: Cleo se va.",
-    "pop": "pop() quita al último invitado, Ben.",
-    "shift": "shift() quita al primer invitado, Zoe.",
-    "summary": "Cada método hizo un trabajo específico con la lista. En el módulo de Listas enlazadas vas a escribir cada uno tú mismo."
+    "pop": "pop() quita el último nombre, Ben.",
+    "shift": "shift() quita el primer nombre, Zoe.",
+    "summary": "Cada método hizo un trabajo específico con la lista. En el módulo de Listas enlazadas vas a escribir cada uno por tu cuenta."
   },
   "pointerArrows": {
     "variables": "Variables",

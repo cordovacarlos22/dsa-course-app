@@ -8,7 +8,7 @@ minutes: 12
 
 ## Una clase es una plantilla de invitación
 
-Hasta ahora has guardado datos en arrays y objetos, y has escrito funciones que trabajan con esos datos. Una **clase** junta las dos cosas en un solo lugar: describe qué datos guarda algo **y** qué puedes hacer con ellos. Piensa en la **plantilla de invitación** de nuestra fiesta. La plantilla no es una invitación. Es un diseño que usas para imprimir todas las invitaciones que quieras, y cada invitación que imprime tiene el mismo diseño, con el nombre de un invitado distinto.
+Hasta ahora has guardado datos en arrays y objetos, y has escrito funciones que trabajan con esos datos. Una **clase** junta las dos cosas en un solo lugar: describe qué datos guarda algo **y** qué puedes hacer con ellos. Piensa en la **plantilla de invitación** de nuestra fiesta. La plantilla no es una invitación. Es un diseño que usas para imprimir todas las invitaciones que quieras, y cada invitación que imprime tiene el mismo diseño, con un nombre distinto en cada una.
 
 En código, la plantilla es la **clase**, y cada invitación que imprime es una **instancia** de esa clase (también vas a oír "un objeto creado a partir de la clase"). Aquí tienes una clase `Invitation` (invitación). Por convención, los nombres de las clases empiezan con **mayúscula** (`Invitation`, `LinkedList`), y así es fácil distinguirlos de las variables y funciones normales (`invitation`, `push`):
 
@@ -20,7 +20,7 @@ class Invitation {
 }
 ```
 
-Esa ya es una clase completa. Es chiquita, pero puede hacer invitaciones, y cada invitación que hace recibe su propio `guest` (invitado).
+Esa ya es una clase completa. Es chiquita, pero puede hacer invitaciones, y cada invitación que hace recibe su propio `guest` (el nombre de la persona invitada).
 
 ```viz
 invitation-template
@@ -49,7 +49,7 @@ console.log(forAna === forBen) // false: dos invitaciones distintas
 
 ## El constructor, new y this
 
-Cada clase tiene un método especial llamado **constructor**. Es el código que corre cuando se crea una instancia nueva, y su trabajo es prepararla: aquí, guardar a su invitado. Los valores que le pasas a la clase, como `'Ana'`, van directo a los parámetros del constructor, como `guest`.
+Cada clase tiene un método especial llamado **constructor**. Es el código que corre cuando se crea una instancia nueva, y su trabajo es prepararla: aquí, guardar el nombre que va en la invitación. Los valores que le pasas a la clase, como `'Ana'`, van directo a los parámetros del constructor, como `guest`.
 
 La palabra clave **`new`** es la que llama al constructor. `new Invitation('Ana')` parece una sola acción, pero JavaScript hace cuatro cosas pequeñas:
 
@@ -80,7 +80,7 @@ const forAna = new Invitation('Ana')
 console.log(forAna.guest, forAna.isSent)
 ```
 
-**Error común:** escribir `guest = guest` en vez de `this.guest = guest` en el constructor. Eso solo reasigna el parámetro, así que la invitación se queda sin invitado.
+**Error común:** escribir `guest = guest` en vez de `this.guest = guest` en el constructor. Eso solo reasigna el parámetro, así que la invitación se queda sin nombre.
 
 ## Métodos: getters y setters
 

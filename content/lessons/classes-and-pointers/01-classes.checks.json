@@ -38,7 +38,7 @@
       "type": "code",
       "task": {
         "en": "Write a class `Guest`. Its constructor receives a `name`, stores it as `this.name`, and starts every guest with `this.rsvp` set to `'no'`.",
-        "es": "Escribe una clase `Guest`. Su constructor recibe un `name`, lo guarda como `this.name`, y hace que cada invitado empiece con `this.rsvp` en `'no'`."
+        "es": "Escribe una clase `Guest`. Su constructor recibe un `name`, lo guarda como `this.name`, y hace que cada `Guest` empiece con `this.rsvp` en `'no'`."
       },
       "hint": {
         "en": "Inside the constructor, write to `this`: one line for the name, one for the RSVP.",
@@ -92,7 +92,7 @@
       "type": "code",
       "task": {
         "en": "Add two methods to `Guest`: a getter `getRsvp()` that returns the guest's RSVP, and a setter `setRsvp(answer)` that changes it.",
-        "es": "Agrégale dos métodos a `Guest`: un getter `getRsvp()` que regrese el RSVP del invitado, y un setter `setRsvp(answer)` que lo cambie."
+        "es": "Agrégale dos métodos a `Guest`: un getter `getRsvp()` que regrese su RSVP, y un setter `setRsvp(answer)` que lo cambie."
       },
       "hint": {
         "en": "The getter returns `this.rsvp`. The setter assigns `answer` to `this.rsvp`.",

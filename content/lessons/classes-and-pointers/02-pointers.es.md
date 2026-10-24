@@ -84,7 +84,7 @@ pointer-move
 
 **Qué acaba de pasar:** mover `second` no cambió ningún objeto; solo movió una flecha. Luego `first` también se movió, y el objeto A, `{ value: 'Ana' }`, se quedó sin flechas. Solo puedes llegar a un objeto a través de algo que apunte a él, así que a un objeto al que nada apunta ya no se puede llegar. Solo se queda ahí, ocupando memoria.
 
-Ahí entra la **recolección de basura**. Cada cierto tiempo, JavaScript busca objetos a los que ya nada puede llegar y libera la memoria que usan. Nunca borras un objeto tú mismo: dejas de apuntarle, y el **recolector de basura** lo limpia.
+Ahí entra la **recolección de basura**. Cada cierto tiempo, JavaScript busca objetos a los que ya nada puede llegar y libera la memoria que usan. Nunca borras un objeto por tu cuenta: dejas de apuntarle, y el **recolector de basura** lo limpia.
 
 Así es exactamente como funcionan las listas enlazadas, y por eso esta lección va justo antes. Una lista enlazada es una cadena de objetos pequeños llamados **nodos**, cada uno apuntando al siguiente, con `head` y `tail` apuntando a los dos extremos (viste una versión pequeña de esto en el módulo de Introducción). Agregar un nodo quiere decir mover un par de flechas. Quitar uno quiere decir **alejar** las flechas de él, para que ya nada le apunte, y el recolector de basura se encarga del resto. Y mover un puntero es una sola asignación, así que es **O(1)** sin importar qué tan larga sea la lista. Por eso una lista enlazada puede agregar o quitar al principio en O(1), algo que un array no puede hacer.
 

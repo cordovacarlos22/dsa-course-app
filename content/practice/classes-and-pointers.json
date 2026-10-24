@@ -16,16 +16,16 @@
       },
       "options": [
         {
-          "en": "The template is an instance; the invitations are classes",
-          "es": "La plantilla es una instancia; las invitaciones son clases"
+          "en": "The template is an instance; the invitations are classes made from it",
+          "es": "La plantilla es una instancia; las invitaciones son clases hechas con ella"
         },
         {
-          "en": "The template is the class; each invitation is an instance created from it",
-          "es": "La plantilla es la clase; cada invitación es una instancia creada a partir de ella"
+          "en": "The template is the class; each invitation is an instance",
+          "es": "La plantilla es la clase; cada invitación es una instancia"
         },
         {
-          "en": "The template is a method; the invitations are properties",
-          "es": "La plantilla es un método; las invitaciones son propiedades"
+          "en": "The template is a method; the invitations are its properties",
+          "es": "La plantilla es un método; las invitaciones son sus propiedades"
         },
         {
           "en": "The template is `this`; the invitations are constructors",
@@ -56,7 +56,7 @@
         },
         {
           "en": "With a capital first letter: `Invitation`",
-          "es": "Con la primera letra en mayúscula: `Invitation`"
+          "es": "Con mayúscula inicial: `Invitation`"
         },
         {
           "en": "With a `class_` prefix: `class_invitation`",
@@ -78,20 +78,20 @@
       },
       "options": [
         {
-          "en": "It deletes an instance when you no longer need it",
-          "es": "Borra una instancia cuando ya no la necesitas"
+          "en": "It deletes an instance once nothing uses it anymore",
+          "es": "Borra una instancia cuando ya nada la usa"
         },
         {
-          "en": "It turns the class into a string",
-          "es": "Convierte la clase en un string"
+          "en": "It turns the class into a string you can print",
+          "es": "Convierte la clase en un string que puedes imprimir"
         },
         {
-          "en": "It runs every time any method is called",
-          "es": "Corre cada vez que se llama a cualquier método"
+          "en": "It runs every time any method of the class is called",
+          "es": "Corre cada vez que se llama a cualquier método de la clase"
         },
         {
-          "en": "It runs when `new` creates an instance, and sets up that instance's starting properties",
-          "es": "Corre cuando `new` crea una instancia, y prepara las propiedades iniciales de esa instancia"
+          "en": "It sets up each new instance when `new` creates it",
+          "es": "Prepara cada instancia nueva cuando `new` la crea"
         }
       ],
       "correctIndex": 3,
@@ -110,11 +110,11 @@
       "code": "const forAna = new Invitation('Ana')",
       "options": [
         {
-          "en": "It creates a new instance of `Invitation` by calling the constructor with `'Ana'`",
-          "es": "Crea una instancia nueva de `Invitation` llamando al constructor con `'Ana'`"
+          "en": "It creates a new `Invitation` by calling the constructor with `'Ana'`",
+          "es": "Crea una `Invitation` nueva llamando al constructor con `'Ana'`"
         },
         {
-          "en": "It changes the `Invitation` class so every invitation is for Ana",
+          "en": "It changes the `Invitation` class so that every invitation is for Ana",
           "es": "Cambia la clase `Invitation` para que todas las invitaciones sean para Ana"
         },
         {
@@ -154,14 +154,14 @@
           "es": "`forBen`, la instancia en la que se llamó el método"
         },
         {
-          "en": "Every invitation at once",
-          "es": "Todas las invitaciones a la vez"
+          "en": "Every invitation at once, because they share the method",
+          "es": "Todas las invitaciones a la vez, porque comparten el método"
         }
       ],
       "correctIndex": 2,
       "explanation": {
         "en": "`this` is the specific instance the method was called on. `forBen.getGuest()` reads `forBen`'s guest, so it returns `'Ben'`.",
-        "es": "`this` es la instancia específica en la que se llamó el método. `forBen.getGuest()` lee el invitado de `forBen`, así que regresa `'Ben'`."
+        "es": "`this` es la instancia específica en la que se llamó el método. `forBen.getGuest()` lee el `guest` de `forBen`, así que regresa `'Ben'`."
       }
     },
     {
@@ -205,19 +205,19 @@
       },
       "options": [
         {
-          "en": "A getter returns a value from the instance; a setter changes a value on the instance",
-          "es": "Un getter regresa un valor de la instancia; un setter cambia un valor de la instancia"
+          "en": "A getter reads a value from the instance; a setter changes one",
+          "es": "Un getter lee un valor de la instancia; un setter lo cambia"
         },
         {
           "en": "A getter creates instances; a setter deletes them",
           "es": "Un getter crea instancias; un setter las borra"
         },
         {
-          "en": "Getters and setters can only be used inside the constructor",
-          "es": "Los getters y setters solo se pueden usar dentro del constructor"
+          "en": "Getters and setters can only be called from inside the constructor",
+          "es": "Los getters y setters solo se pueden llamar desde dentro del constructor"
         },
         {
-          "en": "A setter must always return the new value",
+          "en": "A setter must always return the new value it was given",
           "es": "Un setter siempre debe regresar el valor nuevo"
         }
       ],
@@ -236,20 +236,20 @@
       },
       "options": [
         {
-          "en": "Because JavaScript doesn't allow functions outside a class",
-          "es": "Porque JavaScript no permite funciones fuera de una clase"
+          "en": "Because JavaScript doesn't let you write functions outside a class",
+          "es": "Porque JavaScript no te deja escribir funciones fuera de una clase"
         },
         {
-          "en": "Because a class keeps the data (head, tail, length) together with the methods that work on it (push, pop, shift…)",
-          "es": "Porque una clase mantiene los datos (head, tail, length) junto con los métodos que trabajan con ellos (push, pop, shift…)"
+          "en": "Because a class keeps the data with the methods that use it",
+          "es": "Porque una clase junta los datos con los métodos que los usan"
         },
         {
-          "en": "Because classes make code run in O(1)",
-          "es": "Porque las clases hacen que el código corra en O(1)"
+          "en": "Because a class makes every method run in O(1) time",
+          "es": "Porque una clase hace que cada método corra en O(1)"
         },
         {
-          "en": "Because classes use less memory than arrays",
-          "es": "Porque las clases usan menos memoria que los arrays"
+          "en": "Because classes use less memory than arrays and objects",
+          "es": "Porque las clases usan menos memoria que los arrays y los objetos"
         }
       ],
       "correctIndex": 1,
@@ -267,16 +267,16 @@
       },
       "options": [
         {
-          "en": "Make a brand-new, empty object",
-          "es": "Crear un objeto nuevo y vacío"
+          "en": "Make a brand-new, empty object for the instance",
+          "es": "Crear un objeto nuevo y vacío para la instancia"
         },
         {
-          "en": "Point `this` at that object",
-          "es": "Hacer que `this` apunte a ese objeto"
+          "en": "Point `this` at that new object while the constructor runs",
+          "es": "Hacer que `this` apunte a ese objeto mientras corre el constructor"
         },
         {
-          "en": "Run the constructor",
-          "es": "Ejecutar el constructor"
+          "en": "Run the constructor with the arguments you passed",
+          "es": "Ejecutar el constructor con los argumentos que pasaste"
         },
         {
           "en": "Copy every method of the class into the new object",
@@ -299,11 +299,11 @@
       "code": "class Invitation {\n  constructor(guest) {\n    this.guest = guest\n  }\n}\n\nconst forAna = Invitation('Ana')",
       "options": [
         {
-          "en": "JavaScript throws a `TypeError`: a class can't be called without `new`",
-          "es": "JavaScript lanza un `TypeError`: una clase no se puede llamar sin `new`"
+          "en": "A `TypeError`: a class can't be called without `new`",
+          "es": "Un `TypeError`: una clase no se puede llamar sin `new`"
         },
         {
-          "en": "`forAna` becomes Ana's invitation, exactly as with `new`",
+          "en": "`forAna` becomes Ana's invitation, exactly as it would with `new`",
           "es": "`forAna` se vuelve la invitación de Ana, igual que con `new`"
         },
         {
@@ -363,20 +363,20 @@
       "code": "let card = { value: 'Ana' }\nlet sameCard = card\ncard.value = 'Ben'",
       "options": [
         {
-          "en": "`'Ana'`, because `sameCard` is a copy",
-          "es": "`'Ana'`, porque `sameCard` es una copia"
+          "en": "`'Ana'`, because `sameCard` is a copy made before the change",
+          "es": "`'Ana'`, porque `sameCard` es una copia hecha antes del cambio"
         },
         {
-          "en": "`undefined`",
-          "es": "`undefined`"
+          "en": "`undefined`, because `sameCard` was never given a value",
+          "es": "`undefined`, porque a `sameCard` nunca se le dio un valor"
         },
         {
           "en": "`'Cleo'`",
           "es": "`'Cleo'`"
         },
         {
-          "en": "`'Ben'`, because `card` and `sameCard` point to the same object in memory",
-          "es": "`'Ben'`, porque `card` y `sameCard` apuntan al mismo objeto en memoria"
+          "en": "`'Ben'`: both variables point to the same object",
+          "es": "`'Ben'`: las dos variables apuntan al mismo objeto"
         }
       ],
       "correctIndex": 3,
@@ -459,12 +459,12 @@
       "code": "let first = { value: 'Ana' }\nlet third = { value: 'Cleo' }\nfirst = third",
       "options": [
         {
-          "en": "`third` now contains both objects",
-          "es": "Ahora `third` contiene los dos objetos"
+          "en": "`third` now contains both objects, one after the other",
+          "es": "Ahora `third` contiene los dos objetos, uno tras otro"
         },
         {
-          "en": "It can't be reached, so JavaScript eventually removes it with garbage collection",
-          "es": "Ya no se puede llegar a él, así que JavaScript acaba quitándolo con la recolección de basura"
+          "en": "It can't be reached, so the garbage collector frees it",
+          "es": "Ya nada llega a él, así que el recolector de basura lo libera"
         },
         {
           "en": "It throws an error on the next line",
@@ -486,20 +486,20 @@
       "topic": "Pointers",
       "prompt": {
         "en": "In a linked list, you remove a node by moving the arrows that pointed to it. Why don't you need to delete the node yourself?",
-        "es": "En una lista enlazada, quitas un nodo moviendo las flechas que apuntaban a él. ¿Por qué no necesitas borrar el nodo tú mismo?"
+        "es": "En una lista enlazada, quitas un nodo moviendo las flechas que apuntaban a él. ¿Por qué no necesitas borrar el nodo por tu cuenta?"
       },
       "options": [
         {
-          "en": "JavaScript deletes every object after one second",
-          "es": "JavaScript borra cada objeto después de un segundo"
+          "en": "JavaScript deletes every object automatically after one second",
+          "es": "JavaScript borra cada objeto automáticamente después de un segundo"
         },
         {
           "en": "Nothing points to it anymore, so the garbage collector frees it",
           "es": "Ya nada le apunta, así que el recolector de basura lo libera"
         },
         {
-          "en": "Removed nodes stay in the list forever",
-          "es": "Los nodos quitados se quedan en la lista para siempre"
+          "en": "Removed nodes stay in the list forever, so there's nothing to delete",
+          "es": "Los nodos quitados se quedan en la lista para siempre, así que no hay nada que borrar"
         },
         {
           "en": "Moving the arrows copies the node somewhere else",
@@ -523,7 +523,7 @@
       },
       "description": {
         "en": "Write a class `Invitation`:\n\n- `constructor(guest)` stores the guest's name on the instance as `this.guest`.\n- `getGuest()` returns the invitation's guest.\n- `setGuest(guest)` changes the invitation's guest.\n\nExample:\n\n```js\nconst forBen = new Invitation('Ben')\nforBen.getGuest() // 'Ben'\nforBen.setGuest('Benny')\nforBen.getGuest() // 'Benny'\n```\n\nEach invitation must keep its own guest: changing one invitation never changes another.",
-        "es": "Escribe una clase `Invitation`:\n\n- `constructor(guest)` guarda el nombre del invitado en la instancia como `this.guest`.\n- `getGuest()` regresa el invitado de la invitación.\n- `setGuest(guest)` cambia el invitado de la invitación.\n\nEjemplo:\n\n```js\nconst forBen = new Invitation('Ben')\nforBen.getGuest() // 'Ben'\nforBen.setGuest('Benny')\nforBen.getGuest() // 'Benny'\n```\n\nCada invitación debe guardar su propio invitado: cambiar una invitación nunca cambia otra."
+        "es": "Escribe una clase `Invitation`:\n\n- `constructor(guest)` guarda el nombre de la persona invitada en la instancia como `this.guest`.\n- `getGuest()` regresa el nombre de la invitación.\n- `setGuest(guest)` cambia el nombre de la invitación.\n\nEjemplo:\n\n```js\nconst forBen = new Invitation('Ben')\nforBen.getGuest() // 'Ben'\nforBen.setGuest('Benny')\nforBen.getGuest() // 'Benny'\n```\n\nCada invitación debe guardar su propio nombre: cambiar una invitación nunca cambia otra."
       },
       "difficulty": "easy",
       "category": "build",
@@ -625,7 +625,7 @@
       },
       "description": {
         "en": "Someone at the party door clicks a counter every time a guest comes in or leaves. Write a class `Counter`:\n\n- `constructor()` starts `this.count` at `0`.\n- `increment()` adds 1 to the count and returns the new count.\n- `decrement()` subtracts 1 and returns the new count (it may go below 0).\n- `reset()` sets the count back to 0 and returns it.\n\nExample:\n\n```js\nconst door = new Counter()\ndoor.increment() // 1\ndoor.increment() // 2\ndoor.decrement() // 1\ndoor.reset() // 0\n```",
-        "es": "Alguien en la puerta de la fiesta presiona un contador cada vez que un invitado entra o sale. Escribe una clase `Counter`:\n\n- `constructor()` empieza `this.count` en `0`.\n- `increment()` le suma 1 a la cuenta y regresa la cuenta nueva.\n- `decrement()` le resta 1 y regresa la cuenta nueva (puede quedar abajo de 0).\n- `reset()` regresa la cuenta a 0 y la regresa.\n\nEjemplo:\n\n```js\nconst door = new Counter()\ndoor.increment() // 1\ndoor.increment() // 2\ndoor.decrement() // 1\ndoor.reset() // 0\n```"
+        "es": "Alguien en la puerta de la fiesta presiona un contador cada vez que alguien entra o sale. Escribe una clase `Counter`:\n\n- `constructor()` empieza `this.count` en `0`.\n- `increment()` le suma 1 a la cuenta y regresa la cuenta nueva.\n- `decrement()` le resta 1 y regresa la cuenta nueva (puede quedar abajo de 0).\n- `reset()` regresa la cuenta a 0 y la regresa.\n\nEjemplo:\n\n```js\nconst door = new Counter()\ndoor.increment() // 1\ndoor.increment() // 2\ndoor.decrement() // 1\ndoor.reset() // 0\n```"
       },
       "difficulty": "easy",
       "category": "build",
