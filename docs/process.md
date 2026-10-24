@@ -67,7 +67,7 @@ Dependabot opens PRs for outdated or vulnerable dependencies every week. Those P
   1. In Vercel → Deployments, choose the previous production deploy → **Instant Rollback** (seconds, no rebuild).
   2. While rolled back, **Vercel stops moving the domains to new production deploys**, so a release alone won't go live.
   3. Fix forward: revert the bad change on `main` with a PR, and release that commit.
-  4. In Vercel, **promote** the new production deploy (or press **Undo Rollback**), so the domains follow `production` again. Check in Vercel's dashboard which deploy is live.
+  4. In Vercel, **promote** the new production deploy, so the domains follow `production` again. (Not "Undo Rollback": it may bring back the bad deploy.) Check in Vercel's dashboard which deploy is live.
 - **Switching it on (Carlos, once):**
   1. In Vercel → Settings → Environments → Production → Branch Tracking, change `main` to `production`. Until then, Vercel still deploys `main` to production on every merge, and Release only moves a branch nobody deploys.
   2. Once the domain is live, set the repository variable `PRODUCTION_URLS` to `https://charliecodeacademy.com https://app.charliecodeacademy.com/learn`.
