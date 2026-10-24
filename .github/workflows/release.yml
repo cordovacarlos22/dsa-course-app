@@ -1,7 +1,8 @@
 # The ship stage of docs/process.md. Vercel deploys the `production` branch
-# to the live site; this workflow is the only thing that moves it. It moves
-# `production` forward to a commit that already passed CI on `main`, and only
-# after Carlos approves the run (the `release` environment).
+# to the live site, and by rule only this workflow moves it: nobody pushes it
+# by hand, agents included. It moves `production` forward to one of `main`'s
+# own commits, and only after Carlos approves the run (the `release`
+# environment).
 name: Release
 
 on:
@@ -25,7 +26,7 @@ jobs:
     name: Move production forward
     runs-on: ubuntu-latest
     # Waits here for Carlos's approval. The environment only accepts runs
-    # started from main, so a branch can't run its own edited copy of this.
+    # started from main, so this job can't run from a branch's edited copy.
     environment: release
     permissions:
       contents: write # the one write: pushing the production branch
@@ -41,8 +42,11 @@ jobs:
           COMMIT: ${{ inputs.commit }}
         run: |
           commit=$(git rev-parse --verify "${COMMIT:-origin/main}^{commit}")
-          if ! git merge-base --is-ancestor "$commit" origin/main; then
-            echo "::error::$commit isn't on main, so it hasn't been reviewed and merged."
+          # One of main's own commits (a merge), not one from inside a PR:
+          # the ruleset can't tell them apart, since a PR's commits pass CI too.
+          main_commits=$(git rev-list --first-parent origin/main)
+          if ! grep -qx "$commit" <<<"$main_commits"; then
+            echo "::error::$commit isn't one of main's own commits, so it wasn't merged as a whole PR."
             exit 1
           fi
           if ! git merge-base --is-ancestor origin/production "$commit"; then
@@ -50,7 +54,7 @@ jobs:
             exit 1
           fi
           # The production ruleset also refuses a commit whose "CI passed" or
-          # "CodeQL" check didn't pass, and any force push.
+          # "CodeQL" check hasn't passed (yet), and any force push.
           git push origin "$commit:refs/heads/production"
           echo "commit=$commit" >> "$GITHUB_OUTPUT"
 
@@ -70,10 +74,11 @@ jobs:
           COMMIT: ${{ needs.release.outputs.commit }}
         run: |
           for attempt in $(seq 1 60); do
-            id=$(gh api "repos/$GITHUB_REPOSITORY/deployments?sha=$COMMIT&environment=Production" --jq '.[0].id // empty')
+            # || true: one failed GitHub call just means "ask again".
+            id=$(gh api "repos/$GITHUB_REPOSITORY/deployments?sha=$COMMIT&environment=Production" --jq '.[0].id // empty' || true)
             state=""
             if [ -n "$id" ]; then
-              state=$(gh api "repos/$GITHUB_REPOSITORY/deployments/$id/statuses" --jq '.[0].state // empty')
+              state=$(gh api "repos/$GITHUB_REPOSITORY/deployments/$id/statuses" --jq '.[0].state // empty' || true)
             fi
             case "$state" in
               success) exit 0 ;;
