@@ -23,6 +23,8 @@ for (const { module, hasQuiz, exercises } of practice()) {
       test('quiz', async ({ page }) => {
         const problems = []
         await page.goto(`/learn/${module}/quiz`)
+        // The start screen's defaults: in order, every question.
+        await page.locator('form button[type=submit]').click()
         await expect(page.locator('form fieldset')).toBeVisible()
         for (let i = 0; ; i++) {
           const scroll = await sidewaysScroll(page)
