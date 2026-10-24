@@ -2,7 +2,9 @@ import { useTranslation } from 'react-i18next'
 import ModuleCard from '../components/ModuleCard'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useLanguage } from '../hooks/useLanguage'
-import { getCourse, getSections, localize } from '../lib/course'
+import { Link } from 'react-router'
+import { EXAM_SIZE, getCourse, getSections, localize } from '../lib/course'
+import { loadQuizScore } from '../lib/quizScores'
 
 // All modules, grouped into the course's sections ("Foundations", "Sorting"…).
 function CourseHomePage() {
@@ -31,9 +33,43 @@ function CourseHomePage() {
               <ModuleCard key={module.slug} module={module} />
             ))}
           </ol>
+          <ExamCard section={section} />
         </section>
       ))}
     </div>
+  )
+}
+
+// The exam at the end of a section, for sections whose modules have quizzes.
+function ExamCard({ section }) {
+  const { t } = useTranslation()
+  let questions = 0
+  for (let i = 0; i < section.modules.length; i++) {
+    questions += section.modules[i].practice?.questions ?? 0
+  }
+  if (questions === 0) return null
+  const best = loadQuizScore(`exam:${section.slug}`)
+
+  return (
+    <Link
+      to={`/learn/sections/${section.slug}/exam`}
+      className="mt-4 flex flex-wrap items-center justify-between gap-2 rounded-2xl border-2 border-brand/30 bg-white p-5 shadow-sm transition hover:border-brand hover:shadow-md"
+    >
+      <span>
+        <span className="block text-lg font-bold">
+          <span aria-hidden="true">📝 </span>
+          {t('exam.card')}
+        </span>
+        <span className="mt-1 block text-sm text-slate-600">
+          {t('exam.cardDetail', { count: Math.min(EXAM_SIZE, questions) })}
+        </span>
+      </span>
+      <span className="text-sm font-semibold text-brand">
+        {best
+          ? t('exam.best', { score: best.best, total: best.total })
+          : t('exam.take')}
+      </span>
+    </Link>
   )
 }
 

@@ -32,3 +32,23 @@ export function shuffle(list) {
   }
   return copy
 }
+
+// Every quiz question of these modules, for a section exam. Each one knows
+// its module (`source`, shown above the question), and its id gets the
+// module in front, because two modules may use the same id.
+export function examQuestions(modules) {
+  const questions = []
+  for (let i = 0; i < modules.length; i++) {
+    const practice = getPractice(modules[i].slug)
+    if (!practice) continue
+    for (let j = 0; j < practice.questions.length; j++) {
+      const question = practice.questions[j]
+      questions.push({
+        ...question,
+        id: `${modules[i].slug}/${question.id}`,
+        source: modules[i].title,
+      })
+    }
+  }
+  return questions
+}

@@ -320,5 +320,15 @@
       "remaining": "Tiempo restante",
       "timeUp": "¡Se acabó el tiempo! Sigue si quieres."
     }
+  },
+  "exam": {
+    "title": "Examen de la sección {{number}}: {{title}}",
+    "card": "Examen de la sección",
+    "cardDetail": "{{count}} preguntas mezcladas de los módulos de esta sección",
+    "take": "Hacer el examen",
+    "best": "Tu mejor resultado: {{score}} de {{total}}",
+    "from": "De {{module}}",
+    "complete": "¡Examen terminado!",
+    "backToCourse": "Volver al curso"
   }
 }

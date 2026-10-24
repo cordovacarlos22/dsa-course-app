@@ -320,5 +320,15 @@
       "remaining": "Time left",
       "timeUp": "Time's up! Keep going if you like."
     }
+  },
+  "exam": {
+    "title": "Section {{number}} exam: {{title}}",
+    "card": "Section exam",
+    "cardDetail": "{{count}} questions mixed from this section's modules",
+    "take": "Take the exam",
+    "best": "Your best: {{score}} of {{total}}",
+    "from": "From {{module}}",
+    "complete": "Exam complete!",
+    "backToCourse": "Back to the course"
   }
 }
