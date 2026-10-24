@@ -503,16 +503,21 @@ describe('validateLessonChecks', () => {
   })
 
   it('needs 2 to 5 checklist points in an explain checkpoint', () => {
-    const checks = makeValidChecks()
-    checks.steps[0] = {
-      type: 'explain',
-      question: text('Why?'),
-      modelAnswer: text('Because.'),
-      checklist: [text('Only one point')],
+    function errorsWithPoints(count) {
+      const checks = makeValidChecks()
+      checks.steps[0] = {
+        type: 'explain',
+        question: text('Why?'),
+        modelAnswer: text('Because.'),
+        checklist: Array.from({ length: count }, (_, i) =>
+          text(`Point ${i + 1}`),
+        ),
+      }
+      return validateLessonChecks(checks, { en: 2 }).join()
     }
-    expect(validateLessonChecks(checks, { en: 2 }).join()).toMatch(
-      /2–5 checklist points/,
-    )
+    expect(errorsWithPoints(1)).toMatch(/2–5 checklist points/)
+    expect(errorsWithPoints(6)).toMatch(/2–5 checklist points/)
+    expect(errorsWithPoints(5)).toBe('')
   })
 
   it('rejects a choice answer that is not one of the options', () => {

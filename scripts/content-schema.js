@@ -248,11 +248,15 @@ const explainCheckpointSchema = z
   })
   .strict()
 
-export const checkpointSchema = z.union([
+// Picked by `type` (and a code checkpoint by `kind`), so an error names the
+// field that's wrong instead of "Invalid input".
+export const checkpointSchema = z.discriminatedUnion('type', [
   choiceCheckpointSchema,
   explainCheckpointSchema,
-  codeFunctionCheckpointSchema,
-  codeClassCheckpointSchema,
+  z.discriminatedUnion('kind', [
+    codeFunctionCheckpointSchema,
+    codeClassCheckpointSchema,
+  ]),
 ])
 
 export const lessonChecksSchema = z
