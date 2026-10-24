@@ -1,7 +1,7 @@
 ---
 title: Timing our code
 order: 2
-minutes: 11
+minutes: 12
 ---
 
 > **Goal:** compare two working solutions with a stopwatch, and see why timing isn't a good enough measure.
@@ -122,7 +122,7 @@ stopwatch-race
 
 **What just happened:** the same code ran on a fast laptop and on an old phone. The laptop finished much sooner, and a second run gave different times on both, even though nothing in the code changed. But both machines did exactly the same number of steps, and the steps only changed when the number of guests changed. In the last scene, a tiny job showed 0.0 ms on both: too fast to measure at all.
 
-Now time our two solutions yourself. Press **Run** a few times:
+Now time our two solutions yourself. Before you press **Run**, predict which one wins, and by roughly how much. Then run it a few times:
 
 ```js-run
 function sumOneTo(n) {
@@ -153,6 +153,8 @@ The formula wins by a mile. But look at the times as you run it again: they chan
 1. **Different machines record different times.** The same code is faster on a new laptop than on an old phone. The winner usually stays the same, but the numbers don't.
 2. **The same machine records different times.** Other programs, the browser and JavaScript's own optimizations change a little on every run.
 3. **Fast code may be too fast to measure.** When several solutions all finish in a tiny fraction of a millisecond, the stopwatch can't tell which one is really the most efficient.
+
+**Under the hood:** two things make the times wobble even on one computer. First, JavaScript engines don't run your code the same way every time: they watch which parts run a lot, like a busy loop, and compile those parts into faster machine code while the program runs. So the first runs can be slower than later ones, before that kicks in. Second, browsers make `performance.now()` a little less precise on purpose, as a security measure, so a job that takes a few microseconds can show up as 0. Both are reasons to benchmark with big inputs and several runs, and both are reasons to count operations instead.
 
 Timing your code isn't a bad idea; developers do it all the time to confirm that a change helped. But imagine code that runs for an hour, compared with another version that runs for four. You don't want to run both (and wait five hours!) just to know which one is better. We need a way to talk about how code performs **without** timing it. That's where Big O comes in.
 
