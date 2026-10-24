@@ -81,7 +81,7 @@ npm run format        # format all files with Prettier
 npm run format:check  # check formatting (CI runs this)
 npm run build         # production build into dist/
 npm run test:coverage # unit tests with a coverage report (coverage/index.html)
-npm run test:e2e      # end-to-end tests in a real browser (run `npm run build` first)
+npm run test:e2e      # end-to-end tests in Chrome and WebKit (run `npm run build` first; `npx playwright install webkit` once)
 npm run serve:preview # serve dist/ with vercel.json's security headers (port 4174)
 ```
 
