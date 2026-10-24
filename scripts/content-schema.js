@@ -234,10 +234,29 @@ const codeClassCheckpointSchema = z
   })
   .strict()
 
-export const checkpointSchema = z.union([
+// "Explain it yourself": the student writes an explanation, then compares it
+// with the model answer and ticks each checklist point it covers.
+const explainCheckpointSchema = z
+  .object({
+    type: z.literal('explain'),
+    question: localizedText,
+    modelAnswer: localizedText,
+    checklist: z
+      .array(localizedText)
+      .min(2, 'an explain checkpoint needs 2–5 checklist points')
+      .max(5, 'an explain checkpoint needs 2–5 checklist points'),
+  })
+  .strict()
+
+// Picked by `type` (and a code checkpoint by `kind`), so an error names the
+// field that's wrong instead of "Invalid input".
+export const checkpointSchema = z.discriminatedUnion('type', [
   choiceCheckpointSchema,
-  codeFunctionCheckpointSchema,
-  codeClassCheckpointSchema,
+  explainCheckpointSchema,
+  z.discriminatedUnion('kind', [
+    codeFunctionCheckpointSchema,
+    codeClassCheckpointSchema,
+  ]),
 ])
 
 export const lessonChecksSchema = z

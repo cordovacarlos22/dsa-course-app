@@ -237,7 +237,19 @@
     "hint": "Hint",
     "showAnswer": "Show answer",
     "answerShown": "The right answer is highlighted in green. Select it and check again.",
-    "passedBefore": "You already passed this step."
+    "passedBefore": "You already passed this step.",
+    "explain": {
+      "title": "Explain it yourself",
+      "yourAnswer": "Your explanation",
+      "tip": "Write it in your own words, as if you were explaining it to a friend.",
+      "compare": "Compare with a model answer",
+      "writeFirst": "Write at least a sentence first.",
+      "modelAnswer": "A model answer",
+      "checklist": "Tick each point your explanation covers:",
+      "missing": "Missing a point? Add it to your explanation in your own words, then tick it.",
+      "done": "Done",
+      "passed": "Explained!"
+    }
   },
   "workspace": {
     "panes": "Workspace",
