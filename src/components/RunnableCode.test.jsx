@@ -84,6 +84,49 @@ describe('RunnableCode', () => {
     expect(screen.queryByRole('status')).not.toBeInTheDocument()
   })
 
+  it('goes back to editing after showing everything, and runs again', async () => {
+    render(<RunnableCode initialCode={TWO_GUESTS} />)
+    await pressRun()
+    expect(screen.getByRole('button', { name: /replay/i })).toHaveFocus()
+
+    act(() => screen.getByRole('button', { name: 'Show all' }).click())
+    act(() => screen.getByRole('button', { name: /edit/i }).click())
+    expect(screen.getByRole('textbox')).toHaveFocus()
+
+    await pressRun()
+    expect(screen.getByRole('button', { name: /replay/i })).toHaveFocus()
+  })
+
+  it('runs with Ctrl+Enter and moves to Edit when nothing was printed', async () => {
+    const user = userEvent.setup()
+    render(<RunnableCode initialCode="let a = 1" />)
+
+    await user.click(screen.getByRole('textbox'))
+    await user.keyboard('{Control>}{Enter}{/Control}')
+
+    expect(await screen.findByRole('button', { name: /edit/i })).toHaveFocus()
+    expect(screen.getByRole('button', { name: /replay/i })).toBeDisabled()
+    expect(output()).toHaveTextContent('(nothing was printed)')
+  })
+
+  it('replays the code that ran, not what was typed while it ran', async () => {
+    const user = userEvent.setup()
+    let finishRun
+    runJavaScript.mockImplementationOnce(
+      (code) =>
+        new Promise((resolve) => {
+          finishRun = () => resolve({ ...executeCode(code), problem: null })
+        }),
+    )
+    render(<RunnableCode initialCode="console.log('Ana')" />)
+
+    await user.click(screen.getByRole('button', { name: /run/i }))
+    await user.type(screen.getByRole('textbox'), '{Enter}let late = 1')
+    await act(async () => finishRun())
+
+    expect(codeLines()).toHaveLength(1)
+  })
+
   it('shows everything at once when the device asks for less motion', async () => {
     vi.stubGlobal('matchMedia', () => ({ matches: true }))
     render(<RunnableCode initialCode={TWO_GUESTS} />)
