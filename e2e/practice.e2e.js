@@ -69,10 +69,14 @@ for (const { module, hasQuiz, exercises } of practice()) {
           }
           return locator
         }
-        await reveal(page.locator('.cm-editor'))
-        await expect(page.locator('.cm-editor')).toBeVisible({
-          timeout: 15_000,
-        })
+        // The editor loads a moment after the page, so look for its tab
+        // again until it shows (a slow phone can reach the last tab first).
+        await expect(async () => {
+          await reveal(page.locator('.cm-editor'))
+          await expect(page.locator('.cm-editor')).toBeVisible({
+            timeout: 1_000,
+          })
+        }).toPass({ timeout: 15_000 })
         expect(await sidewaysScroll(page)).toBe(0)
         const check = page.getByRole('button', {
           name: `✓ ${label.check}`,
