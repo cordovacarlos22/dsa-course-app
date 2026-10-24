@@ -34,38 +34,29 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "An O(n) function does 1,000 steps for 1,000 items. About how many for 3,000 items?",
-        "es": "Una función O(n) da 1,000 pasos con 1,000 elementos. ¿Más o menos cuántos con 3,000 elementos?"
+        "en": "In your own words: what does it mean that O(n) work is proportional to n, and what does that look like on a chart?",
+        "es": "Con tus palabras: ¿qué significa que el trabajo O(n) sea proporcional a n, y cómo se ve eso en una gráfica?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "Proportional means the work grows by the same factor as the input: double n and the work doubles, multiply n by 10 and the work is about 10 times bigger, because each item costs about the same amount of work. On a chart of operations against n, that makes a straight line.",
+        "es": "Proporcional significa que el trabajo crece por el mismo factor que la entrada: duplica n y el trabajo se duplica, multiplica n por 10 y el trabajo es unas 10 veces más grande, porque cada elemento cuesta más o menos el mismo trabajo. En una gráfica de operaciones contra n, eso forma una línea recta."
+      },
+      "checklist": [
         {
-          "en": "1,000",
-          "es": "1,000"
+          "en": "Says the work grows by the same factor as n (double n, double the work)",
+          "es": "Dice que el trabajo crece por el mismo factor que n (duplica n, duplica el trabajo)"
         },
         {
-          "en": "3,000",
-          "es": "3,000"
+          "en": "Says each item costs about the same amount of work",
+          "es": "Dice que cada elemento cuesta más o menos el mismo trabajo"
         },
         {
-          "en": "9,000",
-          "es": "9,000"
-        },
-        {
-          "en": "9,000,000",
-          "es": "9,000,000"
+          "en": "Says it makes a straight line on the chart",
+          "es": "Dice que forma una línea recta en la gráfica"
         }
-      ],
-      "answer": 1,
-      "hint": {
-        "en": "O(n) is a straight line: proportional.",
-        "es": "O(n) es una línea recta: proporcional."
-      },
-      "explanation": {
-        "en": "Linear time: 3 times the items, 3 times the steps.",
-        "es": "Tiempo lineal: el triple de elementos, el triple de pasos."
-      }
+      ]
     },
     {
       "type": "code",
