@@ -1,7 +1,7 @@
 ---
 title: Visualizando la complejidad temporal
 order: 4
-minutes: 9
+minutes: 11
 ---
 
 > **Meta:** ver en una gráfica cómo crecen dos soluciones, y aprender a leer la tendencia en lugar de los números exactos.
@@ -87,6 +87,26 @@ for (let k = 0; k < sizes.length; k++) {
 Con n pequeño, los tiempos del bucle brincan de un lado a otro: a esa escala tan pequeña, todo lo demás que pasa en tu computadora pesa más que el trabajo mismo. Que eso no te confunda. Cuando n se hace grande, el tiempo del bucle sube de forma constante (más o menos 10 veces más trabajo cada vez que n es 10 veces más grande), mientras que el de la fórmula casi no se mueve.
 
 Esa es la lección: **no leas los números exactos, lee la tendencia**.
+
+Este es el truco de comparar hecho con conteos de operaciones, que nunca se mueven. Cada tamaño es 10 veces el anterior, así que divide cada conteo entre el anterior: cerca de 10 significa que el trabajo crece en proporción a n, y 1 significa que no crece nada. Predice qué van a mostrar los números del bucle y luego ejecútalo:
+
+```js-run
+const sizes = [1000, 10000, 100000, 1000000]
+let previousLoop = 0
+for (let k = 0; k < sizes.length; k++) {
+  const n = sizes[k]
+  const loopOperations = 5 * n + 2
+  const formulaOperations = 3
+  let growth = ''
+  if (previousLoop > 0) {
+    growth = ' (' + (loopOperations / previousLoop).toFixed(2) + ' veces el anterior)'
+  }
+  console.log('n = ' + n + ': bucle ' + loopOperations + growth + ' | fórmula ' + formulaOperations)
+  previousLoop = loopOperations
+}
+```
+
+Cada vez que n creció 10 veces, la cuenta del bucle creció 10 veces: una línea recta. La cuenta de la fórmula se quedó en 3: una línea plana. Usa la misma prueba con tiempos reales: con entradas grandes, una razón cerca de 10 significa que el trabajo crece en proporción a n, aunque los milisegundos exactos se muevan.
 
 **Error común:** decidir con una sola corrida pequeña que el bucle "a veces es más rápido". Con entradas chiquitas, el ruido pesa más que el trabajo, así que cualquiera de las dos versiones puede parecer más rápida. Solo las entradas grandes muestran cuál crece de verdad.
 

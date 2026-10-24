@@ -1,7 +1,7 @@
 ---
 title: Visualizing time complexities
 order: 4
-minutes: 9
+minutes: 11
 ---
 
 > **Goal:** see the growth of two solutions on a chart, and learn to read the trend instead of the exact numbers.
@@ -87,6 +87,26 @@ for (let k = 0; k < sizes.length; k++) {
 With small n, the loop's times jump around: at that tiny scale, everything else happening on your computer is bigger than the work itself. Don't let that confuse you. As n gets big, the loop's time climbs steadily (roughly 10 times more work each time n is 10 times bigger), while the formula's time barely moves.
 
 That's the lesson: **don't read the exact numbers, read the trend**.
+
+Here's the comparison trick done with operation counts, which never wobble. Each size is 10 times the one before, so divide each count by the previous one: about 10 means the work grows in proportion to n, and 1 means it doesn't grow at all. Predict what the loop's numbers will show, then run it:
+
+```js-run
+const sizes = [1000, 10000, 100000, 1000000]
+let previousLoop = 0
+for (let k = 0; k < sizes.length; k++) {
+  const n = sizes[k]
+  const loopOperations = 5 * n + 2
+  const formulaOperations = 3
+  let growth = ''
+  if (previousLoop > 0) {
+    growth = ' (' + (loopOperations / previousLoop).toFixed(2) + ' times the last one)'
+  }
+  console.log('n = ' + n + ': loop ' + loopOperations + growth + ' | formula ' + formulaOperations)
+  previousLoop = loopOperations
+}
+```
+
+Every time n grew 10 times, the loop's count grew 10 times: a straight line. The formula's count stayed at 3: a flat line. Use the same test on real timings: with big inputs, a ratio near 10 means the work grows in proportion to n, even when the exact milliseconds wobble.
 
 **Common mistake:** deciding from one small run that the loop is "sometimes faster". With tiny inputs, the noise is bigger than the work, so either version can look faster. Only big inputs show which one really grows.
 
