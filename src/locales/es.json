@@ -247,7 +247,7 @@
       "modelAnswer": "Una respuesta modelo",
       "checklist": "Marca cada punto que cubre tu explicación:",
       "missing": "¿Te falta un punto? Agrégalo a tu explicación con tus propias palabras y márcalo.",
-      "done": "Listo",
+      "done": "Terminé",
       "passed": "¡Explicado!"
     }
   },
