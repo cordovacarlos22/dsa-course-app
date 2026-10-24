@@ -118,8 +118,9 @@ Esas tendencias son justo lo que describe Big O. Cada forma tiene un nombre, que
 - **O(n)**, **tiempo lineal:** una línea recta. El trabajo crece en proporción a n, como el bucle.
 - **O(n²)**, **tiempo cuadrático:** una curva que se dobla hacia arriba muy rápido. El trabajo crece con n × n.
 - **O(log n)**, **tiempo logarítmico:** una curva que crece muy despacio. Duplicar n agrega solo un paso más.
+- **O(n log n)**, **tiempo linearítmico:** una línea que se curva hacia arriba solo un poco más que O(n). Así crecen los mejores algoritmos de ordenamiento generales, como merge sort.
 
-Más adelante en el módulo vas a tener una lección completa sobre cada una. Por ahora, lo importante es que **la forma importa más que cualquier medición aislada**. Al pasar de 1,000 elementos a 1,000,000 (1,000 veces más), una función O(1) hace el mismo trabajo, una función O(n) hace 1,000 veces más trabajo y una función O(n²) hace un **millón** de veces más.
+Más adelante en el módulo vas a ver cada una otra vez, casi todas en una lección propia (O(n log n) llega con los logaritmos). Por ahora, lo importante es que **la forma importa más que cualquier medición aislada**. Al pasar de 1,000 elementos a 1,000,000 (1,000 veces más), una función O(1) hace el mismo trabajo, una función O(n) hace 1,000 veces más trabajo y una función O(n²) hace un **millón** de veces más.
 
 ```viz
 big-o-growth-chart

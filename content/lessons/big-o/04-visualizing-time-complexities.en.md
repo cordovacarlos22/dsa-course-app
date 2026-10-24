@@ -118,8 +118,9 @@ These trends are exactly what Big O describes. Each shape has a name, written wi
 - **O(n)**, **linear time:** a straight line. The work grows in proportion to n, like the loop.
 - **O(n²)**, **quadratic time:** a curve that bends up steeply. The work grows with n × n.
 - **O(log n)**, **logarithmic time:** a curve that grows very slowly. Doubling n adds just one more step.
+- **O(n log n)**, **linearithmic time:** a line that bends up just a little more than O(n). It's how the best general sorting algorithms grow, like merge sort.
 
-You'll get a whole lesson on each of these later in the module. For now, the point is that the **shape matters more than any single measurement**. Going from 1,000 items to 1,000,000 items (1,000 times more), an O(1) function does the same work, an O(n) function does 1,000 times more work, and an O(n²) function does a **million** times more.
+You'll meet each of these again later in the module, most of them in a lesson of their own (O(n log n) comes with logarithms). For now, the point is that the **shape matters more than any single measurement**. Going from 1,000 items to 1,000,000 items (1,000 times more), an O(1) function does the same work, an O(n) function does 1,000 times more work, and an O(n²) function does a **million** times more.
 
 ```viz
 big-o-growth-chart
