@@ -303,8 +303,8 @@ Modules 04–17 have empty folders; they appear in `course.json` as "coming soon
 - 2026-10-11 (solved): Actions didn't start on the new repo until Carlos added a starter workflow (`blank.yml`) to `main`. That file then failed our Prettier check, so it was removed in `fix/ci-remove-starter-workflow`.
 - (solved) Branch protection is on now that the repo is public.
 
-- App name and domain (placeholder title: "DSA in JavaScript").
+- App name (placeholder title: "DSA in JavaScript"). The domain is decided: `charliecodeacademy.com` (#70).
 - Daily AI limit per student (default 40 messages).
 - (solved) 18 modules (Carlos chose 17 + Array Interview Problems).
-- The Spanish `O(n^2)` script says O(n²) is "generally efficient"; the English translation says **inefficient** (matches the wrap-up). Carlos should fix the Spanish script.
-- The Intro slide 3 still says "Scott Barrett" (original instructor) instead of charliecodeacademy.
+- (no longer applies, #41) An old Spanish `O(n^2)` script called O(n²) "generally efficient" while our lessons say **inefficient**. That script is no longer a source, so there's nothing to fix.
+- Carlos's Intro slide 3 still names the original course's instructor instead of charliecodeacademy (Carlos fixes the slide; never write that name in the repo).

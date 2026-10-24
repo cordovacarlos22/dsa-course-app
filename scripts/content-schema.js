@@ -125,7 +125,9 @@ export const exerciseSchema = z.preprocess(
 // The module's folder inside Carlos's course folder (outside the repo), e.g.
 // "course 1 /section 4 ", or a list when a module draws on both courses
 // (Big O). Folder names keep their trailing spaces.
-const sourceFolder = z.union([nonEmpty, z.array(nonEmpty).min(1)])
+// Not `nonEmpty`: that trims, and the spaces are part of these names.
+const folderName = z.string().regex(/\S/, 'must not be empty')
+const sourceFolder = z.union([folderName, z.array(folderName).min(1)])
 
 export const practiceSchema = z
   .object({

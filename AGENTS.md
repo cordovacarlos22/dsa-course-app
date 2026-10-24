@@ -252,7 +252,7 @@ When Carlos says _"generate content for section N"_:
      - `kind: "function"` (default): `functionName` + tests `{ args, expected }`.
      - `kind: "class"`: `className` + tests made of steps: `{ create: [args] }`, `{ call: "method", args: [], expected }`, `{ read: "prop.path", expected }`.
      - Each has a difficulty (`easy` / `medium` / `hard`), a description, JS starter code, a reference solution, **at least 5 tests** (include edge cases), and the expected time/space complexity.
-   - **Original wording only.** Use the transcripts and the blueprint to learn _what_ to test, but never copy questions, exercises, transcripts or slides word for word.
+   - **Original wording only.** Use the module's notes, slides and the blueprint to learn _what_ to test, but never copy questions, exercises, notes or slides word for word.
 
 4. Run `npm run content:validate` and fix every error. It checks the schemas (`scripts/content-schema.js`), that the slug exists in `course.json`, unique ids, and runs every reference solution against its tests.
 
