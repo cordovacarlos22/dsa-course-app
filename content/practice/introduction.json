@@ -163,6 +163,38 @@
       }
     },
     {
+      "id": "copying-an-object",
+      "topic": "Getting the most out of it",
+      "prompt": {
+        "en": "What does this code print?",
+        "es": "¿Qué imprime este código?"
+      },
+      "code": "const guest = { table: 2 }\nconst sameGuest = guest\nsameGuest.table = 5\nconsole.log(guest.table)",
+      "options": [
+        {
+          "en": "`5`",
+          "es": "`5`"
+        },
+        {
+          "en": "`2`",
+          "es": "`2`"
+        },
+        {
+          "en": "`undefined`",
+          "es": "`undefined`"
+        },
+        {
+          "en": "An error, because `guest` is a `const`",
+          "es": "Un error, porque `guest` es un `const`"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "`sameGuest = guest` copies the arrow, not the object, so both variables point to the same object. Changing `sameGuest.table` changes the one object they share. `const` stops the arrow from moving, not the object from changing.",
+        "es": "`sameGuest = guest` copia la flecha, no el objeto, así que las dos variables apuntan al mismo objeto. Cambiar `sameGuest.table` cambia el único objeto que comparten. `const` impide que la flecha se mueva, no que el objeto cambie."
+      }
+    },
+    {
       "id": "when-to-do-exercises",
       "topic": "Getting the most out of it",
       "prompt": {
@@ -287,6 +319,37 @@
       }
     },
     {
+      "id": "array-vs-object-lookup",
+      "topic": "Welcome",
+      "prompt": {
+        "en": "Dev's name is last in a guest list of 1,000 names. To answer \"Is Dev on the list?\", how many checks does an array need, checking one name at a time, and how many does an object with one key per guest need?",
+        "es": "El nombre de Dev es el último de una lista de 1,000 nombres. Para responder \"¿Dev está en la lista?\", ¿cuántas revisiones necesita un array, revisando un nombre a la vez, y cuántas un objeto con una clave por cada nombre?"
+      },
+      "options": [
+        {
+          "en": "1 and 1,000",
+          "es": "1 y 1,000"
+        },
+        {
+          "en": "1,000 and 1,000",
+          "es": "1,000 y 1,000"
+        },
+        {
+          "en": "500 and 1",
+          "es": "500 y 1"
+        },
+        {
+          "en": "1,000 and 1",
+          "es": "1,000 y 1"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "The array has to check the names one by one, and Dev is last, so it takes 1,000 checks. The object looks up the key `Dev` directly: one check, however long the list is.",
+        "es": "El array tiene que revisar los nombres uno por uno, y Dev va al final, así que toma 1,000 revisiones. El objeto busca la clave `Dev` directamente: una revisión, sin importar qué tan larga sea la lista."
+      }
+    },
+    {
       "id": "infinite-loop-protection",
       "topic": "Running code",
       "prompt": {
@@ -316,6 +379,131 @@
       "explanation": {
         "en": "The code runs separately from the page, so an infinite loop can't freeze it. After 2 seconds the course stops the code and tells you there may be an infinite loop.",
         "es": "El código se ejecuta separado de la página, así que un bucle infinito no puede congelarla. Después de 2 segundos el curso detiene el código y te avisa que puede haber un bucle infinito."
+      }
+    },
+    {
+      "id": "line-tags",
+      "topic": "Running code",
+      "prompt": {
+        "en": "After you press Run, an output line carries the tag **line 5**. What does the tag tell you?",
+        "es": "Después de presionar Ejecutar, una línea de salida lleva la etiqueta **línea 5**. ¿Qué te dice la etiqueta?"
+      },
+      "options": [
+        {
+          "en": "That line 5 of the code printed it",
+          "es": "Que la línea 5 del código la imprimió"
+        },
+        {
+          "en": "That it's the fifth line of output",
+          "es": "Que es la quinta línea de la salida"
+        },
+        {
+          "en": "That the code took 5 milliseconds to run",
+          "es": "Que el código tardó 5 milisegundos en ejecutarse"
+        },
+        {
+          "en": "That line 5 has an error",
+          "es": "Que la línea 5 tiene un error"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Each output line is tagged with the line of code that printed it. A `console.log` inside a loop prints several lines with the same tag, one per turn.",
+        "es": "Cada línea de salida lleva la etiqueta de la línea de código que la imprimió. Un `console.log` dentro de un bucle imprime varias líneas con la misma etiqueta, una por vuelta."
+      }
+    },
+    {
+      "id": "web-worker",
+      "topic": "Running code",
+      "prompt": {
+        "en": "Why does the course run your code in a Web Worker?",
+        "es": "¿Por qué el curso ejecuta tu código en un Web Worker?"
+      },
+      "options": [
+        {
+          "en": "Because a Web Worker makes JavaScript run faster",
+          "es": "Porque un Web Worker hace que JavaScript corra más rápido"
+        },
+        {
+          "en": "So the lesson never freezes, and stuck code can be stopped",
+          "es": "Para que la lección nunca se congele, y el código atorado se pueda detener"
+        },
+        {
+          "en": "So your code can save files on your computer",
+          "es": "Para que tu código pueda guardar archivos en tu computadora"
+        },
+        {
+          "en": "Because a web page can't run JavaScript",
+          "es": "Porque una página web no puede ejecutar JavaScript"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "A page runs its JavaScript one thing at a time. Running your code in a separate Web Worker keeps the lesson responsive, and lets the course stop code that's still busy after 2 seconds.",
+        "es": "Una página ejecuta su JavaScript una cosa a la vez. Ejecutar tu código en un Web Worker aparte mantiene la lección funcionando, y deja que el curso detenga el código que sigue ocupado después de 2 segundos."
+      }
+    },
+    {
+      "id": "plus-joins-text",
+      "topic": "Running code",
+      "prompt": {
+        "en": "What does this line print?",
+        "es": "¿Qué imprime esta línea?"
+      },
+      "code": "console.log('Seats: ' + 2 + 3)",
+      "options": [
+        {
+          "en": "`Seats: 5`",
+          "es": "`Seats: 5`"
+        },
+        {
+          "en": "`Seats: 2 3`",
+          "es": "`Seats: 2 3`"
+        },
+        {
+          "en": "`Seats: 23`",
+          "es": "`Seats: 23`"
+        },
+        {
+          "en": "An error, because you can't add text and numbers",
+          "es": "Un error, porque no puedes sumar texto y números"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "`+` works from left to right. `'Seats: ' + 2` makes the text `'Seats: 2'`, and then `+ 3` joins a `3` to it. To print `Seats: 5`, use a comma: `console.log('Seats:', 2 + 3)`.",
+        "es": "`+` trabaja de izquierda a derecha. `'Seats: ' + 2` forma el texto `'Seats: 2'`, y luego `+ 3` le une un `3`. Para imprimir `Seats: 5`, usa una coma: `console.log('Seats:', 2 + 3)`."
+      }
+    },
+    {
+      "id": "syntax-error-runs-nothing",
+      "topic": "Running code",
+      "prompt": {
+        "en": "A code box has 10 lines, and a `)` is missing on line 8. What happens when you press Run?",
+        "es": "Una caja de código tiene 10 líneas, y en la línea 8 falta un `)`. ¿Qué pasa al presionar Ejecutar?"
+      },
+      "options": [
+        {
+          "en": "Lines 1 to 7 run, then it stops at line 8",
+          "es": "Las líneas 1 a 7 corren, y luego se detiene en la línea 8"
+        },
+        {
+          "en": "Nothing runs: JavaScript reports a SyntaxError before running any line",
+          "es": "No corre nada: JavaScript avisa un SyntaxError antes de ejecutar cualquier línea"
+        },
+        {
+          "en": "Everything runs, and only line 8 is skipped",
+          "es": "Corre todo, y solo se salta la línea 8"
+        },
+        {
+          "en": "JavaScript adds the missing `)` for you",
+          "es": "JavaScript agrega el `)` que falta por ti"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "JavaScript reads the whole code before running it. If it can't make sense of the code, it stops with a SyntaxError, so not even line 1 runs. Other errors, like a ReferenceError, only stop the code at the line where they happen.",
+        "es": "JavaScript lee todo el código antes de ejecutarlo. Si no puede entenderlo, se detiene con un SyntaxError, así que no corre ni la línea 1. Otros errores, como un ReferenceError, solo detienen el código en la línea donde pasan."
       }
     }
   ],
