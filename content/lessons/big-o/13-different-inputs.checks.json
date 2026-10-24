@@ -1,44 +1,35 @@
 {
   "steps": [
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "A function loops over `guests` (a items), then over `helpers` (b items), one loop after the other. What's its Big O?",
-        "es": "Una función recorre `guests` (a elementos) y después `helpers` (b elementos), un bucle después del otro. ¿Cuál es su Big O?"
+        "en": "In your own words: why is a loop over the guests followed by a loop over the helpers O(a + b), and not O(n)?",
+        "es": "Con tus palabras: ¿por qué un bucle sobre los invitados seguido de un bucle sobre los ayudantes es O(a + b), y no O(n)?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "Because the guests and the helpers are two different inputs, and their sizes can be completely different: 1,000 guests and 3 helpers, or the other way around. Calling both n would pretend they're the same size. So each input gets its own letter, and two loops one after the other add up to O(a + b).",
+        "es": "Porque los invitados y los ayudantes son dos entradas distintas, y sus tamaños pueden ser muy diferentes: 1,000 invitados y 3 ayudantes, o al revés. Llamar n a los dos haría como si tuvieran el mismo tamaño. Así que cada entrada recibe su propia letra, y dos bucles uno después del otro se suman: O(a + b)."
+      },
+      "checklist": [
         {
-          "en": "O(n)",
-          "es": "O(n)"
+          "en": "Says the two inputs can have very different sizes",
+          "es": "Dice que las dos entradas pueden tener tamaños muy distintos"
         },
         {
-          "en": "O(2n)",
-          "es": "O(2n)"
+          "en": "Says each input gets its own letter",
+          "es": "Dice que cada entrada recibe su propia letra"
         },
         {
-          "en": "O(a · b)",
-          "es": "O(a · b)"
-        },
-        {
-          "en": "O(a + b)",
-          "es": "O(a + b)"
+          "en": "Says loops one after the other add up (a + b)",
+          "es": "Dice que los bucles seguidos se suman (a + b)"
         }
-      ],
-      "answer": 3,
-      "hint": {
-        "en": "Two different inputs, one letter each. Loops one after the other add.",
-        "es": "Dos entradas distintas, una letra cada una. Los bucles uno después del otro se suman."
-      },
-      "explanation": {
-        "en": "a + b, and it can't be simplified further: you don't know which input is bigger.",
-        "es": "a + b, y no se puede simplificar más: no sabes cuál entrada es más grande."
-      }
+      ]
     },
     {
       "type": "code",
       "task": {
         "en": "Write `countThankYous(guests, helpers)`: every guest thanks every helper. Use a loop over `helpers` **inside** a loop over `guests`, and count the thank-yous. (That's O(a · b).)",
-        "es": "Escribe `countThankYous(guests, helpers)`: cada invitado le agradece a cada ayudante. Usa un bucle sobre `helpers` **dentro** de un bucle sobre `guests` y cuenta los agradecimientos. (Eso es O(a · b).)"
+        "es": "Escribe `countThankYous(guests, helpers)`: cada persona invitada le agradece a cada ayudante. Usa un bucle sobre `helpers` **dentro** de un bucle sobre `guests` y cuenta los agradecimientos. (Eso es O(a · b).)"
       },
       "hint": {
         "en": "`for (let i = 0; i < guests.length; i++)` and inside it `for (let j = 0; j < helpers.length; j++)`. Add 1 each time.",

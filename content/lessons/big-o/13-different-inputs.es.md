@@ -1,7 +1,7 @@
 ---
 title: Términos distintos para entradas distintas
 order: 13
-minutes: 9
+minutes: 10
 ---
 
 > **Meta:** escribir O(a + b) y O(a · b) para código con dos entradas. ¡Una "trampa" clásica de entrevista!
@@ -45,7 +45,7 @@ const helpers = ['Kai', 'Lu'] // b = 2
 
 let inARow = 0
 for (let i = 0; i < guests.length; i++) {
-  inARow++ // darle la bienvenida a un invitado
+  inARow++ // darle la bienvenida a una persona
 }
 for (let j = 0; j < helpers.length; j++) {
   inARow++ // darle instrucciones a un ayudante
@@ -54,7 +54,7 @@ for (let j = 0; j < helpers.length; j++) {
 let nested = 0
 for (let i = 0; i < guests.length; i++) {
   for (let j = 0; j < helpers.length; j++) {
-    nested++ // este invitado le da las gracias a este ayudante
+    nested++ // un agradecimiento por cada par de persona invitada y ayudante
   }
 }
 
@@ -72,7 +72,7 @@ console.log('Anidados:', nested, 'pasos (a · b)') // 8
 trace-welcome-and-goodbye
 ```
 
-**Qué acaba de pasar:** los dos bucles recorrieron la **misma** lista de invitados. El bucle de bienvenidas corrió una vez por invitado, y luego el de despedidas corrió otra vez una vez por invitado: n + n = 2n. Como es una sola entrada, n de verdad es el mismo número en los dos bucles, así que 2n es O(n).
+**Qué acaba de pasar:** los dos bucles recorrieron la **misma** lista de invitados. El bucle de bienvenidas corrió una vez por persona, y luego el de despedidas corrió otra vez una vez por persona: n + n = 2n. Como es una sola entrada, n de verdad es el mismo número en los dos bucles, así que 2n es O(n).
 
 | Forma del código                                    | Big O    |
 | --------------------------------------------------- | -------- |
@@ -96,6 +96,8 @@ console.log('1,000,000 invitados, 3 ayudantes:', stepsInARow(1000000, 3), 'segui
 ```
 
 En el primer caso, b hace casi todo el trabajo; en el segundo, lo hace a. No se puede quitar ninguna de las dos letras, porque el código funciona para las dos fiestas.
+
+Hay una excepción: cuando el problema **promete** que una entrada nunca crece. Si cada fiesta tiene exactamente 3 ayudantes, b ya no es una variable: es la constante 3. Entonces O(a + 3) se simplifica a O(a), y O(a · 3) también a O(a). Una letra solo se queda en la respuesta para una entrada que puede crecer.
 
 En una entrevista, es buena costumbre decirlo en voz alta: "Digamos que el número de invitados es a y el número de ayudantes es b. El primer bucle es O(a), el segundo es O(b), así que la función completa es O(a + b)."
 

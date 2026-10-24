@@ -1,7 +1,7 @@
 ---
 title: Different terms for inputs
 order: 13
-minutes: 9
+minutes: 10
 ---
 
 > **Goal:** write O(a + b) and O(a · b) for code with two inputs. A classic interview "gotcha"!
@@ -96,6 +96,8 @@ console.log('1,000,000 guests, 3 helpers:', stepsInARow(1000000, 3), 'in a row,'
 ```
 
 In the first case, b does almost all the work; in the second, a does. Neither letter can be dropped, because the code works for both parties.
+
+There's one exception: when the problem **promises** that an input never grows. If every party has exactly 3 helpers, b isn't a variable anymore: it's the constant 3. Then O(a + 3) simplifies to O(a), and O(a · 3) to O(a) as well. A letter only stays in the answer for an input that can grow.
 
 In an interview, it's a good habit to say this out loud: "Let's call the number of guests a and the number of helpers b. The first loop is O(a), the second is O(b), so the whole function is O(a + b)."
 
