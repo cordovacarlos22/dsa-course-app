@@ -335,7 +335,6 @@ describe('celebrations', () => {
 
   it('celebrates the whole module when its last lesson is finished', async () => {
     const user = userEvent.setup()
-    checkJavaScript.mockResolvedValue(passedCheck)
     saveProgress('introduction', '01-welcome', {
       ...emptyProgress(),
       passed: [0, 1, 2, 3],

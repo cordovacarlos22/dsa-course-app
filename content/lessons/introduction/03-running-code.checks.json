@@ -57,8 +57,8 @@
     {
       "type": "choice",
       "question": {
-        "en": "This code stops with `ReferenceError: numbr is not defined`: `function timesTwo(number) { return numbr * 2 }`. What is the bug?",
-        "es": "Este código se detiene con `ReferenceError: numbr is not defined`: `function timesTwo(number) { return numbr * 2 }`. ¿Cuál es el error?"
+        "en": "Calling `timesTwo(5)` stops with `ReferenceError: numbr is not defined`. The function is `function timesTwo(number) { return numbr * 2 }`. What is the bug?",
+        "es": "Llamar `timesTwo(5)` se detiene con `ReferenceError: numbr is not defined`. La función es `function timesTwo(number) { return numbr * 2 }`. ¿Cuál es el error?"
       },
       "options": [
         {
@@ -91,8 +91,8 @@
     {
       "type": "choice",
       "question": {
-        "en": "This loop never stops: `let count = 1`, then `while (count <= 3) { total += count }`. Why?",
-        "es": "Este bucle nunca termina: `let count = 1`, y luego `while (count <= 3) { total += count }`. ¿Por qué?"
+        "en": "This loop never stops: `let total = 0` and `let count = 1`, then `while (count <= 3) { total += count }`. Why?",
+        "es": "Este bucle nunca termina: `let total = 0` y `let count = 1`, y luego `while (count <= 3) { total += count }`. ¿Por qué?"
       },
       "options": [
         {
