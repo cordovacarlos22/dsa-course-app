@@ -249,7 +249,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Next
 
-- **Process first (2026-10-23):** #37 CI pipeline ✅ (PR #50), #59 Reviewer agent + Dependabot queue, #40 bot account, #38 Docker, #51 Infisical, #39 release pipeline (staging + approval), then #41 source paths, #42 code-box replay, #43–#46 deeper modules.
+- **Process first (2026-10-23):** #37 CI pipeline ✅ (PR #50), #59 Reviewer agent ✅ (PR #61), #62 security upgrades ✅ (PR #64), #63 Vite 8 + WebKit (PR #69), #70 own domain (code: PR #72; then Carlos's setup), #39 release gate (PR #73; then Carlos switches Vercel's production branch), #68 react-router 8, #71 eslint 10, #40 bot account, #38 Docker, #51 Infisical (+ automatic staging tests), then #41 source paths, #42 code-box replay, #43–#46 deeper modules.
 
 - After `fix/tool-findings` merges: check production's headers (`curl -sI https://dsa-course-app.vercel.app/`) and run the app once in a browser for CSP errors.
 - #34 and #35 (the theory pass) are merged.

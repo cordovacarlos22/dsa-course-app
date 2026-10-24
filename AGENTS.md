@@ -129,7 +129,7 @@ Every change goes through **plan → code → build → test → ship**, with ro
 2. **Code:** one issue = one branch (`type/<issue>-<slug>`) = one PR that says `Closes #<issue>` and fills the PR template. Never commit to `main`. Small [Conventional Commits](https://www.conventionalcommits.org).
 3. **Build:** GitHub Actions must be green (lint, format, unit tests, content, build; end-to-end and security scans as they're added).
 4. **Test:** the Reviewer agent reviews every PR (Dependabot's too) and posts a verdict, the QA agent tests and files bugs as issues, and Carlos signs off. Reviews run locally in Claude Code, never as a paid run in CI.
-5. **Ship:** today Vercel deploys `main` straight to production. The staging site and the approval gate before production are being added (see the status table in `docs/process.md`).
+5. **Ship:** `main` is staging; production is the `production` branch, which only the **Release** workflow moves forward, after Carlos approves (see "5. Ship" in `docs/process.md`). **Never push `production` by hand** (agents included): its ruleset can't tell a merged commit from a PR's. Until Carlos switches Vercel's production branch, Vercel still deploys `main` to production.
 
 **Database rule (stage 8): expand, then contract.** A migration must never break the version that's live: add new tables and columns first, and remove or rename old ones only in a later release.
 

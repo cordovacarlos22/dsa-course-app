@@ -55,9 +55,22 @@ Dependabot opens PRs for outdated or vulnerable dependencies every week. Those P
 
 ### 5. Ship
 
-- A merge to `main` deploys to **staging** automatically, then runs the end-to-end and smoke tests there.
-- Production waits for **Carlos's approval** (a GitHub environment with a required reviewer). After he approves, the staging build is promoted to production and smoke-tested.
-- The previous production deploy stays available, so a bad release is rolled back with one command.
+- **Staging (after the switch below):** every merge to `main` deploys to staging on Vercel: Vercel's `main` branch address, and `staging.charliecodeacademy.com` once that domain is added. It's added only after the switch, because before it a domain on `main` serves production. Staging is behind Vercel's login, so only Carlos opens it. Automatic tests against staging come after #51, which keeps the secret that lets CI past the login.
+- **Release:** production is the `production` branch. To ship, run **Release** (GitHub → Actions → Release → Run workflow; it takes a commit, and the default is `main`'s latest).
+  - The run waits for **Carlos's approval** in the `release` environment, which only accepts runs started from `main`.
+  - It then moves `production` forward to that commit, and Vercel deploys it. The commit must be one of `main`'s own commits (a merge, not a commit from inside a PR) and newer than what's live.
+  - Release after the commit's checks on `main` are green: the ruleset below refuses a commit whose checks haven't passed yet. When several PRs merge within minutes, only the last merge gets a full CI run (a newer push cancels the older run on `main`), so release the latest commit, which is the default.
+  - When the repository variable `PRODUCTION_URLS` is set, it waits for Vercel's deploy and checks that every address answers 200 with the Content-Security-Policy. That proves the site is up with its headers, not which deploy is live; Vercel's dashboard shows that.
+- **A ruleset guards the `production` branch:** it only accepts commits whose **CI passed** and **CodeQL** checks passed, and it can't be force-pushed or deleted. It can't tell whether a commit was merged, though: a PR's own commits pass those checks too. Only the Release workflow checks for `main`.
+- **So nobody pushes `production` by hand, agents included.** Only Release moves it. (GitHub can't enforce this on a personal repo without an extra deploy-key secret: a possible later step, Carlos's call.)
+- **Rollback:**
+  1. In Vercel → Deployments, choose the previous production deploy → **Instant Rollback** (seconds, no rebuild).
+  2. While rolled back, **Vercel stops moving the domains to new production deploys**, so a release alone won't go live.
+  3. Fix forward: revert the bad change on `main` with a PR, and release that commit.
+  4. In Vercel, **promote** the new production deploy, so the domains follow `production` again. (Not "Undo Rollback": it may bring back the bad deploy.) Check in Vercel's dashboard which deploy is live.
+- **Switching it on (Carlos, once):**
+  1. In Vercel → Settings → Environments → Production → Branch Tracking, change `main` to `production`. Until then, Vercel still deploys `main` to production on every merge, and Release only moves a branch nobody deploys.
+  2. Once the domain is live, set the repository variable `PRODUCTION_URLS` to `https://charliecodeacademy.com https://app.charliecodeacademy.com/learn`.
 - **Database rule (from stage 8): expand, then contract.** Staging and production may share a database during a release, so a migration must never break the version that's live. Add new tables and columns first; remove or rename old ones only in a later release.
 
 ## Definition of done
@@ -84,17 +97,19 @@ For now every agent works through **Carlos's GitHub account**, so GitHub sees on
 
 ## Status: what's live today
 
-| Piece                                                                              | Status            |
-| ---------------------------------------------------------------------------------- | ----------------- |
-| Issue templates, PR template, CODEOWNERS, agent roles                              | ✅ live           |
-| Labels and the first issues (#37–#46)                                              | ✅ live           |
-| Board "DSA course app" (github.com/users/cordovacarlos22/projects/9)               | ✅ live           |
-| CI: lint, format, unit tests, content, build                                       | ✅ live           |
-| CI: end-to-end tests (3 setups), dependency audit, CodeQL, secret scan, Dependabot | ✅ live (#37)     |
-| Required checks on `main`: CI passed and CodeQL                                    | ✅ live           |
-| GitHub secret scanning, push protection, Dependabot security updates               | ✅ live           |
-| Secrets in Infisical (OIDC from GitHub Actions)                                    | ⏳ #51            |
-| Docker dev and QA environment                                                      | ⏳ `chore/docker` |
-| Staging deploy, Carlos's approval, production promote, rollback                    | ⏳ `ci/release`   |
+| Piece                                                                              | Status                                                             |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Issue templates, PR template, CODEOWNERS, agent roles                              | ✅ live                                                            |
+| Labels and the first issues (#37–#46)                                              | ✅ live                                                            |
+| Board "DSA course app" (github.com/users/cordovacarlos22/projects/9)               | ✅ live                                                            |
+| CI: lint, format, unit tests, content, build                                       | ✅ live                                                            |
+| CI: end-to-end tests (3 setups), dependency audit, CodeQL, secret scan, Dependabot | ✅ live (#37)                                                      |
+| Required checks on `main`: CI passed and CodeQL                                    | ✅ live                                                            |
+| GitHub secret scanning, push protection, Dependabot security updates               | ✅ live                                                            |
+| Secrets in Infisical (OIDC from GitHub Actions)                                    | ⏳ #51                                                             |
+| Docker dev and QA environment                                                      | ⏳ `chore/docker`                                                  |
+| Release: `production` branch, Carlos's approval, ruleset, rollback                 | ✅ built (#39): on once Vercel's production branch is `production` |
+| Staging on `staging.charliecodeacademy.com`                                        | ⏳ #70 (the domain)                                                |
+| Automatic tests against staging                                                    | ⏳ after #51                                                       |
 
-Until the release pipeline is live, Vercel deploys `main` to production on every merge, so Carlos's approval happens when he merges the PR.
+Until Carlos switches Vercel's production branch to `production`, Vercel deploys `main` to production on every merge, so his approval still happens when he merges the PR.
