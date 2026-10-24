@@ -89,17 +89,19 @@ An issue is **Done** when its acceptance criteria are met, its tests are added, 
 
 The app has its own domain, `charliecodeacademy.com` (registered on Cloudflare; its DNS points to Vercel). One Vercel project serves every address:
 
-| Address                          | Serves                                                  |
-| -------------------------------- | ------------------------------------------------------- |
-| `charliecodeacademy.com`         | the landing page                                        |
-| `www.charliecodeacademy.com`     | a redirect to `charliecodeacademy.com`                  |
-| `app.charliecodeacademy.com`     | the course for students (`/` goes to `/learn`)          |
-| `staging.charliecodeacademy.com` | the latest `main` (staging, #39), behind Vercel's login |
+| Address                          | Serves                                                                                  |
+| -------------------------------- | --------------------------------------------------------------------------------------- |
+| `charliecodeacademy.com`         | the landing page                                                                        |
+| `www.charliecodeacademy.com`     | a redirect to `charliecodeacademy.com`                                                  |
+| `app.charliecodeacademy.com`     | the course for students (`/` goes to `/learn`)                                          |
+| `staging.charliecodeacademy.com` | the latest `main`, behind Vercel's login: **added only after #39's switch** (see below) |
 
 - **DNS:** every record for Vercel is **DNS only** (Cloudflare's proxy off), because the proxy breaks Vercel's certificates and caching.
 - **Protection:** Vercel's **Standard Protection**. The landing page and `app.` are public; previews and `staging.` ask for the Vercel login.
-- **Two addresses, one app:** pages under `/learn` belong to `app.`, the rest to the landing page. `src/lib/crossSite.js` sends a page loaded on the wrong address to the right one, carrying the language (`?lang=`), so the course's progress always lives on `app.`. `vercel.json` redirects direct visits by host.
-- **Switching it on:** set `VITE_SITE_ORIGIN=https://charliecodeacademy.com` and `VITE_APP_ORIGIN=https://app.charliecodeacademy.com` in Vercel for **Production only**. In Preview they would send staging's visitors to production. Without them (dev, tests, previews), the app stays on one address.
+- **`staging.` waits for #39's switch.** While `main` is still Vercel's production branch, a domain assigned to `main` serves _production_ deploys: Standard Protection would leave it public, and it would get the production-only variables below. So add `staging.` (assigned to `main`) only after Vercel's production branch is `production` ("5. Ship").
+- **Two addresses, one app:** pages under `/learn` belong to `app.`, the rest to the landing page. `src/lib/crossSite.js` sends a page loaded on the wrong address to the right one, carrying the language (`?lang=`, which the app saves and then removes from the address bar), so the course's progress always lives on `app.`. `vercel.json` redirects direct visits by host.
+- **Switching it on:** set `VITE_SITE_ORIGIN=https://charliecodeacademy.com` and `VITE_APP_ORIGIN=https://app.charliecodeacademy.com` in Vercel for **Production only** (in Preview they would send staging's visitors to production), then **redeploy production**: Vite writes them into the build, so a deploy made before they existed doesn't have them. Without them (dev, tests, previews), the app stays on one address.
+- **After that, test on the domain:** with the variables on, `dsa-course-app.vercel.app` sends browsers to the domain too, so browser checks of production use `charliecodeacademy.com` and `app.`.
 
 ## Accounts: who GitHub sees
 
