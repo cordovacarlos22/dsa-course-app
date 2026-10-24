@@ -12,7 +12,7 @@ So far, every function had **one** input, and we called its size n. But plenty o
 
 Remember `printTwice`, with one loop after another? Each loop ran n times, so it was O(2n), and we dropped the constant to get O(n). Here's the interview twist: instead of passing in **one** number n, we pass in **two** different ones, a and b. The first loop runs a times and the second runs b times.
 
-The knee-jerk answer, if you haven't seen this before, goes like this: "A single loop is O(n), and this other single loop is O(n). Add them: O(2n). Drop the constant: O(n)." **That's not correct.** You can't say that a equals n **and** b equals n: they're two different inputs. Picture a = 1 and b = 1,000,000: one loop barely runs, and the other runs a million times. So the first loop is **O(a)**, the second is **O(b)**, and together they're **O(a + b)**. That's as far as it simplifies.
+The first answer that comes to mind, if you haven't seen this before, goes like this: "A single loop is O(n), and this other single loop is O(n). Add them: O(2n). Drop the constant: O(n)." **That's not correct.** You can't say that a equals n **and** b equals n: they're two different inputs. Picture a = 1 and b = 1,000,000: one loop barely runs, and the other runs a million times. So the first loop is **O(a)**, the second is **O(b)**, and together they're **O(a + b)**. That's as far as it simplifies.
 
 Here's the same idea with a party that has guests (a) and helpers (b):
 
@@ -62,7 +62,7 @@ console.log('In a row:', inARow, 'steps (a + b)') // 6
 console.log('Nested:', nested, 'steps (a · b)') // 8
 ```
 
-**Common mistake:** the knee-jerk answer itself, calling both loops O(n) and ending up with O(n). Two loops over **different** inputs never collapse into one letter. Write one letter per input, then add (loops in a row) or multiply (one loop inside the other).
+**Common mistake:** that first answer, calling both loops O(n) and ending up with O(n). Two loops over **different** inputs never collapse into one letter. Write one letter per input, then add (loops in a row) or multiply (one loop inside the other).
 
 ## Don't call them both n
 

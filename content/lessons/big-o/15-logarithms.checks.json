@@ -41,8 +41,8 @@
         "es": "Con tus palabras: ¿por qué dividir y conquistar encuentra un elemento en una lista ordenada en unos log₂(n) pasos?"
       },
       "modelAnswer": {
-        "en": "Each step looks at the middle and throws away the half that can't hold the item, so what's left to search halves every time. Starting with n items, you can only halve about log₂(n) times before one item is left: 8 items take 3 halvings, and a billion takes about 30. That's why the steps barely grow, even when the list gets huge.",
-        "es": "Cada paso mira el centro y descarta la mitad donde no puede estar el elemento, así que lo que queda por buscar se reduce a la mitad cada vez. Empezando con n elementos, solo puedes partir a la mitad unas log₂(n) veces antes de que quede un solo elemento: 8 elementos se parten 3 veces, y mil millones unas 30. Por eso los pasos casi no crecen, aunque la lista sea enorme."
+        "en": "Each step looks at the middle and throws away the half that can't hold the item, so what's left to search halves every time. Starting with n items, you can only halve about log₂(n) times before one item is left: 8 items take 3 halvings, and a billion takes about 30 (29 if you round down each time). That's why the steps barely grow, even when the list gets huge.",
+        "es": "Cada paso mira el centro y descarta la mitad donde no puede estar el elemento, así que lo que queda por buscar se reduce a la mitad cada vez. Empezando con n elementos, solo puedes partir a la mitad unas log₂(n) veces antes de que quede un solo elemento: 8 elementos se parten 3 veces, y mil millones unas 30 (29 si redondeas hacia abajo cada vez). Por eso los pasos casi no crecen, aunque la lista sea enorme."
       },
       "checklist": [
         {

@@ -79,7 +79,7 @@ console.log('O(n!):', factorial)
 
 ## Recap
 
-**Big O notation** is our tool for judging how an algorithm performs. It gives us a **high-level understanding** of how the runtime (time complexity) or the memory (space complexity) of an algorithm changes as its input grows. It doesn't care about precision, only about **general trends**. And it's a property of the **algorithm** itself, not of the machine running it: a supercomputer runs the same code faster than your laptop, but the trend is the same.
+**Big O notation** is our tool for judging how an algorithm performs. It gives us a **high-level understanding** of how the runtime (time complexity) or the memory (space complexity) of an algorithm changes as its input grows. It doesn't care about precision, only about **general trends**. And it's a property of the **algorithm** itself, not of the machine running it: a faster computer finishes each step sooner, but it still does the same number of steps, so the trend is the same.
 
 The rules you learned:
 

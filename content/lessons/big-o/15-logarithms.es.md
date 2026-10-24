@@ -8,9 +8,9 @@ minutes: 12
 
 ## Lo contrario de un exponente
 
-Algunos algoritmos tienen un Big O que no es O(1), O(n) ni O(n²). Uno que aparece más de lo que esperarías tiene que ver con **logaritmos**, así que aquí va la versión corta. Ya sea que aprendiste logaritmos en la escuela y los olvidaste, o que nunca los aprendiste, no necesitas ser experto en matemáticas.
+Algunos algoritmos tienen un Big O que no es O(1), O(n) ni O(n²). Uno que aparece más de lo que esperarías tiene que ver con **logaritmos**, así que aquí va la versión corta. Ya sea que aprendiste logaritmos en la escuela y los olvidaste, o que nunca los aprendiste, no necesitas dominar las matemáticas.
 
-Un **logaritmo es lo contrario de un exponente**, igual que la división es lo contrario de la multiplicación. Así como 2 × 0.5 = 1 se puede voltear en 1 ÷ 2 = 0.5, un exponente se puede voltear en un logaritmo:
+Un **logaritmo deshace un exponente**. Un exponente parte de cuántas veces multiplicas y te da el resultado. Un logaritmo parte del resultado y te devuelve cuántas veces multiplicaste:
 
 - **2³ = 8** significa "multiplica tres 2 entre sí y obtienes 8".
 - **log₂(8) = 3** pregunta lo mismo al revés: "¿2 elevado a **qué** potencia da 8?" La respuesta es 3.

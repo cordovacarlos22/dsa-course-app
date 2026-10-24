@@ -79,7 +79,7 @@ console.log('O(n!):', factorial)
 
 ## Resumen
 
-La **notación Big O** es nuestra herramienta para juzgar cómo se desempeña un algoritmo. Nos da un **entendimiento de alto nivel** de cómo cambia el tiempo de ejecución (complejidad temporal) o la memoria (complejidad espacial) de un algoritmo cuando crece su entrada. No le importa la precisión, solo las **tendencias generales**. Y es una propiedad del **algoritmo** mismo, no de la máquina que lo corre: una supercomputadora corre el mismo código más rápido que tu laptop, pero la tendencia es la misma.
+La **notación Big O** es nuestra herramienta para juzgar cómo se desempeña un algoritmo. Nos da un **entendimiento de alto nivel** de cómo cambia el tiempo de ejecución (complejidad temporal) o la memoria (complejidad espacial) de un algoritmo cuando crece su entrada. No le importa la precisión, solo las **tendencias generales**. Y es una propiedad del **algoritmo** mismo, no de la máquina que lo corre: una computadora más rápida termina cada paso antes, pero sigue haciendo la misma cantidad de pasos, así que la tendencia es la misma.
 
 Las reglas que aprendiste:
 
@@ -104,7 +104,7 @@ Aquí tienes una última función para analizar con todas las reglas a la vez. P
 ```js-run
 function partyPlan(guests) {
   let steps = 0
-  steps++ // el anfitrión revisa la puerta: O(1)
+  steps++ // revisar la puerta: O(1)
   for (let i = 0; i < guests.length; i++) {
     steps++ // darle la bienvenida a cada persona: O(n)
   }

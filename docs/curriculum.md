@@ -46,7 +46,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Big O (`big-o`)
 
-**Status:** ✅ 17 lessons, 56 steps (EN + ES, 56 checkpoints, all theory first; all 17 lessons deeper, with explain checks, #43 and #44) · ✅ quiz, 48 questions (EN + ES) · ✅ 6 interview problems · ⬜ slides
+**Status:** ✅ 17 lessons, 56 steps (EN + ES, 56 checkpoints, all theory first; all 17 lessons deeper, with explain checks, #43 and #44) · ✅ quiz, 49 questions (EN + ES) · ✅ 6 interview problems · ⬜ slides
 **Goal:** measure and compare the efficiency of code, in time and space.
 **Sources:** Carlos's two Big O files (course 1 "Section 2 - Big o notes.docx" and course 2 "Intro to Big O.docx", text and images; see AGENTS.md).
 **Style:** one lesson per lecture of both courses, at their depth (450–900 words each), with the courses' own examples written as indexed loops; every step has an animation except three practice steps, lesson 3's "Count it yourself", lesson 10's "Spot the dominant term in code" and lesson 14's "Trading space for time", which use runnable code instead, and the party **guest list** is the story of the animations.

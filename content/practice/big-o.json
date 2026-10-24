@@ -1137,6 +1137,37 @@
       }
     },
     {
+      "id": "simplify-both-rules",
+      "topic": "Big O: Drop Non-Dominants",
+      "prompt": {
+        "en": "Simplify O(3n² + 10n + 7) as much as possible.",
+        "es": "Simplifica O(3n² + 10n + 7) lo más posible."
+      },
+      "options": [
+        {
+          "en": "O(3n²)",
+          "es": "O(3n²)"
+        },
+        {
+          "en": "O(n² + n)",
+          "es": "O(n² + n)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Both rules at once: 10n and 7 are non-dominant next to 3n², so they go, and then the constant 3 goes too. That leaves O(n²).",
+        "es": "Las dos reglas a la vez: 10n y 7 no son dominantes junto a 3n², así que se eliminan, y luego también se va la constante 3. Queda O(n²)."
+      }
+    },
+    {
       "id": "time-at-least-ten",
       "topic": "Big O: Rules of Thumb",
       "prompt": {
@@ -1456,7 +1487,7 @@
       "topic": "Big O: Arrays",
       "prompt": {
         "en": "`guests.splice(1, 0, 'Zoe')` inserts a name near the middle. A classmate says it's O(n/2), because only about half the names move. What's the correct Big O?",
-        "es": "`guests.splice(1, 0, 'Zoe')` inserta un nombre cerca del medio. Un compañero dice que es O(n/2), porque solo se mueve más o menos la mitad de los nombres. ¿Cuál es el Big O correcto?"
+        "es": "`guests.splice(1, 0, 'Zoe')` inserta un nombre cerca del medio. Alguien de tu clase dice que es O(n/2), porque solo se mueve más o menos la mitad de los nombres. ¿Cuál es el Big O correcto?"
       },
       "code": "guests.splice(1, 0, 'Zoe')",
       "options": [

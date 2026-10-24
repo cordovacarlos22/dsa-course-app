@@ -4,7 +4,7 @@
       "type": "choice",
       "question": {
         "en": "A teammate says reading `scores[9000]` from an array of 10,000 scores is slow, because JavaScript has to count from index 0 up to 9,000. What's the Big O of that read?",
-        "es": "Un compañero dice que leer `scores[9000]` de un array de 10,000 puntajes es lento, porque JavaScript tiene que contar desde el índice 0 hasta el 9,000. ¿Cuál es el Big O de esa lectura?"
+        "es": "Alguien de tu clase dice que leer `scores[9000]` de un array de 10,000 puntajes es lento, porque JavaScript tiene que contar desde el índice 0 hasta el 9,000. ¿Cuál es el Big O de esa lectura?"
       },
       "options": [
         {
@@ -63,7 +63,7 @@
       "type": "choice",
       "question": {
         "en": "`tickets.splice(1, 0, 40)` inserts an item near the middle. A classmate says it's O(n/2) because only half the items move. What's the correct Big O?",
-        "es": "`tickets.splice(1, 0, 40)` inserta un elemento cerca del medio. Un compañero dice que es O(n/2) porque solo se mueve la mitad de los elementos. ¿Cuál es el Big O correcto?"
+        "es": "`tickets.splice(1, 0, 40)` inserta un elemento cerca del medio. Alguien de tu clase dice que es O(n/2) porque solo se mueve la mitad de los elementos. ¿Cuál es el Big O correcto?"
       },
       "options": [
         {

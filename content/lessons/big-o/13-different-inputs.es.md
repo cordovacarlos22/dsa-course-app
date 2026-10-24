@@ -12,7 +12,7 @@ Hasta ahora, cada función tenía **una** entrada, y a su tamaño le decíamos n
 
 ¿Recuerdas `printTwice`, con un bucle después de otro? Cada bucle corría n veces, así que era O(2n), y quitamos la constante para obtener O(n). Este es el giro de entrevista: en lugar de pasar **un** número n, pasamos **dos** números distintos, a y b. El primer bucle corre a veces y el segundo corre b veces.
 
-La respuesta automática, si nunca has visto esto, suena así: "Un bucle es O(n), y este otro bucle también es O(n). Súmalos: O(2n). Quita la constante: O(n)." **Eso no es correcto.** No puedes decir que a es igual a n **y** que b es igual a n: son dos entradas distintas. Imagina a = 1 y b = 1,000,000: un bucle casi no corre, y el otro corre un millón de veces. Así que el primer bucle es **O(a)**, el segundo es **O(b)**, y juntos son **O(a + b)**. Hasta ahí se simplifica.
+La primera respuesta que se te ocurre, si nunca has visto esto, suena así: "Un bucle es O(n), y este otro bucle también es O(n). Súmalos: O(2n). Quita la constante: O(n)." **Eso no es correcto.** No puedes decir que a es igual a n **y** que b es igual a n: son dos entradas distintas. Imagina a = 1 y b = 1,000,000: un bucle casi no corre, y el otro corre un millón de veces. Así que el primer bucle es **O(a)**, el segundo es **O(b)**, y juntos son **O(a + b)**. Hasta ahí se simplifica.
 
 Esta es la misma idea con una fiesta que tiene invitados (a) y ayudantes (b):
 
@@ -62,7 +62,7 @@ console.log('Seguidos:', inARow, 'pasos (a + b)') // 6
 console.log('Anidados:', nested, 'pasos (a · b)') // 8
 ```
 
-**Error común:** la respuesta automática misma: decir que los dos bucles son O(n) y terminar con O(n). Dos bucles sobre entradas **distintas** nunca se juntan en una sola letra. Escribe una letra por entrada, y luego suma (bucles seguidos) o multiplica (un bucle dentro del otro).
+**Error común:** esa primera respuesta: decir que los dos bucles son O(n) y terminar con O(n). Dos bucles sobre entradas **distintas** nunca se juntan en una sola letra. Escribe una letra por entrada, y luego suma (bucles seguidos) o multiplica (un bucle dentro del otro).
 
 ## No les digas n a las dos
 

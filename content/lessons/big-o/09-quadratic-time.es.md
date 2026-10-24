@@ -93,7 +93,7 @@ Ahora sí podemos comparar dos códigos con Big O de verdad. Si dos funciones ha
 | 100   | 100   | 10,000    |
 | 1,000 | 1,000 | 1,000,000 |
 
-O(n²) en general se considera **ineficiente**. Muchas veces se siente bien cuando lo pruebas con pocos elementos, y luego se arrastra con datos reales. Si puedes reescribir tu código para que sea O(n), va a ser mucho más eficiente. Esa es una pregunta muy común en las entrevistas: la primera idea para un problema es O(n²), y el entrevistador pregunta: "¿Puedes hacerlo mejor?"
+O(n²) en general se considera **ineficiente**. Muchas veces se siente bien cuando lo pruebas con pocos elementos, y luego se arrastra con datos reales. Si puedes reescribir tu código para que sea O(n), va a ser mucho más eficiente. Esa es una pregunta muy común en las entrevistas: la primera idea para un problema es O(n²), y quien te entrevista pregunta: "¿Puedes hacerlo mejor?"
 
 Pon O(n²) en la gráfica junto a O(n) y la diferencia salta a la vista:
 
