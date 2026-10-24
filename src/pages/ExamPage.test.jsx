@@ -55,6 +55,8 @@ describe('section exam', () => {
         'Section 1 exam: Foundations · DSA in JavaScript',
       ),
     )
+    // Opening the page doesn't move the focus past its title.
+    expect(document.body).toHaveFocus()
 
     for (let i = 0; i < EXAM_SIZE; i++) {
       expect(
@@ -81,6 +83,10 @@ describe('section exam', () => {
     expect(
       screen.getByRole('link', { name: 'Back to the course' }),
     ).toHaveAttribute('href', '/learn')
+
+    // Try again draws a new mix and moves the focus to its first question.
+    await user.click(screen.getByRole('button', { name: 'Try again' }))
+    expect(screen.getByText(`Question 1 of ${EXAM_SIZE}`)).toHaveFocus()
   })
 
   it('shows "page not found" for a section with no quizzes', async () => {
