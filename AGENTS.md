@@ -98,6 +98,7 @@ Before every commit, run: `npm run lint && npm run format:check && npm test && n
 - UI text goes in `src/locales/*.json`, never hard-coded (once i18n is set up, stage 4).
 - Secrets live in `.env.local` (git-ignored). Only `VITE_` variables reach the browser, so never put a service-role key in one.
 - **The Anthropic API key never goes in the frontend or Vercel.** It's a Supabase function secret, used only by `supabase/functions/tutor`.
+- **Two addresses in production** (see "Domains" in `docs/process.md`): the landing page on `charliecodeacademy.com`, the course on `app.charliecodeacademy.com`. Course pages live under `/learn`, and login and Supabase auth redirect URLs (stage 8) use `app.`.
 - **Security headers live in `vercel.json`.** Its Content-Security-Policy only allows the app's own files. When the app starts calling a new service (Supabase in stage 8), add that origin to `connect-src`. Two exceptions are on purpose: `'unsafe-eval'` (the code runner runs student code with `new Function` in a Web Worker; without it Run and Check stop working) and `worker-src blob:` (confetti). After changing the policy, open the PR preview and check the browser console for CSP errors.
 - **Every page sets its browser tab title** with `useDocumentTitle(name)` (`src/hooks/useDocumentTitle.js`), in the student's language.
 

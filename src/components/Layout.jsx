@@ -1,5 +1,8 @@
-import { Link, NavLink, Outlet, useMatch } from 'react-router'
+import { useEffect } from 'react'
+import { Link, NavLink, Outlet, useLocation, useMatch } from 'react-router'
 import { useTranslation } from 'react-i18next'
+import { useLanguage } from '../hooks/useLanguage'
+import { crossSiteUrl, goTo } from '../lib/crossSite'
 import LanguageSwitcher from './LanguageSwitcher'
 import SoundToggle from './SoundToggle'
 import FirstVisitLanguagePicker from './FirstVisitLanguagePicker'
@@ -10,6 +13,11 @@ function Layout() {
   // Lessons get the full width for the 3-pane coding workspace.
   const isLesson = useMatch('/learn/:moduleSlug/:lessonSlug')
   const width = isLesson ? 'max-w-screen-2xl' : 'max-w-5xl'
+  const otherAddress = useOtherAddress()
+
+  // This page lives on the other address (see src/lib/crossSite.js): show
+  // nothing while the browser goes there.
+  if (otherAddress) return null
 
   return (
     <div className="flex min-h-screen flex-col bg-surface text-ink">
@@ -65,6 +73,27 @@ function Layout() {
       <FirstVisitLanguagePicker />
     </div>
   )
+}
+
+// The URL of this page on the other address, or null to stay.
+function useOtherAddress() {
+  const { pathname, search, hash } = useLocation()
+  const { language } = useLanguage()
+  const otherAddress = crossSiteUrl({
+    pathname,
+    search,
+    hash,
+    here: window.location.host,
+    siteOrigin: import.meta.env.VITE_SITE_ORIGIN,
+    appOrigin: import.meta.env.VITE_APP_ORIGIN,
+    language,
+  })
+
+  useEffect(() => {
+    if (otherAddress) goTo(otherAddress)
+  }, [otherAddress])
+
+  return otherAddress
 }
 
 export default Layout

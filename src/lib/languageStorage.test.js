@@ -1,5 +1,9 @@
 import { afterEach, describe, it, expect, vi } from 'vitest'
-import { getSavedLanguage, saveLanguage } from './languageStorage'
+import {
+  getSavedLanguage,
+  saveLanguage,
+  saveLinkedLanguage,
+} from './languageStorage'
 
 afterEach(() => {
   vi.restoreAllMocks()
@@ -25,6 +29,18 @@ describe('languageStorage', () => {
       throw new Error('blocked')
     })
     expect(() => saveLanguage('es')).not.toThrow()
+    expect(() => saveLinkedLanguage('?lang=es')).not.toThrow()
+    expect(getSavedLanguage()).toBeNull()
+  })
+
+  it('saves the language a link brings along (?lang=)', () => {
+    saveLinkedLanguage('?lang=es')
+    expect(getSavedLanguage()).toBe('es')
+  })
+
+  it('ignores a link without a supported language', () => {
+    saveLinkedLanguage('?lang=fr')
+    saveLinkedLanguage('')
     expect(getSavedLanguage()).toBeNull()
   })
 })
