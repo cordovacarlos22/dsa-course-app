@@ -134,7 +134,7 @@ jobs:
       - name: Build and start the preview container
         run: |
           docker compose up --build --detach preview
-          # Wait up to 30 s for the server to answer.
+          # Try 30 times, about a minute and a half at most, for an answer.
           for attempt in $(seq 1 30); do
             curl -sf --max-time 2 -o /dev/null http://127.0.0.1:4174/ && exit 0
             sleep 1
