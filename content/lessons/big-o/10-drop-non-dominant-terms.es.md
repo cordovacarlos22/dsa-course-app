@@ -1,7 +1,7 @@
 ---
 title: Elimina los términos no dominantes
 order: 10
-minutes: 9
+minutes: 12
 ---
 
 > **Meta:** simplificar expresiones como O(n² + n) con la segunda regla: quedarse solo con el término que crece más rápido.
@@ -100,3 +100,44 @@ La proporción se acerca cada vez más a 1: con n grande, los términos que quit
 Cuidado con las constantes grandes: O(n + 1,000,000) sigue siendo solo **O(n)**. Por grande que sea, un número fijo no crece, y cuando n es lo bastante grande, la parte n siempre gana.
 
 **Error común:** comparar los términos con una n pequeña. Con n = 1,000, el 1,000,000 de n + 1,000,000 es mucho más grande que n, así que dan ganas de decir que el código es O(1). Pero Big O pregunta qué pasa cuando n sigue creciendo, y con n = mil millones, la parte n es mil veces más grande que la constante.
+
+## Encuentra el término dominante en el código
+
+Hasta ahora los términos llegaban ya escritos, como n² + 5n + 8. En el código real nadie te da la expresión: la armas tú, un bloque a la vez, y luego te quedas solo con la parte que crece más rápido. Los pasos:
+
+1. Dale a cada bloque de código su costo: una línea sola es O(1), un bucle sobre la entrada es O(n), y un bucle dentro de otro bucle sobre la entrada es O(n²).
+2. Suma los bloques que van **uno después del otro**.
+3. Quédate con el término dominante y quita las constantes.
+
+Esta es una función que prepara la fiesta, con el costo de cada bloque en un comentario:
+
+```js-run
+function prepareParty(guests) {
+  console.log('Invitados:', guests.length) // O(1)
+
+  for (let i = 0; i < guests.length; i++) {
+    console.log('Gafete para ' + guests[i]) // O(n): un gafete por persona
+  }
+
+  let introductions = 0
+  for (let i = 0; i < guests.length; i++) {
+    for (let j = 0; j < guests.length; j++) {
+      if (i !== j) {
+        introductions = introductions + 1 // O(n²): cada persona conoce a todas las demás
+      }
+    }
+  }
+  console.log('Presentaciones:', introductions)
+}
+
+prepareParty(['Ana', 'Ben', 'Cleo', 'Dev'])
+```
+
+Al sumar los bloques queda O(1) + O(n) + O(n²). El bucle anidado es el término dominante, así que `prepareParty` es **O(n²)**. Con 4 personas son 4 gafetes y 12 presentaciones; con 1,000 personas, 1,000 gafetes y 999,000 presentaciones. Los gafetes casi no cuentan junto a las presentaciones.
+
+Otras dos formas que vas a ver todo el tiempo:
+
+- **Un bucle sobre la entrada y luego un bucle de largo fijo** (por ejemplo, poner 10 mesas): n + 10, así que **O(n)**. Un bucle que nunca crece es una constante, por grande que parezca.
+- **Dos bucles anidados, uno después del otro:** n² + n² = 2n², y al quitar el 2 queda **O(n²)**. Dos copias del mismo término forman una constante más grande, no un término nuevo.
+
+**Error común:** quedarte con el bloque que va primero, o con el que tiene más líneas. Dónde está un bloque y qué tan largo se ve no importan: busca el bloque que crece más rápido con la entrada, y ese es el que se queda Big O.

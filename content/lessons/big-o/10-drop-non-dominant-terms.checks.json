@@ -35,37 +35,62 @@
       }
     },
     {
+      "type": "explain",
+      "question": {
+        "en": "In your own words: why can Big O drop the smaller terms, like the n in n² + n?",
+        "es": "Con tus palabras: ¿por qué Big O puede quitar los términos más pequeños, como la n de n² + n?"
+      },
+      "modelAnswer": {
+        "en": "Big O only describes how the work grows for big inputs. When n is big, the fastest-growing term does almost all the work: at n = 1,000, n² is a million while n is only a thousand, and the gap keeps growing. The smaller terms don't change the shape of the growth, so they can go.",
+        "es": "Big O solo describe cómo crece el trabajo con entradas grandes. Cuando n es grande, el término que crece más rápido hace casi todo el trabajo: con n = 1,000, n² es un millón mientras que n es solo mil, y la diferencia sigue creciendo. Los términos más pequeños no cambian la forma del crecimiento, así que se pueden quitar."
+      },
+      "checklist": [
+        {
+          "en": "Says Big O describes the growth for big inputs",
+          "es": "Dice que Big O describe el crecimiento con entradas grandes"
+        },
+        {
+          "en": "Says the fastest-growing term does almost all the work when n is big",
+          "es": "Dice que el término que crece más rápido hace casi todo el trabajo cuando n es grande"
+        },
+        {
+          "en": "Says the smaller terms don't change the shape",
+          "es": "Dice que los términos más pequeños no cambian la forma"
+        }
+      ]
+    },
+    {
       "type": "choice",
       "question": {
-        "en": "Simplify O(n² + n³).",
-        "es": "Simplifica O(n² + n³)."
+        "en": "`checkIn(guests)` has a loop over the guests, then a loop that always runs 50 times to set out the chairs. What's its Big O, simplified?",
+        "es": "`checkIn(guests)` tiene un bucle sobre los invitados y luego un bucle que siempre da 50 vueltas para poner las sillas. ¿Cuál es su Big O, ya simplificado?"
       },
       "options": [
         {
-          "en": "O(n²)",
-          "es": "O(n²)"
+          "en": "O(1)",
+          "es": "O(1)"
         },
         {
           "en": "O(n)",
           "es": "O(n)"
         },
         {
-          "en": "O(n³)",
-          "es": "O(n³)"
+          "en": "O(n + 50)",
+          "es": "O(n + 50)"
         },
         {
-          "en": "O(n⁵)",
-          "es": "O(n⁵)"
+          "en": "O(50n)",
+          "es": "O(50n)"
         }
       ],
-      "answer": 2,
+      "answer": 1,
       "hint": {
-        "en": "Which one grows faster: n² or n³?",
-        "es": "¿Cuál crece más rápido: n² o n³?"
+        "en": "Which block grows when the guest list grows?",
+        "es": "¿Qué bloque crece cuando crece la lista de invitados?"
       },
       "explanation": {
-        "en": "n³ grows faster than n², so n³ is the dominant term: O(n³).",
-        "es": "n³ crece más rápido que n², así que n³ es el término dominante: O(n³)."
+        "en": "The guest loop grows with n; the chair loop always runs 50 times, a constant. n + 50 simplifies to O(n).",
+        "es": "El bucle de invitados crece con n; el de las sillas siempre da 50 vueltas, una constante. n + 50 se simplifica a O(n)."
       }
     }
   ]
