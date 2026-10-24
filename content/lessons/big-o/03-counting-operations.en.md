@@ -1,7 +1,7 @@
 ---
 title: Counting operations
 order: 3
-minutes: 10
+minutes: 13
 ---
 
 > **Goal:** count the simple operations of a function instead of timing it, and see why the exact count doesn't matter.
@@ -77,6 +77,69 @@ console.log(countOperations(1000)) // 5002
 ```
 
 **Common mistake:** worrying that your count doesn't match someone else's. Is the comparison that finally ends the loop one more operation? Is `i++` one operation or two? People get slightly different totals, like 5n + 2 or 5n + 3, and that's fine. As the next step shows, the exact number isn't what we're after.
+
+## Count it yourself
+
+Counting any function follows the same recipe:
+
+1. Find the work that happens **once**, outside any loop.
+2. Find each **loop**, and ask how many times it runs.
+3. **Multiply** the work inside the loop by the number of turns.
+4. **Add** it all up, then look at how the total grows.
+
+Let's practice on two new functions. The first works out the average age of the guests:
+
+```js-run
+function averageAge(ages) {
+  let total = 0
+  for (let i = 0; i < ages.length; i++) {
+    total = total + ages[i]
+  }
+  return total / ages.length
+}
+
+console.log(averageAge([31, 25, 40, 28])) // 31
+```
+
+Let's count it:
+
+- **Once:** `let total = 0` (1 assignment), `let i = 0` (1 assignment) and, at the end, `total / ages.length` (1 division): 3 operations.
+- **Once per age:** the comparison `i < ages.length`, the addition and assignment in `total = total + ages[i]`, and the addition and assignment in `i++`: 5 operations.
+
+That's about **5n + 3** operations for n ages: the same shape as `sumOneTo`, growing in proportion to the length of the list.
+
+The second function announces who opens and who closes the line:
+
+```js-run
+function firstAndLast(guests) {
+  return guests[0] + ' opens the party and ' + guests[guests.length - 1] + ' closes it'
+}
+
+console.log(firstAndLast(['Ana', 'Ben', 'Cleo', 'Dev']))
+console.log(firstAndLast(['Ana', 'Ben', 'Cleo', 'Dev', 'Eli', 'Fay', 'Gus', 'Hana']))
+```
+
+Count it the way we counted the formula: one subtraction (`guests.length - 1`) and three additions that join the text. That's **4 operations**, and with 4 guests or 4,000 it's still 4, because there's no loop: nothing repeats.
+
+Now let the computer count `averageAge` for growing lists. Before you run it, predict: if 8 ages cost about 40 operations, about how many will 16 cost?
+
+```js-run
+function countAverageAgeOperations(n) {
+  let operations = 3 // let total = 0, let i = 0, and the division at the end
+  for (let i = 0; i < n; i++) {
+    operations = operations + 5 // the comparison, + and = for total, + and = in i++
+  }
+  return operations
+}
+
+console.log('4 ages:', countAverageAgeOperations(4)) // 23
+console.log('8 ages:', countAverageAgeOperations(8)) // 43
+console.log('16 ages:', countAverageAgeOperations(16)) // 83
+```
+
+From 4 to 8 ages, the count went from 23 to 43, and from 8 to 16 it reached 83: each time the list doubles, the work about doubles. The "+ 3" at the start is why it's not exactly double, and it matters less and less as the list grows.
+
+**Common mistake:** counting a loop's work only once. The lines inside a loop's `{ }` run once **per turn**, so their operations get multiplied by the number of turns. A quick test: point at a line and ask, "How many times does this run when the list has n items?"
 
 ## Fuzzy counting
 

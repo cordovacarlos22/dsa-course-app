@@ -101,6 +101,31 @@
         "en": "About 40 becomes about 80: it doubles. The exact 5 doesn't matter; the trend does.",
         "es": "Unas 40 se vuelven unas 80: se duplica. El 5 exacto no importa; la tendencia sí."
       }
+    },
+    {
+      "type": "explain",
+      "question": {
+        "en": "In your own words: why doesn't Big O care whether a loop costs 5n + 2 or 3n operations?",
+        "es": "Con tus palabras: ¿por qué a Big O no le importa si un bucle cuesta 5n + 2 o 3n operaciones?"
+      },
+      "modelAnswer": {
+        "en": "Because both grow the same way: in proportion to n. When n is big, small extras like the + 2 are a tiny part of the total, and the exact cost per item doesn't change the shape of the growth. What decides whether code survives a huge input is how the count grows, not its exact value.",
+        "es": "Porque las dos crecen igual: en proporción a n. Cuando n es grande, los extras pequeños como el + 2 son una parte mínima del total, y el costo exacto por elemento no cambia la forma del crecimiento. Lo que decide si un código aguanta una entrada enorme es cómo crece la cuenta, no su valor exacto."
+      },
+      "checklist": [
+        {
+          "en": "Says both counts grow in proportion to n (the same trend)",
+          "es": "Dice que las dos cuentas crecen en proporción a n (la misma tendencia)"
+        },
+        {
+          "en": "Says small extras like + 2 stop mattering when n is big",
+          "es": "Dice que los extras pequeños como el + 2 dejan de importar cuando n es grande"
+        },
+        {
+          "en": "Says what matters is how the count grows, not the exact number",
+          "es": "Dice que lo que importa es cómo crece la cuenta, no el número exacto"
+        }
+      ]
     }
   ]
 }

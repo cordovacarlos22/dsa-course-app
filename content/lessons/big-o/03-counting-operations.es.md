@@ -1,7 +1,7 @@
 ---
 title: Contando operaciones
 order: 3
-minutes: 10
+minutes: 13
 ---
 
 > **Meta:** contar las operaciones simples de una función en lugar de medir su tiempo, y ver por qué la cuenta exacta no importa.
@@ -78,6 +78,69 @@ console.log(countOperations(1000)) // 5002
 
 **Error común:** preocuparte porque tu cuenta no coincide con la de otra persona. ¿La comparación que finalmente termina el bucle es una operación más? ¿`i++` es una operación o dos? Cada persona puede llegar a un total un poco distinto, como 5n + 2 o 5n + 3, y no pasa nada. Como muestra el siguiente paso, el número exacto no es lo que buscamos.
 
+## Cuéntalo tú
+
+Contar cualquier función sigue la misma receta:
+
+1. Encuentra el trabajo que pasa **una sola vez**, fuera de cualquier bucle.
+2. Encuentra cada **bucle**, y pregúntate cuántas vueltas da.
+3. **Multiplica** el trabajo de adentro del bucle por el número de vueltas.
+4. **Suma** todo, y luego mira cómo crece el total.
+
+Practiquemos con dos funciones nuevas. La primera calcula la edad promedio de las personas invitadas:
+
+```js-run
+function averageAge(ages) {
+  let total = 0
+  for (let i = 0; i < ages.length; i++) {
+    total = total + ages[i]
+  }
+  return total / ages.length
+}
+
+console.log(averageAge([31, 25, 40, 28])) // 31
+```
+
+Contemos:
+
+- **Una sola vez:** `let total = 0` (1 asignación), `let i = 0` (1 asignación) y, al final, `total / ages.length` (1 división): 3 operaciones.
+- **Una vez por cada edad:** la comparación `i < ages.length`, la suma y la asignación de `total = total + ages[i]`, y la suma y la asignación de `i++`: 5 operaciones.
+
+Son unas **5n + 3** operaciones para n edades: la misma forma que `sumOneTo`, que crece en proporción al largo de la lista.
+
+La segunda función anuncia a quien abre y a quien cierra la fila:
+
+```js-run
+function firstAndLast(guests) {
+  return guests[0] + ' abre la fiesta y ' + guests[guests.length - 1] + ' la cierra'
+}
+
+console.log(firstAndLast(['Ana', 'Ben', 'Cleo', 'Dev']))
+console.log(firstAndLast(['Ana', 'Ben', 'Cleo', 'Dev', 'Eli', 'Fay', 'Gus', 'Hana']))
+```
+
+Cuéntala como contamos la fórmula: una resta (`guests.length - 1`) y tres sumas que unen el texto. Son **4 operaciones**, y con 4 personas o con 4,000 siguen siendo 4, porque no hay bucle: nada se repite.
+
+Ahora deja que la computadora cuente `averageAge` con listas cada vez más grandes. Antes de ejecutarlo, predice: si 8 edades cuestan unas 40 operaciones, ¿más o menos cuántas costarán 16?
+
+```js-run
+function countAverageAgeOperations(n) {
+  let operations = 3 // let total = 0, let i = 0, y la división del final
+  for (let i = 0; i < n; i++) {
+    operations = operations + 5 // la comparación, + y = de total, + y = de i++
+  }
+  return operations
+}
+
+console.log('4 edades:', countAverageAgeOperations(4)) // 23
+console.log('8 edades:', countAverageAgeOperations(8)) // 43
+console.log('16 edades:', countAverageAgeOperations(16)) // 83
+```
+
+De 4 a 8 edades, la cuenta pasó de 23 a 43, y de 8 a 16 llegó a 83: cada vez que la lista se duplica, el trabajo casi se duplica. El "+ 3" del inicio es la razón de que no sea exactamente el doble, y importa cada vez menos mientras la lista crece.
+
+**Error común:** contar una sola vez el trabajo de un bucle. Las líneas dentro de las `{ }` de un bucle se ejecutan una vez **por vuelta**, así que sus operaciones se multiplican por el número de vueltas. Una prueba rápida: señala una línea y pregúntate: "¿Cuántas veces se ejecuta cuando la lista tiene n elementos?"
+
 ## Contar "a ojo"
 
 La buena noticia: **el número exacto no importa**. Sea 5n + 2, 3n o 2n, lo que importa es la **tendencia general**: cuando n crece, el número de operaciones crece **más o menos en proporción a n**. Duplica n y duplicas el trabajo. Multiplica n por 1,000 y el trabajo crece unas 1,000 veces. Ese es el panorama general, y el panorama general es lo que le importa a Big O.
@@ -88,15 +151,15 @@ La buena noticia: **el número exacto no importa**. Sea 5n + 2, 3n o 2n, lo que 
 linear-boxes
 ```
 
-**Qué acaba de pasar:** darle la bienvenida a cada invitado fue un paso, así que 4 invitados tomaron 4 pasos, 8 tomaron 8 y 16 tomaron 16. Los puntos formaron una línea recta: el doble de invitados, el doble de trabajo. Ese crecimiento parejo, en proporción, es el que tiene nuestro bucle, sin importar su cuenta exacta por número.
+**Qué acaba de pasar:** darle la bienvenida a cada persona fue un paso, así que 4 invitados tomaron 4 pasos, 8 tomaron 8 y 16 tomaron 16. Los puntos formaron una línea recta: el doble de invitados, el doble de trabajo. Ese crecimiento parejo, en proporción, es el que tiene nuestro bucle, sin importar su cuenta exacta por número.
 
-Lo mismo pasa cuando cuentas a los invitados. Contarlos uno por uno con un bucle cuesta unas 5 operaciones por invitado:
+Lo mismo pasa cuando cuentas a los invitados. Contarlos uno por uno con un bucle cuesta unas 5 operaciones por persona:
 
 ```viz
 trace-count-guests
 ```
 
-**Qué acaba de pasar:** el bucle pagó 5 operaciones por cada invitado, más 3 al principio: 5n + 3, otra línea recta. Pero el último texto señaló un atajo: JavaScript ya sabe cuántos elementos tiene un array, así que `guests.length` da la misma respuesta en **1 paso**, haya 4 invitados o 4 millones. La misma respuesta, un crecimiento completamente distinto.
+**Qué acaba de pasar:** el bucle pagó 5 operaciones por cada persona, más 3 al principio: 5n + 3, otra línea recta. Pero el último texto señaló un atajo: JavaScript ya sabe cuántos elementos tiene un array, así que `guests.length` da la misma respuesta en **1 paso**, haya 4 invitados o 4 millones. La misma respuesta, un crecimiento completamente distinto.
 
 ```js-run
 const guests = ['Ana', 'Ben', 'Cleo', 'Dev']
