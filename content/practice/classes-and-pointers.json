@@ -16,16 +16,16 @@
       },
       "options": [
         {
-          "en": "The template is an instance; the invitations are classes",
-          "es": "La plantilla es una instancia; las invitaciones son clases"
+          "en": "The template is an instance; the invitations are classes made from it",
+          "es": "La plantilla es una instancia; las invitaciones son clases hechas con ella"
         },
         {
-          "en": "The template is the class; each invitation is an instance created from it",
-          "es": "La plantilla es la clase; cada invitación es una instancia creada a partir de ella"
+          "en": "The template is the class; each invitation is an instance",
+          "es": "La plantilla es la clase; cada invitación es una instancia"
         },
         {
-          "en": "The template is a method; the invitations are properties",
-          "es": "La plantilla es un método; las invitaciones son propiedades"
+          "en": "The template is a method; the invitations are its properties",
+          "es": "La plantilla es un método; las invitaciones son sus propiedades"
         },
         {
           "en": "The template is `this`; the invitations are constructors",
@@ -56,7 +56,7 @@
         },
         {
           "en": "With a capital first letter: `Invitation`",
-          "es": "Con la primera letra en mayúscula: `Invitation`"
+          "es": "Con mayúscula inicial: `Invitation`"
         },
         {
           "en": "With a `class_` prefix: `class_invitation`",
@@ -78,20 +78,20 @@
       },
       "options": [
         {
-          "en": "It deletes an instance when you no longer need it",
-          "es": "Borra una instancia cuando ya no la necesitas"
+          "en": "It deletes an instance once nothing uses it anymore",
+          "es": "Borra una instancia cuando ya nada la usa"
         },
         {
-          "en": "It turns the class into a string",
-          "es": "Convierte la clase en un string"
+          "en": "It turns the class into a string you can print",
+          "es": "Convierte la clase en un string que puedes imprimir"
         },
         {
-          "en": "It runs every time any method is called",
-          "es": "Corre cada vez que se llama a cualquier método"
+          "en": "It runs every time any method of the class is called",
+          "es": "Corre cada vez que se llama a cualquier método de la clase"
         },
         {
-          "en": "It runs when `new` creates an instance, and sets up that instance's starting properties",
-          "es": "Corre cuando `new` crea una instancia, y prepara las propiedades iniciales de esa instancia"
+          "en": "It sets up each new instance when `new` creates it",
+          "es": "Prepara cada instancia nueva cuando `new` la crea"
         }
       ],
       "correctIndex": 3,
@@ -110,11 +110,11 @@
       "code": "const forAna = new Invitation('Ana')",
       "options": [
         {
-          "en": "It creates a new instance of `Invitation` by calling the constructor with `'Ana'`",
-          "es": "Crea una instancia nueva de `Invitation` llamando al constructor con `'Ana'`"
+          "en": "It creates a new `Invitation` by calling the constructor with `'Ana'`",
+          "es": "Crea una `Invitation` nueva llamando al constructor con `'Ana'`"
         },
         {
-          "en": "It changes the `Invitation` class so every invitation is for Ana",
+          "en": "It changes the `Invitation` class so that every invitation is for Ana",
           "es": "Cambia la clase `Invitation` para que todas las invitaciones sean para Ana"
         },
         {
@@ -154,14 +154,14 @@
           "es": "`forBen`, la instancia en la que se llamó el método"
         },
         {
-          "en": "Every invitation at once",
-          "es": "Todas las invitaciones a la vez"
+          "en": "Every invitation at once, because they share the method",
+          "es": "Todas las invitaciones a la vez, porque comparten el método"
         }
       ],
       "correctIndex": 2,
       "explanation": {
         "en": "`this` is the specific instance the method was called on. `forBen.getGuest()` reads `forBen`'s guest, so it returns `'Ben'`.",
-        "es": "`this` es la instancia específica en la que se llamó el método. `forBen.getGuest()` lee el invitado de `forBen`, así que regresa `'Ben'`."
+        "es": "`this` es la instancia específica en la que se llamó el método. `forBen.getGuest()` lee el `guest` de `forBen`, así que regresa `'Ben'`."
       }
     },
     {
@@ -205,19 +205,19 @@
       },
       "options": [
         {
-          "en": "A getter returns a value from the instance; a setter changes a value on the instance",
-          "es": "Un getter regresa un valor de la instancia; un setter cambia un valor de la instancia"
+          "en": "A getter reads a value from the instance; a setter changes one",
+          "es": "Un getter lee un valor de la instancia; un setter lo cambia"
         },
         {
           "en": "A getter creates instances; a setter deletes them",
           "es": "Un getter crea instancias; un setter las borra"
         },
         {
-          "en": "Getters and setters can only be used inside the constructor",
-          "es": "Los getters y setters solo se pueden usar dentro del constructor"
+          "en": "Getters and setters can only be called from inside the constructor",
+          "es": "Los getters y setters solo se pueden llamar desde dentro del constructor"
         },
         {
-          "en": "A setter must always return the new value",
+          "en": "A setter must always return the new value it was given",
           "es": "Un setter siempre debe regresar el valor nuevo"
         }
       ],
@@ -236,20 +236,20 @@
       },
       "options": [
         {
-          "en": "Because JavaScript doesn't allow functions outside a class",
-          "es": "Porque JavaScript no permite funciones fuera de una clase"
+          "en": "Because JavaScript doesn't let you write functions outside a class",
+          "es": "Porque JavaScript no te deja escribir funciones fuera de una clase"
         },
         {
-          "en": "Because a class keeps the data (head, tail, length) together with the methods that work on it (push, pop, shift…)",
-          "es": "Porque una clase mantiene los datos (head, tail, length) junto con los métodos que trabajan con ellos (push, pop, shift…)"
+          "en": "Because a class keeps the data with the methods that use it",
+          "es": "Porque una clase junta los datos con los métodos que los usan"
         },
         {
-          "en": "Because classes make code run in O(1)",
-          "es": "Porque las clases hacen que el código corra en O(1)"
+          "en": "Because a class makes every method run in O(1) time",
+          "es": "Porque una clase hace que cada método corra en O(1)"
         },
         {
-          "en": "Because classes use less memory than arrays",
-          "es": "Porque las clases usan menos memoria que los arrays"
+          "en": "Because classes use less memory than arrays and objects",
+          "es": "Porque las clases usan menos memoria que los arrays y los objetos"
         }
       ],
       "correctIndex": 1,
@@ -267,16 +267,16 @@
       },
       "options": [
         {
-          "en": "Make a brand-new, empty object",
-          "es": "Crear un objeto nuevo y vacío"
+          "en": "Make a brand-new, empty object for the instance",
+          "es": "Crear un objeto nuevo y vacío para la instancia"
         },
         {
-          "en": "Point `this` at that object",
-          "es": "Hacer que `this` apunte a ese objeto"
+          "en": "Point `this` at that new object while the constructor runs",
+          "es": "Hacer que `this` apunte a ese objeto mientras corre el constructor"
         },
         {
-          "en": "Run the constructor",
-          "es": "Ejecutar el constructor"
+          "en": "Run the constructor with the arguments you passed",
+          "es": "Ejecutar el constructor con los argumentos que pasaste"
         },
         {
           "en": "Copy every method of the class into the new object",
@@ -299,11 +299,11 @@
       "code": "class Invitation {\n  constructor(guest) {\n    this.guest = guest\n  }\n}\n\nconst forAna = Invitation('Ana')",
       "options": [
         {
-          "en": "JavaScript throws a `TypeError`: a class can't be called without `new`",
-          "es": "JavaScript lanza un `TypeError`: una clase no se puede llamar sin `new`"
+          "en": "A `TypeError`: a class can't be called without `new`",
+          "es": "Un `TypeError`: una clase no se puede llamar sin `new`"
         },
         {
-          "en": "`forAna` becomes Ana's invitation, exactly as with `new`",
+          "en": "`forAna` becomes Ana's invitation, exactly as it would with `new`",
           "es": "`forAna` se vuelve la invitación de Ana, igual que con `new`"
         },
         {
@@ -363,20 +363,20 @@
       "code": "let card = { value: 'Ana' }\nlet sameCard = card\ncard.value = 'Ben'",
       "options": [
         {
-          "en": "`'Ana'`, because `sameCard` is a copy",
-          "es": "`'Ana'`, porque `sameCard` es una copia"
+          "en": "`'Ana'`, because `sameCard` is a copy made before the change",
+          "es": "`'Ana'`, porque `sameCard` es una copia hecha antes del cambio"
         },
         {
-          "en": "`undefined`",
-          "es": "`undefined`"
+          "en": "`undefined`, because `sameCard` was never given a value",
+          "es": "`undefined`, porque a `sameCard` nunca se le dio un valor"
         },
         {
           "en": "`'Cleo'`",
           "es": "`'Cleo'`"
         },
         {
-          "en": "`'Ben'`, because `card` and `sameCard` point to the same object in memory",
-          "es": "`'Ben'`, porque `card` y `sameCard` apuntan al mismo objeto en memoria"
+          "en": "`'Ben'`: both variables point to the same object",
+          "es": "`'Ben'`: las dos variables apuntan al mismo objeto"
         }
       ],
       "correctIndex": 3,
@@ -459,12 +459,12 @@
       "code": "let first = { value: 'Ana' }\nlet third = { value: 'Cleo' }\nfirst = third",
       "options": [
         {
-          "en": "`third` now contains both objects",
-          "es": "Ahora `third` contiene los dos objetos"
+          "en": "`third` now contains both objects, one after the other",
+          "es": "Ahora `third` contiene los dos objetos, uno tras otro"
         },
         {
-          "en": "It can't be reached, so JavaScript eventually removes it with garbage collection",
-          "es": "Ya no se puede llegar a él, así que JavaScript acaba quitándolo con la recolección de basura"
+          "en": "It can't be reached, so the garbage collector frees it",
+          "es": "Ya nada llega a él, así que el recolector de basura lo libera"
         },
         {
           "en": "It throws an error on the next line",
@@ -486,20 +486,20 @@
       "topic": "Pointers",
       "prompt": {
         "en": "In a linked list, you remove a node by moving the arrows that pointed to it. Why don't you need to delete the node yourself?",
-        "es": "En una lista enlazada, quitas un nodo moviendo las flechas que apuntaban a él. ¿Por qué no necesitas borrar el nodo tú mismo?"
+        "es": "En una lista enlazada, quitas un nodo moviendo las flechas que apuntaban a él. ¿Por qué no necesitas borrar el nodo por tu cuenta?"
       },
       "options": [
         {
-          "en": "JavaScript deletes every object after one second",
-          "es": "JavaScript borra cada objeto después de un segundo"
+          "en": "JavaScript deletes every object automatically after one second",
+          "es": "JavaScript borra cada objeto automáticamente después de un segundo"
         },
         {
           "en": "Nothing points to it anymore, so the garbage collector frees it",
           "es": "Ya nada le apunta, así que el recolector de basura lo libera"
         },
         {
-          "en": "Removed nodes stay in the list forever",
-          "es": "Los nodos quitados se quedan en la lista para siempre"
+          "en": "Removed nodes stay in the list forever, so there's nothing to delete",
+          "es": "Los nodos quitados se quedan en la lista para siempre, así que no hay nada que borrar"
         },
         {
           "en": "Moving the arrows copies the node somewhere else",
@@ -510,6 +510,261 @@
       "explanation": {
         "en": "Once no arrow leads to the node, nothing can reach it, and the garbage collector frees its memory. Moving the arrows is a single assignment, which is why it's O(1).",
         "es": "Cuando ninguna flecha lleva al nodo, nada puede llegar a él, y el recolector de basura libera su memoria. Mover las flechas es una sola asignación, y por eso es O(1)."
+      }
+    },
+    {
+      "id": "class-is-function",
+      "topic": "Classes",
+      "prompt": {
+        "en": "What does the last line print?",
+        "es": "¿Qué imprime la última línea?"
+      },
+      "code": "class Table {\n  constructor(seats) {\n    this.seats = seats\n  }\n}\n\nconsole.log(typeof Table)",
+      "options": [
+        {
+          "en": "`'object'`",
+          "es": "`'object'`"
+        },
+        {
+          "en": "`'undefined'`",
+          "es": "`'undefined'`"
+        },
+        {
+          "en": "`'function'`",
+          "es": "`'function'`"
+        },
+        {
+          "en": "`'class'`",
+          "es": "`'class'`"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "A class is a special kind of function: one that can only be called with `new`. That's why `typeof` says `'function'`.",
+        "es": "Una clase es un tipo especial de función: una que solo se puede llamar con `new`. Por eso `typeof` dice `'function'`."
+      }
+    },
+    {
+      "id": "shared-methods",
+      "topic": "Classes",
+      "prompt": {
+        "en": "Both invitations come from the same class. What does the last line print, and why?",
+        "es": "Las dos invitaciones vienen de la misma clase. ¿Qué imprime la última línea, y por qué?"
+      },
+      "code": "class Invitation {\n  constructor(guest) {\n    this.guest = guest\n  }\n\n  getGuest() {\n    return this.guest\n  }\n}\n\nconst forAna = new Invitation('Ana')\nconst forBen = new Invitation('Ben')\nconsole.log(forAna.getGuest === forBen.getGuest)",
+      "options": [
+        {
+          "en": "`true`: both instances use the one method kept with the class",
+          "es": "`true`: las dos instancias usan el único método guardado con la clase"
+        },
+        {
+          "en": "`false`: each instance gets its own copy of the method when `new` runs",
+          "es": "`false`: cada instancia recibe su propia copia del método cuando corre `new`"
+        },
+        {
+          "en": "`false`: methods can't be compared with `===`",
+          "es": "`false`: los métodos no se pueden comparar con `===`"
+        },
+        {
+          "en": "It throws an error, because `getGuest` isn't called",
+          "es": "Lanza un error, porque `getGuest` no se llama"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "Methods live once on the class's prototype and every instance borrows them, so both names lead to the very same function. Only the data (`guest`) is stored on each instance.",
+        "es": "Los métodos viven una sola vez en el prototipo de la clase y cada instancia los toma prestados, así que los dos nombres llevan exactamente a la misma función. Solo los datos (`guest`) se guardan en cada instancia."
+      }
+    },
+    {
+      "id": "forgot-this",
+      "topic": "Classes",
+      "prompt": {
+        "en": "What does the last line print?",
+        "es": "¿Qué imprime la última línea?"
+      },
+      "code": "class Table {\n  constructor(seats) {\n    seats = seats\n  }\n}\n\nconst bigTable = new Table(8)\nconsole.log(bigTable.seats)",
+      "options": [
+        {
+          "en": "`8`",
+          "es": "`8`"
+        },
+        {
+          "en": "`undefined`",
+          "es": "`undefined`"
+        },
+        {
+          "en": "`null`",
+          "es": "`null`"
+        },
+        {
+          "en": "It throws a `TypeError`",
+          "es": "Lanza un `TypeError`"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "`seats = seats` only reassigns the parameter. Nothing is stored on the new object, so reading `bigTable.seats` gives `undefined`. The constructor needed `this.seats = seats`.",
+        "es": "`seats = seats` solo reasigna el parámetro. No se guarda nada en el objeto nuevo, así que leer `bigTable.seats` da `undefined`. El constructor necesitaba `this.seats = seats`."
+      }
+    },
+    {
+      "id": "function-changes-object",
+      "topic": "Pointers",
+      "prompt": {
+        "en": "What does the last line print?",
+        "es": "¿Qué imprime la última línea?"
+      },
+      "code": "function markArrived(card) {\n  card.arrived = true\n}\n\nconst ana = { value: 'Ana', arrived: false }\nmarkArrived(ana)\nconsole.log(ana.arrived)",
+      "options": [
+        {
+          "en": "`false`",
+          "es": "`false`"
+        },
+        {
+          "en": "`undefined`",
+          "es": "`undefined`"
+        },
+        {
+          "en": "It throws an error, because `ana` is a `const`",
+          "es": "Lanza un error, porque `ana` es `const`"
+        },
+        {
+          "en": "`true`",
+          "es": "`true`"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "The parameter `card` gets a copy of the arrow, so it points to the same object as `ana`. Changing `card.arrived` changes that one object. (`const` only stops `ana` from pointing somewhere else.)",
+        "es": "El parámetro `card` recibe una copia de la flecha, así que apunta al mismo objeto que `ana`. Cambiar `card.arrived` cambia ese único objeto. (`const` solo impide que `ana` apunte a otro lado.)"
+      }
+    },
+    {
+      "id": "function-moves-parameter",
+      "topic": "Pointers",
+      "prompt": {
+        "en": "What does the last line print?",
+        "es": "¿Qué imprime la última línea?"
+      },
+      "code": "function replaceCard(card) {\n  card = { value: 'Zoe' }\n}\n\nconst ana = { value: 'Ana' }\nreplaceCard(ana)\nconsole.log(ana.value)",
+      "options": [
+        {
+          "en": "`'Zoe'`",
+          "es": "`'Zoe'`"
+        },
+        {
+          "en": "`'Ana'`",
+          "es": "`'Ana'`"
+        },
+        {
+          "en": "`undefined`",
+          "es": "`undefined`"
+        },
+        {
+          "en": "It throws an error, because `card` was reassigned",
+          "es": "Lanza un error, porque `card` se reasignó"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "`card = { value: 'Zoe' }` moves only the function's own arrow to a new object. `ana` still points to Ana's object, which nobody changed.",
+        "es": "`card = { value: 'Zoe' }` solo mueve la flecha propia de la función hacia un objeto nuevo. `ana` sigue apuntando al objeto de Ana, que nadie cambió."
+      }
+    },
+    {
+      "id": "array-alias",
+      "topic": "Pointers",
+      "prompt": {
+        "en": "What does the last line print?",
+        "es": "¿Qué imprime la última línea?"
+      },
+      "code": "let guests = ['Ana', 'Ben']\nlet backup = guests\nbackup.push('Cleo')\nconsole.log(guests.length)",
+      "options": [
+        {
+          "en": "`2`, because `backup` is a separate copy",
+          "es": "`2`, porque `backup` es una copia aparte"
+        },
+        {
+          "en": "`2`, because `push` only changes `backup`",
+          "es": "`2`, porque `push` solo cambia `backup`"
+        },
+        {
+          "en": "`3`, because both names point to one array",
+          "es": "`3`: los dos nombres apuntan a un array"
+        },
+        {
+          "en": "It throws an error, because `guests` didn't change",
+          "es": "Lanza un error, porque `guests` no cambió"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "Arrays are objects, so `let backup = guests` copies the arrow. `push` through `backup` adds to the one array both names point to. `guests.slice()` would have made a real copy.",
+        "es": "Los arrays son objetos, así que `let backup = guests` copia la flecha. `push` a través de `backup` agrega al único array al que apuntan los dos nombres. `guests.slice()` sí habría hecho una copia de verdad."
+      }
+    },
+    {
+      "id": "const-object",
+      "topic": "Pointers",
+      "prompt": {
+        "en": "What does the last line print?",
+        "es": "¿Qué imprime la última línea?"
+      },
+      "code": "const card = { value: 'Ana' }\ncard.value = 'Ben'\nconsole.log(card.value)",
+      "options": [
+        {
+          "en": "It throws an error, because `card` is a `const`",
+          "es": "Lanza un error, porque `card` es `const`"
+        },
+        {
+          "en": "`'Ana'`, because a `const` object keeps the values it was created with",
+          "es": "`'Ana'`, porque un objeto `const` conserva los valores con los que se creó"
+        },
+        {
+          "en": "`undefined`",
+          "es": "`undefined`"
+        },
+        {
+          "en": "`'Ben'`: `const` only stops `card` from pointing elsewhere",
+          "es": "`'Ben'`: `const` solo impide que `card` apunte a otro lado"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "`const` locks the arrow, not the object. You can't point `card` at a different object, but you can change the object it points to.",
+        "es": "`const` fija la flecha, no el objeto. No puedes apuntar `card` a otro objeto, pero sí puedes cambiar el objeto al que apunta."
+      }
+    },
+    {
+      "id": "list-method-order",
+      "topic": "Classes",
+      "prompt": {
+        "en": "A list starts as `new LinkedList('Ana')`. Then you call `push('Ben')`, and then `unshift('Zoe')`. In what order are the guests now, from first to last?",
+        "es": "Una lista empieza como `new LinkedList('Ana')`. Luego llamas `push('Ben')`, y después `unshift('Zoe')`. ¿En qué orden quedan las personas invitadas, de la primera a la última?"
+      },
+      "options": [
+        {
+          "en": "Zoe, Ana, Ben",
+          "es": "Zoe, Ana, Ben"
+        },
+        {
+          "en": "Ana, Ben, Zoe",
+          "es": "Ana, Ben, Zoe"
+        },
+        {
+          "en": "Ben, Ana, Zoe",
+          "es": "Ben, Ana, Zoe"
+        },
+        {
+          "en": "Zoe, Ben, Ana",
+          "es": "Zoe, Ben, Ana"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "`push` adds at the end (Ana, Ben) and `unshift` adds at the start (Zoe, Ana, Ben). Each method does one specific job on the list.",
+        "es": "`push` agrega al final (Ana, Ben) y `unshift` agrega al principio (Zoe, Ana, Ben). Cada método hace un trabajo específico en la lista."
       }
     }
   ],
@@ -523,7 +778,7 @@
       },
       "description": {
         "en": "Write a class `Invitation`:\n\n- `constructor(guest)` stores the guest's name on the instance as `this.guest`.\n- `getGuest()` returns the invitation's guest.\n- `setGuest(guest)` changes the invitation's guest.\n\nExample:\n\n```js\nconst forBen = new Invitation('Ben')\nforBen.getGuest() // 'Ben'\nforBen.setGuest('Benny')\nforBen.getGuest() // 'Benny'\n```\n\nEach invitation must keep its own guest: changing one invitation never changes another.",
-        "es": "Escribe una clase `Invitation`:\n\n- `constructor(guest)` guarda el nombre del invitado en la instancia como `this.guest`.\n- `getGuest()` regresa el invitado de la invitación.\n- `setGuest(guest)` cambia el invitado de la invitación.\n\nEjemplo:\n\n```js\nconst forBen = new Invitation('Ben')\nforBen.getGuest() // 'Ben'\nforBen.setGuest('Benny')\nforBen.getGuest() // 'Benny'\n```\n\nCada invitación debe guardar su propio invitado: cambiar una invitación nunca cambia otra."
+        "es": "Escribe una clase `Invitation`:\n\n- `constructor(guest)` guarda el nombre de la persona invitada en la instancia como `this.guest`.\n- `getGuest()` regresa el nombre de la invitación.\n- `setGuest(guest)` cambia el nombre de la invitación.\n\nEjemplo:\n\n```js\nconst forBen = new Invitation('Ben')\nforBen.getGuest() // 'Ben'\nforBen.setGuest('Benny')\nforBen.getGuest() // 'Benny'\n```\n\nCada invitación debe guardar su propio nombre: cambiar una invitación nunca cambia otra."
       },
       "difficulty": "easy",
       "category": "build",
@@ -625,7 +880,7 @@
       },
       "description": {
         "en": "Someone at the party door clicks a counter every time a guest comes in or leaves. Write a class `Counter`:\n\n- `constructor()` starts `this.count` at `0`.\n- `increment()` adds 1 to the count and returns the new count.\n- `decrement()` subtracts 1 and returns the new count (it may go below 0).\n- `reset()` sets the count back to 0 and returns it.\n\nExample:\n\n```js\nconst door = new Counter()\ndoor.increment() // 1\ndoor.increment() // 2\ndoor.decrement() // 1\ndoor.reset() // 0\n```",
-        "es": "Alguien en la puerta de la fiesta presiona un contador cada vez que un invitado entra o sale. Escribe una clase `Counter`:\n\n- `constructor()` empieza `this.count` en `0`.\n- `increment()` le suma 1 a la cuenta y regresa la cuenta nueva.\n- `decrement()` le resta 1 y regresa la cuenta nueva (puede quedar abajo de 0).\n- `reset()` regresa la cuenta a 0 y la regresa.\n\nEjemplo:\n\n```js\nconst door = new Counter()\ndoor.increment() // 1\ndoor.increment() // 2\ndoor.decrement() // 1\ndoor.reset() // 0\n```"
+        "es": "Alguien en la puerta de la fiesta presiona un contador cada vez que una persona entra o sale. Escribe una clase `Counter`:\n\n- `constructor()` empieza `this.count` en `0`.\n- `increment()` le suma 1 a la cuenta y regresa la cuenta nueva.\n- `decrement()` le resta 1 y regresa la cuenta nueva (puede quedar abajo de 0).\n- `reset()` regresa la cuenta a 0 y la regresa.\n\nEjemplo:\n\n```js\nconst door = new Counter()\ndoor.increment() // 1\ndoor.increment() // 2\ndoor.decrement() // 1\ndoor.reset() // 0\n```"
       },
       "difficulty": "easy",
       "category": "build",
@@ -740,6 +995,312 @@
       "expectedComplexity": {
         "time": "O(1)",
         "space": "O(1)"
+      }
+    },
+    {
+      "slug": "seating-table",
+      "kind": "class",
+      "title": {
+        "en": "The Seating Table",
+        "es": "La mesa con sillas"
+      },
+      "description": {
+        "en": "Each table at the party has a fixed number of seats. Write a class `Table`:\n\n- `constructor(seats)` stores `this.seats` and starts `this.guests` as an empty array.\n- `seat(name)` adds the name to `this.guests` and returns `true`, but only if there's a free seat. When the table is full, it adds nobody and returns `false`.\n- `freeSeats()` returns how many seats are still free.\n\nExample:\n\n```js\nconst table = new Table(2)\ntable.seat('Ana') // true\ntable.seat('Ben') // true\ntable.seat('Cleo') // false: the table is full\ntable.freeSeats() // 0\n```",
+        "es": "Cada mesa de la fiesta tiene un número fijo de sillas. Escribe una clase `Table`:\n\n- `constructor(seats)` guarda `this.seats` y empieza `this.guests` como un array vacío.\n- `seat(name)` agrega el nombre a `this.guests` y regresa `true`, pero solo si hay una silla libre. Cuando la mesa está llena, no agrega a nadie y regresa `false`.\n- `freeSeats()` regresa cuántas sillas siguen libres.\n\nEjemplo:\n\n```js\nconst table = new Table(2)\ntable.seat('Ana') // true\ntable.seat('Ben') // true\ntable.seat('Cleo') // false: la mesa está llena\ntable.freeSeats() // 0\n```"
+      },
+      "difficulty": "easy",
+      "category": "build",
+      "className": "Table",
+      "starterCode": {
+        "javascript": "class Table {\n  constructor(seats) {\n    // Your code here\n  }\n\n  seat(name) {\n    // Your code here\n  }\n\n  freeSeats() {\n    // Your code here\n  }\n}"
+      },
+      "solution": {
+        "javascript": "class Table {\n  constructor(seats) {\n    this.seats = seats\n    this.guests = []\n  }\n\n  seat(name) {\n    if (this.guests.length >= this.seats) {\n      return false\n    }\n    this.guests.push(name)\n    return true\n  }\n\n  freeSeats() {\n    return this.seats - this.guests.length\n  }\n}"
+      },
+      "tests": [
+        {
+          "steps": [
+            {
+              "create": [4]
+            },
+            {
+              "read": "seats",
+              "expected": 4
+            },
+            {
+              "call": "freeSeats",
+              "expected": 4
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": [2]
+            },
+            {
+              "call": "seat",
+              "args": ["Ana"],
+              "expected": true
+            },
+            {
+              "call": "seat",
+              "args": ["Ben"],
+              "expected": true
+            },
+            {
+              "call": "seat",
+              "args": ["Cleo"],
+              "expected": false
+            },
+            {
+              "call": "freeSeats",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": [3]
+            },
+            {
+              "call": "seat",
+              "args": ["Ana"],
+              "expected": true
+            },
+            {
+              "call": "freeSeats",
+              "expected": 2
+            },
+            {
+              "read": "guests",
+              "expected": ["Ana"]
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": [0]
+            },
+            {
+              "call": "seat",
+              "args": ["Ana"],
+              "expected": false
+            },
+            {
+              "call": "freeSeats",
+              "expected": 0
+            },
+            {
+              "read": "guests",
+              "expected": []
+            }
+          ]
+        },
+        {
+          "steps": [
+            {
+              "create": [1]
+            },
+            {
+              "call": "seat",
+              "args": ["Ana"],
+              "expected": true
+            },
+            {
+              "call": "seat",
+              "args": ["Ben"],
+              "expected": false
+            },
+            {
+              "read": "guests",
+              "expected": ["Ana"]
+            }
+          ]
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(1)",
+        "space": "O(n)"
+      }
+    },
+    {
+      "slug": "count-the-cards",
+      "title": {
+        "en": "Count the Cards",
+        "es": "Cuenta las tarjetas"
+      },
+      "description": {
+        "en": "Guest cards are linked in a chain: each card is `{ value, next }`, and `next` points to the following card, or is `null` on the last one. Write `countCards(head)`, which follows the pointers from `head` and returns how many cards there are. An empty chain is `null`, with 0 cards.\n\nExample:\n\n```js\nconst head = { value: 'Ana', next: { value: 'Ben', next: null } }\ncountCards(head) // 2\ncountCards(null) // 0\n```",
+        "es": "Las tarjetas de las personas invitadas están unidas en una cadena: cada tarjeta es `{ value, next }`, y `next` apunta a la siguiente tarjeta, o es `null` en la última. Escribe `countCards(head)`, que sigue los punteros desde `head` y regresa cuántas tarjetas hay. Una cadena vacía es `null`, con 0 tarjetas.\n\nEjemplo:\n\n```js\nconst head = { value: 'Ana', next: { value: 'Ben', next: null } }\ncountCards(head) // 2\ncountCards(null) // 0\n```"
+      },
+      "difficulty": "easy",
+      "category": "build",
+      "functionName": "countCards",
+      "starterCode": {
+        "javascript": "function countCards(head) {\n  let count = 0\n  // Your code here: move a pointer from card to card\n  return count\n}"
+      },
+      "solution": {
+        "javascript": "function countCards(head) {\n  let count = 0\n  let current = head\n  while (current !== null) {\n    count = count + 1\n    current = current.next\n  }\n  return count\n}"
+      },
+      "tests": [
+        {
+          "args": [null],
+          "expected": 0
+        },
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": null
+            }
+          ],
+          "expected": 1
+        },
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": {
+                "value": "Ben",
+                "next": {
+                  "value": "Cleo",
+                  "next": null
+                }
+              }
+            }
+          ],
+          "expected": 3
+        },
+        {
+          "args": [
+            {
+              "value": 1,
+              "next": {
+                "value": 2,
+                "next": {
+                  "value": 3,
+                  "next": {
+                    "value": 4,
+                    "next": {
+                      "value": 5,
+                      "next": null
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "expected": 5
+        },
+        {
+          "args": [
+            {
+              "value": null,
+              "next": {
+                "value": 0,
+                "next": null
+              }
+            }
+          ],
+          "expected": 2
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(n)",
+        "space": "O(1)"
+      }
+    },
+    {
+      "slug": "every-other-card",
+      "title": {
+        "en": "Every Other Card",
+        "es": "Una tarjeta sí y otra no"
+      },
+      "description": {
+        "en": "The same kind of chain of guest cards (`{ value, next }`, ending in `null`). The host calls every other guest to the dance floor: the 1st, the 3rd, the 5th and so on. Write `everyOtherValue(head)`, which returns an array with the values of those cards, in order. An empty chain (`null`) gives `[]`.\n\nExample:\n\n```js\n// Ana → Ben → Cleo → Dev\neveryOtherValue(head) // ['Ana', 'Cleo']\n```",
+        "es": "El mismo tipo de cadena de tarjetas (`{ value, next }`, que termina en `null`). Quien organiza llama a la pista a una persona sí y otra no: la 1.ª, la 3.ª, la 5.ª, y así. Escribe `everyOtherValue(head)`, que regresa un array con los valores de esas tarjetas, en orden. Una cadena vacía (`null`) da `[]`.\n\nEjemplo:\n\n```js\n// Ana → Ben → Cleo → Dev\neveryOtherValue(head) // ['Ana', 'Cleo']\n```"
+      },
+      "difficulty": "medium",
+      "category": "build",
+      "functionName": "everyOtherValue",
+      "starterCode": {
+        "javascript": "function everyOtherValue(head) {\n  const values = []\n  // Your code here\n  return values\n}"
+      },
+      "solution": {
+        "javascript": "function everyOtherValue(head) {\n  const values = []\n  let current = head\n  let position = 0\n  while (current !== null) {\n    if (position % 2 === 0) {\n      values.push(current.value)\n    }\n    position = position + 1\n    current = current.next\n  }\n  return values\n}"
+      },
+      "tests": [
+        {
+          "args": [null],
+          "expected": []
+        },
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": null
+            }
+          ],
+          "expected": ["Ana"]
+        },
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": {
+                "value": "Ben",
+                "next": null
+              }
+            }
+          ],
+          "expected": ["Ana"]
+        },
+        {
+          "args": [
+            {
+              "value": "Ana",
+              "next": {
+                "value": "Ben",
+                "next": {
+                  "value": "Cleo",
+                  "next": {
+                    "value": "Dev",
+                    "next": null
+                  }
+                }
+              }
+            }
+          ],
+          "expected": ["Ana", "Cleo"]
+        },
+        {
+          "args": [
+            {
+              "value": 1,
+              "next": {
+                "value": 2,
+                "next": {
+                  "value": 3,
+                  "next": {
+                    "value": 4,
+                    "next": {
+                      "value": 5,
+                      "next": null
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "expected": [1, 3, 5]
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(n)",
+        "space": "O(n)"
       }
     }
   ]
