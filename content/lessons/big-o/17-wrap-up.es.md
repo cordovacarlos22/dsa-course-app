@@ -87,7 +87,7 @@ Las reglas que aprendiste:
 
 1. **Cuenta operaciones, no segundos.**
 2. Big O es el **peor caso** (Ω es el mejor caso, Θ el promedio).
-3. **Elimina las constantes:** O(2n) → O(n), O(100n²) → O(n²), O(500) → O(1).
+3. **Elimina las constantes:** O(2n) → O(n), O(7n²) → O(n²), O(500) → O(1).
 4. **Elimina los términos no dominantes:** O(n² + n) → O(n²).
 5. **Entradas distintas, términos distintos:** O(a + b) y O(a · b).
 6. Un **bucle dentro de otro** es O(n²); **dividir y conquistar** es O(log n); **O(1)** es el más eficiente de todos.

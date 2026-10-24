@@ -87,7 +87,7 @@ The rules you learned:
 
 1. **Count operations, not seconds.**
 2. Big O is the **worst case** (Ω is the best case, Θ the average).
-3. **Drop the constants:** O(2n) → O(n), O(100n²) → O(n²), O(500) → O(1).
+3. **Drop the constants:** O(2n) → O(n), O(7n²) → O(n²), O(500) → O(1).
 4. **Drop the non-dominant terms:** O(n² + n) → O(n²).
 5. **Different inputs, different terms:** O(a + b) and O(a · b).
 6. A **loop within a loop** is O(n²); **divide and conquer** is O(log n); **O(1)** is the most efficient of all.

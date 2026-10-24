@@ -296,31 +296,31 @@
       "id": "simplify-constant-multiplier",
       "topic": "Big O: Drop Constants",
       "prompt": {
-        "en": "How should O(50n³) be written?",
-        "es": "¿Cómo se debe escribir O(50n³)?"
+        "en": "Simplify O(50n³) as much as possible.",
+        "es": "Simplifica O(50n³) lo más posible."
       },
       "options": [
         {
-          "en": "O(50n)",
-          "es": "O(50n)"
+          "en": "O(150n)",
+          "es": "O(150n)"
         },
         {
           "en": "O(n³)",
           "es": "O(n³)"
         },
         {
-          "en": "O(n⁵⁰)",
-          "es": "O(n⁵⁰)"
+          "en": "O(n)",
+          "es": "O(n)"
         },
         {
-          "en": "O(150n)",
-          "es": "O(150n)"
+          "en": "O(50n³)",
+          "es": "O(50n³)"
         }
       ],
       "correctIndex": 1,
       "explanation": {
-        "en": "Constant multipliers like 50 don't change the shape of the growth, so we drop them: O(n³).",
-        "es": "Los multiplicadores constantes como 50 no cambian la forma del crecimiento, así que los eliminamos: O(n³)."
+        "en": "Constant multipliers like 50 don't change the shape of the growth, so we drop the 50. The ³ is part of the shape, so it stays: O(n³).",
+        "es": "Los multiplicadores constantes como 50 no cambian la forma del crecimiento, así que quitamos el 50. El ³ es parte de la forma, así que se queda: O(n³)."
       }
     },
     {
@@ -408,14 +408,14 @@
           "es": "O(n²)"
         },
         {
-          "en": "O(n³)",
-          "es": "O(n³)"
+          "en": "O(2n²)",
+          "es": "O(2n²)"
         }
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "The total is n² + n. When n is large, n² is so much bigger that n barely matters, so we drop the non-dominant term: O(n²).",
-        "es": "El total es n² + n. Cuando n es grande, n² es tanto mayor que n casi no importa, así que eliminamos el término no dominante: O(n²)."
+        "en": "The total is n² + n. When n is large, n² is so much bigger that n barely matters, so we drop the non-dominant term: O(n²). And it isn't 2n²: the second loop is a single loop, not another nested one.",
+        "es": "El total es n² + n. Cuando n es grande, n² es tanto mayor que n casi no importa, así que eliminamos el término no dominante: O(n²). Y no es 2n²: el segundo es un ciclo simple, no otro anidado."
       }
     },
     {
