@@ -122,14 +122,19 @@ export const exerciseSchema = z.preprocess(
   z.discriminatedUnion('kind', [functionExerciseSchema, classExerciseSchema]),
 )
 
+// The module's folder inside Carlos's course folder (outside the repo), e.g.
+// "course 1 /section 4 ", or a list when a module draws on both courses
+// (Big O). Folder names keep their trailing spaces.
+// Not `nonEmpty`: that trims, and the spaces are part of these names.
+const folderName = z.string().regex(/\S/, 'must not be empty')
+const sourceFolder = z.union([folderName, z.array(folderName).min(1)])
+
 export const practiceSchema = z
   .object({
     slug,
     order: z.number().int().positive(),
     title: localizedText,
-    // Module folder in Carlos's course folder (outside the repo), e.g.
-    // "recursos originales/modulo-02-big-o".
-    sourceFolder: nonEmpty,
+    sourceFolder,
     questions: z.array(questionSchema).min(1),
     exercises: z.array(exerciseSchema),
   })
@@ -140,9 +145,9 @@ const moduleSchema = z
     slug,
     order: z.number().int().positive(),
     title: localizedText,
-    // Module folder in Carlos's course folder (outside the repo). Optional:
-    // modules we designed ourselves (like 18) have no source folder.
-    sourceFolder: nonEmpty.optional(),
+    // Optional: modules whose files aren't in the course folder yet, and the
+    // ones we designed ourselves, have none.
+    sourceFolder: sourceFolder.optional(),
   })
   .strict()
 

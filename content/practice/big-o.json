@@ -5,7 +5,10 @@
     "en": "Big O",
     "es": "Big O"
   },
-  "sourceFolder": "recursos originales/modulo-02-big-o",
+  "sourceFolder": [
+    "course 1 /Section 2 - Big o ",
+    "course 2/section 2 - big o "
+  ],
   "questions": [
     {
       "id": "time-and-space",

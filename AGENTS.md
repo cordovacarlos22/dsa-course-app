@@ -154,7 +154,7 @@ Every change goes through **plan → code → build → test → ship**, with ro
 - **The code is ours too** (Carlos, 2026-10-20: "i dont want to get copyright issues"). Never reuse the course's function, class or variable names, or its analogies: no `logItems`, `addUpTo`, `countUpAndDown`, `printAllPairs`, `logAtLeast5`, `addItems`, `charCount`, `isAlphaNumeric`, `Cookie`/`cookieOne`, cookie cutters, or the linked list locals `temp`, `pre`, `newNode`, `before`. Pick our own names from the party story. Only the standard vocabulary every DSA book and interview uses stays: `LinkedList`, `Node`, `value`, `next`, `prev`, `head`, `tail`, `length`, the method names (`push`, `pop`, `shift`, `unshift`, `get`, `set`, `insert`, `remove`, `reverse`) and loop letters (`i`, `j`, `k`, `n`). Before a content PR, compare our code's identifiers with the module's source files and slides, along with the 8-word prose check.
 - **Slides are ours too:** each module gets its own deck (original text and diagrams, Carlos's brand, EN + ES), built in a later stage.
 - **Course levels: Section → Module → Lesson → Step** (ES: Sección → Módulo → Lección → Paso). `content/course.json` groups modules into `sections`.
-- **Module slugs are English names without numbers** (`big-o`, `linked-lists`, `dijkstra`). The order lives only in `content/course.json`, so reordering never breaks links. `sourceFolder` (optional) points to the matching folder in Carlos's course material.
+- **Module slugs are English names without numbers** (`big-o`, `linked-lists`, `dijkstra`). The order lives only in `content/course.json`, so reordering never breaks links. `sourceFolder` (optional) names the module's folder inside the course folder (a list when it uses both courses, like Big O), relative to that folder: e.g. `course 1 /section 4 `.
 
 ## Lesson-writing procedure
 
@@ -173,7 +173,7 @@ When Carlos says _"write the lessons for module N"_:
    - `…/course 2/section 4 - problem solving aproach/section 04 problem-solving-approach-and-patterns.docx`, plus the slides PDF `04-05-pdf-slides-problem-solving-approach-and-patterns.pdf` in the same folder (a topic reference only; its pages 26–51 belong to Problem-Solving Patterns). This `.docx` also links to the original slides: never copy that link either.
    - `…/course 1 /section 4 /4 linked list.docx` (its quiz screenshots are inside) and its `resources /` folder (an exercise and a solution `.js` file for each method, and a one-page Big O table PDF). Write our own starter code and tests: never reuse the files' helper methods, `test()` functions or expected output.
 
-   Read the text with `textutil -convert txt -stdout "<file>"` and extract the images with `unzip "<file>" 'word/media/*' -d <scratch dir>`. For **other modules**, Carlos adds his files to the same "DSA + LEETCODE…" folder: ask him for the paths. Don't use `recursos originales/…/guiones/` for a module he has given files for.
+   Read the text with `textutil -convert txt -stdout "<file>"` and extract the images with `unzip "<file>" 'word/media/*' -d <scratch dir>`. For **other modules**, Carlos adds his files to the same course folder: ask him for the paths. **Never read any other folder for content**, even if older notes or transcripts exist elsewhere on the computer.
 
 2. **One lesson per lecture.** Follow both courses' lectures in order, merging the ones they share. Cover every point, example and number from the sources, writing the explanations in Carlos's voice (see the closeness rules above).
 3. Save it as `content/lessons/<module-slug>/<NN-lesson-slug>.en.md` with front-matter (`title`, `order`, `minutes`).
@@ -228,29 +228,22 @@ When Carlos says _"write the lessons for module N"_:
 
 When Carlos says _"generate content for section N"_:
 
-1. **Find the sources.** If Carlos gave you files for the module (see the lesson-writing procedure; for Big O, the two `.docx` files), use those, quizzes and images included. Otherwise they live **outside the repo**, in Carlos's course folder:
+1. **Find the sources.** They live **outside the repo**, only in Carlos's course folder:
 
    ```
-   ~/Desktop/curso por mi /Curso-de-Estructuras-de-Datos-y-Algoritmos-en-JavaScript-con-Ejercicios-de-LEETCODE/
-   ├── recursos originales/modulo-NN-<slug>/   ← THE source (English version)
-   │   ├── guiones/*.md                        ← English lesson transcripts + slide outlines
-   │   └── *.pdf, *.js, images                 ← English resources
-   └── recursos /guiones/modulo-NN-<slug>/     ← Spanish transcripts (.docx), only to translate from
+   ~/Desktop/DSA + LEETCODE for Coding Interviews — Clear, Step-by-Step Animated Walkthroughs!/
+   ├── course 1 /<section folder>/   ← notes (.docx with images), slides, code
+   └── course 2/<section folder>/    ← notes (.docx with images), slides
    ```
 
-   - Folder names contain **trailing spaces** (`curso por mi /`, `recursos /`), so always quote paths.
+   - The module's `sourceFolder` in `content/course.json` names its folder (or folders) there, and the lesson-writing procedure lists the exact files for the modules written so far.
+   - **Never read any other folder for content**, even if older notes or transcripts exist elsewhere on the computer. If a module has no folder there yet, ask Carlos for his files.
+   - Folder names contain **trailing spaces** (`course 1 `, `section 4 `), so always quote paths.
    - Skip binary and junk files: `.key`, `.m4v`, `.mov`, `.mp3`, `.DS_Store`, `.textClipping`, `~$*.docx`.
-   - No other folders are sources (not the Udemy notes folder, not old exercise repos).
 
-2. **If the module has no English transcripts yet**, translate them first:
-   - Read each Spanish script with `textutil -convert txt -stdout "<path>.docx"`.
-   - Write one file per lesson to `recursos originales/modulo-NN-<slug>/guiones/NN-<lesson>.md`, numbered in course order.
-   - Format: `# <Lesson title>`, then `> Translated from recursos /guiones/<file>.docx`, then `## Transcript` (a faithful translation; keep code names as in the English `.js` resources) and `## Slides`. Drop the chatbot footer line ("Estas diapositivas proporcionan…").
-   - Never write into `recursos /` and never touch the course folder's git state.
+2. **Read everything** in the module's folders: the `.docx` text and its images (commands in the lesson-writing procedure), the slide PDFs and the `.js` files.
 
-3. **Read everything** in `recursos originales/modulo-NN-<slug>/`: the `guiones/*.md`, the `.pdf`s and the `.js` files.
-
-4. **Write `content/practice/<module-slug>.json`** (e.g. `big-o.json`). The slug is the module's English name from `content/course.json`; its `sourceFolder` tells you which `recursos originales/modulo-NN-…` folder has the material.
+3. **Write `content/practice/<module-slug>.json`** (e.g. `big-o.json`). The slug is the module's English name from `content/course.json`; its `sourceFolder` tells you which folder(s) in the course folder have the material.
    - **English first.** `en` is required; `es` can be added later (the validator warns about missing Spanish).
    - **10–16 multiple-choice questions** covering every lesson: 4 options each, exactly one correct, a short explanation. Test understanding (why, when, Big O), not just memorization. Use the `code` field for "what does this code do / what's its Big O?" questions. Spread the correct answer across positions 0–3.
    - **Exercises**, as listed for the module in `docs/curriculum.md`:
@@ -259,11 +252,11 @@ When Carlos says _"generate content for section N"_:
      - `kind: "function"` (default): `functionName` + tests `{ args, expected }`.
      - `kind: "class"`: `className` + tests made of steps: `{ create: [args] }`, `{ call: "method", args: [], expected }`, `{ read: "prop.path", expected }`.
      - Each has a difficulty (`easy` / `medium` / `hard`), a description, JS starter code, a reference solution, **at least 5 tests** (include edge cases), and the expected time/space complexity.
-   - **Original wording only.** Use the transcripts and the blueprint to learn _what_ to test, but never copy questions, exercises, transcripts or slides word for word.
+   - **Original wording only.** Use the module's notes, slides and the blueprint to learn _what_ to test, but never copy questions, exercises, notes or slides word for word.
 
-5. Run `npm run content:validate` and fix every error. It checks the schemas (`scripts/content-schema.js`), that the slug exists in `course.json`, unique ids, and runs every reference solution against its tests.
+4. Run `npm run content:validate` and fix every error. It checks the schemas (`scripts/content-schema.js`), that the slug exists in `course.json`, unique ids, and runs every reference solution against its tests.
 
-6. Add the section to **Course sections imported** in `memory.md`.
+5. Add the section to **Course sections imported** in `memory.md`.
 
 ## Privacy
 
