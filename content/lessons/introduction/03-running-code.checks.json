@@ -26,92 +26,101 @@
       ]
     },
     {
+      "type": "code",
+      "task": {
+        "en": "A warm-up coding check! Write `greet(name)` so it **returns** (not prints) the text `Hi <name>!`. For example, `greet('Ana')` returns `'Hi Ana!'`. Press **Check**: the course runs a few tests on your function and shows which ones pass.",
+        "es": "¡Una comprobación de código para calentar! Escribe `greet(name)` para que **devuelva** (no que imprima) el texto `Hi <name>!`. Por ejemplo, `greet('Ana')` devuelve `'Hi Ana!'`. Presiona **Comprobar**: el curso corre unas pruebas sobre tu función y te muestra cuáles pasan."
+      },
+      "hint": {
+        "en": "Inside the function, write exactly `return 'Hi ' + name + '!'`. Watch the space after `Hi`.",
+        "es": "Dentro de la función, escribe exactamente `return 'Hi ' + name + '!'`. Fíjate en el espacio después de `Hi`."
+      },
+      "starterCode": "function greet(name) {\n  // Return the greeting here.\n}\n\nconsole.log(greet('Ana'))\n",
+      "solution": "function greet(name) {\n  return 'Hi ' + name + '!'\n}\n\nconsole.log(greet('Ana'))\n",
+      "kind": "function",
+      "functionName": "greet",
+      "tests": [
+        {
+          "args": ["Ana"],
+          "expected": "Hi Ana!"
+        },
+        {
+          "args": ["Ben"],
+          "expected": "Hi Ben!"
+        },
+        {
+          "args": ["Cleo"],
+          "expected": "Hi Cleo!"
+        }
+      ]
+    },
+    {
       "type": "choice",
       "question": {
-        "en": "What does `console.log('Year:', 1995)` print?",
-        "es": "¿Qué imprime `console.log('Year:', 1995)`?"
+        "en": "This code stops with `ReferenceError: numbr is not defined`: `function timesTwo(number) { return numbr * 2 }`. What is the bug?",
+        "es": "Este código se detiene con `ReferenceError: numbr is not defined`: `function timesTwo(number) { return numbr * 2 }`. ¿Cuál es el error?"
       },
       "options": [
         {
-          "en": "`'Year:', 1995`",
-          "es": "`'Year:', 1995`"
+          "en": "`numbr` is a typo: the parameter is called `number`",
+          "es": "`numbr` es un error de escritura: el parámetro se llama `number`"
         },
         {
-          "en": "`Year:1995`",
-          "es": "`Year:1995`"
+          "en": "The function must be called before it's written, so the name isn't found yet",
+          "es": "La función se tiene que llamar antes de escribirla, así que todavía no se encuentra el nombre"
         },
         {
-          "en": "An error, because you can't mix text and numbers",
-          "es": "Un error, porque no puedes mezclar texto y números"
+          "en": "`* 2` can't be used inside `return`",
+          "es": "`* 2` no se puede usar dentro de `return`"
         },
         {
-          "en": "`Year: 1995`",
-          "es": "`Year: 1995`"
+          "en": "The function needs `console.log` to work",
+          "es": "La función necesita `console.log` para funcionar"
+        }
+      ],
+      "answer": 0,
+      "hint": {
+        "en": "The message names the problem: which name doesn't JavaScript know? Compare it with the parameter.",
+        "es": "El mensaje nombra el problema: ¿qué nombre no conoce JavaScript? Compáralo con el parámetro."
+      },
+      "explanation": {
+        "en": "A `ReferenceError` means JavaScript met a name it doesn't know. `numbr` was never declared: the parameter is `number`. Fixing the spelling makes `timesTwo(5)` return 10.",
+        "es": "Un `ReferenceError` quiere decir que JavaScript encontró un nombre que no conoce. `numbr` nunca se declaró: el parámetro es `number`. Corregir la escritura hace que `timesTwo(5)` devuelva 10."
+      }
+    },
+    {
+      "type": "choice",
+      "question": {
+        "en": "This loop never stops: `let count = 1`, then `while (count <= 3) { total += count }`. Why?",
+        "es": "Este bucle nunca termina: `let count = 1`, y luego `while (count <= 3) { total += count }`. ¿Por qué?"
+      },
+      "options": [
+        {
+          "en": "`while` loops can only count down, so this one never reaches 3",
+          "es": "Los bucles `while` solo pueden contar hacia abajo, así que este nunca llega a 3"
+        },
+        {
+          "en": "`total` should start at 1 instead of 0",
+          "es": "`total` debería empezar en 1 en vez de 0"
+        },
+        {
+          "en": "`count <= 3` should be `count < 3`",
+          "es": "`count <= 3` debería ser `count < 3`"
+        },
+        {
+          "en": "`count` never changes, so `count <= 3` stays true forever",
+          "es": "`count` nunca cambia, así que `count <= 3` sigue siendo verdadero siempre"
         }
       ],
       "answer": 3,
       "hint": {
-        "en": "`console.log` puts something between the values it prints. Try it in the code box above.",
-        "es": "`console.log` pone algo entre los valores que imprime. Pruébalo en la caja de código de arriba."
+        "en": "Look at what the condition checks. Does anything inside the loop change it?",
+        "es": "Fíjate en lo que revisa la condición. ¿Algo dentro del bucle la cambia?"
       },
       "explanation": {
-        "en": "`console.log` prints every value you give it, separated by a space.",
-        "es": "`console.log` imprime todos los valores que le das, separados por un espacio."
+        "en": "Each turn adds to `total` but never touches `count`, so `count <= 3` is true forever. Adding `count++` inside the loop moves it toward the end. The course stops a stuck loop after 2 seconds, so your page never freezes.",
+        "es": "Cada vuelta le suma a `total` pero nunca toca `count`, así que `count <= 3` es verdadero para siempre. Agregar `count++` dentro del bucle lo acerca al final. El curso detiene un bucle atorado después de 2 segundos, así que tu página nunca se congela."
       }
-    },
-    {
-      "type": "code",
-      "task": {
-        "en": "This code has a bug. Press **Run**, read the error message, and fix the code so `timesTwo(number)` returns the number times 2.",
-        "es": "Este código tiene un error. Presiona **Ejecutar**, lee el mensaje de error y arregla el código para que `timesTwo(number)` devuelva el número por 2."
-      },
-      "hint": {
-        "en": "The error says `numbr is not defined`: a typo. What is the parameter really called?",
-        "es": "El error dice `numbr is not defined`: un error de escritura. ¿Cómo se llama de verdad el parámetro?"
-      },
-      "starterCode": "function timesTwo(number) {\n  return numbr * 2\n}\n\nconsole.log(timesTwo(5))\n",
-      "solution": "function timesTwo(number) {\n  return number * 2\n}\n\nconsole.log(timesTwo(5))\n",
-      "kind": "function",
-      "functionName": "timesTwo",
-      "tests": [
-        {
-          "args": [2],
-          "expected": 4
-        },
-        {
-          "args": [5],
-          "expected": 10
-        },
-        {
-          "args": [-3],
-          "expected": -6
-        }
-      ]
-    },
-    {
-      "type": "code",
-      "task": {
-        "en": "This loop never stops. Press **Check** and you'll see it get stopped after 2 seconds. Then fix it so `sumTo(n)` returns 1 + 2 + … + n.",
-        "es": "Este bucle nunca termina. Presiona **Comprobar** y verás que se detiene después de 2 segundos. Después arréglalo para que `sumTo(n)` devuelva 1 + 2 + … + n."
-      },
-      "hint": {
-        "en": "`count` never changes, so `count <= n` is always true. Add `count++` inside the loop.",
-        "es": "`count` nunca cambia, así que `count <= n` siempre es verdadero. Agrega `count++` dentro del bucle."
-      },
-      "starterCode": "function sumTo(n) {\n  let runningSum = 0\n  let count = 1\n  while (count <= n) {\n    runningSum += count\n  }\n  return runningSum\n}\n\nconsole.log(sumTo(3)) // 6\n",
-      "solution": "function sumTo(n) {\n  let runningSum = 0\n  let count = 1\n  while (count <= n) {\n    runningSum += count\n    count++\n  }\n  return runningSum\n}\n\nconsole.log(sumTo(3)) // 6\n",
-      "kind": "function",
-      "functionName": "sumTo",
-      "tests": [
-        {
-          "args": [3],
-          "expected": 6
-        },
-        {
-          "args": [5],
-          "expected": 15
-        }
-      ]
     }
   ]
 }

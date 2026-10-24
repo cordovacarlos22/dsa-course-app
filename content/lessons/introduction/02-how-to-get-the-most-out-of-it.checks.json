@@ -103,57 +103,38 @@
       }
     },
     {
-      "type": "code",
-      "task": {
-        "en": "Practice moving a pointer. Each node looks like `{ value, next }`, and the last node has `next: null`. Write `lastValue(head)`: start at `head`, follow the `next` pointers to the last node, and return its `value`.",
-        "es": "Practica mover un puntero. Cada nodo se ve así: `{ value, next }`, y el último nodo tiene `next: null`. Escribe `lastValue(head)`: empieza en `head`, sigue los punteros `next` hasta el último nodo y devuelve su `value`."
+      "type": "choice",
+      "question": {
+        "en": "A chain starts at `head = { value: 4, next: { value: 7, next: null } }`. A pointer starts at `head` and moves with `current = current.next` until `current.next` is `null`. What is `current.value` then?",
+        "es": "Una cadena empieza en `head = { value: 4, next: { value: 7, next: null } }`. Un puntero empieza en `head` y se mueve con `current = current.next` hasta que `current.next` es `null`. ¿Cuánto vale `current.value` entonces?"
       },
-      "hint": {
-        "en": "Use a variable `current = head`, and move it with `current = current.next` while `current.next !== null`. Then return `current.value`.",
-        "es": "Usa una variable `current = head` y muévela con `current = current.next` mientras `current.next !== null`. Después devuelve `current.value`."
-      },
-      "starterCode": "function lastValue(head) {\n  let current = head\n  // Move current forward until it reaches the last node.\n  return current.value\n}\n\nconst list = { value: 4, next: { value: 7, next: null } }\nconsole.log(lastValue(list)) // 7\n",
-      "solution": "function lastValue(head) {\n  let current = head\n  while (current.next !== null) {\n    current = current.next\n  }\n  return current.value\n}\n\nconst list = { value: 4, next: { value: 7, next: null } }\nconsole.log(lastValue(list)) // 7\n",
-      "kind": "function",
-      "functionName": "lastValue",
-      "tests": [
+      "options": [
         {
-          "args": [
-            {
-              "value": 4,
-              "next": {
-                "value": 7,
-                "next": null
-              }
-            }
-          ],
-          "expected": 7
+          "en": "`4`",
+          "es": "`4`"
         },
         {
-          "args": [
-            {
-              "value": 1,
-              "next": {
-                "value": 2,
-                "next": {
-                  "value": 3,
-                  "next": null
-                }
-              }
-            }
-          ],
-          "expected": 3
+          "en": "`7`",
+          "es": "`7`"
         },
         {
-          "args": [
-            {
-              "value": 9,
-              "next": null
-            }
-          ],
-          "expected": 9
+          "en": "`null`",
+          "es": "`null`"
+        },
+        {
+          "en": "`undefined`, because the pointer ran off the end",
+          "es": "`undefined`, porque el puntero se salió del final"
         }
-      ]
+      ],
+      "answer": 1,
+      "hint": {
+        "en": "The pointer stops on the node whose `next` is `null`. Which node is that?",
+        "es": "El puntero se detiene en el nodo cuyo `next` es `null`. ¿Cuál es ese nodo?"
+      },
+      "explanation": {
+        "en": "It starts on 4, moves once to 7, and stops there, because 7's `next` is `null`. Following `next` pointers until there's no next node is how you reach the end of a linked list.",
+        "es": "Empieza en 4, se mueve una vez a 7 y se detiene ahí, porque el `next` de 7 es `null`. Seguir los punteros `next` hasta que ya no hay siguiente nodo es como llegas al final de una lista enlazada."
+      }
     },
     {
       "type": "explain",

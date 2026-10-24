@@ -505,6 +505,37 @@
         "en": "JavaScript reads the whole code before running it. If it can't make sense of the code, it stops with a SyntaxError, so not even line 1 runs. Other errors, like a ReferenceError, only stop the code at the line where they happen.",
         "es": "JavaScript lee todo el código antes de ejecutarlo. Si no puede entenderlo, se detiene con un SyntaxError, así que no corre ni la línea 1. Otros errores, como un ReferenceError, solo detienen el código en la línea donde pasan."
       }
+    },
+    {
+      "id": "console-log-commas",
+      "topic": "Running code",
+      "prompt": {
+        "en": "What does `console.log('Year:', 1995)` print?",
+        "es": "¿Qué imprime `console.log('Year:', 1995)`?"
+      },
+      "options": [
+        {
+          "en": "`'Year:', 1995`",
+          "es": "`'Year:', 1995`"
+        },
+        {
+          "en": "`Year:1995`",
+          "es": "`Year:1995`"
+        },
+        {
+          "en": "An error, because you can't mix text and numbers",
+          "es": "Un error, porque no puedes mezclar texto y números"
+        },
+        {
+          "en": "`Year: 1995`",
+          "es": "`Year: 1995`"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "`console.log` prints every value you give it, separated by a space.",
+        "es": "`console.log` imprime todos los valores que le das, separados por un espacio."
+      }
     }
   ],
   "exercises": []
