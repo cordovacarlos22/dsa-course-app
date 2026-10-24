@@ -58,7 +58,7 @@
       "type": "choice",
       "question": {
         "en": "Calling `timesTwo(5)` stops with `ReferenceError: numbr is not defined`. The function is `function timesTwo(number) { return numbr * 2 }`. What is the bug?",
-        "es": "Llamar `timesTwo(5)` se detiene con `ReferenceError: numbr is not defined`. La función es `function timesTwo(number) { return numbr * 2 }`. ¿Cuál es el error?"
+        "es": "Al llamar `timesTwo(5)`, el código se detiene con `ReferenceError: numbr is not defined`. La función es `function timesTwo(number) { return numbr * 2 }`. ¿Cuál es el error?"
       },
       "options": [
         {
