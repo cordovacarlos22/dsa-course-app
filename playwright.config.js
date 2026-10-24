@@ -8,6 +8,9 @@ const PORT = 4174
 // Playwright's Chromium. The WebKit project needs Playwright's WebKit
 // (`npx playwright install webkit`).
 const chrome = process.env.CI ? {} : { channel: 'chrome' }
+// E2E_BASE_URL tests an app that's already running (the Docker `preview`
+// container, later staging) instead of starting the local preview server.
+const runningApp = process.env.E2E_BASE_URL
 
 export default defineConfig({
   testDir: 'e2e',
@@ -18,7 +21,7 @@ export default defineConfig({
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
   timeout: 120_000,
   use: {
-    baseURL: `http://localhost:${PORT}`,
+    baseURL: runningApp ?? `http://localhost:${PORT}`,
     trace: 'retain-on-failure',
   },
   projects: [
@@ -53,9 +56,11 @@ export default defineConfig({
       },
     },
   ],
-  webServer: {
-    command: `node scripts/serve-preview.mjs ${PORT}`,
-    url: `http://localhost:${PORT}`,
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: runningApp
+    ? undefined
+    : {
+        command: `node scripts/serve-preview.mjs ${PORT}`,
+        url: `http://localhost:${PORT}`,
+        reuseExistingServer: !process.env.CI,
+      },
 })
