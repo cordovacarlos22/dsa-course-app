@@ -234,8 +234,23 @@ const codeClassCheckpointSchema = z
   })
   .strict()
 
+// "Explain it yourself": the student writes an explanation, then compares it
+// with the model answer and ticks each checklist point it covers.
+const explainCheckpointSchema = z
+  .object({
+    type: z.literal('explain'),
+    question: localizedText,
+    modelAnswer: localizedText,
+    checklist: z
+      .array(localizedText)
+      .min(2, 'an explain checkpoint needs 2–5 checklist points')
+      .max(5, 'an explain checkpoint needs 2–5 checklist points'),
+  })
+  .strict()
+
 export const checkpointSchema = z.union([
   choiceCheckpointSchema,
+  explainCheckpointSchema,
   codeFunctionCheckpointSchema,
   codeClassCheckpointSchema,
 ])

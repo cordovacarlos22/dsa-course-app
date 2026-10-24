@@ -339,6 +339,8 @@ export function validateLessonChecks(data, stepCounts) {
       )
       return
     }
+    // The student checks their own explanation: there's no code to run.
+    if (checkpoint.type === 'explain') return
     const teachingText = [
       checkpoint.starterCode,
       checkpoint.solution,
