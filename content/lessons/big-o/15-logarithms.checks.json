@@ -35,38 +35,29 @@
       }
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "A sorted array has 2,147,483,648 items (that's 2³¹). About how many steps does divide and conquer need to find any item?",
-        "es": "Un array ordenado tiene 2,147,483,648 elementos (eso es 2³¹). ¿Más o menos cuántos pasos necesita dividir y conquistar para encontrar cualquier elemento?"
+        "en": "In your own words: why does divide and conquer find an item in a sorted list in about log₂(n) steps?",
+        "es": "Con tus palabras: ¿por qué dividir y conquistar encuentra un elemento en una lista ordenada en unos log₂(n) pasos?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "Each step looks at the middle and throws away the half that can't hold the item, so what's left to search halves every time. Starting with n items, you can only halve about log₂(n) times before one item is left: 8 items take 3 halvings, and a billion takes about 30. That's why the steps barely grow, even when the list gets huge.",
+        "es": "Cada paso mira el centro y descarta la mitad donde no puede estar el elemento, así que lo que queda por buscar se reduce a la mitad cada vez. Empezando con n elementos, solo puedes partir a la mitad unas log₂(n) veces antes de que quede un solo elemento: 8 elementos se parten 3 veces, y mil millones unas 30. Por eso los pasos casi no crecen, aunque la lista sea enorme."
+      },
+      "checklist": [
         {
-          "en": "31",
-          "es": "31"
+          "en": "Says each step throws away half of what's left",
+          "es": "Dice que cada paso descarta la mitad de lo que queda"
         },
         {
-          "en": "1,000",
-          "es": "1,000"
+          "en": "Says log₂(n) is how many times n can be halved before one item is left",
+          "es": "Dice que log₂(n) es cuántas veces se puede partir n a la mitad antes de que quede un elemento"
         },
         {
-          "en": "1,073,741,824",
-          "es": "1,073,741,824"
-        },
-        {
-          "en": "2,147,483,648",
-          "es": "2,147,483,648"
+          "en": "Says the steps grow very slowly (about 30 for a billion)",
+          "es": "Dice que los pasos crecen muy despacio (unos 30 para mil millones)"
         }
-      ],
-      "answer": 0,
-      "hint": {
-        "en": "2³¹ items means 31 halvings until one is left.",
-        "es": "2³¹ elementos quiere decir 31 mitades hasta que quede uno."
-      },
-      "explanation": {
-        "en": "log₂(2³¹) = 31. Checking one by one could take over two billion steps.",
-        "es": "log₂(2³¹) = 31. Revisar uno por uno podría tomar más de dos mil millones de pasos."
-      }
+      ]
     },
     {
       "type": "choice",

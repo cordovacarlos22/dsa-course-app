@@ -58,26 +58,26 @@ El índice de cada elemento siempre tiene que coincidir con su posición. Si agr
 array-reindex
 ```
 
-Este es un array, `myArray`, con 4 números en los índices 0 a 3. Presiona **Ejecutar** y sigue el resultado:
+Este es un array de números de boletos para una rifa, `tickets`, con 4 números en los índices 0 a 3. Presiona **Ejecutar** y sigue el resultado:
 
 ```js-run
-const myArray = [11, 3, 23, 7]
+const tickets = [12, 5, 31, 8]
 
-myArray.push(17) // agrega el 17 al final, en el índice 4
-console.log('push:', myArray)
-myArray.pop() // lo quita otra vez
-console.log('pop:', myArray)
+tickets.push(20) // agrega el 20 al final, en el índice 4
+console.log('push:', tickets)
+tickets.pop() // lo quita otra vez
+console.log('pop:', tickets)
 
-myArray.shift() // quita el 11 del principio...
-console.log('shift:', myArray, 'el 3 ahora está en el índice', myArray.indexOf(3))
-myArray.unshift(11) // ...y lo vuelve a poner
-console.log('unshift:', myArray, 'el 3 regresó al índice', myArray.indexOf(3))
+tickets.shift() // quita el 12 del principio...
+console.log('shift:', tickets, 'el 5 ahora está en el índice', tickets.indexOf(5))
+tickets.unshift(12) // ...y lo vuelve a poner
+console.log('unshift:', tickets, 'el 5 regresó al índice', tickets.indexOf(5))
 ```
 
-- **`push(17)`** agrega el 17 al final, en el índice 4. Ningún otro elemento necesita un índice nuevo: **O(1)**.
+- **`push(20)`** agrega el 20 al final, en el índice 4. Ningún otro elemento necesita un índice nuevo: **O(1)**.
 - **`pop()`** quita el último elemento. Otra vez, nada más se vuelve a indexar: **O(1)**.
 - **`shift()`** quita el primer elemento, y ahora todos los demás índices están mal: el nuevo primer elemento tiene que pasar a ser el índice 0, el siguiente el índice 1, y así. **Todos** los elementos se vuelven a indexar: **O(n)**.
-- **`unshift(11)`** vuelve a poner el 11 al principio, y cada elemento tiene que subir un índice: **O(n)**.
+- **`unshift(12)`** vuelve a poner el 12 al principio, y cada elemento tiene que subir un índice: **O(n)**.
 
 Con 4 elementos eso no es nada, pero con miles de elementos es muchísimo reindexar. Cada reindexado es un trabajo pequeño, así que la cuenta exacta podría ser 2n o 10n operaciones. Igual crece en proporción a n, así que es O(n).
 
@@ -98,16 +98,16 @@ array-splice
 Entonces, ¿qué pasa en el medio? Insertemos algo:
 
 ```js-run
-const myArray = [11, 3, 23, 7]
+const tickets = [12, 5, 31, 8]
 
-myArray.splice(1, 0, 'hi') // en el índice 1, quita 0 elementos y agrega 'hi'
-console.log(myArray) // el 3, el 23 y el 7 subieron un índice
+tickets.splice(1, 0, 40) // en el índice 1, quita 0 elementos y agrega el 40
+console.log(tickets) // el 5, el 31 y el 8 subieron un índice
 
-myArray.splice(1, 1) // en el índice 1, quita 1 elemento
-console.log(myArray) // y todos regresan a su lugar
+tickets.splice(1, 1) // en el índice 1, quita 1 elemento
+console.log(tickets) // y todos regresan a su lugar
 ```
 
-Cuando 'hi' entra en el índice 1, cada elemento que está después necesita un índice nuevo: **O(n)**.
+Cuando el 40 entra en el índice 1, cada elemento que está después necesita un índice nuevo: **O(n)**.
 
 Quizá digas: "Oye, solo reindexamos más o menos la mitad de los elementos. ¿No es O(½n)?" Hay dos problemas con esa idea. Primero, Big O siempre mide el **peor caso**, no el promedio, e insertar en el índice 0 mueve todo. Segundo, aunque fuera ½n, **½ es una constante, y las constantes se eliminan**. De cualquier forma, es **O(n)**. Quitar del medio es O(n) por la misma razón.
 
@@ -115,17 +115,17 @@ Quizá digas: "Oye, solo reindexamos más o menos la mitad de los elementos. ¿N
 
 ## Buscar por valor contra leer por índice
 
-La última operación es **buscar**: sabes _qué_ estás buscando, pero no _dónde_ está. Esta es la diferencia con acceder en una frase: acceder pregunta "¿qué hay en el índice 3?", y buscar pregunta "¿dónde está el valor 7?". En un array desordenado, el valor puede estar en cualquier lugar, así que la única forma de encontrarlo es revisar los elementos uno por uno.
+La última operación es **buscar**: sabes _qué_ estás buscando, pero no _dónde_ está. Esta es la diferencia con acceder en una frase: acceder pregunta "¿qué hay en el índice 3?", y buscar pregunta "¿dónde está el valor 42?". En un array desordenado, el valor puede estar en cualquier lugar, así que la única forma de encontrarlo es revisar los elementos uno por uno.
 
 ```viz
 search-cases
 ```
 
-Digamos que buscamos el **valor** 7. Empezamos al principio: ¿eso es 7? No. No. No… hasta que por fin lo encontramos. Si está al final, o si no está, ya revisamos todos los elementos. Buscar **por valor** es **O(n)**. Recuerda que `includes` e `indexOf` hacen exactamente esto por dentro, así que también son O(n).
+Digamos que buscamos el **valor** 42. Empezamos al principio: ¿eso es 42? No. No. No… hasta que por fin lo encontramos. Si está al final, o si no está, ya revisamos todos los elementos. Buscar **por valor** es **O(n)**. Recuerda que `includes` e `indexOf` hacen exactamente esto por dentro, así que también son O(n).
 
 Si el array está **ordenado**, hay una forma más rápida: la búsqueda binaria, el O(log n) que parte a la mitad y que viste en la lección de logaritmos. La vas a escribir tú en el módulo de búsqueda. Con datos desordenados, O(n) es lo mejor que podemos hacer.
 
-Leer **por índice** es distinto, como viste al principio de la lección: los arrays usan sus índices para ir **directo** a ese lugar, en O(1). En un array de un millón de elementos, puedes saltar directo al elemento 400,000 en un paso.
+Leer **por índice** es distinto, como viste al principio de la lección: los arrays usan sus índices para ir **directo** a ese lugar, en O(1). En un array de un millón de elementos, puedes saltar directo al elemento 600,000 en un paso.
 
 Esta es toda la lección en una tabla:
 
