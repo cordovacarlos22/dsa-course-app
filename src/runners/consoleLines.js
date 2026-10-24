@@ -14,9 +14,15 @@ const PRINTING = /^console\.(log|info|warn|error)$/
 // or printing through another name (`const say = console.log`), just gets no
 // line tag.
 export function tagConsoleCalls(code) {
+  // In source order: the parser visits a call before the calls inside it.
   const calls = []
+  let hasOwnConsole = false
   parser.parse(code).iterate({
     enter(node) {
+      if (node.name === 'VariableDefinition') {
+        if (code.slice(node.from, node.to) === 'console') hasOwnConsole = true
+        return
+      }
       if (node.name !== 'CallExpression') return
       const callee = node.node.firstChild
       if (callee?.name !== 'MemberExpression') return
@@ -24,16 +30,21 @@ export function tagConsoleCalls(code) {
       if (method) calls.push({ from: callee.from, to: callee.to, method })
     },
   })
+  // Code that names something `console` (say, a function parameter) runs as
+  // written: that `console` has no `atLine`.
+  if (hasOwnConsole) return code
 
-  // From the last call back to the first, so earlier positions stay valid.
-  let tagged = code
-  for (let i = calls.length - 1; i >= 0; i--) {
+  // The new text starts with `console`, like the old, so code without
+  // semicolons still splits into the same statements.
+  let tagged = ''
+  let copiedUpTo = 0
+  let line = 1
+  for (let i = 0; i < calls.length; i++) {
     const { from, to, method } = calls[i]
-    const line = code.slice(0, from).split('\n').length
-    tagged =
-      tagged.slice(0, from) +
-      `console.atLine(${line}).${method}` +
-      tagged.slice(to)
+    const before = code.slice(copiedUpTo, from)
+    line += before.split('\n').length - 1
+    tagged += `${before}console.atLine(${line}).${method}`
+    copiedUpTo = to
   }
-  return tagged
+  return tagged + code.slice(copiedUpTo)
 }

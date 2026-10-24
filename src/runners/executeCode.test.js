@@ -41,10 +41,36 @@ describe('executeCode', () => {
     expect(result.lines).toEqual([null, null])
   })
 
+  it('runs code that has a console of its own', () => {
+    const code = [
+      'function whisper(console) {',
+      "  console.log('psst')",
+      '}',
+      'whisper({ log: function () {} })',
+      "console.log('done')",
+    ].join('\n')
+    // It runs as written, so its output has no line tags.
+    expect(executeCode(code)).toEqual({
+      logs: ['done'],
+      lines: [null],
+      error: null,
+      errorLine: null,
+    })
+  })
+
   it('reports the line where an error was thrown', () => {
     const result = executeCode("console.log('ok')\n\nnull.length")
     expect(result.error).toMatch(/^TypeError/)
     expect(result.errorLine).toBe(3)
+  })
+
+  it("uses the error's own line number when the stack has none (Safari)", () => {
+    // Safari counts the two wrapper lines too, so its line 4 is our line 2.
+    const result = executeCode(
+      "let a = 1\nthrow { name: 'Error', message: 'boom', line: 4 }",
+    )
+    expect(result.error).toBe('Error: boom')
+    expect(result.errorLine).toBe(2)
   })
 
   it('prints several values on one line, separated by spaces', () => {

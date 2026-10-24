@@ -23,4 +23,9 @@ describe('tagConsoleCalls', () => {
     expect(tagged).toContain('/* console.log() */')
     expect(tagged).toContain('console.atLine(4).info(`${1}`)')
   })
+
+  it('leaves code that has its own console as it is', () => {
+    const code = "function whisper(console) {\n  console.log('psst')\n}"
+    expect(tagConsoleCalls(code)).toBe(code)
+  })
 })
