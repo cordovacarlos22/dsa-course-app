@@ -4,7 +4,7 @@
       "type": "choice",
       "question": {
         "en": "A teammate says reading `scores[9000]` from an array of 10,000 scores is slow, because JavaScript has to count from index 0 up to 9,000. What's the Big O of that read?",
-        "es": "Un compañero dice que leer `scores[9000]` de un array de 10,000 puntajes es lento, porque JavaScript tiene que contar desde el índice 0 hasta el 9,000. ¿Cuál es el Big O de esa lectura?"
+        "es": "Alguien de tu clase dice que leer `scores[9000]` de un array de 10,000 puntajes es lento, porque JavaScript tiene que contar desde el índice 0 hasta el 9,000. ¿Cuál es el Big O de esa lectura?"
       },
       "options": [
         {
@@ -35,44 +35,35 @@
       }
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "Which of these array operations is O(1)?",
-        "es": "¿Cuál de estas operaciones de array es O(1)?"
+        "en": "In your own words: why are push and pop O(1), while shift and unshift are O(n)?",
+        "es": "Con tus palabras: ¿por qué push y pop son O(1), mientras que shift y unshift son O(n)?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "push and pop work at the end of the array, so no other item moves and no index changes: one step. shift and unshift work at the front, so every other item has to move one place and get a new index. With n items, that's n moves.",
+        "es": "push y pop trabajan al final del array, así que ningún otro elemento se mueve y ningún índice cambia: un paso. shift y unshift trabajan al inicio, así que todos los demás elementos tienen que moverse un lugar y recibir un índice nuevo. Con n elementos, son n movimientos."
+      },
+      "checklist": [
         {
-          "en": "`unshift(x)`: add to the start",
-          "es": "`unshift(x)`: agregar al principio"
+          "en": "Says push and pop work at the end, so nothing else moves",
+          "es": "Dice que push y pop trabajan al final, así que nada más se mueve"
         },
         {
-          "en": "`shift()`: remove from the start",
-          "es": "`shift()`: quitar del principio"
+          "en": "Says shift and unshift make every other item move to a new index",
+          "es": "Dice que shift y unshift obligan a los demás elementos a moverse a un índice nuevo"
         },
         {
-          "en": "`push(x)`: add to the end",
-          "es": "`push(x)`: agregar al final"
-        },
-        {
-          "en": "`splice(1, 0, x)`: insert near the start",
-          "es": "`splice(1, 0, x)`: insertar cerca del principio"
+          "en": "Says moving n items is O(n)",
+          "es": "Dice que mover n elementos es O(n)"
         }
-      ],
-      "answer": 2,
-      "hint": {
-        "en": "Which one doesn't make any other item change its index?",
-        "es": "¿Cuál no obliga a ningún otro elemento a cambiar de índice?"
-      },
-      "explanation": {
-        "en": "Adding or removing at the end doesn't re-index anything: O(1). The start and the middle re-index the rest: O(n).",
-        "es": "Agregar o quitar al final no reindexa nada: O(1). El principio y el medio reindexan el resto: O(n)."
-      }
+      ]
     },
     {
       "type": "choice",
       "question": {
-        "en": "`myArray.splice(1, 0, 'hi')` inserts an item near the middle. A classmate says it's O(n/2) because only half the items move. What's the correct Big O?",
-        "es": "`myArray.splice(1, 0, 'hi')` inserta un elemento cerca del medio. Un compañero dice que es O(n/2) porque solo se mueve la mitad de los elementos. ¿Cuál es el Big O correcto?"
+        "en": "`tickets.splice(1, 0, 40)` inserts an item near the middle. A classmate says it's O(n/2) because only half the items move. What's the correct Big O?",
+        "es": "`tickets.splice(1, 0, 40)` inserta un elemento cerca del medio. Alguien de tu clase dice que es O(n/2) porque solo se mueve la mitad de los elementos. ¿Cuál es el Big O correcto?"
       },
       "options": [
         {
@@ -105,8 +96,8 @@
     {
       "type": "choice",
       "question": {
-        "en": "In an array of a million items, what's the Big O of reading `arr[400000]`, and of finding where the value 7 is?",
-        "es": "En un array de un millón de elementos, ¿cuál es el Big O de leer `arr[400000]`, y de encontrar dónde está el valor 7?"
+        "en": "In an array of a million items, what's the Big O of reading `arr[600000]`, and of finding where the value 42 is?",
+        "es": "En un array de un millón de elementos, ¿cuál es el Big O de leer `arr[600000]`, y de encontrar dónde está el valor 42?"
       },
       "options": [
         {
@@ -128,8 +119,8 @@
       ],
       "answer": 1,
       "hint": {
-        "en": "Does the array know where the value 7 is?",
-        "es": "¿El array sabe dónde está el valor 7?"
+        "en": "Does the array know where the value 42 is?",
+        "es": "¿El array sabe dónde está el valor 42?"
       },
       "explanation": {
         "en": "The index jumps straight to the spot in memory: O(1). Finding a value means checking item by item: O(n).",

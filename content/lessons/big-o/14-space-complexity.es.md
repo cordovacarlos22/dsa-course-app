@@ -1,7 +1,7 @@
 ---
 title: Complejidad espacial
 order: 14
-minutes: 11
+minutes: 14
 ---
 
 > **Meta:** medir cuánta memoria extra necesita un código, con la misma notación Big O.
@@ -10,7 +10,7 @@ minutes: 11
 
 Hasta ahora nos preocupamos por el **tiempo**: cuánto más tarda un algoritmo cuando su entrada se hace más grande. Eso es la **complejidad temporal**. Ahora veamos la **complejidad espacial**: cuánta **memoria** ocupa un algoritmo cuando crece su entrada. Usamos la misma notación Big O y las mismas reglas (quitar las constantes, quitar los términos no dominantes); solo medimos otra cosa.
 
-Cada valor que crea tu código vive en algún lugar de la memoria de la computadora: cada variable, cada array nuevo, cada texto nuevo. La complejidad espacial pregunta cómo crece la cantidad de memoria **nueva** con la entrada. Una función que guarda un solo contador necesita la misma memoria para 10 invitados o para 10 millones. Una función que hace un gafete nuevo para cada invitado necesita más memoria entre más larga es la lista.
+Cada valor que crea tu código vive en algún lugar de la memoria de la computadora: cada variable, cada array nuevo, cada texto nuevo. La complejidad espacial pregunta cómo crece la cantidad de memoria **nueva** con la entrada. Una función que guarda un solo contador necesita la misma memoria para 10 invitados o para 10 millones. Una función que hace un gafete nuevo para cada nombre necesita más memoria entre más larga es la lista.
 
 Primero hay que aclarar algo. Cuando n crece, obviamente la entrada también crece: una lista de un millón de invitados ocupa más memoria que una de 10. Esa parte la **ignoramos**. Lo que medimos es el espacio que el algoritmo **necesita por sí mismo**, aparte de la entrada. Si lees sobre esto en internet, quizá veas que se llama **complejidad espacial auxiliar**. En este curso, a menos que digamos lo contrario, "complejidad espacial" quiere decir complejidad espacial auxiliar: lo que pasa **dentro** del algoritmo.
 
@@ -18,9 +18,9 @@ Primero hay que aclarar algo. Cuando n crece, obviamente la entrada también cre
 memory-boxes
 ```
 
-**Qué acaba de pasar:** contar a los invitados necesitó una caja de memoria, el contador, ya fueran 3 invitados o 6: **espacio O(1)**. Hacer un gafete para cada invitado necesitó una caja nueva por invitado, así que 6 invitados fueron 6 cajas: **espacio O(n)**. La lista de invitados fue la misma en los dos casos, y no contó.
+**Qué acaba de pasar:** contar a los invitados necesitó una caja de memoria, el contador, ya fueran 3 invitados o 6: **espacio O(1)**. Hacer un gafete para cada nombre necesitó una caja nueva por nombre, así que 6 invitados fueron 6 cajas: **espacio O(n)**. La lista de invitados fue la misma en los dos casos, y no contó.
 
-Esta es una función que lee a cada invitado pero solo guarda un nombre extra:
+Esta es una función que lee cada nombre pero solo guarda uno extra:
 
 ```js-run
 function longestName(guests) {
@@ -55,7 +55,7 @@ Así que para encontrar la complejidad espacial de una función, fíjate en lo q
 trace-count-guests
 ```
 
-**Qué acaba de pasar:** `countGuests` recorrió a cada invitado, pero los únicos valores que guardó fueron dos números, `count` e `i`. Cambiaron en cada vuelta, pero cambiar un número no ocupa memoria nueva: el espacio ya estaba ahí. Haya 4 invitados o 4 millones, siguen siendo dos números: **espacio O(1)**.
+**Qué acaba de pasar:** `countGuests` recorrió toda la lista, pero los únicos valores que guardó fueron dos números, `count` e `i`. Cambiaron en cada vuelta, pero cambiar un número no ocupa memoria nueva: el espacio ya estaba ahí. Haya 4 invitados o 4 millones, siguen siendo dos números: **espacio O(1)**.
 
 Un texto, en cambio, crece cuando le agregas cosas. Cada vuelta de este bucle hace el texto más largo, así que su memoria crece con el número de vueltas:
 
@@ -72,7 +72,7 @@ console.log('Largo:', line.length) // 20 caracteres: 4 por vuelta, así que espa
 
 ## Sumar vs duplicar los pedidos
 
-Analicemos dos funciones. Las dos recorren un array de pedidos de botanas (cuántas botanas pidió cada invitado), así que las dos son O(n) de **tiempo**. Pero su espacio es muy distinto, porque una crea un solo número y la otra crea un array nuevo completo.
+Analicemos dos funciones. Las dos recorren un array de pedidos de botanas (cuántas botanas pidió cada persona), así que las dos son O(n) de **tiempo**. Pero su espacio es muy distinto, porque una crea un solo número y la otra crea un array nuevo completo.
 
 **`totalOrders`** crea un número, `runningSum`, y la variable del bucle, `i`. Seguimos sumando en `runningSum`, pero eso cuesta tiempo, no espacio nuevo: el espacio ya está ahí. Tenga el array 10 elementos o un millón, la función solo tiene esos dos números. Eso es **espacio O(1)**.
 
@@ -118,3 +118,40 @@ Prueba con estas:
 No necesitas dominar la complejidad espacial antes de seguir. La meta es que cuando digamos "esta tiene una complejidad espacial excelente pero una complejidad temporal terrible", sepas qué significa.
 
 **Error común:** suponer que el tiempo y el espacio siempre coinciden. Las dos funciones de arriba tardan O(n), pero una es O(1) de espacio y la otra O(n). Y una función O(n²) lenta puede usar casi nada de memoria. Da siempre las dos respuestas por separado.
+
+## Cambiar espacio por tiempo
+
+El tiempo y el espacio muchas veces jalan en direcciones opuestas. A veces puedes hacer un código **más rápido** dejándolo usar **más memoria**: recuerdas lo que ya viste, para nunca tener que buscarlo otra vez. A eso se le llama **cambiar espacio por tiempo**, y es una de las ideas más útiles de todo el curso.
+
+Este es un trabajo clásico: _¿la lista de invitados tiene el mismo nombre dos veces?_ La primera idea compara cada nombre con todos los que vienen después, con dos bucles anidados. Solo guarda `i` y `j`, así que es **espacio O(1)**, pero es **tiempo O(n²)**. La segunda idea recorre la lista **una vez** y anota cada nombre que ve en un objeto, como un libro de visitas. Antes de anotar un nombre, revisa si ya está en el libro, y revisar una clave de un objeto es un solo salto, O(1). Una sola pasada la hace **tiempo O(n)**, pero el libro puede guardar hasta n nombres: **espacio O(n)**.
+
+```js-run
+function hasDuplicateSlow(guests) {
+  for (let i = 0; i < guests.length; i++) {
+    for (let j = i + 1; j < guests.length; j++) {
+      if (guests[i] === guests[j]) {
+        return true
+      }
+    }
+  }
+  return false
+}
+
+function hasDuplicateFast(guests) {
+  const seen = {}
+  for (let i = 0; i < guests.length; i++) {
+    if (seen[guests[i]] === true) {
+      return true
+    }
+    seen[guests[i]] = true
+  }
+  return false
+}
+
+const guests = ['Ana', 'Ben', 'Cleo', 'Ben']
+console.log(hasDuplicateSlow(guests), hasDuplicateFast(guests)) // true true
+```
+
+Las dos dan las mismas respuestas. Con 10 nombres, nadie notaría la diferencia. Con 100,000, la versión lenta hace hasta unos 5 mil millones de comparaciones, mientras que la rápida da 100,000 pasos y guarda un libro de hasta 100,000 nombres. Casi siempre es un gran trato: la memoria es barata y esperar no. Pero cuando la memoria es escasa, el espacio O(1) de la versión lenta puede ser la mejor opción. Eso es justo lo que quiere decir quien te entrevista con _"¿Y si nos importa más la memoria?"_
+
+**Error común:** pensar que la versión rápida siempre es mejor. Es más rápida con listas grandes, pero lo paga con memoria. Cuál gana depende de qué te falta más, tiempo o memoria, y en las entrevistas es muy común que pregunten por los dos lados.

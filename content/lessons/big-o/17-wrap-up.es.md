@@ -36,7 +36,7 @@ Con n = 100: O(1) es 1, O(log n) es más o menos 7, O(n) es 100 y O(n²) es 10,0
 
 ## Las palabras, y una hoja de referencia
 
-Quienes entrevistan y otros desarrolladores casi nunca dicen "O de n al cuadrado" sin un nombre o una imagen que lo acompañe. Cada forma tiene un **nombre**, y casi todas tienen una frase que la gente usa para ella. Conocer las dos te ayuda a seguir una conversación y a explicar tu propio código:
+Quienes entrevistan y quienes programan casi nunca dicen "O de n al cuadrado" sin un nombre o una imagen que lo acompañe. Cada forma tiene un **nombre**, y casi todas tienen una frase que la gente usa para ella. Conocer las dos te ayuda a seguir una conversación y a explicar tu propio código:
 
 | Big O      | Nombre                  | Vas a escuchar…                 | Ejemplo                                 |
 | ---------- | ----------------------- | ------------------------------- | --------------------------------------- |
@@ -44,7 +44,7 @@ Quienes entrevistan y otros desarrolladores casi nunca dicen "O de n al cuadrado
 | O(log n)   | logarítmico             | "dividir y conquistar"          | búsqueda binaria                        |
 | O(n)       | lineal                  | "proporcional"                  | recorrer un array                       |
 | O(n log n) | linearítmico            | "el mejor ordenamiento general" | merge sort, quick sort                  |
-| O(n²)      | cuadrático (polinomial) | "un bucle dentro de otro"       | cada invitado saluda a cada invitado    |
+| O(n²)      | cuadrático (polinomial) | "un bucle dentro de otro"       | cada persona saluda a todas las demás   |
 
 Una gran referencia gratis es la **Big O Cheat Sheet**, en bigocheatsheet.com. Su gráfica califica cada ritmo de crecimiento en una escala que va de **Excelente** (_Excellent_) a **Horrible**: O(1) y O(log n) están en el extremo excelente, O(n²), O(2ⁿ) y O(n!) en el horrible, y O(n) y O(n log n) en medio. También muestra O(2ⁿ) y O(n!), que crecen todavía más rápido; O(n!) es algo que básicamente solo vas a ver si escribes código malo a propósito.
 
@@ -79,7 +79,7 @@ console.log('O(n!):', factorial)
 
 ## Resumen
 
-La **notación Big O** es nuestra herramienta para juzgar cómo se desempeña un algoritmo. Nos da un **entendimiento de alto nivel** de cómo cambia el tiempo de ejecución (complejidad temporal) o la memoria (complejidad espacial) de un algoritmo cuando crece su entrada. No le importa la precisión, solo las **tendencias generales**. Y es una propiedad del **algoritmo** mismo, no de la máquina que lo corre: una supercomputadora corre el mismo código más rápido que tu laptop, pero la tendencia es la misma.
+La **notación Big O** es nuestra herramienta para juzgar cómo se desempeña un algoritmo. Nos da un **entendimiento de alto nivel** de cómo cambia el tiempo de ejecución (complejidad temporal) o la memoria (complejidad espacial) de un algoritmo cuando crece su entrada. No le importa la precisión, solo las **tendencias generales**. Y es una propiedad del **algoritmo** mismo, no de la máquina que lo corre: una computadora más rápida termina cada paso antes, pero sigue haciendo la misma cantidad de pasos, así que la tendencia es la misma.
 
 Las reglas que aprendiste:
 
@@ -104,13 +104,13 @@ Aquí tienes una última función para analizar con todas las reglas a la vez. P
 ```js-run
 function partyPlan(guests) {
   let steps = 0
-  steps++ // el anfitrión revisa la puerta: O(1)
+  steps++ // revisar la puerta: O(1)
   for (let i = 0; i < guests.length; i++) {
-    steps++ // darle la bienvenida a cada invitado: O(n)
+    steps++ // darle la bienvenida a cada persona: O(n)
   }
   for (let i = 0; i < guests.length; i++) {
     for (let j = 0; j < guests.length; j++) {
-      steps++ // cada invitado conoce a cada invitado: O(n²)
+      steps++ // cada persona conoce a todas las demás: O(n²)
     }
   }
   return steps
@@ -120,7 +120,7 @@ const sizes = [10, 100, 1000]
 for (let k = 0; k < sizes.length; k++) {
   const guests = []
   for (let i = 0; i < sizes[k]; i++) {
-    guests.push('Invitado ' + i)
+    guests.push('Persona ' + i)
   }
   console.log(sizes[k], 'invitados:', partyPlan(guests), 'pasos')
 }

@@ -1,7 +1,7 @@
 ---
 title: Términos distintos para entradas distintas
 order: 13
-minutes: 9
+minutes: 10
 ---
 
 > **Meta:** escribir O(a + b) y O(a · b) para código con dos entradas. ¡Una "trampa" clásica de entrevista!
@@ -12,7 +12,7 @@ Hasta ahora, cada función tenía **una** entrada, y a su tamaño le decíamos n
 
 ¿Recuerdas `printTwice`, con un bucle después de otro? Cada bucle corría n veces, así que era O(2n), y quitamos la constante para obtener O(n). Este es el giro de entrevista: en lugar de pasar **un** número n, pasamos **dos** números distintos, a y b. El primer bucle corre a veces y el segundo corre b veces.
 
-La respuesta automática, si nunca has visto esto, suena así: "Un bucle es O(n), y este otro bucle también es O(n). Súmalos: O(2n). Quita la constante: O(n)." **Eso no es correcto.** No puedes decir que a es igual a n **y** que b es igual a n: son dos entradas distintas. Imagina a = 1 y b = 1,000,000: un bucle casi no corre, y el otro corre un millón de veces. Así que el primer bucle es **O(a)**, el segundo es **O(b)**, y juntos son **O(a + b)**. Hasta ahí se simplifica.
+La primera respuesta que se te ocurre, si nunca has visto esto, suena así: "Un bucle es O(n), y este otro bucle también es O(n). Súmalos: O(2n). Quita la constante: O(n)." **Eso no es correcto.** No puedes decir que a es igual a n **y** que b es igual a n: son dos entradas distintas. Imagina a = 1 y b = 1,000,000: un bucle casi no corre, y el otro corre un millón de veces. Así que el primer bucle es **O(a)**, el segundo es **O(b)**, y juntos son **O(a + b)**. Hasta ahí se simplifica.
 
 Esta es la misma idea con una fiesta que tiene invitados (a) y ayudantes (b):
 
@@ -20,7 +20,7 @@ Esta es la misma idea con una fiesta que tiene invitados (a) y ayudantes (b):
 two-inputs
 ```
 
-**Qué acaba de pasar:** la fiesta tenía 4 invitados y 2 ayudantes: dos listas distintas. El primer bucle le dio la bienvenida a cada invitado (a pasos), y luego un segundo bucle recorrió a los ayudantes (b pasos más), para un total de **O(a + b)**. En la última escena, cada invitado le dio las gracias a cada ayudante: un bucle sobre los ayudantes **dentro** de un bucle sobre los invitados. Eso son a × b pasos: **O(a · b)**.
+**Qué acaba de pasar:** la fiesta tenía 4 invitados y 2 ayudantes: dos listas distintas. El primer bucle le dio la bienvenida a cada persona (a pasos), y luego un segundo bucle recorrió a los ayudantes (b pasos más), para un total de **O(a + b)**. En la última escena, cada persona invitada le dio las gracias a cada ayudante: un bucle sobre los ayudantes **dentro** de un bucle sobre los invitados. Eso son a × b pasos: **O(a · b)**.
 
 Esta es `printBoth`, la versión con números:
 
@@ -45,7 +45,7 @@ const helpers = ['Kai', 'Lu'] // b = 2
 
 let inARow = 0
 for (let i = 0; i < guests.length; i++) {
-  inARow++ // darle la bienvenida a un invitado
+  inARow++ // darle la bienvenida a una persona
 }
 for (let j = 0; j < helpers.length; j++) {
   inARow++ // darle instrucciones a un ayudante
@@ -54,7 +54,7 @@ for (let j = 0; j < helpers.length; j++) {
 let nested = 0
 for (let i = 0; i < guests.length; i++) {
   for (let j = 0; j < helpers.length; j++) {
-    nested++ // este invitado le da las gracias a este ayudante
+    nested++ // un agradecimiento por cada par de persona invitada y ayudante
   }
 }
 
@@ -62,7 +62,7 @@ console.log('Seguidos:', inARow, 'pasos (a + b)') // 6
 console.log('Anidados:', nested, 'pasos (a · b)') // 8
 ```
 
-**Error común:** la respuesta automática misma: decir que los dos bucles son O(n) y terminar con O(n). Dos bucles sobre entradas **distintas** nunca se juntan en una sola letra. Escribe una letra por entrada, y luego suma (bucles seguidos) o multiplica (un bucle dentro del otro).
+**Error común:** esa primera respuesta: decir que los dos bucles son O(n) y terminar con O(n). Dos bucles sobre entradas **distintas** nunca se juntan en una sola letra. Escribe una letra por entrada, y luego suma (bucles seguidos) o multiplica (un bucle dentro del otro).
 
 ## No les digas n a las dos
 
@@ -72,7 +72,7 @@ console.log('Anidados:', nested, 'pasos (a · b)') // 8
 trace-welcome-and-goodbye
 ```
 
-**Qué acaba de pasar:** los dos bucles recorrieron la **misma** lista de invitados. El bucle de bienvenidas corrió una vez por invitado, y luego el de despedidas corrió otra vez una vez por invitado: n + n = 2n. Como es una sola entrada, n de verdad es el mismo número en los dos bucles, así que 2n es O(n).
+**Qué acaba de pasar:** los dos bucles recorrieron la **misma** lista de invitados. El bucle de bienvenidas corrió una vez por persona, y luego el de despedidas corrió otra vez una vez por persona: n + n = 2n. Como es una sola entrada, n de verdad es el mismo número en los dos bucles, así que 2n es O(n).
 
 | Forma del código                                    | Big O    |
 | --------------------------------------------------- | -------- |
@@ -96,6 +96,8 @@ console.log('1,000,000 invitados, 3 ayudantes:', stepsInARow(1000000, 3), 'segui
 ```
 
 En el primer caso, b hace casi todo el trabajo; en el segundo, lo hace a. No se puede quitar ninguna de las dos letras, porque el código funciona para las dos fiestas.
+
+Hay una excepción: cuando el problema **promete** que una entrada nunca crece. Si cada fiesta tiene exactamente 3 ayudantes, b ya no es una variable: es la constante 3. Entonces O(a + 3) se simplifica a O(a), y O(a · 3) también a O(a). Una letra solo se queda en la respuesta para una entrada que puede crecer.
 
 En una entrevista, es buena costumbre decirlo en voz alta: "Digamos que el número de invitados es a y el número de ayudantes es b. El primer bucle es O(a), el segundo es O(b), así que la función completa es O(a + b)."
 

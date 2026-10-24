@@ -69,38 +69,29 @@
       }
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "Simplify O(3n² + 10n + 7).",
-        "es": "Simplifica O(3n² + 10n + 7)."
+        "en": "In your own words: how would you work out the Big O of a function you've never seen before?",
+        "es": "Con tus palabras: ¿cómo calcularías el Big O de una función que nunca has visto?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "Give each part its cost: single lines are O(1), a loop costs how many times it runs times the work inside, and a loop inside a loop multiplies. Add up the parts that come one after the other, use a different letter for each input, then drop the constants and keep only the dominant term. And answer for the worst case, in time and in space.",
+        "es": "Dale a cada parte su costo: las líneas sueltas son O(1), un bucle cuesta cuántas veces se ejecuta por el trabajo de adentro, y un bucle dentro de otro multiplica. Suma las partes que van una después de la otra, usa una letra distinta para cada entrada, y luego quita las constantes y quédate solo con el término dominante. Y responde para el peor caso, en tiempo y en espacio."
+      },
+      "checklist": [
         {
-          "en": "O(3n²)",
-          "es": "O(3n²)"
+          "en": "Says to give each line or loop its cost (loops multiply by how many times they run)",
+          "es": "Dice que hay que darle su costo a cada línea o bucle (los bucles multiplican por sus vueltas)"
         },
         {
-          "en": "O(n² + n)",
-          "es": "O(n² + n)"
+          "en": "Says to add up the parts and keep only the dominant term, without constants",
+          "es": "Dice que hay que sumar las partes y quedarse con el término dominante, sin constantes"
         },
         {
-          "en": "O(n)",
-          "es": "O(n)"
-        },
-        {
-          "en": "O(n²)",
-          "es": "O(n²)"
+          "en": "Mentions the worst case, or giving both time and space",
+          "es": "Menciona el peor caso, o dar tanto el tiempo como el espacio"
         }
-      ],
-      "answer": 3,
-      "hint": {
-        "en": "Use both rules: drop the non-dominant terms and the constants.",
-        "es": "Usa las dos reglas: elimina los términos no dominantes y las constantes."
-      },
-      "explanation": {
-        "en": "Drop 10n and 7 (non-dominant), then the 3 (constant): O(n²).",
-        "es": "Quita 10n y 7 (no dominantes) y luego el 3 (constante): O(n²)."
-      }
+      ]
     }
   ]
 }

@@ -1044,24 +1044,24 @@
       }
     },
     {
-      "id": "simplify-a-constant",
+      "id": "simplify-constant-terms",
       "topic": "Big O: Drop Constants",
       "prompt": {
-        "en": "Simplify O(25) as much as possible.",
-        "es": "Simplifica O(25) lo más posible."
+        "en": "Simplify O(3 + 40 + 700) as much as possible.",
+        "es": "Simplifica O(3 + 40 + 700) lo más posible."
       },
       "options": [
         {
-          "en": "O(25)",
-          "es": "O(25)"
+          "en": "O(743)",
+          "es": "O(743)"
         },
         {
           "en": "O(n)",
           "es": "O(n)"
         },
         {
-          "en": "O(n!)",
-          "es": "O(n!)"
+          "en": "O(3n)",
+          "es": "O(3n)"
         },
         {
           "en": "O(1)",
@@ -1070,52 +1070,21 @@
       ],
       "correctIndex": 3,
       "explanation": {
-        "en": "25 operations every time is a constant amount of work, and constant work is written O(1).",
-        "es": "25 operaciones cada vez es una cantidad de trabajo constante, y el trabajo constante se escribe O(1)."
+        "en": "3, 40 and 700 are all fixed amounts of work: none of them depends on n. However big a constant is, constant work is written O(1).",
+        "es": "3, 40 y 700 son cantidades fijas de trabajo: ninguna depende de n. Por grande que sea una constante, el trabajo constante se escribe O(1)."
       }
     },
     {
-      "id": "simplify-repeated-n",
+      "id": "simplify-same-rate-terms",
       "topic": "Big O: Drop Constants",
       "prompt": {
-        "en": "Simplify O(n + n + n + n) as much as possible.",
-        "es": "Simplifica O(n + n + n + n) lo más posible."
+        "en": "Simplify O(n + n/2 + 3n) as much as possible.",
+        "es": "Simplifica O(n + n/2 + 3n) lo más posible."
       },
       "options": [
         {
-          "en": "O(4n)",
-          "es": "O(4n)"
-        },
-        {
-          "en": "O(n)",
-          "es": "O(n)"
-        },
-        {
-          "en": "O(n²)",
-          "es": "O(n²)"
-        },
-        {
-          "en": "O(n⁴)",
-          "es": "O(n⁴)"
-        }
-      ],
-      "correctIndex": 1,
-      "explanation": {
-        "en": "n + n + n + n is 4n, and dropping the constant 4 leaves O(n).",
-        "es": "n + n + n + n es 4n, y al quitar la constante 4 queda O(n)."
-      }
-    },
-    {
-      "id": "simplify-n-squared-plus-n-cubed",
-      "topic": "Big O: Drop Non-Dominants",
-      "prompt": {
-        "en": "Simplify O(n² + n³) as much as possible.",
-        "es": "Simplifica O(n² + n³) lo más posible."
-      },
-      "options": [
-        {
-          "en": "O(n²)",
-          "es": "O(n²)"
+          "en": "O(4.5n)",
+          "es": "O(4.5n)"
         },
         {
           "en": "O(n)",
@@ -1126,14 +1095,76 @@
           "es": "O(n³)"
         },
         {
+          "en": "O(n/2)",
+          "es": "O(n/2)"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "n, n/2 and 3n all grow at the same rate as n. Together they're 4.5n, and dropping the constant 4.5 leaves O(n). Adding terms never multiplies them, so it isn't O(n³).",
+        "es": "n, n/2 y 3n crecen al mismo ritmo que n. Juntos suman 4.5n, y al quitar la constante 4.5 queda O(n). Sumar términos nunca los multiplica, así que no es O(n³)."
+      }
+    },
+    {
+      "id": "simplify-n-to-the-fourth-plus-n",
+      "topic": "Big O: Drop Non-Dominants",
+      "prompt": {
+        "en": "Simplify O(n⁴ + n) as much as possible.",
+        "es": "Simplifica O(n⁴ + n) lo más posible."
+      },
+      "options": [
+        {
           "en": "O(n⁵)",
           "es": "O(n⁵)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n⁴)",
+          "es": "O(n⁴)"
+        },
+        {
+          "en": "O(n⁴ + n)",
+          "es": "O(n⁴ + n)"
         }
       ],
       "correctIndex": 2,
       "explanation": {
-        "en": "n³ grows faster than n², so n³ is the dominant term and n² is dropped.",
-        "es": "n³ crece más rápido que n², así que n³ es el término dominante y n² se elimina."
+        "en": "n⁴ grows much faster than n, so it's the dominant term and n is dropped: O(n⁴). O(n⁴ + n) isn't simplified yet, and adding terms never adds their exponents, so it isn't O(n⁵).",
+        "es": "n⁴ crece mucho más rápido que n, así que es el término dominante y n se elimina: O(n⁴). O(n⁴ + n) todavía no está simplificado, y sumar términos nunca suma sus exponentes, así que no es O(n⁵)."
+      }
+    },
+    {
+      "id": "simplify-both-rules",
+      "topic": "Big O: Drop Non-Dominants",
+      "prompt": {
+        "en": "Simplify O(3n² + 10n + 7) as much as possible.",
+        "es": "Simplifica O(3n² + 10n + 7) lo más posible."
+      },
+      "options": [
+        {
+          "en": "O(3n²)",
+          "es": "O(3n²)"
+        },
+        {
+          "en": "O(n² + n)",
+          "es": "O(n² + n)"
+        },
+        {
+          "en": "O(n)",
+          "es": "O(n)"
+        },
+        {
+          "en": "O(n²)",
+          "es": "O(n²)"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Both rules at once: 10n and 7 are non-dominant next to 3n², so they go, and then the constant 3 goes too. That leaves O(n²).",
+        "es": "Las dos reglas a la vez: 10n y 7 no son dominantes junto a 3n², así que se eliminan, y luego también se va la constante 3. Queda O(n²)."
       }
     },
     {
@@ -1297,6 +1328,37 @@
       }
     },
     {
+      "id": "space-what-counts",
+      "topic": "Big O: Space Complexity",
+      "prompt": {
+        "en": "When we measure space complexity in this course, what do we count?",
+        "es": "Cuando medimos la complejidad espacial en este curso, ¿qué contamos?"
+      },
+      "options": [
+        {
+          "en": "Only the extra memory it creates: auxiliary space",
+          "es": "Solo la memoria extra que crea: el espacio auxiliar"
+        },
+        {
+          "en": "The memory of the input itself, plus everything in it",
+          "es": "La memoria de la entrada misma, con todo lo que tiene"
+        },
+        {
+          "en": "How many seconds the code takes on a typical computer",
+          "es": "Cuántos segundos tarda el código en una computadora normal"
+        },
+        {
+          "en": "The size of the whole program file on the disk",
+          "es": "El tamaño de todo el archivo del programa en el disco"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "We ignore the input and count only the space the algorithm needs on its own: auxiliary space.",
+        "es": "Ignoramos la entrada y contamos solo el espacio que necesita el algoritmo por sí mismo: el espacio auxiliar."
+      }
+    },
+    {
       "id": "space-even-indexes",
       "topic": "Big O: Space Complexity",
       "prompt": {
@@ -1359,6 +1421,37 @@
       }
     },
     {
+      "id": "trade-space-for-time",
+      "topic": "Big O: Space Complexity",
+      "prompt": {
+        "en": "A function walks a list once and writes every name it sees into an object, to spot a repeated name. What are its time and space?",
+        "es": "Una función recorre una lista una vez y anota en un objeto cada nombre que ve, para detectar un nombre repetido. ¿Cuál es su tiempo y su espacio?"
+      },
+      "options": [
+        {
+          "en": "O(n²) time and O(1) space, like the nested loops",
+          "es": "Tiempo O(n²) y espacio O(1), como los bucles anidados"
+        },
+        {
+          "en": "O(n) time and O(1) space, because objects are free",
+          "es": "Tiempo O(n) y espacio O(1), porque los objetos son gratis"
+        },
+        {
+          "en": "O(n) time and O(n) space: memory for speed",
+          "es": "Tiempo O(n) y espacio O(n): memoria a cambio de velocidad"
+        },
+        {
+          "en": "O(1) time and O(n) space, because it uses an object",
+          "es": "Tiempo O(1) y espacio O(n), porque usa un objeto"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "One pass over the list is O(n) time, and the object can end up holding every name: O(n) space. It spends memory to avoid the nested loops' O(n²) time.",
+        "es": "Una sola pasada por la lista es tiempo O(n), y el objeto puede terminar guardando todos los nombres: espacio O(n). Gasta memoria para evitar el tiempo O(n²) de los bucles anidados."
+      }
+    },
+    {
       "id": "array-push-vs-unshift",
       "topic": "Big O: Arrays",
       "prompt": {
@@ -1394,7 +1487,7 @@
       "topic": "Big O: Arrays",
       "prompt": {
         "en": "`guests.splice(1, 0, 'Zoe')` inserts a name near the middle. A classmate says it's O(n/2), because only about half the names move. What's the correct Big O?",
-        "es": "`guests.splice(1, 0, 'Zoe')` inserta un nombre cerca del medio. Un compañero dice que es O(n/2), porque solo se mueve más o menos la mitad de los nombres. ¿Cuál es el Big O correcto?"
+        "es": "`guests.splice(1, 0, 'Zoe')` inserta un nombre cerca del medio. Alguien de tu clase dice que es O(n/2), porque solo se mueve más o menos la mitad de los nombres. ¿Cuál es el Big O correcto?"
       },
       "code": "guests.splice(1, 0, 'Zoe')",
       "options": [
@@ -1511,8 +1604,8 @@
         "es": "Contiene duplicados"
       },
       "description": {
-        "en": "Write a function `containsDuplicate(nums)` that returns `true` if any value appears at least twice in the array, and `false` if every value is different.\n\nExample: `containsDuplicate([1, 2, 3, 1])` → `true`\n\nThe obvious solution compares every pair with two nested loops: O(n²). Can you get it to O(n) time? Hint: a `Set` remembers what you've already seen.",
-        "es": "Escribe una función `containsDuplicate(nums)` que devuelva `true` si algún valor aparece al menos dos veces en el arreglo, y `false` si todos los valores son diferentes.\n\nEjemplo: `containsDuplicate([1, 2, 3, 1])` → `true`\n\nLa solución obvia compara cada par con dos ciclos anidados: O(n²). ¿Puedes lograrlo en tiempo O(n)? Pista: un `Set` recuerda lo que ya viste."
+        "en": "Write a function `containsDuplicate(nums)` that returns `true` if any value appears at least twice in the array, and `false` if every value is different.\n\nExample: `containsDuplicate([1, 2, 3, 1])` → `true`\n\nThe obvious solution compares every pair with two nested loops: O(n²). Can you get it to O(n) time? Hint: an object can remember what you've already seen, like the guest book in the space complexity lesson.",
+        "es": "Escribe una función `containsDuplicate(nums)` que devuelva `true` si algún valor aparece al menos dos veces en el arreglo, y `false` si todos los valores son diferentes.\n\nEjemplo: `containsDuplicate([1, 2, 3, 1])` → `true`\n\nLa solución obvia compara cada par con dos ciclos anidados: O(n²). ¿Puedes lograrlo en tiempo O(n)? Pista: un objeto puede recordar lo que ya viste, como el libro de visitas de la lección de complejidad espacial."
       },
       "difficulty": "easy",
       "category": "interview",
@@ -1521,7 +1614,7 @@
         "javascript": "function containsDuplicate(nums) {\n  // Your code here\n}"
       },
       "solution": {
-        "javascript": "function containsDuplicate(nums) {\n  const seen = new Set()\n  for (let i = 0; i < nums.length; i++) {\n    if (seen.has(nums[i])) return true\n    seen.add(nums[i])\n  }\n  return false\n}"
+        "javascript": "function containsDuplicate(nums) {\n  const seen = {}\n  for (let i = 0; i < nums.length; i++) {\n    if (seen[nums[i]] === true) return true\n    seen[nums[i]] = true\n  }\n  return false\n}"
       },
       "tests": [
         {
@@ -1709,6 +1802,64 @@
       ],
       "expectedComplexity": {
         "time": "O(1)",
+        "space": "O(1)"
+      }
+    },
+    {
+      "slug": "count-the-halvings",
+      "title": {
+        "en": "Count the Halvings",
+        "es": "Cuenta los cortes a la mitad"
+      },
+      "description": {
+        "en": "Binary search cuts the list in half again and again. How many cuts can it make? Write `countHalvings(n)`, which returns how many times you can halve n, rounding down each time, before you reach 1.\n\nFor 25: 25 → 12 → 6 → 3 → 1 is 4 halvings, so `countHalvings(25)` → `4`. For 1 there's nothing to cut: `0`.\n\nUse a loop that halves a copy of n until it reaches 1, counting the turns. Then try a billion: how many halvings does it take?\n\nGoal: O(log n) time, O(1) space.",
+        "es": "La búsqueda binaria parte la lista a la mitad una y otra vez. ¿Cuántos cortes puede hacer? Escribe `countHalvings(n)`, que devuelve cuántas veces puedes partir n a la mitad, redondeando hacia abajo cada vez, antes de llegar a 1.\n\nPara 25: 25 → 12 → 6 → 3 → 1 son 4 cortes, así que `countHalvings(25)` → `4`. Para 1 no hay nada que cortar: `0`.\n\nUsa un bucle que parta a la mitad una copia de n hasta llegar a 1, contando las vueltas. Luego prueba con mil millones: ¿cuántos cortes necesita?\n\nMeta: tiempo O(log n), espacio O(1)."
+      },
+      "difficulty": "easy",
+      "category": "interview",
+      "functionName": "countHalvings",
+      "starterCode": {
+        "javascript": "function countHalvings(n) {\n  // Your code here\n}"
+      },
+      "solution": {
+        "javascript": "function countHalvings(n) {\n  let halvings = 0\n  let size = n\n  while (size > 1) {\n    size = Math.floor(size / 2)\n    halvings++\n  }\n  return halvings\n}"
+      },
+      "tests": [
+        {
+          "args": [1],
+          "expected": 0
+        },
+        {
+          "args": [2],
+          "expected": 1
+        },
+        {
+          "args": [3],
+          "expected": 1
+        },
+        {
+          "args": [8],
+          "expected": 3
+        },
+        {
+          "args": [25],
+          "expected": 4
+        },
+        {
+          "args": [1000],
+          "expected": 9
+        },
+        {
+          "args": [1000000000],
+          "expected": 29
+        },
+        {
+          "args": [2147483648],
+          "expected": 31
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(log n)",
         "space": "O(1)"
       }
     }

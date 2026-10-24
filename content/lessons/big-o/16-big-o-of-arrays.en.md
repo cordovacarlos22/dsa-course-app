@@ -58,26 +58,26 @@ Every item's index must always match its position. If you add or remove an item 
 array-reindex
 ```
 
-Here's an array, `myArray`, with 4 numbers at indexes 0 to 3. Press **Run** and follow along:
+Here's an array of raffle ticket numbers, `tickets`, with 4 numbers at indexes 0 to 3. Press **Run** and follow along:
 
 ```js-run
-const myArray = [11, 3, 23, 7]
+const tickets = [12, 5, 31, 8]
 
-myArray.push(17) // adds 17 at the end, at index 4
-console.log('push:', myArray)
-myArray.pop() // removes it again
-console.log('pop:', myArray)
+tickets.push(20) // adds 20 at the end, at index 4
+console.log('push:', tickets)
+tickets.pop() // removes it again
+console.log('pop:', tickets)
 
-myArray.shift() // removes 11 from the start...
-console.log('shift:', myArray, '3 is now at index', myArray.indexOf(3))
-myArray.unshift(11) // ...and puts it back
-console.log('unshift:', myArray, '3 is back at index', myArray.indexOf(3))
+tickets.shift() // removes 12 from the start...
+console.log('shift:', tickets, '5 is now at index', tickets.indexOf(5))
+tickets.unshift(12) // ...and puts it back
+console.log('unshift:', tickets, '5 is back at index', tickets.indexOf(5))
 ```
 
-- **`push(17)`** adds 17 at the end, at index 4. None of the other items needs a new index: **O(1)**.
+- **`push(20)`** adds 20 at the end, at index 4. None of the other items needs a new index: **O(1)**.
 - **`pop()`** removes the last item. Again, nothing else is re-indexed: **O(1)**.
 - **`shift()`** removes the first item, and now every other index is wrong: the new first item has to become index 0, the next one index 1, and so on. **Every** item gets re-indexed: **O(n)**.
-- **`unshift(11)`** adds 11 back at the start, and every item has to move up one index: **O(n)**.
+- **`unshift(12)`** adds 12 back at the start, and every item has to move up one index: **O(n)**.
 
 With 4 items that's nothing, but with thousands of items it's a lot of re-indexing. Each re-index is a small job, so the exact count might be 2n or 10n operations. It still grows in proportion to n, so it's O(n).
 
@@ -98,16 +98,16 @@ array-splice
 What about the middle, then? Let's insert something:
 
 ```js-run
-const myArray = [11, 3, 23, 7]
+const tickets = [12, 5, 31, 8]
 
-myArray.splice(1, 0, 'hi') // at index 1, remove 0 items, add 'hi'
-console.log(myArray) // 3, 23 and 7 all moved up one index
+tickets.splice(1, 0, 40) // at index 1, remove 0 items, add 40
+console.log(tickets) // 5, 31 and 8 all moved up one index
 
-myArray.splice(1, 1) // at index 1, remove 1 item
-console.log(myArray) // and they all move back
+tickets.splice(1, 1) // at index 1, remove 1 item
+console.log(tickets) // and they all move back
 ```
 
-When 'hi' goes into index 1, every item after it needs a new index: **O(n)**.
+When 40 goes into index 1, every item after it needs a new index: **O(n)**.
 
 You might say: "Hey, we only re-indexed about half the items. Isn't that O(½n)?" There are two problems with that. First, Big O always measures the **worst case**, not the average, and inserting at index 0 moves everything. Second, even if it were ½n, **½ is a constant, and we drop constants**. Either way, it's **O(n)**. Removing from the middle is O(n) for the same reason.
 
@@ -115,17 +115,17 @@ You might say: "Hey, we only re-indexed about half the items. Isn't that O(½n)?
 
 ## Find by value vs read by index
 
-The last operation is **search**: you know _what_ you're looking for, but not _where_ it is. Here's the difference from access in one sentence: access asks "what's at index 3?", while search asks "where is the value 7?". In an unsorted array, the value could be anywhere, so the only way to find it is to check the items one by one.
+The last operation is **search**: you know _what_ you're looking for, but not _where_ it is. Here's the difference from access in one sentence: access asks "what's at index 3?", while search asks "where is the value 42?". In an unsorted array, the value could be anywhere, so the only way to find it is to check the items one by one.
 
 ```viz
 search-cases
 ```
 
-Say we're looking for the **value** 7. We start at the beginning: is that 7? No. No. No… until we finally find it. If it's at the end, or not there at all, we've checked every item. Searching **by value** is **O(n)**. Remember that `includes` and `indexOf` do exactly this behind the scenes, so they're O(n) too.
+Say we're looking for the **value** 42. We start at the beginning: is that 42? No. No. No… until we finally find it. If it's at the end, or not there at all, we've checked every item. Searching **by value** is **O(n)**. Remember that `includes` and `indexOf` do exactly this behind the scenes, so they're O(n) too.
 
 If the array is **sorted**, there's a faster way: binary search, the O(log n) halving you saw in the logarithms lesson. You'll write it yourself in the searching module. For unsorted data, O(n) is the best we can do.
 
-Reading **by index** is different, as you saw at the start of the lesson: arrays use their indexes to go **directly** to that spot, in O(1). In an array of a million items, you can jump straight to item 400,000 in one step.
+Reading **by index** is different, as you saw at the start of the lesson: arrays use their indexes to go **directly** to that spot, in O(1). In an array of a million items, you can jump straight to item 600,000 in one step.
 
 Here's the whole lesson in one table:
 
