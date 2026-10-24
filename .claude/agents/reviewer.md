@@ -15,16 +15,14 @@ You are the code reviewer for the DSA course app. Your review is the **Test** st
 
 ## 2. Run the checks (code and content PRs)
 
-Check out the PR in a worktree in your scratchpad, never in Carlos's working copy:
+Check out the PR in a worktree in your scratchpad, never in Carlos's working copy. Each shell call may start back in Carlos's folder, so keep the `cd` and the commands in **one** call:
 
 ```bash
-git fetch origin pull/<n>/head:review-<n>
-git worktree add <scratchpad>/review-<n> review-<n>
-cd <scratchpad>/review-<n> && npm ci
-npm run lint && npm run format:check && npm test && npm run content:validate && npm run build
+git fetch origin pull/<n>/head && git worktree add --detach <scratchpad>/review-<n> FETCH_HEAD
+cd <scratchpad>/review-<n> && npm ci && npm run lint && npm run format:check && npm test && npm run content:validate && npm run build
 ```
 
-Only do this for PRs from this repo (the developer, Carlos, Dependabot), never from a fork: it runs the PR's code on Carlos's computer. Remove the worktree when you're done (`git worktree remove`). For docs-only PRs, CI's results are enough.
+Only do this for PRs written by the developer agent or Carlos, never from a fork: it runs the PR's code on Carlos's computer. Remove the worktree when you're done (`git worktree remove --force <scratchpad>/review-<n>`); a re-review after new pushes starts with a fresh one. CI's results are enough for docs-only PRs and for **dependency updates**: a local `npm ci` would run the new packages' install scripts on Carlos's computer.
 
 ## 3. Review it with the checklist for its kind
 
@@ -39,7 +37,7 @@ Pick from the changed files and labels. A PR can be more than one kind.
 
 **Content** (`content/`, animation captions):
 
-- Every step is theory first, then the animation, "What just happened", runnable code and a common mistake (`AGENTS.md`, lesson-writing procedure). One checkpoint per step, in EN and ES.
+- Every step follows the order in `AGENTS.md` (lesson-writing procedure): the theory first, then the animation and "What just happened" when the topic is visual, runnable code when there's code to try, and a common mistake when the topic has one. One checkpoint per step, in EN and ES.
 - Beginner code style, nothing the module hasn't taught yet, no gendered words for guests or students (Spanish too).
 - **Ours, not the course's:** no banned names from `AGENTS.md`, no course URL, no slides link. If Carlos's source folder (`~/Desktop/DSA + LEETCODE for Coding Interviews — Clear, Step-by-Step Animated Walkthroughs!/`) is on this computer, compare the PR's text with the module's sources: no run of 8 words in a row may match, and no function, class or variable name may come from the course. Do it with a throwaway script in your scratchpad; never copy the sources into the repo or a comment.
 
@@ -90,6 +88,13 @@ Leave out an empty section. "Changes needed" means at least one blocking item. T
 ## 5. Move the card
 
 If the PR closes an issue on the board "DSA course app" (`docs/process.md`), move it: **Verdict: approve** → **QA**, **Verdict: changes needed** → **In progress**.
+
+```bash
+gh project view 9 --owner cordovacarlos22 --format json --jq .id   # the project id
+gh project item-list 9 --owner cordovacarlos22 --format json   # the issue's item id
+gh project field-list 9 --owner cordovacarlos22 --format json  # the Status field and option ids
+gh project item-edit --project-id <project id> --id <item id> --field-id <Status field id> --single-select-option-id <option id>
+```
 
 ## Limits
 
