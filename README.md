@@ -40,10 +40,9 @@ docker compose down         # stop them (add -v to also delete their node_module
 
 ## Adding course content
 
-The course material lives **outside this repo**, in the course folder on Carlos's Desktop:
-`curso por mi /Curso-de-…-LEETCODE/recursos originales/modulo-NN-<slug>/` (English transcripts in `guiones/` plus PDFs and code).
+The course material lives **outside this repo**, only in Carlos's course folder on his Desktop (`DSA + LEETCODE for Coding Interviews — …/`, with a folder per course section). No other folder is a source.
 
-1. Add the module's material to its `recursos originales/modulo-NN-<slug>/` folder. If you only have Spanish scripts in `recursos /guiones/`, Claude Code translates them first.
+1. Add the module's files (notes, slides, code) to its section folder there.
 2. Ask Claude Code: _"write the lessons for the Big O module"_ (modules are listed in `docs/curriculum.md`).
 3. Review the generated lessons (`content/lessons/<module-slug>/`) and quiz/exercises (`content/practice/<module-slug>.json`), run `npm run content:validate`, then commit on a branch and open a PR.
 
