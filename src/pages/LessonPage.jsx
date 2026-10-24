@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useLanguage } from '../hooks/useLanguage'
 import { celebrate } from '../lib/celebrate'
+import { playSound } from '../lib/sounds'
 import { getModule, lessonTitle, localize } from '../lib/course'
 import { getLesson, getLessonSteps, getLessonVersion } from '../lib/lessons'
 import {
@@ -123,8 +124,10 @@ function LessonPlayer({ module, lessonIndex }) {
     if (!isPassed) celebratePass()
     update((current) => markStepPassed(current, stepIndex, steps.length))
   }
-  const markFailed = () =>
+  const markFailed = () => {
+    playSound('miss')
     update((current) => recordFailedAttempt(current, stepIndex))
+  }
   const markSolutionViewed = () =>
     update((current) => recordViewedSolution(current, stepIndex))
 

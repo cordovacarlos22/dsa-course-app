@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useLanguage } from '../hooks/useLanguage'
 import { celebrate } from '../lib/celebrate'
+import { playSound } from '../lib/sounds'
 import { getModule, localize } from '../lib/course'
 import {
   COUNTDOWN_MINUTES,
@@ -167,7 +168,10 @@ function ExerciseSolver({ module, exercise, nextExercise }) {
           cheer={t('exercise.cheer')}
           failedTries={failedTries}
           onPassed={handlePassed}
-          onFailed={() => setFailedTries((tries) => tries + 1)}
+          onFailed={() => {
+            playSound('miss')
+            setFailedTries((tries) => tries + 1)
+          }}
           onViewSolution={() =>
             setResult(saveViewedSolution(module.slug, exercise.slug))
           }

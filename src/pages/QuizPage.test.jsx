@@ -5,6 +5,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import App from '../App'
 import i18n from '../i18n'
 import { celebrate } from '../lib/celebrate'
+import { playSound } from '../lib/sounds'
 import { saveLanguage } from '../lib/languageStorage'
 import { getPractice } from '../lib/practice'
 import { loadQuizScore, saveQuizScore } from '../lib/quizScores'
@@ -12,6 +13,10 @@ import { loadQuizScore, saveQuizScore } from '../lib/quizScores'
 // Confetti needs a real canvas, and sounds need Web Audio: the tests only
 // check which celebration was asked for.
 vi.mock('../lib/celebrate', () => ({ celebrate: vi.fn() }))
+vi.mock('../lib/sounds', async (importOriginal) => ({
+  ...(await importOriginal()),
+  playSound: vi.fn(),
+}))
 
 const QUIZ = getPractice('introduction').questions
 const wrongOption = (question) => (question.correctIndex + 1) % 4
@@ -49,7 +54,10 @@ async function playQuiz(user, missed = []) {
   }
 }
 
-beforeEach(() => celebrate.mockReset())
+beforeEach(() => {
+  celebrate.mockReset()
+  playSound.mockReset()
+})
 
 describe('quiz page', () => {
   it('shows one question at a time and explains the answer', async () => {
@@ -89,6 +97,18 @@ describe('quiz page', () => {
     expect(
       screen.getByText('Not quite. The right answer is in green.'),
     ).toBeInTheDocument()
+    expect(playSound).toHaveBeenCalledWith('miss')
+    expect(celebrate).not.toHaveBeenCalled()
+  })
+
+  it('celebrates each right answer with a ding', async () => {
+    const user = userEvent.setup()
+    await renderAt('/learn/introduction/quiz')
+    await screen.findByText(`Question 1 of ${QUIZ.length}`)
+
+    await answer(user, QUIZ[0].correctIndex)
+    expect(celebrate).toHaveBeenCalledWith('step')
+    expect(playSound).not.toHaveBeenCalledWith('miss')
   })
 
   it('scores the quiz, lists the misses and keeps the best score', async () => {
@@ -109,7 +129,7 @@ describe('quiz page', () => {
     expect(
       within(review.nextElementSibling).getAllByRole('listitem'),
     ).toHaveLength(1)
-    expect(celebrate).toHaveBeenCalledWith('lesson')
+    expect(celebrate).toHaveBeenLastCalledWith('lesson')
     expect(loadQuizScore('introduction')).toEqual({
       best: QUIZ.length - 1,
       total: QUIZ.length,
@@ -132,7 +152,7 @@ describe('quiz page', () => {
     expect(
       screen.queryByRole('heading', { name: 'Questions to review' }),
     ).not.toBeInTheDocument()
-    expect(celebrate).toHaveBeenCalledWith('module')
+    expect(celebrate).toHaveBeenLastCalledWith('module')
   })
 
   it('is linked from the module page, with the best score', async () => {
