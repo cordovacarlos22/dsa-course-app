@@ -149,8 +149,11 @@ describe('quiz page', () => {
       total: QUIZ.length,
     })
 
-    // Try again goes back to the start screen.
+    // Try again goes back to the start screen, and its heading takes the focus.
     await user.click(screen.getByRole('button', { name: 'Try again' }))
+    expect(
+      screen.getByRole('heading', { name: 'How do you want to practice?' }),
+    ).toHaveFocus()
     await user.click(screen.getByRole('button', { name: 'Start the quiz' }))
     expect(screen.getByText(`Question 1 of ${QUIZ.length}`)).toHaveFocus()
   })

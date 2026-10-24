@@ -43,12 +43,16 @@ function QuizPage() {
 // The start screen until the student starts, then the questions they chose.
 function Quiz({ module, questions }) {
   const [run, setRun] = useState(null) // { questions, isFullRun }
+  // After Try again the start screen takes the focus, so keyboard and
+  // screen reader users don't lose their place. Not on the first visit.
+  const [hasPlayed, setHasPlayed] = useState(false)
 
   if (!run) {
     return (
       <QuizStart
         module={module}
         questionCount={questions.length}
+        focusHeading={hasPlayed}
         onStart={(choice) =>
           setRun({
             questions: pickQuestions(questions, choice),
@@ -63,7 +67,10 @@ function Quiz({ module, questions }) {
       module={module}
       questions={run.questions}
       isFullRun={run.isFullRun}
-      onRestart={() => setRun(null)}
+      onRestart={() => {
+        setHasPlayed(true)
+        setRun(null)
+      }}
     />
   )
 }
@@ -89,8 +96,12 @@ function QuizHeader({ module }) {
 
 // In order or random, and 5, 10 or all the questions (only the counts the
 // quiz has more questions than).
-function QuizStart({ module, questionCount, onStart }) {
+function QuizStart({ module, questionCount, focusHeading, onStart }) {
   const { t } = useTranslation()
+  const headingRef = useRef(null)
+  useEffect(() => {
+    if (focusHeading) headingRef.current?.focus()
+  }, [focusHeading])
   const [order, setOrder] = useState('inOrder')
   const [count, setCount] = useState('all')
   const counts = [5, 10].filter((option) => option < questionCount)
@@ -123,7 +134,9 @@ function QuizStart({ module, questionCount, onStart }) {
         onSubmit={start}
         className="mt-6 space-y-6 rounded-2xl border-2 border-brand/30 bg-white p-6"
       >
-        <h2 className="text-lg font-bold">{t('quiz.setupHeading')}</h2>
+        <h2 ref={headingRef} tabIndex={-1} className="text-lg font-bold">
+          {t('quiz.setupHeading')}
+        </h2>
         <fieldset className="min-w-0">
           <legend className="font-semibold">{t('quiz.order')}</legend>
           <div className="mt-2 grid gap-2 sm:grid-cols-2">
@@ -215,7 +228,7 @@ function QuizPlayer({ module, questions, isFullRun, onRestart }) {
     const best = isSaved
       ? saveQuizScore(module.slug, score, total)
       : loadQuizScore(module.slug)
-    celebrate(score === total ? 'module' : 'lesson')
+    celebrate(isSaved && score === total ? 'module' : 'lesson')
     setResult({ score, total, best, isSaved })
   }
 
