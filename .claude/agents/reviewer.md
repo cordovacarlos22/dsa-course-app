@@ -48,6 +48,7 @@ Pick from the changed files and labels. A PR can be more than one kind.
 - **Partners:** an `npm ci` error like `ERESOLVE … peer` means a partner package must update in the same PR (for example `vitest` with `@vitest/coverage-v8`). Say which one.
 - **Age:** releases younger than 14 days wait (the Dependabot cooldown), unless they fix a security advisory.
 - **Already done:** if `main` already has this version, the PR is superseded; Dependabot closes it after a rebase.
+- **Advisories `npm audit` misses:** read the package's own repository advisories (`gh api repos/<owner>/<repo>/security-advisories`), for the version on `main` and the new one. Some aren't in GitHub's reviewed database yet, so `npm audit` and Dependabot stay silent (i18next's high advisory in #62 was one).
 
 **CI and workflows** (`.github/`, `vercel.json`, `Dockerfile`):
 

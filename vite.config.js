@@ -15,15 +15,17 @@ export default defineConfig({
     // The code editor (CodeMirror, ~515 kB) is its own chunk, loaded only
     // when a coding step opens, so it doesn't slow down the first page.
     chunkSizeWarningLimit: 600,
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         // Lessons and quizzes go in their own files: editing a lesson then
         // only changes that file, so students don't re-download the app
         // code. They load with the pages that show them (the first page only
         // needs the summary from scripts/content-catalog.js).
-        manualChunks(id) {
-          if (/\/content\/lessons\/.*\.md/.test(id)) return 'lessons'
-          if (id.includes('/content/practice/')) return 'practice'
+        codeSplitting: {
+          groups: [
+            { name: 'lessons', test: /\/content\/lessons\/.*\.md/ },
+            { name: 'practice', test: /\/content\/practice\// },
+          ],
         },
       },
     },

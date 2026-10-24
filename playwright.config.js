@@ -4,6 +4,10 @@ import { defineConfig } from '@playwright/test'
 // with vercel.json's headers, so they catch Content-Security-Policy problems
 // too. Run `npm run build` first. Each project is one way students use the app.
 const PORT = 4174
+// Locally, the Chromium projects use the installed Chrome; CI installs
+// Playwright's Chromium. The WebKit project needs Playwright's WebKit
+// (`npx playwright install webkit`).
+const chrome = process.env.CI ? {} : { channel: 'chrome' }
 
 export default defineConfig({
   testDir: 'e2e',
@@ -15,25 +19,37 @@ export default defineConfig({
   timeout: 120_000,
   use: {
     baseURL: `http://localhost:${PORT}`,
-    // Locally, use the installed Chrome; CI installs Playwright's Chromium.
-    channel: process.env.CI ? undefined : 'chrome',
     trace: 'retain-on-failure',
   },
   projects: [
     {
       name: 'desktop-en',
-      use: { viewport: { width: 1280, height: 900 }, language: 'en' },
+      use: {
+        ...chrome,
+        viewport: { width: 1280, height: 900 },
+        language: 'en',
+      },
     },
     {
       name: 'phone-es',
-      use: { viewport: { width: 375, height: 900 }, language: 'es' },
+      use: { ...chrome, viewport: { width: 375, height: 900 }, language: 'es' },
     },
     {
       name: 'small-en-reduced-motion',
       use: {
+        ...chrome,
         viewport: { width: 320, height: 900 },
         language: 'en',
         reducedMotion: 'reduce',
+      },
+    },
+    {
+      // Safari's engine: every browser on an iPhone runs on it.
+      name: 'phone-es-webkit',
+      use: {
+        browserName: 'webkit',
+        viewport: { width: 375, height: 900 },
+        language: 'es',
       },
     },
   ],
