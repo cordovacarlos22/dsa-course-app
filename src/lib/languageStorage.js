@@ -15,6 +15,13 @@ export function getSavedLanguage() {
   }
 }
 
+// A link from the landing page to the course carries the student's language
+// (?lang=es), because the two addresses don't share browser storage.
+export function saveLinkedLanguage(search) {
+  const linked = new URLSearchParams(search).get('lang')
+  if (SUPPORTED_LANGUAGES.includes(linked)) saveLanguage(linked)
+}
+
 export function saveLanguage(language) {
   try {
     localStorage.setItem(STORAGE_KEY, language)
