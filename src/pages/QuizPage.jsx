@@ -7,6 +7,7 @@ import { celebrate } from '../lib/celebrate'
 import { getModule, localize } from '../lib/course'
 import { getPractice } from '../lib/practice'
 import { saveQuizScore } from '../lib/quizScores'
+import { playSound } from '../lib/sounds'
 import InlineMarkdown from '../components/lesson/InlineMarkdown'
 import NotFoundPage from './NotFoundPage'
 
@@ -74,6 +75,8 @@ function QuizPlayer({ module, questions }) {
     event.preventDefault()
     if (selected === null || isChecked) return
     setAnswers([...answers, selected])
+    if (selected === question.correctIndex) celebrate('step')
+    else playSound('miss')
   }
 
   function next() {

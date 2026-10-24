@@ -30,6 +30,9 @@ const SOUNDS = {
     note(783.99, 0.52),
     note(1046.5, 0.64, 0.6),
   ],
+  // Two soft notes going down: that answer wasn't right. Gentle on purpose,
+  // so a mistake never feels like a punishment.
+  miss: [note(392, 0, 0.16), note(311.13, 0.12, 0.26)],
 }
 
 // Used only when the browser blocks storage, so the 🔊 button still works
@@ -76,7 +79,7 @@ function wakeUp(context) {
   if (context.state === 'suspended') context.resume().catch(() => {})
 }
 
-// Plays "step", "lesson" or "module".
+// Plays "step", "lesson", "module" or "miss".
 export function playSound(name) {
   const notes = SOUNDS[name]
   if (!notes || !isSoundOn()) return

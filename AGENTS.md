@@ -26,7 +26,7 @@ Act as a senior full-stack developer who writes **simple, clear code that a juni
 3. **Timed exercises:** LeetCode-style problems. Students write JavaScript in the browser and hidden tests check it.
 4. **AI tutor** (Claude, via a Supabase Edge Function): lesson chat, exercise hints, code review, mock interviews. Each student has a daily AI limit.
 5. **Progress tracking:** each student sees their own progress; the admin sees everyone's.
-   - **Celebrations, like a game:** confetti and a short sound when a student passes a check, finishes a lesson or finishes a module. Use `celebrate(level)` from `src/lib/celebrate.js` for any new win (e.g. a finished quiz). The 🔊 button mutes the sounds, and devices that ask for less motion get no confetti. XP points and daily streaks come with Supabase (stage 8).
+   - **Celebrations, like a game:** confetti and a short sound when a student passes a check, finishes a lesson or finishes a module. Use `celebrate(level)` from `src/lib/celebrate.js` for any new win (e.g. a finished quiz). A wrong answer plays a soft tone instead: `playSound('miss')` from `src/lib/sounds.js`. The 🔊 button mutes the sounds, and devices that ask for less motion get no confetti. XP points and daily streaks come with Supabase (stage 8).
 6. **Two languages:** English first, Spanish later (UI and content). A language picker shows on the first visit.
 
 Free with login while it's being built; payments come later.

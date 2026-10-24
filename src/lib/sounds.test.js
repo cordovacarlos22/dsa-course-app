@@ -67,6 +67,17 @@ describe('sounds', () => {
     expect(notesPlayed).toBe(6)
   })
 
+  it('play a soft two-note tone for a wrong answer, unless muted', async () => {
+    vi.stubGlobal('AudioContext', FakeAudioContext)
+    const { playSound, setSoundOn } = await loadSounds()
+
+    playSound('miss')
+    expect(notesPlayed).toBe(2)
+    setSoundOn(false)
+    playSound('miss')
+    expect(notesPlayed).toBe(2)
+  })
+
   it('do nothing (and never crash) without Web Audio', async () => {
     vi.stubGlobal('AudioContext', undefined)
     const { playSound } = await loadSounds()

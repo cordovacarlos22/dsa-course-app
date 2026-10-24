@@ -5,6 +5,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import App from '../App'
 import i18n from '../i18n'
 import { celebrate } from '../lib/celebrate'
+import { playSound } from '../lib/sounds'
 import { loadExerciseResult } from '../lib/exercises'
 import { saveLanguage } from '../lib/languageStorage'
 import { checkJavaScript } from '../runners'
@@ -18,6 +19,10 @@ vi.mock('../runners', () => ({
 // Confetti needs a real canvas, and sounds need Web Audio: the tests only
 // check which celebration was asked for.
 vi.mock('../lib/celebrate', () => ({ celebrate: vi.fn() }))
+vi.mock('../lib/sounds', async (importOriginal) => ({
+  ...(await importOriginal()),
+  playSound: vi.fn(),
+}))
 
 // CodeMirror needs a real browser layout; a textarea is enough for tests.
 vi.mock('../components/lesson/CodeEditor', () => ({
@@ -126,6 +131,7 @@ describe('exercise page', () => {
     expect(
       await screen.findByText(/Aim for O\(1\) time and O\(1\) space/),
     ).toBeInTheDocument()
+    expect(playSound).toHaveBeenCalledWith('miss')
     expect(
       screen.queryByRole('button', { name: 'Show solution' }),
     ).not.toBeInTheDocument()
