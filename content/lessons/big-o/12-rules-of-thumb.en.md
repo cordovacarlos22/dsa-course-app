@@ -128,7 +128,7 @@ Practice with these:
 | A loop that runs n + 25 times                | O(n)  |
 | A loop up to Math.max(n, 12)                 | O(n)  |
 | A loop up to Math.min(n, 3)                  | O(1)  |
-| A loop that jumps 2 items at a time          | O(n)  |
+| A loop that jumps 3 items at a time          | O(n)  |
 | A loop over the array with `includes` inside | O(n²) |
 
 **Common mistake:** mixing up `Math.max` and `Math.min`. `max` sets a floor, so the loop still grows with n: O(n). `min` sets a ceiling, so the loop can never grow past it: O(1). Ask: "Can this loop get longer when n grows?"

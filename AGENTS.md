@@ -246,7 +246,7 @@ When Carlos says _"generate content for section N"_:
 
 3. **Write `content/practice/<module-slug>.json`** (e.g. `big-o.json`). The slug is the module's English name from `content/course.json`; its `sourceFolder` tells you which folder(s) in the course folder have the material.
    - **English first.** `en` is required; `es` can be added later (the validator warns about missing Spanish).
-   - **10–16 multiple-choice questions** covering every lesson: 4 options each, exactly one correct, a short explanation. Test understanding (why, when, Big O), not just memorization. Use the `code` field for "what does this code do / what's its Big O?" questions. Spread the correct answer across positions 0–3, and don't let it be the longest option (students learn to pick the longest one).
+   - **10–16 multiple-choice questions** covering every lesson: 4 options each, exactly one correct, a short explanation. Test understanding (why, when, Big O), not just memorization. Use the `code` field for "what does this code do / what's its Big O?" questions. Spread the correct answer across positions 0–3, and don't let it be the single longest option (students learn to pick the longest one; a tie with a wrong option is fine).
    - **Exercises**, as listed for the module in `docs/curriculum.md`:
      - `category: "build"`: implement the module's data structure or algorithm, one method or step at a time.
      - `category: "interview"`: a LeetCode-style problem that uses the topic.

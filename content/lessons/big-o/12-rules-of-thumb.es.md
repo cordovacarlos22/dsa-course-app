@@ -128,7 +128,7 @@ Practica con estos:
 | Un bucle que corre n + 25 veces                | O(n)  |
 | Un bucle hasta Math.max(n, 12)                 | O(n)  |
 | Un bucle hasta Math.min(n, 3)                  | O(1)  |
-| Un bucle que salta de 2 en 2                   | O(n)  |
+| Un bucle que salta de 3 en 3                   | O(n)  |
 | Un bucle sobre el array con `includes` adentro | O(n²) |
 
 **Error común:** confundir `Math.max` con `Math.min`. `max` pone un piso, así que el bucle sigue creciendo con n: O(n). `min` pone un techo, así que el bucle nunca puede pasar de ahí: O(1). Pregúntate: "¿Este bucle se puede alargar cuando n crece?"
