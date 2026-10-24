@@ -1,5 +1,6 @@
 # docker compose up dev      → the dev server on http://localhost:5173
 # docker compose up preview  → the production build on http://localhost:4174
+#                              (rebuilt from the current code every time)
 # Both only listen on this computer (127.0.0.1), never on the network.
 # After a dependency change: docker compose up --build -V dev (-V gives the
 # container a fresh node_modules instead of the old one).
@@ -9,6 +10,8 @@ services:
     build:
       context: .
       target: base
+    # A tiny init process passes the stop signal on, so `down` is quick.
+    init: true
     # Vite has to listen on every interface inside the container to be
     # reachable through the published port.
     command: ['npm', 'run', 'dev', '--', '--host', '0.0.0.0']
@@ -24,5 +27,9 @@ services:
     build:
       context: .
       target: preview
+    # Rebuild on every `up`, so it never serves an older branch's build
+    # (QA tests each PR with it). The build cache keeps this fast.
+    pull_policy: build
+    init: true
     ports:
       - '127.0.0.1:4174:4174'

@@ -4,9 +4,9 @@
   "name": "DSA course app",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "dev",
+  "runServices": ["dev"],
   "workspaceFolder": "/app",
   "remoteUser": "node",
-  "forwardPorts": [5173],
   "customizations": {
     "vscode": {
       "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]

@@ -17,7 +17,7 @@ With [Docker Desktop](https://www.docker.com/products/docker-desktop/) (or Colim
 ```bash
 docker compose up dev       # dev server with live reload: http://localhost:5173
 docker compose up preview   # the production build with vercel.json's headers: http://localhost:4174
-docker compose down         # stop them
+docker compose down         # stop them (add -v to also delete their node_modules volumes)
 ```
 
 - Both are only reachable from this computer.

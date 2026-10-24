@@ -21,7 +21,7 @@ export default defineConfig({
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
   timeout: 120_000,
   use: {
-    baseURL: runningApp ?? `http://localhost:${PORT}`,
+    baseURL: runningApp || `http://localhost:${PORT}`,
     trace: 'retain-on-failure',
   },
   projects: [

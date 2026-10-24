@@ -41,6 +41,10 @@ updates:
       interval: weekly
     cooldown:
       default-days: 14
+    # The Node major follows .nvmrc (24), changed on purpose, not by Dependabot.
+    ignore:
+      - dependency-name: node
+        update-types: ['version-update:semver-major']
     labels: ['type:chore', 'area:ci']
 
   - package-ecosystem: github-actions

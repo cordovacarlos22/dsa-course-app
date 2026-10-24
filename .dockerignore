@@ -10,7 +10,7 @@ test-results
 .github
 .claude
 .devcontainer
-.env*
-!.env.example
+**/.env*
+!**/.env.example
 *.log
 .DS_Store
