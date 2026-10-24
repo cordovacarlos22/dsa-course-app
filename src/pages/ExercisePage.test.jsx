@@ -65,6 +65,7 @@ const checkButton = () => screen.getByRole('button', { name: '✓ Check' })
 beforeEach(() => {
   checkJavaScript.mockReset()
   celebrate.mockReset()
+  playSound.mockReset()
 })
 
 describe('exercise page', () => {

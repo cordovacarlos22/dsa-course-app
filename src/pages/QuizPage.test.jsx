@@ -129,7 +129,7 @@ describe('quiz page', () => {
     expect(
       within(review.nextElementSibling).getAllByRole('listitem'),
     ).toHaveLength(1)
-    expect(celebrate).toHaveBeenCalledWith('lesson')
+    expect(celebrate).toHaveBeenLastCalledWith('lesson')
     expect(loadQuizScore('introduction')).toEqual({
       best: QUIZ.length - 1,
       total: QUIZ.length,
@@ -152,7 +152,7 @@ describe('quiz page', () => {
     expect(
       screen.queryByRole('heading', { name: 'Questions to review' }),
     ).not.toBeInTheDocument()
-    expect(celebrate).toHaveBeenCalledWith('module')
+    expect(celebrate).toHaveBeenLastCalledWith('module')
   })
 
   it('is linked from the module page, with the best score', async () => {

@@ -85,6 +85,7 @@ async function explainAndFinish(user) {
 beforeEach(() => {
   checkJavaScript.mockReset()
   celebrate.mockReset()
+  playSound.mockReset()
   window.scrollTo = vi.fn() // jsdom doesn't scroll
 })
 
@@ -125,6 +126,7 @@ describe('lesson page', () => {
     await user.click(screen.getByRole('radio', { name: '1' }))
     await user.click(screen.getByRole('button', { name: 'Check answer' }))
     expect(screen.getByText('Not quite. Try again.')).toBeInTheDocument()
+    expect(playSound).toHaveBeenCalledTimes(1)
     expect(playSound).toHaveBeenCalledWith('miss')
     expect(screen.getByText(/Count the boxes from Ana/)).toBeInTheDocument()
     expect(nextButton()).toBeDisabled()
