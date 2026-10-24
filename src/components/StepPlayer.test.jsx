@@ -58,6 +58,37 @@ describe('StepPlayer', () => {
     expect(screen.getByRole('button', { name: /next/i })).toBeDisabled()
   })
 
+  it('stops the moment it reaches the last step, and Restart plays it again', () => {
+    vi.useFakeTimers()
+    renderPlayer()
+
+    act(() => screen.getByRole('button', { name: 'Play' }).click())
+    act(() => vi.advanceTimersByTime(2200))
+    act(() => vi.advanceTimersByTime(2200))
+    // No extra wait: it already stopped on arrival.
+    expect(screen.getByText('Third step')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Restart' })).toBeInTheDocument()
+
+    act(() => screen.getByRole('button', { name: 'Restart' }).click())
+    expect(screen.getByText('First step')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Pause' })).toBeInTheDocument()
+    act(() => vi.advanceTimersByTime(2200))
+    act(() => vi.advanceTimersByTime(2200))
+    expect(screen.getByText('Third step')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Restart' })).toBeInTheDocument()
+  })
+
+  it('stops moving when the student pauses', () => {
+    vi.useFakeTimers()
+    renderPlayer()
+
+    act(() => screen.getByRole('button', { name: 'Play' }).click())
+    act(() => screen.getByRole('button', { name: 'Pause' }).click())
+    act(() => vi.advanceTimersByTime(2200))
+    act(() => vi.advanceTimersByTime(2200))
+    expect(screen.getByText('First step')).toBeInTheDocument()
+  })
+
   it('plays on its own and starts over inside AutoPlayContext', () => {
     vi.useFakeTimers()
     render(
