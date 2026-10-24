@@ -25,6 +25,12 @@ updates:
           - '@tailwindcss/*'
       i18n:
         patterns: ['i18next', 'react-i18next']
+      eslint:
+        patterns:
+          - 'eslint'
+          - '@eslint/*'
+          - 'eslint-plugin-*'
+          - 'eslint-config-*'
       minor-and-patch:
         update-types: [minor, patch]
     labels: ['type:chore', 'area:ci']
