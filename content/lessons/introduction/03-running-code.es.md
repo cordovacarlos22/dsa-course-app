@@ -14,9 +14,9 @@ Cada caja oscura con un botón **Ejecutar** es un pequeño editor de código:
 - **Ejecútalo**: presiona el botón **Ejecutar**, o **Ctrl + Enter** (**Cmd + Enter** en Mac).
 - **Restablécelo**: vuelve al código original si te pierdes.
 
-Cuando presionas Ejecutar, tu código corre aquí mismo en tu navegador, en un espacio aparte de la página, así que la lección nunca se congela. JavaScript lee tu código **de arriba hacia abajo**, una línea a la vez, y todo lo que tu código imprima con `console.log` aparece debajo de la caja. Nada de lo que escribas puede romper la lección: si te pierdes, Restablecer lo regresa todo.
+Cuando presionas Ejecutar, tu código corre aquí mismo en tu navegador, en un espacio aparte de la página, así que la lección nunca se congela. JavaScript ejecuta tu código **de arriba hacia abajo**, una línea a la vez, y todo lo que tu código imprima con `console.log` aparece debajo de la caja. Nada de lo que escribas puede romper la lección: si te pierdes, Restablecer lo regresa todo.
 
-Eso hace que las cajas de código sean el mejor lugar para experimentar. Cambia un número, renombra una variable, borra una línea y mira qué pasa. Aprendes más de un resultado que te sorprende que de leer el mismo código diez veces. Pruébalo con esta: ejecútala, luego intercambia las dos últimas líneas y ejecútala otra vez.
+Eso hace que las cajas de código sean el mejor lugar para experimentar. Cambia un número, renombra una variable, borra una línea y mira qué pasa. Aprendes más de un resultado que te sorprende que de leer el mismo código diez veces. Pruébalo con esta: ejecútala, luego presiona **Editar**, intercambia las dos últimas líneas y ejecútala otra vez.
 
 ```js-run
 console.log('1. Esta línea corre primero')
@@ -106,7 +106,7 @@ Vas a ver dos cosas:
 1. `Hola, Ada`: todo lo que está **antes** del error se ejecuta y se imprime igual.
 2. Una línea roja: `ReferenceError: gret is not defined`.
 
-El **tipo** (`ReferenceError`) dice que usamos un nombre que JavaScript no conoce. El **mensaje** (`gret is not defined`, "gret no está definido") dice qué nombre. ¡Es un error de escritura! Cambia `gret` por `greet` y ejecútalo otra vez.
+El **tipo** (`ReferenceError`) dice que usamos un nombre que JavaScript no conoce. El **mensaje** (`gret is not defined`, "gret no está definido") dice qué nombre. ¡Es un error de escritura! Presiona **Editar**, cambia `gret` por `greet` y ejecútalo otra vez.
 
 En la repetición, el error aparece al final, en rojo, con la etiqueta de la línea que lo lanzó: aquí, `línea 6`. Esa etiqueta es tu punto de partida: ve a esa línea y léela con calma. (Cuando el navegador no puede saber qué línea fue, el error simplemente no tiene etiqueta.)
 
@@ -161,7 +161,7 @@ Las cajas de código son perfectas para las lecciones. Para sesiones de práctic
 
 1. Abre Chrome y luego el menú **⋮ → Más herramientas → Herramientas para desarrolladores**.
 2. En DevTools, abre su propio menú **⋮** (no el del navegador), luego **Posición** (_Dock side_). Puedes acoplar DevTools a la derecha, abajo o a la izquierda de la página, o elegir **Desacoplar en una ventana separada** para darle su propia ventana. Luego pon esa ventana en pantalla completa para tener mucho espacio.
-3. Ve a la pestaña **Sources** (Fuentes) y luego a **Snippets** (abre el navegador con el botón `»` si no lo ves). Cada snippet que guardas se queda ahí, así que es un buen lugar para tu código de práctica.
+3. Ve a la pestaña **Sources** (Fuentes) y abre su panel izquierdo con el botón **Show navigator** (arriba a la izquierda) si está cerrado. Luego elige la pestaña **Snippets**; si no la ves, está detrás del botón `»`. Cada snippet que guardas se queda ahí, así que es un buen lugar para tu código de práctica.
 4. Haz clic en **+ New snippet**, escribe tu código y ejecútalo con **Ctrl + Enter** (**Cmd + Enter** en Mac), o con el botón de reproducir de abajo.
 
 Pruébalo con una función chiquita:

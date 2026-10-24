@@ -281,9 +281,9 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 | Section                       | File                                             | Questions | Exercises                                                                   | Spanish | Date       |
 | ----------------------------- | ------------------------------------------------ | --------- | --------------------------------------------------------------------------- | ------- | ---------- |
-| 1: Introduction               | `content/practice/introduction.json`             | 10        | none                                                                        | done    | 2026-10-11 |
+| 1: Introduction               | `content/practice/introduction.json`             | 16        | none                                                                        | done    | 2026-10-11 |
 | 2: Big O                      | `content/practice/big-o.json`                    | 33        | find-max (easy), contains-duplicate (easy), binary-search (medium)          | done    | 2026-10-11 |
-| 3: Classes & Pointers         | `content/practice/classes-and-pointers.json`     | 16        | cookie-class (easy, class), counter-class (easy, class)                     | done    | 2026-10-20 |
+| 3: Classes & Pointers         | `content/practice/classes-and-pointers.json`     | 16        | invitation-class (easy, class), counter-class (easy, class)                 | done    | 2026-10-20 |
 | 3: Big O of Arrays & Objects  | `content/practice/arrays-and-objects.json`       | 15        | word-frequency (easy), last-answer-wins (easy), guests-who-arrived (medium) | done    | 2026-10-13 |
 | 4: A Problem-Solving Approach | `content/practice/problem-solving-approach.json` | 14        | count-the-vowels (easy), character-counter (easy), title-case (easy)        | done    | 2026-10-19 |
 | 4: Linked Lists               | `content/practice/linked-lists.json`             | 23        | all 10 Build its, constructor to reverse (class)                            | done    | 2026-10-20 |

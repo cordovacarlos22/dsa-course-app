@@ -14,9 +14,9 @@ Every dark box with a **Run** button is a small code editor:
 - **Run** it: press the **Run** button, or **Ctrl + Enter** (**Cmd + Enter** on a Mac).
 - **Reset** it: brings back the original code if you get lost.
 
-When you press Run, your code runs right here in your browser, in a separate space from the page itself, so the lesson never freezes. JavaScript reads your code **from top to bottom**, one line at a time, and whatever your code prints with `console.log` shows up under the box. Nothing you type can break the lesson: if you get lost, Reset brings everything back.
+When you press Run, your code runs right here in your browser, in a separate space from the page itself, so the lesson never freezes. JavaScript runs your code **from top to bottom**, one line at a time, and whatever your code prints with `console.log` shows up under the box. Nothing you type can break the lesson: if you get lost, Reset brings everything back.
 
-That makes the code boxes the best place to experiment. Change a number, rename a variable, delete a line and see what happens. You learn more from one surprising result than from reading the same code ten times. Try it with this one: run it, then swap the last two lines and run it again.
+That makes the code boxes the best place to experiment. Change a number, rename a variable, delete a line and see what happens. You learn more from one surprising result than from reading the same code ten times. Try it with this one: run it, then press **Edit**, swap the last two lines and run it again.
 
 ```js-run
 console.log('1. This line runs first')
@@ -106,7 +106,7 @@ You'll see two things:
 1. `Hello, Ada`: everything **before** the error still runs and prints.
 2. A red line: `ReferenceError: gret is not defined`.
 
-The **type** (`ReferenceError`) says we used a name JavaScript doesn't know. The **message** (`gret is not defined`) says which name. It's a typo! Change `gret` to `greet` and run it again.
+The **type** (`ReferenceError`) says we used a name JavaScript doesn't know. The **message** (`gret is not defined`) says which name. It's a typo! Press **Edit**, change `gret` to `greet` and run it again.
 
 In the replay, the error comes last, in red, tagged with the line that threw it: `line 6` here. That tag is your starting point: go to that line and read it slowly. (When the browser can't tell which line it was, the error simply has no tag.)
 
@@ -161,7 +161,7 @@ The code boxes are perfect for lessons. For longer practice sessions, you can al
 
 1. Open Chrome, then the menu **⋮ → More tools → Developer tools**.
 2. In DevTools, open its own **⋮** menu (not the browser's), then **Dock side**. You can dock DevTools to the right, the bottom or the left of the page, or pick **Undock into separate window** to give it a window of its own. Then make that window full screen for plenty of room.
-3. Go to the **Sources** tab, then **Snippets** (open the navigator with the `»` button if you don't see it). Every snippet you save stays there, so it's a handy home for your practice code.
+3. Go to the **Sources** tab, and open its left panel with the **Show navigator** button (top left) if it's closed. Then pick the **Snippets** tab; if you don't see it, it's behind the `»` button. Every snippet you save stays there, so it's a handy home for your practice code.
 4. Click **+ New snippet**, write your code, and run it with **Ctrl + Enter** (**Cmd + Enter** on a Mac), or with the play button at the bottom.
 
 Try it with a tiny function:

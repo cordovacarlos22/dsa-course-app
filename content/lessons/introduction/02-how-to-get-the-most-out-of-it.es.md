@@ -20,7 +20,7 @@ linked-list-cost-end
 
 **Qué acaba de pasar:** agregar a Eve al final tomó dos movimientos, porque `tail` ya apuntaba al final de la fila. Pero quitar a Eve significó regresar `tail` a Dev, y en una lista enlazada simple nada apunta hacia atrás desde Eve. Así que el código recorrió toda la fila desde el inicio para encontrar a quien va antes del tail. Con 4 invitados es una caminata corta; con 4,000 es larga. Una lista doblemente enlazada daría un paso atrás desde el tail en un solo movimiento. Big O es el lenguaje para justo esta diferencia: una versión hace siempre la misma pequeña cantidad de trabajo, y la otra hace más trabajo entre más larga es la lista.
 
-Antes de ejecutar la siguiente caja, haz una predicción: si una fila de 4 invitados toma 2 pasos, ¿cuántos pasos toma una fila de 4,000? Luego ejecútala para ver cómo crece la caminata con el tamaño de la lista:
+Antes de ejecutar la siguiente caja, haz una predicción: si una fila de 400 invitados toma 398 pasos, ¿cuántos pasos toma una fila de 4,000? Luego ejecútala para ver cómo crece la caminata con el tamaño de la lista:
 
 ```js-run
 // Una lista enlazada simple solo se puede recorrer hacia adelante, desde el inicio.
@@ -35,7 +35,7 @@ for (let k = 0; k < sizes.length; k++) {
 }
 ```
 
-Cada persona más en la fila suma un paso más, así que el trabajo crece **al mismo ritmo** que la fila: con 1,000 veces más invitados, unas 1,000 veces más pasos. La lista doblemente enlazada hace el mismo movimiento con 4 invitados o con 4 millones. Decir con precisión "esta crece con la lista y esa no", y notarlo con solo leer el código, es lo que enseña el módulo de Big O.
+La caminata siempre tiene 2 pasos menos que la fila, así que cada persona más en la fila suma un paso más: el trabajo crece **al mismo ritmo** que la fila. En una fila larga, esos 2 pasos dejan de importar: con 10 veces más invitados, unas 10 veces más pasos (398 → 3,998). La lista doblemente enlazada hace el mismo movimiento con 4 invitados o con 4 millones. Decir con precisión "esta crece con la lista y esa no", y notarlo con solo leer el código, es lo que enseña el módulo de Big O.
 
 Hay tres razones para aprender Big O primero:
 
@@ -78,7 +78,21 @@ Un plano, dos gafetes. `new NameTag('Ana')` creó un objeto con el plano, y `new
 
 Los **punteros** son la otra idea clave, y confunden a mucha gente. Cuando una variable guarda un objeto, no guarda una copia del objeto: guarda una **referencia**, una flecha hacia donde vive el objeto. En este curso a una variable así le decimos **puntero**. Los punteros se pueden mover para que apunten a otro objeto, y dos punteros pueden apuntar al mismo objeto.
 
-Por eso una variable que guarda un objeto se comporta distinto de una que guarda un número. Si copias un número en otra variable, obtienes otro número, separado. Si copias una variable de objeto, obtienes otra flecha al **mismo** objeto, así que un cambio hecho por una flecha se ve por la otra. Predice qué imprime esto y luego ejecútalo:
+Por eso una variable que guarda un objeto se comporta distinto de una que guarda un número. Si copias un número en otra variable, obtienes otro número, separado. Si copias una variable de objeto, obtienes otra flecha al **mismo** objeto, así que un cambio hecho por una flecha se ve por la otra. Mira los dos casos:
+
+```viz
+value-copy
+```
+
+**Qué acaba de pasar:** `let seats = guestCount` copió el 5 en `seats` en ese momento, y después nada unió a las dos variables. Cuando `guestCount` cambió a 8, `seats` se quedó con su propio 5.
+
+```viz
+reference-copy
+```
+
+**Qué acaba de pasar:** `let sameCard = card` copió la flecha, no el objeto, así que las dos variables apuntaron al mismo objeto A. Cambiar `card.value` cambió el objeto A, y leer `sameCard.value` mostró el cambio también: siempre hubo un solo objeto.
+
+Ahora pruébalo con otros valores. Predice qué imprime esto y luego ejecútalo:
 
 ```js-run
 // Un número: la variable guarda el valor mismo.

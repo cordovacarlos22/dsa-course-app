@@ -73,7 +73,7 @@ Every lesson is a short series of **steps**, and you move to the next one only a
 3. **What just happened:** a walkthrough of what the animation showed.
 4. **Code you can run** right here on the page.
 5. **A common mistake** to watch out for, when the topic has one.
-6. **A quick check at the end:** a multiple-choice question, a small coding task, or an **"explain it yourself"** box, where you write the idea in your own words, compare it with a model answer and tick the points you covered. The **Next** button unlocks when you pass it. Stuck? A wrong try shows a hint, and after 3 tries you can see the answer.
+6. **A quick check at the end:** a multiple-choice question, a small coding task, or an **"explain it yourself"** box, where you write the idea in your own words, compare it with a model answer and tick the points you covered. The **Next** button unlocks when you pass it. Stuck on a question or a coding task? A wrong try shows a hint, and after 3 tries you can see the answer.
 
 Here's an animation from the Big O module. Press the play button, or step through it with the arrows. Don't worry about the words in it yet; they'll make sense later:
 

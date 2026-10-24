@@ -402,8 +402,8 @@
           "es": "Que el código tardó 5 milisegundos en ejecutarse"
         },
         {
-          "en": "That line 5 has an error",
-          "es": "Que la línea 5 tiene un error"
+          "en": "That the code ran 5 times",
+          "es": "Que el código se ejecutó 5 veces"
         }
       ],
       "correctIndex": 0,

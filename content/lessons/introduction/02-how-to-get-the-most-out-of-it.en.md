@@ -20,7 +20,7 @@ linked-list-cost-end
 
 **What just happened:** adding Eve at the end took two moves, because `tail` already pointed at the last guest. But removing Eve meant moving `tail` back to Dev, and in a singly linked list nothing points back from Eve. So the code walked the whole line from the front to find the guest before the tail. With 4 guests that's a short walk; with 4,000 it's a long one. A doubly linked list would step back from the tail in one move. Big O is the language for exactly this difference: one version does the same small amount of work every time, the other does more work the longer the list gets.
 
-Before you run the next box, make a guess: if a line of 4 guests takes 2 steps, how many steps will a line of 4,000 take? Then run it to see how the walk grows with the size of the list:
+Before you run the next box, make a guess: if a line of 400 guests takes 398 steps, how many steps will a line of 4,000 take? Then run it to see how the walk grows with the size of the list:
 
 ```js-run
 // A singly linked list can only be walked forward, from the front.
@@ -35,7 +35,7 @@ for (let k = 0; k < sizes.length; k++) {
 }
 ```
 
-Every extra guest adds one more step, so the work grows **in step with** the length of the line: 1,000 times the guests, about 1,000 times the steps. The doubly linked list does the same one move whether the line has 4 guests or 4 million. Saying "this one grows with the list, that one doesn't" precisely, and spotting it just by reading code, is what the Big O module teaches.
+The walk is always 2 steps shorter than the line, so every extra guest adds one more step: the work grows **in step with** the length of the line. On a long line, those 2 steps stop mattering: 10 times the guests, about 10 times the steps (398 → 3,998). The doubly linked list does the same one move whether the line has 4 guests or 4 million. Saying "this one grows with the list, that one doesn't" precisely, and spotting it just by reading code, is what the Big O module teaches.
 
 There are three reasons to learn Big O first:
 
@@ -78,7 +78,21 @@ One blueprint, two tags. `new NameTag('Ana')` made one object from the blueprint
 
 **Pointers** are the other key idea, and they trip up a lot of people. When a variable holds an object, it doesn't hold a copy of the object: it holds a **reference**, an arrow to where the object lives. In this course we call a variable like that a **pointer**. Pointers can be moved to point at a different object, and two pointers can point at the same object.
 
-That makes a variable that holds an object behave differently from one that holds a number. Copy a number into a second variable and you get a second, separate number. Copy an object variable and you get a second arrow to the **same** object, so a change made through one arrow shows up through the other. Predict what this prints, then run it:
+That makes a variable that holds an object behave differently from one that holds a number. Copy a number into a second variable and you get a second, separate number. Copy an object variable and you get a second arrow to the **same** object, so a change made through one arrow shows up through the other. Watch both cases:
+
+```viz
+value-copy
+```
+
+**What just happened:** `let seats = guestCount` copied the 5 into `seats` at that moment, and nothing linked the two variables after that. When `guestCount` became 8, `seats` kept its own 5.
+
+```viz
+reference-copy
+```
+
+**What just happened:** `let sameCard = card` copied the arrow, not the object, so both variables pointed at the same object A. Changing `card.value` changed object A, and reading `sameCard.value` showed the change too: there was only ever one object.
+
+Now try it with different values. Predict what this prints, then run it:
 
 ```js-run
 // A number: the variable holds the value itself.

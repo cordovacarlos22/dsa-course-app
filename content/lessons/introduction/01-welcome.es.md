@@ -19,7 +19,7 @@ Este curso es para ti si:
 - estás cambiando de carrera hacia el mundo tech y necesitas bases sólidas, rápido,
 - o tienes una entrevista técnica cerca y quieres llegar con confianza.
 
-Solo necesitas JavaScript básico: variables, funciones, bucles y arrays. No necesitas experiencia con estructuras de datos ni algoritmos: aprenderlos es justo para lo que existe el curso. Las clases las vemos en el módulo de Clases y punteros, justo antes de que construyas tu primera estructura de datos.
+Solo necesitas JavaScript básico: variables, funciones, bucles y arrays. No necesitas experiencia con estructuras de datos ni algoritmos: para aprenderlos está el curso. Las clases las vemos en el módulo de Clases y punteros, justo antes de que construyas tu primera estructura de datos.
 
 Aquí tienes un ejemplo chiquito de las dos ideas a la vez. El array es la estructura de datos; el bucle que encuentra el nombre más largo es el algoritmo. Presiona **Ejecutar**:
 
@@ -60,7 +60,7 @@ const guestBook = { Ana: true, Ben: true, Cleo: true, Dev: true }
 console.log('Objeto: ¿Dev está en la lista?', guestBook['Dev'] === true, '| revisiones: 1')
 ```
 
-El array necesitó 4 revisiones, porque Dev iba al final. Con 4,000 nombres y Dev todavía al final, necesitaría 4,000. El objeto respondió con una sola consulta en los dos casos. Eso no hace que los objetos sean mejores que los arrays: un array guarda los nombres **en orden**, y un objeto no. Saber para qué es buena cada herramienta, y cuánto cuesta cada trabajo con ella, es todo el juego. El módulo de Big O de arrays y objetos mide exactamente esto.
+El array necesitó 4 revisiones, porque Dev iba al final. Con 4,000 nombres y Dev todavía al final, necesitaría 4,000. El objeto respondió con una sola consulta en los dos casos. Eso no hace que los objetos sean mejores que los arrays: un array guarda los nombres **en orden**, y un objeto no. Saber para qué es buena cada herramienta, y cuánto cuesta cada trabajo con ella: de eso se trata todo. El módulo de Big O de arrays y objetos mide exactamente esto.
 
 **Error común:** pensar que DSA es solo para entrevistas, o solo para "gente de matemáticas". Es para cualquiera que escriba código que tenga que manejar muchos datos, y las matemáticas que vas a necesitar caben en una página. Cada idea se enseña con pasos pequeños e imágenes.
 
@@ -73,7 +73,7 @@ Cada lección es una serie corta de **pasos**, y solo pasas al siguiente despué
 3. **Qué acaba de pasar:** un recorrido por lo que mostró la animación.
 4. **Código que puedes ejecutar** aquí mismo, en la página.
 5. **Un error común** que conviene evitar, cuando el tema tiene uno.
-6. **Una comprobación rápida al final:** una pregunta de opción múltiple, una pequeña tarea de código o una caja de **"Explícalo con tus palabras"**, donde escribes la idea con tus propias palabras, la comparas con una respuesta modelo y marcas los puntos que cubriste. El botón **Siguiente** se desbloquea cuando la pasas. ¿Te atascaste? Un intento fallido te muestra una pista, y después de 3 intentos puedes ver la respuesta.
+6. **Una comprobación rápida al final:** una pregunta de opción múltiple, una pequeña tarea de código o una caja de **"Explícalo con tus palabras"**, donde escribes la idea con tus propias palabras, la comparas con una respuesta modelo y marcas los puntos que cubriste. El botón **Siguiente** se desbloquea cuando la pasas. ¿Te atascaste en una pregunta o una tarea de código? Un intento fallido te muestra una pista, y después de 3 intentos puedes ver la respuesta.
 
 Esta es una animación del módulo de Big O. Presiona el botón de reproducir, o avanza con las flechas. No te preocupes por las palabras que usa; van a tener sentido más adelante:
 
