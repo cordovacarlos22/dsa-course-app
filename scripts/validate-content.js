@@ -383,7 +383,7 @@ export function findLessonsMissingEnglish(fileNames) {
 }
 
 async function validateAllLessons(course) {
-  let moduleFolders = []
+  let moduleFolders
   try {
     moduleFolders = (await readdir(LESSONS_DIR, { withFileTypes: true }))
       .filter((entry) => entry.isDirectory())
