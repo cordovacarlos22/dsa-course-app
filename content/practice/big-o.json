@@ -175,16 +175,16 @@
       },
       "options": [
         {
-          "en": "Best Ω(1), worst O(n)",
-          "es": "Mejor Ω(1), peor O(n)"
+          "en": "Best Ω(1) when the first name is short, worst O(n)",
+          "es": "Mejor Ω(1) cuando el primer nombre es corto, peor O(n)"
         },
         {
-          "en": "Best Ω(n), worst O(n²)",
-          "es": "Mejor Ω(n), peor O(n²)"
+          "en": "Best Ω(n), but worst O(n²) when many names are short",
+          "es": "Mejor Ω(n), pero peor O(n²) cuando hay muchos nombres cortos"
         },
         {
-          "en": "Best Ω(1), worst O(1)",
-          "es": "Mejor Ω(1), peor O(1)"
+          "en": "Best Ω(1) and worst O(1): counting is always quick",
+          "es": "Mejor Ω(1) y peor O(1): contar siempre es rápido"
         },
         {
           "en": "Both are n checks, so it's Θ(n)",
@@ -364,20 +364,20 @@
       },
       "options": [
         {
-          "en": "Because `let j = 0` runs again on every turn of the outer loop, so the inner loop starts over",
-          "es": "Porque `let j = 0` se ejecuta otra vez en cada vuelta del bucle de afuera, así que el de adentro empieza de nuevo"
+          "en": "Because `let j = 0` runs again on every outer turn, so it starts over",
+          "es": "Porque `let j = 0` se ejecuta en cada vuelta de afuera, así que empieza de nuevo"
         },
         {
-          "en": "Because JavaScript copies the inner loop n times",
-          "es": "Porque JavaScript copia el bucle de adentro n veces"
+          "en": "Because JavaScript makes a separate copy of the inner loop for each n",
+          "es": "Porque JavaScript hace una copia aparte del bucle de adentro para cada n"
         },
         {
-          "en": "Because the inner loop runs before the outer one",
-          "es": "Porque el bucle de adentro corre antes que el de afuera"
+          "en": "Because the inner loop always finishes first, before the outer one starts",
+          "es": "Porque el bucle de adentro siempre termina primero, antes de que empiece el de afuera"
         },
         {
-          "en": "It doesn't: the inner loop only runs once",
-          "es": "No es así: el bucle de adentro solo corre una vez"
+          "en": "It doesn't: the inner loop only runs once, however big n gets",
+          "es": "No es así: el bucle de adentro solo corre una vez, por grande que sea n"
         }
       ],
       "correctIndex": 0,
@@ -959,20 +959,20 @@
       },
       "options": [
         {
-          "en": "Because 5n + 2 is smaller than n",
-          "es": "Porque 5n + 2 es menor que n"
+          "en": "Because 5n + 2 is always smaller than n, whatever n is",
+          "es": "Porque 5n + 2 siempre es menor que n, sea cual sea n"
         },
         {
-          "en": "Because we only count the 2",
-          "es": "Porque solo contamos el 2"
+          "en": "Because Big O only counts the + 2, and the 5n doesn't matter",
+          "es": "Porque Big O solo cuenta el + 2, y el 5n no importa"
         },
         {
-          "en": "It isn't: it's O(5n + 2)",
-          "es": "No lo es: es O(5n + 2)"
+          "en": "It isn't: the definition says it stays O(5n + 2)",
+          "es": "No lo es: la definición dice que sigue siendo O(5n + 2)"
         },
         {
-          "en": "Because once n is big enough, 5n + 2 is never more than a constant times n (like 6n)",
-          "es": "Porque cuando n es lo bastante grande, 5n + 2 nunca es mayor que una constante por n (como 6n)"
+          "en": "Because from n = 2 on, 5n + 2 stays under 6n",
+          "es": "Porque desde n = 2, 5n + 2 se queda debajo de 6n"
         }
       ],
       "correctIndex": 3,
