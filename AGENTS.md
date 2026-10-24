@@ -83,6 +83,9 @@ npm run build         # production build into dist/
 npm run test:coverage # unit tests with a coverage report (coverage/index.html)
 npm run test:e2e      # end-to-end tests in Chrome and WebKit (run `npm run build` first; `npx playwright install webkit` once)
 npm run serve:preview # serve dist/ with vercel.json's security headers (port 4174)
+docker compose up dev      # the dev server in Docker (http://localhost:5173)
+docker compose up preview  # the production build in Docker, with vercel.json's headers (port 4174)
+E2E_BASE_URL=http://127.0.0.1:4174 npm run test:e2e  # e2e tests against an app that's already running
 ```
 
 Before every commit, run: `npm run lint && npm run format:check && npm test && npm run content:validate && npm run build`. Before opening a PR, also run `npm run test:e2e` (CI runs it on every PR, plus `npm audit`, CodeQL and a gitleaks secret scan).

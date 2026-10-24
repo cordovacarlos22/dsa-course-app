@@ -10,6 +10,22 @@ cp .env.example .env.local   # then fill in your Supabase values
 npm run dev                  # http://localhost:5173
 ```
 
+## Run it with Docker
+
+With [Docker Desktop](https://www.docker.com/products/docker-desktop/) (or Colima) running:
+
+```bash
+docker compose up dev       # dev server with live reload: http://localhost:5173
+docker compose up preview   # the production build with vercel.json's headers: http://localhost:4174
+docker compose down         # stop them
+```
+
+- Both are only reachable from this computer.
+- After a dependency change (`package.json`), rebuild with `docker compose up --build -V dev`. `-V` gives the container a fresh `node_modules`.
+- In VS Code, **Dev Containers: Reopen in Container** opens the project inside the same `dev` service (`.devcontainer/devcontainer.json`).
+- To run the end-to-end tests against the container: `E2E_BASE_URL=http://127.0.0.1:4174 npm run test:e2e`.
+- If a new terminal says `docker: command not found`, add Docker's folder to your PATH in `~/.zprofile`: `export PATH="$HOME/.docker/bin:$PATH"`.
+
 ## Scripts
 
 | Command                | What it does                      |
