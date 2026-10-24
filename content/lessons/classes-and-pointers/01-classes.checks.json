@@ -198,6 +198,35 @@
         "en": "The class is shared, but the data isn't. `a.push` runs with `this` pointing at `a`, so only `a` changes, just like `setGuest` on one invitation.",
         "es": "La clase se comparte, pero los datos no. `a.push` corre con `this` apuntando a `a`, así que solo cambia `a`, igual que `setGuest` en una invitación."
       }
+    },
+    {
+      "type": "explain",
+      "question": {
+        "en": "In your own words: what does `new Invitation('Ana')` do, and what does `this` mean inside the class?",
+        "es": "Con tus palabras: ¿qué hace `new Invitation('Ana')`, y qué significa `this` dentro de la clase?"
+      },
+      "modelAnswer": {
+        "en": "`new` makes a fresh, empty object, points `this` at it, runs the constructor to fill it in (here, storing 'Ana' as its guest) and hands the finished object back. Inside a method, `this` is the instance the method was called on: in `forAna.getGuest()`, `this` is `forAna`. That's how one class, written once, works on many instances without mixing up their data: each instance keeps its own data, and they all share the class's methods.",
+        "es": "`new` crea un objeto nuevo y vacío, hace que `this` le apunte, ejecuta el constructor para llenarlo (aquí, guardar 'Ana' como su guest) y regresa el objeto terminado. Dentro de un método, `this` es la instancia con la que se llamó al método: en `forAna.getGuest()`, `this` es `forAna`. Así una sola clase, escrita una vez, trabaja con muchas instancias sin mezclar sus datos: cada instancia guarda sus propios datos, y todas comparten los métodos de la clase."
+      },
+      "checklist": [
+        {
+          "en": "Says `new` creates a new object and runs the constructor",
+          "es": "Dice que `new` crea un objeto nuevo y ejecuta el constructor"
+        },
+        {
+          "en": "Says the constructor stores the values on `this`, the new instance",
+          "es": "Dice que el constructor guarda los valores en `this`, la instancia nueva"
+        },
+        {
+          "en": "Says `this` in a method is the instance it was called on",
+          "es": "Dice que `this` en un método es la instancia con la que se llamó"
+        },
+        {
+          "en": "Says each instance keeps its own data while sharing the class's methods",
+          "es": "Dice que cada instancia guarda sus propios datos y comparte los métodos de la clase"
+        }
+      ]
     }
   ]
 }

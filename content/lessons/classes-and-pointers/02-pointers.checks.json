@@ -132,6 +132,35 @@
           "expected": 2
         }
       ]
+    },
+    {
+      "type": "explain",
+      "question": {
+        "en": "In your own words: why does changing `card.value` through a second variable also change what the first one sees, when changing a copied number doesn't?",
+        "es": "Con tus palabras: ¿por qué cambiar `card.value` a través de una segunda variable también cambia lo que ve la primera, si cambiar un número copiado no lo hace?"
+      },
+      "modelAnswer": {
+        "en": "A number is a primitive, so `let seats = guestCount` copies the value itself: the two variables are independent from then on. A variable that holds an object doesn't hold the object, it holds a pointer to it. So `let sameCard = card` copies the pointer, and both variables point to the same single object. A change made through either one changes that object, so the other sees it too. Passing an object to a function works the same way: the parameter gets a copy of the pointer.",
+        "es": "Un número es un primitivo, así que `let seats = guestCount` copia el valor en sí: desde ahí las dos variables son independientes. Una variable que guarda un objeto no guarda el objeto, guarda un puntero a él. Así que `let sameCard = card` copia el puntero, y las dos variables apuntan al mismo y único objeto. Un cambio hecho a través de cualquiera de las dos cambia ese objeto, así que la otra también lo ve. Pasarle un objeto a una función funciona igual: el parámetro recibe una copia del puntero."
+      },
+      "checklist": [
+        {
+          "en": "Says a primitive like a number is copied, so the two variables are independent",
+          "es": "Dice que un primitivo como un número se copia, así que las dos variables son independientes"
+        },
+        {
+          "en": "Says a variable with an object holds a pointer (a reference), not the object",
+          "es": "Dice que una variable con un objeto guarda un puntero (una referencia), no el objeto"
+        },
+        {
+          "en": "Says `=` with an object copies the pointer, so both point to one object",
+          "es": "Dice que `=` con un objeto copia el puntero, así que las dos apuntan a un solo objeto"
+        },
+        {
+          "en": "Says a change through either pointer shows up through the other",
+          "es": "Dice que un cambio a través de cualquiera de los punteros se ve a través del otro"
+        }
+      ]
     }
   ]
 }
