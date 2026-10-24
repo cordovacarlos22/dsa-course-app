@@ -419,6 +419,37 @@
       }
     },
     {
+      "id": "two-nested-in-a-row",
+      "topic": "Big O: Drop Non-Dominants",
+      "prompt": {
+        "en": "A function has two nested loops over the same list, one after the other. What's its Big O?",
+        "es": "Una función tiene dos bucles anidados sobre la misma lista, uno después del otro. ¿Cuál es su Big O?"
+      },
+      "options": [
+        {
+          "en": "O(2n²), because there are two of them",
+          "es": "O(2n²), porque hay dos bucles anidados"
+        },
+        {
+          "en": "O(n⁴), because n² times n² is n⁴",
+          "es": "O(n⁴), porque n² por n² da n⁴"
+        },
+        {
+          "en": "O(n), because the loops take turns",
+          "es": "O(n), porque los bucles se van turnando"
+        },
+        {
+          "en": "O(n²): 2n² drops its constant 2",
+          "es": "O(n²): a 2n² se le quita el 2"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Blocks one after the other add up: n² + n² = 2n². Dropping the constant 2 leaves O(n²). Multiplying (n⁴) would only happen if one nested loop sat inside the other.",
+        "es": "Los bloques seguidos se suman: n² + n² = 2n². Al quitar la constante 2 queda O(n²). Multiplicar (n⁴) solo pasaría si un bucle anidado estuviera dentro del otro."
+      }
+    },
+    {
       "id": "constant-time",
       "topic": "Big O: O(1)",
       "prompt": {
@@ -448,6 +479,37 @@
       "explanation": {
         "en": "Reading by index jumps straight to the box, whether there are 5 guests or 5 million. A fixed number of steps is O(1); we never write O(2).",
         "es": "Leer por índice salta directo a la caja, haya 5 invitados o 5 millones. Un número fijo de pasos es O(1); nunca escribimos O(2)."
+      }
+    },
+    {
+      "id": "which-line-hides-a-loop",
+      "topic": "Big O: O(1)",
+      "prompt": {
+        "en": "Which line hides a loop, so it's O(n)?",
+        "es": "¿Qué línea esconde un bucle, así que es O(n)?"
+      },
+      "options": [
+        {
+          "en": "`guests[3]`",
+          "es": "`guests[3]`"
+        },
+        {
+          "en": "`guests.includes('Zoe')`",
+          "es": "`guests.includes('Zoe')`"
+        },
+        {
+          "en": "`guests.length`",
+          "es": "`guests.length`"
+        },
+        {
+          "en": "`guests[guests.length - 1]`",
+          "es": "`guests[guests.length - 1]`"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "`includes` looks at the guests one by one until it finds 'Zoe' or runs out: O(n). The others jump straight to the answer.",
+        "es": "`includes` mira a los invitados uno por uno hasta encontrar a 'Zoe' o quedarse sin invitados: O(n). Los demás saltan directo a la respuesta."
       }
     },
     {
@@ -1593,6 +1655,56 @@
         {
           "args": [1000000000000],
           "expected": 2000000000002
+        }
+      ],
+      "expectedComplexity": {
+        "time": "O(1)",
+        "space": "O(1)"
+      }
+    },
+    {
+      "slug": "count-the-handshakes",
+      "title": {
+        "en": "Count the Handshakes",
+        "es": "Cuenta los apretones de manos"
+      },
+      "description": {
+        "en": "At the end of the party, every guest shakes hands **once** with every other guest. This code counts the handshakes the slow way:\n\n```js\nfunction countHandshakesSlowly(guestCount) {\n  let handshakes = 0\n  for (let i = 0; i < guestCount; i++) {\n    for (let j = i + 1; j < guestCount; j++) {\n      handshakes = handshakes + 1\n    }\n  }\n  return handshakes\n}\n```\n\nIts inner loop starts at `i + 1`, so each pair shakes hands only once. What's its Big O? And before you read on, predict `countHandshakesSlowly(4)`.\n\nNow write `countHandshakes(guestCount)`, which returns the same number **without a loop**, so it answers instantly, even for a million guests (one test uses 1,000,000, and the nested loops would need about 500 billion steps for it). Think about how many hands each guest shakes, and how many times that counts each handshake.\n\nExample: `countHandshakes(4)` → `6`\n\nGoal: O(1) time, O(1) space. The slow version does about n² / 2 steps: O(n²).",
+        "es": "Al final de la fiesta, cada persona invitada le da la mano **una vez** a cada una de las demás. Este código cuenta los apretones de manos de la forma lenta:\n\n```js\nfunction countHandshakesSlowly(guestCount) {\n  let handshakes = 0\n  for (let i = 0; i < guestCount; i++) {\n    for (let j = i + 1; j < guestCount; j++) {\n      handshakes = handshakes + 1\n    }\n  }\n  return handshakes\n}\n```\n\nSu bucle de adentro empieza en `i + 1`, así que cada pareja se da la mano una sola vez. ¿Cuál es su Big O? Y antes de seguir leyendo, predice `countHandshakesSlowly(4)`.\n\nAhora escribe `countHandshakes(guestCount)`, que devuelve el mismo número **sin un bucle**, para que responda al instante, incluso con un millón de personas (una prueba usa 1,000,000, y los bucles anidados necesitarían unos 500 mil millones de pasos para eso). Piensa en cuántas manos estrecha cada persona, y cuántas veces cuenta eso cada apretón.\n\nEjemplo: `countHandshakes(4)` → `6`\n\nMeta: tiempo O(1), espacio O(1). La versión lenta da unos n² / 2 pasos: O(n²)."
+      },
+      "difficulty": "medium",
+      "category": "interview",
+      "functionName": "countHandshakes",
+      "starterCode": {
+        "javascript": "function countHandshakes(guestCount) {\n  // Your code here\n}"
+      },
+      "solution": {
+        "javascript": "function countHandshakes(guestCount) {\n  // Each guest shakes guestCount - 1 hands, and that counts every handshake twice.\n  return (guestCount * (guestCount - 1)) / 2\n}"
+      },
+      "tests": [
+        {
+          "args": [0],
+          "expected": 0
+        },
+        {
+          "args": [1],
+          "expected": 0
+        },
+        {
+          "args": [2],
+          "expected": 1
+        },
+        {
+          "args": [4],
+          "expected": 6
+        },
+        {
+          "args": [10],
+          "expected": 45
+        },
+        {
+          "args": [1000000],
+          "expected": 499999500000
         }
       ],
       "expectedComplexity": {
