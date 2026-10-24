@@ -1,7 +1,7 @@
 ---
 title: Best, average and worst case
 order: 6
-minutes: 9
+minutes: 12
 ---
 
 > **Goal:** know what Ω, Θ and O describe, and why Big O always means the worst case.
@@ -101,3 +101,38 @@ With 6 guests, the average is 3.5 checks: about half the list. Double the guests
 That doesn't mean the other cases are useless. When you analyze code, think about all three: the best case, what usually happens, and the worst case. But when someone asks for "the Big O", give them the worst case.
 
 **Common mistake:** answering "O(1)" because the name you tried was first on the list. That's the best case, Ω(1). The Big O of `isInvited` is O(n), because some inputs make it read every name.
+
+## When all three cases match
+
+`isInvited` has a lucky input because it can stop early: when the name comes first, it's done. But some code has no lucky input. To count the short names on the guest list, a loop has to look at **every** name, because a short name could be anywhere, even last. So it never stops early, and every list of n guests costs about the same: n checks.
+
+When the best case and the worst case grow the same way, there's nothing left between them: the lower bound (Ω) and the upper bound (O) squeeze together into one exact description. That's what **Θ** is for, and why it's called a **tight bound**. `countShortNames` is **Θ(n)**: its best case, average case and worst case are all n checks. You'll often see Θ used this way in books: not just for the average case, but whenever the best and worst cases grow alike.
+
+```viz
+trace-count-short-names
+```
+
+**What just happened:** the loop visited every name on the list, short or not. A short name cost one extra operation (adding 1 to `count`), but no name let the loop stop early. With 4 names, then 8, then 16, the total grew with the list every time: there's no lucky list that finishes sooner.
+
+Before you run this, predict: which list makes `countShortNames` check fewer names, the one where every name is short, or the one with no short names at all?
+
+```js-run
+function countShortNames(guests) {
+  let count = 0
+  let checks = 0
+  for (let i = 0; i < guests.length; i++) {
+    checks++
+    if (guests[i].length <= 3) {
+      count = count + 1
+    }
+  }
+  return 'short names: ' + count + ', checks: ' + checks
+}
+
+console.log(countShortNames(['Ana', 'Ben', 'Dev', 'Eli', 'Fay', 'Gus'])) // every name is short
+console.log(countShortNames(['Cleo', 'Hana', 'Ivan', 'Jade', 'Lola', 'Omar'])) // no short names
+```
+
+Neither: both lists cost 6 checks. The names changed how many short ones there were, but not how much work the loop did. That's what a Θ(n) loop looks like.
+
+**Common mistake:** thinking every loop has an O(1) best case. A loop only has a lucky input if it can stop early, with a `return` or a `break` inside. If it always runs to the end, its best case is as slow as its worst.
