@@ -1,0 +1,104 @@
+# The ship stage of docs/process.md. Vercel deploys the `production` branch
+# to the live site; this workflow is the only thing that moves it. It moves
+# `production` forward to a commit that already passed CI on `main`, and only
+# after Carlos approves the run (the `release` environment).
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: Commit on main to release (empty = main's latest)
+        required: false
+        default: ''
+
+# One release at a time, and one waiting for approval is never cancelled.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    name: Move production forward
+    runs-on: ubuntu-latest
+    # Waits here for Carlos's approval. The environment only accepts runs
+    # started from main, so a branch can't run its own edited copy of this.
+    environment: release
+    permissions:
+      contents: write # the one write: pushing the production branch
+    outputs:
+      commit: ${{ steps.move.outputs.commit }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # the history of main and production
+      - name: Move production to the commit (forward only)
+        id: move
+        env:
+          COMMIT: ${{ inputs.commit }}
+        run: |
+          commit=$(git rev-parse --verify "${COMMIT:-origin/main}^{commit}")
+          if ! git merge-base --is-ancestor "$commit" origin/main; then
+            echo "::error::$commit isn't on main, so it hasn't been reviewed and merged."
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor origin/production "$commit"; then
+            echo "::error::$commit is older than what's live. To go back, use Vercel's Instant Rollback (docs/process.md)."
+            exit 1
+          fi
+          # The production ruleset also refuses a commit whose "CI passed" or
+          # "CodeQL" check didn't pass, and any force push.
+          git push origin "$commit:refs/heads/production"
+          echo "commit=$commit" >> "$GITHUB_OUTPUT"
+
+  smoke:
+    name: Check the live site
+    needs: release
+    # On once Vercel deploys `production` and the domain is live: set the
+    # repository variable PRODUCTION_URLS (docs/process.md, 5. Ship).
+    if: vars.PRODUCTION_URLS != ''
+    runs-on: ubuntu-latest
+    permissions:
+      deployments: read
+    steps:
+      - name: Wait for Vercel's production deploy of the commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COMMIT: ${{ needs.release.outputs.commit }}
+        run: |
+          for attempt in $(seq 1 60); do
+            id=$(gh api "repos/$GITHUB_REPOSITORY/deployments?sha=$COMMIT&environment=Production" --jq '.[0].id // empty')
+            state=""
+            if [ -n "$id" ]; then
+              state=$(gh api "repos/$GITHUB_REPOSITORY/deployments/$id/statuses" --jq '.[0].state // empty')
+            fi
+            case "$state" in
+              success) exit 0 ;;
+              failure | error)
+                echo "::error::Vercel's production deploy of $COMMIT failed."
+                exit 1
+                ;;
+            esac
+            sleep 10
+          done
+          echo "::error::No production deploy of $COMMIT after 10 minutes."
+          exit 1
+      - name: Each address answers 200 with the security headers
+        env:
+          PRODUCTION_URLS: ${{ vars.PRODUCTION_URLS }}
+        run: |
+          for url in $PRODUCTION_URLS; do
+            headers=$(curl -sSI --max-time 20 "$url")
+            echo "$url: $(echo "$headers" | head -1)"
+            if ! echo "$headers" | head -1 | grep -q ' 200'; then
+              echo "::error::$url didn't answer 200."
+              exit 1
+            fi
+            if ! echo "$headers" | grep -qi '^content-security-policy:'; then
+              echo "::error::$url has no Content-Security-Policy header."
+              exit 1
+            fi
+          done
