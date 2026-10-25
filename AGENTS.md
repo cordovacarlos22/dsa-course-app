@@ -6,12 +6,10 @@ Instructions for any AI agent (Claude Code, Codex, Cursor, etc.) working in this
 
 This project has a memory file: **[`memory.md`](./memory.md)**.
 
-1. **At the start of every session**, read `memory.md` to learn the decisions made so far, the current stage, and what comes next.
-2. **At the end of every session** (or after finishing a stage), update `memory.md`:
-   - add new decisions to **Decisions** (with the date and the reason),
-   - update **Current stage**, **Done** and **Next**,
-   - add every course section you imported to **Course sections imported**.
-3. Keep entries short. Never delete past decisions: if one changes, add a new entry that says what replaced it.
+1. **At the start of every session**, read `memory.md` and [`docs/decisions/`](./docs/decisions/) to learn the decisions made so far, the current stage, and what comes next.
+2. **In a PR, record each decision as a new file** in `docs/decisions/` (`YYYY-MM-DD-<slug>.md`: the date, the issue, who decided, what and why; see its `README.md`). **PRs never edit `memory.md`** (only the refresh in step 3 does): every PR writing to the same lines made each merge conflict with the next PR (#114).
+3. **After Carlos merges the last PR of a batch** (and no other PR is open), the developer agent opens one small `docs:` PR that refreshes `memory.md`: **Current stage**, **Done**, **Next**, and every course section imported under **Course sections imported**.
+4. Keep entries short. Never delete past decisions: if one changes, add a new file that says which one it replaces.
 
 ## Role
 
@@ -49,6 +47,7 @@ Free with login while it's being built; payments come later.
 AGENTS.md            # this file
 CLAUDE.md            # points Claude Code to this file
 memory.md            # project memory (see above)
+docs/decisions/      # one file per decision (PRs add these, never edit memory.md)
 DESIGN.md            # the app's look: colors, type, components (for design agents)
 PRODUCT.md           # who the app is for and what it promises (for design agents)
 .claude/skills/      # reviewed third-party agent skills (see "Agent skills")
@@ -130,7 +129,7 @@ Carlos also uses **Ponytail** ([DietrichGebert/ponytail](https://github.com/Diet
 Every change goes through **plan → code → build → test → ship**, with roles for a product manager, developer, reviewer and QA agent (`.claude/agents/`) and Carlos as product owner. The short version:
 
 1. **Plan:** work starts as a GitHub issue from a template (Feature, Bug or Content) on the "DSA course app" board. Only issues Carlos moved to **Ready** get built.
-2. **Code:** one issue = one branch (`type/<issue>-<slug>`) = one PR that says `Closes #<issue>` and fills the PR template. Never commit to `main`. Small [Conventional Commits](https://www.conventionalcommits.org). `git fetch` before you branch, and rebase on the latest `main` before you open a PR. PRs that touch `package-lock.json` or `memory.md` merge one at a time, each rebased on the one before (never GitHub's "Update branch" button: it merges `main` in and can leave the lock file out of sync).
+2. **Code:** one issue = one branch (`type/<issue>-<slug>`) = one PR that says `Closes #<issue>` and fills the PR template. Never commit to `main`. Small [Conventional Commits](https://www.conventionalcommits.org). `git fetch` before you branch, and rebase on the latest `main` before you open a PR. PRs that touch `package-lock.json` merge one at a time, each rebased on the one before (never GitHub's "Update branch" button: it merges `main` in and can leave the lock file out of sync).
 3. **Build:** GitHub Actions must be green (lint, format, unit tests, content, build; end-to-end and security scans as they're added).
 4. **Test:** the Reviewer agent reviews every PR (Dependabot's too) and posts a verdict, the QA agent tests and files bugs as issues, and Carlos signs off. Reviews run locally in Claude Code, never as a paid run in CI.
 5. **Ship:** `main` is staging; production is the `production` branch, which only the **Release** workflow moves forward, after Carlos approves (see "5. Ship" in `docs/process.md`). **Never push `production` by hand** (agents included): its ruleset can't tell a merged commit from a PR's. Until Carlos switches Vercel's production branch, Vercel still deploys `main` to production.
@@ -257,7 +256,7 @@ When Carlos says _"generate content for section N"_:
 
 4. Run `npm run content:validate` and fix every error. It checks the schemas (`scripts/content-schema.js`), that the slug exists in `course.json`, unique ids, and runs every reference solution against its tests.
 
-5. Add the section to **Course sections imported** in `memory.md`.
+5. Say in the PR's decision file (`docs/decisions/`) which section you imported; the `docs:` refresh after the batch adds it to **Course sections imported** in `memory.md`.
 
 ## Privacy
 

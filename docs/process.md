@@ -35,8 +35,8 @@ Labels: `type:feature`, `type:bug`, `type:chore`, `type:content`, `area:lessons`
 - One issue → one branch → one PR. Branch names: `type/<issue>-<short-slug>`, e.g. `feat/42-code-replay`.
 - Small commits with [Conventional Commits](https://www.conventionalcommits.org): `feat:`, `fix:`, `test:`, `docs:`, `chore:`, `ci:`, `content:`.
 - The PR uses the template, says `Closes #<issue>`, and lists what was tested and what Carlos must decide.
-- Every feature comes with tests of what the user sees. Docs and `memory.md` are updated in the same PR.
-- `git fetch` before you branch, and rebase on the latest `main` before you open a PR. PRs that touch `package-lock.json` or `memory.md` merge **one at a time**, each rebased on the one before. Don't use GitHub's "Update branch" button: it merges `main` into the branch and can leave the lock file out of sync (it broke #74).
+- Every feature comes with tests of what the user sees. Docs are updated in the same PR, and each decision is a new file in `docs/decisions/`. PRs never edit `memory.md`: the developer agent refreshes it in one `docs:` PR after the last PR of a batch merges, and only that PR may edit it (#114).
+- `git fetch` before you branch, and rebase on the latest `main` before you open a PR. PRs that touch `package-lock.json` merge **one at a time**, each rebased on the one before. Don't use GitHub's "Update branch" button: it merges `main` into the branch and can leave the lock file out of sync (it broke #74).
 
 ### 3. Build
 
@@ -76,7 +76,7 @@ Dependabot opens PRs for outdated or vulnerable dependencies every week. Those P
 
 ## Definition of done
 
-An issue is **Done** when its acceptance criteria are met, its tests are added, docs and `memory.md` are updated, review and QA passed, and it's live in production.
+An issue is **Done** when its acceptance criteria are met, its tests are added, docs are updated and its decisions are in `docs/decisions/`, review and QA passed, and it's live in production.
 
 ## Security basics, always
 

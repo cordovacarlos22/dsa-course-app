@@ -60,7 +60,7 @@ Pick from the changed files and labels. A PR can be more than one kind.
 
 - `security` label, or the PR touches login, data, secrets, the code runner or the AI tutor: also follow the `security-audit` skill in `.claude/skills/`.
 - It changes screens: also check the `web-design-guidelines` skill.
-- Docs and `memory.md` are updated when the PR changes a decision, a command or the stage.
+- Docs are updated when the PR changes a command or the stage, and each decision is a new file in `docs/decisions/`. A PR that edits `memory.md` is blocking (only the `docs:` refresh after a batch may), because it makes the next PR conflict.
 
 ## 4. Post one review
 
