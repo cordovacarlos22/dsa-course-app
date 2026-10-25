@@ -44,6 +44,9 @@ export function getModule(slug) {
   return getModules().find((module) => module.slug === slug) ?? null
 }
 
+// How many questions a section exam has (fewer when its quizzes have fewer).
+export const EXAM_SIZE = 20
+
 // The course's sections ("Foundations", "Sorting"…), each with its modules.
 export function getSections() {
   const modulesBySlug = Object.fromEntries(

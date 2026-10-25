@@ -25,23 +25,27 @@ function QuizPage() {
   const module = getModule(moduleSlug)
   const practice = getPractice(moduleSlug)
   const hasQuiz = module && practice?.questions.length > 0
+  const moduleTitle = hasQuiz ? localize(module.title, language) : ''
+  // What the quiz screens need to know (a section exam fills in its own).
+  const quiz = hasQuiz && {
+    title: t('quiz.title', { module: moduleTitle }),
+    back: {
+      to: `/learn/${module.slug}`,
+      label: t('lesson.backToModule', { module: moduleTitle }),
+    },
+    scoreId: module.slug,
+  }
   // Called before the early return: hooks must run on every render.
-  useDocumentTitle(
-    hasQuiz
-      ? t('quiz.title', { module: localize(module.title, language) })
-      : t('notFound.title'),
-  )
+  useDocumentTitle(hasQuiz ? quiz.title : t('notFound.title'))
 
   if (!hasQuiz) return <NotFoundPage />
 
   // `key`: a new module starts with fresh state.
-  return (
-    <Quiz key={moduleSlug} module={module} questions={practice.questions} />
-  )
+  return <Quiz key={moduleSlug} quiz={quiz} questions={practice.questions} />
 }
 
 // The start screen until the student starts, then the questions they chose.
-function Quiz({ module, questions }) {
+function Quiz({ quiz, questions }) {
   const [run, setRun] = useState(null) // { questions, isFullRun }
   // After Try again the start screen takes the focus, so keyboard and
   // screen reader users don't lose their place. Not on the first visit.
@@ -50,7 +54,7 @@ function Quiz({ module, questions }) {
   if (!run) {
     return (
       <QuizStart
-        module={module}
+        quiz={quiz}
         questionCount={questions.length}
         focusHeading={hasPlayed}
         onStart={(choice) =>
@@ -64,7 +68,7 @@ function Quiz({ module, questions }) {
   }
   return (
     <QuizPlayer
-      module={module}
+      quiz={quiz}
       questions={run.questions}
       isFullRun={run.isFullRun}
       onRestart={() => {
@@ -75,28 +79,23 @@ function Quiz({ module, questions }) {
   )
 }
 
-function QuizHeader({ module }) {
-  const { t } = useTranslation()
-  const { language } = useLanguage()
-  const moduleTitle = localize(module.title, language)
+function QuizHeader({ quiz }) {
   return (
     <>
       <Link
-        to={`/learn/${module.slug}`}
+        to={quiz.back.to}
         className="text-sm font-medium text-brand hover:underline"
       >
-        ← {t('lesson.backToModule', { module: moduleTitle })}
+        ← {quiz.back.label}
       </Link>
-      <h1 className="mt-4 text-2xl font-extrabold sm:text-3xl">
-        {t('quiz.title', { module: moduleTitle })}
-      </h1>
+      <h1 className="mt-4 text-2xl font-extrabold sm:text-3xl">{quiz.title}</h1>
     </>
   )
 }
 
 // In order or random, and 5, 10 or all the questions (only the counts the
 // quiz has more questions than).
-function QuizStart({ module, questionCount, focusHeading, onStart }) {
+function QuizStart({ quiz, questionCount, focusHeading, onStart }) {
   const { t } = useTranslation()
   const headingRef = useRef(null)
   useEffect(() => {
@@ -129,7 +128,7 @@ function QuizStart({ module, questionCount, focusHeading, onStart }) {
 
   return (
     <article className="mx-auto max-w-3xl">
-      <QuizHeader module={module} />
+      <QuizHeader quiz={quiz} />
       <form
         onSubmit={start}
         className="mt-6 space-y-6 rounded-2xl border-2 border-brand/30 bg-white p-6"
@@ -170,7 +169,17 @@ function QuizStart({ module, questionCount, focusHeading, onStart }) {
   )
 }
 
-function QuizPlayer({ module, questions, isFullRun, onRestart }) {
+// One question at a time, then the score card. `quiz` is { title, back:
+// { to, label }, scoreId, doneLabel? }: a module quiz or a section exam.
+// `focusFirstQuestion`: false when the player is the first thing on the page
+// (an exam), so opening the page doesn't move the focus past its title.
+export function QuizPlayer({
+  quiz,
+  questions,
+  isFullRun,
+  focusFirstQuestion = true,
+  onRestart,
+}) {
   const { t } = useTranslation()
   const { language } = useLanguage()
   const [index, setIndex] = useState(0) // the question on screen
@@ -180,14 +189,16 @@ function QuizPlayer({ module, questions, isFullRun, onRestart }) {
   // At the end: { score, total, best, isSaved }
   const [result, setResult] = useState(null)
   const headingRef = useRef(null)
-  // What was on screen last time, to notice when it changes. It starts at
-  // "nothing", so pressing Start moves the focus to the first question.
-  const shownRef = useRef({ index: -1, isDone: false })
+  // What was on screen last time, to notice when it changes. Starting at
+  // "nothing" moves the focus to the first question (after Start).
+  const shownRef = useRef({
+    index: focusFirstQuestion ? -1 : 0,
+    isDone: false,
+  })
 
   const question = questions[index]
   const isChecked = answers.length > index
   const isLast = index === questions.length - 1
-  const moduleTitle = localize(module.title, language)
 
   // A new question (or the score card) moves the focus to its heading, so
   // screen readers read it and Tab continues from there.
@@ -226,13 +237,13 @@ function QuizPlayer({ module, questions, isFullRun, onRestart }) {
     ).length
     const isSaved = isFullRun && total === questions.length
     const best = isSaved
-      ? saveQuizScore(module.slug, score, total)
-      : loadQuizScore(module.slug)
+      ? saveQuizScore(quiz.scoreId, score, total)
+      : loadQuizScore(quiz.scoreId)
     celebrate(isSaved && score === total ? 'module' : 'lesson')
     setResult({ score, total, best, isSaved })
   }
 
-  const header = <QuizHeader module={module} />
+  const header = <QuizHeader quiz={quiz} />
 
   if (result) {
     return (
@@ -244,8 +255,9 @@ function QuizPlayer({ module, questions, isFullRun, onRestart }) {
           result={result}
           headingRef={headingRef}
           onTryAgain={onRestart}
-          moduleSlug={module.slug}
-          moduleTitle={moduleTitle}
+          back={quiz.back}
+          doneLabel={quiz.doneLabel ?? t('quiz.complete')}
+          shortRunLabel={quiz.shortRunLabel ?? t('quiz.shortRun')}
         />
       </article>
     )
@@ -273,6 +285,11 @@ function QuizPlayer({ module, questions, isFullRun, onRestart }) {
               total: questions.length,
             })}
           </legend>
+          {question.source && (
+            <p className="mt-2 text-sm text-slate-500">
+              {t('exam.from', { module: localize(question.source, language) })}
+            </p>
+          )}
           <p className="mt-2 text-lg font-semibold">
             <InlineMarkdown>
               {localize(question.prompt, language)}
@@ -395,8 +412,9 @@ function QuizResult({
   result,
   headingRef,
   onTryAgain,
-  moduleSlug,
-  moduleTitle,
+  back,
+  doneLabel,
+  shortRunLabel,
 }) {
   const { t } = useTranslation()
   const { language } = useLanguage()
@@ -416,7 +434,7 @@ function QuizResult({
       <div className="rounded-2xl border-2 border-brand/30 bg-white p-6 text-center motion-safe:animate-pop">
         <h2 ref={headingRef} tabIndex={-1} className="text-xl font-extrabold">
           {score === total ? '🏆 ' : ''}
-          {t('quiz.complete')}
+          {doneLabel}
         </h2>
         <p className="mt-2 text-4xl font-extrabold text-brand tabular-nums">
           {t('quiz.score', { score, total })}
@@ -428,7 +446,7 @@ function QuizResult({
           </p>
         )}
         {!isSaved && (
-          <p className="mt-1 text-sm text-slate-500">{t('quiz.shortRun')}</p>
+          <p className="mt-1 text-sm text-slate-500">{shortRunLabel}</p>
         )}
         <div className="mt-5 flex flex-wrap justify-center gap-2">
           <button
@@ -439,10 +457,10 @@ function QuizResult({
             {t('quiz.tryAgain')}
           </button>
           <Link
-            to={`/learn/${moduleSlug}`}
+            to={back.to}
             className="rounded-lg border border-slate-300 px-4 py-2 font-semibold hover:bg-slate-50"
           >
-            {t('lesson.backToModule', { module: moduleTitle })}
+            {back.label}
           </Link>
         </div>
       </div>
@@ -456,6 +474,13 @@ function QuizResult({
                 key={question.id}
                 className="rounded-xl border border-slate-200 bg-white p-4"
               >
+                {question.source && (
+                  <p className="text-sm text-slate-500">
+                    {t('exam.from', {
+                      module: localize(question.source, language),
+                    })}
+                  </p>
+                )}
                 <p className="font-semibold">
                   <InlineMarkdown>
                     {localize(question.prompt, language)}
