@@ -110,7 +110,7 @@
       "type": "choice",
       "question": {
         "en": "Which `LinkedList` method adds a guest to the **front** of the line?",
-        "es": "¿Qué método de `LinkedList` agrega un invitado al **inicio** de la fila?"
+        "es": "¿Qué método de `LinkedList` agrega a alguien al **inicio** de la fila?"
       },
       "options": [
         {
@@ -139,6 +139,39 @@
         "en": "`unshift` adds at the front and `shift` removes from the front, just like the array methods with the same names. `push` and `pop` work at the back.",
         "es": "`unshift` agrega al inicio y `shift` quita del inicio, igual que los métodos de array con los mismos nombres. `push` y `pop` trabajan al final."
       }
+    },
+    {
+      "type": "explain",
+      "question": {
+        "en": "In your own words: how does a linked list keep its guests in order without indexes or side-by-side memory, and how do you reach the guest at position 3?",
+        "es": "Con tus palabras: ¿cómo mantiene el orden una lista enlazada sin índices ni memoria contigua, y cómo llegas a la posición 3?"
+      },
+      "modelAnswer": {
+        "en": "Each node is an object that holds a value and a `next` pointer to the node after it, so the order lives in the pointers, not in where the nodes sit in memory. `head` points to the first node, `tail` to the last, and the last node's `next` is `null`, which marks the end. There are no indexes to jump to, so to reach position 3 you start at `head` and follow `next` three times, counting from 0. That's why reaching a node is O(n) in the worst case, while an array jumps to an index in O(1).",
+        "es": "Cada nodo es un objeto que guarda un valor y un puntero `next` al nodo que sigue, así que el orden vive en los punteros, no en dónde están los nodos en la memoria. `head` apunta al primer nodo, `tail` al último, y el `next` del último nodo es `null`, que marca el final. No hay índices a los cuales saltar, así que para llegar a la posición 3 empiezas en `head` y sigues `next` tres veces, contando desde 0. Por eso llegar a un nodo es O(n) en el peor caso, mientras que un array salta a un índice en O(1)."
+      },
+      "checklist": [
+        {
+          "en": "Says each node holds a value and a `next` pointer to the following node",
+          "es": "Dice que cada nodo guarda un valor y un puntero `next` al nodo siguiente"
+        },
+        {
+          "en": "Says the order comes from the pointers, not from where nodes are in memory",
+          "es": "Dice que el orden sale de los punteros, no de dónde están los nodos en la memoria"
+        },
+        {
+          "en": "Says `head` is the start and a `null` `next` marks the end",
+          "es": "Dice que `head` es el inicio y que un `next` en `null` marca el final"
+        },
+        {
+          "en": "Says position 3 is reached by following `next` three times from `head`",
+          "es": "Dice que a la posición 3 se llega siguiendo `next` tres veces desde `head`"
+        },
+        {
+          "en": "Says reaching a node is O(n), unlike an array's O(1) index",
+          "es": "Dice que llegar a un nodo es O(n), a diferencia del índice O(1) de un array"
+        }
+      ]
     }
   ]
 }

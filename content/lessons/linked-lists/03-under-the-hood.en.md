@@ -1,7 +1,7 @@
 ---
 title: 'Under the hood: nodes are objects'
 order: 3
-minutes: 12
+minutes: 15
 ---
 
 > **Goal:** see what a linked list really is in JavaScript (objects inside objects), and walk one from `head` to `null`.
@@ -32,6 +32,8 @@ console.log(dev.next) // null: Dev doesn't point anywhere yet
 ```
 
 (The app prints objects in JSON style, with quotes around the property names. It's the same object.)
+
+**Under the hood:** JavaScript engines notice when many objects have the same properties, added in the same order, and give them one shared description of their shape, so reading `node.value` stays fast. Every node in this module is `{ value, next }`, built the same way each time. That's one more reason the next lesson makes all nodes with one `Node` class: the same shape, every time.
 
 **Common mistake:** calling the value "the node". `dev.value` is just a string. The node is the object that holds the value and the pointer, and the pointer is what makes it part of a list.
 
@@ -70,6 +72,8 @@ dev.value = 'Devon'
 console.log(head.next.next.next.value) // 'Devon': there's only one Dev node
 ```
 
+**Under the hood:** printing has to follow every `next` to show you the nesting, so a long list prints as one long line of braces nested inside braces. The browser's DevTools don't follow them all at once: they show the first levels and let you click a small arrow to open the next one. Either way, it's the same arrows being followed, and nothing in the list changes when you print it.
+
 **Common mistake:** thinking `cleo.next = dev` stores a copy of Dev's node. It stores a reference, so a change made through `dev` shows up when you reach the same node through the list, like `'Devon'` above.
 
 ## Walking the list
@@ -104,4 +108,38 @@ console.log(head.value) // still 'Ana': head never moved
 
 **The Big O of a walk:** it visits every node once, so it's **O(n) time**. It only needs one extra pointer, `current`, however long the line is, so it's **O(1) extra space**. That's the cost hiding inside pop, insert, remove and finding a node, from the last lesson.
 
+**Under the hood:** `while (current !== null)` and `while (current)` stop at the same moment, because `null` counts as false in a condition and a node object counts as true. We write `!== null` on purpose: it says exactly what we mean, "until we step past the end of the line", and nothing else can sneak in as false.
+
 **Common mistake:** forgetting `current = current.next`. Then `current` never changes, the condition never becomes false, and the loop runs forever (the app stops it after 2 seconds). Another one: writing `while (current.next !== null)` when you mean to visit every node. The loop stops with `current` **on** the last node, before its body runs for it, so the last guest never gets greeted. It also crashes on an empty list, because reading `next` from `null` is an error.
+
+## Changing a node vs moving a pointer
+
+`current` and `head` both point to nodes **in** the list, so there are two very different things you can do with `current`, and every method in this module uses both:
+
+- **Move the pointer:** `current = current.next`. Only the variable `current` changes. It now points to another node, and the list itself is exactly the same as before.
+- **Change the node:** `current.value = 'Bea'`. This reaches **through** the pointer and changes the node it points to. That node is in the list, so the list changes, and anyone who reaches that node, through `head` or any other pointer, sees the new value.
+
+This is the pointers lesson again, applied to a walk. `=` on a variable moves an arrow. `=` on a **property** (anything with a dot) changes the object at the end of the arrow.
+
+Before you run this, predict the two printed lines:
+
+```js-run
+const head = {
+  value: 'Ana',
+  next: { value: 'Ben', next: { value: 'Cleo', next: null } },
+}
+
+let current = head
+current = current.next // move the pointer: now on Ben's node
+current.value = 'Bea' // change the node: Ben's node now holds 'Bea'
+current = null // move the pointer again: the list doesn't notice
+
+console.log(head.value, head.next.value, head.next.next.value)
+console.log(current)
+```
+
+**What just happened:** moving `current` to Ben's node changed nothing in the list. Writing `current.value` did: it changed the node itself, so `head.next.value` printed `'Bea'`. Setting `current` to `null` only changed the variable, so the list stayed whole: Ana, Bea, Cleo. Later methods use exactly this: `set` walks with `current`, then changes `current.value`, and `insert` changes `current.next` to link in a new node.
+
+**Big O:** moving `current` once and changing a node are both **O(1)**. Getting `current` to a node k steps from `head` is the O(k) walk from before.
+
+**Common mistake:** expecting `current = null` (or `current = someOtherNode`) to remove a node from the list. Moving your own pointer never changes the list. To change the line, you have to change a property on a node in it, like `current.next`.

@@ -1,7 +1,7 @@
 ---
 title: Linked lists vs arrays in Big O
 order: 2
-minutes: 14
+minutes: 18
 ---
 
 > **Goal:** know the Big O of every linked list operation, see why each one costs what it does, and compare it with the same operation on an array.
@@ -48,6 +48,8 @@ tail.next = null
 console.log('Last guest:', tail.value, '- nodes visited:', visited)
 ```
 
+**Under the hood:** a node has no idea who points to it. Dev's node holds `'Dev'` and its own `next`, and nothing in it says "Cleo points to me". Pointers are one-way: the node that points knows, the node pointed to doesn't. So the only way to find the node **before** Dev is to ask every node, from the front, "is your `next` Dev?" That question, repeated, is the O(n) walk inside `pop`.
+
 **Common mistake:** assuming `pop` is O(1) because `push` is. The two look like mirror images, but `push` only moves forward from the tail, while `pop` needs the node **behind** the tail, and a singly linked list can't look backwards. (The Doubly Linked Lists module fixes exactly this.)
 
 ## The front of the line: unshift and shift
@@ -78,6 +80,8 @@ console.log(head.value, '->', head.next.value) // Zoe -> Ana
 head = head.next
 console.log(head.value) // Ana
 ```
+
+**Under the hood:** `shift` never deletes anything itself. JavaScript's **garbage collector** runs in the background and frees any object your program can no longer reach from its variables. Once `head` moves past Zoe, nothing reachable points to Zoe's node, so the collector frees it later, on its own schedule. That work isn't part of your method, so it doesn't change `shift`'s O(1).
 
 **Common mistake:** moving `head` before linking the new node. If you write `head = zoe` first, then `zoe.next = head` points Zoe's node at itself, and nothing points to Ana anymore: the rest of the line is lost. Link the new node first, then move `head`.
 
@@ -120,6 +124,8 @@ const guests = ['Ana', 'Ben', 'Cleo', 'Dev']
 console.log(guests[2]) // 'Cleo', in one jump
 ```
 
+**Under the hood:** insert is O(n) on both structures, but for different reasons. A linked list pays for the **walk** to the spot; the linking itself is two pointer moves. An array can jump to the spot in O(1), then pays for **moving** every item after it one slot over. So if a linked list method is already standing at the right node (because an earlier step walked there), inserting next to it is O(1). An array never gets that deal: the items after the spot always move.
+
 **Common mistake:** walking one node too far before inserting. To put a guest at index 3, stop at index **2**. If you stop on the node at index 3, the node before it is already behind you, and you can't go back to link it.
 
 ## Linked lists vs arrays: pick by the job
@@ -147,4 +153,42 @@ linked-list-big-o
 
 **What just happened:** the table lit up one group at a time. Half the rows are ties. Arrays win pop and finding by index, thanks to their indexes and their single block of memory. Linked lists win the front of the line, because moving `head` never touches any other node.
 
+**Under the hood:** Big O counts steps, not how long each step takes, and here arrays have a hidden advantage. Their items sit side by side, so the computer reads them in big chunks it already loaded (its **cache**). A linked list's nodes are scattered, so each step of a walk may have to fetch a new spot in memory, which is slower. Two O(n) walks can take quite different times, and for small lists an array is often faster in practice. Big O tells you how the time **grows**; it doesn't settle every race.
+
 **Common mistake:** judging a structure by one operation. Pop is slow on a linked list, but if your program never pops, that doesn't matter. Look at the mix of operations your program does most, then pick.
+
+## Memory: one block or many nodes
+
+Time isn't the only cost. The other is **space**: how much memory each structure needs, and how it gets it.
+
+An array needs **one unbroken block**. When you `push` and the block is full, the engine reserves a bigger block somewhere else and copies every item into it. That copy is O(n), but it happens rarely, because each new block leaves extra room. Spread over many pushes, a `push` averages out to O(1): the **amortized** cost from the Big O module. A linked list never copies anything. Every `push` makes one new node wherever there's free memory, and the nodes already in the line never move.
+
+The price of that freedom is the pointers. Each array slot holds one item, but each node holds an item **and** a `next` pointer, and the list adds `head`, `tail` and `length` on top. Both structures still use **O(n) space** for n guests (the extra is one pointer per guest, a constant amount), but a linked list uses more memory for the same guests.
+
+```js-run
+const names = ['Ana', 'Ben', 'Cleo', 'Dev', 'Eve']
+
+// build the list from the back, so each new node can point to the one after it
+let head = null
+for (let i = names.length - 1; i >= 0; i--) {
+  head = { value: names[i], next: head }
+}
+
+// walk it and count what it stores
+let values = 0
+let pointers = 0
+let current = head
+while (current !== null) {
+  values++
+  pointers++ // every node has a next, even the last one (it holds null)
+  current = current.next
+}
+console.log('values:', values, '| next pointers:', pointers)
+console.log('array slots:', names.length)
+```
+
+**What just happened:** the loop built a 5-node list from the back: each new node pointed to the list made so far, and `head` moved onto it. The walk then counted 5 values and 5 `next` pointers, one per node, while the array needed only its 5 slots. Same guests, more pieces to store: that's the memory side of the trade.
+
+**Big O:** both use **O(n) space**. Building the list was **O(n) time**, one O(1) step per name, and the counting walk was O(n) too.
+
+**Common mistake:** thinking a linked list saves memory because it never reserves extra room. It never wastes a whole unused block, but it pays for a pointer in every node. Which one uses less memory depends on the sizes, so pick by the operations your program does most, as the table showed.

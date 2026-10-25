@@ -61,7 +61,7 @@
       "answer": 3,
       "hint": {
         "en": "A missing value means there's no guest yet.",
-        "es": "Un valor que falta significa que todavía no hay invitado."
+        "es": "Un valor que falta significa que todavía no hay nadie en la fila."
       },
       "explanation": {
         "en": "With no value there's nothing to put in a node, so the list starts empty: both ends point to `null` and the length is 0. `push` can add guests later.",
@@ -215,38 +215,37 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "After `const line = new LinkedList('Ana')`, what is `line.head === line.tail`?",
-        "es": "Después de `const line = new LinkedList('Ana')`, ¿qué es `line.head === line.tail`?"
+        "en": "In your own words: what does `new LinkedList('Ana')` set up, why is there a separate `Node` class, and what are the constructor's time and space costs?",
+        "es": "Con tus palabras: ¿qué prepara `new LinkedList('Ana')`, por qué hay una clase `Node` aparte, y cuánto cuesta el constructor en tiempo y en espacio?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "It makes one node with `new Node('Ana')`, holding the value and a `next` of `null`, then points both `head` and `tail` at that same node and sets `length` to 1. It's one node with two pointers, not two nodes. With no value, the list starts empty: `head` and `tail` are `null` and `length` is 0, and checking `value === undefined` keeps real values like 0. The `Node` class exists because the constructor, `push`, `unshift` and `insert` all make nodes, so that code is written once. The constructor does a fixed number of steps and makes at most one node, so it's O(1) time and O(1) space.",
+        "es": "Crea un nodo con `new Node('Ana')`, que guarda el valor y un `next` en `null`, luego hace que `head` y `tail` apunten a ese mismo nodo y pone `length` en 1. Es un nodo con dos punteros, no dos nodos. Sin valor, la lista empieza vacía: `head` y `tail` son `null` y `length` es 0, y revisar `value === undefined` conserva valores reales como 0. La clase `Node` existe porque el constructor, `push`, `unshift` e `insert` crean nodos, así que ese código se escribe una sola vez. El constructor hace un número fijo de pasos y crea a lo mucho un nodo, así que es O(1) en tiempo y O(1) en espacio."
+      },
+      "checklist": [
         {
-          "en": "`false`: `tail` is a copy of `head`",
-          "es": "`false`: `tail` es una copia de `head`"
+          "en": "Says it makes one node and points both `head` and `tail` at it",
+          "es": "Dice que crea un nodo y hace que `head` y `tail` apunten a él"
         },
         {
-          "en": "`true`: both point to the same node",
-          "es": "`true`: los dos apuntan al mismo nodo"
+          "en": "Says `length` becomes 1, or 0 for an empty list",
+          "es": "Dice que `length` queda en 1, o en 0 para una lista vacía"
         },
         {
-          "en": "`false`: they're two nodes with the same value",
-          "es": "`false`: son dos nodos con el mismo valor"
+          "en": "Says a missing value (`undefined`) gives an empty list, but 0 is a real value",
+          "es": "Dice que un valor que falta (`undefined`) da una lista vacía, pero 0 es un valor real"
         },
         {
-          "en": "An error: nodes can't be compared",
-          "es": "Un error: los nodos no se pueden comparar"
+          "en": "Says `Node` exists because several methods make nodes",
+          "es": "Dice que `Node` existe porque varios métodos crean nodos"
+        },
+        {
+          "en": "Says the constructor is O(1) time and O(1) space",
+          "es": "Dice que el constructor es O(1) en tiempo y O(1) en espacio"
         }
-      ],
-      "answer": 1,
-      "hint": {
-        "en": "`this.tail = this.head` copies the arrow, not the node.",
-        "es": "`this.tail = this.head` copia la flecha, no el nodo."
-      },
-      "explanation": {
-        "en": "There's only one node. `this.tail = this.head` points `tail` where `head` already points, and `===` on objects checks for the same object, so it's `true`.",
-        "es": "Solo hay un nodo. `this.tail = this.head` hace que `tail` apunte a donde ya apunta `head`, y `===` con objetos revisa si es el mismo objeto, así que da `true`."
-      }
+      ]
     }
   ]
 }

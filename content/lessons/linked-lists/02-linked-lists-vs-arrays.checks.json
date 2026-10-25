@@ -27,7 +27,7 @@
       "answer": 3,
       "hint": {
         "en": "After the last guest leaves, `tail` has to move to the guest before. Can you get there from the tail?",
-        "es": "Cuando el último invitado se va, `tail` tiene que moverse al invitado anterior. ¿Puedes llegar ahí desde el tail?"
+        "es": "Cuando la última persona se va, `tail` tiene que moverse al nodo anterior. ¿Puedes llegar ahí desde el tail?"
       },
       "explanation": {
         "en": "Pointers only go forward, so nothing leads back from the tail. `pop` walks from `head` until it finds the node whose `next` is the tail. A longer line means a longer walk: O(n).",
@@ -207,7 +207,7 @@
       "type": "choice",
       "question": {
         "en": "At a ticket counter, new guests join at the back and the guest at the front is served and leaves. Which structure does **both** jobs in O(1)?",
-        "es": "En una taquilla, los invitados nuevos se forman al final y al invitado del inicio lo atienden y se va. ¿Qué estructura hace **los dos** trabajos en O(1)?"
+        "es": "En una taquilla, las personas nuevas se forman al final y quien está al inicio recibe su boleto y se va. ¿Qué estructura hace **los dos** trabajos en O(1)?"
       },
       "options": [
         {
@@ -236,6 +236,39 @@
         "en": "A linked list does `push` in O(1) thanks to `tail`, and `shift` in O(1) by moving `head`. An array also does `push` in O(1), but every `shift` re-indexes the whole line: O(n).",
         "es": "Una lista enlazada hace `push` en O(1) gracias a `tail`, y `shift` en O(1) moviendo `head`. Un array también hace `push` en O(1), pero cada `shift` reindexa toda la fila: O(n)."
       }
+    },
+    {
+      "type": "explain",
+      "question": {
+        "en": "In your own words: why is `pop` O(n) on a linked list but O(1) on an array, while `shift` is the other way around? And what does a linked list pay in memory?",
+        "es": "Con tus palabras: ¿por qué `pop` es O(n) en una lista enlazada pero O(1) en un array, mientras que con `shift` pasa al revés? ¿Y qué paga una lista enlazada en memoria?"
+      },
+      "modelAnswer": {
+        "en": "To `pop`, the list has to move `tail` to the node before the last one, but pointers only go forward and a node doesn't know who points to it, so the list walks from `head` to find it: O(n). An array just drops its last slot: O(1). At the front it flips: a linked list's `shift` only moves `head` to `head.next`, one pointer move, O(1), while an array has to move every other item down one index, O(n). In memory, both are O(n), but each node stores a `next` pointer next to its value, so a linked list uses more memory for the same items. In exchange, it never has to copy itself into a bigger block.",
+        "es": "Para hacer `pop`, la lista tiene que mover `tail` al nodo antes del último, pero los punteros solo van hacia adelante y un nodo no sabe quién le apunta, así que la lista camina desde `head` para encontrarlo: O(n). Un array solo suelta su último espacio: O(1). Al inicio se voltea: el `shift` de una lista enlazada solo mueve `head` a `head.next`, un movimiento de puntero, O(1), mientras que un array tiene que recorrer todos los demás elementos un índice, O(n). En memoria, las dos son O(n), pero cada nodo guarda un puntero `next` además de su valor, así que una lista enlazada usa más memoria para los mismos elementos. A cambio, nunca tiene que copiarse a un bloque más grande."
+      },
+      "checklist": [
+        {
+          "en": "Says `pop` needs the node before the tail, and pointers only go forward",
+          "es": "Dice que `pop` necesita el nodo antes del tail, y que los punteros solo van hacia adelante"
+        },
+        {
+          "en": "Says finding that node means walking from `head`, so it's O(n)",
+          "es": "Dice que encontrar ese nodo significa caminar desde `head`, así que es O(n)"
+        },
+        {
+          "en": "Says `shift` on a linked list is one pointer move, O(1)",
+          "es": "Dice que `shift` en una lista enlazada es un movimiento de puntero, O(1)"
+        },
+        {
+          "en": "Says an array's `shift` moves every other item to a new index, O(n)",
+          "es": "Dice que el `shift` de un array mueve todos los demás elementos a un índice nuevo, O(n)"
+        },
+        {
+          "en": "Says each node also stores a pointer, so a linked list uses more memory",
+          "es": "Dice que cada nodo también guarda un puntero, así que una lista enlazada usa más memoria"
+        }
+      ]
     }
   ]
 }

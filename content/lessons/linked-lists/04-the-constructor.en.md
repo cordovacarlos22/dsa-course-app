@@ -1,7 +1,7 @@
 ---
 title: The constructor
 order: 4
-minutes: 15
+minutes: 17
 ---
 
 > **Goal:** write the `Node` class and the `LinkedList` constructor, using the 5 steps: understand, examples, break it down, write the code, look back.
@@ -37,6 +37,8 @@ class LinkedList {
 }
 ```
 
+**Under the hood:** `class Node` gives you no node by itself: it's the recipe. Every `new Node('Ana')` makes a **separate** object, and they all share one constructor, written once. If the shape of a node ever changes (the Doubly Linked Lists module adds a `prev` pointer), you change it in one place, and every method that makes nodes picks it up.
+
 **Common mistake:** putting `value` and `next` on the list itself. The list isn't a node: it **points to** nodes, with `head` and `tail`. Nodes hold values; the list holds the pointers to its two ends, plus the length.
 
 ## Examples: one guest, none, and zero
@@ -64,6 +66,8 @@ for (let i = 0; i < values.length; i++) {
   console.log(String(value), '| missing?', value === undefined, '| !value:', !value)
 }
 ```
+
+**Under the hood:** when you call a function or a constructor with fewer values than it has parameters, JavaScript fills each missing parameter with `undefined`. So inside `constructor(value)`, `new LinkedList()` gives `value === undefined`, which is exactly how the class can tell "nothing was passed" apart from 0, `''` or `false`, which are real values someone chose.
 
 **Common mistake:** checking for a missing value with `if (!value)`. As you just saw, `!0` and `!''` are `true`, so a list started with 0 or an empty string would come out empty. Check `value === undefined` instead: only a value that wasn't passed is `undefined`.
 
@@ -100,6 +104,8 @@ linked-list-constructor-plan
 ```
 
 **What just happened:** we played the plan with comments only. The list started empty, a new node was made, `head` was pointed at it, then `tail` was pointed at the **same** node, and finally the length became 1.
+
+**Under the hood:** the plan only ever creates **one** object with `new Node`. Steps b and c don't create anything: they point two properties of the list at that one object. So at the end of the constructor there are exactly two objects in memory: the list (with `head`, `tail` and `length`) and the node they both point to.
 
 **Common mistake:** in step c, making a second node for `tail` with `new Node(value)`. That gives you two separate nodes with the same value, `head` on one and `tail` on the other, and the list is broken from the start. One node, two pointers.
 
@@ -169,6 +175,8 @@ const empty = new LinkedList()
 console.log(empty.head, empty.tail, empty.length) // null null 0
 ```
 
+**Under the hood:** if you paste the two classes into the browser's DevTools console, it answers `undefined`. That's expected: defining a class doesn't return anything, it only gets the recipe ready. Then type `new LinkedList(4)` and open the result. You'll see `head` and `tail`, each showing a node with `value: 4` and `next: null`, plus `length: 1`. The console draws that node twice, once under each pointer, but it's **one** object, as `line.head === line.tail` proves above.
+
 **Common mistake:** writing `head = firstNode` without `this.`. Inside a class, that's an error ("head is not defined"), because `head` isn't a variable: it's a property of the list, and the list is `this`.
 
 ## Look back
@@ -201,5 +209,7 @@ const tailOne = head // like this.tail = this.head
 const tailTwo = firstNode // like this.tail = firstNode
 console.log(tailOne === tailTwo) // true: the same node either way
 ```
+
+**Under the hood:** `firstNode` is a `const` that only lives while the constructor runs. When the constructor ends, that variable is gone, but the node isn't, because `head` and `tail` still point to it. An object stays in memory as long as **something** still reaches it, whatever the variable that first held it was called.
 
 **Common mistake:** thinking `this.tail = this.head` makes `tail` follow `head` from now on. It points `tail` at the node `head` points to **right now**. When `push` moves `tail` later, `head` stays put, and the other way around.
