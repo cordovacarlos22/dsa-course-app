@@ -566,7 +566,7 @@
       "correctIndex": 1,
       "explanation": {
         "en": "A linked list's unshift makes two pointer moves, however long the line is: O(1). An array's unshift moves every item over one index: O(n) each time.",
-        "es": "El unshift de una lista enlazada hace dos movimientos de punteros, sin importar lo larga que sea la fila: O(1). El unshift de un array recorre cada elemento un índice: O(n) cada vez."
+        "es": "El unshift de una lista enlazada hace dos movimientos de punteros, sin importar lo larga que sea la fila: O(1). El unshift de un array mueve cada elemento un índice: O(n) cada vez."
       }
     },
     {
@@ -828,8 +828,8 @@
       },
       "options": [
         {
-          "en": "So success is always `true` and failure always `false`, never sometimes the list",
-          "es": "Para que el éxito siempre sea `true` y la falla `false`, nunca a veces la lista"
+          "en": "So every success gives `true` and every failure `false`, not the list for some cases",
+          "es": "Para que cada éxito dé `true` y cada falla `false`, no la lista en algunos casos"
         },
         {
           "en": "Because `return this.unshift(value)` is O(n)",

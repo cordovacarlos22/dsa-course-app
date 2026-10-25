@@ -807,7 +807,7 @@
       "next": "Ese puntero se llama next. El next de Ana apunta a Ben: ese es el enlace de \"lista enlazada\".",
       "head": "head apunta al primer nodo. Todo recorrido por la lista empieza aquí.",
       "tail": "tail apunta al último nodo, así que el final de la fila siempre está a un paso.",
-      "null": "Dev es el último, así que el next de Dev es null: después no viene nadie. A una lista que termina en null se le llama terminada en null.",
+      "null": "Dev va al final, así que el next de Dev es null: después no viene nadie. A una lista que termina en null se le llama terminada en null.",
       "summary": "Para llegar a cualquier nombre, empieza en head y sigue next, un nodo a la vez, hasta llegar a null."
     },
     "costEnd": {
@@ -987,7 +987,7 @@
       "emptyBefore": "Ejemplo 1: una fila vacía. No hay nadie a quien hacerle pop.",
       "emptyAfter": "pop() regresa undefined, y la fila se queda vacía.",
       "oneBefore": "Ejemplo 2: un nombre. head y tail están en Ana.",
-      "oneAfter": "Hacerle pop a la única persona vacía la fila: head y tail regresan a null, y length es 0.",
+      "oneAfter": "Hacerle pop a la única persona deja la fila vacía: head y tail regresan a null, y length es 0.",
       "manyBefore": "Ejemplo 3: tres invitados, con tail en Cleo.",
       "manyAfter": "El nodo de Cleo se suelta y se regresa. tail regresa a Ben, el nodo de antes."
     },
@@ -1036,7 +1036,7 @@
       "emptyBefore": "Ejemplo 1: una fila vacía. No hay nadie a quien hacerle shift.",
       "emptyAfter": "shift() regresa undefined, y la fila se queda vacía.",
       "oneBefore": "Ejemplo 2: un nombre, Ana.",
-      "oneAfter": "Hacerle shift a la única persona vacía la fila: head se vuelve null, y tail también tiene que volverse null.",
+      "oneAfter": "Hacerle shift a la única persona deja la fila vacía: head se vuelve null, y tail también tiene que volverse null.",
       "manyBefore": "Ejemplo 3: tres invitados, con head en Ana.",
       "manyAfter": "El nodo de Ana sale del inicio y se regresa. head se mueve a Ben, y tail se queda en Cleo."
     },
