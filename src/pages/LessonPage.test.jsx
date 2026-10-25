@@ -320,13 +320,13 @@ describe('celebrations', () => {
   it('does not celebrate a step that passed before', async () => {
     const user = userEvent.setup()
     checkJavaScript.mockResolvedValue(passedCheck)
-    saveProgress('introduction', '01-welcome', {
+    saveProgress('introduction', '03-running-code', {
       ...emptyProgress(),
       passed: [0, 1],
     })
-    // Step 2 is a coding step the student already passed: checking it
+    // Step 2 is the module's coding warm-up, already passed: checking it
     // again passes, but it's not a new win.
-    renderAt(`${WELCOME}?step=2`)
+    renderAt('/learn/introduction/03-running-code?step=2')
     await screen.findByText('Step 2 of 4', { selector: 'p' })
     await user.click(screen.getByRole('button', { name: '✓ Check' }))
     expect(await screen.findByText(/All tests passed!/)).toBeInTheDocument()
@@ -335,7 +335,6 @@ describe('celebrations', () => {
 
   it('celebrates the whole module when its last lesson is finished', async () => {
     const user = userEvent.setup()
-    checkJavaScript.mockResolvedValue(passedCheck)
     saveProgress('introduction', '01-welcome', {
       ...emptyProgress(),
       passed: [0, 1, 2, 3],
@@ -353,7 +352,9 @@ describe('celebrations', () => {
     renderAt('/learn/introduction/03-running-code')
     await screen.findByText('Step 4 of 4', { selector: 'p' })
 
-    await user.click(screen.getByRole('button', { name: '✓ Check' }))
+    // The module's last step: why a loop never stops.
+    await user.click(screen.getByRole('radio', { name: /never changes/ }))
+    await user.click(screen.getByRole('button', { name: 'Check answer' }))
     expect(celebrate).toHaveBeenCalledWith('module')
     expect(screen.getByText(/module complete!/i)).toBeInTheDocument()
   })
@@ -397,11 +398,11 @@ describe('keyboard focus', () => {
 
   it('moves between the coding tabs with the arrow keys', async () => {
     const user = userEvent.setup()
-    saveProgress('introduction', '01-welcome', {
+    saveProgress('introduction', '03-running-code', {
       ...emptyProgress(),
       passed: [0],
     })
-    renderAt(`${WELCOME}?step=2`)
+    renderAt('/learn/introduction/03-running-code?step=2')
     const learn = await screen.findByRole('tab', { name: 'Learn' })
     const code = screen.getByRole('tab', { name: 'Code' })
     const output = screen.getByRole('tab', { name: 'Output' })

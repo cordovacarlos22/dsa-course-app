@@ -35,7 +35,7 @@ In the box above, the tags read `line 1`, `line 3` and `line 4`. Line 2 printed 
 
 **Under the hood:** a web page runs its JavaScript **one thing at a time**. If your code ran inside the page and got stuck in a loop, the page couldn't do anything else: no scrolling, no clicking, no drawing. So the course runs your code in a **Web Worker**, a separate helper that runs JavaScript next to the page instead of inside it. The lesson stays responsive while your code runs, and if your code is still busy after **2 seconds**, the course stops the worker. Before running your code, the course also notes the line number of each `console.log`; that's how the replay knows which line printed what.
 
-Coding **checks** use a bigger workspace: the lesson on the left, and on the right the editor with the output below it (tabs on a phone). **Run** shows what your code prints, and **Check** runs tests on your code and tells you which ones pass. You'll try it in the next steps.
+Coding **checks** use a bigger workspace: the lesson on the left, and on the right the editor with the output below it (tabs on a phone). **Run** shows what your code prints, and **Check** runs tests on your code and tells you which ones pass. You'll try one at the end of the next step: a short warm-up. It's the module's only coding check: the rest are questions about code and explain-it-yourself boxes, so you can focus on reading code first.
 
 **Common mistake:** computing a value and expecting to see it. A line like `2 + 3` on its own works out the answer and then throws it away. Only what you pass to `console.log` shows up under the box.
 

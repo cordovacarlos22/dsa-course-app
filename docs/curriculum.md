@@ -37,7 +37,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Introduction (`introduction`)
 
-**Status:** ✅ 3 lessons, theory first, deeper (#43) (EN + ES, 13 checkpoints, 3 of them explain) · ✅ quiz, 16 questions (EN + ES) · ⬜ slides
+**Status:** ✅ 3 lessons, theory first, deeper (#43) (EN + ES, 13 checkpoints: 3 explain, 1 coding warm-up, the rest choice; #102) · ✅ quiz, 17 questions (EN + ES) · ⬜ slides
 **Goal:** know what the course covers, how to study, and how to run code in the app.
 
 - **Lessons:** Welcome to the course · Getting the most out of this course · Running code in this course

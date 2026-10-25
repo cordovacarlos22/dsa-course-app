@@ -35,33 +35,38 @@
       }
     },
     {
-      "type": "code",
-      "task": {
-        "en": "Your first coding check! Write `greet(name)` so it **returns** (not prints) the text `Hi <name>!`. For example, `greet('Ada')` returns `'Hi Ada!'`. Press **Check** when you're ready.",
-        "es": "¡Tu primera comprobación de código! Escribe `greet(name)` para que **devuelva** (no que imprima) el texto `Hi <name>!`. Por ejemplo, `greet('Ada')` devuelve `'Hi Ada!'`. Presiona **Comprobar** cuando quieras."
+      "type": "choice",
+      "question": {
+        "en": "A function is `function greet(name) { return 'Hi ' + name + '!' }`. What does `greet('Ana')` return?",
+        "es": "Una función es `function greet(name) { return 'Hi ' + name + '!' }`. ¿Qué devuelve `greet('Ana')`?"
       },
-      "hint": {
-        "en": "Join the pieces with `+`: `return 'Hi ' + name + '!'`. Watch the space after `Hi`.",
-        "es": "Une las piezas con `+`: `return 'Hi ' + name + '!'`. Fíjate en el espacio después de `Hi`."
-      },
-      "starterCode": "function greet(name) {\n  // Return the greeting here.\n}\n\nconsole.log(greet('Ada'))\n",
-      "solution": "function greet(name) {\n  return 'Hi ' + name + '!'\n}\n\nconsole.log(greet('Ada'))\n",
-      "kind": "function",
-      "functionName": "greet",
-      "tests": [
+      "options": [
         {
-          "args": ["Ada"],
-          "expected": "Hi Ada!"
+          "en": "`'Hi name!'`",
+          "es": "`'Hi name!'`"
         },
         {
-          "args": ["Grace"],
-          "expected": "Hi Grace!"
+          "en": "`'HiAna!'`",
+          "es": "`'HiAna!'`"
         },
         {
-          "args": ["Luis"],
-          "expected": "Hi Luis!"
+          "en": "`'Hi Ana!'`",
+          "es": "`'Hi Ana!'`"
+        },
+        {
+          "en": "Nothing, because it doesn't use `console.log`",
+          "es": "Nada, porque no usa `console.log`"
         }
-      ]
+      ],
+      "answer": 2,
+      "hint": {
+        "en": "`+` joins pieces of text exactly as written, spaces included. And `return` hands the result back even without `console.log`.",
+        "es": "`+` une pedazos de texto tal como están escritos, con todo y espacios. Y `return` regresa el resultado aunque no haya `console.log`."
+      },
+      "explanation": {
+        "en": "`'Hi ' + 'Ana' + '!'` gives `'Hi Ana!'`, with the space that's inside `'Hi '`. `return` gives the value back to whoever called the function; printing it is a separate job.",
+        "es": "`'Hi ' + 'Ana' + '!'` da `'Hi Ana!'`, con el espacio que está dentro de `'Hi '`. `return` le devuelve el valor a quien llamó la función; imprimirlo es otro trabajo."
+      }
     },
     {
       "type": "explain",
