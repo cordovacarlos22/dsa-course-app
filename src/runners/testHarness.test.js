@@ -43,7 +43,8 @@ describe('runCheckpointTests', () => {
     expect(result.passed).toBe(true)
     expect(result.results[0]).toEqual({
       ok: true,
-      message: 'isEven(2) returned true',
+      key: 'returned',
+      values: { call: 'isEven(2)', actual: 'true' },
     })
   })
 
@@ -53,14 +54,16 @@ describe('runCheckpointTests', () => {
     expect(result.passed).toBe(false)
     expect(result.results[1]).toEqual({
       ok: false,
-      message: 'isEven(3) should return false, but returned true',
+      key: 'shouldReturn',
+      values: { call: 'isEven(3)', expected: 'false', actual: 'true' },
     })
   })
 
   it('reports an error thrown by the student code', () => {
     const code = 'function isEven(n) { return n.oops.bad }'
     const result = runCheckpointTests(code, isEvenCheckpoint, quietConsole)
-    expect(result.results[0].message).toMatch(/^TypeError/)
+    expect(result.results[0].key).toBe('crashed')
+    expect(result.results[0].values.error).toMatch(/^TypeError/)
   })
 
   it('says when the function is missing', () => {
@@ -81,7 +84,8 @@ describe('runCheckpointTests', () => {
     const result = runCheckpointTests(bad, counterCheckpoint, quietConsole)
     expect(result.results[0]).toEqual({
       ok: false,
-      message: 'Counter.count should be 2, but was 1',
+      key: 'shouldBe',
+      values: { call: 'Counter.count', expected: '2', actual: '1' },
     })
   })
 

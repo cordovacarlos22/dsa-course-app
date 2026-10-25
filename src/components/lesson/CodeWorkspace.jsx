@@ -272,7 +272,8 @@ function Output({ output, isPassed, cheer }) {
                 key={index}
                 className={test.ok ? 'text-green-300' : 'text-red-300'}
               >
-                {test.ok ? '✓' : '✗'} {test.message}
+                {test.ok ? '✓' : '✗'}{' '}
+                {t(`workspace.test.${test.key}`, test.values)}
               </li>
             ))}
           </ul>

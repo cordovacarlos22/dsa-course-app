@@ -69,7 +69,7 @@ export function runJavaScript(code, timeoutMs = RUN_TIMEOUT_MS) {
 }
 
 // Runs the code against a checkpoint's tests and resolves with
-// { logs, error, passed, results: [{ ok, message }], problem }.
+// { logs, error, passed, results: [{ ok, key, values }], problem }.
 export function checkJavaScript(code, checkpoint, timeoutMs = RUN_TIMEOUT_MS) {
   return runInWorker({ type: 'check', code, checkpoint }, timeoutMs, {
     logs: [],

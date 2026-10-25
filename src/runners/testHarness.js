@@ -64,7 +64,8 @@ function describeStep(step, className) {
 // Checks the values produced by the code against the tests.
 // `produce(test)` returns the actual value(s) for one test: the function's
 // return value, or (for classes) the array returned by playClassSteps.
-// Returns [{ ok, message }], one entry per test.
+// Returns [{ ok, key, values }], one entry per test: the page turns `key`
+// into a sentence in the student's language (`workspace.test.<key>`).
 export function gradeTests(checkpoint, produce) {
   const name = checkpoint.functionName ?? checkpoint.className
   return checkpoint.tests.map((test) => {
@@ -73,10 +74,19 @@ export function gradeTests(checkpoint, produce) {
       if (checkpoint.kind !== 'class') {
         const call = `${name}(${showArgs(test.args)})`
         return deepEqual(actual, test.expected)
-          ? { ok: true, message: `${call} returned ${show(actual)}` }
+          ? {
+              ok: true,
+              key: 'returned',
+              values: { call, actual: show(actual) },
+            }
           : {
               ok: false,
-              message: `${call} should return ${show(test.expected)}, but returned ${show(actual)}`,
+              key: 'shouldReturn',
+              values: {
+                call,
+                expected: show(test.expected),
+                actual: show(actual),
+              },
             }
       }
       const mismatch = test.steps.findIndex(
@@ -86,18 +96,25 @@ export function gradeTests(checkpoint, produce) {
       if (mismatch === -1) {
         return {
           ok: true,
-          message: `new ${name}(${showArgs(test.steps[0].create)}) worked as expected`,
+          key: 'worked',
+          values: { call: `new ${name}(${showArgs(test.steps[0].create)})` },
         }
       }
       const step = test.steps[mismatch]
       return {
         ok: false,
-        message: `${describeStep(step, name)} should be ${show(step.expected)}, but was ${show(actual[mismatch])}`,
+        key: 'shouldBe',
+        values: {
+          call: describeStep(step, name),
+          expected: show(step.expected),
+          actual: show(actual[mismatch]),
+        },
       }
     } catch (error) {
       return {
         ok: false,
-        message: `${error.name ?? 'Error'}: ${error.message}`,
+        key: 'crashed',
+        values: { error: `${error.name ?? 'Error'}: ${error.message}` },
       }
     }
   })

@@ -264,7 +264,14 @@
     "allPassed": "All tests passed!",
     "somePassed": "{{passed}} of {{total}} tests passed",
     "console": "Console",
-    "loadingEditor": "Loading the editor…"
+    "loadingEditor": "Loading the editor…",
+    "test": {
+      "returned": "{{call}} returned {{actual}}",
+      "shouldReturn": "{{call}} should return {{expected}}, but returned {{actual}}",
+      "worked": "{{call}} worked as expected",
+      "shouldBe": "{{call}} should be {{expected}}, but was {{actual}}",
+      "crashed": "{{error}}"
+    }
   },
   "quiz": {
     "title": "{{module}} quiz",

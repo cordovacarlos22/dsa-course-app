@@ -43,13 +43,27 @@ const failedCheck = {
   problem: null,
   passed: false,
   results: [
-    { ok: false, message: 'isInvited(["Ana"], "Ana") should return true' },
+    {
+      ok: false,
+      key: 'shouldReturn',
+      values: {
+        call: 'isInvited(["Ana"], "Ana")',
+        expected: 'true',
+        actual: 'false',
+      },
+    },
   ],
 }
 const passedCheck = {
   ...failedCheck,
   passed: true,
-  results: [{ ok: true, message: 'isInvited(["Ana"], "Ana") returned true' }],
+  results: [
+    {
+      ok: true,
+      key: 'returned',
+      values: { call: 'isInvited(["Ana"], "Ana")', actual: 'true' },
+    },
+  ],
 }
 
 function renderAt(path) {

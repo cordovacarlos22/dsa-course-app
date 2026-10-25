@@ -74,7 +74,7 @@ export function executeCode(code) {
 }
 
 // Runs the student's code against a checkpoint's tests.
-// Returns { logs, error, passed, results: [{ ok, message }] }.
+// Returns { logs, error, passed, results: [{ ok, key, values }] }.
 export function checkCode(code, checkpoint) {
   const logs = []
   try {
