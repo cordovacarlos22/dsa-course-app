@@ -42,12 +42,18 @@ const failedCheck = {
   error: null,
   problem: null,
   passed: false,
-  results: [{ ok: false, message: 'Counter.count should be 0' }],
+  results: [
+    {
+      ok: false,
+      key: 'shouldBe',
+      values: { call: 'Counter.count', expected: '0', actual: '1' },
+    },
+  ],
 }
 const passedCheck = {
   ...failedCheck,
   passed: true,
-  results: [{ ok: true, message: 'Counter.count is 0' }],
+  results: [{ ok: true, key: 'worked', values: { call: 'new Counter()' } }],
 }
 
 async function renderAt(path, language = 'en') {
@@ -194,6 +200,16 @@ describe('exercise page', () => {
       }),
     ).toBeInTheDocument()
     expect(screen.getByText(/Constrúyelo · Fácil/)).toBeInTheDocument()
+  })
+
+  it('explains each test result in Spanish', async () => {
+    const user = userEvent.setup()
+    checkJavaScript.mockResolvedValue(failedCheck)
+    await renderAt(COUNTER, 'es')
+    await user.click(await screen.findByRole('button', { name: '✓ Comprobar' }))
+    expect(
+      await screen.findByText(/Counter\.count debería ser 0, pero era 1/),
+    ).toBeInTheDocument()
   })
 
   it('shows "page not found" for an unknown exercise', async () => {
