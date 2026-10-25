@@ -206,7 +206,8 @@ function LessonPlayer({ module, lessonIndex }) {
                 {step.title}
               </h2>
             )}
-            <LessonMarkdown markdown={step.body} />
+            {/* A new key per step, so its code boxes start from their own code, not the last step's edits. */}
+            <LessonMarkdown key={`body-${stepIndex}`} markdown={step.body} />
             {step.checkpoint?.type === 'explain' && (
               <ExplainCheckpoint
                 key={stepIndex}
