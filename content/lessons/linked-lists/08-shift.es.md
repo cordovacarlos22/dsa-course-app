@@ -94,7 +94,7 @@ oldHead.next = null
 console.log(oldHead) // ahora es solo Ana
 ```
 
-**Por dentro:** `oldHead.next = null` no libera memoria: `oldHead` todavía guarda el nodo, y pronto lo guardará quien lo reciba. Es para que el código sea **correcto**: asegura que el nodo regresado no pueda meterse a la fila. También importa para la memoria después: si algún código se queda con el nodo regresado cuando la lista ya no existe, un `next` sin cortar mantendría alcanzable el resto de la cadena, y el recolector de basura no podría liberarla.
+**Por dentro:** `oldHead.next = null` no libera memoria en ese momento: `oldHead` todavía guarda el nodo, y pronto lo guardará quien lo reciba. Es para que el código sea **correcto**: asegura que el nodo regresado no pueda meterse a la fila. También importa para la memoria después: si algún código se queda con el nodo regresado cuando la lista ya no existe, un `next` sin cortar mantendría alcanzable el resto de la cadena, y el recolector de basura no podría liberarla.
 
 **Error común:** saltarse `oldHead.next = null`. La lista en sí queda bien sin esa línea, pero el nodo que regresas todavía apunta a la fila, así que el código que lo use puede llegar, y hasta cambiar, a invitados que siguen en la lista.
 

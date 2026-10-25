@@ -94,7 +94,7 @@ oldHead.next = null
 console.log(oldHead) // now it's only Ana
 ```
 
-**Under the hood:** `oldHead.next = null` doesn't free any memory: the node is still held by `oldHead`, and soon by whoever receives it. It's about **correctness**: it makes sure the returned node can't reach into the line. It also matters for memory later: if some code keeps the returned node after the list itself is gone, an uncut `next` would keep the rest of the chain reachable, so the garbage collector couldn't free it.
+**Under the hood:** `oldHead.next = null` doesn't free memory right away: the node is still held by `oldHead`, and soon by whoever receives it. It's about **correctness**: it makes sure the returned node can't reach into the line. It also matters for memory later: if some code keeps the returned node after the list itself is gone, an uncut `next` would keep the rest of the chain reachable, so the garbage collector couldn't free it.
 
 **Common mistake:** skipping `oldHead.next = null`. The list itself is fine without it, but the returned node still points into the line, so code that uses it can reach, and even change, guests who are still in the list.
 
