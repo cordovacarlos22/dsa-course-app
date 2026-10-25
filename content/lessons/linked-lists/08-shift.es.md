@@ -50,7 +50,7 @@ const justAna = ['Ana']
 console.log(justAna.shift(), justAna.length) // Ana 0
 ```
 
-**Por dentro:** `this.head = this.head.next` funciona porque JavaScript evalúa primero el lado derecho. Lee `this.head.next`, el segundo nodo (o `null`), mientras `head` todavía apunta al primero, y solo entonces mueve `head`. Esa sola línea es segura en todos los escenarios, incluida la fila de un nodo.
+**Por dentro:** `this.head = this.head.next` funciona porque JavaScript calcula el valor del lado derecho antes de cambiar `head`. Lee `this.head.next`, el segundo nodo (o `null`), mientras `head` todavía apunta al primero, y solo entonces mueve `head`. Esa sola línea es segura siempre que haya un primer nodo, incluida la fila de un nodo; la fila vacía nunca llega a ella, porque el primer `if` regresa antes.
 
 **Error común:** resolver el caso de un nombre como lo hace pop, reiniciando `head` y `tail`. Funciona, pero esconde en qué es distinto shift: `head` se vuelve `null` solo, porque el `next` del único nodo era `null`. Solo `tail` necesita la ayuda extra.
 
@@ -94,7 +94,7 @@ oldHead.next = null
 console.log(oldHead) // ahora es solo Ana
 ```
 
-**Por dentro:** `oldHead.next = null` no libera memoria: `oldHead` todavía guarda el nodo, y pronto lo guardará quien lo reciba. Es para que el código sea **correcto**: asegura que el nodo regresado no pueda meterse a la fila, donde un `next` sin cortar dejaría a quien lo tenga recorrer, y hasta cambiar, el resto de la lista. Liberar memoria sigue siendo trabajo del recolector de basura.
+**Por dentro:** `oldHead.next = null` no libera memoria: `oldHead` todavía guarda el nodo, y pronto lo guardará quien lo reciba. Es para que el código sea **correcto**: asegura que el nodo regresado no pueda meterse a la fila. También importa para la memoria después: si algún código se queda con el nodo regresado cuando la lista ya no existe, un `next` sin cortar mantendría alcanzable el resto de la cadena, y el recolector de basura no podría liberarla.
 
 **Error común:** saltarse `oldHead.next = null`. La lista en sí queda bien sin esa línea, pero el nodo que regresas todavía apunta a la fila, así que el código que lo use puede llegar, y hasta cambiar, a invitados que siguen en la lista.
 
