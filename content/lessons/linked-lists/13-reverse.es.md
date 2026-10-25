@@ -76,7 +76,7 @@ console.log(order)
 
 **Qué acaba de pasar:** cada vuelta volteó una flecha, así que después de tres vueltas cada nodo apuntaba al que antes iba delante de él. `previous` terminó en Cleo, el nuevo primer nodo, y recorrer desde ahí imprimió Cleo Ben Ana.
 
-**Por dentro:** el `reverse()` de un array también es en el lugar, pero mueve **valores**: intercambia el primer elemento con el último, el segundo con el penúltimo, y así, unos n/2 intercambios. Puede hacerlo porque salta a cualquier índice. Una lista enlazada no puede saltar a su último nodo, así que hace lo contrario: cada valor se queda en su nodo, y las flechas se dan la vuelta.
+**Por dentro:** el `reverse()` de un array también es en el lugar, pero mueve **valores**: intercambia el primer elemento con el último, el segundo con el penúltimo, y así, unos n/2 intercambios. Puede hacerlo porque salta a cualquier índice. Una lista enlazada simple no puede saltar a un índice ni regresar desde `tail`, así que hace lo contrario: cada valor se queda en su nodo, y las flechas se dan la vuelta.
 
 **Error común:** probar solo el ejemplo de muchos invitados. La fila vacía es la que hace tronar un reverse descuidado, como vas a ver en el paso 4.
 
@@ -191,7 +191,7 @@ console.log(line.head.value, line.tail.value) // Dev Ana
 console.log(new LinkedList().reverse().length) // 0: la fila vacía funciona
 ```
 
-**Por dentro:** intercambiar head y tail necesita una variable extra por la misma razón que intercambiar dos vasos de jugo necesita un tercer vaso. `this.head = this.tail` sobrescribiría el único puntero al que era el primer nodo, así que primero se guarda en `current`. Esa es la forma clásica de intercambiar dos variables. (JavaScript también tiene un intercambio en una línea, `[a, b] = [b, a]`, pero la variable extra muestra qué hay que guardar.)
+**Por dentro:** intercambiar head y tail necesita una variable extra por la misma razón que intercambiar dos vasos de jugo necesita un tercer vaso. `this.head = this.tail` sobrescribiría el único puntero al que era el primer nodo, así que primero se guarda en `current`. Esa es la forma clásica de intercambiar dos variables: guarda una, sobrescríbela, y luego usa la copia guardada.
 
 **Error común:** escribir las cuatro líneas del bucle en otro orden. Cada línea necesita la anterior: `nextNode` se tiene que guardar antes del volteo, y `previous` se tiene que mover antes que `current`, o `previous` caería en el nodo equivocado.
 

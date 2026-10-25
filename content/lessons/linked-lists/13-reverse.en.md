@@ -76,7 +76,7 @@ console.log(order)
 
 **What just happened:** each round flipped one arrow, so after three rounds every node pointed to the one that used to come before it. `previous` ended on Cleo, the new first node, and walking from there printed Cleo Ben Ana.
 
-**Under the hood:** an array's `reverse()` is in place too, but it moves **values**: it swaps the first item with the last, the second with the second-to-last, and so on, about n/2 swaps. It can do that because it jumps to any index. A linked list can't jump to its last node, so it does the opposite: every value stays in its node, and the arrows turn around.
+**Under the hood:** an array's `reverse()` is in place too, but it moves **values**: it swaps the first item with the last, the second with the second-to-last, and so on, about n/2 swaps. It can do that because it jumps to any index. A singly linked list can't jump to an index or step back from `tail`, so it does the opposite: every value stays in its node, and the arrows turn around.
 
 **Common mistake:** checking only the many-guests example. The empty line is the one that crashes a careless reverse, as you'll see in step 4.
 
@@ -191,7 +191,7 @@ console.log(line.head.value, line.tail.value) // Dev Ana
 console.log(new LinkedList().reverse().length) // 0: the empty line is fine
 ```
 
-**Under the hood:** the head-and-tail swap needs a spare variable for the same reason swapping two cups of juice needs a third cup. `this.head = this.tail` would overwrite the only pointer to the old first node, so it's saved in `current` first. That's the classic way to swap two variables. (JavaScript also has a one-line swap, `[a, b] = [b, a]`, but the spare variable shows what has to be saved.)
+**Under the hood:** the head-and-tail swap needs a spare variable for the same reason swapping two cups of juice needs a third cup. `this.head = this.tail` would overwrite the only pointer to the old first node, so it's saved in `current` first. That's the classic way to swap two variables: save one, overwrite it, then use the saved copy.
 
 **Common mistake:** writing the four loop lines in another order. Each line needs the one before it: `nextNode` must be saved before the flip, and `previous` must move before `current` does, or `previous` would land on the wrong node.
 
