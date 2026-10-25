@@ -61,7 +61,7 @@
       "answer": 0,
       "hint": {
         "en": "Who is last in the line after Zoe joins at the front?",
-        "es": "¿Quién es el último de la fila después de que Zoe se forma al inicio?"
+        "es": "¿Qué nodo queda al final de la fila después de que Zoe se forma al inicio?"
       },
       "explanation": {
         "en": "Zoe joins at the front, so Ana is still the last guest and `tail` stays on Ana's node. Only an empty list needs `tail` set by unshift.",

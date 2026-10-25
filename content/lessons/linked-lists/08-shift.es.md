@@ -50,7 +50,7 @@ const justAna = ['Ana']
 console.log(justAna.shift(), justAna.length) // Ana 0
 ```
 
-**Por dentro:** con un nodo, `head` se vuelve `null` sin ningún código especial: `this.head = this.head.next` copia el `next` del único nodo, que es `null`. Solo `tail`, que todavía apunta al nodo que se fue, necesita la revisión extra.
+**Por dentro:** `this.head = this.head.next` funciona porque JavaScript evalúa primero el lado derecho. Lee `this.head.next`, el segundo nodo (o `null`), mientras `head` todavía apunta al primero, y solo entonces mueve `head`. Esa sola línea es segura en todos los escenarios, incluida la fila de un nodo.
 
 **Error común:** resolver el caso de un nombre como lo hace pop, reiniciando `head` y `tail`. Funciona, pero esconde en qué es distinto shift: `head` se vuelve `null` solo, porque el `next` del único nodo era `null`. Solo `tail` necesita la ayuda extra.
 
@@ -94,7 +94,7 @@ oldHead.next = null
 console.log(oldHead) // ahora es solo Ana
 ```
 
-**Por dentro:** `oldHead.next = null` no libera memoria: `oldHead` todavía guarda el nodo, y pronto lo guardará quien lo reciba. Es para que el código sea **correcto**: asegura que el nodo regresado no pueda meterse a la fila. Liberar memoria sigue siendo trabajo del recolector de basura.
+**Por dentro:** `oldHead.next = null` no libera memoria: `oldHead` todavía guarda el nodo, y pronto lo guardará quien lo reciba. Es para que el código sea **correcto**: asegura que el nodo regresado no pueda meterse a la fila, donde un `next` sin cortar dejaría a quien lo tenga recorrer, y hasta cambiar, el resto de la lista. Liberar memoria sigue siendo trabajo del recolector de basura.
 
 **Error común:** saltarse `oldHead.next = null`. La lista en sí queda bien sin esa línea, pero el nodo que regresas todavía apunta a la fila, así que el código que lo use puede llegar, y hasta cambiar, a invitados que siguen en la lista.
 
@@ -239,6 +239,6 @@ while (counter.length > 0) {
 }
 ```
 
-**Por dentro:** `push` al final más `shift` al inicio es una **cola**: el primero en llegar es el primero en salir, como en la taquilla. En nuestra lista enlazada los dos son O(1), así que atender a n personas cuesta O(n) en total. El módulo de Pilas y colas arma una, con estos mismos dos movimientos.
+**Por dentro:** `push` al final más `shift` al inicio es una **cola**: lo primero que entra es lo primero que sale, como en la taquilla. En nuestra lista enlazada los dos son O(1), así que atender a n personas cuesta O(n) en total. El módulo de Pilas y colas arma una, con estos mismos dos movimientos.
 
 **Error común:** usar un array como una cola larga con `push` y `shift`. Funciona, pero cada `shift` mueve toda la fila, así que atender a n invitados cuesta O(n²) en total. Una lista enlazada los atiende en O(n).

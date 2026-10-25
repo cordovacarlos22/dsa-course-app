@@ -22,7 +22,7 @@ linked-list-pop
 
 **Qué acaba de pasar:** la fila tenía cuatro invitados. `pop()` soltó el nodo de Dev del final, regresó `tail` a Cleo, y la longitud pasó de 4 a 3. Luego regresó el nodo de Dev.
 
-**Por dentro:** el nodo que regresa pop ya está separado de la fila: era el último, así que su `next` es `null`. Por eso pop, a diferencia de shift dentro de dos lecciones, nunca tiene que cortar una flecha antes de regresarlo.
+**Por dentro:** el nodo que regresa pop ya está separado de la fila: era el último, así que su `next` es `null`. Por eso pop, a diferencia de shift dentro de dos lecciones, nunca tiene que cortar el `next` del propio nodo que regresa (sí corta la flecha que apuntaba **hacia** él, con `this.tail.next = null`).
 
 **Error común:** esperar que `pop` regrese el valor, como el `pop` de un array. El nuestro regresa todo el nodo. El valor está a un paso: `line.pop().value`.
 
@@ -79,7 +79,7 @@ linked-list-pop-plan
 
 **Qué acaba de pasar:** en una fila de tres, `current` y `previous` empezaron en Ana y caminaron hasta que `current` quedó en Cleo, el último nodo, con `previous` en Ben. `tail` se movió a Ben, el `next` de Ben se volvió `null`, la longitud bajó a 2, y se regresó el nodo de Cleo. El paso 6 solo hizo algo en la fila de un nombre: cuando Ana se fue, la longitud era 0, así que `head` y `tail` regresaron a `null`.
 
-**Por dentro:** que `current` y `previous` avancen a un nodo de distancia es un patrón con nombre: un **puntero que va detrás** (en inglés, _trailing pointer_). `previous` siempre recuerda el nodo que acabas de dejar, porque una lista enlazada simple no puede regresar a él. `remove` usa la misma pareja más adelante en este módulo.
+**Por dentro:** que `current` y `previous` avancen a un nodo de distancia es un patrón con nombre: un **puntero que va detrás** (en inglés, _trailing pointer_). `previous` siempre recuerda el nodo que acabas de dejar, porque una lista enlazada simple no puede regresar a él. `reverse` usa la misma pareja al final de este módulo.
 
 **Error común:** caminar con `while (current !== null)`. Entonces el bucle corre una vez de más, `current` termina en `null`, y `previous` termina en el **último** nodo en vez del de antes. Te pasaste justo del nodo que necesitabas.
 

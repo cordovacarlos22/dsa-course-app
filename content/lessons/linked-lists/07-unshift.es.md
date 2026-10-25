@@ -78,7 +78,7 @@ linked-list-unshift-plan
 
 **Qué acaba de pasar:** se creó el nodo nuevo para Zoe, la fila no estaba vacía, el `next` de Zoe apuntó a Ana, y solo entonces `head` se movió a Zoe. La longitud subió y se regresó la lista. En una fila vacía, el paso 2 habría hecho todo el trabajo.
 
-**Por dentro:** el orden de los pasos 3a y 3b sigue una regla que te protege en cada método con punteros: **enlaza antes de mover**. Nunca muevas el único puntero a una parte de la fila hasta que algo más le apunte. Aquí, el `next` de Zoe se agarra de Ana antes de que `head` la suelte.
+**Por dentro:** el orden de los pasos 3a y 3b sigue una regla que te protege en cada método con punteros: **enlaza antes de mover**. Nunca muevas el único puntero a una parte de la fila hasta que algo más le apunte. Aquí, el `next` de Zoe se agarra del nodo de Ana antes de que `head` lo suelte.
 
 **Error común:** escribir el paso 3b antes del 3a. Primero `this.head = nodeToAdd` y luego `nodeToAdd.next = this.head` hace que el nodo nuevo se apunte **a sí mismo**. Ana, Ben y Cleo se quedan sin nada que los apunte, y el recolector de basura se los lleva.
 
@@ -157,7 +157,7 @@ console.log(line.toArray().join(' -> ')) // Ana -> Ben -> Cleo
 console.log(line.head.value, line.tail.value) // Ana Cleo: Cleo llegó primero, así que Cleo queda al final
 ```
 
-**Por dentro:** el bucle de la lección Listas enlazadas vs arrays que armaba una lista desde el final (`head = { value: names[i], next: head }`) era unshift sin la clase: un nodo nuevo que apunta al head anterior, y luego `head` se mueve a él. Armar una lista con unshift va del último valor al primero.
+**Por dentro:** el bucle del paso Revisar de pop que armaba una fila larga (`head = { value: 'Persona ' + k, next: head }`) era unshift sin la clase: un nodo nuevo que apunta al head anterior, y luego `head` se mueve a él. Por eso una lista armada con unshift queda en el orden contrario al que usaste para agregar.
 
 **Error común:** esperar que los invitados agregados con unshift salgan en el orden en que los agregaste. Cada unshift va **delante** del anterior, así que agregar a Cleo, Ben y Ana en ese orden da Ana, Ben, Cleo.
 
@@ -192,7 +192,7 @@ for (let i = 0; i < sizes.length; i++) {
   let arrayMoves = 0
   let listMoves = 0
   for (let k = 0; k < sizes[i]; k++) {
-    arrayMoves = arrayMoves + k // un array recorre a cada nombre que ya está en la fila
+    arrayMoves = arrayMoves + k // un array recorre cada nombre que ya está en la fila
     listMoves = listMoves + 2 // una lista enlazada hace dos movimientos de punteros
   }
   console.log(sizes[i] + ' invitados: array ' + arrayMoves + ' movimientos, lista enlazada ' + listMoves)

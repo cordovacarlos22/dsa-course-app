@@ -239,7 +239,7 @@
       "type": "explain",
       "question": {
         "en": "In your own words: what are pop's three cases, why does it have to walk the list, and what would make it O(1)?",
-        "es": "Con tus palabras: ¿cuáles son los tres casos de pop, por qué tiene que recorrer la lista, y qué la haría O(1)?"
+        "es": "Con tus palabras: ¿cuáles son los tres casos de pop, por qué tiene que recorrer la lista, y qué cambio haría que pop fuera O(1)?"
       },
       "modelAnswer": {
         "en": "An empty list returns `undefined`. With two or more nodes, pop walks from `head` with `current` and a trailing `previous` until `current` is on the last node, then moves `tail` to `previous`, sets its `next` to `null`, lowers `length` and returns the removed node. With one node, the same code leaves `length` at 0, so `head` and `tail` must both be set to `null`, or the list keeps a ghost node. It has to walk because `tail` needs the node before the last one, and pointers only go forward, so that's O(n). A `prev` pointer in every node (a doubly linked list) would make pop O(1).",
@@ -264,7 +264,7 @@
         },
         {
           "en": "Says a `prev` pointer (doubly linked list) would make it O(1)",
-          "es": "Dice que un puntero `prev` (lista doblemente enlazada) la haría O(1)"
+          "es": "Dice que un puntero `prev` (lista doblemente enlazada) haría O(1) a pop"
         }
       ]
     }

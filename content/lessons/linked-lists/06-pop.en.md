@@ -22,7 +22,7 @@ linked-list-pop
 
 **What just happened:** the line had four guests. `pop()` cut Dev's node off the end, moved `tail` back to Cleo, and the length went from 4 to 3. Then it returned Dev's node.
 
-**Under the hood:** the node pop returns is already cut off from the line: it was the last one, so its `next` is `null`. That's why pop, unlike shift in two lessons, never has to cut an arrow before returning.
+**Under the hood:** the node pop returns is already cut off from the line: it was the last one, so its `next` is `null`. That's why pop, unlike shift in two lessons, never has to cut the returned node's own `next` (it does cut the arrow that pointed **to** it, with `this.tail.next = null`).
 
 **Common mistake:** expecting `pop` to return the value, like an array's `pop`. Ours returns the whole node. The value is one step away: `line.pop().value`.
 
@@ -79,7 +79,7 @@ linked-list-pop-plan
 
 **What just happened:** on a line of three, `current` and `previous` started at Ana and walked until `current` was on Cleo, the last guest, with `previous` on Ben. `tail` moved to Ben, Ben's `next` became `null`, the length dropped to 2, and Cleo's node was returned. Step 6 only did something in the one-guest line: after Ana left, the length was 0, so `head` and `tail` went back to `null`.
 
-**Under the hood:** `current` and `previous` moving one node apart is a pattern with a name: a **trailing pointer**. `previous` always remembers the node you just left, because a singly linked list can't step back to it. `remove` uses the same pair later in this module.
+**Under the hood:** `current` and `previous` moving one node apart is a pattern with a name: a **trailing pointer**. `previous` always remembers the node you just left, because a singly linked list can't step back to it. `reverse` uses the same pair at the end of this module.
 
 **Common mistake:** walking with `while (current !== null)`. The loop then runs one extra time, `current` ends on `null`, and `previous` ends on the **last** node instead of the one before it. You've walked right past the node you needed.
 

@@ -157,7 +157,7 @@ console.log(line.toArray().join(' -> ')) // Ana -> Ben -> Cleo
 console.log(line.head.value, line.tail.value) // Ana Cleo: Cleo came first, so Cleo is at the back
 ```
 
-**Under the hood:** the loop in the Linked Lists vs Arrays lesson that built a list from the back (`head = { value: names[i], next: head }`) was unshift without the class: a new node pointing at the old head, then `head` moving onto it. Building a list by unshifting goes from the last value to the first.
+**Under the hood:** the loop in pop's Look back that built a long line (`head = { value: 'Guest ' + k, next: head }`) was unshift without the class: a new node pointing at the old head, then `head` moving onto it. That's why a list built by unshifting comes out in the opposite order from the one you added in.
 
 **Common mistake:** expecting unshifted guests to come out in the order you added them. Each unshift goes in **front** of the last one, so adding Cleo, Ben, Ana in that order gives Ana, Ben, Cleo.
 

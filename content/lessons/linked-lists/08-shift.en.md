@@ -50,7 +50,7 @@ const justAna = ['Ana']
 console.log(justAna.shift(), justAna.length) // Ana 0
 ```
 
-**Under the hood:** with one node, `head` becomes `null` with no special code at all: `this.head = this.head.next` copies the only node's `next`, which is `null`. Only `tail`, which still points to the node that left, needs the extra check.
+**Under the hood:** `this.head = this.head.next` works because JavaScript evaluates the right side first. It reads `this.head.next`, the second node (or `null`), while `head` still points to the first one, and only then moves `head`. That one line is safe in every scenario, the one-node line included.
 
 **Common mistake:** handling the one-guest case like pop does, resetting both `head` and `tail`. That works, but it hides how shift is different: `head` becomes `null` on its own, because the only node's `next` was `null`. Only `tail` needs the extra help.
 
@@ -94,7 +94,7 @@ oldHead.next = null
 console.log(oldHead) // now it's only Ana
 ```
 
-**Under the hood:** `oldHead.next = null` doesn't free any memory: the node is still held by `oldHead`, and soon by whoever receives it. It's about **correctness**: it makes sure the returned node can't reach into the line. Freeing memory is still the garbage collector's job.
+**Under the hood:** `oldHead.next = null` doesn't free any memory: the node is still held by `oldHead`, and soon by whoever receives it. It's about **correctness**: it makes sure the returned node can't reach into the line, where an uncut `next` would let whoever holds it walk, and even change, the rest of the list. Freeing memory is still the garbage collector's job.
 
 **Common mistake:** skipping `oldHead.next = null`. The list itself is fine without it, but the returned node still points into the line, so code that uses it can reach, and even change, guests who are still in the list.
 
