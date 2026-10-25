@@ -1,14 +1,14 @@
 ---
 title: 'get: encontrar el nodo en un índice'
 order: 9
-minutes: 12
+minutes: 15
 ---
 
 > **Meta:** escribir `get`, el método que camina hasta el nodo en un índice y lo regresa, y manejar cada índice que no existe.
 
 ## Entender: qué hace get
 
-Una lista enlazada no tiene índices, pero la gente igual pide "el tercer invitado". **`get`** responde esa pregunta: le da a la lista enlazada algo que funciona como un índice, contando mientras camina. Paso 1: qué entra, qué sale, qué cambia.
+Una lista enlazada no tiene índices, pero la gente igual pide "el tercer nombre". **`get`** responde esa pregunta: le da a la lista enlazada algo que funciona como un índice, contando mientras camina. Paso 1: qué entra, qué sale, qué cambia.
 
 - **Qué entra:** un índice, contado desde `head` como en un array: el primer nodo es 0, el siguiente es 1, y así.
 - **Qué sale:** el **nodo** en ese índice, que sigue en la fila. Si no hay nodo en ese índice, `get` regresa `undefined`.
@@ -22,31 +22,54 @@ linked-list-get
 
 **Qué acaba de pasar:** `get(2)` empezó en `head` y avanzó dos veces, contando a Ana como 0, a Ben como 1 y a Cleo como 2. Regresó el nodo de Cleo, y la fila no cambió.
 
+**Por dentro:** `get` regresa el **nodo real**, no una copia. Lo que le hagas, como cambiar su `value` o su `next`, pasa dentro de la lista. En eso se van a apoyar `set`, `insert` y `remove`.
+
 **Error común:** esperar que `get` regrese el valor. Regresa todo el nodo, para que todavía puedas seguir su `next` o cambiarlo. El valor está a un paso: `line.get(2).value`.
 
-## Ejemplos: vacía, un invitado, el último invitado, fuera de rango
+## Ejemplos: vacía, un nombre, el último nombre, fuera de rango
 
 Paso 2: ejemplos. En un método con índices, los ejemplos interesantes son sobre **qué índices existen**. En una fila de cuatro invitados, los índices válidos son 0, 1, 2 y 3: de 0 hasta **`length - 1`**.
 
 - **Una fila vacía** no tiene ningún índice válido, así que `get(0)` regresa `undefined`.
-- **Un invitado:** solo existe el índice 0, y `get(0)` regresa el nodo de head sin moverse.
-- **El último invitado:** `get(length - 1)` es la caminata más larga, hasta el tail.
+- **Un nombre:** solo existe el índice 0, y `get(0)` regresa el nodo de head sin moverse.
+- **El último nombre:** `get(length - 1)` es la caminata más larga, hasta el tail.
 - **Fuera de rango:** un índice negativo como -1, o un índice de `length` o más (como 4 en una fila de cuatro), no existe. `get` regresa `undefined` para esos sin caminar nada.
 
 ```viz
 linked-list-get-examples
 ```
 
-**Qué acaba de pasar:** la fila vacía y los índices -1 y 4 regresaron `undefined`, sin caminar. El índice 0 con un invitado regresó el nodo de Ana de inmediato, y el índice 3 recorrió toda la fila hasta Dev.
+**Qué acaba de pasar:** la fila vacía y los índices -1 y 4 regresaron `undefined`, sin caminar. El índice 0 con un nombre regresó el nodo de Ana de inmediato, y el índice 3 recorrió toda la fila hasta Dev.
 
 Los arrays responden igual a los índices fuera de rango, así que `undefined` es una elección natural:
 
 ```js-run
 const guests = ['Ana', 'Ben', 'Cleo', 'Dev']
 console.log(guests[3]) // Dev: el último índice es length - 1
-console.log(guests[4]) // undefined: no hay invitado en el índice 4
+console.log(guests[4]) // undefined: no hay nadie en el índice 4
 console.log(guests[-1]) // undefined: no hay índices negativos
 ```
+
+Antes de correrlo, predice cada línea. `walkTo` es `get` **sin** la revisión del rango:
+
+```js-run
+function walkTo(head, index) {
+  let current = head
+  for (let i = 0; i < index; i++) {
+    current = current.next
+  }
+  return current
+}
+
+const head = { value: 'Ana', next: { value: 'Ben', next: { value: 'Cleo', next: null } } }
+console.log(walkTo(head, 0).value)
+console.log(walkTo(head, 2).value)
+console.log(walkTo(head, 3)) // el índice 3 es la longitud
+```
+
+**Qué acaba de pasar:** el índice 0 no se movió y dio Ana; el índice 2 se movió dos veces y dio Cleo. El índice 3, la longitud, se pasó un paso del último nodo y dio `null` en vez de un nodo. El índice 4 tronaría, porque leería `.next` de ese `null`. Ese es el trabajo de la revisión del rango.
+
+**Por dentro:** la revisión del rango corre **antes** de la caminata por una razón: leer `.next` de `null` lanza un `TypeError` y detiene el programa. Rechazar primero un índice malo hace que el bucle solo camine sobre nodos que existen.
 
 **Error común:** escribir la revisión del rango como `index > this.length`. Eso deja pasar `index === length`, y la caminata se sale del final de la fila. El último índice que existe es `length - 1`, así que la revisión es `index >= this.length`.
 
@@ -72,6 +95,8 @@ linked-list-get-plan
 ```
 
 **Qué acaba de pasar:** la revisión del rango pasó para el índice 2. `current` empezó en `head`, en el índice 0, y avanzó una vez por cada cuenta: a Ben (1), luego a Cleo (2). Dos movimientos para el índice 2, y luego se regresó `current`.
+
+**Por dentro:** el bucle cuenta movimientos, no nodos. Para llegar al índice k te mueves k veces, así que `get(0)` se mueve cero veces y regresa `head` tal cual. Por eso el bucle corre mientras `i < index`, empezando en 0.
 
 **Error común:** equivocarse por uno en el bucle, como `i <= index` o empezar `i` en 1. Cualquiera de los dos hace que `current` se mueva una vez de más o de menos. Prueba el bucle con el ejemplo más chico: `get(0)` no debe moverse nada.
 
@@ -150,6 +175,8 @@ console.log(line.get(4)) // undefined
 console.log(line.get(-1)) // undefined
 ```
 
+**Por dentro:** la caminata nunca puede tronar, aunque lee `current.next` en cada movimiento. La revisión del rango garantiza que `index` es como mucho `length - 1`, y el bucle se mueve exactamente `index` veces, así que cada `next` que lee pertenece a un nodo que de verdad está en la fila.
+
 **Error común:** regresar `null` para un índice que no existe. Funciona, pero es una respuesta distinta al `undefined` de un array, y a lo que regresan `pop` y `shift` con una lista vacía. Un solo valor para "aquí no hay nada" en toda la clase es más fácil de revisar.
 
 ## Revisar
@@ -173,5 +200,7 @@ for (let index = 0; index < length; index++) {
   console.log('get(' + index + '): ' + moves + ' movimientos')
 }
 ```
+
+**Por dentro:** una lista doblemente enlazada puede hacer `get` cerca del doble de rápido en la práctica: para un índice después de la mitad, camina hacia atrás desde `tail` con `prev`. Sigue siendo O(n), porque la constante se descarta, pero es un truco real que vas a ver en el módulo de Listas doblemente enlazadas.
 
 **Error común:** llamar `get` dentro de un bucle para visitar todos los nodos: `for (let i = 0; i < line.length; i++) { line.get(i) }`. Cada `get` vuelve a caminar desde el inicio, así que el bucle hace 0 + 1 + 2 + … movimientos: O(n²). Para visitar todos los nodos, camina una sola vez con `current`, como hace `toArray`.

@@ -1,7 +1,7 @@
 ---
 title: 'remove: take out the guest at an index'
 order: 12
-minutes: 14
+minutes: 17
 ---
 
 > **Goal:** write `remove`, the method that takes out the node at any index and returns it, by reusing `shift`, `pop` and `get`.
@@ -22,6 +22,8 @@ linked-list-remove
 
 **What just happened:** `remove(2)` took Cleo's node out of the middle. Ben now points straight to Dev, Dev moved from index 3 to 2, and the length went from 4 to 3. Then remove returned Cleo's node, cut off from the line.
 
+**Under the hood:** removing a node doesn't erase it. It's still an ordinary object, now held by whoever received the return value. It's only gone from the **list**, because no node in the line points to it anymore.
+
 **Common mistake:** mixing up remove's return value with insert's. insert answers yes or no (`true` or `false`). remove gives back **who left** (the node), like pop and shift, or `undefined` when nobody did.
 
 ## Examples: front, back, middle, out of range
@@ -40,6 +42,26 @@ linked-list-remove-examples
 ```
 
 **What just happened:** index 0 took Ana off the front, like shift. Index 3 took Dev off the back, like pop. Index 2 took Cleo out of the middle. Index 4 was out of range, so nothing changed and remove returned `undefined`.
+
+Before you run this, predict the three lines. It's remove's middle case with plain objects:
+
+```js-run
+const dev = { value: 'Dev', next: null }
+const cleo = { value: 'Cleo', next: dev }
+const ben = { value: 'Ben', next: cleo }
+
+const removed = ben.next // Cleo: the node that leaves
+ben.next = removed.next // Ben now points past Cleo
+console.log(ben.next.value)
+console.log(removed.next.value) // still points into the line?
+
+removed.next = null // cut it loose
+console.log(removed.next)
+```
+
+**What just happened:** after one pointer move, Ben pointed straight to Dev, so Cleo was out of the line. But Cleo's node still pointed to Dev until `removed.next = null` cut it. That cut is why remove returns a clean node.
+
+**Under the hood:** remove's range check is the same as get's, `index < 0 || index >= this.length`, because you can only remove a node that exists, just as you can only get one. insert was the odd one out, since it also accepts the spot right after the last node.
 
 **Common mistake:** copying insert's range check, `index > this.length`. That lets `remove(length)` through, and there's no node there to remove.
 
@@ -68,6 +90,8 @@ linked-list-remove-plan
 ```
 
 **What just happened:** index 2 passed the range check and wasn't an end. `get(1)` walked to Ben, so `nodeBefore` was Ben, and `removed` was Ben's `next`, Cleo, with no second walk. Ben's `next` skipped over Cleo to Dev, Cleo's `next` was cut, and the length dropped to 3.
+
+**Under the hood:** `nodeBefore.next = removed.next` is the whole removal: one pointer move. Everything else in the method is finding `nodeBefore`, keeping `removed` so it can be returned, and tidying up (`removed.next = null`, `length--`).
 
 **Common mistake:** writing only `nodeBefore.next = nodeBefore.next.next`. The node does leave the line, but you've lost your only pointer to it, so you can't cut its `next` or return it. Save it in `removed` first.
 
@@ -207,6 +231,8 @@ console.log(line.remove(2).value, line.tail.value) // Dev Ben: the last index us
 console.log(line.remove(5)) // undefined
 ```
 
+**Under the hood:** remove hands the ends to `shift` and `pop`, and those already update `length`, `head` and `tail`. So the middle case doesn't touch `head` or `tail`, for the same reason insert's middle case doesn't: a node in the middle is never the first or the last.
+
 **Common mistake:** checking for the last index with `this.length` instead of `this.length - 1`. `index === this.length` never passes the range check, so the pop case would never run, and removing the last guest would go through the middle code, which never moves `tail`.
 
 ## Look back
@@ -232,5 +258,7 @@ for (let index = 0; index < length; index++) {
   console.log('remove(' + index + '): ' + moves + ' moves')
 }
 ```
+
+**Under the hood:** a doubly linked list makes removing a node you **already have** O(1): from the node itself, `prev` and `next` give both neighbors, with no walk. That's why browsers and editors keep lists like that for things they remove often, like the steps behind an undo button.
 
 **Common mistake:** assuming the last guest is the cheapest to remove because it's "at the end". In a singly linked list, the end is the expensive spot. Removing it goes through pop, which walks the whole line.

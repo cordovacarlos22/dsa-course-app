@@ -1,20 +1,20 @@
 ---
-title: 'insert: agregar un invitado en un índice'
+title: 'insert: agregar a alguien en un índice'
 order: 11
-minutes: 15
+minutes: 18
 ---
 
 > **Meta:** escribir `insert`, el método que agrega un nodo nuevo en cualquier índice, reusando `unshift`, `push` y `get` para las partes que ya resuelven.
 
 ## Entender: qué hace insert
 
-Llega un invitado con un amigo que ya está en la fila y se mete en un lugar específico. Eso es **`insert`**: un nodo nuevo en un índice dado. Paso 1: qué entra, qué sale, qué cambia.
+Llega alguien que tiene amistades en la fila y se mete en un lugar específico. Eso es **`insert`**: un nodo nuevo en un índice dado. Paso 1: qué entra, qué sale, qué cambia.
 
 - **Qué entra:** un índice y un valor: `line.insert(2, 'Eve')`.
 - **Qué cambia:** un nodo nuevo con ese valor entra **en ese índice**. El nodo que estaba ahí, y cada nodo después de él, quedan un índice más adelante. `length` sube 1. Si el índice es 0 o la longitud, también se mueve `head` o `tail`.
-- **Qué sale:** `true` cuando el invitado ya está en la fila, y `false` cuando el índice está fuera de rango y no se agregó nada.
+- **Qué sale:** `true` cuando el nodo nuevo ya está en la fila, y `false` cuando el índice está fuera de rango y no se agregó nada.
 
-¿Qué índices se permiten? Para `get`, el último índice válido era `length - 1`. Para `insert` hay uno más: **`length` mismo**, el lugar justo después del último invitado, que significa "agrega al final". Así que insert acepta todos los índices de 0 hasta `length`, incluido.
+¿Qué índices se permiten? Para `get`, el último índice válido era `length - 1`. Para `insert` hay uno más: **`length` mismo**, el lugar justo después del último nodo, que significa "agrega al final". Así que insert acepta todos los índices de 0 hasta `length`, incluido.
 
 ```viz
 linked-list-insert
@@ -22,7 +22,9 @@ linked-list-insert
 
 **Qué acaba de pasar:** `insert(2, 'Eve')` puso un nodo para Eve en el índice 2, entre Ben y Cleo. Cleo y Dev quedaron un índice más adelante, en 3 y 4, y la longitud pasó de 4 a 5. Luego `insert` regresó `true`.
 
-**Error común:** confundir `insert` con `set`. `set(2, 'Eve')` **reemplazaría** el valor de Cleo. `insert(2, 'Eve')` agrega un invitado nuevo y conserva a Cleo, un índice más adelante.
+**Por dentro:** dentro de la fila, nada se mueve. Los nodos de Cleo y de Dev se quedan exactamente donde están en la memoria; solo quedan a un enlace más de `head`. Esa es la diferencia con un array, donde cada elemento después del lugar de verdad se mueve a otro espacio.
+
+**Error común:** confundir `insert` con `set`. `set(2, 'Eve')` **reemplazaría** el valor de Cleo. `insert(2, 'Eve')` agrega un nodo nuevo y conserva a Cleo, un índice más adelante.
 
 ## Ejemplos: inicio, final, mitad, fuera de rango
 
@@ -31,7 +33,7 @@ Paso 2: ejemplos. insert tiene cuatro tipos, y dos de ellos son métodos que ya 
 - **Índice 0, el inicio:** eso es exactamente **`unshift`**.
 - **Índice `length`, el final:** eso es exactamente **`push`**.
 - **La mitad:** el trabajo de verdad: camina hasta el nodo antes del lugar, y enlaza ahí el nodo nuevo. Lo viste en la lección 2.
-- **Fuera de rango:** un índice negativo, o uno después de `length`, como 7 en una fila de cuatro. No hay forma de poner a un invitado ahí sin dejar un hueco que ningún nodo podría llenar, así que insert regresa `false` y no cambia nada.
+- **Fuera de rango:** un índice negativo, o uno después de `length`, como 7 en una fila de cuatro. No hay forma de poner a alguien ahí sin dejar un hueco que ningún nodo podría llenar, así que insert regresa `false` y no cambia nada.
 
 Fíjate en lo que **no** está en la lista: una fila vacía. Ya está cubierta. En una fila vacía, `length` es 0, así que el único índice válido es 0, y ese es el caso de unshift.
 
@@ -40,6 +42,30 @@ linked-list-insert-examples
 ```
 
 **Qué acaba de pasar:** el índice 0 puso a Zoe al inicio, igual que unshift. El índice 4 puso a Eve al final, igual que push. El índice 2 enlazó a Eve en la mitad. El índice 7 estaba fuera de rango, así que nada cambió e insert regresó `false`.
+
+Antes de correrlo, predice qué imprime cada mitad. Las dos enlazan a Eve entre Ben y Cleo, en órdenes opuestos:
+
+```js-run
+// orden correcto: primero Eve se agarra de Cleo, luego Ben apunta a Eve
+const cleo = { value: 'Cleo', next: null }
+const ben = { value: 'Ben', next: cleo }
+const eve = { value: 'Eve', next: null }
+eve.next = ben.next
+ben.next = eve
+console.log(ben.next.value, ben.next.next.value)
+
+// orden equivocado: primero Ben suelta a Cleo
+const cleo2 = { value: 'Cleo', next: null }
+const ben2 = { value: 'Ben', next: cleo2 }
+const eve2 = { value: 'Eve', next: null }
+ben2.next = eve2
+eve2.next = ben2.next
+console.log(eve2.next === eve2) // ¿el nodo de Eve se apunta a sí mismo?
+```
+
+**Qué acaba de pasar:** en el orden correcto, Ben → Eve → Cleo. En el orden equivocado, el `next` de Ben ya apuntaba a Eve cuando corrió `eve2.next = ben2.next`, así que el nodo de Eve se apuntó **a sí mismo** (`true`), y ya nada apuntaba a Cleo.
+
+**Por dentro:** insert acepta `index === length` pero `get` lo rechaza, y está bien para los dos. Una lista de 4 tiene nodos en 0–3, así que no hay nada que **obtener** en 4, pero sí hay un lugar donde **insertar** en 4: justo después del último nodo. El rango válido depende de la pregunta que haces.
 
 **Error común:** copiar la revisión del rango de get, `index >= this.length`. Para insert está mal: rechaza `index === length`, así que nunca podrías insertar al final.
 
@@ -66,6 +92,8 @@ linked-list-insert-plan
 ```
 
 **Qué acaba de pasar:** el índice 2 pasó la revisión del rango y no era un extremo. Se creó un nodo para Eve, y `get(1)` caminó hasta Ben, el nodo antes del lugar. El `next` de Eve apuntó a Cleo, y solo entonces el `next` de Ben apuntó a Eve. La longitud subió a 5, e insert regresó `true`.
+
+**Por dentro:** insert llama a `get(index - 1)`, no a `get(index)`, porque una lista enlazada simple solo puede cambiar el nodo **antes** del lugar. Para enlazar a Eve, el `next` de Ben tiene que cambiar, y desde Cleo no hay forma de regresar a Ben.
 
 **Error común:** hacer el paso 6 antes del 5. Después de `nodeBefore.next = nodeToAdd`, ya nada apunta a Cleo, así que `nodeToAdd.next = nodeBefore.next` hace que el nodo de Eve se apunte a sí mismo, y Cleo y Dev se pierden.
 
@@ -189,7 +217,9 @@ console.log(line.toArray().join(' -> ')) // Zoe -> Ana -> Ben -> Cleo -> Dev
 console.log(line.insert(9, 'Eve'), line.length) // false 5
 ```
 
-**Error común:** agregar `this.length++` también en los casos del inicio y del final. `unshift` y `push` ya le suman 1 a la longitud, así que hacerlo otra vez en insert cuenta dos veces al invitado nuevo.
+**Por dentro:** los casos del inicio y del final le pasan el trabajo a `unshift` y `push`, que ya mantienen bien `head`, `tail` y `length`. Por eso el caso del medio nunca tiene que tocar `head` ni `tail`: cuando el código llega ahí, el nodo nuevo no puede ser el primero ni el último.
+
+**Error común:** agregar `this.length++` también en los casos del inicio y del final. `unshift` y `push` ya le suman 1 a la longitud, así que hacerlo otra vez en insert cuenta dos veces el nodo nuevo.
 
 ## Revisar
 
@@ -214,5 +244,7 @@ for (let index = 0; index <= length; index++) {
   console.log('insert(' + index + '): ' + moves + ' movimientos')
 }
 ```
+
+**Por dentro:** si un método ya está parado en el nodo antes del lugar, enlazar ahí un nodo nuevo es O(1): son los dos movimientos de punteros sin la caminata. Algunos programas guardan un puntero a un nodo cerca del que trabajan, justo para insertar junto a él en O(1). El O(n) es la caminata, nunca el enlace.
 
 **Error común:** olvidar el caso fuera de rango porque "nadie va a pasar un índice malo". Siempre alguien lo hace, muchas veces equivocándose por uno, y sin la revisión, `get(index - 1)` regresa `undefined` y `undefined.next` truena.

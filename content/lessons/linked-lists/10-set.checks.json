@@ -27,7 +27,7 @@
       "answer": 1,
       "hint": {
         "en": "No guest joins or leaves the line.",
-        "es": "Ningún invitado entra ni sale de la fila."
+        "es": "Nadie entra ni sale de la fila."
       },
       "explanation": {
         "en": "`set` finds the node at index 1 and changes its value. No node is added or removed, so `head`, `tail` and `length` stay the same.",
@@ -209,38 +209,33 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "Where does the O(n) in `set`'s Big O come from?",
-        "es": "¿De dónde sale el O(n) del Big O de `set`?"
+        "en": "In your own words: how does `set` use `get`, what does it change, what does it return, and where does its O(n) come from?",
+        "es": "Con tus palabras: ¿cómo usa `set` a `get`, qué cambia, qué regresa, y de dónde sale su O(n)?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "It calls `this.get(index)` to find the node, so the range check and the walk are reused instead of written again. If `get` found a node, `set` changes that node's `value` and returns `true`; if `get` returned `undefined`, nothing changes and it returns `false`. No arrows move and the length stays the same: it's the same node in the same place, with a new value. Changing the value is O(1); the O(n) comes entirely from the walk inside `get`.",
+        "es": "Llama a `this.get(index)` para encontrar el nodo, así que reusa la revisión del rango y la caminata en vez de escribirlas otra vez. Si `get` encontró un nodo, `set` cambia el `value` de ese nodo y regresa `true`; si `get` regresó `undefined`, no cambia nada y regresa `false`. Ninguna flecha se mueve y la longitud sigue igual: es el mismo nodo en el mismo lugar, con un valor nuevo. Cambiar el valor es O(1); el O(n) sale completo de la caminata dentro de `get`."
+      },
+      "checklist": [
         {
-          "en": "From the walk inside `get`",
-          "es": "De la caminata dentro de `get`"
+          "en": "Says `set` finds the node with `this.get(index)`",
+          "es": "Dice que `set` encuentra el nodo con `this.get(index)`"
         },
         {
-          "en": "From changing the value",
-          "es": "De cambiar el valor"
+          "en": "Says it only changes the node's `value`, not its arrows or the length",
+          "es": "Dice que solo cambia el `value` del nodo, no sus flechas ni la longitud"
         },
         {
-          "en": "From returning `true` or `false`",
-          "es": "De regresar `true` o `false`"
+          "en": "Says it returns `true` when it changed a node and `false` otherwise",
+          "es": "Dice que regresa `true` cuando cambió un nodo y `false` si no"
         },
         {
-          "en": "From the range check",
-          "es": "De la revisión del rango"
+          "en": "Says the O(n) is the walk inside `get`, and the change is O(1)",
+          "es": "Dice que el O(n) es la caminata dentro de `get`, y el cambio es O(1)"
         }
-      ],
-      "answer": 0,
-      "hint": {
-        "en": "Which part of set gets longer as the line gets longer?",
-        "es": "¿Qué parte de set se hace más larga cuando la fila es más larga?"
-      },
-      "explanation": {
-        "en": "Changing a value is one step: O(1). Finding the node means walking from `head`, and that walk, inside `get`, grows with the line: O(n).",
-        "es": "Cambiar un valor es un paso: O(1). Encontrar el nodo significa caminar desde `head`, y esa caminata, dentro de `get`, crece con la fila: O(n)."
-      }
+      ]
     }
   ]
 }

@@ -27,11 +27,11 @@
       "answer": 1,
       "hint": {
         "en": "insert can also add right after the last guest.",
-        "es": "insert también puede agregar justo después del último invitado."
+        "es": "insert también puede agregar justo después del último nodo."
       },
       "explanation": {
         "en": "insert accepts 0 to `length`, so 0 to 4 here. Index 4 is the spot right after the last guest: inserting there is the same as push.",
-        "es": "insert acepta de 0 a `length`, así que aquí de 0 a 4. El índice 4 es el lugar justo después del último invitado: insertar ahí es lo mismo que push."
+        "es": "insert acepta de 0 a `length`, así que aquí de 0 a 4. El índice 4 es el lugar justo después del último nodo: insertar ahí es lo mismo que push."
       }
     },
     {
@@ -55,13 +55,13 @@
         },
         {
           "en": "Replaces the last guest with Eve",
-          "es": "Reemplaza al último invitado con Eve"
+          "es": "Reemplaza el último nodo con Eve"
         }
       ],
       "answer": 2,
       "hint": {
         "en": "Which spot is right after the last guest?",
-        "es": "¿Qué lugar está justo después del último invitado?"
+        "es": "¿Qué lugar está justo después del último nodo?"
       },
       "explanation": {
         "en": "Index `length` is the spot right after the tail, so insert hands the job to `push`: Eve joins at the back, and insert returns `true`.",
@@ -106,7 +106,7 @@
       "type": "code",
       "task": {
         "en": "Write `insert(index, value)` in the `LinkedList` class, following the plan. Return `false` for an index below 0 or above `length`. Use `unshift` for index 0 and `push` for index `length`, and link a new node in the middle otherwise. Return `true` whenever the guest is in.",
-        "es": "Escribe `insert(index, value)` en la clase `LinkedList`, siguiendo el plan. Regresa `false` para un índice menor que 0 o mayor que `length`. Usa `unshift` para el índice 0 y `push` para el índice `length`, y si no, enlaza un nodo nuevo en medio. Regresa `true` siempre que el invitado quede en la fila."
+        "es": "Escribe `insert(index, value)` en la clase `LinkedList`, siguiendo el plan. Regresa `false` para un índice menor que 0 o mayor que `length`. Usa `unshift` para el índice 0 y `push` para el índice `length`, y si no, enlaza un nodo nuevo en medio. Regresa `true` siempre que el nodo nuevo quede en la fila."
       },
       "hint": {
         "en": "After the range check: `if (index === 0) { this.unshift(value); return true }` and the same with `push` for `index === this.length`. In the middle: `const nodeBefore = this.get(index - 1)`, then `nodeToAdd.next = nodeBefore.next`, `nodeBefore.next = nodeToAdd`, `this.length++`.",
@@ -225,38 +225,33 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "Why does our `insert` return `true` after `this.unshift(value)`, instead of `return this.unshift(value)`?",
-        "es": "¿Por qué nuestro `insert` regresa `true` después de `this.unshift(value)`, en vez de `return this.unshift(value)`?"
+        "en": "In your own words: how does `insert` handle the front, the back, the middle and a bad index, why does it stop at the node before the spot, and what's its Big O?",
+        "es": "Con tus palabras: ¿cómo resuelve `insert` el inicio, el final, el medio y un índice malo, por qué se detiene en el nodo antes del lugar, y cuál es su Big O?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "A bad index (below 0 or above `length`) returns `false` and changes nothing. Index 0 is `unshift` and index `length` is `push`, which already keep `head`, `tail` and `length` right. For the middle, it makes a node and uses `this.get(index - 1)` to reach the node before the spot, because only that node's `next` can link the new one in: it points the new node at the node after the spot first, then points the node before at the new node, adds 1 to `length` and returns `true`. The ends are O(1), the middle walks, so `insert` is O(n) time and O(1) space.",
+        "es": "Un índice malo (menor que 0 o mayor que `length`) regresa `false` y no cambia nada. El índice 0 es `unshift` y el índice `length` es `push`, que ya mantienen bien `head`, `tail` y `length`. Para el medio, crea un nodo y usa `this.get(index - 1)` para llegar al nodo antes del lugar, porque solo el `next` de ese nodo puede enlazar el nuevo: primero apunta el nodo nuevo al que va después del lugar, luego apunta el nodo de antes al nuevo, suma 1 a `length` y regresa `true`. Los extremos son O(1), el medio camina, así que `insert` es O(n) en tiempo y O(1) en espacio."
+      },
+      "checklist": [
         {
-          "en": "So every success returns `true` and every failure `false`, instead of sometimes returning the list",
-          "es": "Para que cada éxito regrese `true` y cada falla `false`, en vez de a veces regresar la lista"
+          "en": "Says a bad index returns `false`, and the ends go to `unshift` and `push`",
+          "es": "Dice que un índice malo regresa `false`, y los extremos van a `unshift` y `push`"
         },
         {
-          "en": "Because `return this.unshift(value)` is O(n)",
-          "es": "Porque `return this.unshift(value)` es O(n)"
+          "en": "Says the middle reaches the node before the spot with `get(index - 1)`",
+          "es": "Dice que el medio llega al nodo antes del lugar con `get(index - 1)`"
         },
         {
-          "en": "Because `unshift` returns nothing",
-          "es": "Porque `unshift` no regresa nada"
+          "en": "Says the new node is linked to the next node before the node before is pointed at it",
+          "es": "Dice que el nodo nuevo se enlaza al siguiente antes de que el nodo de antes le apunte"
         },
         {
-          "en": "To make insert faster at the front",
-          "es": "Para que insert sea más rápido al inicio"
+          "en": "Says it's O(n) because of the walk, and the linking is O(1)",
+          "es": "Dice que es O(n) por la caminata, y el enlace es O(1)"
         }
-      ],
-      "answer": 0,
-      "hint": {
-        "en": "What does `unshift` return?",
-        "es": "¿Qué regresa `unshift`?"
-      },
-      "explanation": {
-        "en": "`unshift` and `push` return the list, so `return this.unshift(value)` would make insert answer with the list at the ends and `true` in the middle. Returning `true` keeps one kind of answer for one question.",
-        "es": "`unshift` y `push` regresan la lista, así que `return this.unshift(value)` haría que insert respondiera con la lista en los extremos y con `true` en medio. Regresar `true` mantiene un solo tipo de respuesta para una sola pregunta."
-      }
+      ]
     }
   ]
 }
