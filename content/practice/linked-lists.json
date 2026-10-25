@@ -20,8 +20,8 @@
           "es": "Sus elementos tienen índices, como un array"
         },
         {
-          "en": "Their nodes must sit side by side in memory",
-          "es": "Sus nodos tienen que estar uno junto al otro en memoria"
+          "en": "Their nodes must sit side by side in one block of memory, like an array's items",
+          "es": "Sus nodos tienen que estar uno junto al otro en un solo bloque de memoria, como los elementos de un array"
         },
         {
           "en": "Their nodes can be anywhere in memory, linked by pointers",
@@ -78,8 +78,8 @@
       },
       "options": [
         {
-          "en": "The first and last values, as strings",
-          "es": "El primer y el último valor, como strings"
+          "en": "The first and last values, stored as plain strings on the list",
+          "es": "El primer y el último valor, guardados como strings en la lista"
         },
         {
           "en": "Copies of the first and last nodes",
@@ -113,12 +113,12 @@
           "es": "Porque hay que reindexar cada nodo"
         },
         {
-          "en": "Because `tail` must move to the node before it, and the only way to reach that node is walking from `head`",
-          "es": "Porque `tail` tiene que moverse al nodo anterior, y la única forma de llegar a ese nodo es caminar desde `head`"
+          "en": "Because `tail` must move back one node, and only a walk from `head` can reach it",
+          "es": "Porque `tail` debe retroceder un nodo, y solo una caminata desde `head` llega a él"
         },
         {
-          "en": "Because the removed node has to be copied first",
-          "es": "Porque primero hay que copiar el nodo que se quita"
+          "en": "Because the removed node has to be copied first, so the list doesn't lose its value",
+          "es": "Porque primero hay que copiar el nodo que se quita, para que la lista no pierda su valor"
         },
         {
           "en": "It isn't: `pop` is O(1), like `push`",
@@ -167,7 +167,7 @@
       "topic": "Big O",
       "prompt": {
         "en": "You need the guest at index 500 of a linked list with 1,000 nodes. What's the Big O of finding it?",
-        "es": "Necesitas al invitado en el índice 500 de una lista enlazada con 1,000 nodos. ¿Cuál es el Big O de encontrarlo?"
+        "es": "Necesitas el nombre en el índice 500 de una lista enlazada con 1,000 nodos. ¿Cuál es el Big O de encontrarlo?"
       },
       "options": [
         {
@@ -175,8 +175,8 @@
           "es": "O(1), como un array"
         },
         {
-          "en": "O(log n), by splitting the list in halves",
-          "es": "O(log n), partiendo la lista a la mitad"
+          "en": "O(log n), by splitting the list in halves like a binary search",
+          "es": "O(log n), partiendo la lista a la mitad como en una búsqueda binaria"
         },
         {
           "en": "O(n²)",
@@ -269,12 +269,12 @@
           "es": "Porque `head` no se puede cambiar en JavaScript"
         },
         {
-          "en": "Because `current` is faster than `head`",
-          "es": "Porque `current` es más rápido que `head`"
+          "en": "Because moving `current` is faster than moving `head`, so the whole walk finishes sooner",
+          "es": "Porque mover `current` es más rápido que mover `head`, así que el recorrido termina antes"
         },
         {
-          "en": "Because `head` is the only pointer to the front: moving it would lose the nodes behind it",
-          "es": "Porque `head` es el único puntero al inicio: moverlo haría que se perdieran los nodos que deja atrás"
+          "en": "Because `head` is the only pointer to the front, so moving it loses the nodes behind it",
+          "es": "Porque `head` es el único puntero al inicio, y moverlo pierde los nodos que deja atrás"
         },
         {
           "en": "Because a walk has to go backwards",
@@ -297,8 +297,8 @@
       "code": "constructor(value) {\n  this.head = null\n  this.tail = null\n  this.length = 0\n  if (!value) {\n    return\n  }\n  const firstNode = new Node(value)\n  this.head = firstNode\n  this.tail = this.head\n  this.length = 1\n}",
       "options": [
         {
-          "en": "`!0` is `true`, so 0 is treated as a missing value; check `value === undefined` instead",
-          "es": "`!0` es `true`, así que 0 se trata como un valor que falta; revisa `value === undefined` en su lugar"
+          "en": "`!0` is `true`, so 0 counts as missing; check `value === undefined` instead",
+          "es": "`!0` es `true`, así que 0 cuenta como si faltara; revisa `value === undefined`"
         },
         {
           "en": "Nodes can't hold the number 0",
@@ -309,8 +309,8 @@
           "es": "`length` tiene que empezar en 1"
         },
         {
-          "en": "`this.tail = this.head` copies the node",
-          "es": "`this.tail = this.head` copia el nodo"
+          "en": "`this.tail = this.head` copies the node, so the list ends up with an empty copy",
+          "es": "`this.tail = this.head` copia el nodo, y la lista se queda con una copia vacía"
         }
       ],
       "correctIndex": 0,
@@ -332,8 +332,8 @@
           "es": "Crea un segundo nodo con el mismo valor"
         },
         {
-          "en": "It makes `tail` follow `head` forever",
-          "es": "Hace que `tail` siga a `head` para siempre"
+          "en": "It makes `tail` follow `head` from now on, whenever `head` moves",
+          "es": "Hace que `tail` siga a `head` de aquí en adelante, cada vez que `head` se mueva"
         },
         {
           "en": "It copies `head`'s value into `tail`",
@@ -371,14 +371,14 @@
           "es": "Hacer que `head` y `tail` apunten al nodo nuevo"
         },
         {
-          "en": "Walk the list to find the end",
-          "es": "Recorrer la lista para encontrar el final"
+          "en": "Walk the list from `head` to find where the end is",
+          "es": "Recorrer la lista desde `head` para encontrar dónde termina"
         }
       ],
       "correctIndex": 2,
       "explanation": {
         "en": "An empty list has no last node, so `this.tail.next` would crash. The new node is the first and the last guest at once, so `head` and `tail` both point to it.",
-        "es": "Una lista vacía no tiene último nodo, así que `this.tail.next` truena. El nodo nuevo es el primer y el último invitado a la vez, así que `head` y `tail` apuntan a él."
+        "es": "Una lista vacía no tiene último nodo, así que `this.tail.next` truena. El nodo nuevo es el primer y el último nodo a la vez, así que `head` y `tail` apuntan a él."
       }
     },
     {
@@ -426,8 +426,8 @@
           "es": "`head` y `tail` tienen que volverse `null`"
         },
         {
-          "en": "Only `tail` must become `null`",
-          "es": "Solo `tail` tiene que volverse `null`"
+          "en": "Only `tail` must become `null`; `head` moves on by itself",
+          "es": "Solo `tail` tiene que volverse `null`; `head` se mueve por su cuenta"
         },
         {
           "en": "`length` must stay at 1",
@@ -476,6 +476,37 @@
       }
     },
     {
+      "id": "ll-pop-prev",
+      "topic": "pop",
+      "prompt": {
+        "en": "Which change would make `pop` O(1)?",
+        "es": "¿Qué cambio haría que `pop` fuera O(1)?"
+      },
+      "options": [
+        {
+          "en": "Using a `for` loop over `length` instead of a `while` loop",
+          "es": "Usar un bucle `for` sobre `length` en vez de un bucle `while`"
+        },
+        {
+          "en": "Giving every node a pointer to the node before it, too",
+          "es": "Darle a cada nodo también un puntero al nodo de antes"
+        },
+        {
+          "en": "Checking `length` before walking",
+          "es": "Revisar `length` antes de caminar"
+        },
+        {
+          "en": "Returning the value instead of the node",
+          "es": "Regresar el valor en vez del nodo"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "pop walks to find the node before the tail. If every node also pointed backwards (`prev`), that node would be `tail.prev`, one step away. That's a doubly linked list, the next module.",
+        "es": "pop camina para encontrar el nodo antes del tail. Si cada nodo también apuntara hacia atrás (`prev`), ese nodo sería `tail.prev`, a un paso. Eso es una lista doblemente enlazada, el siguiente módulo."
+      }
+    },
+    {
       "id": "ll-unshift-order",
       "topic": "unshift",
       "prompt": {
@@ -489,8 +520,8 @@
           "es": "Funciona igual"
         },
         {
-          "en": "The new node ends up at the back",
-          "es": "El nodo nuevo termina al final"
+          "en": "The new node ends up at the back of the line, after the old tail",
+          "es": "El nodo nuevo termina al final de la fila, después del tail anterior"
         },
         {
           "en": "`length` goes up by 2",
@@ -505,6 +536,37 @@
       "explanation": {
         "en": "After `this.head = nodeToAdd`, `this.head` is the new node, so `nodeToAdd.next = this.head` points it at itself. Nothing points to the old first node anymore. Link first, then move `head`.",
         "es": "Después de `this.head = nodeToAdd`, `this.head` es el nodo nuevo, así que `nodeToAdd.next = this.head` lo apunta a sí mismo. Ya nada apunta al antiguo primer nodo. Primero enlaza, luego mueve `head`."
+      }
+    },
+    {
+      "id": "ll-unshift-front",
+      "topic": "unshift",
+      "prompt": {
+        "en": "You add 10,000 guests, one at a time, at the **front**. Which structure does each add in O(1)?",
+        "es": "Agregas 10,000 nombres, uno por uno, al **inicio**. ¿Qué estructura hace cada agregado en O(1)?"
+      },
+      "options": [
+        {
+          "en": "An array with `unshift`",
+          "es": "Un array con `unshift`"
+        },
+        {
+          "en": "A linked list with `unshift`",
+          "es": "Una lista enlazada con `unshift`"
+        },
+        {
+          "en": "Both: adding is always O(1)",
+          "es": "Las dos: agregar siempre es O(1)"
+        },
+        {
+          "en": "Neither: the front is always O(n)",
+          "es": "Ninguna: el inicio siempre es O(n)"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "A linked list's unshift makes two pointer moves, however long the line is: O(1). An array's unshift moves every item over one index: O(n) each time.",
+        "es": "El unshift de una lista enlazada hace dos movimientos de punteros, sin importar lo larga que sea la fila: O(1). El unshift de un array recorre cada elemento un índice: O(n) cada vez."
       }
     },
     {
@@ -528,14 +590,45 @@
           "es": "Para que `shift` sea O(1)"
         },
         {
-          "en": "Because `length` reads `oldHead.next`",
-          "es": "Porque `length` lee `oldHead.next`"
+          "en": "Because `length` is worked out afterwards by reading `oldHead.next`",
+          "es": "Porque después `length` se calcula leyendo `oldHead.next` desde la lista"
         }
       ],
       "correctIndex": 0,
       "explanation": {
         "en": "After `head` moves, the removed node still points to the second guest. Cutting that arrow means the node you hand back is just one guest, not a doorway into the list.",
-        "es": "Después de que `head` se mueve, el nodo que se quitó todavía apunta al segundo invitado. Cortar esa flecha hace que el nodo que regresas sea solo un invitado, no una puerta hacia la lista."
+        "es": "Después de que `head` se mueve, el nodo que se quitó todavía apunta al segundo nodo. Cortar esa flecha hace que el nodo que regresas sea solo un nodo, no una puerta hacia la lista."
+      }
+    },
+    {
+      "id": "ll-shift-queue",
+      "topic": "shift",
+      "prompt": {
+        "en": "A ticket counter: guests join at the back and are served from the front. Which two methods of our linked list do that, both in O(1)?",
+        "es": "Una taquilla: las personas se forman al final y las atienden por el inicio. ¿Qué dos métodos de nuestra lista enlazada hacen eso, los dos en O(1)?"
+      },
+      "options": [
+        {
+          "en": "`push` and `pop`",
+          "es": "`push` y `pop`"
+        },
+        {
+          "en": "`push` and `shift`",
+          "es": "`push` y `shift`"
+        },
+        {
+          "en": "`unshift` and `pop`",
+          "es": "`unshift` y `pop`"
+        },
+        {
+          "en": "`unshift` and `shift`",
+          "es": "`unshift` y `shift`"
+        }
+      ],
+      "correctIndex": 1,
+      "explanation": {
+        "en": "`push` adds at the back and `shift` removes from the front, and both are O(1) in a linked list. That pair is a queue. (`pop` would be O(n).)",
+        "es": "`push` agrega al final y `shift` quita del inicio, y los dos son O(1) en una lista enlazada. Esa pareja es una cola. (`pop` sería O(n).)"
       }
     },
     {
@@ -570,6 +663,37 @@
       }
     },
     {
+      "id": "ll-get-returns-node",
+      "topic": "get",
+      "prompt": {
+        "en": "Why does our `get` return the node instead of just its value?",
+        "es": "¿Por qué nuestro `get` regresa el nodo y no solo su valor?"
+      },
+      "options": [
+        {
+          "en": "Because returning a value is O(n) and a node is O(1)",
+          "es": "Porque regresar un valor es O(n) y un nodo es O(1)"
+        },
+        {
+          "en": "Because JavaScript methods can't return a string that lives inside an object",
+          "es": "Porque los métodos de JavaScript no pueden regresar un string que vive dentro de un objeto"
+        },
+        {
+          "en": "To remove the node from the list",
+          "es": "Para quitar el nodo de la lista"
+        },
+        {
+          "en": "So `set`, `insert` and `remove` can change the node or link around it",
+          "es": "Para que `set`, `insert` y `remove` cambien el nodo o enlacen alrededor de él"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "`set` changes the node's value, and `insert` and `remove` change the arrows around it. They all need the node itself, so `get` hands it back, and the value is still one `.value` away.",
+        "es": "`set` cambia el valor del nodo, e `insert` y `remove` cambian las flechas alrededor de él. Todos necesitan el nodo, así que `get` lo regresa, y el valor sigue a un `.value` de distancia."
+      }
+    },
+    {
       "id": "ll-set-reuses-get",
       "topic": "set",
       "prompt": {
@@ -587,8 +711,8 @@
           "es": "`false`: `get` regresa `undefined`, que es falsy, así que el `if` se salta"
         },
         {
-          "en": "An error, because `target.value` is read from `undefined`",
-          "es": "Un error, porque se lee `target.value` de `undefined`"
+          "en": "An error, because `target.value` gets read from `undefined` before the `if` runs",
+          "es": "Un error, porque se lee `target.value` de `undefined` antes de que corra el `if`"
         },
         {
           "en": "`undefined`, like `get`",
@@ -599,6 +723,37 @@
       "explanation": {
         "en": "`this.get(index)` handles the range check. When there's no node, `target` is `undefined`, the `if` doesn't run, and the method reaches `return false`.",
         "es": "`this.get(index)` se encarga de revisar el rango. Cuando no hay nodo, `target` es `undefined`, el `if` no corre, y el método llega a `return false`."
+      }
+    },
+    {
+      "id": "ll-set-cost",
+      "topic": "set",
+      "prompt": {
+        "en": "Where does the O(n) in `set`'s Big O come from?",
+        "es": "¿De dónde sale el O(n) del Big O de `set`?"
+      },
+      "options": [
+        {
+          "en": "From changing the value",
+          "es": "De cambiar el valor"
+        },
+        {
+          "en": "From returning `true` or `false`",
+          "es": "De regresar `true` o `false` al final"
+        },
+        {
+          "en": "From the range check",
+          "es": "De la revisión del rango"
+        },
+        {
+          "en": "From the walk inside `get`",
+          "es": "De la caminata dentro de `get`"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Changing a value is one step: O(1). Finding the node means walking from `head`, and that walk, inside `get`, grows with the line: O(n).",
+        "es": "Cambiar un valor es un paso: O(1). Encontrar el nodo significa caminar desde `head`, y esa caminata, dentro de `get`, crece con la fila: O(n)."
       }
     },
     {
@@ -614,12 +769,12 @@
           "es": "Agrega a Eve al final, como `push`, y regresa `true`"
         },
         {
-          "en": "Returns `false`, because index 3 doesn't exist yet",
+          "en": "Returns `false`, because index 3 doesn't exist in the list yet",
           "es": "Regresa `false`, porque el índice 3 todavía no existe"
         },
         {
           "en": "Replaces the guest at index 2",
-          "es": "Reemplaza al invitado del índice 2"
+          "es": "Reemplaza a quien está en el índice 2"
         },
         {
           "en": "Adds Eve at the front",
@@ -629,7 +784,7 @@
       "correctIndex": 0,
       "explanation": {
         "en": "insert accepts indexes up to `length`. Index `length` is the spot right after the last guest, so insert calls `push`.",
-        "es": "insert acepta índices hasta `length`. El índice `length` es el lugar justo después del último invitado, así que insert llama a `push`."
+        "es": "insert acepta índices hasta `length`. El índice `length` es el lugar justo después del último nodo, así que insert llama a `push`."
       }
     },
     {
@@ -637,7 +792,7 @@
       "topic": "insert",
       "prompt": {
         "en": "This `insert` counts a new guest at the front twice. Which line is the bug?",
-        "es": "Este `insert` cuenta dos veces a un invitado nuevo al inicio. ¿Qué línea es el error?"
+        "es": "Este `insert` cuenta dos veces un nodo nuevo al inicio. ¿Qué línea es el error?"
       },
       "code": "if (index === 0) {\n  this.unshift(value)\n  this.length++\n  return true\n}",
       "options": [
@@ -650,18 +805,49 @@
           "es": "`return true`"
         },
         {
-          "en": "`this.length++` after `this.unshift(value)`, since `unshift` already adds 1",
-          "es": "`this.length++` después de `this.unshift(value)`, porque `unshift` ya suma 1"
+          "en": "`this.length++`: `unshift` already adds 1",
+          "es": "`this.length++`: `unshift` ya suma 1"
         },
         {
-          "en": "`this.unshift(value)`",
-          "es": "`this.unshift(value)`"
+          "en": "`this.unshift(value)`, which should be `this.push(value)` at index 0",
+          "es": "`this.unshift(value)`, que en el índice 0 debería ser `this.push(value)`"
         }
       ],
       "correctIndex": 2,
       "explanation": {
         "en": "`unshift` updates `length` by itself. Adding 1 again in insert makes the length one too big every time a guest is inserted at index 0.",
-        "es": "`unshift` actualiza `length` por su cuenta. Sumar 1 otra vez en insert hace que la longitud quede uno de más cada vez que se inserta un invitado en el índice 0."
+        "es": "`unshift` actualiza `length` por su cuenta. Sumar 1 otra vez en insert hace que la longitud quede uno de más cada vez que se inserta un nodo en el índice 0."
+      }
+    },
+    {
+      "id": "ll-insert-true",
+      "topic": "insert",
+      "prompt": {
+        "en": "Why does our `insert` return `true` after `this.unshift(value)`, instead of `return this.unshift(value)`?",
+        "es": "¿Por qué nuestro `insert` regresa `true` después de `this.unshift(value)`, en vez de `return this.unshift(value)`?"
+      },
+      "options": [
+        {
+          "en": "So success is always `true` and failure always `false`, never sometimes the list",
+          "es": "Para que el éxito siempre sea `true` y la falla `false`, nunca a veces la lista"
+        },
+        {
+          "en": "Because `return this.unshift(value)` is O(n)",
+          "es": "Porque `return this.unshift(value)` es O(n)"
+        },
+        {
+          "en": "Because `unshift` returns nothing",
+          "es": "Porque `unshift` no regresa nada"
+        },
+        {
+          "en": "To make insert faster at the front, because returning the whole list means walking it",
+          "es": "Para que insert sea más rápido al inicio, porque regresar toda la lista implica recorrerla"
+        }
+      ],
+      "correctIndex": 0,
+      "explanation": {
+        "en": "`unshift` and `push` return the list, so `return this.unshift(value)` would make insert answer with the list at the ends and `true` in the middle. Returning `true` keeps one kind of answer for one question.",
+        "es": "`unshift` y `push` regresan la lista, así que `return this.unshift(value)` haría que insert respondiera con la lista en los extremos y con `true` en medio. Regresar `true` mantiene un solo tipo de respuesta para una sola pregunta."
       }
     },
     {
@@ -673,8 +859,8 @@
       },
       "options": [
         {
-          "en": "`this.get(index)`, to be safe",
-          "es": "`this.get(index)`, para ir a la segura"
+          "en": "`this.get(index)`, a second walk from `head` to be safe",
+          "es": "`this.get(index)`, otra caminata desde `head` para ir a la segura"
         },
         {
           "en": "`this.tail`",
@@ -696,6 +882,37 @@
       }
     },
     {
+      "id": "ll-remove-most-expensive",
+      "topic": "remove",
+      "prompt": {
+        "en": "In a singly linked list, which spot is the most expensive one to `remove` from?",
+        "es": "En una lista enlazada simple, ¿de qué lugar es más caro hacer `remove`?"
+      },
+      "options": [
+        {
+          "en": "The front, index 0",
+          "es": "El inicio, índice 0"
+        },
+        {
+          "en": "The second guest, index 1",
+          "es": "El segundo nodo, índice 1"
+        },
+        {
+          "en": "The last node, because `pop` walks the whole line",
+          "es": "El último nodo, porque `pop` recorre toda la fila"
+        },
+        {
+          "en": "They all cost the same, because a linked list has no indexes to update",
+          "es": "Todos cuestan lo mismo, porque una lista enlazada no tiene índices que actualizar"
+        }
+      ],
+      "correctIndex": 2,
+      "explanation": {
+        "en": "The front is O(1) with shift. Any other index walks to the node before it. The last guest goes through pop, which walks the whole line: the worst case, O(n).",
+        "es": "El inicio es O(1) con shift. Cualquier otro índice camina hasta el nodo de antes. El último nodo pasa por pop, que recorre toda la fila: el peor caso, O(n)."
+      }
+    },
+    {
       "id": "ll-reverse-next",
       "topic": "reverse",
       "prompt": {
@@ -712,8 +929,8 @@
           "es": "`nextNode` guarda la flecha ya volteada, así que el resto de la fila se pierde"
         },
         {
-          "en": "`head` and `tail` don't swap",
-          "es": "`head` y `tail` no se intercambian"
+          "en": "`head` and `tail` never swap, so the list keeps its old front and back",
+          "es": "`head` y `tail` nunca se intercambian, así que la lista conserva su inicio y su final"
         },
         {
           "en": "It becomes O(n²)",
@@ -724,6 +941,37 @@
       "explanation": {
         "en": "Flipping `current.next` first means `current.next` no longer leads forward. Then `nextNode = current.next` saves the node behind, and nothing points to the rest of the line.",
         "es": "Voltear `current.next` primero hace que `current.next` ya no lleve hacia adelante. Entonces `nextNode = current.next` guarda el nodo de atrás, y nada apunta al resto de la fila."
+      }
+    },
+    {
+      "id": "ll-reverse-cost",
+      "topic": "reverse",
+      "prompt": {
+        "en": "What are reverse's time and space complexity?",
+        "es": "¿Cuál es la complejidad en tiempo y espacio de reverse?"
+      },
+      "options": [
+        {
+          "en": "O(n²) time, O(1) space",
+          "es": "O(n²) en tiempo, O(1) en espacio"
+        },
+        {
+          "en": "O(n) time, O(n) space",
+          "es": "O(n) en tiempo, O(n) en espacio"
+        },
+        {
+          "en": "O(1) time, O(1) space",
+          "es": "O(1) en tiempo, O(1) en espacio"
+        },
+        {
+          "en": "O(n) time, O(1) space",
+          "es": "O(n) en tiempo, O(1) en espacio"
+        }
+      ],
+      "correctIndex": 3,
+      "explanation": {
+        "en": "Each node is visited once: O(n) time. It only uses three extra pointers and makes no new nodes: O(1) space. A reversed copy would need O(n) space.",
+        "es": "Cada nodo se visita una vez: O(n) en tiempo. Solo usa tres punteros extra y no crea nodos nuevos: O(1) en espacio. Una copia volteada necesitaría O(n) en espacio."
       }
     }
   ],
@@ -737,7 +985,7 @@
       },
       "description": {
         "en": "The conga line needs its first guest. Write two classes:\n\n- `Node`: its constructor stores `value` and starts `next` at `null`.\n- `LinkedList`: its constructor starts the list empty (`head` and `tail` are `null`, `length` is `0`). If a value was passed, it makes a `Node` with it, points `head` and `tail` at that one node and sets `length` to `1`.\n\nA value of `0` or `''` still counts as a value: only a missing value means an empty list.\n\nExample:\n\n```js\nconst line = new LinkedList('Ana')\nline.head.value // 'Ana'\nline.head === line.tail // true\n\nconst empty = new LinkedList()\nempty.head // null\nempty.length // 0\n```",
-        "es": "La fila de conga necesita a su primer invitado. Escribe dos clases:\n\n- `Node`: su constructor guarda `value` y empieza `next` en `null`.\n- `LinkedList`: su constructor empieza la lista vacía (`head` y `tail` son `null`, `length` es `0`). Si se pasó un valor, crea un `Node` con él, hace que `head` y `tail` apunten a ese único nodo y pone `length` en `1`.\n\nUn valor de `0` o `''` sigue contando como valor: solo un valor que falta significa una lista vacía.\n\nEjemplo:\n\n```js\nconst line = new LinkedList('Ana')\nline.head.value // 'Ana'\nline.head === line.tail // true\n\nconst empty = new LinkedList()\nempty.head // null\nempty.length // 0\n```"
+        "es": "La fila de conga necesita a su primera persona. Escribe dos clases:\n\n- `Node`: su constructor guarda `value` y empieza `next` en `null`.\n- `LinkedList`: su constructor empieza la lista vacía (`head` y `tail` son `null`, `length` es `0`). Si se pasó un valor, crea un `Node` con él, hace que `head` y `tail` apunten a ese único nodo y pone `length` en `1`.\n\nUn valor de `0` o `''` sigue contando como valor: solo un valor que falta significa una lista vacía.\n\nEjemplo:\n\n```js\nconst line = new LinkedList('Ana')\nline.head.value // 'Ana'\nline.head === line.tail // true\n\nconst empty = new LinkedList()\nempty.head // null\nempty.length // 0\n```"
       },
       "difficulty": "easy",
       "category": "build",
@@ -872,7 +1120,7 @@
       },
       "description": {
         "en": "A guest joins the back of the conga line. Write `push(value)` for `LinkedList`:\n\n- Add a new `Node` holding `value` after the last node, and move `tail` to it.\n- If the list is empty, the new node becomes both `head` and `tail`.\n- Add 1 to `length` and return the list (`this`).\n\nThe starter code already has `Node`, the constructor and a `toArray()` helper that returns the values in order.\n\nExample:\n\n```js\nconst line = new LinkedList()\nline.push('Ana').push('Ben')\nline.toArray() // ['Ana', 'Ben']\nline.tail.value // 'Ben'\n```",
-        "es": "Un invitado se forma al final de la fila de conga. Escribe `push(value)` para `LinkedList`:\n\n- Agrega un `Node` nuevo con `value` después del último nodo, y mueve `tail` a él.\n- En una lista vacía, `head` y `tail` apuntan al nodo nuevo.\n- Súmale 1 a `length` y regresa la lista (`this`).\n\nEl código inicial ya tiene `Node`, el constructor y un ayudante `toArray()` que regresa los valores en orden.\n\nEjemplo:\n\n```js\nconst line = new LinkedList()\nline.push('Ana').push('Ben')\nline.toArray() // ['Ana', 'Ben']\nline.tail.value // 'Ben'\n```"
+        "es": "Alguien se forma al final de la fila de conga. Escribe `push(value)` para `LinkedList`:\n\n- Agrega un `Node` nuevo con `value` después del último nodo, y mueve `tail` a él.\n- En una lista vacía, `head` y `tail` apuntan al nodo nuevo.\n- Súmale 1 a `length` y regresa la lista (`this`).\n\nEl código inicial ya tiene `Node`, el constructor y un ayudante `toArray()` que regresa los valores en orden.\n\nEjemplo:\n\n```js\nconst line = new LinkedList()\nline.push('Ana').push('Ben')\nline.toArray() // ['Ana', 'Ben']\nline.tail.value // 'Ben'\n```"
       },
       "difficulty": "easy",
       "category": "build",
@@ -1028,7 +1276,7 @@
       },
       "description": {
         "en": "The guest at the back of the line leaves. Write `pop()` for `LinkedList`:\n\n- Remove the last node and return it. `tail` moves back to the node before it, whose `next` becomes `null`.\n- On an empty list, return `undefined`.\n- When you pop the only node, `head` and `tail` both become `null`.\n- Subtract 1 from `length`.\n\nThe starter code already has `Node`, the constructor, `push` and a `toArray()` helper that returns the values in order.\n\nExample:\n\n```js\nconst line = new LinkedList('Ana').push('Ben')\nline.pop().value // 'Ben'\nline.pop().value // 'Ana'\nline.pop() // undefined\n```",
-        "es": "El invitado del final de la fila se va. Escribe `pop()` para `LinkedList`:\n\n- Quita el último nodo y regrésalo. `tail` regresa al nodo de antes, cuyo `next` se vuelve `null`.\n- En una lista vacía, regresa `undefined`.\n- Cuando le haces pop al único nodo, `head` y `tail` se vuelven `null`.\n- Réstale 1 a `length`.\n\nEl código inicial ya tiene `Node`, el constructor, `push` y un ayudante `toArray()` que regresa los valores en orden.\n\nEjemplo:\n\n```js\nconst line = new LinkedList('Ana').push('Ben')\nline.pop().value // 'Ben'\nline.pop().value // 'Ana'\nline.pop() // undefined\n```"
+        "es": "Quien está al final de la fila se va. Escribe `pop()` para `LinkedList`:\n\n- Quita el último nodo y regrésalo. `tail` regresa al nodo de antes, cuyo `next` se vuelve `null`.\n- En una lista vacía, regresa `undefined`.\n- Cuando le haces pop al único nodo, `head` y `tail` se vuelven `null`.\n- Réstale 1 a `length`.\n\nEl código inicial ya tiene `Node`, el constructor, `push` y un ayudante `toArray()` que regresa los valores en orden.\n\nEjemplo:\n\n```js\nconst line = new LinkedList('Ana').push('Ben')\nline.pop().value // 'Ben'\nline.pop().value // 'Ana'\nline.pop() // undefined\n```"
       },
       "difficulty": "easy",
       "category": "build",
@@ -1208,7 +1456,7 @@
       },
       "description": {
         "en": "A guest goes straight to the front of the line. Write `unshift(value)` for `LinkedList`:\n\n- Add a new `Node` holding `value` before the first node, and move `head` to it.\n- If the list is empty, the new node becomes both `head` and `tail`.\n- Add 1 to `length` and return the list (`this`).\n\nThe starter code already has `Node`, the constructor, `push` and a `toArray()` helper that returns the values in order.\n\nExample:\n\n```js\nconst line = new LinkedList('Ana')\nline.unshift('Zoe')\nline.toArray() // ['Zoe', 'Ana']\nline.tail.value // 'Ana'\n```",
-        "es": "Un invitado se va directo al inicio de la fila. Escribe `unshift(value)` para `LinkedList`:\n\n- Agrega un `Node` nuevo con `value` antes del primer nodo, y mueve `head` a él.\n- En una lista vacía, `head` y `tail` apuntan al nodo nuevo.\n- Súmale 1 a `length` y regresa la lista (`this`).\n\nEl código inicial ya tiene `Node`, el constructor, `push` y un ayudante `toArray()` que regresa los valores en orden.\n\nEjemplo:\n\n```js\nconst line = new LinkedList('Ana')\nline.unshift('Zoe')\nline.toArray() // ['Zoe', 'Ana']\nline.tail.value // 'Ana'\n```"
+        "es": "Alguien se va directo al inicio de la fila. Escribe `unshift(value)` para `LinkedList`:\n\n- Agrega un `Node` nuevo con `value` antes del primer nodo, y mueve `head` a él.\n- En una lista vacía, `head` y `tail` apuntan al nodo nuevo.\n- Súmale 1 a `length` y regresa la lista (`this`).\n\nEl código inicial ya tiene `Node`, el constructor, `push` y un ayudante `toArray()` que regresa los valores en orden.\n\nEjemplo:\n\n```js\nconst line = new LinkedList('Ana')\nline.unshift('Zoe')\nline.toArray() // ['Zoe', 'Ana']\nline.tail.value // 'Ana'\n```"
       },
       "difficulty": "easy",
       "category": "build",
@@ -1371,7 +1619,7 @@
       },
       "description": {
         "en": "The guest at the front of the line is served and leaves. Write `shift()` for `LinkedList`:\n\n- Remove the first node and return it, cut off from the line (its `next` is `null`). `head` moves to the next node.\n- On an empty list, return `undefined`.\n- When the list becomes empty, `tail` becomes `null` too.\n- Subtract 1 from `length`.\n\nThe starter code already has `Node`, the constructor, `push` and a `toArray()` helper that returns the values in order.\n\nExample:\n\n```js\nconst line = new LinkedList('Ana').push('Ben')\nline.shift() // { value: 'Ana', next: null }\nline.head.value // 'Ben'\n```",
-        "es": "Al invitado del inicio de la fila lo atienden y se va. Escribe `shift()` para `LinkedList`:\n\n- Quita el primer nodo y regrésalo, suelto de la fila (su `next` es `null`). `head` se mueve al siguiente nodo.\n- En una lista vacía, regresa `undefined`.\n- Cuando la lista queda vacía, `tail` también se vuelve `null`.\n- Réstale 1 a `length`.\n\nEl código inicial ya tiene `Node`, el constructor, `push` y un ayudante `toArray()` que regresa los valores en orden.\n\nEjemplo:\n\n```js\nconst line = new LinkedList('Ana').push('Ben')\nline.shift() // { value: 'Ana', next: null }\nline.head.value // 'Ben'\n```"
+        "es": "Atienden a quien está al inicio de la fila, y esa persona se va. Escribe `shift()` para `LinkedList`:\n\n- Quita el primer nodo y regrésalo, suelto de la fila (su `next` es `null`). `head` se mueve al siguiente nodo.\n- En una lista vacía, regresa `undefined`.\n- Cuando la lista queda vacía, `tail` también se vuelve `null`.\n- Réstale 1 a `length`.\n\nEl código inicial ya tiene `Node`, el constructor, `push` y un ayudante `toArray()` que regresa los valores en orden.\n\nEjemplo:\n\n```js\nconst line = new LinkedList('Ana').push('Ben')\nline.shift() // { value: 'Ana', next: null }\nline.head.value // 'Ben'\n```"
       },
       "difficulty": "easy",
       "category": "build",

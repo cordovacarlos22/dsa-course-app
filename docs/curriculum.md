@@ -220,7 +220,7 @@ Planned practice: about **155 exercises** (70 build it, 86 interview problems), 
 
 ## Linked Lists (`linked-lists`)
 
-**Status:** ✅ 13 lessons, 60 steps (EN + ES, 60 checkpoints) · ✅ quiz, 23 questions (EN + ES) · ✅ 10 build it · ⬜ interview problems (with course 1's Section 5) · ⬜ slides
+**Status:** ✅ 13 lessons, 63 steps, deeper (#46) (EN + ES, 63 checkpoints, 13 of them explain; an under-the-hood part in every step) · ✅ quiz, 31 questions (EN + ES, answers balanced) · ✅ 10 build it · ⬜ interview problems (with course 1's Section 5) · ⬜ slides
 **Goal:** build a singly linked list from scratch and solve classic pointer problems.
 **Sources:** course 1's Section 4 (14 lectures, 3 quiz questions, exercise files and a Big O table). Course 2's own linked list section joins later, when Carlos sends it.
 **Style:** theory first. Every method lesson (constructor to reverse) follows the 5 steps from A Problem-Solving Approach: understand, examples (empty, one, many), break it down, write the code, look back. The party continues as a **conga line** of guests: each one holds on to the next, `head` is the front and `tail` is the back. Our list can start empty (`new LinkedList()`) or with one guest (`new LinkedList('Ana')`).

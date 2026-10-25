@@ -207,7 +207,7 @@ describe('course home', () => {
     })
     expect(linkedLists).toHaveAttribute('href', '/learn/linked-lists')
     expect(linkedLists).toHaveTextContent(
-      '13 lessons · 23 questions · 10 exercises',
+      '13 lessons · 31 questions · 10 exercises',
     )
     expect(
       screen.queryByRole('link', { name: /Doubly Linked Lists/ }),
