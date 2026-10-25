@@ -208,7 +208,7 @@ describe('exercise page', () => {
     await renderAt(COUNTER, 'es')
     await user.click(await screen.findByRole('button', { name: '✓ Comprobar' }))
     expect(
-      await screen.findByText(/Counter\.count debería ser 0, pero fue 1/),
+      await screen.findByText(/Counter\.count debería ser 0, pero era 1/),
     ).toBeInTheDocument()
   })
 

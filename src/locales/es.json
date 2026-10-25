@@ -269,7 +269,7 @@
       "returned": "{{call}} devolvió {{actual}}",
       "shouldReturn": "{{call}} debería devolver {{expected}}, pero devolvió {{actual}}",
       "worked": "{{call}} funcionó como se esperaba",
-      "shouldBe": "{{call}} debería ser {{expected}}, pero fue {{actual}}",
+      "shouldBe": "{{call}} debería ser {{expected}}, pero era {{actual}}",
       "crashed": "{{error}}"
     }
   },
