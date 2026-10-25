@@ -31,6 +31,18 @@ async function renderAt(path, language = 'en') {
   )
 }
 
+// Opens the quiz and starts it with the start screen's choices: in order,
+// all the questions, unless the test picks others.
+async function openQuiz(user, choices = []) {
+  await renderAt('/learn/introduction/quiz')
+  for (let i = 0; i < choices.length; i++) {
+    await user.click(screen.getByRole('radio', { name: choices[i] }))
+  }
+  await user.click(
+    await screen.findByRole('button', { name: 'Start the quiz' }),
+  )
+}
+
 // Picks an option (by its position) and checks it.
 async function answer(user, optionIndex) {
   await user.click(screen.getAllByRole('radio')[optionIndex])
@@ -74,7 +86,9 @@ describe('quiz page', () => {
     await waitFor(() =>
       expect(document.title).toBe('Introduction quiz · DSA in JavaScript'),
     )
-    expect(screen.getByText(`Question 1 of ${QUIZ.length}`)).toBeInTheDocument()
+    // The start screen comes first; its defaults are in order, all questions.
+    await user.click(screen.getByRole('button', { name: 'Start the quiz' }))
+    expect(screen.getByText(`Question 1 of ${QUIZ.length}`)).toHaveFocus()
     // Nothing is selected yet.
     expect(screen.getByRole('button', { name: 'Check answer' })).toBeDisabled()
 
@@ -90,7 +104,7 @@ describe('quiz page', () => {
 
   it('points to the right answer after a wrong one', async () => {
     const user = userEvent.setup()
-    await renderAt('/learn/introduction/quiz')
+    await openQuiz(user)
     await screen.findByText(`Question 1 of ${QUIZ.length}`)
 
     await answer(user, wrongOption(QUIZ[0]))
@@ -103,7 +117,7 @@ describe('quiz page', () => {
 
   it('celebrates each right answer with a ding', async () => {
     const user = userEvent.setup()
-    await renderAt('/learn/introduction/quiz')
+    await openQuiz(user)
     await screen.findByText(`Question 1 of ${QUIZ.length}`)
 
     await answer(user, QUIZ[0].correctIndex)
@@ -114,7 +128,7 @@ describe('quiz page', () => {
   it('scores the quiz, lists the misses and keeps the best score', async () => {
     const user = userEvent.setup()
     saveQuizScore('introduction', 5, QUIZ.length)
-    await renderAt('/learn/introduction/quiz')
+    await openQuiz(user)
     await screen.findByText(`Question 1 of ${QUIZ.length}`)
 
     await playQuiz(user, [0])
@@ -135,13 +149,76 @@ describe('quiz page', () => {
       total: QUIZ.length,
     })
 
+    // Try again goes back to the start screen, and its heading takes the focus.
     await user.click(screen.getByRole('button', { name: 'Try again' }))
+    expect(
+      screen.getByRole('heading', { name: 'How do you want to practice?' }),
+    ).toHaveFocus()
+    await user.click(screen.getByRole('button', { name: 'Start the quiz' }))
     expect(screen.getByText(`Question 1 of ${QUIZ.length}`)).toHaveFocus()
+  })
+
+  it('lets the student practice 5 random questions', async () => {
+    const user = userEvent.setup()
+    saveQuizScore('introduction', 3, QUIZ.length)
+    await openQuiz(user, ['Random', '5'])
+
+    const shown = []
+    for (let i = 0; i < 5; i++) {
+      expect(screen.getByText(`Question ${i + 1} of 5`)).toBeInTheDocument()
+      const prompt = screen
+        .getByText(`Question ${i + 1} of 5`)
+        .closest('fieldset')
+        .querySelector('p').textContent
+      const question = QUIZ.find(
+        (candidate) => candidate.prompt.en.replace(/[`*]/g, '') === prompt,
+      )
+      shown.push(question.id)
+      await answer(user, question.correctIndex)
+      await user.click(
+        screen.getByRole('button', {
+          name: i === 4 ? 'See your score' : /Next question/,
+        }),
+      )
+    }
+
+    expect(new Set(shown).size).toBe(5)
+    expect(screen.getByText('5 of 5')).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        'Only a quiz with all the questions updates your best score.',
+      ),
+    ).toBeInTheDocument()
+    // A short practice never replaces the full quiz's best score.
+    expect(loadQuizScore('introduction')).toEqual({
+      best: 3,
+      total: QUIZ.length,
+    })
+  })
+
+  it('finishes early and scores only the answered questions', async () => {
+    const user = userEvent.setup()
+    await openQuiz(user)
+
+    await answer(user, QUIZ[0].correctIndex)
+    await user.click(screen.getByRole('button', { name: /Next question/ }))
+    await answer(user, wrongOption(QUIZ[1]))
+    await user.click(screen.getByRole('button', { name: 'Finish now' }))
+
+    expect(
+      screen.getByRole('heading', { name: 'Quiz complete!' }),
+    ).toHaveFocus()
+    expect(screen.getByText('1 of 2')).toBeInTheDocument()
+    const review = screen.getByRole('heading', { name: 'Questions to review' })
+    expect(
+      within(review.nextElementSibling).getAllByRole('listitem'),
+    ).toHaveLength(1)
+    expect(loadQuizScore('introduction')).toBeNull()
   })
 
   it('celebrates a perfect score the most', async () => {
     const user = userEvent.setup()
-    await renderAt('/learn/introduction/quiz')
+    await openQuiz(user)
     await screen.findByText(`Question 1 of ${QUIZ.length}`)
 
     await playQuiz(user)
@@ -171,6 +248,7 @@ describe('quiz page', () => {
   })
 
   it('speaks Spanish', async () => {
+    const user = userEvent.setup()
     await renderAt('/learn/introduction/quiz', 'es')
     expect(
       await screen.findByRole('heading', {
@@ -178,6 +256,11 @@ describe('quiz page', () => {
         name: 'Cuestionario de Introducción',
       }),
     ).toBeInTheDocument()
+    expect(screen.getByText('¿Cómo quieres practicar?')).toBeInTheDocument()
+    await user.click(screen.getByRole('radio', { name: 'Al azar' }))
+    await user.click(
+      screen.getByRole('button', { name: 'Empezar el cuestionario' }),
+    )
     expect(screen.getByText(`Pregunta 1 de ${QUIZ.length}`)).toBeInTheDocument()
   })
 

@@ -283,7 +283,16 @@
     "review": "Preguntas para repasar",
     "yourAnswer": "Tu respuesta",
     "rightAnswer": "Respuesta correcta",
-    "tryAgain": "Intentar de nuevo"
+    "tryAgain": "Intentar de nuevo",
+    "setupHeading": "¿Cómo quieres practicar?",
+    "order": "Orden",
+    "inOrder": "En orden",
+    "random": "Al azar",
+    "howMany": "Cuántas preguntas",
+    "countAll": "Todas ({{count}})",
+    "start": "Empezar el cuestionario",
+    "finishNow": "Terminar ahora",
+    "shortRun": "Solo un cuestionario con todas las preguntas actualiza tu mejor resultado."
   },
   "exercise": {
     "category": {

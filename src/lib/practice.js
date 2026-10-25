@@ -13,3 +13,22 @@ const practiceBySlug = Object.fromEntries(
 export function getPractice(moduleSlug) {
   return practiceBySlug[moduleSlug] ?? null
 }
+
+// The questions for one quiz run: in order or shuffled, then the first
+// `count` of them (or all).
+export function pickQuestions(questions, { order, count }) {
+  const list = order === 'random' ? shuffle(questions) : [...questions]
+  return count === 'all' ? list : list.slice(0, count)
+}
+
+// A shuffled copy (Fisher–Yates: every order is equally likely).
+export function shuffle(list) {
+  const copy = [...list]
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    const swapped = copy[i]
+    copy[i] = copy[j]
+    copy[j] = swapped
+  }
+  return copy
+}
