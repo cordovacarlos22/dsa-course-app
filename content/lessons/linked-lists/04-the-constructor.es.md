@@ -1,7 +1,7 @@
 ---
 title: El constructor
 order: 4
-minutes: 15
+minutes: 17
 ---
 
 > **Meta:** escribir la clase `Node` y el constructor de `LinkedList`, con los 5 pasos: entender, ejemplos, dividirlo en pasos, escribir el código y revisar.
@@ -10,7 +10,7 @@ minutes: 15
 
 Este es el primer método de nuestra clase `LinkedList`, así que hagámoslo bien, con los 5 pasos de Un método para resolver problemas. **El paso 1 es entender** qué tiene que hacer el método y qué regresa, antes de pensar en código.
 
-El constructor corre cuando alguien escribe `new LinkedList('Ana')`. Su trabajo es preparar una lista nueva que guarde a un invitado. La lista guarda tres datos: **`head`** (el primer nodo), **`tail`** (el último nodo) y **`length`** (cuántos nodos hay). Así que, después de que corre el constructor, debe haber un nodo con `'Ana'`, con `head` y `tail` apuntando a él y `length` en 1. ¿Qué regresa? Nada por sí mismo: como viste en la lección de clases, `new` te entrega la instancia terminada.
+El constructor corre cuando alguien escribe `new LinkedList('Ana')`. Su trabajo es preparar una lista nueva que guarde un nombre. La lista guarda tres datos: **`head`** (el primer nodo), **`tail`** (el último nodo) y **`length`** (cuántos nodos hay). Así que, después de que corre el constructor, debe haber un nodo con `'Ana'`, con `head` y `tail` apuntando a él y `length` en 1. ¿Qué regresa? Nada por sí mismo: como viste en la lección de clases, `new` te entrega la instancia terminada.
 
 Antes de escribirlo, fíjate en lo que el constructor tiene en común con tres métodos que vas a escribir pronto: `push`, `unshift` e `insert`. Los cuatro reciben un valor, y los cuatro **crean un nodo nuevo** con él. No queremos el mismo código para crear nodos copiado en cuatro métodos, así que le damos su propia clase: **`Node`**. Cada método crea entonces un nodo en una línea, `new Node(value)`, y el nodo siempre sale igual: el valor, más un `next` que empieza en `null`.
 
@@ -18,7 +18,7 @@ Antes de escribirlo, fíjate en lo que el constructor tiene en común con tres m
 linked-list-node-class
 ```
 
-**Qué acaba de pasar:** pusimos en fila los cuatro métodos que reciben un valor. El constructor crea un nodo para el primer invitado, y `push`, `unshift` e `insert` crean uno cada uno antes de agregarlo a la fila. Cuatro métodos, un trabajo en común, así que ese trabajo se fue a la clase `Node`.
+**Qué acaba de pasar:** pusimos en fila los cuatro métodos que reciben un valor. El constructor crea un nodo para el primer nombre, y `push`, `unshift` e `insert` crean uno cada uno antes de agregarlo a la fila. Cuatro métodos, un trabajo en común, así que ese trabajo se fue a la clase `Node`.
 
 Este es el plan de las dos clases, antes de cualquier código real:
 
@@ -37,15 +37,17 @@ class LinkedList {
 }
 ```
 
+**Por dentro:** `class Node` por sí sola no te da ningún nodo: es la receta. Cada `new Node('Ana')` crea un objeto **aparte**, y todos comparten un solo constructor, escrito una vez. Si la forma de un nodo cambia algún día (el módulo de Listas doblemente enlazadas agrega un puntero `prev`), lo cambias en un solo lugar, y cada método que crea nodos lo toma.
+
 **Error común:** poner `value` y `next` en la lista misma. La lista no es un nodo: **apunta a** nodos, con `head` y `tail`. Los nodos guardan valores; la lista guarda los punteros a sus dos extremos, más la longitud.
 
-## Ejemplos: un invitado, ninguno y cero
+## Ejemplos: un nombre, ninguno y cero
 
 **El paso 2 es explorar ejemplos**, incluyendo los raros, porque ahí se esconden los errores. Para cada método de este módulo, prueba al menos una lista vacía, una lista con un nodo y una lista con muchos nodos.
 
 El ejemplo principal es fácil. `new LinkedList('Ana')` da un nodo con `'Ana'`, con `head` y `tail` en él y `length` en 1.
 
-¿Y `new LinkedList()`, **sin ningún valor**? Un constructor que siempre crea un nodo crearía uno con `undefined`: un invitado sin nombre. Nuestra clase hace algo más útil y empieza **vacía**: `head` y `tail` apuntan a `null`, y `length` es 0. Así puedes empezar una fila vacía y agregar invitados después con `push`, y las pruebas de las próximas lecciones pueden crear una lista vacía fácilmente.
+¿Y `new LinkedList()`, **sin ningún valor**? Un constructor que siempre crea un nodo crearía uno con `undefined`: un nodo sin nombre. Nuestra clase hace algo más útil y empieza **vacía**: `head` y `tail` apuntan a `null`, y `length` es 0. Así puedes empezar una fila vacía y agregar nombres después con `push`, y las pruebas de las próximas lecciones pueden crear una lista vacía fácilmente.
 
 ¿Y `new LinkedList(0)`? El cero es un **valor real**: una lista de puntajes podría empezar con 0 sin problema. Tiene que recibir un nodo como cualquier otro valor. Ten en mente este ejemplo, porque atrapa un error muy común. Por último, **muchos invitados**: el constructor solo recibe un valor, así que crea un nodo como máximo. Agregar más es trabajo de `push`, en la próxima lección.
 
@@ -64,6 +66,8 @@ for (let i = 0; i < values.length; i++) {
   console.log(String(value), '| ¿falta?', value === undefined, '| !value:', !value)
 }
 ```
+
+**Por dentro:** cuando llamas a una función o a un constructor con menos valores que parámetros, JavaScript llena cada parámetro que falta con `undefined`. Así que dentro de `constructor(value)`, `new LinkedList()` da `value === undefined`, y justo así la clase puede distinguir "no se pasó nada" de 0, `''` o `false`, que son valores reales que alguien eligió.
 
 **Error común:** revisar si falta un valor con `if (!value)`. Como acabas de ver, `!0` y `!''` son `true`, así que una lista que empieza con 0 o con un string vacío saldría vacía. Revisa `value === undefined`: solo un valor que no se pasó es `undefined`.
 
@@ -101,6 +105,8 @@ linked-list-constructor-plan
 
 **Qué acaba de pasar:** jugamos el plan solo con comentarios. La lista empezó vacía, se creó un nodo nuevo, `head` lo apuntó, luego `tail` apuntó al **mismo** nodo, y al final length se volvió 1.
 
+**Por dentro:** el plan solo crea **un** objeto con `new Node`. Los pasos b y c no crean nada: hacen que dos propiedades de la lista apunten a ese único objeto. Así que al terminar el constructor hay exactamente dos objetos en memoria: la lista (con `head`, `tail` y `length`) y el nodo al que los dos apuntan.
+
 **Error común:** en el paso c, crear un segundo nodo para `tail` con `new Node(value)`. Eso te da dos nodos separados con el mismo valor, `head` en uno y `tail` en el otro, y la lista queda rota desde el principio. Un nodo, dos punteros.
 
 ## Escribir el código
@@ -129,7 +135,7 @@ class LinkedList {
 }
 ```
 
-`new Node(value)` corre el constructor de Node y regresa un nodo, y `firstNode` apunta a él. `this.head = firstNode` hace que el `head` de la lista apunte a ese nodo. `this.tail = this.head` significa "haz que `tail` apunte a donde apunta `head`", que es el mismo nodo. `this.length = 1` anota un invitado. Cada línea usa `this`, porque son propiedades de **esta** lista: la que `new` está construyendo.
+`new Node(value)` corre el constructor de Node y regresa un nodo, y `firstNode` apunta a él. `this.head = firstNode` hace que el `head` de la lista apunte a ese nodo. `this.tail = this.head` significa "haz que `tail` apunte a donde apunta `head`", que es el mismo nodo. `this.length = 1` anota un nombre. Cada línea usa `this`, porque son propiedades de **esta** lista: la que `new` está construyendo.
 
 Ahora el caso especial. Empieza cada lista vacía, y envuelve el caso común en `if (value !== undefined)`, para que un valor que falta se lo salte:
 
@@ -169,6 +175,8 @@ const empty = new LinkedList()
 console.log(empty.head, empty.tail, empty.length) // null null 0
 ```
 
+**Por dentro:** si pegas las dos clases en la consola de las DevTools del navegador, responde `undefined`. Es lo esperado: definir una clase no regresa nada, solo deja lista la receta. Luego escribe `new LinkedList(4)` y abre el resultado. Vas a ver `head` y `tail`, cada uno mostrando un nodo con `value: 4` y `next: null`, más `length: 1`. La consola dibuja ese nodo dos veces, una bajo cada puntero, pero es **un** objeto, como demuestra `line.head === line.tail` arriba.
+
 **Error común:** escribir `head = firstNode` sin `this.`. Dentro de una clase, eso es un error ("head is not defined"), porque `head` no es una variable: es una propiedad de la lista, y la lista es `this`.
 
 ## Revisar
@@ -201,5 +209,7 @@ const tailOne = head // como this.tail = this.head
 const tailTwo = firstNode // como this.tail = firstNode
 console.log(tailOne === tailTwo) // true: el mismo nodo de las dos formas
 ```
+
+**Por dentro:** `firstNode` es un `const` que solo vive mientras corre el constructor. Cuando el constructor termina, esa variable desaparece, pero el nodo no, porque `head` y `tail` todavía le apuntan. Un objeto se queda en memoria mientras **algo** todavía llegue a él, sin importar cómo se llamaba la variable que lo guardó primero.
 
 **Error común:** pensar que `this.tail = this.head` hace que `tail` siga a `head` de aquí en adelante. Hace que `tail` apunte al nodo al que `head` apunta **en este momento**. Cuando `push` mueva `tail` después, `head` se queda donde está, y al revés.

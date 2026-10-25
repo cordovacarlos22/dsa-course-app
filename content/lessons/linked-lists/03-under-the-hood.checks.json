@@ -130,6 +130,39 @@
           "expected": [1, 2, 3, 4]
         }
       ]
+    },
+    {
+      "type": "explain",
+      "question": {
+        "en": "In your own words: what is a node in JavaScript, why does a printed list look like objects inside objects even though nothing is copied, and why do we walk with `current` instead of moving `head`?",
+        "es": "Con tus palabras: ¿qué es un nodo en JavaScript, por qué una lista impresa se ve como objetos dentro de objetos aunque nada se copia, y por qué recorremos con `current` en vez de mover `head`?"
+      },
+      "modelAnswer": {
+        "en": "A node is a whole object with two properties: `value`, the data, and `next`, a reference to the following node (or `null` at the end). Setting `cleo.next = dev` stores a reference, not a copy, so each node exists once; printing follows those references, which is why the list looks nested. We walk with a separate pointer, `current`, because `head` is the only thing pointing to the front of the list: moving it would lose the nodes behind it. Moving `current` (`current = current.next`) never changes the list, while setting a property through it, like `current.value`, changes the node that's in the list.",
+        "es": "Un nodo es un objeto completo con dos propiedades: `value`, el dato, y `next`, una referencia al nodo siguiente (o `null` al final). Hacer `cleo.next = dev` guarda una referencia, no una copia, así que cada nodo existe una sola vez; imprimir sigue esas referencias, y por eso la lista se ve anidada. Recorremos con un puntero aparte, `current`, porque `head` es lo único que apunta al inicio de la lista: moverlo perdería los nodos que quedan atrás. Mover `current` (`current = current.next`) nunca cambia la lista, mientras que asignar una propiedad a través de él, como `current.value`, cambia el nodo que está en la lista."
+      },
+      "checklist": [
+        {
+          "en": "Says a node is one object with `value` and `next`",
+          "es": "Dice que un nodo es un objeto con `value` y `next`"
+        },
+        {
+          "en": "Says `next` holds a reference, so nodes aren't copied",
+          "es": "Dice que `next` guarda una referencia, así que los nodos no se copian"
+        },
+        {
+          "en": "Says printing follows the references, which makes it look nested",
+          "es": "Dice que imprimir sigue las referencias, y por eso se ve anidado"
+        },
+        {
+          "en": "Says moving `head` would lose the front of the list, so `current` walks",
+          "es": "Dice que mover `head` perdería el inicio de la lista, así que camina `current`"
+        },
+        {
+          "en": "Says moving `current` doesn't change the list, but setting `current.value` does",
+          "es": "Dice que mover `current` no cambia la lista, pero asignar `current.value` sí"
+        }
+      ]
     }
   ]
 }

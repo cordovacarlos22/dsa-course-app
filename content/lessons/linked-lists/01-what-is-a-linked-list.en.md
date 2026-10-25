@@ -1,7 +1,7 @@
 ---
 title: What is a linked list?
 order: 1
-minutes: 10
+minutes: 13
 ---
 
 > **Goal:** know what a linked list is, how it's different from an array, and name its parts: nodes, `next`, `head`, `tail` and `null`.
@@ -31,6 +31,8 @@ const line = {
 console.log(line[2]) // undefined: there are no indexes
 console.log(line.next.next.value) // 'Cleo': follow the links instead
 ```
+
+**Under the hood:** every time your code creates an object, the JavaScript engine finds a free spot for it in a big area of memory called the **heap**. Objects made at different moments land wherever there's room, so the nodes of one list usually end up scattered. That's why a node has to remember where the next one is: nothing else knows. It also means each node costs a little more memory than an array slot, because it stores a pointer next to its value.
 
 **Common mistake:** typing `list[2]` out of habit. A linked list has no index to jump to. To get the third guest, you start at the first one and follow two links.
 
@@ -64,7 +66,24 @@ console.log(head.next.value) // 'Ben': one link from the front
 console.log(head === ana) // true: head is a pointer to Ana's node
 ```
 
+Before you run the next snippet, predict what each line prints. Count the links from `head` for each one.
+
+```js-run
+const dev = { value: 'Dev', next: null }
+const cleo = { value: 'Cleo', next: dev }
+const ben = { value: 'Ben', next: cleo }
+const head = { value: 'Ana', next: ben }
+
+console.log(head.next.next.value) // two links from the front
+console.log(head.next.next.next === dev) // three links: is it the tail?
+console.log(head.next.next.next.next) // one link past the tail
+```
+
+**What just happened:** two links from Ana reached Cleo. Three links reached Dev's node, the very same object as `dev`, so the comparison was `true`. One more link read Dev's `next`, which is `null`: the end of the line.
+
 Notice that `head` and `tail` aren't nodes. They're **pointers to nodes**, just like the variables from the pointers lesson: `head` and `ana` are two names for the same object.
+
+**Under the hood:** why `null` and not `undefined`? Both mean "nothing", but JavaScript gives you `undefined` when something was **never set**, like a property you forgot to write. `null` is the one you set **on purpose**. So a `next` of `null` says "this node has no next guest, and that's deliberate", while an `undefined` `next` usually means a bug. Checking `current !== null`, as every walk in this module does, only works if the end of the line really is `null`.
 
 **Common mistake:** thinking the tail's `next` loops back to the first node. In every list in this module, the last node's `next` is `null`. (Lists whose last node points back to the first one do exist: they're called circular lists, and they're a different structure.)
 
@@ -82,6 +101,41 @@ list-class-preview
 
 **What just happened:** the preview ran the methods you're about to write. The constructor starts the line, `push` and `unshift` add a guest at the back and the front, `insert` and `remove` work at an index, and `pop` and `shift` take a guest off either end. In the next lesson, before you write any of them, you'll work out what each one costs.
 
-**In short:** a linked list is a chain of nodes. Each node has a value and a `next` pointer, `head` and `tail` point to the two ends, and the last node points to `null`. There are no indexes, so reaching a node means following links from `head`.
+**Under the hood:** JavaScript has no built-in linked list. Arrays come with the language, written by the people who built the engine, but a linked list in JavaScript is always one somebody wrote out of objects and pointers, exactly as you're about to do. Other languages ship one in their standard library, and inside, it's the same nodes and `next` pointers.
 
 **Common mistake:** deciding that linked lists are simply "better" than arrays. They're faster at some jobs and slower at others, and the next lesson puts numbers on both.
+
+## Following the links
+
+Without indexes, how do you say "the 4th guest"? You count **links**. The guest at position 0 is the node `head` points to. Position 1 is one link away: `head.next`. Position 2 is two links away: `head.next.next`. In general, the node at position k is **k links from `head`**. The positions aren't stored anywhere: they're just how many times you followed `next`.
+
+Typing `.next` four times works for a tiny list, but not for position 57. So you follow the links in a **loop**, moving a pointer one node at a time. Lesson 3 turns this into the walk that almost every method in this module uses. For now, here's the idea in its smallest form:
+
+```js-run
+const head = {
+  value: 'Ana',
+  next: { value: 'Ben', next: { value: 'Cleo', next: { value: 'Dev', next: null } } },
+}
+
+// the guest at position 3: follow next 3 times
+let current = head
+for (let i = 0; i < 3; i++) {
+  current = current.next
+}
+console.log(current.value) // 'Dev'
+
+// following one link too many reaches null
+let past = head
+for (let i = 0; i < 4; i++) {
+  past = past.next
+}
+console.log(past) // null: there's no guest at position 4
+```
+
+**What just happened:** the loop moved `current` forward 3 times, from Ana to Ben, Cleo and finally Dev, so position 3 is Dev. The second loop moved 4 times and ended on `null`, the end marker. Reading `past.value` there would crash, because `null` has no properties: that's why every method you write checks for `null` before it reads a node.
+
+**Big O:** reaching position k takes k steps, so in a list of n guests, reaching a guest is **O(n)** in the worst case (the last one). The pointers themselves, `head`, `tail` and one `next` per node, take **O(n) space** in total, one per guest.
+
+**In short:** a linked list is a chain of nodes. Each node has a value and a `next` pointer, `head` and `tail` point to the two ends, and the last node points to `null`. There are no indexes, so reaching a node means following links from `head`.
+
+**Common mistake:** counting positions from 1. Like array indexes, positions in a linked list start at 0: the node `head` points to is position 0, so position 3 is the **4th** guest.
