@@ -48,4 +48,4 @@ The course material lives **outside this repo**, only in Carlos's course folder 
 
 ## For AI agents
 
-Read [`AGENTS.md`](./AGENTS.md) and [`memory.md`](./memory.md).
+Read [`AGENTS.md`](./AGENTS.md), [`memory.md`](./memory.md) and [`docs/decisions/`](./docs/decisions/).

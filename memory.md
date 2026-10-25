@@ -1,12 +1,12 @@
 # Project memory
 
-Agents: read this at the start of every session and update it at the end (see `AGENTS.md`).
+Agents: read this and [`docs/decisions/`](./docs/decisions/) at the start of every session. PRs don't edit this file: they add a decision file, and this file is refreshed in one `docs:` PR after a batch merges (see `AGENTS.md`).
 
 ## Current stage
 
 - 2026-10-24: Carlos's app requests are merged: answer sounds (#100), finished modules on the course home (#101), an easier Introduction (#102), quiz modes (#103) and section exams (#104), after deeper Classes & Pointers (#45). Their decisions are in `docs/decisions/`. Deeper Linked Lists (#46) comes next.
 - Stages 1–5 are done. **Stage 6 (lessons)** is in progress: Introduction (3 lessons) and Big O (17 lessons) are merged, EN + ES, with checkpoints.
-- 2026-10-24: **Deeper content (#43, #44)** is in review as a stack on #81 (the explain checkpoint): the Introduction (#85), then Big O 1–4 (#86), 5–8 (#87) and 9–12 (#89). Big O 13–17 (#44, part 2) is in review after them, then an **under the hood** follow-up (Big O 3, 4 and 6–17) that closes #43 and #44. **Neutral Spanish** for Arrays & Objects, A Problem-Solving Approach, their captions and the landing page (#90, part 1) comes after it.
+- 2026-10-24: **Deeper content (#43, #44)** and **neutral Spanish, part 1** (#90) are merged.
 - 2026-10-12: game-style **celebrations** merged (PR #19).
 - 2026-10-12: **agent skills** (security + design) and `DESIGN.md` / `PRODUCT.md` on `chore/agent-skills` (PR #20).
 - 2026-10-12: **fixes from the tools' first runs** on `fix/tool-findings` (built on PR #20).
@@ -23,7 +23,7 @@ Agents: read this at the start of every session and update it at the end (see `A
 
 ## Decisions
 
-From 2026-10-24 on, each decision is its own file in [`docs/decisions/`](./docs/decisions/) (#114), so PRs never edit this file and never conflict. The entries below are the older ones.
+Starting with the 2026-10-24 app-request batch (#45, #100–#104), each decision is its own file in [`docs/decisions/`](./docs/decisions/) (#114), so PRs never edit this file and never conflict. The entries below came before it.
 
 - 2026-10-24: **One Vercel project for the landing page and the course; no login for now** (Carlos). The landing page is built from the course (the `course.json` list, the animations, `ChoiceCheckpoint`), so splitting it would mean copying them. The two addresses were switched on that day: Carlos set `VITE_SITE_ORIGIN` and `VITE_APP_ORIGIN` for Production and redeployed (#70, #95). "Start learning" on `charliecodeacademy.com` now goes to `app.charliecodeacademy.com`, and `app.`'s logo goes back. Login comes later, on `app.` only.
 - 2026-10-24: **Neutral Spanish, part 1** (#90; also fixes #82). Arrays & Objects, A Problem-Solving Approach, their animation captions and the landing page no longer give a guest, the student or the interviewer a gender. The singular "invitado" becomes "nombre" or "persona"; "el entrevistador" becomes "quien te entrevista"; "estás atascado / seguro" become "te atascas / tienes claro"; and "callado", "candidato", "a ti mismo" and "trabajando solo" are reworded. The landing page says "Quienes programan en JavaScript", "Autodidactas", "sabiendo explicar" and "¿Empezamos?". `content:validate` now **warns** (never fails) about the singular "invitado/a" (except "persona invitada") and the usual gendered words for the student, one line per file with line numbers. Linked Lists and Classes & Pointers get theirs in #46 and #45. The plural "los invitados" stays until Carlos decides. Also filed #93: in most quizzes outside Big O, the right answer is often the single longest option.
@@ -267,10 +267,15 @@ From 2026-10-24 on, each decision is its own file in [`docs/decisions/`](./docs/
   - **Exercises on phones:** the tests open the Code tab before pressing Check, because Check switches to the Output tab.
 - 2026-10-13, `docs/ponytail`: Ponytail reviewed (no network calls; the installed files match the reviewed commit). `AGENTS.md` limits it to app code, and `.claude/skills/README.md` says what it runs and how to update or turn it off.
 
+- 2026-10-24, the deeper-content and app-request batches:
+  - **Deeper content:** Introduction and Big O 1–17 (#43, #44, PRs #85–#87, #89, #91 and #92), the explain checkpoint (#80, PR #81), neutral Spanish part 1 (#90, PR #94) and deeper Classes & Pointers (#45, PR #99).
+  - **App requests:** answer sounds (#100, PR #105), finished modules on `/learn` (#101, PR #107), an easier Introduction (#102, PR #108), quiz modes (#103, PR #109) and section exams (#104, PR #110). Each passed the Reviewer and QA.
+  - **Domains:** the landing page on `charliecodeacademy.com`, the course on `app.` (#70, #95).
+
 ## Next
 
 - **Deeper content, in order:** #43, #44 and #45 are merged; next is #46 Linked Lists (each also fixes its Spanish, see #90), then the rest of #90 (gender-neutral Spanish in the other modules).
-- **Process first (updated 2026-10-24):** done: #37 CI pipeline (PR #50), #59 Reviewer agent (PR #61), #62 security upgrades (PR #64), #63 Vite 8 + WebKit (PR #69), react-router 8 (PR #68), #71 eslint 10 (PR #74), the code for #70 own domain (PR #72) and #39 release gate (PR #73). Now: #38 Docker. Then #41 source paths, #42 code-box replay, #43–#46 deeper modules. **Waiting on Carlos:** #70's domain setup (Vercel domains, DNS through the Cloudflare connector, Standard Protection, the two Production-only variables), #39's Vercel production-branch switch plus the first Release run, #40 bot account, #51 Infisical.
+- **Process first (updated 2026-10-24):** done: #37 CI pipeline (PR #50), #59 Reviewer agent (PR #61), #62 security upgrades (PR #64), #63 Vite 8 + WebKit (PR #69), react-router 8 (PR #68), #71 eslint 10 (PR #74), the code for #70 own domain (PR #72) and #39 release gate (PR #73). Also done: #38 Docker, #41 source paths, #42 code-box replay, #43–#45 deeper modules and #70's domains. Next: #46. **Waiting on Carlos:** #39's Vercel production-branch switch plus the first Release run, #40 bot account, #51 Infisical.
 
 - After `fix/tool-findings` merges: check production's headers (`curl -sI https://dsa-course-app.vercel.app/`) and run the app once in a browser for CSP errors.
 - #34 and #35 (the theory pass) are merged.
@@ -293,7 +298,7 @@ From 2026-10-24 on, each decision is its own file in [`docs/decisions/`](./docs/
 
 | Section                       | File                                             | Questions | Exercises                                                                                                                                                 | Spanish | Date       |
 | ----------------------------- | ------------------------------------------------ | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ---------- |
-| 1: Introduction               | `content/practice/introduction.json`             | 16        | none                                                                                                                                                      | done    | 2026-10-11 |
+| 1: Introduction               | `content/practice/introduction.json`             | 17        | none                                                                                                                                                      | done    | 2026-10-11 |
 | 2: Big O                      | `content/practice/big-o.json`                    | 49        | find-max (easy), contains-duplicate (easy), binary-search (medium), count-the-operations (easy), count-the-handshakes (medium), count-the-halvings (easy) | done    | 2026-10-11 |
 | 3: Classes & Pointers         | `content/practice/classes-and-pointers.json`     | 24        | invitation-class (easy, class), counter-class (easy, class), seating-table (easy, class), count-the-cards (easy), every-other-card (medium)               | done    | 2026-10-24 |
 | 3: Big O of Arrays & Objects  | `content/practice/arrays-and-objects.json`       | 15        | word-frequency (easy), last-answer-wins (easy), guests-who-arrived (medium)                                                                               | done    | 2026-10-13 |

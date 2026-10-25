@@ -7,8 +7,8 @@ Instructions for any AI agent (Claude Code, Codex, Cursor, etc.) working in this
 This project has a memory file: **[`memory.md`](./memory.md)**.
 
 1. **At the start of every session**, read `memory.md` and [`docs/decisions/`](./docs/decisions/) to learn the decisions made so far, the current stage, and what comes next.
-2. **In a PR, record each decision as a new file** in `docs/decisions/` (`YYYY-MM-DD-<slug>.md`: the date, the issue, who decided, what and why; see its `README.md`). **PRs never edit `memory.md`:** every PR writing to the same lines made each merge conflict with the next PR (#114).
-3. **After a batch of PRs merges** (and no other PR is open), one small `docs:` PR refreshes `memory.md`: **Current stage**, **Done**, **Next**, and every course section imported under **Course sections imported**.
+2. **In a PR, record each decision as a new file** in `docs/decisions/` (`YYYY-MM-DD-<slug>.md`: the date, the issue, who decided, what and why; see its `README.md`). **PRs never edit `memory.md`** (only the refresh in step 3 does): every PR writing to the same lines made each merge conflict with the next PR (#114).
+3. **After Carlos merges the last PR of a batch** (and no other PR is open), the developer agent opens one small `docs:` PR that refreshes `memory.md`: **Current stage**, **Done**, **Next**, and every course section imported under **Course sections imported**.
 4. Keep entries short. Never delete past decisions: if one changes, add a new file that says which one it replaces.
 
 ## Role
