@@ -1,16 +1,16 @@
 ---
-title: 'pop: quitar al invitado del final'
+title: 'pop: quitar a quien está al final'
 order: 6
-minutes: 16
+minutes: 18
 ---
 
 > **Meta:** escribir `pop`, el método que quita el último nodo y lo regresa, con dos punteros que recorren la fila juntos.
 
 ## Entender: qué hace pop
 
-El invitado del final de la fila de conga se va. Eso es **`pop`**. Paso 1: qué entra, qué sale, qué cambia.
+Quien está al final de la fila de conga se va. Eso es **`pop`**. Paso 1: qué entra, qué sale, qué cambia.
 
-- **Qué entra:** nada. `line.pop()` siempre quita al **último** invitado.
+- **Qué entra:** nada. `line.pop()` siempre quita a la **última** persona.
 - **Qué cambia:** el último nodo se suelta del final de la lista. `tail` se mueve **hacia atrás** al nodo de antes, y el `next` de ese nodo se vuelve `null`, porque ahora es el final de la fila. `length` baja 1.
 - **Qué sale:** el nodo que se quitó, para que sepas quién se fue (`line.pop().value` es el nombre). Si la lista está vacía, no hay nada que quitar, y `pop` regresa `undefined`.
 
@@ -22,6 +22,8 @@ linked-list-pop
 
 **Qué acaba de pasar:** la fila tenía cuatro invitados. `pop()` soltó el nodo de Dev del final, regresó `tail` a Cleo, y la longitud pasó de 4 a 3. Luego regresó el nodo de Dev.
 
+**Por dentro:** el nodo que regresa pop ya está separado de la fila: era el último, así que su `next` es `null`. Por eso pop, a diferencia de shift dentro de dos lecciones, nunca tiene que cortar una flecha antes de regresarlo.
+
 **Error común:** esperar que `pop` regrese el valor, como el `pop` de un array. El nuestro regresa todo el nodo. El valor está a un paso: `line.pop().value`.
 
 ## Ejemplos: tres escenarios
@@ -29,7 +31,7 @@ linked-list-pop
 Paso 2: ejemplos. pop tiene **tres escenarios**, y el código tiene que resolver bien los tres.
 
 1. **Una fila vacía.** No hay nada a qué hacerle pop, así que pop regresa `undefined` y no cambia nada. (Un array hace lo mismo: `[].pop()` es `undefined`.)
-2. **Un invitado.** Hacerle pop al único invitado deja la fila **vacía**. Así que `head` y `tail` tienen que regresar a `null`, y `length` a 0. Este es el tramposo: si `head` y `tail` todavía apuntan al nodo que acabas de quitar, la lista dice que está vacía (length 0) pero todavía guarda un invitado fantasma.
+2. **Un nombre.** Hacerle pop a la única persona deja la fila **vacía**. Así que `head` y `tail` tienen que regresar a `null`, y `length` a 0. Este es el tramposo: si `head` y `tail` todavía apuntan al nodo que acabas de quitar, la lista dice que está vacía (length 0) pero todavía guarda un nodo fantasma.
 3. **Muchos invitados.** El caso principal: camina hasta el nodo antes del tail, mueve `tail` ahí, y suelta el último nodo.
 
 ```viz
@@ -48,7 +50,9 @@ const justAna = ['Ana']
 console.log(justAna.pop(), justAna.length) // Ana 0: ahora el array está vacío
 ```
 
-**Error común:** resolver solo el caso de muchos invitados. El caso de un invitado no truena, y eso lo hace peor: sin avisar, deja a `head` y `tail` apuntando a un nodo que ya no está en la lista.
+**Por dentro:** pop regresa `undefined` en una lista vacía a propósito: es lo que regresa el `pop` de un array vacío (`[].pop()` es `undefined`), así que el código que ya conoce los arrays no se lleva sorpresas.
+
+**Error común:** resolver solo el caso de muchos nombres. El caso de un nombre no truena, y eso lo hace peor: sin avisar, deja a `head` y `tail` apuntando a un nodo que ya no está en la lista.
 
 ## Dividirlo en pasos
 
@@ -73,7 +77,9 @@ pop() {
 linked-list-pop-plan
 ```
 
-**Qué acaba de pasar:** en una fila de tres, `current` y `previous` empezaron en Ana y caminaron hasta que `current` quedó en Cleo, el último invitado, con `previous` en Ben. `tail` se movió a Ben, el `next` de Ben se volvió `null`, la longitud bajó a 2, y se regresó el nodo de Cleo. El paso 6 solo hizo algo en la fila de un invitado: cuando Ana se fue, la longitud era 0, así que `head` y `tail` regresaron a `null`.
+**Qué acaba de pasar:** en una fila de tres, `current` y `previous` empezaron en Ana y caminaron hasta que `current` quedó en Cleo, el último nodo, con `previous` en Ben. `tail` se movió a Ben, el `next` de Ben se volvió `null`, la longitud bajó a 2, y se regresó el nodo de Cleo. El paso 6 solo hizo algo en la fila de un nombre: cuando Ana se fue, la longitud era 0, así que `head` y `tail` regresaron a `null`.
+
+**Por dentro:** que `current` y `previous` avancen a un nodo de distancia es un patrón con nombre: un **puntero que va detrás** (en inglés, _trailing pointer_). `previous` siempre recuerda el nodo que acabas de dejar, porque una lista enlazada simple no puede regresar a él. `remove` usa la misma pareja más adelante en este módulo.
 
 **Error común:** caminar con `while (current !== null)`. Entonces el bucle corre una vez de más, `current` termina en `null`, y `previous` termina en el **último** nodo en vez del de antes. Te pasaste justo del nodo que necesitabas.
 
@@ -98,13 +104,13 @@ pop() {
 
 Ahora los casos especiales. **La lista vacía:** `current.next` truena cuando `current` es `null`, así que revisa primero, arriba de todo: `if (!this.head) { return undefined }`.
 
-**Un invitado:** recorre el código de arriba con solo Ana en la fila. `current` y `previous` empiezan en Ana. `current.next` ya es `null`, así que el bucle nunca corre. `this.tail = previous` no cambia nada (tail ya estaba en Ana), y `this.tail.next = null` tampoco (ya era `null`). `this.length--` deja la longitud en 0. Y entonces... `head` y `tail` **todavía apuntan a Ana**. Así que justo después de restar, agrega: si la longitud ahora es 0, pon `head` y `tail` en `null`. Tiene que ir **después** de `this.length--`, porque es ahí cuando la longitud se vuelve 0.
+**Un nombre:** recorre el código de arriba con solo Ana en la fila. `current` y `previous` empiezan en Ana. `current.next` ya es `null`, así que el bucle nunca corre. `this.tail = previous` no cambia nada (tail ya estaba en Ana), y `this.tail.next = null` tampoco (ya era `null`). `this.length--` deja la longitud en 0. Y entonces... `head` y `tail` **todavía apuntan a Ana**. Así que justo después de restar, agrega: si la longitud ahora es 0, pon `head` y `tail` en `null`. Tiene que ir **después** de `this.length--`, porque es ahí cuando la longitud se vuelve 0.
 
 ```viz
 trace-ll-pop
 ```
 
-**Qué acaba de pasar:** con 4 invitados, `current` y `previous` caminaron juntos hasta que `current` quedó en Dev y `previous` en Cleo; luego `tail` se movió a Cleo y Dev se soltó, después de visitar 4 nodos. Con 1 invitado, el bucle no corrió, y solo la revisión de `length === 0` vació la fila. Con 0 invitados, el primer `if` regresó `undefined` de inmediato.
+**Qué acaba de pasar:** con 4 invitados, `current` y `previous` caminaron juntos hasta que `current` quedó en Dev y `previous` en Cleo; luego `tail` se movió a Cleo y Dev se soltó, después de visitar 4 nodos. Con 1 nombre, el bucle no corrió, y solo la revisión de `length === 0` vació la fila. Con 0 invitados, el primer `if` regresó `undefined` de inmediato.
 
 ```js-run
 class Node {
@@ -164,12 +170,14 @@ class LinkedList {
 const line = new LinkedList('Ana')
 line.push('Ben')
 console.log(line.pop().value) // Ben: dos o más invitados
-console.log(line.pop().value) // Ana: el único invitado
+console.log(line.pop().value) // Ana: la única persona
 console.log(line.pop()) // undefined: una fila vacía
 console.log(line.head, line.tail, line.length) // null null 0
 ```
 
-**Error común:** poner la revisión de `length === 0` **antes** de `this.length--`. Con un invitado, la longitud todavía es 1 en ese momento, así que la revisión es falsa, y el invitado fantasma se queda en `head` y `tail`.
+**Por dentro:** pop no destruye el nodo. La lista deja de apuntarle, pero el nodo es un objeto normal, y quien llamó a pop ahora tiene un puntero a él. Si ese código ignora el resultado, ya nada llega al nodo, y el recolector de basura lo libera.
+
+**Error común:** poner la revisión de `length === 0` **antes** de `this.length--`. Con un nombre, la longitud todavía es 1 en ese momento, así que la revisión es falsa, y el nodo fantasma se queda en `head` y `tail`.
 
 ## Revisar
 
@@ -187,7 +195,7 @@ const sizes = [10, 100, 1000]
 for (let i = 0; i < sizes.length; i++) {
   let head = null
   for (let k = sizes[i]; k >= 1; k--) {
-    head = { value: 'Invitado ' + k, next: head }
+    head = { value: 'Persona ' + k, next: head }
   }
   let current = head
   let visited = 1
@@ -198,5 +206,7 @@ for (let i = 0; i < sizes.length; i++) {
   console.log(sizes[i] + ' invitados: ' + visited + ' nodos visitados')
 }
 ```
+
+**Por dentro:** la caminata existe solo porque un nodo no puede apuntar hacia atrás. Dale a cada nodo un segundo puntero, `prev`, y el nodo antes del tail es simplemente `this.tail.prev`: pop se vuelve O(1). Eso es una **lista doblemente enlazada**, un módulo más adelante, y el precio es un puntero más en cada nodo.
 
 **Error común:** usar una lista enlazada cuando tu programa casi siempre quita del final. Si pop es el trabajo que más vas a hacer, un array (o una lista doblemente enlazada) es mejor opción.

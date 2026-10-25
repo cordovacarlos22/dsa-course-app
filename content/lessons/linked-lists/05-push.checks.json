@@ -55,13 +55,13 @@
         },
         {
           "en": "Both stay `null` until a second guest arrives",
-          "es": "Los dos siguen en `null` hasta que llegue un segundo invitado"
+          "es": "Los dos siguen en `null` hasta que llegue una segunda persona"
         }
       ],
       "answer": 1,
       "hint": {
         "en": "With one guest in line, who is first and who is last?",
-        "es": "Con un solo invitado en la fila, ¿quién es el primero y quién el último?"
+        "es": "Con una sola persona en la fila, ¿qué nodo es el primero y cuál el último?"
       },
       "explanation": {
         "en": "Ana is the first and the last guest at once, so `head` and `tail` both point to Ana's node. There's no last node to link from, which is why the empty list needs its own branch.",
@@ -222,38 +222,33 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "Because `push` returns `this`, what does `new LinkedList('Ana').push('Ben').push('Cleo').length` give?",
-        "es": "Como `push` regresa `this`, ¿qué da `new LinkedList('Ana').push('Ben').push('Cleo').length`?"
+        "en": "In your own words: what does `push` do on an empty list and on a list with guests, in what order, and why is it O(1)?",
+        "es": "Con tus palabras: ¿qué hace `push` en una lista vacía y en una lista con nombres, en qué orden, y por qué es O(1)?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "It makes a new node first. On an empty list, it points both `head` and `tail` at that node. Otherwise it links the new node after the last one (`this.tail.next = nodeToAdd`) and only then moves `tail` onto it, because moving `tail` first would lose the old last node. Then it adds 1 to `length` and returns the list, so calls can be chained. It's O(1) because `tail` already points to the end: no walk, just a couple of pointer moves, however long the list is.",
+        "es": "Primero crea un nodo nuevo. En una lista vacía, hace que `head` y `tail` apunten a ese nodo. Si no, enlaza el nodo nuevo después del último (`this.tail.next = nodeToAdd`) y solo después mueve `tail` a él, porque mover `tail` primero perdería al que era el último nodo. Luego suma 1 a `length` y regresa la lista, para poder encadenar llamadas. Es O(1) porque `tail` ya apunta al final: sin caminata, solo un par de movimientos de punteros, sin importar lo larga que sea la lista."
+      },
+      "checklist": [
         {
-          "en": "`3`",
-          "es": "`3`"
+          "en": "Says an empty list gets `head` and `tail` both on the new node",
+          "es": "Dice que en una lista vacía `head` y `tail` quedan los dos en el nodo nuevo"
         },
         {
-          "en": "`1`",
-          "es": "`1`"
+          "en": "Says otherwise the last node's `next` is linked before `tail` moves",
+          "es": "Dice que si no, se enlaza el `next` del último nodo antes de mover `tail`"
         },
         {
-          "en": "`undefined`",
-          "es": "`undefined`"
+          "en": "Says `length` goes up by 1 and the list is returned",
+          "es": "Dice que `length` sube 1 y se regresa la lista"
         },
         {
-          "en": "An error: you can't call `push` on what `push` returns",
-          "es": "Un error: no puedes llamar `push` sobre lo que regresa `push`"
+          "en": "Says it's O(1) because `tail` means there's no walk",
+          "es": "Dice que es O(1) porque con `tail` no hay que caminar"
         }
-      ],
-      "answer": 0,
-      "hint": {
-        "en": "Each `push` hands back the same list, so the next `push` is called on it.",
-        "es": "Cada `push` regresa la misma lista, así que el siguiente `push` se llama sobre ella."
-      },
-      "explanation": {
-        "en": "Each call returns the list, so the calls chain: Ana, then Ben, then Cleo, all in one list. Its `length` is 3.",
-        "es": "Cada llamada regresa la lista, así que las llamadas se encadenan: Ana, luego Ben, luego Cleo, todos en una lista. Su `length` es 3."
-      }
+      ]
     }
   ]
 }

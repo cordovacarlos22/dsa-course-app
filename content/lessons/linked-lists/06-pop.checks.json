@@ -38,16 +38,16 @@
       "type": "choice",
       "question": {
         "en": "You `pop()` a list that has **one** guest. Which result is right?",
-        "es": "Haces `pop()` en una lista con **un** invitado. ¿Qué resultado es correcto?"
+        "es": "Haces `pop()` en una lista con **un** nombre. ¿Qué resultado es correcto?"
       },
       "options": [
         {
           "en": "`length` is 0, but `head` and `tail` still point to the guest",
-          "es": "`length` es 0, pero `head` y `tail` todavía apuntan al invitado"
+          "es": "`length` es 0, pero `head` y `tail` todavía apuntan a su nodo"
         },
         {
           "en": "`head` and `tail` are `null`, `length` is 0, and the guest's node is returned",
-          "es": "`head` y `tail` son `null`, `length` es 0, y se regresa el nodo del invitado"
+          "es": "`head` y `tail` son `null`, `length` es 0, y se regresa su nodo"
         },
         {
           "en": "It returns `undefined`, because a list needs two nodes to pop",
@@ -55,17 +55,17 @@
         },
         {
           "en": "`tail` is `null`, but `head` still points to the guest",
-          "es": "`tail` es `null`, pero `head` todavía apunta al invitado"
+          "es": "`tail` es `null`, pero `head` todavía apunta a su nodo"
         }
       ],
       "answer": 1,
       "hint": {
         "en": "After the only guest leaves, what should an empty list look like?",
-        "es": "Cuando el único invitado se va, ¿cómo debe verse una lista vacía?"
+        "es": "Cuando la única persona se va, ¿cómo debe verse una lista vacía?"
       },
       "explanation": {
         "en": "Popping the only guest empties the line, so the list must look exactly like a new empty list: `head` and `tail` on `null` and `length` 0. The node that left is returned.",
-        "es": "Hacerle pop al único invitado vacía la fila, así que la lista debe verse igual que una lista vacía nueva: `head` y `tail` en `null` y `length` en 0. Se regresa el nodo que se fue."
+        "es": "Hacerle pop a la única persona vacía la fila, así que la lista debe verse igual que una lista vacía nueva: `head` y `tail` en `null` y `length` en 0. Se regresa el nodo que se fue."
       }
     },
     {
@@ -106,7 +106,7 @@
       "type": "code",
       "task": {
         "en": "Write `pop()` in the `LinkedList` class, following the plan in the comments. It removes the last node and returns it, returns `undefined` on an empty list, and leaves an empty list behind when it pops the only guest.",
-        "es": "Escribe `pop()` en la clase `LinkedList`, siguiendo el plan de los comentarios. Quita el último nodo y lo regresa, regresa `undefined` en una lista vacía, y deja una lista vacía cuando le hace pop al único invitado."
+        "es": "Escribe `pop()` en la clase `LinkedList`, siguiendo el plan de los comentarios. Quita el último nodo y lo regresa, regresa `undefined` en una lista vacía, y deja una lista vacía cuando le hace pop a la única persona."
       },
       "hint": {
         "en": "Walk with `while (current.next !== null) { previous = current; current = current.next }`. Then `this.tail = previous`, `this.tail.next = null` and `this.length--`. After the decrement, if `this.length === 0`, set `head` and `tail` to `null`.",
@@ -236,38 +236,37 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "Which change would make `pop` O(1)?",
-        "es": "¿Qué cambio haría que `pop` fuera O(1)?"
+        "en": "In your own words: what are pop's three cases, why does it have to walk the list, and what would make it O(1)?",
+        "es": "Con tus palabras: ¿cuáles son los tres casos de pop, por qué tiene que recorrer la lista, y qué la haría O(1)?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "An empty list returns `undefined`. With two or more nodes, pop walks from `head` with `current` and a trailing `previous` until `current` is on the last node, then moves `tail` to `previous`, sets its `next` to `null`, lowers `length` and returns the removed node. With one node, the same code leaves `length` at 0, so `head` and `tail` must both be set to `null`, or the list keeps a ghost node. It has to walk because `tail` needs the node before the last one, and pointers only go forward, so that's O(n). A `prev` pointer in every node (a doubly linked list) would make pop O(1).",
+        "es": "Una lista vacía regresa `undefined`. Con dos nodos o más, pop camina desde `head` con `current` y un `previous` que va detrás hasta que `current` está en el último nodo; luego mueve `tail` a `previous`, pone su `next` en `null`, baja `length` y regresa el nodo quitado. Con un nodo, el mismo código deja `length` en 0, así que `head` y `tail` tienen que quedar en `null`, o la lista se queda con un nodo fantasma. Tiene que caminar porque `tail` necesita el nodo antes del último, y los punteros solo van hacia adelante, así que es O(n). Un puntero `prev` en cada nodo (una lista doblemente enlazada) haría pop O(1)."
+      },
+      "checklist": [
         {
-          "en": "Using a `for` loop instead of a `while` loop",
-          "es": "Usar un bucle `for` en vez de un `while`"
+          "en": "Says an empty list returns `undefined`",
+          "es": "Dice que una lista vacía regresa `undefined`"
         },
         {
-          "en": "Checking `length` before walking",
-          "es": "Revisar `length` antes de caminar"
+          "en": "Says it walks with two pointers to reach the node before the tail",
+          "es": "Dice que camina con dos punteros para llegar al nodo antes del tail"
         },
         {
-          "en": "Returning the value instead of the node",
-          "es": "Regresar el valor en vez del nodo"
+          "en": "Says one node needs `head` and `tail` reset to `null`",
+          "es": "Dice que con un nodo hay que regresar `head` y `tail` a `null`"
         },
         {
-          "en": "Giving every node a pointer to the node before it, too",
-          "es": "Darle a cada nodo también un puntero al nodo de antes"
+          "en": "Says the walk makes it O(n) because pointers only go forward",
+          "es": "Dice que la caminata la hace O(n) porque los punteros solo van hacia adelante"
+        },
+        {
+          "en": "Says a `prev` pointer (doubly linked list) would make it O(1)",
+          "es": "Dice que un puntero `prev` (lista doblemente enlazada) la haría O(1)"
         }
-      ],
-      "answer": 3,
-      "hint": {
-        "en": "What does pop walk the line to find?",
-        "es": "¿Qué busca pop al recorrer la fila?"
-      },
-      "explanation": {
-        "en": "pop walks to find the node before the tail. If every node also pointed backwards (`prev`), that node would be `tail.prev`, one step away. That's a doubly linked list, the next module.",
-        "es": "pop camina para encontrar el nodo antes del tail. Si cada nodo también apuntara hacia atrás (`prev`), ese nodo sería `tail.prev`, a un paso. Eso es una lista doblemente enlazada, el siguiente módulo."
-      }
+      ]
     }
   ]
 }

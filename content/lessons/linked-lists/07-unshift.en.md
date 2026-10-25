@@ -1,7 +1,7 @@
 ---
 title: 'unshift: add a guest at the front'
 order: 7
-minutes: 12
+minutes: 14
 ---
 
 > **Goal:** write `unshift`, the method that adds a node at the front of the list, and see why it's O(1) here when it's O(n) on an array.
@@ -21,6 +21,8 @@ linked-list-unshift
 ```
 
 **What just happened:** the line was Ana, Ben, Cleo. `unshift('Zoe')` put a node for Zoe in front of Ana, `head` moved to Zoe, and the length went from 3 to 4. `tail` stayed on Cleo. Then the whole list was returned.
+
+**Under the hood:** unshift is the one adding method every linked list can do in O(1), even a list with no `tail` at all. `head` is the one pointer a linked list can't live without, and unshift only needs `head`.
 
 **Common mistake:** expecting `unshift` to return the new length. An array's `unshift` does, but ours returns the list, so it can be chained like push.
 
@@ -48,6 +50,8 @@ empty.unshift('Zoe')
 console.log(empty) // Zoe is first and last
 ```
 
+**Under the hood:** the empty case of unshift is exactly the empty case of push: both point `head` and `tail` at the new node. That's no accident. In a list of one, the first node and the last node are the same node, so it doesn't matter which end you add from.
+
 **Common mistake:** forgetting `tail` on an empty list. If unshift only moves `head`, an empty list ends up with `head` on the new node and `tail` still `null`, and the next `push` crashes on `this.tail.next`.
 
 ## Break it down
@@ -73,6 +77,8 @@ linked-list-unshift-plan
 ```
 
 **What just happened:** the new node for Zoe was made, the line wasn't empty, Zoe's `next` was pointed at Ana, and only then did `head` move to Zoe. The length went up and the list was returned. On an empty line, step 2 would have done the whole job.
+
+**Under the hood:** the order of steps 3a and 3b follows a rule that keeps you safe in every pointer method: **link before you move**. Never move the only pointer to part of the line until something else points to it. Here, Zoe's `next` holds on to Ana before `head` lets go.
 
 **Common mistake:** writing step 3b before 3a. `this.head = nodeToAdd` first, then `nodeToAdd.next = this.head`, points the new node at **itself**. Ana, Ben and Cleo have nothing pointing to them, and the garbage collector takes them.
 
@@ -151,6 +157,8 @@ console.log(line.toArray().join(' -> ')) // Ana -> Ben -> Cleo
 console.log(line.head.value, line.tail.value) // Ana Cleo: Cleo came first, so Cleo is at the back
 ```
 
+**Under the hood:** the loop in the Linked Lists vs Arrays lesson that built a list from the back (`head = { value: names[i], next: head }`) was unshift without the class: a new node pointing at the old head, then `head` moving onto it. Building a list by unshifting goes from the last value to the first.
+
 **Common mistake:** expecting unshifted guests to come out in the order you added them. Each unshift goes in **front** of the last one, so adding Cleo, Ben, Ana in that order gives Ana, Ben, Cleo.
 
 ## Look back
@@ -190,5 +198,7 @@ for (let i = 0; i < sizes.length; i++) {
   console.log(sizes[i] + ' guests: array ' + arrayMoves + ' moves, linked list ' + listMoves)
 }
 ```
+
+**Under the hood:** a list that only adds and removes at the front, with `unshift` and `shift`, is a **stack**: the last one in is the first one out. Built this way, both operations are O(1), and the Stacks & Queues module later in this section uses exactly that.
 
 **Common mistake:** thinking unshift is fast because the code is short. Short code can still be slow (a short line that calls `guests.unshift` in a loop is O(n²) on an array). What makes ours O(1) is that it never touches any node except the new one and the old first one.

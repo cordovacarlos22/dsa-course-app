@@ -1,17 +1,17 @@
 ---
-title: 'unshift: agregar un invitado al inicio'
+title: 'unshift: agregar a alguien al inicio'
 order: 7
-minutes: 12
+minutes: 14
 ---
 
 > **Meta:** escribir `unshift`, el método que agrega un nodo al inicio de la lista, y ver por qué aquí es O(1) cuando en un array es O(n).
 
 ## Entender: qué hace unshift
 
-Llega un invitado y se va directo al **inicio** de la fila de conga. Eso es **`unshift`**, el reflejo de push. Paso 1: qué entra, qué sale, qué cambia.
+Llega alguien y se va directo al **inicio** de la fila de conga. Eso es **`unshift`**, el reflejo de push. Paso 1: qué entra, qué sale, qué cambia.
 
 - **Qué entra:** un valor: `line.unshift('Zoe')`.
-- **Qué cambia:** un nodo nuevo con ese valor va **antes del primer nodo**. `head` se mueve al nodo nuevo, porque es el nuevo primer invitado. `length` sube 1. `tail` no se mueve (a menos que la lista estuviera vacía).
+- **Qué cambia:** un nodo nuevo con ese valor va **antes del primer nodo**. `head` se mueve al nodo nuevo, porque es el nuevo primer nodo. `length` sube 1. `tail` no se mueve (a menos que la lista estuviera vacía).
 - **Qué sale:** la lista misma, `this`, igual que nuestro push.
 
 Esta es la operación donde las listas enlazadas les ganan a los arrays. El `unshift` de un array tiene que recorrer cada elemento un lugar y darle un índice nuevo: O(n). Una lista enlazada solo hace que el nodo nuevo apunte al antiguo primer nodo y mueve `head`. Nadie más de la fila se mueve.
@@ -22,31 +22,35 @@ linked-list-unshift
 
 **Qué acaba de pasar:** la fila era Ana, Ben, Cleo. `unshift('Zoe')` puso un nodo para Zoe delante de Ana, `head` se movió a Zoe, y la longitud pasó de 3 a 4. `tail` se quedó en Cleo. Luego se regresó la lista completa.
 
+**Por dentro:** unshift es el único método para agregar que cualquier lista enlazada hace en O(1), incluso una sin `tail`. `head` es el único puntero sin el que una lista enlazada no puede vivir, y unshift solo necesita `head`.
+
 **Error común:** esperar que `unshift` regrese la nueva longitud. El `unshift` de un array sí lo hace, pero el nuestro regresa la lista, así que se puede encadenar como push.
 
-## Ejemplos: vacía, un invitado, muchos invitados
+## Ejemplos: vacía, un nombre, muchos nombres
 
 Paso 2: los mismos tres ejemplos que en push.
 
-**Muchos invitados:** el nodo de Zoe apunta a Ana (donde está `head`), y luego `head` se mueve a Zoe. Dos movimientos de punteros. **Un invitado:** exactamente igual. Zoe apunta a Ana, `head` se mueve a Zoe, y `tail` se queda en Ana, que sigue en el último lugar. **Una fila vacía:** el invitado nuevo es el primero y el último, así que `head` y `tail` apuntan al nodo nuevo, igual que push en una fila vacía.
+**Muchos nombres:** el nodo de Zoe apunta a Ana (donde está `head`), y luego `head` se mueve a Zoe. Dos movimientos de punteros. **Un nombre:** exactamente igual. Zoe apunta a Ana, `head` se mueve a Zoe, y `tail` se queda en Ana, que sigue en el último lugar. **Una fila vacía:** el nodo nuevo es el primero y el último, así que `head` y `tail` apuntan al nodo nuevo, igual que push en una fila vacía.
 
 ```viz
 linked-list-unshift-examples
 ```
 
-**Qué acaba de pasar:** con una fila vacía, `head` y `tail` tomaron el nodo de Zoe. Con un invitado y con tres, Zoe se enlazó al frente y solo se movió `head`.
+**Qué acaba de pasar:** con una fila vacía, `head` y `tail` tomaron el nodo de Zoe. Con un nombre y con tres, Zoe se enlazó al frente y solo se movió `head`.
 
 Compáralo con los arrays. Corre esto y fíjate en lo que regresa cada llamada:
 
 ```js-run
 const guests = ['Ana', 'Ben', 'Cleo']
 console.log(guests.unshift('Zoe')) // 4: el unshift de un array regresa la nueva longitud
-console.log(guests) // cada invitado se recorrió un lugar para hacer espacio
+console.log(guests) // cada nombre se recorrió un lugar para hacer espacio
 
 const empty = []
 empty.unshift('Zoe')
 console.log(empty) // Zoe ocupa el primer y el último lugar
 ```
+
+**Por dentro:** el caso vacío de unshift es exactamente el caso vacío de push: los dos hacen que `head` y `tail` apunten al nodo nuevo. No es casualidad. En una lista de uno, el primer nodo y el último son el mismo nodo, así que da igual por qué extremo agregues.
 
 **Error común:** olvidar `tail` en una lista vacía. Si unshift solo mueve `head`, una lista vacía termina con `head` en el nodo nuevo y `tail` todavía en `null`, y el siguiente `push` truena en `this.tail.next`.
 
@@ -73,6 +77,8 @@ linked-list-unshift-plan
 ```
 
 **Qué acaba de pasar:** se creó el nodo nuevo para Zoe, la fila no estaba vacía, el `next` de Zoe apuntó a Ana, y solo entonces `head` se movió a Zoe. La longitud subió y se regresó la lista. En una fila vacía, el paso 2 habría hecho todo el trabajo.
+
+**Por dentro:** el orden de los pasos 3a y 3b sigue una regla que te protege en cada método con punteros: **enlaza antes de mover**. Nunca muevas el único puntero a una parte de la fila hasta que algo más le apunte. Aquí, el `next` de Zoe se agarra de Ana antes de que `head` la suelte.
 
 **Error común:** escribir el paso 3b antes del 3a. Primero `this.head = nodeToAdd` y luego `nodeToAdd.next = this.head` hace que el nodo nuevo se apunte **a sí mismo**. Ana, Ben y Cleo se quedan sin nada que los apunte, y el recolector de basura se los lleva.
 
@@ -151,6 +157,8 @@ console.log(line.toArray().join(' -> ')) // Ana -> Ben -> Cleo
 console.log(line.head.value, line.tail.value) // Ana Cleo: Cleo llegó primero, así que Cleo queda al final
 ```
 
+**Por dentro:** el bucle de la lección Listas enlazadas vs arrays que armaba una lista desde el final (`head = { value: names[i], next: head }`) era unshift sin la clase: un nodo nuevo que apunta al head anterior, y luego `head` se mueve a él. Armar una lista con unshift va del último valor al primero.
+
 **Error común:** esperar que los invitados agregados con unshift salgan en el orden en que los agregaste. Cada unshift va **delante** del anterior, así que agregar a Cleo, Ben y Ana en ese orden da Ana, Ben, Cleo.
 
 ## Revisar
@@ -184,11 +192,13 @@ for (let i = 0; i < sizes.length; i++) {
   let arrayMoves = 0
   let listMoves = 0
   for (let k = 0; k < sizes[i]; k++) {
-    arrayMoves = arrayMoves + k // un array recorre a cada invitado que ya está en la fila
+    arrayMoves = arrayMoves + k // un array recorre a cada nombre que ya está en la fila
     listMoves = listMoves + 2 // una lista enlazada hace dos movimientos de punteros
   }
   console.log(sizes[i] + ' invitados: array ' + arrayMoves + ' movimientos, lista enlazada ' + listMoves)
 }
 ```
+
+**Por dentro:** una lista que solo agrega y quita al inicio, con `unshift` y `shift`, es una **pila**: lo último que entra es lo primero que sale. Armada así, las dos operaciones son O(1), y el módulo de Pilas y colas, más adelante en esta sección, usa justo eso.
 
 **Error común:** pensar que unshift es rápido porque el código es corto. Un código corto también puede ser lento (una línea corta que llama `guests.unshift` dentro de un bucle es O(n²) en un array). Lo que hace O(1) al nuestro es que nunca toca ningún nodo excepto el nuevo y el antiguo primero.
