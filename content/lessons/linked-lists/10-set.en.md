@@ -1,7 +1,7 @@
 ---
 title: 'set: change the value at an index'
 order: 10
-minutes: 11
+minutes: 14
 ---
 
 > **Goal:** write `set`, the method that changes the value of the node at an index, by reusing `get` instead of writing the walk again.
@@ -21,6 +21,8 @@ linked-list-set
 ```
 
 **What just happened:** `set(1, 'Benny')` went to the node at index 1 and changed its value from Ben to Benny. Same node, same place in the line, new value. It returned `true`.
+
+**Under the hood:** `set` changes the node's `value` and nothing else. The node keeps its place in memory and its `next`, so no arrow anywhere in the list moves. Any other pointer to that node, from a variable or from the node before it, sees the new value right away.
 
 **Common mistake:** thinking `set` adds a guest at that index. It only changes a guest who is already there. Adding a new node at an index is `insert`, two lessons from now.
 
@@ -49,6 +51,23 @@ guests[9] = 'Zoe'
 console.log(guests.length) // 10: the array grew, with empty slots in between
 ```
 
+Before you run this, predict both lines. It's set's idea with plain objects:
+
+```js-run
+const head = { value: 'Ana', next: { value: 'Ben', next: null } }
+
+let target = head.next // like this.get(1)
+target.value = 'Benny' // change the node through the pointer
+target = { value: 'Zoe', next: null } // move the pointer: the list doesn't notice
+
+console.log(head.next.value)
+console.log(target.value)
+```
+
+**What just happened:** `target.value = 'Benny'` reached through the pointer and changed Ben's node, which is in the list, so `head.next.value` printed Benny. Pointing `target` at a brand-new object only changed the variable: Zoe never joined the line.
+
+**Under the hood:** returning `true` or `false` is a common way for a method to report "did it work?" when there's nothing useful to hand back. Arrays do it too: `includes` answers yes or no, and so does our `set`.
+
 **Common mistake:** returning nothing. Without `true` or `false`, a caller who tries `set(9, 'Zoe')` can't tell that nothing happened.
 
 ## Break it down
@@ -70,6 +89,8 @@ linked-list-set-plan
 ```
 
 **What just happened:** `this.get(1)` did all the finding and handed back Ben's node. The node was truthy, so its value changed to Benny, and `set` returned `true`. With index 9, `get` returned `undefined`, the `if` was skipped, and `set` returned `false`.
+
+**Under the hood:** `this.get(index)` is a method calling another method on the same object. Inside `set`, `this` is the list `set` was called on, so `this.get` walks **that** list. That's how one class's methods build on each other.
 
 **Common mistake:** calling `get(index)` without `this.`. Inside a class, `get` on its own isn't a variable, so it's an error ("get is not defined"). Methods of the same object are reached through `this`.
 
@@ -145,6 +166,8 @@ console.log(line.set(9, 'Zoe')) // false: there's no index 9
 console.log(line.length) // 3: set never adds or removes
 ```
 
+**Under the hood:** in `target.value = value`, the two `value`s are different things. The left one, after the dot, is the node's **property**. The right one is the **parameter** `set` received. JavaScript tells them apart by the dot, the same way `this.value = value` worked in the `Node` constructor.
+
 **Common mistake:** leaving out `return true` inside the `if`. The value still changes, but then the code carries on to `return false`, so `set` reports a failure for a change that worked.
 
 ## Look back
@@ -170,5 +193,7 @@ for (let i = 0; i < sizes.length; i++) {
   console.log(sizes[i] + ' guests: ' + moves + ' moves to reach the last index, then 1 assignment')
 }
 ```
+
+**Under the hood:** reusing `get` costs nothing extra in Big O: `set` would need the same walk if it wrote its own loop. What it saves is **code**: one walk, written and tested once, used by `set`, `insert` and `remove`. A bug fixed in `get` is fixed in all four.
 
 **Common mistake:** thinking `set` is O(1) because changing a value is O(1). The change is, but finding the node isn't. Always count the walk to get there.

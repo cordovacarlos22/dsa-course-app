@@ -209,38 +209,33 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "Why does our `get` return the node instead of just its value?",
-        "es": "¿Por qué nuestro `get` regresa el nodo y no solo su valor?"
+        "en": "In your own words: what does `get(index)` return, which indexes does it reject, how does it reach the node, and what's its Big O?",
+        "es": "Con tus palabras: ¿qué regresa `get(index)`, qué índices rechaza, cómo llega al nodo, y cuál es su Big O?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "It returns the node at that index, the real node and not a copy, or `undefined` when the index is below 0 or at `length` or above (and on an empty list, every index is out of range). It checks the range before walking, so it never reads `next` from `null`. Then it starts `current` at `head` and moves it forward `index` times with a `for` loop, because it knows exactly how many moves it needs. In the worst case, the last index, it walks the whole list: O(n) time, and O(1) space for the one pointer. An array does the same lookup in O(1).",
+        "es": "Regresa el nodo en ese índice, el nodo real y no una copia, o `undefined` cuando el índice es menor que 0 o es `length` o más (y en una lista vacía, todos los índices están fuera de rango). Revisa el rango antes de caminar, así que nunca lee `next` de `null`. Luego empieza `current` en `head` y lo mueve `index` veces con un bucle `for`, porque sabe exactamente cuántos movimientos necesita. En el peor caso, el último índice, recorre toda la lista: O(n) en tiempo, y O(1) en espacio por el único puntero. Un array hace la misma búsqueda en O(1)."
+      },
+      "checklist": [
         {
-          "en": "So `set`, `insert` and `remove` can use it to change the node or link around it",
-          "es": "Para que `set`, `insert` y `remove` lo usen para cambiar el nodo o enlazar alrededor de él"
+          "en": "Says it returns the node itself, or `undefined` for a bad index",
+          "es": "Dice que regresa el nodo mismo, o `undefined` para un índice malo"
         },
         {
-          "en": "Because returning a value is O(n) and a node is O(1)",
-          "es": "Porque regresar un valor es O(n) y un nodo es O(1)"
+          "en": "Says valid indexes go from 0 to `length - 1`",
+          "es": "Dice que los índices válidos van de 0 a `length - 1`"
         },
         {
-          "en": "Because JavaScript methods can't return strings",
-          "es": "Porque los métodos de JavaScript no pueden regresar strings"
+          "en": "Says it walks from `head`, moving `index` times",
+          "es": "Dice que camina desde `head`, moviéndose `index` veces"
         },
         {
-          "en": "To remove the node from the list",
-          "es": "Para quitar el nodo de la lista"
+          "en": "Says it's O(n) time and O(1) space, unlike an array's O(1)",
+          "es": "Dice que es O(n) en tiempo y O(1) en espacio, a diferencia del O(1) de un array"
         }
-      ],
-      "answer": 0,
-      "hint": {
-        "en": "Think about the next three methods in this module.",
-        "es": "Piensa en los siguientes tres métodos de este módulo."
-      },
-      "explanation": {
-        "en": "`set` changes the node's value, and `insert` and `remove` change the arrows around it. They all need the node itself, so `get` hands it back, and the value is still one `.value` away.",
-        "es": "`set` cambia el valor del nodo, e `insert` y `remove` cambian las flechas alrededor de él. Todos necesitan el nodo, así que `get` lo regresa, y el valor sigue a un `.value` de distancia."
-      }
+      ]
     }
   ]
 }

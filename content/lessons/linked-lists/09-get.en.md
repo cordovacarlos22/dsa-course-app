@@ -1,7 +1,7 @@
 ---
 title: 'get: find the node at an index'
 order: 9
-minutes: 12
+minutes: 15
 ---
 
 > **Goal:** write `get`, the method that walks to the node at an index and returns it, and handle every index that doesn't exist.
@@ -21,6 +21,8 @@ linked-list-get
 ```
 
 **What just happened:** `get(2)` started at `head` and moved forward twice, counting Ana as 0, Ben as 1 and Cleo as 2. It returned Cleo's node, and the line didn't change.
+
+**Under the hood:** `get` hands back the **real node**, not a copy. Whatever you do to it, like changing its `value` or its `next`, happens inside the list. That's exactly what `set`, `insert` and `remove` will rely on.
 
 **Common mistake:** expecting `get` to return the value. It returns the whole node, so you can still follow its `next` or change it. The value is one step away: `line.get(2).value`.
 
@@ -48,6 +50,27 @@ console.log(guests[4]) // undefined: no guest at index 4
 console.log(guests[-1]) // undefined: no negative indexes
 ```
 
+Before you run this, predict each line. `walkTo` is `get` **without** the range check:
+
+```js-run
+function walkTo(head, index) {
+  let current = head
+  for (let i = 0; i < index; i++) {
+    current = current.next
+  }
+  return current
+}
+
+const head = { value: 'Ana', next: { value: 'Ben', next: { value: 'Cleo', next: null } } }
+console.log(walkTo(head, 0).value)
+console.log(walkTo(head, 2).value)
+console.log(walkTo(head, 3)) // index 3 is the length
+```
+
+**What just happened:** index 0 didn't move and gave Ana; index 2 moved twice and gave Cleo. Index 3, the length, moved one step past the last node and gave `null` instead of a node. Index 4 would crash, because it would read `.next` from that `null`. That's the job of the range check.
+
+**Under the hood:** the range check runs **before** the walk for a reason: reading `.next` on `null` throws a `TypeError` and stops the program. Rejecting a bad index first means the loop only ever walks over nodes that exist.
+
 **Common mistake:** writing the range check as `index > this.length`. That lets `index === length` through, and the walk steps off the end of the line. The last index that exists is `length - 1`, so the check is `index >= this.length`.
 
 ## Break it down
@@ -72,6 +95,8 @@ linked-list-get-plan
 ```
 
 **What just happened:** the range check passed for index 2. `current` started at `head`, on index 0, and moved forward once per count: to Ben (1), then Cleo (2). Two moves for index 2, and then `current` was returned.
+
+**Under the hood:** the loop counts moves, not nodes. To reach index k you move k times, so `get(0)` moves zero times and hands back `head` as it is. That's why the loop runs while `i < index`, starting from 0.
 
 **Common mistake:** an off-by-one in the loop, like `i <= index` or starting `i` at 1. Either makes `current` move one time too many or too few. Check the loop on the smallest example: `get(0)` must not move at all.
 
@@ -150,6 +175,8 @@ console.log(line.get(4)) // undefined
 console.log(line.get(-1)) // undefined
 ```
 
+**Under the hood:** `current` is a local variable: it only exists while `get` runs. When `get` returns, the variable is gone, but the node it pointed to isn't. It's still in the line, and now the caller holds a pointer to it too. Returning a node never takes it out of the list.
+
 **Common mistake:** returning `null` for an index that doesn't exist. It works, but it's a different answer from an array's `undefined`, and from what `pop` and `shift` return on an empty list. One "nothing there" value across the class is easier to check.
 
 ## Look back
@@ -173,5 +200,7 @@ for (let index = 0; index < length; index++) {
   console.log('get(' + index + '): ' + moves + ' moves')
 }
 ```
+
+**Under the hood:** a doubly linked list can make `get` about twice as fast in practice: for an index past the middle, it walks backwards from `tail` with `prev`. That's at most n/2 steps instead of n, a smaller constant, but the walk still grows with the line, so it's still O(n). It's a real trick you'll meet in the Doubly Linked Lists module.
 
 **Common mistake:** calling `get` inside a loop to visit every node: `for (let i = 0; i < line.length; i++) { line.get(i) }`. Each `get` walks from the start again, so the loop does 0 + 1 + 2 + … moves: O(n²). To visit every node, walk once with `current`, like `toArray` does.

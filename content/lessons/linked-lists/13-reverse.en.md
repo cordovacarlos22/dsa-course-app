@@ -1,7 +1,7 @@
 ---
 title: 'reverse: turn the line around'
 order: 13
-minutes: 16
+minutes: 19
 ---
 
 > **Goal:** write `reverse`, the method that flips the whole list in place, and keep track of every node while the arrows turn around.
@@ -21,6 +21,8 @@ linked-list-reverse
 ```
 
 **What just happened:** before, `head` was on Ana and every arrow pointed right. After `reverse()`, `head` was on Dev, `tail` on Ana, and every arrow pointed left. Read from the new `head`, the line is Dev, Cleo, Ben, Ana.
+
+**Under the hood:** "in place" is about extra **space**, not about whether anything changes. The list changes completely, but it uses the same n nodes the whole time, plus three pointers. A reversed copy would need n new nodes: O(n) extra space.
 
 **Common mistake:** thinking reverse moves the values around, putting `'Dev'` into Ana's node and so on. It doesn't touch a single value. Only the `next` arrows and `head`/`tail` change.
 
@@ -47,6 +49,34 @@ const sameArray = guests.reverse()
 console.log(guests) // reversed in place
 console.log(sameArray === guests) // true: no new array was made
 ```
+
+Before you run this, predict the order it prints. It's reverse's flipping idea with plain objects, using a `while` loop that walks until `null` (the lesson's method counts with a `for` loop instead):
+
+```js-run
+let head = { value: 'Ana', next: { value: 'Ben', next: { value: 'Cleo', next: null } } }
+
+let previous = null
+let current = head
+while (current !== null) {
+  const nextNode = current.next // save the far side
+  current.next = previous // flip the arrow
+  previous = current
+  current = nextNode
+}
+head = previous
+
+let order = ''
+let walker = head
+while (walker !== null) {
+  order = order + walker.value + ' '
+  walker = walker.next
+}
+console.log(order)
+```
+
+**What just happened:** each round flipped one arrow, so after three rounds every node pointed to the one that used to come before it. `previous` ended on Cleo, the new first node, and walking from there printed Cleo Ben Ana.
+
+**Under the hood:** an array's `reverse()` is in place too, but it moves **values**: it swaps the first item with the last, the second with the second-to-last, and so on, about n/2 swaps. It can do that because it jumps to any index. A singly linked list can't jump to an index or step back from `tail`, so it does the opposite: every value stays in its node, and the arrows turn around.
 
 **Common mistake:** checking only the many-guests example. The empty line is the one that crashes a careless reverse, as you'll see in step 4.
 
@@ -76,6 +106,8 @@ linked-list-reverse-plan
 ```
 
 **What just happened:** after the swap, `current` sat on Ana with `previous` on `null`. `nextNode` grabbed Ben, Ana's arrow flipped to `null`, and that opened a gap between Ana and Ben. But `nextNode` was still holding Ben, so `previous` moved to Ana and `current` crossed the gap to Ben. After four rounds, every arrow pointed left.
+
+**Under the hood:** at every moment of the loop, the nodes behind `current` form a finished reversed line that starts at `previous`, and the nodes from `current` on are the untouched rest. Each round moves one node from the rest to the front of the finished part. When `current` reaches `null`, the rest is empty and the whole line is reversed.
 
 **Common mistake:** flipping first and saving `nextNode` second. After `current.next = previous`, `current.next` no longer leads forward, so `nextNode = current.next` saves the wrong node, and the rest of the line is gone.
 
@@ -159,6 +191,8 @@ console.log(line.head.value, line.tail.value) // Dev Ana
 console.log(new LinkedList().reverse().length) // 0: the empty line is fine
 ```
 
+**Under the hood:** the head-and-tail swap needs a spare variable for the same reason swapping two cups of juice needs a third cup. `this.head = this.tail` would overwrite the only pointer to the old first node, so it's saved in `current` first. That's the classic way to swap two variables: save one, overwrite it, then use the saved copy.
+
 **Common mistake:** writing the four loop lines in another order. Each line needs the one before it: `nextNode` must be saved before the flip, and `previous` must move before `current` does, or `previous` would land on the wrong node.
 
 ## Look back
@@ -185,5 +219,7 @@ Step 5: the Big O, one refactor, and the whole module in one table.
 | `reverse()`            | flips the whole list in place   | O(n)         |
 
 Every row matches the costs you predicted in lesson 2, before writing a single method. The interview problems for this module, coming with the next section of the course, use these same pointer moves: finding the middle node, spotting a cycle, reversing part of a list.
+
+**Under the hood:** the loop's three pointers (`previous`, `current`, `nextNode`) are a pattern you'll see again: moving a small window of pointers along a chain so you never lose your place. Doubly linked lists, trees and many interview problems use the same "save the far side before you cut" move.
 
 **Common mistake:** memorizing reverse line by line. In an interview, you'll be asked to explain it. Remember the idea instead, a gap opens with every flip and `nextNode` holds the far side, and you can rebuild the four lines from it.

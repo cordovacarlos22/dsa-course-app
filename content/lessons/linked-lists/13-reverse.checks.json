@@ -38,7 +38,7 @@
       "type": "choice",
       "question": {
         "en": "What should `reverse()` do on a list with **one** guest?",
-        "es": "¿Qué debe hacer `reverse()` en una lista con **un** invitado?"
+        "es": "¿Qué debe hacer `reverse()` en una lista con **un** nombre?"
       },
       "options": [
         {
@@ -51,7 +51,7 @@
         },
         {
           "en": "Leave it the same: `head` and `tail` both stay on that guest",
-          "es": "Dejarla igual: `head` y `tail` se quedan en ese invitado"
+          "es": "Dejarla igual: `head` y `tail` se quedan en ese nodo"
         },
         {
           "en": "Crash, because there's no second node",
@@ -65,7 +65,7 @@
       },
       "explanation": {
         "en": "One guest reversed is the same line. The swap puts `head` and `tail` back on the same node, and its `next` stays `null`.",
-        "es": "Un invitado volteado es la misma fila. El intercambio deja `head` y `tail` en el mismo nodo, y su `next` sigue en `null`."
+        "es": "Una fila de un nombre, volteada, es la misma fila. El intercambio deja `head` y `tail` en el mismo nodo, y su `next` sigue en `null`."
       }
     },
     {
@@ -218,38 +218,37 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "What are reverse's time and space complexity?",
-        "es": "¿Cuál es la complejidad en tiempo y espacio de reverse?"
+        "en": "In your own words: how does `reverse` flip the list without losing any nodes, why does it need three pointers, and what are its time and space costs?",
+        "es": "Con tus palabras: ¿cómo voltea `reverse` la lista sin perder nodos, por qué necesita tres punteros, y cuánto cuesta en tiempo y en espacio?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "It first swaps `head` and `tail`, keeping the old head in `current`. Then, for each node, it saves `current.next` in `nextNode` before flipping, points `current.next` back at `previous`, and moves `previous` and `current` one node forward. Flipping an arrow opens a gap between `current` and the rest of the list; `nextNode` holds the far side of that gap, so nothing is lost, and `previous` is where the flipped arrow has to point. It changes no values and makes no new nodes: it visits each node once, so it's O(n) time and O(1) space.",
+        "es": "Primero intercambia `head` y `tail`, guardando el head anterior en `current`. Luego, para cada nodo, guarda `current.next` en `nextNode` antes de voltear, apunta `current.next` de regreso a `previous`, y mueve `previous` y `current` un nodo hacia adelante. Voltear una flecha abre un hueco entre `current` y el resto de la lista; `nextNode` guarda el otro lado de ese hueco, así que nada se pierde, y `previous` es a donde tiene que apuntar la flecha volteada. No cambia ningún valor ni crea nodos nuevos: visita cada nodo una vez, así que es O(n) en tiempo y O(1) en espacio."
+      },
+      "checklist": [
         {
-          "en": "O(n²) time, O(1) space",
-          "es": "O(n²) en tiempo, O(1) en espacio"
+          "en": "Says it swaps `head` and `tail` first",
+          "es": "Dice que primero intercambia `head` y `tail`"
         },
         {
-          "en": "O(n) time, O(n) space",
-          "es": "O(n) en tiempo, O(n) en espacio"
+          "en": "Says `nextNode` is saved before the flip so the rest of the list isn't lost",
+          "es": "Dice que `nextNode` se guarda antes de voltear para no perder el resto de la lista"
         },
         {
-          "en": "O(1) time, O(1) space",
-          "es": "O(1) en tiempo, O(1) en espacio"
+          "en": "Says each `current.next` is pointed back at `previous`",
+          "es": "Dice que cada `current.next` se apunta de regreso a `previous`"
         },
         {
-          "en": "O(n) time, O(1) space",
-          "es": "O(n) en tiempo, O(1) en espacio"
+          "en": "Says it changes arrows, not values, and makes no new nodes",
+          "es": "Dice que cambia flechas, no valores, y no crea nodos nuevos"
+        },
+        {
+          "en": "Says it's O(n) time and O(1) space",
+          "es": "Dice que es O(n) en tiempo y O(1) en espacio"
         }
-      ],
-      "answer": 3,
-      "hint": {
-        "en": "How many times is each node visited, and how many new nodes are made?",
-        "es": "¿Cuántas veces se visita cada nodo, y cuántos nodos nuevos se crean?"
-      },
-      "explanation": {
-        "en": "Each node is visited once: O(n) time. It only uses three extra pointers and makes no new nodes: O(1) space. A reversed copy would need O(n) space.",
-        "es": "Cada nodo se visita una vez: O(n) en tiempo. Solo usa tres punteros extra y no crea nodos nuevos: O(1) en espacio. Una copia volteada necesitaría O(n) en espacio."
-      }
+      ]
     }
   ]
 }

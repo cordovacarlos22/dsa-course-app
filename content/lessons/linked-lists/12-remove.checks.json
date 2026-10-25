@@ -61,7 +61,7 @@
       "answer": 1,
       "hint": {
         "en": "pop removes the last guest. What's the last index?",
-        "es": "pop quita al último invitado. ¿Cuál es el último índice?"
+        "es": "pop quita el último nodo. ¿Cuál es el último índice?"
       },
       "explanation": {
         "en": "The last index is `length - 1`, which is 3 here, so `remove(3)` returns `this.pop()`. `remove(4)` is out of range and returns `undefined`.",
@@ -253,38 +253,33 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "In a singly linked list, which spot is the most expensive one to `remove` from?",
-        "es": "En una lista enlazada simple, ¿de qué lugar es más caro hacer `remove`?"
+        "en": "In your own words: how does `remove` handle the front, the back, the middle and a bad index, what does it return, and which spot is the most expensive?",
+        "es": "Con tus palabras: ¿cómo resuelve `remove` el inicio, el final, el medio y un índice malo, qué regresa, y qué lugar es el más caro?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "A bad index (below 0, or `length` or above) returns `undefined`. Index 0 goes to `shift` and the last index, `length - 1`, goes to `pop`. For the middle, `this.get(index - 1)` reaches the node before, the leaving node is simply that node's `next` (no second walk), the node before is pointed past it, the removed node's `next` is cut to `null`, `length` drops by 1 and the removed node is returned. The front is O(1), but the last node is the most expensive spot, because `pop` walks the whole list; the middle walks too. So `remove` is O(n) time and O(1) space.",
+        "es": "Un índice malo (menor que 0, o `length` o más) regresa `undefined`. El índice 0 va a `shift` y el último índice, `length - 1`, va a `pop`. Para el medio, `this.get(index - 1)` llega al nodo de antes, el nodo que se va es simplemente el `next` de ese nodo (sin una segunda caminata), el nodo de antes se apunta más allá de él, el `next` del nodo quitado se corta a `null`, `length` baja 1 y se regresa el nodo quitado. El inicio es O(1), pero el último nodo es el lugar más caro, porque `pop` recorre toda la lista; el medio también camina. Así que `remove` es O(n) en tiempo y O(1) en espacio."
+      },
+      "checklist": [
         {
-          "en": "The front, index 0",
-          "es": "El inicio, índice 0"
+          "en": "Says a bad index returns `undefined`, and the ends go to `shift` and `pop`",
+          "es": "Dice que un índice malo regresa `undefined`, y los extremos van a `shift` y `pop`"
         },
         {
-          "en": "The second guest, index 1",
-          "es": "El segundo invitado, índice 1"
+          "en": "Says the middle takes the leaving node from the node before's `next`, with no second walk",
+          "es": "Dice que el medio toma el nodo que se va del `next` del nodo de antes, sin una segunda caminata"
         },
         {
-          "en": "The last guest, because `pop` walks the whole line",
-          "es": "El último invitado, porque `pop` recorre toda la fila"
+          "en": "Says the removed node is cut loose and returned",
+          "es": "Dice que el nodo quitado se separa y se regresa"
         },
         {
-          "en": "They all cost the same",
-          "es": "Todos cuestan lo mismo"
+          "en": "Says the last node is the most expensive spot, because `pop` walks",
+          "es": "Dice que el último nodo es el lugar más caro, porque `pop` camina"
         }
-      ],
-      "answer": 2,
-      "hint": {
-        "en": "Which of the methods remove calls has to walk the whole line?",
-        "es": "¿Cuál de los métodos que llama remove tiene que recorrer toda la fila?"
-      },
-      "explanation": {
-        "en": "The front is O(1) with shift. Any other index walks to the node before it. The last guest goes through pop, which walks the whole line: the worst case, O(n).",
-        "es": "El inicio es O(1) con shift. Cualquier otro índice camina hasta el nodo de antes. El último invitado pasa por pop, que recorre toda la fila: el peor caso, O(n)."
-      }
+      ]
     }
   ]
 }

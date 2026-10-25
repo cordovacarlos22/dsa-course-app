@@ -1,14 +1,14 @@
 ---
 title: 'set: cambiar el valor en un índice'
 order: 10
-minutes: 11
+minutes: 14
 ---
 
 > **Meta:** escribir `set`, el método que cambia el valor del nodo en un índice, reusando `get` en vez de escribir la caminata otra vez.
 
 ## Entender: qué hace set
 
-El gafete de un invitado tiene un error: dice Ben, pero debería decir Benny. Nadie entra ni sale de la fila; un nodo solo recibe un valor nuevo. Eso es **`set`**. Paso 1: qué entra, qué sale, qué cambia.
+Un gafete tiene un error: dice Ben, pero debería decir Benny. Nadie entra ni sale de la fila; un nodo solo recibe un valor nuevo. Eso es **`set`**. Paso 1: qué entra, qué sale, qué cambia.
 
 - **Qué entra:** un índice y el valor nuevo: `line.set(1, 'Benny')`.
 - **Qué cambia:** el **valor** del nodo en ese índice. No se agrega ni se quita ningún nodo, así que `head`, `tail` y `length` se quedan exactamente igual.
@@ -22,7 +22,9 @@ linked-list-set
 
 **Qué acaba de pasar:** `set(1, 'Benny')` fue al nodo del índice 1 y cambió su valor de Ben a Benny. El mismo nodo, el mismo lugar en la fila, un valor nuevo. Regresó `true`.
 
-**Error común:** pensar que `set` agrega un invitado en ese índice. Solo cambia a un invitado que ya está ahí. Agregar un nodo nuevo en un índice es `insert`, dentro de dos lecciones.
+**Por dentro:** `set` cambia el `value` del nodo y nada más. El nodo conserva su lugar en la memoria y su `next`, así que ninguna flecha de la lista se mueve. Cualquier otro puntero a ese nodo, de una variable o del nodo de antes, ve el valor nuevo de inmediato.
+
+**Error común:** pensar que `set` agrega a alguien en ese índice. Solo cambia un nodo que ya está ahí. Agregar un nodo nuevo en un índice es `insert`, dentro de dos lecciones.
 
 ## Ejemplos: en rango, fuera de rango, vacía
 
@@ -49,6 +51,23 @@ guests[9] = 'Zoe'
 console.log(guests.length) // 10: el array creció, con espacios vacíos en medio
 ```
 
+Antes de correrlo, predice las dos líneas. Es la idea de set con objetos normales:
+
+```js-run
+const head = { value: 'Ana', next: { value: 'Ben', next: null } }
+
+let target = head.next // como this.get(1)
+target.value = 'Benny' // cambiar el nodo a través del puntero
+target = { value: 'Zoe', next: null } // mover el puntero: la lista ni se entera
+
+console.log(head.next.value)
+console.log(target.value)
+```
+
+**Qué acaba de pasar:** `target.value = 'Benny'` llegó a través del puntero y cambió el nodo de Ben, que está en la lista, así que `head.next.value` imprimió Benny. Apuntar `target` a un objeto nuevo solo cambió la variable: Zoe nunca entró a la fila.
+
+**Por dentro:** regresar `true` o `false` es una forma común de que un método diga "¿funcionó?" cuando no hay nada útil que regresar. Los arrays también lo hacen: `includes` responde sí o no, y nuestro `set` también.
+
 **Error común:** no regresar nada. Sin `true` o `false`, quien intenta `set(9, 'Zoe')` no puede saber que no pasó nada.
 
 ## Dividirlo en pasos
@@ -70,6 +89,8 @@ linked-list-set-plan
 ```
 
 **Qué acaba de pasar:** `this.get(1)` hizo toda la búsqueda y regresó el nodo de Ben. El nodo era truthy, así que su valor cambió a Benny, y `set` regresó `true`. Con el índice 9, `get` regresó `undefined`, el `if` se saltó, y `set` regresó `false`.
+
+**Por dentro:** `this.get(index)` es un método que llama a otro método del mismo objeto. Dentro de `set`, `this` es la lista con la que se llamó a `set`, así que `this.get` recorre **esa** lista. Así se apoyan unos métodos de una clase en otros.
 
 **Error común:** llamar `get(index)` sin `this.`. Dentro de una clase, `get` solo no es una variable, así que es un error ("get is not defined"). A los métodos del mismo objeto se llega con `this`.
 
@@ -145,6 +166,8 @@ console.log(line.set(9, 'Zoe')) // false: no hay índice 9
 console.log(line.length) // 3: set nunca agrega ni quita
 ```
 
+**Por dentro:** en `target.value = value`, los dos `value` son cosas distintas. El de la izquierda, después del punto, es la **propiedad** del nodo. El de la derecha es el **parámetro** que recibió `set`. JavaScript los distingue por el punto, igual que `this.value = value` funcionaba en el constructor de `Node`.
+
 **Error común:** dejar fuera `return true` dentro del `if`. El valor sí cambia, pero luego el código sigue hasta `return false`, así que `set` reporta un error en un cambio que sí funcionó.
 
 ## Revisar
@@ -170,5 +193,7 @@ for (let i = 0; i < sizes.length; i++) {
   console.log(sizes[i] + ' invitados: ' + moves + ' movimientos para llegar al último índice, luego 1 asignación')
 }
 ```
+
+**Por dentro:** reusar `get` no cuesta nada extra en Big O: `set` necesitaría la misma caminata si escribiera su propio bucle. Lo que ahorra es **código**: una caminata, escrita y probada una vez, que usan `set`, `insert` y `remove`. Un error arreglado en `get` queda arreglado en los cuatro.
 
 **Error común:** pensar que `set` es O(1) porque cambiar un valor es O(1). El cambio sí lo es, pero encontrar el nodo no. Cuenta siempre la caminata para llegar ahí.

@@ -1,7 +1,7 @@
 ---
 title: 'insert: add a guest at an index'
 order: 11
-minutes: 15
+minutes: 18
 ---
 
 > **Goal:** write `insert`, the method that adds a new node at any index, by reusing `unshift`, `push` and `get` for the parts they already solve.
@@ -22,6 +22,8 @@ linked-list-insert
 
 **What just happened:** `insert(2, 'Eve')` put a node for Eve at index 2, between Ben and Cleo. Cleo and Dev each moved one index later, to 3 and 4, and the length went from 4 to 5. Then `insert` returned `true`.
 
+**Under the hood:** inside the line, nothing moves. Cleo's and Dev's nodes stay exactly where they are in memory; they only end up one more link away from `head`. That's the difference from an array, where every item after the spot really moves to a new slot.
+
 **Common mistake:** confusing `insert` with `set`. `set(2, 'Eve')` would **replace** Cleo's value. `insert(2, 'Eve')` adds a new guest and keeps Cleo, one index later.
 
 ## Examples: front, back, middle, out of range
@@ -40,6 +42,30 @@ linked-list-insert-examples
 ```
 
 **What just happened:** index 0 put Zoe at the front, the same as unshift. Index 4 put Eve at the back, the same as push. Index 2 linked Eve into the middle. Index 7 was out of range, so nothing changed and insert returned `false`.
+
+Before you run this, predict what each half prints. Both link Eve between Ben and Cleo, in opposite orders:
+
+```js-run
+// right order: Eve holds on to Cleo first, then Ben points to Eve
+const cleo = { value: 'Cleo', next: null }
+const ben = { value: 'Ben', next: cleo }
+const eve = { value: 'Eve', next: null }
+eve.next = ben.next
+ben.next = eve
+console.log(ben.next.value, ben.next.next.value)
+
+// wrong order: Ben lets go of Cleo first
+const cleo2 = { value: 'Cleo', next: null }
+const ben2 = { value: 'Ben', next: cleo2 }
+const eve2 = { value: 'Eve', next: null }
+ben2.next = eve2
+eve2.next = ben2.next
+console.log(eve2.next === eve2) // does Eve's node point to itself?
+```
+
+**What just happened:** in the right order, Ben → Eve → Cleo. In the wrong order, Ben's `next` already pointed to Eve when `eve2.next = ben2.next` ran, so Eve's node pointed to **itself** (`true`), and nothing pointed to Cleo anymore.
+
+**Under the hood:** insert accepts `index === length` but `get` rejects it, and that's correct for both. A list of 4 has nodes at 0–3, so there's nothing to **get** at 4, but there's a spot to **insert** at 4: right after the last node. The valid range depends on the question you're asking.
 
 **Common mistake:** copying get's range check, `index >= this.length`. For insert that's wrong: it rejects `index === length`, so you could never insert at the end.
 
@@ -66,6 +92,8 @@ linked-list-insert-plan
 ```
 
 **What just happened:** index 2 passed the range check and wasn't an end. A node for Eve was made, and `get(1)` walked to Ben, the node before the spot. Eve's `next` was pointed at Cleo, and only then was Ben's `next` pointed at Eve. The length went up to 5, and insert returned `true`.
+
+**Under the hood:** insert calls `get(index - 1)`, not `get(index)`, because a singly linked list can only change the node **before** the spot. To link Eve in, Ben's `next` has to change, and from Cleo there's no way back to Ben.
 
 **Common mistake:** doing step 6 before step 5. After `nodeBefore.next = nodeToAdd`, nothing points to Cleo anymore, so `nodeToAdd.next = nodeBefore.next` points Eve's node at itself, and Cleo and Dev are lost.
 
@@ -189,6 +217,8 @@ console.log(line.toArray().join(' -> ')) // Zoe -> Ana -> Ben -> Cleo -> Dev
 console.log(line.insert(9, 'Eve'), line.length) // false 5
 ```
 
+**Under the hood:** the front and back cases hand the job to `unshift` and `push`, which already keep `head`, `tail` and `length` right. That's why the middle case never has to touch `head` or `tail`: by the time the code reaches it, the new node can't be the first or the last one.
+
 **Common mistake:** adding `this.length++` to the front and back cases too. `unshift` and `push` already add 1 to the length, so doing it again in insert counts the new guest twice.
 
 ## Look back
@@ -214,5 +244,7 @@ for (let index = 0; index <= length; index++) {
   console.log('insert(' + index + '): ' + moves + ' moves')
 }
 ```
+
+**Under the hood:** if a method is already standing on the node before the spot, linking a new node there is O(1): it's the two pointer moves without the walk. Some programs keep a pointer to a node they work near, just to insert next to it in O(1). The O(n) is the walk, never the linking.
 
 **Common mistake:** forgetting the out-of-range case because "nobody will pass a bad index". Someone always does, often off by one, and without the check, `get(index - 1)` returns `undefined` and `undefined.next` crashes.
