@@ -2,9 +2,10 @@ import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { useLanguage } from '../hooks/useLanguage'
 import { localize } from '../lib/course'
+import { isModuleComplete } from '../lib/progress'
 
 // One module on the course home. Modules without content yet are shown,
-// but greyed out and not clickable.
+// but greyed out and not clickable; finished ones get a badge.
 function ModuleCard({ module }) {
   const { t } = useTranslation()
   const { language } = useLanguage()
@@ -40,6 +41,9 @@ function ModuleCard({ module }) {
     )
   }
 
+  const isComplete =
+    lessons.length > 0 && isModuleComplete(module.slug, lessons)
+
   return (
     <li>
       <Link
@@ -47,6 +51,12 @@ function ModuleCard({ module }) {
         className="block h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition motion-safe:hover:-translate-y-0.5 hover:border-brand hover:shadow-md"
       >
         {header}
+        {isComplete && (
+          <p className="mt-2 inline-block rounded-full bg-accent/20 px-2.5 py-0.5 text-xs font-bold">
+            <span aria-hidden="true">🏆 </span>
+            {t('module.completedBadge')}
+          </p>
+        )}
         <p className="mt-3 text-sm text-slate-600">{summary.join(' · ')}</p>
       </Link>
     </li>
