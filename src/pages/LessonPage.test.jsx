@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
@@ -204,6 +204,30 @@ describe('lesson page', () => {
     expect(
       screen.getByText('Step 4 of 5', { selector: 'p' }),
     ).toBeInTheDocument()
+  })
+
+  it('gives the next step its own code, not the code edited on this one', async () => {
+    const user = userEvent.setup()
+    saveProgress('big-o', '01-why-big-o', { ...emptyProgress(), passed: [0] })
+    renderAt(`${LESSON}?step=1`)
+    const [firstBox] = await screen.findAllByRole('textbox', {
+      name: 'Editable JavaScript code',
+    })
+    await user.clear(firstBox)
+    await user.type(firstBox, 'my edit')
+
+    await user.click(nextButton())
+    await screen.findByRole('heading', {
+      level: 2,
+      name: 'Many ways to solve the same problem',
+    })
+    await waitFor(() => {
+      const [nextBox] = screen.getAllByRole('textbox', {
+        name: 'Editable JavaScript code',
+      })
+      expect(nextBox.value).toContain('function reverseWithLoop')
+    })
+    expect(screen.queryByDisplayValue('my edit')).not.toBeInTheDocument()
   })
 
   it('keeps Next locked on an explain step until every point is ticked', async () => {

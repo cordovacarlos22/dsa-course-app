@@ -105,3 +105,25 @@ for (const module of lessonsByModule()) {
     }
   })
 }
+
+// The tests above open each step by its address; a student presses Next, and
+// the next step's code box must start from its own code (#112).
+test('Next gives the next step its own code box', async ({ page }) => {
+  const lesson = lessonsByModule()
+    .find((module) => module.slug === 'big-o')
+    .lessons.find((each) => each.slug === '01-why-big-o')
+  await unlockLesson(page, 'big-o', lesson)
+  await page.goto('/learn/big-o/01-why-big-o?step=1')
+  const firstBox = page.locator('[data-runnable-code]').first()
+  await expect(firstBox.locator('textarea')).toHaveValue(/const sizes/)
+  await firstBox.locator('button', { hasText: '▶' }).click()
+  await expect(firstBox.locator('[role=status]')).toBeVisible()
+
+  await page
+    .getByRole('navigation', { name: /^(Steps|Pasos)$/ })
+    .getByRole('button', { name: /^(Next|Siguiente)/ })
+    .click()
+  await expect(
+    page.locator('[data-runnable-code]').first().locator('textarea'),
+  ).toHaveValue(/function reverseWithLoop/)
+})
