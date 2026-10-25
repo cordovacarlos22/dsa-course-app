@@ -22,7 +22,7 @@ Eso es todo lo que necesita un nodo. `value` guarda el dato, y `next` guarda el 
 linked-list-node
 ```
 
-**Qué acaba de pasar:** sacamos el nodo de Dev de la fila y vimos sus dos partes. El valor es `'Dev'`. El puntero es `next`, que es `null` porque Dev es el último. Juntos forman un solo objeto, y ese objeto es el nodo.
+**Qué acaba de pasar:** sacamos el nodo de Dev de la fila y vimos sus dos partes. El valor es `'Dev'`. El puntero es `next`, que es `null` porque Dev va al final. Juntos forman un solo objeto, y ese objeto es el nodo.
 
 ```js-run
 const dev = { value: 'Dev', next: null }
@@ -33,7 +33,7 @@ console.log(dev.next) // null: Dev todavía no apunta a nada
 
 (La app imprime los objetos en estilo JSON, con comillas alrededor de los nombres de las propiedades. Es el mismo objeto.)
 
-**Por dentro:** los motores de JavaScript notan cuando muchos objetos tienen las mismas propiedades, agregadas en el mismo orden, y los guardan con un formato compacto compartido, así que leer `node.value` sigue siendo rápido. Cada nodo de este módulo es `{ value, next }`, armado igual cada vez. Esa es una razón más para que la próxima lección cree todos los nodos con una sola clase `Node`: la misma forma, siempre.
+**Por dentro:** los motores de JavaScript notan cuando muchos objetos tienen las mismas propiedades, agregadas en el mismo orden, y les dan una misma descripción de su forma, que comparten todos, así que leer `node.value` sigue siendo rápido. Cada nodo de este módulo es `{ value, next }`, armado igual cada vez. Esa es una razón más para que la próxima lección cree todos los nodos con una sola clase `Node`: la misma forma, siempre.
 
 **Error común:** decirle "el nodo" al valor. `dev.value` es solo un string. El nodo es el objeto que guarda el valor y el puntero, y el puntero es lo que lo hace parte de una lista.
 
@@ -72,7 +72,7 @@ dev.value = 'Devon'
 console.log(head.next.next.next.value) // 'Devon': solo hay un nodo de Dev
 ```
 
-**Por dentro:** imprimir tiene que seguir cada `next` para mostrarte el anidado, así que una lista larga se imprime como una escalera profunda de objetos. Las DevTools del navegador no los siguen todos de una vez: muestran los primeros niveles y te dejan dar clic en una flechita para abrir el siguiente. De cualquier forma, son las mismas flechas que se siguen, y nada en la lista cambia cuando la imprimes.
+**Por dentro:** imprimir tiene que seguir cada `next` para mostrarte el anidado, así que una lista larga se imprime como una línea larga de llaves anidadas, una dentro de otra. Las DevTools del navegador no los siguen todos de una vez: muestran los primeros niveles y te dejan dar clic en una flechita para abrir el siguiente. De cualquier forma, son las mismas flechas que se siguen, y nada en la lista cambia cuando la imprimes.
 
 **Error común:** pensar que `cleo.next = dev` guarda una copia del nodo de Dev. Guarda una referencia, así que un cambio hecho a través de `dev` aparece cuando llegas al mismo nodo por la lista, como `'Devon'` arriba.
 
@@ -90,7 +90,7 @@ Casi todos los métodos que vas a escribir en este módulo (pop, get, set, inser
 trace-ll-walk
 ```
 
-**Qué acaba de pasar:** `current` empezó en Ana, donde apunta `head`. En cada vuelta del bucle, saludó al nombre del nodo donde estaba y luego avanzó con `current = current.next`. Después del último nodo, `current` se volvió `null`, y la condición `current !== null` terminó el bucle. Con una fila vacía, `head` ya era `null`, así que el bucle nunca corrió. Elige 5 nombres y cuenta: el recorrido visita cada nodo exactamente una vez.
+**Qué acaba de pasar:** `current` empezó en Ana, donde apunta `head`. En cada vuelta del bucle, saludó a quien estaba en ese nodo y luego avanzó con `current = current.next`. Después del último nodo, `current` se volvió `null`, y la condición `current !== null` terminó el bucle. Con una fila vacía, `head` ya era `null`, así que el bucle nunca corrió. Elige 5 nombres y cuenta: el recorrido visita cada nodo exactamente una vez.
 
 ```js-run
 const head = {

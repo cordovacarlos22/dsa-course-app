@@ -65,7 +65,7 @@
       },
       "explanation": {
         "en": "`head.next` is Ben's node, the inner object. Ben is last, so Ben's `next` is `null`. That `null` is the end of the list.",
-        "es": "`head.next` es el nodo de Ben, el objeto de adentro. Ben es el último, así que el `next` de Ben es `null`. Ese `null` es el final de la lista."
+        "es": "`head.next` es el nodo de Ben, el objeto de adentro. Ben va al final de la fila, así que el `next` de Ben es `null`. Ese `null` es el final de la lista."
       }
     },
     {

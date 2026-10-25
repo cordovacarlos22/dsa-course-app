@@ -32,7 +32,7 @@ console.log(line[2]) // undefined: there are no indexes
 console.log(line.next.next.value) // 'Cleo': follow the links instead
 ```
 
-**Under the hood:** every time your code creates an object, the JavaScript engine finds a free spot for it in a big area of memory called the **heap**. Objects made at different moments land wherever there's room, so the nodes of one list usually end up scattered. That's why a node has to remember where the next one is: nothing else knows. It also means each node costs a little more memory than an array slot, because it stores a pointer next to its value.
+**Under the hood:** every time your code creates an object, the JavaScript engine finds a free spot for it in a big area of memory called the **heap**. Nothing keeps the nodes of one list together: as a list grows and changes, its nodes end up spread around memory. That's why a node has to remember where the next one is: nothing else knows. It also means each node costs a little more memory than an array slot, because it stores a pointer next to its value.
 
 **Common mistake:** typing `list[2]` out of habit. A linked list has no index to jump to. To get the third guest, you start at the first one and follow two links.
 

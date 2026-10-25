@@ -32,7 +32,7 @@ console.log(line[2]) // undefined: no hay índices
 console.log(line.next.next.value) // 'Cleo': mejor sigue los enlaces
 ```
 
-**Por dentro:** cada vez que tu código crea un objeto, el motor de JavaScript le busca un lugar libre en una zona grande de la memoria llamada el **heap**. Los objetos creados en momentos distintos quedan donde haya espacio, así que los nodos de una misma lista casi siempre terminan dispersos. Por eso un nodo tiene que recordar dónde está el siguiente: nadie más lo sabe. También significa que cada nodo ocupa un poco más de memoria que un espacio de un array, porque guarda un puntero además de su valor.
+**Por dentro:** cada vez que tu código crea un objeto, el motor de JavaScript le busca un lugar libre en una zona grande de la memoria llamada el **heap**. Nada mantiene juntos los nodos de una lista: a medida que la lista crece y cambia, sus nodos terminan repartidos por la memoria. Por eso un nodo tiene que recordar dónde está el siguiente: nadie más lo sabe. También significa que cada nodo ocupa un poco más de memoria que un espacio de un array, porque guarda un puntero además de su valor.
 
 **Error común:** escribir `list[2]` por costumbre. Una lista enlazada no tiene ningún índice al cual saltar. Para llegar al tercer nombre de la fila, empiezas en el primero y sigues dos enlaces.
 

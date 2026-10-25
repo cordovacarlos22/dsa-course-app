@@ -33,7 +33,7 @@ console.log(dev.next) // null: Dev doesn't point anywhere yet
 
 (The app prints objects in JSON style, with quotes around the property names. It's the same object.)
 
-**Under the hood:** JavaScript engines notice when many objects have the same properties, added in the same order, and store them in a compact shared layout, so reading `node.value` stays fast. Every node in this module is `{ value, next }`, built the same way each time. That's one more reason the next lesson makes all nodes with one `Node` class: the same shape, every time.
+**Under the hood:** JavaScript engines notice when many objects have the same properties, added in the same order, and give them one shared description of their shape, so reading `node.value` stays fast. Every node in this module is `{ value, next }`, built the same way each time. That's one more reason the next lesson makes all nodes with one `Node` class: the same shape, every time.
 
 **Common mistake:** calling the value "the node". `dev.value` is just a string. The node is the object that holds the value and the pointer, and the pointer is what makes it part of a list.
 
@@ -72,7 +72,7 @@ dev.value = 'Devon'
 console.log(head.next.next.next.value) // 'Devon': there's only one Dev node
 ```
 
-**Under the hood:** printing has to follow every `next` to show you the nesting, so a long list prints as a deep staircase of objects. The browser's DevTools don't follow them all at once: they show the first levels and let you click a small arrow to open the next one. Either way, it's the same arrows being followed, and nothing in the list changes when you print it.
+**Under the hood:** printing has to follow every `next` to show you the nesting, so a long list prints as one long line of braces nested inside braces. The browser's DevTools don't follow them all at once: they show the first levels and let you click a small arrow to open the next one. Either way, it's the same arrows being followed, and nothing in the list changes when you print it.
 
 **Common mistake:** thinking `cleo.next = dev` stores a copy of Dev's node. It stores a reference, so a change made through `dev` shows up when you reach the same node through the list, like `'Devon'` above.
 
