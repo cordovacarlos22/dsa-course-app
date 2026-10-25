@@ -259,6 +259,6 @@ for (let index = 0; index < length; index++) {
 }
 ```
 
-**Por dentro:** una lista doblemente enlazada hace O(1) quitar un nodo que **ya tienes**: desde el nodo mismo, `prev` y `next` te dan a los dos vecinos, sin caminar. Por eso los navegadores y los editores usan listas así para cosas que quitan seguido, como los pasos detrás del botón de deshacer.
+**Por dentro:** una lista doblemente enlazada hace O(1) quitar un nodo que **ya tienes**: desde el nodo mismo, `prev` y `next` te dan a los dos vecinos, sin caminar. Por eso los programas que seguido quitan el elemento en el que están parados, como un reproductor de música que saca de su cola la canción que suena, usan listas así.
 
 **Error común:** suponer que el último nodo es el más barato de quitar porque está "al final". En una lista enlazada simple, el final es el lugar caro. Quitarlo pasa por pop, que recorre toda la fila.

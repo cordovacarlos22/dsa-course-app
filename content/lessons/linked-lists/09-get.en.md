@@ -175,7 +175,7 @@ console.log(line.get(4)) // undefined
 console.log(line.get(-1)) // undefined
 ```
 
-**Under the hood:** the walk can never crash, even though it reads `current.next` on every move. The range check guarantees `index` is at most `length - 1`, and the loop moves exactly `index` times, so every `next` it reads belongs to a node that's really in the line.
+**Under the hood:** `current` is a local variable: it only exists while `get` runs. When `get` returns, the variable is gone, but the node it pointed to isn't. It's still in the line, and now the caller holds a pointer to it too. Returning a node never takes it out of the list.
 
 **Common mistake:** returning `null` for an index that doesn't exist. It works, but it's a different answer from an array's `undefined`, and from what `pop` and `shift` return on an empty list. One "nothing there" value across the class is easier to check.
 
@@ -201,6 +201,6 @@ for (let index = 0; index < length; index++) {
 }
 ```
 
-**Under the hood:** a doubly linked list can make `get` about twice as fast in practice: for an index past the middle, it walks backwards from `tail` with `prev`. It's still O(n), because the constant drops, but it's a real trick you'll meet in the Doubly Linked Lists module.
+**Under the hood:** a doubly linked list can make `get` about twice as fast in practice: for an index past the middle, it walks backwards from `tail` with `prev`. That's at most n/2 steps instead of n, a smaller constant, but the walk still grows with the line, so it's still O(n). It's a real trick you'll meet in the Doubly Linked Lists module.
 
 **Common mistake:** calling `get` inside a loop to visit every node: `for (let i = 0; i < line.length; i++) { line.get(i) }`. Each `get` walks from the start again, so the loop does 0 + 1 + 2 + … moves: O(n²). To visit every node, walk once with `current`, like `toArray` does.

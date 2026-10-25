@@ -66,7 +66,7 @@ console.log(target.value)
 
 **Qué acaba de pasar:** `target.value = 'Benny'` llegó a través del puntero y cambió el nodo de Ben, que está en la lista, así que `head.next.value` imprimió Benny. Apuntar `target` a un objeto nuevo solo cambió la variable: Zoe nunca entró a la fila.
 
-**Por dentro:** regresar `true` o `false` es una forma común de que un método diga "¿funcionó?" cuando no hay nada útil que regresar. Los arrays también lo hacen: `Array.isArray` e `includes` responden sí o no, y nuestro `set` también.
+**Por dentro:** regresar `true` o `false` es una forma común de que un método diga "¿funcionó?" cuando no hay nada útil que regresar. Los arrays también lo hacen: `includes` responde sí o no, y nuestro `set` también.
 
 **Error común:** no regresar nada. Sin `true` o `false`, quien intenta `set(9, 'Zoe')` no puede saber que no pasó nada.
 

@@ -175,7 +175,7 @@ console.log(line.get(4)) // undefined
 console.log(line.get(-1)) // undefined
 ```
 
-**Por dentro:** la caminata nunca puede tronar, aunque lee `current.next` en cada movimiento. La revisión del rango garantiza que `index` es como mucho `length - 1`, y el bucle se mueve exactamente `index` veces, así que cada `next` que lee pertenece a un nodo que de verdad está en la fila.
+**Por dentro:** `current` es una variable local: solo existe mientras corre `get`. Cuando `get` regresa, la variable desaparece, pero el nodo al que apuntaba no. Sigue en la fila, y ahora quien llamó también tiene un puntero a él. Regresar un nodo nunca lo saca de la lista.
 
 **Error común:** regresar `null` para un índice que no existe. Funciona, pero es una respuesta distinta al `undefined` de un array, y a lo que regresan `pop` y `shift` con una lista vacía. Un solo valor para "aquí no hay nada" en toda la clase es más fácil de revisar.
 
@@ -201,6 +201,6 @@ for (let index = 0; index < length; index++) {
 }
 ```
 
-**Por dentro:** una lista doblemente enlazada puede hacer `get` cerca del doble de rápido en la práctica: para un índice después de la mitad, camina hacia atrás desde `tail` con `prev`. Sigue siendo O(n), porque la constante se descarta, pero es un truco real que vas a ver en el módulo de Listas doblemente enlazadas.
+**Por dentro:** una lista doblemente enlazada puede hacer `get` cerca del doble de rápido en la práctica: para un índice después de la mitad, camina hacia atrás desde `tail` con `prev`. Son como mucho n/2 pasos en vez de n, una constante más chica, pero la caminata sigue creciendo con la fila, así que sigue siendo O(n). Es un truco real que vas a ver en el módulo de Listas doblemente enlazadas.
 
 **Error común:** llamar `get` dentro de un bucle para visitar todos los nodos: `for (let i = 0; i < line.length; i++) { line.get(i) }`. Cada `get` vuelve a caminar desde el inicio, así que el bucle hace 0 + 1 + 2 + … movimientos: O(n²). Para visitar todos los nodos, camina una sola vez con `current`, como hace `toArray`.

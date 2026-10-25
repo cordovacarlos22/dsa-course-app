@@ -50,7 +50,7 @@ console.log(guests) // reversed in place
 console.log(sameArray === guests) // true: no new array was made
 ```
 
-Before you run this, predict the order it prints. It's reverse's loop with plain objects:
+Before you run this, predict the order it prints. It's reverse's flipping idea with plain objects, using a `while` loop that walks until `null` (the lesson's method counts with a `for` loop instead):
 
 ```js-run
 let head = { value: 'Ana', next: { value: 'Ben', next: { value: 'Cleo', next: null } } }
@@ -76,7 +76,7 @@ console.log(order)
 
 **What just happened:** each round flipped one arrow, so after three rounds every node pointed to the one that used to come before it. `previous` ended on Cleo, the new first node, and walking from there printed Cleo Ben Ana.
 
-**Under the hood:** a list of one is its own reverse, and so is an empty list, but the code doesn't need special cases for them. With one node, the loop flips that node's arrow to `null`, which it already was; with none, the loop never runs. The general code handles both.
+**Under the hood:** an array's `reverse()` is in place too, but it moves **values**: it swaps the first item with the last, the second with the second-to-last, and so on, about n/2 swaps. It can do that because it jumps to any index. A linked list can't jump to its last node, so it does the opposite: every value stays in its node, and the arrows turn around.
 
 **Common mistake:** checking only the many-guests example. The empty line is the one that crashes a careless reverse, as you'll see in step 4.
 
@@ -191,7 +191,7 @@ console.log(line.head.value, line.tail.value) // Dev Ana
 console.log(new LinkedList().reverse().length) // 0: the empty line is fine
 ```
 
-**Under the hood:** the head-and-tail swap needs a spare variable for the same reason swapping two cups of juice needs a third cup. `this.head = this.tail` would overwrite the only pointer to the old first node, so it's saved in `current` first. Every swap of two variables works this way.
+**Under the hood:** the head-and-tail swap needs a spare variable for the same reason swapping two cups of juice needs a third cup. `this.head = this.tail` would overwrite the only pointer to the old first node, so it's saved in `current` first. That's the classic way to swap two variables. (JavaScript also has a one-line swap, `[a, b] = [b, a]`, but the spare variable shows what has to be saved.)
 
 **Common mistake:** writing the four loop lines in another order. Each line needs the one before it: `nextNode` must be saved before the flip, and `previous` must move before `current` does, or `previous` would land on the wrong node.
 

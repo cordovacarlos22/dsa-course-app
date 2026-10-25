@@ -50,7 +50,7 @@ console.log(guests) // volteado en su lugar
 console.log(sameArray === guests) // true: no se creó un array nuevo
 ```
 
-Antes de correrlo, predice el orden que imprime. Es el bucle de reverse con objetos normales:
+Antes de correrlo, predice el orden que imprime. Es la idea de voltear de reverse con objetos normales, con un bucle `while` que camina hasta `null` (el método de la lección cuenta con un bucle `for`):
 
 ```js-run
 let head = { value: 'Ana', next: { value: 'Ben', next: { value: 'Cleo', next: null } } }
@@ -76,7 +76,7 @@ console.log(order)
 
 **Qué acaba de pasar:** cada vuelta volteó una flecha, así que después de tres vueltas cada nodo apuntaba al que antes iba delante de él. `previous` terminó en Cleo, el nuevo primer nodo, y recorrer desde ahí imprimió Cleo Ben Ana.
 
-**Por dentro:** una lista de uno es su propio reverso, y una lista vacía también, pero el código no necesita casos especiales para ellas. Con un nodo, el bucle voltea la flecha de ese nodo a `null`, que ya lo era; con ninguno, el bucle nunca corre. El código general resuelve los dos.
+**Por dentro:** el `reverse()` de un array también es en el lugar, pero mueve **valores**: intercambia el primer elemento con el último, el segundo con el penúltimo, y así, unos n/2 intercambios. Puede hacerlo porque salta a cualquier índice. Una lista enlazada no puede saltar a su último nodo, así que hace lo contrario: cada valor se queda en su nodo, y las flechas se dan la vuelta.
 
 **Error común:** probar solo el ejemplo de muchos invitados. La fila vacía es la que hace tronar un reverse descuidado, como vas a ver en el paso 4.
 
@@ -123,7 +123,7 @@ Por eso `nextNode` empieza en `null`. Una versión que empieza con `let nextNode
 trace-ll-reverse
 ```
 
-**Qué acaba de pasar:** con 4 invitados, el intercambio puso `head` en Dev y `tail` en Ana, y luego cada vuelta guardó `nextNode`, volteó la flecha de `current` hacia `previous`, y avanzó los dos. Después de la última vuelta, `current` y `nextNode` eran `null` y `previous` estaba en Dev, el nuevo primer nodo. Con 1 nombre, una vuelta no cambió nada. Con 0 invitados, el bucle nunca corrió.
+**Qué acaba de pasar:** con 4 invitados, el intercambio puso `head` en Dev y `tail` en Ana, y luego cada vuelta guardó `nextNode`, volteó la flecha de `current` hacia `previous`, y avanzó los dos. Después de la última vuelta, `current` y `nextNode` eran `null` y `previous` estaba en Dev, el nuevo primer nodo. Con 1 nombre, una vuelta no cambió nada. Con 0 nombres, el bucle nunca corrió.
 
 ```js-run
 class Node {
@@ -191,7 +191,7 @@ console.log(line.head.value, line.tail.value) // Dev Ana
 console.log(new LinkedList().reverse().length) // 0: la fila vacía funciona
 ```
 
-**Por dentro:** intercambiar head y tail necesita una variable extra por la misma razón que intercambiar dos vasos de jugo necesita un tercer vaso. `this.head = this.tail` sobrescribiría el único puntero al que era el primer nodo, así que primero se guarda en `current`. Todo intercambio de dos variables funciona así.
+**Por dentro:** intercambiar head y tail necesita una variable extra por la misma razón que intercambiar dos vasos de jugo necesita un tercer vaso. `this.head = this.tail` sobrescribiría el único puntero al que era el primer nodo, así que primero se guarda en `current`. Esa es la forma clásica de intercambiar dos variables. (JavaScript también tiene un intercambio en una línea, `[a, b] = [b, a]`, pero la variable extra muestra qué hay que guardar.)
 
 **Error común:** escribir las cuatro líneas del bucle en otro orden. Cada línea necesita la anterior: `nextNode` se tiene que guardar antes del volteo, y `previous` se tiene que mover antes que `current`, o `previous` caería en el nodo equivocado.
 

@@ -66,7 +66,7 @@ console.log(target.value)
 
 **What just happened:** `target.value = 'Benny'` reached through the pointer and changed Ben's node, which is in the list, so `head.next.value` printed Benny. Pointing `target` at a brand-new object only changed the variable: Zoe never joined the line.
 
-**Under the hood:** returning `true` or `false` is a common way for a method to report "did it work?" when there's nothing useful to hand back. Arrays do it too: `Array.isArray` and `includes` answer yes or no, and so does our `set`.
+**Under the hood:** returning `true` or `false` is a common way for a method to report "did it work?" when there's nothing useful to hand back. Arrays do it too: `includes` answers yes or no, and so does our `set`.
 
 **Common mistake:** returning nothing. Without `true` or `false`, a caller who tries `set(9, 'Zoe')` can't tell that nothing happened.
 

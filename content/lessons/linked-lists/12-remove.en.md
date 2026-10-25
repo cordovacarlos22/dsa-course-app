@@ -259,6 +259,6 @@ for (let index = 0; index < length; index++) {
 }
 ```
 
-**Under the hood:** a doubly linked list makes removing a node you **already have** O(1): from the node itself, `prev` and `next` give both neighbors, with no walk. That's why browsers and editors keep lists like that for things they remove often, like the steps behind an undo button.
+**Under the hood:** a doubly linked list makes removing a node you **already have** O(1): from the node itself, `prev` and `next` give both neighbors, with no walk. That's why programs that often remove the item they're standing on, like a music player dropping the song that's playing from its queue, keep lists like that.
 
 **Common mistake:** assuming the last guest is the cheapest to remove because it's "at the end". In a singly linked list, the end is the expensive spot. Removing it goes through pop, which walks the whole line.

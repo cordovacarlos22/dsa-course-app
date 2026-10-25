@@ -244,8 +244,8 @@
           "es": "Dice que el medio llega al nodo antes del lugar con `get(index - 1)`"
         },
         {
-          "en": "Says the new node is linked to the next node before the node before is pointed at it",
-          "es": "Dice que el nodo nuevo se enlaza al siguiente antes de que el nodo de antes le apunte"
+          "en": "Says the new node is linked to the next node first, and only then does the node before point to it",
+          "es": "Dice que primero el nodo nuevo se enlaza al siguiente, y solo después el nodo de antes le apunta"
         },
         {
           "en": "Says it's O(n) because of the walk, and the linking is O(1)",
