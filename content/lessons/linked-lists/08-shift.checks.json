@@ -9,19 +9,19 @@
       "options": [
         {
           "en": "Adds a guest at the front",
-          "es": "Agrega un invitado al inicio"
+          "es": "Agrega a alguien al inicio"
         },
         {
           "en": "Removes the last guest and returns it",
-          "es": "Quita al último invitado y lo regresa"
+          "es": "Quita a la última persona y regresa su nodo"
         },
         {
           "en": "Removes the first guest and returns that node",
-          "es": "Quita al primer invitado y regresa ese nodo"
+          "es": "Quita a la primera persona y regresa ese nodo"
         },
         {
           "en": "Moves every guest one place forward",
-          "es": "Recorre a cada invitado un lugar hacia adelante"
+          "es": "Recorre cada nombre un lugar hacia adelante"
         }
       ],
       "answer": 2,
@@ -31,23 +31,23 @@
       },
       "explanation": {
         "en": "`shift` removes the first node and returns it: `head` moves to the second guest and `length` goes down by 1. Nobody else moves.",
-        "es": "`shift` quita el primer nodo y lo regresa: `head` se mueve al segundo invitado y `length` baja 1. Nadie más se mueve."
+        "es": "`shift` quita el primer nodo y lo regresa: `head` se mueve al segundo nodo y `length` baja 1. Nadie más se mueve."
       }
     },
     {
       "type": "choice",
       "question": {
         "en": "You `shift()` a list with **one** guest. After `this.head = this.head.next`, what still needs fixing?",
-        "es": "Haces `shift()` en una lista con **un** invitado. Después de `this.head = this.head.next`, ¿qué falta arreglar?"
+        "es": "Haces `shift()` en una lista con **un** nombre. Después de `this.head = this.head.next`, ¿qué falta arreglar?"
       },
       "options": [
         {
           "en": "`tail`: it still points to the guest who left",
-          "es": "`tail`: todavía apunta al invitado que se fue"
+          "es": "`tail`: todavía apunta al nodo de quien se fue"
         },
         {
           "en": "`head`: it still points to the guest who left",
-          "es": "`head`: todavía apunta al invitado que se fue"
+          "es": "`head`: todavía apunta al nodo de quien se fue"
         },
         {
           "en": "Nothing: the list is already empty",
@@ -99,7 +99,7 @@
       },
       "explanation": {
         "en": "The removed node still points to the second guest. Returning it like that would hand over the rest of the line too. `oldHead.next = null` cuts that last arrow.",
-        "es": "El nodo que se quitó todavía apunta al segundo invitado. Regresarlo así entregaría también el resto de la fila. `oldHead.next = null` corta esa última flecha."
+        "es": "El nodo que se quitó todavía apunta al segundo nodo. Regresarlo así entregaría también el resto de la fila. `oldHead.next = null` corta esa última flecha."
       }
     },
     {
@@ -224,38 +224,33 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "A ticket counter: guests join at the back and are served from the front. Which two methods of our linked list do that, both in O(1)?",
-        "es": "Una taquilla: los invitados se forman al final y los atienden por el inicio. ¿Qué dos métodos de nuestra lista enlazada hacen eso, los dos en O(1)?"
+        "en": "In your own words: what does `shift` do, why does it set `oldHead.next = null`, what changes with only one node, and what's its Big O?",
+        "es": "Con tus palabras: ¿qué hace `shift`, por qué pone `oldHead.next = null`, qué cambia cuando hay un solo nodo, y cuál es su Big O?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "On an empty list it returns `undefined`. Otherwise it keeps a pointer to the first node in `oldHead`, moves `head` to `head.next`, cuts `oldHead.next` so the returned node doesn't still reach into the list, lowers `length` and returns `oldHead`. With one node, `head` becomes `null` by itself, but `tail` still points to the removed node, so when `length` reaches 0, `tail` must be set to `null` too. It never walks, so it's O(1) time and O(1) space, while an array's `shift` is O(n).",
+        "es": "En una lista vacía regresa `undefined`. Si no, guarda un puntero al primer nodo en `oldHead`, mueve `head` a `head.next`, corta `oldHead.next` para que el nodo regresado ya no llegue a la lista, baja `length` y regresa `oldHead`. Con un nodo, `head` se vuelve `null` solo, pero `tail` todavía apunta al nodo quitado, así que cuando `length` llega a 0, `tail` también tiene que quedar en `null`. Nunca camina, así que es O(1) en tiempo y O(1) en espacio, mientras que el `shift` de un array es O(n)."
+      },
+      "checklist": [
         {
-          "en": "`push` and `pop`",
-          "es": "`push` y `pop`"
+          "en": "Says it keeps the old first node, then moves `head` to `head.next`",
+          "es": "Dice que guarda el que era el primer nodo y luego mueve `head` a `head.next`"
         },
         {
-          "en": "`unshift` and `pop`",
-          "es": "`unshift` y `pop`"
+          "en": "Says `oldHead.next = null` stops the returned node from reaching the list",
+          "es": "Dice que `oldHead.next = null` evita que el nodo regresado llegue a la lista"
         },
         {
-          "en": "`unshift` and `shift`",
-          "es": "`unshift` y `shift`"
+          "en": "Says with one node `tail` must also become `null`",
+          "es": "Dice que con un nodo `tail` también tiene que quedar en `null`"
         },
         {
-          "en": "`push` and `shift`",
-          "es": "`push` y `shift`"
+          "en": "Says it's O(1), while an array's `shift` is O(n)",
+          "es": "Dice que es O(1), mientras que el `shift` de un array es O(n)"
         }
-      ],
-      "answer": 3,
-      "hint": {
-        "en": "Joining at the back is one method; leaving from the front is another.",
-        "es": "Formarse al final es un método; salir por el inicio es otro."
-      },
-      "explanation": {
-        "en": "`push` adds at the back and `shift` removes from the front, and both are O(1) in a linked list. That pair is a queue. (`pop` would be O(n).)",
-        "es": "`push` agrega al final y `shift` quita del inicio, y los dos son O(1) en una lista enlazada. Esa pareja es una cola. (`pop` sería O(n).)"
-      }
+      ]
     }
   ]
 }

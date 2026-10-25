@@ -1,7 +1,7 @@
 ---
 title: 'push: add a guest at the back'
 order: 5
-minutes: 14
+minutes: 16
 ---
 
 > **Goal:** write `push`, the method that adds a node to the end of the list, with the 5 steps: understand, examples, break it down, write the code, look back.
@@ -32,6 +32,8 @@ line.tail.value // 'Cleo'
 line.length // 3
 ```
 
+**Under the hood:** `return this` hands back a **reference** to the same list, not a copy. So `line.push('Dev') === line` is `true`: whatever you call next on the result runs on `line` itself.
+
 **Common mistake:** expecting `push` to return the new length, like an array's `push`. Our linked list's `push` returns the list (`this`). If you need the length, read `line.length`.
 
 ## Examples: empty, one guest, many guests
@@ -60,6 +62,8 @@ tail.next = nodeToAdd // there's no node here to set next on
 
 That `TypeError` is what a `push` without an empty-list check would do the first time it's used on an empty list.
 
+**Under the hood:** every method in this module keeps three facts in agreement: `head` is `null` exactly when `tail` is `null`, and exactly when `length` is 0. The empty-list example is where that agreement is easiest to break, which is why it comes first.
+
 **Common mistake:** testing only with a list that already has guests. The empty list is the first example to try, because it's the one that crashes.
 
 ## Break it down
@@ -85,6 +89,8 @@ linked-list-push-plan
 ```
 
 **What just happened:** we played the plan on a line of three. The new node was made first. The line wasn't empty, so step 2 was skipped. Cleo's `next` was pointed at the new node, then `tail` moved to it, then the length went up. With an empty line, step 2 alone would have pointed `head` and `tail` at the node.
+
+**Under the hood:** push never sets the new node's `next`. It doesn't have to: the `Node` constructor already started it at `null`, and a node added at the back is the new end of the line. The `Node` class quietly takes care of the end marker.
 
 **Common mistake:** swapping steps 3a and 3b. If `tail` moves first, then `this.tail.next = nodeToAdd` makes the new node point to **itself**, and the old last node, Cleo, still points to `null`. Walking from `head` would never reach Dev. `tail` is your only quick way to the old last node, so use it before you move it.
 
@@ -165,6 +171,8 @@ console.log(line.toArray().join(' -> ')) // Ana -> Ben -> Cleo
 console.log(line.head.value, line.tail.value, line.length) // Ana Cleo 3
 ```
 
+**Under the hood:** `this.tail.next = nodeToAdd` and `this.tail = nodeToAdd` look alike but do different jobs, the two from the Under the Hood lesson. The first has a dot before the `=`, so it **changes a node**: the old last node now points to the new one. The second **moves a pointer**: the list's `tail` now points somewhere else.
+
 **Common mistake:** forgetting `this.length++` or `return this`. The list still looks right when you print it, but `length` is wrong, and every method that trusts `length` (you'll write a few) breaks later.
 
 ## Look back
@@ -225,5 +233,7 @@ const line = new LinkedList().push('Ana').push('Ben').push('Cleo')
 console.log(line.length) // 3
 console.log(line.tail.value) // Cleo
 ```
+
+**Under the hood:** `tail` is a classic trade: the list stores one extra pointer, O(1) more memory, and in return push never walks. You'll see this deal again and again: keep a little extra information so an operation doesn't have to search for it.
 
 **Common mistake:** "simplifying" push by deleting the `if`. Without it, push crashes on the empty list. A refactor has to keep every example working, not just the main one.

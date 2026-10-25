@@ -1,7 +1,7 @@
 ---
 title: 'shift: remove the guest at the front'
 order: 8
-minutes: 14
+minutes: 16
 ---
 
 > **Goal:** write `shift`, the method that removes the first node and returns it, cleanly cut off from the rest of the line.
@@ -21,6 +21,8 @@ linked-list-shift
 ```
 
 **What just happened:** the line was Ana, Ben, Cleo. `shift()` took Ana's node off the front, `head` moved to Ben, and the length went from 3 to 2. Then it returned Ana's node, cut off from the line.
+
+**Under the hood:** shift returns the whole node, like pop, so the two removing methods behave the same way. The caller gets the value with `.value`, and a list of nodes stays a list of nodes.
 
 **Common mistake:** confusing `shift` and `unshift`. `unshift` **adds** at the front, `shift` **removes** from the front. One way to remember: the longer name does the adding.
 
@@ -47,6 +49,8 @@ console.log(nobody.shift()) // undefined
 const justAna = ['Ana']
 console.log(justAna.shift(), justAna.length) // Ana 0
 ```
+
+**Under the hood:** `this.head = this.head.next` works because JavaScript works out the right side's value before it changes `head`. It reads `this.head.next`, the second node (or `null`), while `head` still points to the first one, and only then moves `head`. That one line is safe whenever there's a first node, the one-node line included; the empty line never reaches it, because the first `if` returns.
 
 **Common mistake:** handling the one-guest case like pop does, resetting both `head` and `tail`. That works, but it hides how shift is different: `head` becomes `null` on its own, because the only node's `next` was `null`. Only `tail` needs the extra help.
 
@@ -89,6 +93,8 @@ console.log(oldHead) // Ana's node is out of the line, but still holds Ben and C
 oldHead.next = null
 console.log(oldHead) // now it's only Ana
 ```
+
+**Under the hood:** `oldHead.next = null` doesn't free memory right away: the node is still held by `oldHead`, and soon by whoever receives it. It's about **correctness**: it makes sure the returned node can't reach into the line. It also matters for memory later: if some code keeps the returned node after the list itself is gone, an uncut `next` would keep the rest of the chain reachable, so the garbage collector couldn't free it.
 
 **Common mistake:** skipping `oldHead.next = null`. The list itself is fine without it, but the returned node still points into the line, so code that uses it can reach, and even change, guests who are still in the list.
 
@@ -171,6 +177,8 @@ console.log(line.shift()) // undefined: an empty line
 console.log(line.head, line.tail, line.length) // null null 0
 ```
 
+**Under the hood:** after `this.length--`, checking `this.length === 0` and checking `this.head === null` give the same answer, because every method keeps `head` and `length` in agreement. We check the length, the same way pop does, so the two methods read alike.
+
 **Common mistake:** forgetting the `length === 0` check. The line looks empty from `head`, but `tail` still holds the guest who left: `line.tail.value` would still say `'Ana'` for an empty line. Any method that trusts `tail` to be the last guest would then work with someone who isn't in the line anymore.
 
 ## Look back
@@ -230,5 +238,7 @@ while (counter.length > 0) {
   console.log('Now serving ' + counter.shift().value)
 }
 ```
+
+**Under the hood:** `push` at the back plus `shift` at the front is a **queue**: first in, first out, like the ticket counter. On our linked list both are O(1), so serving n guests costs O(n) in total. The Stacks & Queues module builds one, with these exact two moves.
 
 **Common mistake:** using an array as a long queue with `push` and `shift`. It works, but every `shift` moves the whole line, so serving n guests costs O(n²) in total. A linked list serves them in O(n).

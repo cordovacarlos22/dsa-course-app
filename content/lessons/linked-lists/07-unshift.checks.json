@@ -17,11 +17,11 @@
         },
         {
           "en": "Every guest moves back one index",
-          "es": "Cada invitado se recorre un índice"
+          "es": "Cada nombre se recorre un índice"
         },
         {
           "en": "Zoe replaces the first guest",
-          "es": "Zoe reemplaza al primer invitado"
+          "es": "Zoe reemplaza a la primera persona"
         }
       ],
       "answer": 1,
@@ -31,14 +31,14 @@
       },
       "explanation": {
         "en": "Zoe's node goes in front, so `head` moves to it and the length grows by 1. Nothing else moves: there are no indexes to update, and `tail` is still on the last guest.",
-        "es": "El nodo de Zoe va al frente, así que `head` se mueve a él y la longitud crece 1. Nada más se mueve: no hay índices que actualizar, y `tail` sigue en el último invitado."
+        "es": "El nodo de Zoe va al frente, así que `head` se mueve a él y la longitud crece 1. Nada más se mueve: no hay índices que actualizar, y `tail` sigue en el último nodo."
       }
     },
     {
       "type": "choice",
       "question": {
         "en": "You `unshift('Zoe')` onto a list with **one** guest, Ana. Where is `tail` afterwards?",
-        "es": "Haces `unshift('Zoe')` en una lista con **un** invitado, Ana. ¿Dónde queda `tail` después?"
+        "es": "Haces `unshift('Zoe')` en una lista con **un** nombre, Ana. ¿Dónde queda `tail` después?"
       },
       "options": [
         {
@@ -61,7 +61,7 @@
       "answer": 0,
       "hint": {
         "en": "Who is last in the line after Zoe joins at the front?",
-        "es": "¿Quién es el último de la fila después de que Zoe se forma al inicio?"
+        "es": "¿Qué nodo queda al final de la fila después de que Zoe se forma al inicio?"
       },
       "explanation": {
         "en": "Zoe joins at the front, so Ana is still the last guest and `tail` stays on Ana's node. Only an empty list needs `tail` set by unshift.",
@@ -225,38 +225,33 @@
       ]
     },
     {
-      "type": "choice",
+      "type": "explain",
       "question": {
-        "en": "You add 10,000 guests, one at a time, at the **front**. Which structure does each add in O(1)?",
-        "es": "Agregas 10,000 invitados, uno por uno, al **inicio**. ¿Qué estructura hace cada agregado en O(1)?"
+        "en": "In your own words: what does `unshift` do, why must the new node be linked before `head` moves, and why is it O(1) when an array's `unshift` is O(n)?",
+        "es": "Con tus palabras: ¿qué hace `unshift`, por qué hay que enlazar el nodo nuevo antes de mover `head`, y por qué es O(1) cuando el `unshift` de un array es O(n)?"
       },
-      "options": [
+      "modelAnswer": {
+        "en": "It makes a new node and puts it at the front. If the list is empty, the new node becomes both `head` and `tail`. Otherwise the new node's `next` is pointed at the current first node, and only then does `head` move to the new node: if `head` moved first, nothing would point to the old first node and the rest of the list would be lost. Then `length` goes up and the list is returned. No other node is touched, so it's O(1). An array has to move every item over to give it a new index, which is O(n).",
+        "es": "Crea un nodo nuevo y lo pone al inicio. En una lista vacía, `head` y `tail` le apuntan los dos. Si no, el `next` del nodo nuevo apunta al primer nodo actual, y solo después `head` se mueve al nodo nuevo: si `head` se moviera primero, nada apuntaría al que era el primer nodo y se perdería el resto de la lista. Luego `length` sube y se regresa la lista. No toca ningún otro nodo, así que es O(1). Un array tiene que recorrer cada elemento para darle un índice nuevo, y eso es O(n)."
+      },
+      "checklist": [
         {
-          "en": "An array with `unshift`",
-          "es": "Un array con `unshift`"
+          "en": "Says an empty list makes the new node both `head` and `tail`",
+          "es": "Dice que en una lista vacía `head` y `tail` quedan en el nodo nuevo"
         },
         {
-          "en": "Both: adding is always O(1)",
-          "es": "Las dos: agregar siempre es O(1)"
+          "en": "Says the new node's `next` points to the old first node",
+          "es": "Dice que el `next` del nodo nuevo apunta al que era el primer nodo"
         },
         {
-          "en": "Neither: the front is always O(n)",
-          "es": "Ninguna: el inicio siempre es O(n)"
+          "en": "Says moving `head` first would lose the rest of the list",
+          "es": "Dice que mover `head` primero perdería el resto de la lista"
         },
         {
-          "en": "A linked list with `unshift`",
-          "es": "Una lista enlazada con `unshift`"
+          "en": "Says it's O(1) because no other node moves, unlike an array's O(n)",
+          "es": "Dice que es O(1) porque ningún otro nodo se mueve, a diferencia del O(n) de un array"
         }
-      ],
-      "answer": 3,
-      "hint": {
-        "en": "Which one has to move every item that's already in line?",
-        "es": "¿Cuál tiene que mover cada elemento que ya está en la fila?"
-      },
-      "explanation": {
-        "en": "A linked list's unshift makes two pointer moves, however long the line is: O(1). An array's unshift moves every item over one index: O(n) each time.",
-        "es": "El unshift de una lista enlazada hace dos movimientos de punteros, sin importar lo larga que sea la fila: O(1). El unshift de un array recorre cada elemento un índice: O(n) cada vez."
-      }
+      ]
     }
   ]
 }

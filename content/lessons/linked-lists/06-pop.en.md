@@ -1,7 +1,7 @@
 ---
 title: 'pop: remove the guest at the back'
 order: 6
-minutes: 16
+minutes: 18
 ---
 
 > **Goal:** write `pop`, the method that removes the last node and returns it, with two pointers that walk the line together.
@@ -21,6 +21,8 @@ linked-list-pop
 ```
 
 **What just happened:** the line had four guests. `pop()` cut Dev's node off the end, moved `tail` back to Cleo, and the length went from 4 to 3. Then it returned Dev's node.
+
+**Under the hood:** the node pop returns is already cut off from the line: it was the last one, so its `next` is `null`. That's why pop, unlike shift in two lessons, never has to cut the returned node's own `next` (it does cut the arrow that pointed **to** it, with `this.tail.next = null`).
 
 **Common mistake:** expecting `pop` to return the value, like an array's `pop`. Ours returns the whole node. The value is one step away: `line.pop().value`.
 
@@ -48,6 +50,8 @@ const justAna = ['Ana']
 console.log(justAna.pop(), justAna.length) // Ana 0: the array is empty now
 ```
 
+**Under the hood:** pop returns `undefined` on an empty list on purpose: it's what an array's `pop` returns for an empty array (`[].pop()` is `undefined`), so code that already knows arrays isn't surprised.
+
 **Common mistake:** handling only the many-guests case. The one-guest case doesn't crash, which makes it worse: it quietly leaves `head` and `tail` pointing at a node that's no longer in the list.
 
 ## Break it down
@@ -74,6 +78,8 @@ linked-list-pop-plan
 ```
 
 **What just happened:** on a line of three, `current` and `previous` started at Ana and walked until `current` was on Cleo, the last guest, with `previous` on Ben. `tail` moved to Ben, Ben's `next` became `null`, the length dropped to 2, and Cleo's node was returned. Step 6 only did something in the one-guest line: after Ana left, the length was 0, so `head` and `tail` went back to `null`.
+
+**Under the hood:** `current` and `previous` moving one node apart is a pattern with a name: a **trailing pointer**. `previous` always remembers the node you just left, because a singly linked list can't step back to it. `reverse` uses the same pair at the end of this module.
 
 **Common mistake:** walking with `while (current !== null)`. The loop then runs one extra time, `current` ends on `null`, and `previous` ends on the **last** node instead of the one before it. You've walked right past the node you needed.
 
@@ -169,6 +175,8 @@ console.log(line.pop()) // undefined: an empty line
 console.log(line.head, line.tail, line.length) // null null 0
 ```
 
+**Under the hood:** pop doesn't destroy the node. The list stops pointing to it, but the node is a normal object, and whoever called pop now holds a pointer to it. If the caller ignores the result, nothing reaches the node anymore, and the garbage collector frees it.
+
 **Common mistake:** putting the `length === 0` check **before** `this.length--`. With one guest, the length is still 1 at that point, so the check is false, and the ghost guest stays in `head` and `tail`.
 
 ## Look back
@@ -198,5 +206,7 @@ for (let i = 0; i < sizes.length; i++) {
   console.log(sizes[i] + ' guests: ' + visited + ' nodes visited')
 }
 ```
+
+**Under the hood:** the walk exists only because a node can't point backwards. Give every node a second pointer, `prev`, and the node before the tail is just `this.tail.prev`: pop becomes O(1). That's a **doubly linked list**, a later module, and the price is one more pointer in every node.
 
 **Common mistake:** reaching for a linked list when your program mostly removes from the back. If pop is the job you'll do most, an array (or a doubly linked list) is the better choice.
